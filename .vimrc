@@ -143,7 +143,6 @@ set statusline=%F%m%r%h%w[%L]%y[%p%%][%04l,%04v]
 set laststatus=2 " always show the status line
 set tabpagemax=1000
 set showtabline=1
-set splitbelow
 set showmatch
 set viminfo=%,<800,'10,/50,:100,h,f0,n~/.vim/.viminfo
 "           | |    |   |   |    | |  + viminfo file path
@@ -196,7 +195,7 @@ vnoremap								<C-h>			<Esc><c-w>h
 vnoremap								<C-j>			<Esc><c-w>j
 vnoremap								<C-k>			<Esc><c-w>k
 vnoremap								<C-l>			<Esc><c-w>l
-au BufNewFile,BufRead *.py vnoremap 	<localleader>ss	"yy<c-w>j<c-w>"y<c-w>k
+au BufNewFile,BufRead *.py vnoremap 	<localleader>ss	"yy<c-w>j<c-w>"y<CR><c-w>k
 vnoremap								<				<gv
 vnoremap								>				>gv
 "____________________________________________________________________________________________________________________
@@ -243,12 +242,16 @@ function CheckTerm1()
 		let termList = term_list()[0]
 		exec termList . "bd!"
         "set lines=75
+		set splitbelow
 		term python %
 		normal 
+		set nosplitbelow
     else
         "set lines=75
+		set splitbelow
 		term python %
 		normal 
+		set nosplitbelow
     endif
 endfunction
 
@@ -257,12 +260,16 @@ function CheckTerm2()
 		let termList = term_list()[0]
 		exec termList . "bd!"
         "set lines=75
+		set splitbelow
 		term python
 		normal 
+		set nosplitbelow
     else
         "set lines=75
+		set splitbelow
 		term python
 		normal 
+		set nosplitbelow
     endif
 endfunction
 
@@ -314,6 +321,8 @@ let g:gruvbox_bold=1
 " YouCompleteMe
 "
 let g:ycm_autoclose_preview_window_after_completion=1
+"set completeopt+=popup
+set completeopt+=popup
 let g:ycm_python_interpreter_path = ''
 let g:ycm_python_sys_path = []
 let g:ycm_extra_conf_vim_data = ['g:ycm_python_interpreter_path','g:ycm_python_sys_path']

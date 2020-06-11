@@ -193,8 +193,10 @@ if s:is_dark
   let s:red    = s:gb.bright_red
   let s:green  = s:gb.bright_green
   let s:yellow = s:gb.bright_yellow
-  let s:blue   = s:gb.bright_purple
-  let s:purple = s:gb.bright_blue
+  "let s:blue   = s:gb.bright_purple
+  "let s:purple = s:gb.bright_blue
+  let s:blue   = s:gb.bright_blue
+  let s:purple = s:gb.bright_purple
   let s:aqua   = s:gb.bright_aqua
   let s:orange = s:gb.bright_orange
 else
