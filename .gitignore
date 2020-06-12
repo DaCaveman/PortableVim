@@ -3,3 +3,4 @@
 /_viminfo.*
 /.vim/.viminfo
 /.vim_backup
+/.matplotlib
