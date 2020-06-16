@@ -441,11 +441,6 @@ let $PYTHONPATH .= $HOME . '\.vim\PortablePython382x64\App\Python;' .
 				  \$HOME . '\.vim\PortablePython382x64\App\Python\libs;' .
 				  \$HOME . '\.vim\PortablePython382x64\App\Python\Scripts;' .
 				  \$HOME . '\.vim\PortablePython382x64\App\Python\Tools;'
-"let $PATH .= $HOME . '\.vim\PortablePython-3.8.2x64\App\Python;' .
-"						 \$HOME . '\.vim\PortablePython-3.8.2\App\Python;' .
-"						 \$HOME . '\.vim\PortablePython-3.8.2x64\App\Scripts;' .
-"						 \$HOME . '\.vim\PortablePython-3.8.2\App\Scripts;'
-"						 \'C:\rtools40\usr\bin;C:\rtools40\mingw64\bin;'
 "____________________________________________________________________________________________________________________
 " .CSV file
 "
@@ -456,5 +451,4 @@ let $PYTHONPATH .= $HOME . '\.vim\PortablePython382x64\App\Python;' .
 autocmd BufNewFile,BufRead *.R set ft=r
 autocmd BufNewFile,BufRead *.r set ft=r
 let g:R_path = 'C:\\Program Files\\R\\R-4.0.0\\bin\\x64'
-"let $PATH .= 'c:\rtools40\usr\bin;c:\rtools40\mingw64\bin'
 "
