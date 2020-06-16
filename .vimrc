@@ -431,16 +431,16 @@ au BufNewFile,BufRead *.py set fileformat=unix
 au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
 au BufWritePre *.py,*.pyw,*.c,*.h %s/\s\+$//e
 let g:pytGoDefinitionKeyMap=1 " gd shows the declaration of curr. word
-let $PATH = ';' . $HOME . '\.vim\PortablePython-3.8.2x64\App\Python;' .
-				  \$HOME . '\.vim\PortablePython-3.8.2x64\App\Scripts;'
+let $PATH .= ';' . $HOME . '\.vim\PortablePython382x64\App\Python;' .
+				  \$HOME . '\.vim\PortablePython382x64\App\Scripts;'
 				  \'C:\rtools40\usr\bin;C:\rtools40\mingw64\bin;'
-let $PYTHONPATH .= $HOME . '\.vim\PortablePython-3.8.2x64\App\Python;' .
-				  \$HOME . '\.vim\PortablePython-3.8.2x64\App\Python\Lib;' .
-				  \$HOME . '\.vim\PortablePython-3.8.2x64\App\Python\DLLs;' .
-				  \$HOME . '\.vim\PortablePython-3.8.2x64\App\Python\include;' .
-				  \$HOME . '\.vim\PortablePython-3.8.2x64\App\Python\libs;' .
-				  \$HOME . '\.vim\PortablePython-3.8.2x64\App\Python\Scripts;' .
-				  \$HOME . '\.vim\PortablePython-3.8.2x64\App\Python\Tools;'
+let $PYTHONPATH .= $HOME . '\.vim\PortablePython382x64\App\Python;' .
+				  \$HOME . '\.vim\PortablePython382x64\App\Python\Lib;' .
+				  \$HOME . '\.vim\PortablePython382x64\App\Python\DLLs;' .
+				  \$HOME . '\.vim\PortablePython382x64\App\Python\include;' .
+				  \$HOME . '\.vim\PortablePython382x64\App\Python\libs;' .
+				  \$HOME . '\.vim\PortablePython382x64\App\Python\Scripts;' .
+				  \$HOME . '\.vim\PortablePython382x64\App\Python\Tools;'
 "____________________________________________________________________________________________________________________
 " .CSV file
 "

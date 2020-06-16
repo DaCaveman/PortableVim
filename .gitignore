@@ -4,4 +4,4 @@
 /.vim/.viminfo
 /.vim_backup
 /.matplotlib
-**/__pycache__/
+*.whl
