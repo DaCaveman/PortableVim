@@ -198,6 +198,8 @@ vnoremap								<C-l>			<Esc><c-w>l
 au BufNewFile,BufRead *.py vnoremap 	<localleader>ss	"yy<c-w>j<c-w>"y<CR><c-w>k
 vnoremap								<				<gv
 vnoremap								>				>gv
+vnoremap 								yp				"0p
+vnoremap 								yP				"0P
 "____________________________________________________________________________________________________________________
 " normal mode mapping
 "

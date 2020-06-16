@@ -4,3 +4,4 @@
 /.vim/.viminfo
 /.vim_backup
 /.matplotlib
+/.vim/PortablePython-3.8.2x64/App/Python/Lib/__pycache__
