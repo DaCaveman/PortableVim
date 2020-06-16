@@ -431,7 +431,7 @@ au BufNewFile,BufRead *.py set fileformat=unix
 au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
 au BufWritePre *.py,*.pyw,*.c,*.h %s/\s\+$//e
 let g:pytGoDefinitionKeyMap=1 " gd shows the declaration of curr. word
-let $PATH .= $HOME . '\\.vim\\PortablePython-3.8.2x64\\App\\Python' . $PATH____________________________________________________________________________________________________________________
+let $PATH = $HOME . '\.vim\PortablePython-3.8.2x64\App\Python;C:\rtools40\usr\bin;C:\rtools40\mingw64\bin;' . $PATH
 "____________________________________________________________________________________________________________________
 " .CSV file
 "
@@ -442,5 +442,5 @@ let $PATH .= $HOME . '\\.vim\\PortablePython-3.8.2x64\\App\\Python' . $PATH_____
 autocmd BufNewFile,BufRead *.R set ft=r
 autocmd BufNewFile,BufRead *.r set ft=r
 let g:R_path = 'C:\\Program Files\\R\\R-4.0.0\\bin\\x64'
-let $PATH .= 'c:\\rtools40\\usr\\bin;c:\\rtools40\\mingw64\\bin' . $PATH____________________________________________________________________________________________________________________
+"let $PATH .= 'c:\rtools40\usr\bin;c:\rtools40\mingw64\bin'
 "
