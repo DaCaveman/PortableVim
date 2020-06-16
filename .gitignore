@@ -5,5 +5,3 @@
 /.vim_backup
 /.matplotlib
 **/__pycache__/
-*.pyc
-*.pyd
