@@ -234,6 +234,7 @@ nnoremap 								K				gkzz
 nnoremap 								<S-U>			<C-R>
 nnoremap 								<localleader>i	<C-A>
 nnoremap 								<localleader>d	<C-X>
+nmap									<localleader>h 	<plug>(YCMHover)
 
 "____________________________________________________________________________________________________________________
 "Terminal Window
