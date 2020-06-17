@@ -244,16 +244,16 @@ function CheckTerm1()
 		let termList = term_list()[0]
 		exec termList . "bd!"
         "set lines=75
-		set splitbelow
+		"set splitbelow
 		term python %
 		normal 
-		set nosplitbelow
+		"set nosplitbelow
     else
         "set lines=75
-		set splitbelow
+		"set splitbelow
 		term python %
 		normal 
-		set nosplitbelow
+		"set nosplitbelow
     endif
 endfunction
 
@@ -262,16 +262,16 @@ function CheckTerm2()
 		let termList = term_list()[0]
 		exec termList . "bd!"
         "set lines=75
-		set splitbelow
+		"set splitbelow
 		term python
 		normal 
-		set nosplitbelow
+		"set nosplitbelow
     else
         "set lines=75
-		set splitbelow
+		"set splitbelow
 		term python
 		normal 
-		set nosplitbelow
+		"set nosplitbelow
     endif
 endfunction
 
