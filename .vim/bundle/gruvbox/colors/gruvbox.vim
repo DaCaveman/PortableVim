@@ -131,6 +131,11 @@ let s:gb.faded_purple   = ['#8f3f71', 96]      " 143-63-113
 let s:gb.faded_aqua     = ['#427b58', 66]      " 66-123-88
 let s:gb.faded_orange   = ['#af3a03', 130]     " 175-58-3
 
+"Special
+let s:gb.nice_blue     = ['#219787', 1]      " 7-102-120
+"let s:gb.nice_green     = ['#28a51a', 1]      " 7-102-120
+let s:gb.nice_green     = ['#7cad64', 1]      " 7-102-120
+
 " }}}
 " Setup Emphasis: {{{
 
@@ -196,7 +201,8 @@ if s:is_dark
   "let s:blue   = s:gb.bright_purple
   "let s:purple = s:gb.bright_blue
   let s:blue   = s:gb.bright_blue
-  let s:purple = s:gb.bright_purple
+  "let s:purple = s:gb.bright_purple
+  let s:purple = s:gb.nice_blue
   let s:aqua   = s:gb.bright_aqua
   let s:orange = s:gb.bright_orange
 else
@@ -458,6 +464,7 @@ call s:HL('GruvboxPurpleSign', s:purple, s:sign_column, s:invert_signs)
 call s:HL('GruvboxAquaSign', s:aqua, s:sign_column, s:invert_signs)
 call s:HL('GruvboxOrangeSign', s:orange, s:sign_column, s:invert_signs)
 
+call s:HL('DaCavemanGreen', s:gb.nice_green)
 " }}}
 
 " Vanilla colorscheme ---------------------------------------------------------
@@ -611,9 +618,9 @@ hi! link Macro GruvboxAqua
 hi! link PreCondit GruvboxAqua
 
 " Generic constant
-hi! link Constant GruvboxPurple
+hi! link Constant DaCavemanGreen
 " Character constant: 'c', '/n'
-hi! link Character GruvboxPurple
+hi! link Character DaCavemanGreen
 " String constant: "this is a string"
 if g:gruvbox_improved_strings == 0
   call s:HL('String',  s:green, s:none, s:italicize_strings)
@@ -621,11 +628,11 @@ else
   call s:HL('String',  s:fg1, s:bg1, s:italicize_strings)
 endif
 " Boolean constant: TRUE, false
-hi! link Boolean GruvboxPurple
+hi! link Boolean DaCavemanGreen
 " Number constant: 234, 0xff
-hi! link Number GruvboxPurple
+hi! link Number DaCavemanGreen
 " Floating point constant: 2.3e10
-hi! link Float GruvboxPurple
+hi! link Float DaCavemanGreen
 
 " Generic type
 hi! link Type GruvboxYellow

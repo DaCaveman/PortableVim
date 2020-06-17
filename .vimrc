@@ -200,6 +200,7 @@ vnoremap								<				<gv
 vnoremap								>				>gv
 vnoremap 								yp				"0p
 vnoremap 								yP				"0P
+vnoremap 								yy				y
 "____________________________________________________________________________________________________________________
 " normal mode mapping
 "
@@ -238,6 +239,7 @@ nnoremap 								<localleader>d	<C-X>
 "Terminal Window
 "
 set termwinsize=10x0
+set splitbelow
 
 function CheckTerm1()
 	if len(term_list())>=1

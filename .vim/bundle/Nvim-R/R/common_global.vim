@@ -104,11 +104,10 @@ function RWarningMsg(wmsg)
     endif
     if mode() == 'i' && (has('nvim-0.4.3') || has('patch-8.1.1705'))
         call RFloatWarn(a:wmsg)
-    else
+    endif
         echohl WarningMsg
         echomsg a:wmsg
         echohl None
-    endif
 endfunction
 
 if has("nvim")
@@ -747,7 +746,15 @@ function StartNClientServer(w)
             let $NVIMR_SECRET = randlst[1]
         endif
     endif
+    if g:R_objbr_opendf
+        let $NVIMR_OPENDF = "TRUE"
+    endif
+    if g:R_objbr_openlist
+        let $NVIMR_OPENLS = "TRUE"
+    endif
     let g:rplugin.jobs["ClientServer"] = StartJob([nvc], g:rplugin.job_handlers)
+    unlet $NVIMR_OPENDF
+    unlet $NVIMR_OPENLS
 endfunction
 
 function UpdatePathForR()
@@ -779,7 +786,7 @@ function StartR(whatr)
 
     call UpdatePathForR()
 
-    if !g:R_in_buffer
+    if (type(g:R_external_term) == v:t_number && g:R_external_term == 1) || type(g:R_external_term) == v:t_string
         let g:R_objbr_place = substitute(g:R_objbr_place, 'console', 'script', '')
     endif
 
@@ -819,7 +826,7 @@ function FinishStartingR()
     call writefile([], g:rplugin.tmpdir . "/GlobalEnvList_" . $NVIMR_ID)
     call writefile([], g:rplugin.tmpdir . "/globenv_" . $NVIMR_ID)
     call writefile([], g:rplugin.tmpdir . "/liblist_" . $NVIMR_ID)
-    call delete(g:rplugin.tmpdir . "/libnames_" . $NVIMR_ID)
+    call writefile([], g:rplugin.tmpdir . "/libnames_" . $NVIMR_ID)
 
     call AddForDeletion(g:rplugin.tmpdir . "/GlobalEnvList_" . $NVIMR_ID)
     call AddForDeletion(g:rplugin.tmpdir . "/globenv_" . $NVIMR_ID)
@@ -833,16 +840,7 @@ function FinishStartingR()
         call AddForDeletion(g:rplugin.tmpdir . "/run_cmd.bat")
     endif
 
-    if g:R_objbr_opendf
-        let start_options = ['options(nvimcom.opendf = TRUE)']
-    else
-        let start_options = ['options(nvimcom.opendf = FALSE)']
-    endif
-    if g:R_objbr_openlist
-        let start_options += ['options(nvimcom.openlist = TRUE)']
-    else
-        let start_options += ['options(nvimcom.openlist = FALSE)']
-    endif
+    let start_options = []
     if g:R_objbr_allnames
         let start_options += ['options(nvimcom.allnames = TRUE)']
     else
@@ -852,11 +850,6 @@ function FinishStartingR()
         let start_options += ['options(nvimcom.texerrs = TRUE)']
     else
         let start_options += ['options(nvimcom.texerrs = FALSE)']
-    endif
-    if g:R_objbr_labelerr
-        let start_options += ['options(nvimcom.labelerr = TRUE)']
-    else
-        let start_options += ['options(nvimcom.labelerr = FALSE)']
     endif
     if exists('g:R_setwidth') && g:R_setwidth == 2
         let start_options += ['options(nvimcom.setwidth = TRUE)']
@@ -868,7 +861,7 @@ function FinishStartingR()
     else
         let start_options += ['options(nvimcom.nvimpager = TRUE)']
     endif
-    if g:R_in_buffer && g:R_esc_term
+    if type(g:R_external_term) == v:t_number && g:R_external_term == 0 && g:R_esc_term
         let start_options += ['options(editor = nvimcom:::nvim.edit)']
     endif
     if exists("g:R_csv_delim") && (g:R_csv_delim == "," || g:R_csv_delim == ";")
@@ -916,7 +909,7 @@ function FinishStartingR()
         return
     endif
 
-    if g:R_in_buffer
+    if type(g:R_external_term) == v:t_number && g:R_external_term == 0
         call StartR_InBuffer()
         return
     endif
@@ -955,7 +948,7 @@ endfunction
 function SetSendCmdToR(...)
     if exists("g:RStudio_cmd")
         let g:SendCmdToR = function('SendCmdToRStudio')
-    elseif g:R_in_buffer
+    elseif type(g:R_external_term) == v:t_number && g:R_external_term == 0
         let g:SendCmdToR = function('SendCmdToR_Buffer')
     elseif has("win32")
         let g:SendCmdToR = function('SendCmdToR_Windows')
@@ -1022,7 +1015,7 @@ function SetNvimcomInfo(nvimcomversion, nvimcomhome, bindportn, rpid, wid, r_inf
     let g:Rout_prompt_str = substitute(g:Rout_prompt_str, '.*#N#', '', '')
     let g:Rout_continue_str = substitute(g:Rout_continue_str, '.*#N#', '', '')
 
-    if has('nvim') && g:R_in_buffer
+    if has('nvim') && type(g:R_external_term) == v:t_number && g:R_external_term == 0
         " Put the cursor and the end of the buffer to ensure automatic scrolling
         " See: https://github.com/neovim/neovim/issues/2636
         let isnormal = mode() ==# 'n'
@@ -1065,9 +1058,9 @@ function SetNvimcomInfo(nvimcomversion, nvimcomhome, bindportn, rpid, wid, r_inf
         endif
         " Set nvimcom port in nvimclient
         if has("win32")
-            call JobStdin(g:rplugin.jobs["ClientServer"], "\001" . g:rplugin.nvimcom_port . " " . $RCONSOLE . "\n")
+            call JobStdin(g:rplugin.jobs["ClientServer"], "1" . g:rplugin.nvimcom_port . " " . $RCONSOLE . "\n")
         else
-            call JobStdin(g:rplugin.jobs["ClientServer"], "\001" . g:rplugin.nvimcom_port . "\n")
+            call JobStdin(g:rplugin.jobs["ClientServer"], "1" . g:rplugin.nvimcom_port . "\n")
         endif
     else
         call RWarningMsg("nvimcom is not running")
@@ -1077,12 +1070,12 @@ function SetNvimcomInfo(nvimcomversion, nvimcomhome, bindportn, rpid, wid, r_inf
     if exists("g:RStudio_cmd")
         if has("win32") && g:R_arrange_windows && filereadable(g:rplugin.compldir . "/win_pos")
             " ArrangeWindows
-            call JobStdin(g:rplugin.jobs["ClientServer"], "\005" . g:rplugin.compldir . "\n")
+            call JobStdin(g:rplugin.jobs["ClientServer"], "75" . g:rplugin.compldir . "\n")
         endif
     elseif has("win32")
         if g:R_arrange_windows && filereadable(g:rplugin.compldir . "/win_pos")
             " ArrangeWindows
-            call JobStdin(g:rplugin.jobs["ClientServer"], "\005" . g:rplugin.compldir . "\n")
+            call JobStdin(g:rplugin.jobs["ClientServer"], "75" . g:rplugin.compldir . "\n")
         endif
     elseif g:R_applescript
         call foreground()
@@ -1156,6 +1149,7 @@ function StartObjBrowser()
             sil exe 'resize ' . g:R_objbr_h
         endif
         sil set filetype=rbrowser
+        let g:rplugin.curview = "GlobalEnv"
         let g:rplugin.ob_winnr = win_getid()
         if exists("*nvim_win_get_buf")
             let g:rplugin.ob_buf = nvim_win_get_buf(g:rplugin.ob_winnr)
@@ -1164,7 +1158,6 @@ function StartObjBrowser()
         " Inheritance of some local variables
         let b:objbrtitle = g:tmp_objbrtitle
         unlet g:tmp_objbrtitle
-        call SendToNvimcom("\002" . g:rplugin.myport)
     endif
     exe "set switchbuf=" . savesb
 endfunction
@@ -1184,6 +1177,10 @@ function RObjBrowser()
 
     let s:running_objbr = 1
 
+    call UpdateRGlobalEnv(1)
+    call JobStdin(g:rplugin.jobs["ClientServer"], "31\n")
+    call SendToNvimcom("\002" . $NVIMR_ID)
+
     call StartObjBrowser()
     let s:running_objbr = 0
 
@@ -1198,7 +1195,7 @@ function RObjBrowser()
 endfunction
 
 function RBrOpenCloseLs(stt)
-    call SendToNvimcom("\007" . a:stt)
+    call JobStdin(g:rplugin.jobs["ClientServer"], "34" . a:stt . g:rplugin.curview . "\n")
 endfunction
 
 let s:wait_nvimcom = 0
@@ -1216,7 +1213,7 @@ function SendToNvimcom(cmd)
         call RWarningMsg("ClientServer not running.")
         return
     endif
-    call JobStdin(g:rplugin.jobs["ClientServer"], "\002" . a:cmd . "\n")
+    call JobStdin(g:rplugin.jobs["ClientServer"], "2" . a:cmd . "\n")
 endfunction
 
 " This function is called by nclientserver
@@ -1254,7 +1251,7 @@ function StopRDebugging()
 endfunction
 
 function FindDebugFunc(srcref)
-    if g:R_in_buffer
+    if type(g:R_external_term) == v:t_number && g:R_external_term == 0
         let s:func_offset = -1 " Not found
         let sbopt = &switchbuf
         set switchbuf=useopen,usetab
@@ -1295,7 +1292,7 @@ function FindDebugFunc(srcref)
         let idx -= 1
     endwhile
 
-    if g:R_in_buffer
+    if type(g:R_external_term) == v:t_number && g:R_external_term == 0
         if tabpagenr() != curtab
             exe 'normal! ' . curtab . 'gt'
         endif
@@ -1353,7 +1350,7 @@ function RDebugJump(fnm, lnum)
     "call sign_place(1, 'rdebugcurline', 'dbgline', fname, {'lnum': flnum})
     sign unplace 1
     exe 'sign place 1 line=' . flnum . ' name=dbgline file=' . fname
-    if g:R_in_buffer
+    if type(g:R_external_term) == v:t_number && g:R_external_term == 0
         exe 'sb ' . g:rplugin.R_bufname
         startinsert
     endif
@@ -2057,6 +2054,7 @@ function SendLineToR(godown, ...)
             let chunkend = ".. .."
         endif
         let rpd = RParenDiff(line)
+        let has_op = line =~ '%>%'
         if rpd < 0
             let line1 = line(".")
             let cline = line1 + 1
@@ -2066,16 +2064,16 @@ function SendLineToR(godown, ...)
                     break
                 endif
                 let rpd += RParenDiff(txt)
-                let cline += 1
                 if rpd == 0
-                    for lnum in range(line1, cline - 1)
+                    let has_op = getline(cline) =~ '%>%'
+                    for lnum in range(line1, cline)
                         if g:R_bracketed_paste
-                            if lnum == line1 && lnum == cline - 1
-                                let ok = g:SendCmdToR("\x1b[200~" . getline(lnum) . "\n\x1b[201~", 0)
+                            if lnum == line1 && lnum == cline
+                                let ok = g:SendCmdToR("\x1b[200~" . getline(lnum) . "\x1b[201~\n", 0)
                             elseif lnum == line1
                                 let ok = g:SendCmdToR("\x1b[200~" . getline(lnum))
-                            elseif lnum == cline - 1
-                                let ok = g:SendCmdToR(getline(lnum) . "\n\x1b[201~", 0)
+                            elseif lnum == cline
+                                let ok = g:SendCmdToR(getline(lnum) . "\x1b[201~\n", 0)
                             else
                                 let ok = g:SendCmdToR(getline(lnum))
                             endif
@@ -2085,22 +2083,23 @@ function SendLineToR(godown, ...)
                         if !ok
                             " always close bracketed mode upon failure
                             if g:R_bracketed_paste
-                                call g:SendCmdToR("\x1b[201~", 0)
+                                call g:SendCmdToR("\x1b[201~\n", 0)
                             end
                             return
                         endif
                     endfor
-                    call cursor(cline - 1, 1)
+                    call cursor(cline, 1)
                     let block = 1
                     break
                 endif
+                let cline += 1
             endwhile
         endif
     endif
 
     if !block
         if g:R_bracketed_paste
-            let ok = g:SendCmdToR("\x1b[200~" . line . "\n\x1b[201~", 0)
+            let ok = g:SendCmdToR("\x1b[200~" . line . "\x1b[201~\n", 0)
         else
             let ok = g:SendCmdToR(line)
         end
@@ -2109,6 +2108,9 @@ function SendLineToR(godown, ...)
     if ok
         if a:godown =~ "down"
             call GoDown()
+            if has_op
+                call SendLineToR(a:godown)
+            endif
         else
             if a:godown == "newline"
                 normal! o
@@ -2133,10 +2135,13 @@ endfunction
 
 " Clear the console screen
 function RClearConsole()
-    if has("win32") && !g:R_in_buffer
-        call JobStdin(g:rplugin.jobs["ClientServer"], "\006\n")
+    if g:R_clear_console == 0
+        return
+    endif
+    if has("win32") && type(g:R_external_term) == v:t_number && g:R_external_term == 1
+        call JobStdin(g:rplugin.jobs["ClientServer"], "76\n")
         sleep 50m
-        call JobStdin(g:rplugin.jobs["ClientServer"], "\007\n")
+        call JobStdin(g:rplugin.jobs["ClientServer"], "77\n")
     else
         call g:SendCmdToR("\014", 0)
     endif
@@ -2180,11 +2185,6 @@ function ClearRInfo()
                 \ && g:R_tmux_title != 'automatic' && g:R_tmux_title != ''
         call system("tmux set automatic-rename on")
     endif
-
-    if bufloaded(b:objbrtitle)
-        exe "bunload! " . b:objbrtitle
-        sleep 30m
-    endif
 endfunction
 
 " Quit R
@@ -2199,14 +2199,14 @@ function RQuit(how)
         endif
     endif
 
-    if g:R_save_win_pos
+    if has("win32") && type(g:R_external_term) == v:t_number && g:R_external_term == 1
         " SaveWinPos
-        call JobStdin(g:rplugin.jobs["ClientServer"], "\004" . $NVIMR_COMPLDIR . "\n")
+        call JobStdin(g:rplugin.jobs["ClientServer"], "74" . $NVIMR_COMPLDIR . "\n")
     endif
 
     " In Neovim, the cursor must be in the term buffer to get TermClose event
     " triggered
-    if g:R_in_buffer && exists("g:rplugin.R_bufname") && has("nvim")
+    if type(g:R_external_term) == v:t_number && g:R_external_term == 0 && exists("g:rplugin.R_bufname") && has("nvim")
         exe "sbuffer " . g:rplugin.R_bufname
         startinsert
     endif
@@ -2217,6 +2217,7 @@ function RQuit(how)
     endif
 
     call g:SendCmdToR(qcmd)
+    call JobStdin(g:rplugin.jobs["ClientServer"], "8\n")
 
     if exists('g:rplugin.tmux_split') || a:how == 'save'
         sleep 200m
@@ -2520,7 +2521,7 @@ function ShowRDoc(rkeyword)
             " The only way of ShowRDoc() being called when R_nvimpager=="no"
             " is the user setting the value of R_nvimpager to 'no' after
             " Neovim startup. It should be set in the vimrc.
-            if g:R_in_buffer
+            if type(g:R_external_term) == v:t_number && g:R_external_term == 0
                 let g:R_nvimpager = "vertical"
             else
                 let g:R_nvimpager = "tab"
@@ -2980,8 +2981,8 @@ function RControlMaps()
     " Build list of objects for omni completion
     "-------------------------------------
     call RCreateMaps('nvi', 'RUpdateObjBrowser', 'ro', ':call RObjBrowser()')
-    call RCreateMaps('nvi', 'ROpenLists',        'r=', ':call RBrOpenCloseLs(1)')
-    call RCreateMaps('nvi', 'RCloseLists',       'r-', ':call RBrOpenCloseLs(0)')
+    call RCreateMaps('nvi', 'ROpenLists',        'r=', ':call RBrOpenCloseLs("O")')
+    call RCreateMaps('nvi', 'RCloseLists',       'r-', ':call RBrOpenCloseLs("C")')
 
     " Render script with rmarkdown
     "-------------------------------------
@@ -3137,7 +3138,7 @@ function RVimLeave()
             if IsJobRunning(job)
                 if job == 'ClientServer'
                     " Avoid warning of exit status 141
-                    call JobStdin(g:rplugin.jobs["ClientServer"], "\x08\n")
+                    call JobStdin(g:rplugin.jobs["ClientServer"], "8\n")
                     sleep 20m
                 endif
             endif
@@ -3159,6 +3160,7 @@ let s:R_task_completed = 0
 function RTaskCompleted()
     let s:R_task_completed = 1
     if g:R_hi_fun_globenv == 2
+        call SendToNvimcom("\002" . $NVIMR_ID)
         call UpdateRGlobalEnv(0)
     endif
 endfunction
@@ -3167,9 +3169,6 @@ let s:updating_globalenvlist = 0
 let s:waiting_glblnv_list = 0
 " Function called by nvimcom
 function GlblEnvUpdated(time)
-    if a:time > g:R_ls_env_tol
-        let g:R_hi_fun_globenv = 0
-    endif
     let s:updating_globalenvlist = 0
     if s:waiting_glblnv_list
         if a:time == -1.0
@@ -3178,6 +3177,10 @@ function GlblEnvUpdated(time)
         else
             call ReadGlobalEnvList()
         endif
+    endif
+
+    if a:time != -1.0 && g:rplugin.curview == "GlobalEnv"
+        call JobStdin(g:rplugin.jobs["ClientServer"], "31\n")
     endif
 endfunction
 
@@ -3197,7 +3200,7 @@ function UpdateRGlobalEnv(block)
     call delete(g:rplugin.tmpdir . "/toplevel_list")
 
     let s:updating_globalenvlist = 1
-    call SendToNvimcom("\x03" . $NVIMR_ID)
+    call SendToNvimcom("\004" . $NVIMR_ID)
 
     if g:rplugin.nvimcom_port == 0
         sleep 500m
@@ -3206,8 +3209,8 @@ function UpdateRGlobalEnv(block)
 
     if a:block
         " We can't return from this function and wait for a message from
-        " nvimcom because omni completion in Vim/Neovim requires the list of
-        " completions as the return value of the 'omnifunc'.
+        " nvimcom because both omni completion and the Object Browser require
+        " the list of completions immediately.
         sleep 10m
         let ii = 0
         let max_ii = 100 * g:R_wait_reply
@@ -3272,7 +3275,10 @@ function RFillOmniMenu(base, newbase, prefix, pkg, olines)
         if (a:base !~ '\$' && tmp[0] =~ '\$') || (a:base =~ '\$' && tmp[0] !~ '\$')
             continue
         endif
-        " Idem with S4 tmp[0]ects
+        if (a:base !~ '\[\[' && tmp[0] =~ '\[\[') || (a:base =~ '\[\[' && tmp[0] !~ '\[\[')
+            continue
+        endif
+        " Idem with S4 objects
         if (a:base !~ '@' && tmp[0] =~ '@') || (a:base =~ '@' && tmp[0] !~ '@')
             continue
         endif
@@ -3286,11 +3292,7 @@ function RFillOmniMenu(base, newbase, prefix, pkg, olines)
             let cls = tmp[2]
         endif
         let pkg = tmp[3]
-        if len(tmp) == 5
-            let inf = tmp[4]
-        else
-            let inf = ''
-        endif
+        let args = tmp[4]
         if len(s:toplev_objs) && pkg != '.GlobalEnv'
             " Do not show an object from a package if it was masked by a
             " toplevel object in .GlobalEnv
@@ -3311,36 +3313,25 @@ function RFillOmniMenu(base, newbase, prefix, pkg, olines)
             let obj = "`" . obj . "`"
         endif
 
-        let tmp = split(inf, "\x08")
-        let ttl = ''
-        let descr = ''
-        if len(tmp) == 2
-            let tmp2 = split(tmp[1], "\x05", 1)
-            let ttl = tmp2[0]
-            let descr = tmp2[1]
-        endif
+        let descr = tmp[5]
+        let ttl = tmp[6]
 
-        if cls == "function"
-            let usage = tmp[0]
-        else
-            let usage = ''
-        endif
         if has('nvim-0.5.0') || has('patch-8.2.84')
             " Only on 2020-04-28 Neovim started accepting any kind of variable as user_data.
             " Before that, it should be a string: https://github.com/jalvesaq/Nvim-R/issues/495
             call add(resp, {'word': a:prefix . obj, 'menu': cls . ' [' . pkg . ']',
-                        \ 'user_data': {'cls': cls, 'pkg': pkg, 'ttl': ttl, 'descr': descr, 'usage': usage}})
+                        \ 'user_data': {'cls': cls, 'pkg': pkg, 'ttl': ttl, 'descr': descr, 'usage': args}})
         elseif has('nvim-0.4.3') || has('patch-8.1.1705')
             call add(resp, {'word': a:prefix . obj, 'menu': cls . ' [' . pkg . ']'})
-            let s:user_data[a:prefix . obj] = {'cls': cls, 'pkg': pkg, 'ttl': ttl, 'descr': descr, 'usage': usage}
+            let s:user_data[a:prefix . obj] = {'cls': cls, 'pkg': pkg, 'ttl': ttl, 'descr': descr, 'usage': args}
         else
-            if tmp[0] =~ '""'
-                let tmp[0] = substitute(tmp[0], '"""', '"\\""', 'g')
-                let tmp[0] = substitute(tmp[0], "\"\"'\"", "\"\\\\\"'\"", 'g')
+            if args =~ '""'
+                let args = substitute(args, '"""', '"\\""', 'g')
+                let args = substitute(args, "\"\"'\"", "\"\\\\\"'\"", 'g')
             endif
-            let tmp[0] = substitute(tmp[0], "NO_ARGS", "", "")
-            let tmp[0] = substitute(tmp[0], "\x07", " = ", "g")
-            let xx = split(tmp[0], "\x09")
+            let args = substitute(args, "NO_ARGS", "", "")
+            let args = substitute(args, "\x07", " = ", "g")
+            let xx = split(args, "\x09")
             if len(xx) > 0
                 let usage = a:prefix . obj . "(" . join(xx, ', ') . ')'
             else
@@ -4061,6 +4052,8 @@ else
             else
                 let g:rplugin.tmpdir = $TMPDIR . "/Nvim-R-" . g:rplugin.userlogin
             endif
+        elseif isdirectory("/dev/shm")
+            let g:rplugin.tmpdir = "/dev/shm/Nvim-R-" . g:rplugin.userlogin
         elseif isdirectory("/tmp")
             let g:rplugin.tmpdir = "/tmp/Nvim-R-" . g:rplugin.userlogin
         else
@@ -4115,7 +4108,6 @@ let g:R_objbr_h           = get(g:, "R_objbr_h",           10)
 let g:R_objbr_opendf      = get(g:, "R_objbr_opendf",       1)
 let g:R_objbr_openlist    = get(g:, "R_objbr_openlist",     0)
 let g:R_objbr_allnames    = get(g:, "R_objbr_allnames",     0)
-let g:R_objbr_labelerr    = get(g:, "R_objbr_labelerr",     1)
 let g:R_applescript       = get(g:, "R_applescript",        0)
 let g:R_esc_term          = get(g:, "R_esc_term",           1)
 let g:R_close_term        = get(g:, "R_close_term",         1)
@@ -4126,21 +4118,22 @@ let g:R_show_arg_help     = get(g:, "R_show_arg_help",      1)
 let g:R_never_unmake_menu = get(g:, "R_never_unmake_menu",  0)
 let g:R_insert_mode_cmds  = get(g:, "R_insert_mode_cmds",   0)
 let g:R_disable_cmds      = get(g:, "R_disable_cmds",    [''])
-let g:R_in_buffer         = get(g:, "R_in_buffer",          1)
 let g:R_open_example      = get(g:, "R_open_example",       1)
 let g:R_openhtml          = get(g:, "R_openhtml",           1)
 let g:R_hi_fun            = get(g:, "R_hi_fun",             1)
 let g:R_hi_fun_paren      = get(g:, "R_hi_fun_paren",       0)
 let g:R_hi_fun_globenv    = get(g:, "R_hi_fun_globenv",     0)
-let g:R_ls_env_tol        = get(g:, "R_ls_env_tol",       500)
 let g:R_bracketed_paste   = get(g:, "R_bracketed_paste",    0)
+let g:R_clear_console     = get(g:, "R_clear_console",      1)
+
 if exists(":terminal") != 2
-    let g:R_in_buffer = 0
+    let g:R_external_term = get(g:, "R_external_term", 1)
 endif
 if !has("nvim") && !exists("*term_start")
     " exists(':terminal') return 2 even when Vim does not have the +terminal feature
-    let g:R_in_buffer = 0
+    let g:R_external_term = get(g:, "R_external_term", 1)
 endif
+let g:R_external_term = get(g:, "R_external_term", 0)
 
 let s:editing_mode = "emacs"
 if filereadable(expand("~/.inputrc"))
@@ -4155,18 +4148,14 @@ endif
 let g:R_editing_mode = get(g:, "R_editing_mode", s:editing_mode)
 unlet s:editing_mode
 
-if g:R_ls_env_tol < 10 || g:R_ls_env_tol > 10000
-    let g:R_ls_env_tol = 500
-endif
-
-if has('win32') && !g:R_in_buffer
+if has('win32') && !(type(g:R_external_term) == v:t_number && g:R_external_term == 0)
     " Sending multiple lines at once to Rgui on Windows does not work.
     let g:R_parenblock = get(g:, 'R_parenblock',         0)
 else
     let g:R_parenblock = get(g:, 'R_parenblock',         1)
 endif
 
-if g:R_in_buffer
+if type(g:R_external_term) == v:t_number && g:R_external_term == 0
     let g:R_nvimpager = get(g:, 'R_nvimpager', 'vertical')
 else
     let g:R_nvimpager = get(g:, 'R_nvimpager', 'tab')
@@ -4205,7 +4194,7 @@ else
     let g:R_rcomment_string = get(g:, "R_rcomment_string", "# ")
 endif
 
-if g:R_in_buffer
+if type(g:R_external_term) == v:t_number && g:R_external_term == 0
     let g:R_save_win_pos = 0
     let g:R_arrange_windows  = 0
 endif
@@ -4323,6 +4312,9 @@ let s:R_pid = 0
 let g:rplugin.myport = 0
 let g:rplugin.nvimcom_port = 0
 
+" Current view of the object browser: .GlobalEnv X loaded libraries
+let g:rplugin.curview = "None"
+
 let s:filelines = readfile(g:rplugin.home . "/R/nvimcom/DESCRIPTION")
 let s:required_nvimcom = substitute(s:filelines[1], "Version: ", "", "")
 let s:required_nvimcom_dot = substitute(s:required_nvimcom, "-", ".", "")
@@ -4383,7 +4375,7 @@ if exists("g:R_app")
     endif
 else
     if has("win32")
-        if g:R_in_buffer
+        if type(g:R_external_term) == v:t_number && g:R_external_term == 0
             let g:rplugin.R = "Rterm.exe"
         else
             let g:rplugin.R = "Rgui.exe"
@@ -4417,11 +4409,15 @@ if g:R_applescript
     exe "source " . substitute(g:rplugin.home, " ", "\\ ", "g") . "/R/osx.vim"
 endif
 
-if (exists('g:R_source') && g:R_source =~# 'tmux_split.vim') || (!has("win32") && !g:R_applescript && !g:R_in_buffer)
-    exe "source " . substitute(g:rplugin.home, " ", "\\ ", "g") . "/R/tmux.vim"
+if !has("win32")
+    if (type(g:R_external_term) == v:t_number && g:R_external_term == 1) ||
+                \ type(g:R_external_term) == v:t_string ||
+                \ (exists('g:R_source') && g:R_source =~# 'tmux_split.vim')
+        exe "source " . substitute(g:rplugin.home, " ", "\\ ", "g") . "/R/tmux.vim"
+    endif
 endif
 
-if g:R_in_buffer
+if type(g:R_external_term) == v:t_number && g:R_external_term == 0
     if has("nvim")
         exe "source " . substitute(g:rplugin.home, " ", "\\ ", "g") . "/R/nvimbuffer.vim"
     else
@@ -4477,11 +4473,6 @@ endif
 " 2017-11-15
 if len(g:R_latexcmd[0]) == 1
     call RWarningMsg("The option R_latexcmd should be a list. Please update your vimrc.")
-endif
-
-" 2017-12-06
-if exists("g:R_term") && g:R_term == "terminator"
-    call RWarningMsg('"terminator" is no longer supported. Please, choose another value for R_term.')
 endif
 
 " 2017-12-14

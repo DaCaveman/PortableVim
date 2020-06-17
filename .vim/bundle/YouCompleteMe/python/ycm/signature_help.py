@@ -157,7 +157,6 @@ def UpdateSignatureHelp( state, signature_info ): # noqa
     # and enable sytax based on the current file syntax)
     "flip": 1,
     "padding": [ 0, 1, 0, 1 ], # Pad 1 char in X axis to match completion menu
-
   }
 
   if not state.popup_win_id:
