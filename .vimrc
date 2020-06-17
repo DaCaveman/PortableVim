@@ -416,8 +416,8 @@ autocmd BufRead,BufNewFile *.var set filetype=pdl2" Highlight pdl2 syntax
 "____________________________________________________________________________________________________________________
 " CSharp/XAML
 "
-autocmd BufRead,BufNewFile *.cs set filetype=cSharp" Highlight cs syntax
-autocmd BufRead,BufNewFile *.xaml set filetype=xml" Highlight xml syntax
+autocmd BufRead,BufNewFile *.cs set filetype=cSharp" Highlight cSharp syntax
+autocmd BufRead,BufNewFile *.xaml set filetype=xaml" Highlight xaml syntax
 "____________________________________________________________________________________________________________________
 "Python
 "
