@@ -167,10 +167,10 @@ endif
 "
 let mapleader = ","	
 let maplocalleader = "ö"
-noremap   	<F9> 		<Esc>:bufdo tab split<CR>:tablast<CR>:tabclose<CR>
-"noremap 	<F2> 		<ESC>:if &guifont=~#'Fira_Code:h8:cANSI:qDRAFT'<Bar>set guifont=Fira_Code:h12:cANSI:qDRAFT<Bar>else<Bar>set guifont=Fira_Code:h8:cANSI:qDRAFT<Bar>set lines=55<Bar>endif<CR>
-
-noremap 	<F2> 		<ESC>:if &guifont=~#'Fira_Code:h8'<Bar>set guifont=Fira_Code:h10.5<Bar>set lines=55<Bar>else<Bar>set guifont=Fira_Code:h8<Bar>set lines=55<Bar>endif<CR>
+noremap									<F9>	 		<Esc>:bufdo tab split<CR>:tablast<CR>:tabclose<CR>
+noremap									<F2>	 		<ESC>:if &guifont=~#'Fira_Code:h8'<Bar>set guifont=Fira_Code:h10.5<Bar>set lines=55<Bar>else<Bar>set guifont=Fira_Code:h8<Bar>set lines=55<Bar>endif<CR>
+noremap									<F3>			<ESC>:if &lines=~#'55'<Bar>set lines=75<Bar>else<Bar>set lines=55<Bar>endif<CR>
+nmap									<localleader>h 	<plug>(YCMHover)
 "____________________________________________________________________________________________________________________
 " Terminal mode mapping
 "
@@ -234,7 +234,6 @@ nnoremap 								K				gkzz
 nnoremap 								<S-U>			<C-R>
 nnoremap 								<localleader>i	<C-A>
 nnoremap 								<localleader>d	<C-X>
-nmap									<localleader>h 	<plug>(YCMHover)
 
 "____________________________________________________________________________________________________________________
 "Terminal Window
@@ -248,12 +247,14 @@ function CheckTerm1()
 		exec termList . "bd!"
         "set lines=75
 		"set splitbelow
+		set termwinsize=12x0
 		term python %
 		normal 
 		"set nosplitbelow
     else
         "set lines=75
 		"set splitbelow
+		set termwinsize=12x0
 		term python %
 		normal 
 		"set nosplitbelow
@@ -266,12 +267,14 @@ function CheckTerm2()
 		exec termList . "bd!"
         "set lines=75
 		"set splitbelow
+		set termwinsize=12x0
 		term python
 		normal 
 		"set nosplitbelow
     else
         "set lines=75
 		"set splitbelow
+		set termwinsize=12x0
 		term python
 		normal 
 		"set nosplitbelow
