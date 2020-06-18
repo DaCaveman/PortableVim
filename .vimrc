@@ -234,6 +234,8 @@ nnoremap 								K				gkzz
 nnoremap 								<S-U>			<C-R>
 nnoremap 								<localleader>i	<C-A>
 nnoremap 								<localleader>d	<C-X>
+nnoremap								Q 				@q
+nnoremap 								<leader>h		:call BlacklistFiletype()<CR>
 
 "____________________________________________________________________________________________________________________
 "Terminal Window
@@ -329,12 +331,27 @@ let g:gruvbox_bold=1
 " YouCompleteMe
 "
 let g:ycm_autoclose_preview_window_after_completion=1
-"set completeopt+=popup
 set completeopt+=popup
 let g:ycm_python_interpreter_path = ''
 let g:ycm_python_sys_path = []
 let g:ycm_extra_conf_vim_data = ['g:ycm_python_interpreter_path','g:ycm_python_sys_path']
 let g:ycm_global_ycm_extra_conf = '~/global_extra_conf.py'
+
+function BlacklistFiletype()
+	if exists("g:ycm_filetype_blacklist[&filetype]")
+		if g:ycm_filetype_blacklist[&filetype]==1
+			unlet g:ycm_filetype_blacklist[&filetype]
+			echo "YouCompleteMe activated for " . &filetype . "!"
+		else
+			let g:ycm_filetype_blacklist[&filetype] = 1
+			echo "YouCompleteMe deactivated for " . &filetype . "!"
+		endif
+	else
+		let g:ycm_filetype_blacklist[&filetype] = 1
+		echo "YouCompleteMe deactivated for " . &filetype . "!"
+	endif
+endfunction
+
 "____________________________________________________________________________________________________________________
 "solarized
 "
