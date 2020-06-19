@@ -235,6 +235,8 @@ nnoremap 								<S-U>			<C-R>
 nnoremap 								<localleader>i	<C-A>
 nnoremap 								<localleader>d	<C-X>
 nnoremap								Q 				@q
+nnoremap								W 				@w
+nnoremap								E 				@e
 nnoremap 								<leader>h		:call BlacklistFiletype()<CR>
 
 "____________________________________________________________________________________________________________________
