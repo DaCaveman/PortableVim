@@ -238,11 +238,13 @@ nnoremap								Q 				@q
 nnoremap								W 				@w
 nnoremap								E 				@e
 nnoremap 								<leader>h		:call BlacklistFiletype()<CR>
+"Some test
+nnoremap 								<localleader>t	:call CopyOut()<CR>
 
 "____________________________________________________________________________________________________________________
 "Terminal Window
 "
-set termwinsize=10x0
+set termwinsize=12x0
 set splitbelow
 
 function CheckTerm1()
@@ -251,14 +253,22 @@ function CheckTerm1()
 		exec termList . "bd!"
         "set lines=75
 		"set splitbelow
-		set termwinsize=12x0
+		if &lines > 55
+			set termwinsize=20x0
+		else
+			set termwinsize=12x0
+		endif
 		term python %
 		normal 
 		"set nosplitbelow
     else
         "set lines=75
 		"set splitbelow
-		set termwinsize=12x0
+		if &lines > 55
+			set termwinsize=20x0
+		else
+			set termwinsize=12x0
+		endif
 		term python %
 		normal 
 		"set nosplitbelow
@@ -271,14 +281,22 @@ function CheckTerm2()
 		exec termList . "bd!"
         "set lines=75
 		"set splitbelow
-		set termwinsize=12x0
+		if &lines > 55
+			set termwinsize=20x0
+		else
+			set termwinsize=12x0
+		endif
 		term python
 		normal 
 		"set nosplitbelow
     else
         "set lines=75
 		"set splitbelow
-		set termwinsize=12x0
+		if &lines > 55
+			set termwinsize=20x0
+		else
+			set termwinsize=12x0
+		endif
 		term python
 		normal 
 		"set nosplitbelow
@@ -296,6 +314,10 @@ function CloseTerm()
         "set lines=55
 		endif
 	endif
+endfunction
+
+function CopyOut()
+	exec "normal 0v$yyj?*jV/>>>yykpV/>>>,cc/>>>0D"
 endfunction
 
 "____________________________________________________________________________________________________________________
