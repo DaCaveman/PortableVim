@@ -317,7 +317,9 @@ function CloseTerm()
 endfunction
 
 function CopyOut()
-	exec "normal 0v$yyj?*jV/>>>yykpV/>>>,cc/>>>0D"
+	set nomagic
+	exec "normal 0v$yyjG?*jV/>>>yykpV/>>>,cc/>>>0D"
+	set magic
 endfunction
 
 "____________________________________________________________________________________________________________________
