@@ -238,8 +238,9 @@ nnoremap								Q 				@q
 nnoremap								W 				@w
 nnoremap								E 				@e
 nnoremap 								<leader>h		:call BlacklistFiletype()<CR>
-"Some test
 nnoremap 								<localleader>t	:call CopyOut()<CR>
+nnoremap 								<leader>/		:call GrepBuffers("<C-R><C-W>")<CR>
+"au FileType qf nnoremap <buffer> 		<CR> 			<CR>:tabdo :ccl<CR>
 
 "____________________________________________________________________________________________________________________
 "Terminal Window
@@ -500,4 +501,23 @@ let $PYTHONPATH .= $HOME . '\.vim\PortablePython382x64\App\Python;' .
 autocmd BufNewFile,BufRead *.R set ft=r
 autocmd BufNewFile,BufRead *.r set ft=r
 let g:R_path = 'C:\\Program Files\\R\\R-4.0.0\\bin\\x64'
+"____________________________________________________________________________________________________________________
+" Functions
 "
+function! BuffersList()
+  let all = range(0, bufnr('$'))
+  let res = []
+  for b in all
+    if buflisted(b)
+      call add(res, bufname(b))
+    endif
+  endfor
+  return res
+endfunction
+
+function! GrepBuffers (expression)
+  exec 'vimgrep/'.a:expression.'/ '.join(BuffersList())
+  cope
+endfunction
+
+command! -nargs=+ GrepBufs call GrepBuffers(<q-args>)
