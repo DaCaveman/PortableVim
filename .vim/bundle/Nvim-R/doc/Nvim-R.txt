@@ -3172,6 +3172,15 @@ Examples:
 								 *Nvim-R-news*
 10. News~
 
+0.9.14.1 (2020-06-16)
+
+ * Delete options R_ls_env_tol, R_objbr_labelerr.
+ * New option: R_clear_console.
+ * Replace options R_in_buffer, R_term and R_term_cmd with a single option:
+   R_external_term.
+ * Change default key binding for calling debug() from \db to \bg to avoid
+   conflict with \d (send line).
+
 0.9.14 (2020-06-01)
 
  * New command \su (send all lines above the current one).

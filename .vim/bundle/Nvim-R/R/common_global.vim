@@ -1134,9 +1134,9 @@ function StartObjBrowser()
             elseif g:R_objbr_place =~# 'left'
                 sil exe 'leftabove vsplit ' . b:objbrtitle
             elseif g:R_objbr_place =~# 'above'
-                sil exe 'aboveleft vsplit ' . b:objbrtitle
+                sil exe 'aboveleft split ' . b:objbrtitle
             elseif g:R_objbr_place =~# 'below'
-                sil exe 'belowright vsplit ' . b:objbrtitle
+                sil exe 'belowright split ' . b:objbrtitle
             else
                 call RWarningMsg('Invalid value for R_objbr_place: "' . R_objbr_place . '"')
                 exe "set switchbuf=" . savesb
@@ -3097,7 +3097,7 @@ function RCreateSendMaps()
     endif
 
     " Debug
-    call RCreateMaps('n',   'RDebug', 'db', ':call RAction("debug")')
+    call RCreateMaps('n',   'RDebug', 'bg', ':call RAction("debug")')
     call RCreateMaps('n',   'RUndebug', 'ud', ':call RAction("undebug")')
 endfunction
 
