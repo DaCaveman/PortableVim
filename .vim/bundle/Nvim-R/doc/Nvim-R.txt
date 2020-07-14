@@ -325,12 +325,15 @@ or `coc-omni` for
 
    https://github.com/neoclide/coc.nvim
 
+<<<<<<< HEAD
 An alternative engine for asynchronous completion of R code is Gabriel
 Alcaras's `ncm-R` plugin: https://github.com/gaalcaras/ncm-R
 
 If you are going to try a plugin to get automatic omni completion you will
 want to set the value of |R_hi_fun_globenv| to either `1` or `2`.
 
+=======
+>>>>>>> 7d62646591cdef3d0bdfc0e9836c2105050028ad
 
 Other plugins~
 
@@ -595,26 +598,23 @@ operations are created in Nvim-R's temporary directory and deleted when R
 quits.
 
 When completing object names (CTRL-X CTRL-O) you have to press CTRL-N to go
-forward in the list and CTRL-P to go backward (see |popupmenu-completion|). If
-R is running and 'completeopt' includes the `preview` string, the preview
-window will display help for the argument selected in the pop up menu (see
-|R_show_arg_help|). For rnoweb, rmd and rrst file types, CTRL-X CTRL-O can
-also be used to complete knitr chunk options if the cursor is inside the chunk
-header.
+forward in the list and CTRL-P to go backward (see |popupmenu-completion|).
+For rnoweb, rmd and rrst file types, CTRL-X CTRL-O can also be used to
+complete knitr chunk options if the cursor is inside the chunk header.
 
-If R is not running or if it is running but is busy the completion will be
-based on information from the packages listed by |R_start_libs| (provided that
-the libraries were loaded at least once during a session of Nvim-R usage).
-Otherwise, the pop up menu for completion of function arguments will include
-an additional line with the name of the library where the function is (if the
-function name can be found in more than one library) and the function method
-(if what is being shown are the arguments of a method and not of the function
-itself). For both `library()` and `require()`, when completing the first
-argument, the popup list shows the names of installed packages, but only if R
-is running.
+If R is not running the completion will be based on information from the
+packages listed by |R_start_libs| (provided that the libraries were loaded at
+least once during a session of Nvim-R usage). Otherwise, the pop up menu for
+completion of function arguments will include an additional line with the name
+of the library where the function is (if the function name can be found in
+more than one library) and the function method (if what is being shown are the
+arguments of a method and not of the function itself). For both `library()`
+and `require()`, when completing the first argument, the popup list shows the
+names of installed packages, but only if R is running.
 
 You can source all .R files in a directory with the Normal mode command
-:RSourceDir, which accepts an optional argument (the directory to be sourced).
+`:RSourceDir`, which accepts an optional argument (the directory to be sourced).
+
 
 ------------------------------------------------------------------------------
 								     *Rinsert*
@@ -688,27 +688,21 @@ Vim can automatically complete the names of R objects when CTRL-X CTRL-O is
 pressed in insert mode (see |omni-completion| for details). Omni completion
 shows in a pop up menu the name of the object, its class and its environment
 (most frequently, its package name). If the object is a function, the plugin
-can also show the function arguments in a separate preview window in Vim and a
-float window in Neovim >= 0.5.0. You should remove "preview" from 'completopt'
-if you do not want the preview window.
+also shows the function arguments in a attached float  window.
 
 If a data.frame is found, while building the list of objects, the columns in
-the data.frame are added to the list. When you try to use omni completion to
-complete the name of a data.frame, the columns are not shown. But when the
-data.frame name is already complete, and you have inserted the '$' symbol,
-omni completion will show the column names.
+the data.frame are added to the list but they are shown in the menu only after
+you have inserted the '$' symbol after the data.frame name.
 
 Only the names of objects in .GlobalEnv and in loaded libraries are completed.
 If R is not running, only objects of libraries listed in |R_start_libs| will
-have their names completed. When you load a new library in R, only the current
-buffer has the highlighting of function names immediately updated. If you have
-other buffers open, they will be updated when you enter them.
+have their names completed.
 
-Vim uses one file to store the names of .GlobalEnv objects and a list of
-files for all other objects. The .GlobalEnv list is stored in the
-`$NVIMR_TMPDIR` directory and is deleted when you quit Vim. The other files
-are stored in the `$NVIMR_COMPLDIR` directory and remain available until you
-manually delete them.
+Vim uses one file to store the names of .GlobalEnv objects and a list of files
+for all other objects. The .GlobalEnv list is stored in the `$NVIMR_TMPDIR`
+directory and is deleted when you quit Vim. The other files are stored in the
+`$NVIMR_COMPLDIR` directory, are automatically updated and remain available
+until you manually delete them.
 
 
 ------------------------------------------------------------------------------
@@ -719,9 +713,9 @@ The Object Browser has two views: .GlobalEnv and Libraries. If you press
 <Enter> on the first line of the Object Browser it will toggle the view
 between the objects in .GlobalEnv and the currently loaded libraries.
 
-In the .GlobalEnv view, if an object has the attribute "label", it will also
-be displayed. For instance, the code below would make the Object Browser
-display the variable labels of an imported SPSS dataset:
+In the .GlobalEnv view, if a data.frame column has the attribute "label", it
+will also be displayed. For instance, the code below would make the Object
+Browser display the variable labels of an imported SPSS dataset:
 >
    library(foreign)
    d <- read.spss("/path/to/spss/dataset.sav", to.data.frame = TRUE)
@@ -743,13 +737,16 @@ their colors defined by the return value of some R functions. Each line in the
 table below shows a highlighting group and the corresponding type of R object:
 
 	 PreProc	libraries
+	 Include	environment
 	 Number		numeric
 	 String		character
 	 Special	factor
 	 Boolean	logical
-	 Type		list
+	 Type		data.frame
+	 StorageClass	list
+	 Structure	s4
 	 Function	function
-	 Statement	s4
+	 Statement	control flow (for, while, break, etc)
 	 Comment	promise (lazy load object)
 
 One limitation of the Object Browser is that objects made available by the
@@ -762,8 +759,15 @@ background):
 >
    obj <- obj
 <
-Note: The Object Browser may slowdown R if its workspace has too many
-objects, data.frames with too many columns or lists with too many elements.
+Notes:
+
+  - The Object Browser enables the automatic update of the data for the omni
+    completion of .GlobalEnv objects, and this may slowdown R if its workspace
+    has too many objects, data.frames with too many columns or lists with too
+    many elements (see |R_hi_fun_globenv|).
+
+  - Names of objects are stupidly truncated if they occupy more than 62 bytes.
+    This means that Unicode sequences might be split and become invalid.
 
 
 ------------------------------------------------------------------------------
@@ -977,6 +981,7 @@ of
 							      *Nvim-R-options*
 6. Options~
 
+<<<<<<< HEAD
 |R_in_buffer|         Run R in Vim/Neovim built in terminal emulator
 |R_esc_term|          Map <Esc> to go to Normal mode in the terminal buffer
 |R_close_term|        Close terminal buffer after R quited
@@ -985,6 +990,11 @@ of
 |R_buffer_opts|       Options to be set in R buffer
 |R_term|              External terminal to be used
 |R_term_cmd|          Complete command to open an external terminal
+=======
+|R_auto_start|        Start R automatically
+|R-built-in-terminal| Options to control Vim/Neovim's built-in terminal
+|R_external_term|     Command to run R in an external terminal emulator
+>>>>>>> 7d62646591cdef3d0bdfc0e9836c2105050028ad
 |R_silent_term|       Do not show terminal errors
 |R_set_home_env|      Set the value of $HOME for R (Windows only)
 |R_save_win_pos|      Save positions of R and GVim windows (Windows only)
@@ -1044,12 +1054,12 @@ of
 |R_rmhidden|          Remove hidden objects from R workspace
 |R_source|            Source additional scripts
 |R_non_r_compl|       Bibliography completion
-|R_show_arg_help|     Show extra information during arguments completion
 |R_wait|              Time to wait for nvimcom loading
 |R_wait_reply|        Time to wait for R reply
 |R_nvim_wd|           Start R in Vim's working directory
 |R_after_start|       Commands to be executed after R startup
 |R_after_ob_open|     Commands to be executed after the Object Browser opening
+|R_debug|             Support for debugging functions
 |R_user_maps_only|    Only user specified key bindings
 |R_disable_cmds|      List of commands to be disabled
 |R_tmpdir|            Where temporary files are created
@@ -1061,6 +1071,27 @@ of
 
 
 ------------------------------------------------------------------------------
+<<<<<<< HEAD
+=======
+								*R_auto_start*
+6.1. Start R automatically~
+
+By default, you have to start R manually with the command <LocalLeader>rf.
+If you want that R starts automatically when you load an R script while
+starting Vim, put in your |vimrc|:
+>
+   let R_auto_start = 1
+<
+If you want that R starts automatically when you start editing an R script
+even if Vim is already started, put in your |vimrc|:
+>
+   let R_auto_start = 2
+<
+
+------------------------------------------------------------------------------
+							 *R-built-in-terminal*
+6.2. R in Vim/Neovim built-in terminal~
+>>>>>>> 7d62646591cdef3d0bdfc0e9836c2105050028ad
 							       *R_esc_term*
 							       *R_close_term*
 							       *R_hl_term*
@@ -1204,7 +1235,7 @@ used to send commands from Vim/Neovim to R.
 								      *R_term*
 								  *R_term_cmd*
 							       *R_silent_term*
-6.2. Terminal emulator (Linux/Unix only)~
+6.3. Terminal emulator (Linux/Unix only)~
 
 Note: The options of this section are ignored on Mac OS X, where the command
 `open` is called to run the default application used to run shell scripts.
@@ -1252,7 +1283,7 @@ put in your |vimrc|:
 							      *R_save_win_pos*
 							   *R_arrange_windows*
 							      *R_set_home_env*
-6.3. Windows specific options~
+6.4. Windows specific options~
 								 *Rtools-path*
 If R cannot find either `make` or `gcc` while trying to compile nvimcom, you
 should add their directories to the beginning of the `PATH` environment
@@ -1286,7 +1317,7 @@ by R, you will want to put in your |vimrc|:
 							       *R_rmdchunk*
 							       *R_assign_map*
 							       *R_assign*
-6.4. Assignment operator and Rnoweb completion of code block~
+6.5. Assignment operator and Rnoweb completion of code block~
 
 In Rnoweb files, a `<` is replaced with `<<>>=\n@`. To disable this feature,
 put in your |vimrc|:
@@ -1338,8 +1369,12 @@ is preceded by a space and followed by a non-word character.
 							    *R_objbr_opendf*
 							    *R_objbr_openlist*
 							    *R_objbr_allnames*
+<<<<<<< HEAD
 							    *R_objbr_labelerr*
 6.5. Object Browser options~
+=======
+6.6. Object Browser options~
+>>>>>>> 7d62646591cdef3d0bdfc0e9836c2105050028ad
 
 By default, the Object Browser will be created at the right of the script
 window, and with 40 columns. Valid values for the Object Browser placement are
@@ -1394,9 +1429,9 @@ in the Object Browser.
 							      *R_nvimpager*
 							      *R_editor_w*
 							      *R_help_w*
-6.6. Vim as pager for R~
+6.7. Vim as pager for R~
 
-6.6.1. Quick setup~
+6.7.1. Quick setup~
 
 If you do not want to see R examples in a Vim buffer, put in your |vimrc|:
 >
@@ -1414,7 +1449,7 @@ If you want to see R documentation in Vim, but are not satisfied with the
 way it works, please, read the subsection 6.6.2 below.
 
 ------------------------------------------------------------------------------
-6.6.2. Details and other options:~
+6.7.2. Details and other options:~
 
 The plugin key bindings will remain active in the documentation buffer, and,
 thus, you will be able to send commands to R as you do while editing an R
@@ -1453,7 +1488,7 @@ another.
 								      *R_path*
 								      *R_app*
 								      *R_cmd*
-6.7. R path and application names~
+6.8. R path and application names~
 
 Vim will run the first R executable in the path. You can set an alternative
 path to R in your |vimrc| as in the examples:
@@ -1488,7 +1523,7 @@ in your system, you should set the value of `R_cmd` in your |vimrc|.
 
 ------------------------------------------------------------------------------
 								      *R_args*
-6.8. Arguments to R~
+6.9. Arguments to R~
 
 Set this option in your |vimrc| if you want to pass command line arguments to
 R at the startup. The value of this variable must be a |List|. Example:
@@ -1502,7 +1537,7 @@ the SDI style of the graphical user interface.
 
 ------------------------------------------------------------------------------
 								*R_start_libs*
-6.9. Omnicompletion and syntax highlight of R functions~
+6.10. Omnicompletion and syntax highlighting~
 
 The list of functions to be highlighted and the list of objects for
 omnicompletion are built dynamically as the libraries are loaded by R.
@@ -1515,13 +1550,7 @@ value of R_start_libs:
    let R_start_libs = 'base,stats,graphics,grDevices,utils,methods'
 <
 
-------------------------------------------------------------------------------
 							    *Rout_more_colors*
-							    *R_hi_fun_globenv*
-							    *R_hi_fun_paren*
-							    *R_hi_fun*
-6.10. Syntax highlight: functions, .Rout files and float windows~
-
 By default, the R commands in .Rout files are highlighted with the color of
 comments, and only the output of commands has some of its elements highlighted
 (numbers, strings, index of vectors, warnings and errors).
@@ -1539,6 +1568,7 @@ in your |vimrc|. Example:
    let g:Rout_prompt_str = '» '
    let g:Rout_continue_str = '… '
 <
+							    *R_hi_fun_paren*
 By default, Nvim-R highlights the names of R functions even if they are not
 followed by a parenthesis. If you prefer to highlight R functions only if
 the `(` is typed, put in your |vimrc|:
@@ -1548,36 +1578,30 @@ the `(` is typed, put in your |vimrc|:
 Note: The syntax highlighting is slower when `R_hi_fun_paren` is 1, and,
 depending on your system configuration, the slowness might be noticeable.
 
+							    *R_hi_fun_globenv*
 By default, functions from `.GlobalEnv` and other environments in the
 `search()` path whose names do not start with `"package:"` are not immediately
-highlighted to avoid the need of both nvimcom saving a temporary file with the
-list objects in these environments after each command sent to R and Nvim-R
-reading and parsing this file, which might be slow in some machines, and
-especially if R's workspace has too many objects, data.frames with too many
-columns or lists with too many elements. Anyway, if you prefer these functions
-more quickly highlighted, change the value of `R_hi_fun_globenv` to either 1
-or 2 in your |vimrc|:
+highlighted to avoid the need of nvimcom saving a temporary file with the list
+objects in these environments after each command sent to R, which might be
+slow in some machines, and especially if R's workspace has too many objects,
+data.frames with too many columns or lists with too many elements. Anyway, if
+you prefer these functions more quickly highlighted, change the value of
+`R_hi_fun_globenv` to either 1 or 2 in your |vimrc|:
 >
    let R_hi_fun_globenv = 0 " Highlight only if starting omni completion
    let R_hi_fun_globenv = 1 " Highlight after an InsertEnter event
    let R_hi_fun_globenv = 2 " Highlight immediately
 <
-The functions from `.GlobalEnv` as well as functions from other environments
-in the search path will be highlighted when created, but the highlighting will
-not be cleared when the functions are deleted because sending commands to R
-could become noticeably slow when editing files with complex syntax highlight
-such as large RMarkdown scripts. Anyway, if you want the syntax highlighting
-of these functions cleared and redone after each command sent to R, put in
-your |vimrc|:
->
-   let R_hi_fun_globenv = 2
-<
+If the value of `R_hi_fun_globenv` is 0, it is automatically increased to 1 if
+you either trigger omnicompletion or open the Object Browser.
+
 Functions from environments in the search path are highlighted as functions
 from packages, but in Neovim (not in Vim) you can set a different highlight
 command for them in your |vimrc|, as in the example below:
 >
    hi rGlobEnvFun ctermfg=117 guifg=#87d7ff cterm=italic gui=italic
 <
+<<<<<<< HEAD
 The value of `R_hi_fun_globenv` will be set to `0` if nvimcom takes more than
 500 milliseconds to create the list of objects that Nvim-R needs to find and,
 then, highlight new functions. Then, the list will be updated only when you
@@ -1587,18 +1611,21 @@ are between 10 and 10000 milliseconds. Example:
 >
    let R_ls_env_tol = 700
 <
+=======
+								    *R_hi_fun*
+>>>>>>> 7d62646591cdef3d0bdfc0e9836c2105050028ad
 If you prefer to completely disable the syntax highlighting of R functions put
 in your |vimrc|:
 >
    let R_hi_fun = 0
 <
-In Neovim >= 0.5.0, a float window with addtional information is shown during
-omni completion. If you want to change the highlighting of the text describing
-the object whose name is being completed, the line separating the description
-from either the function arguments or the object summary, and, when completing
-a function argument, the name of the argument, choose what highlighting groups
-you want to use (see |highlight-groups| )and put in your |vimrc| lines as in
-the example:
+In either Neovim >= 0.4.3 or Vim >= 8.1.1705, a float window with addtional
+information is shown during omni completion. In Neovim only, if you want to
+change the highlighting of the text describing the object whose name is being
+completed, the line separating the description from either the function
+arguments or the object summary, and, when completing a function argument, the
+name of the argument, choose what highlighting groups you want to use (see
+|highlight-groups| )and put in your |init.vim| lines as in the example:
 >
    hi def link previewDescr Title
    hi def link previewSep   PreProc
@@ -2123,23 +2150,8 @@ Note: On Windows, Nvim-R's bibliographic completion works only with ascii letter
 
 
 ------------------------------------------------------------------------------
-								  *R_complete*
-							     *R_show_arg_help*
-6.29. Function arguments~
-
-During the completion of function arguments, the preview window shows R's
-documentation help for the item being completed unless you put in your
-|vimrc|:
->
-   let R_show_arg_help = 0
-<
-You can also completely disable the preview window by setting 'completeopt'
-without the `preview` string.
-
-
-------------------------------------------------------------------------------
 								      *R_wait*
-6.30. Time to wait for nvimcom loading~
+6.29. Time to wait for nvimcom loading~
 
 Nvim-R asynchronously waits 60 seconds for the nvimcom package to be loaded
 during R startup. If 60 seconds are not enough to your R startup, then set a
@@ -2150,7 +2162,7 @@ higher value for the variable in your |vimrc|. Example:
 
 ------------------------------------------------------------------------------
 								*R_wait_reply*
-6.31. Time to wait for R reply~
+6.30. Time to wait for R reply~
 
 By default Nvim-R waits 2 seconds for R to reply after a request for omni
 completion is issued. You can set the amount of time Nvim-R waits (in seconds)
@@ -2161,7 +2173,7 @@ in your |vimrc|.  Example:
 
 ------------------------------------------------------------------------------
 								   *R_nvim_wd*
-6.32 Start R in working directory of Vim~
+6.31 Start R in working directory of Vim~
 
 When you are editing an R file (.R, .Rnw, .Rd, .Rmd, .Rrst) and start R, the R
 package nvimcom runs the command `setwd()` with the directory of the file
@@ -2182,7 +2194,7 @@ in |vimrc|:
 ------------------------------------------------------------------------------
 							       *R_after_start*
 							     *R_after_ob_open*
-6.33 Commands to be executed after either R startup or Object Browser opening~
+6.32 Commands to be executed after either R startup or Object Browser opening~
 
 If you want that Vim executes either Vim or external commands right after R
 startup, set the value of R_after_start in your |vimrc|. The `R_after_start`
@@ -2233,6 +2245,17 @@ If you want that Nvim-R executes Vim commands right after the Object Browser
 is open, set the value of `R_after_ob_open` as a list of commands. Example:
 >
    let R_after_ob_open = [':tabnew %']
+<
+
+------------------------------------------------------------------------------
+								     *R_debug*
+6.33 Support for debugging functions~
+
+Put the line below in your |vimrc| if do not want that the cursor jumps to the
+line being debugged when by `browser()`. Highlighting of the line being
+debugged will also be disabled.
+>
+   let R_debug = 0
 <
 
 ------------------------------------------------------------------------------
@@ -2401,7 +2424,7 @@ In Skim, click in the drop down menu and fill the fields:
 <
 
 ------------------------------------------------------------------------------
-6.38.3 Qpdfview configuration~
+6.39.3 Qpdfview configuration~
 
 Qpdfview is only partially supported: SyncTeX backward does not work with file
 paths containing spaces, and the qpdfview window is not automatically raised
@@ -3172,10 +3195,10 @@ Examples:
 								 *Nvim-R-news*
 10. News~
 
-0.9.14.1 (2020-06-16)
+0.9.14.1 (2020-07-04)
 
- * Delete options R_ls_env_tol, R_objbr_labelerr.
- * New option: R_clear_console.
+ * Delete options R_ls_env_tol, R_objbr_labelerr, R_show_arg_help.
+ * New options: R_clear_console, R_debug, R_auto_start.
  * Replace options R_in_buffer, R_term and R_term_cmd with a single option:
    R_external_term.
  * Change default key binding for calling debug() from \db to \bg to avoid
