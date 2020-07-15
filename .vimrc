@@ -245,7 +245,7 @@ nnoremap 								<leader>/		:call GrepBuffers("<C-R><C-W>")<CR>
 "____________________________________________________________________________________________________________________
 "Terminal Window
 "
-set termwinsize=12x0
+set termwinsize=12x1000
 set splitbelow
 
 function CheckTerm1()
@@ -255,9 +255,9 @@ function CheckTerm1()
         "set lines=75
 		"set splitbelow
 		if &lines > 55
-			set termwinsize=20x0
+			set termwinsize=20x1000
 		else
-			set termwinsize=12x0
+			set termwinsize=12x1000
 		endif
 		term python %
 		normal 
@@ -266,9 +266,9 @@ function CheckTerm1()
         "set lines=75
 		"set splitbelow
 		if &lines > 55
-			set termwinsize=20x0
+			set termwinsize=20x1000
 		else
-			set termwinsize=12x0
+			set termwinsize=12x1000
 		endif
 		term python %
 		normal 
@@ -283,9 +283,9 @@ function CheckTerm2()
         "set lines=75
 		"set splitbelow
 		if &lines > 55
-			set termwinsize=20x0
+			set termwinsize=20x1000
 		else
-			set termwinsize=12x0
+			set termwinsize=12x1000
 		endif
 		term python
 		normal 
@@ -294,9 +294,9 @@ function CheckTerm2()
         "set lines=75
 		"set splitbelow
 		if &lines > 55
-			set termwinsize=20x0
+			set termwinsize=20x1000
 		else
-			set termwinsize=12x0
+			set termwinsize=12x1000
 		endif
 		term python
 		normal 

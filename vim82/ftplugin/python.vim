@@ -6,11 +6,6 @@
 " Last Change:	Sun 17 Mar 2019
 " https://github.com/tpict/vim-ftplugin-python
 
-if exists("g:pytGoDefinitionKeyMap") && g:pytGoDefinitionKeyMap==1
-  " gd mimic
-  nnoremap <silent><buffer> gd :YcmCompleter GoToDefinitionElseDeclaration<CR>
-endif
-
 if exists("b:did_ftplugin") | finish | endif
 let b:did_ftplugin = 1
 let s:keepcpo= &cpo
@@ -41,8 +36,6 @@ setlocal includeexpr=substitute(substitute(substitute(
 setlocal suffixesadd=.py
 setlocal comments=b:#,fb:-
 setlocal commentstring=#\ %s
-
-set encoding=utf-8
 
 if has('python3')
   setlocal omnifunc=python3complete#Complete 
