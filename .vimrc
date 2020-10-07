@@ -188,6 +188,8 @@ inoremap								<C-h>			<Esc><c-w>h
 inoremap								<C-j>			<Esc><c-w>j
 inoremap								<C-k>			<Esc><c-w>k
 inoremap								<C-l>			<Esc><c-w>l
+"digraph
+inoremap								<C-d>			<C-k>
 "____________________________________________________________________________________________________________________
 " Visual mode mapping
 "
@@ -451,6 +453,7 @@ let g:krlSpaceIndent = 0 " don't change 'sts', 'sw', 'et' and 'sr'
 "let g:krlFoldLevel = 1 " close movement folds on startup (default)
 let g:krlFoldLevel = 2 " close all folds on startup
 let g:krlKeyWord = 1 " don't treat $, # and & as word char
+au BufNewFile,BufRead *.src set textwidth=999
 "____________________________________________________________________________________________________________________
 " FANUC karel
 "

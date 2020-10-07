@@ -247,6 +247,7 @@ static void *NeovimServer(void *arg)
 
         ParseMsg(buf);
     }
+    close(Sfd);
     return NULL;
 }
 #endif
@@ -386,6 +387,7 @@ static void SendToServer(const char *port, const char *msg)
         fflush(stderr);
         return;
     }
+    close(s);
 }
 #endif
 
@@ -686,7 +688,7 @@ char *count_sep(char *b1)
                 fflush(stderr);
                 free(b1);
                 return NULL;
-            }
+}
         }
         s++;
     }
@@ -762,8 +764,8 @@ char *read_file(const char *fn)
         free(buffer);
         fprintf(stderr, "Error reading '%s'\n", fn);
         fflush(stderr);
-        return NULL;
-    }
+    return NULL;
+}
     fclose(f);
     return buffer;
 }
@@ -791,8 +793,8 @@ char *read_omnils_file(const char *fn, int *size)
             if(*p == '\006')
                 *p = 0;
             p++;
-        }
     }
+}
 
     return buffer;
 }
@@ -813,20 +815,22 @@ char *read_pkg_descr(const char *pkgnm)
         if(*s == '\t'){
             *s = 0;
             if(strcmp(nm, pkgnm) == 0){
+            s++;
+            dscr = s;
+            while(*s != '\t' && *s != 0){
                 s++;
-                dscr = s;
-                while(*s != '\t' && *s != 0){
-                    s++;
-                    if(*s == '\t'){
-                        *s = 0;
+                if(*s == '\t'){
+                    *s = 0;
                         char *pkgdscr = malloc(sizeof(char) * (1 + strlen(dscr)));
                         strcpy(pkgdscr, dscr);
+                        fclose(f);
                         return pkgdscr;
-                    }
                 }
             }
         }
     }
+}
+    fclose(f);
     return NULL;
 }
 
@@ -983,7 +987,7 @@ void update_pkg_list()
 
 ListStatus* search(const char *s)
 {
-    ListStatus *node = listTree;
+    ListStatus *node = listTree; 
     int cmp = strcmp(node->key, s);
     while(node && cmp != 0){
         if(cmp > 0)
@@ -1051,7 +1055,7 @@ static const char *write_ob_line(const char *p, const char *bs, char *prfx, int 
     const char *f[7];
     const char *s;    // Diagnostic pointer
     const char *bsnm; // Name of object including its parent list, data.frame or S4 object
-    int df;           // Is data.frame? If yes, start open unless closeddf = 1
+    int df;     // Is data.frame? If yes, start open unless closeddf = 1
     int i, j;
     int ne;
 
@@ -1065,11 +1069,11 @@ static const char *write_ob_line(const char *p, const char *bs, char *prfx, int 
         f[i] = p;
         i++;
         while(*p != 0)
-            p++;
+        p++;
         p++;
     }
     while(*p != '\n' && *p != 0)
-        p++;
+    p++;
     if(*p == '\n')
         p++;
 
@@ -1092,7 +1096,7 @@ static const char *write_ob_line(const char *p, const char *bs, char *prfx, int 
         while(s[i] && i < 159){
             descr[j] = s[i];
             if(s[i] == '\'' && s[i + 1] == '\'')
-                i++;
+            i++;
             i++; j++;
         }
         descr[j] = 0;
@@ -1100,7 +1104,7 @@ static const char *write_ob_line(const char *p, const char *bs, char *prfx, int 
 
     if(f[1][0] == '\003')
         fprintf(F2, "   %s(#%s\t%s\n", prfx, f[0], descr);
-    else
+        else
         fprintf(F2, "   %s%c#%s\t%s\n", prfx, f[1][0], f[0], descr);
 
     if(*p == 0)
@@ -1123,80 +1127,55 @@ static const char *write_ob_line(const char *p, const char *bs, char *prfx, int 
             snprintf(base2, 127, "%s[[", bsnm); // S4 object always have names but base2 must be defined
         }
 
-<<<<<<< HEAD
-    if(tp == '[' || tp == '<')
-        if(*nr)
-            fprintf(F2, "   %s%c#%s\t [%s, %d]\n", prfx, tp, nm, nr, e);
-        else
-            fprintf(F2, "   %s%c#%s\t [%d]\n", prfx, tp, nm, e);
-    else
-        fprintf(F2, "   %s%c#%s\t%s\n", prfx, tp, nm, dc);
-
-    if(tp == '[' || tp == '<'){
-        strncpy(base, bsnm, 63);
-        if(tp == '['){
-            if(p[strlen(base)] == '$') // Named list
-                strncat(base, "$", 63);
-        } else
-            strncat(base, "@", 63);
-
-
-        if(e > 0){
             if(get_list_status(bsnm, df) == 0){
-                while(strstr(p, base) == p){
+            while(str_here(p, base1) || str_here(p, base2)){
                     while(*p != '\n')
                         p++;
-=======
-        if(get_list_status(bsnm, df) == 0){
-            while(str_here(p, base1) || str_here(p, base2)){
-                while(*p != '\n')
->>>>>>> 7d62646591cdef3d0bdfc0e9836c2105050028ad
                     p++;
-                p++;
                 nLibObjs--;
+                }
+                return p;
             }
-            return p;
-        }
 
         if(str_here(p, base1) == 0 && str_here(p, base2) == 0)
             return p;
 
-        int len = strlen(prfx);
-        if(nvimcom_is_utf8){
-            int j = 0, i = 0;
-            while(i < len){
-                if(prfx[i] == '\xe2'){
-                    i += 3;
-                    if(prfx[i-1] == '\x80' || prfx[i-1] == '\x94'){
-                        newprfx[j] = ' '; j++;
+            int len = strlen(prfx);
+            if(nvimcom_is_utf8){
+                int j = 0, i = 0;
+                while(i < len){
+                    if(prfx[i] == '\xe2'){
+                        i += 3;
+                        if(prfx[i-1] == '\x80' || prfx[i-1] == '\x94'){
+                            newprfx[j] = ' '; j++;
+                        } else {
+                            newprfx[j] = '\xe2'; j++;
+                            newprfx[j] = '\x94'; j++;
+                            newprfx[j] = '\x82'; j++;
+                        }
                     } else {
-                        newprfx[j] = '\xe2'; j++;
-                        newprfx[j] = '\x94'; j++;
-                        newprfx[j] = '\x82'; j++;
+                        newprfx[j] = prfx[i];
+                        i++, j++;
                     }
-                } else {
-                    newprfx[j] = prfx[i];
-                    i++, j++;
                 }
+                newprfx[j] = 0;
+            } else {
+                for(int i = 0; i < len; i++){
+                    if(prfx[i] == '-' || prfx[i] == '`')
+                        newprfx[i] = ' ';
+                    else
+                        newprfx[i] = prfx[i];
+                }
+                newprfx[len] = 0;
             }
-            newprfx[j] = 0;
-        } else {
-            for(int i = 0; i < len; i++){
-                if(prfx[i] == '-' || prfx[i] == '`')
-                    newprfx[i] = ' ';
-                else
-                    newprfx[i] = prfx[i];
-            }
-            newprfx[len] = 0;
-        }
 
-        // Check if the next list element really is there
+            // Check if the next list element really is there
         while(str_here(p, base1) || str_here(p, base2)){
-            // Check if this is the last element in the list
-            s = p;
+                // Check if this is the last element in the list
+                s = p;
             while(*s != '\n')
-                s++;
-            s++;
+                    s++;
+                    s++;
             ne--;
             if(ne == 0){
                 snprintf(prefix, 112, "%s%s", newprfx, strL);
@@ -1234,7 +1213,7 @@ void hi_glbenv_fun()
             nm->name = p;
             nm->next = nmlist;
             nmlist = nm;
-        }
+    }
         while(*p != '\n')
             p++;
         p++;
@@ -1249,7 +1228,7 @@ void hi_glbenv_fun()
             if(nmlist)
                 printf(" ");
             free(nm);
-        }
+    }
         printf("')\n");
         fflush(stdout);
     }
@@ -1269,12 +1248,12 @@ void update_glblenv_buffer()
         if(glbnv_buffer[i] == '\003'){
             n++;
             i += 7;
-        }
+    }
 
     if(n != nGlbEnvFun){
         nGlbEnvFun = n;
         hi_glbenv_fun();
-    }
+}
 }
 
 void omni2ob()
@@ -1288,7 +1267,7 @@ void omni2ob()
         fflush(stderr);
         return;
     }
-
+    
     fprintf(F2, ".GlobalEnv | Libraries\n\n");
 
     const char *s = glbnv_buffer;
@@ -1297,10 +1276,10 @@ void omni2ob()
 
     fclose(F2);
     if(auto_obbr){
-        fputs("call UpdateOB('GlobalEnv')\n", stdout);
-        fflush(stdout);
-    }
+    fputs("call UpdateOB('GlobalEnv')\n", stdout);
+    fflush(stdout);
 }
+            }
 
 void lib2ob()
 {
@@ -1324,7 +1303,7 @@ void lib2ob()
         if(pkg->loaded){
             if(pkg->descr)
                 fprintf(F2, "   :#%s\t%s\n", pkg->name, pkg->descr);
-            else
+        else
                 fprintf(F2, "   :#%s\t\n", pkg->name);
             snprintf(lbnmc, 511, "%s:", pkg->name);
             stt = get_list_status(lbnmc, 0);
@@ -1415,7 +1394,7 @@ void objbr_setup()
         while(p){
             add_pkg(p, 0);
             p = strtok(NULL, ",");
-        }
+}
         free(s);
     } else {
         add_pkg("base", 0);

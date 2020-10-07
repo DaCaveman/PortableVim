@@ -325,15 +325,6 @@ or `coc-omni` for
 
    https://github.com/neoclide/coc.nvim
 
-<<<<<<< HEAD
-An alternative engine for asynchronous completion of R code is Gabriel
-Alcaras's `ncm-R` plugin: https://github.com/gaalcaras/ncm-R
-
-If you are going to try a plugin to get automatic omni completion you will
-want to set the value of |R_hi_fun_globenv| to either `1` or `2`.
-
-=======
->>>>>>> 7d62646591cdef3d0bdfc0e9836c2105050028ad
 
 Other plugins~
 
@@ -981,20 +972,9 @@ of
 							      *Nvim-R-options*
 6. Options~
 
-<<<<<<< HEAD
-|R_in_buffer|         Run R in Vim/Neovim built in terminal emulator
-|R_esc_term|          Map <Esc> to go to Normal mode in the terminal buffer
-|R_close_term|        Close terminal buffer after R quited
-|R_hl_term|           Syntax highlight terminal as rout file type
-|R_OutDec|            Set comma as decimal separator in rout files
-|R_buffer_opts|       Options to be set in R buffer
-|R_term|              External terminal to be used
-|R_term_cmd|          Complete command to open an external terminal
-=======
 |R_auto_start|        Start R automatically
 |R-built-in-terminal| Options to control Vim/Neovim's built-in terminal
 |R_external_term|     Command to run R in an external terminal emulator
->>>>>>> 7d62646591cdef3d0bdfc0e9836c2105050028ad
 |R_silent_term|       Do not show terminal errors
 |R_set_home_env|      Set the value of $HOME for R (Windows only)
 |R_save_win_pos|      Save positions of R and GVim windows (Windows only)
@@ -1071,8 +1051,6 @@ of
 
 
 ------------------------------------------------------------------------------
-<<<<<<< HEAD
-=======
 								*R_auto_start*
 6.1. Start R automatically~
 
@@ -1091,7 +1069,6 @@ even if Vim is already started, put in your |vimrc|:
 ------------------------------------------------------------------------------
 							 *R-built-in-terminal*
 6.2. R in Vim/Neovim built-in terminal~
->>>>>>> 7d62646591cdef3d0bdfc0e9836c2105050028ad
 							       *R_esc_term*
 							       *R_close_term*
 							       *R_hl_term*
@@ -1369,12 +1346,7 @@ is preceded by a space and followed by a non-word character.
 							    *R_objbr_opendf*
 							    *R_objbr_openlist*
 							    *R_objbr_allnames*
-<<<<<<< HEAD
-							    *R_objbr_labelerr*
-6.5. Object Browser options~
-=======
 6.6. Object Browser options~
->>>>>>> 7d62646591cdef3d0bdfc0e9836c2105050028ad
 
 By default, the Object Browser will be created at the right of the script
 window, and with 40 columns. Valid values for the Object Browser placement are
@@ -1601,19 +1573,7 @@ command for them in your |vimrc|, as in the example below:
 >
    hi rGlobEnvFun ctermfg=117 guifg=#87d7ff cterm=italic gui=italic
 <
-<<<<<<< HEAD
-The value of `R_hi_fun_globenv` will be set to `0` if nvimcom takes more than
-500 milliseconds to create the list of objects that Nvim-R needs to find and,
-then, highlight new functions. Then, the list will be updated only when you
-manually try an omnicompletion. If you want that nvimcom be either more or
-less tolerant to delays, put a different value in your |vimrc|. Valid values
-are between 10 and 10000 milliseconds. Example:
->
-   let R_ls_env_tol = 700
-<
-=======
 								    *R_hi_fun*
->>>>>>> 7d62646591cdef3d0bdfc0e9836c2105050028ad
 If you prefer to completely disable the syntax highlighting of R functions put
 in your |vimrc|:
 >

@@ -21,6 +21,7 @@ GoToImplementationElseDeclaration	youcompleteme.txt	/*GoToImplementationElseDecl
 GoToImprecise	youcompleteme.txt	/*GoToImprecise*
 GoToInclude	youcompleteme.txt	/*GoToInclude*
 GoToReferences	youcompleteme.txt	/*GoToReferences*
+GoToSymbol-symbol-query	youcompleteme.txt	/*GoToSymbol-symbol-query*
 GoToType	youcompleteme.txt	/*GoToType*
 OrganizeImports	youcompleteme.txt	/*OrganizeImports*
 RefactorRename-new-name	youcompleteme.txt	/*RefactorRename-new-name*
@@ -75,12 +76,14 @@ g:ycm_language_server	youcompleteme.txt	/*g:ycm_language_server*
 g:ycm_log_level	youcompleteme.txt	/*g:ycm_log_level*
 g:ycm_max_diagnostics_to_display	youcompleteme.txt	/*g:ycm_max_diagnostics_to_display*
 g:ycm_max_num_candidates	youcompleteme.txt	/*g:ycm_max_num_candidates*
+g:ycm_max_num_candidates_to_detail	youcompleteme.txt	/*g:ycm_max_num_candidates_to_detail*
 g:ycm_max_num_identifier_candidates	youcompleteme.txt	/*g:ycm_max_num_identifier_candidates*
 g:ycm_min_num_identifier_candidate_chars	youcompleteme.txt	/*g:ycm_min_num_identifier_candidate_chars*
 g:ycm_min_num_of_chars_for_completion	youcompleteme.txt	/*g:ycm_min_num_of_chars_for_completion*
 g:ycm_open_loclist_on_ycm_diags	youcompleteme.txt	/*g:ycm_open_loclist_on_ycm_diags*
 g:ycm_rls_binary_path	youcompleteme.txt	/*g:ycm_rls_binary_path*
 g:ycm_roslyn_binary_path	youcompleteme.txt	/*g:ycm_roslyn_binary_path*
+g:ycm_rust_toolchain_root	youcompleteme.txt	/*g:ycm_rust_toolchain_root*
 g:ycm_seed_identifiers_with_syntax	youcompleteme.txt	/*g:ycm_seed_identifiers_with_syntax*
 g:ycm_semantic_triggers	youcompleteme.txt	/*g:ycm_semantic_triggers*
 g:ycm_server_python_interpreter	youcompleteme.txt	/*g:ycm_server_python_interpreter*
@@ -90,6 +93,7 @@ g:ycm_use_clangd	youcompleteme.txt	/*g:ycm_use_clangd*
 g:ycm_use_ultisnips_completer	youcompleteme.txt	/*g:ycm_use_ultisnips_completer*
 g:ycm_warning_symbol	youcompleteme.txt	/*g:ycm_warning_symbol*
 youcompleteme#GetCommandResponse()	youcompleteme.txt	/*youcompleteme#GetCommandResponse()*
+youcompleteme#GetCommandResponseAsync()	youcompleteme.txt	/*youcompleteme#GetCommandResponseAsync()*
 youcompleteme#GetErrorCount	youcompleteme.txt	/*youcompleteme#GetErrorCount*
 youcompleteme#GetWarningCount	youcompleteme.txt	/*youcompleteme#GetWarningCount*
 youcompleteme-autocommands	youcompleteme.txt	/*youcompleteme-autocommands*
@@ -141,7 +145,8 @@ youcompleteme-manually-specified-solution-files	youcompleteme.txt	/*youcompletem
 youcompleteme-maven-projects	youcompleteme.txt	/*youcompleteme-maven-projects*
 youcompleteme-miscellaneous-commands	youcompleteme.txt	/*youcompleteme-miscellaneous-commands*
 youcompleteme-multi-file-refactor	youcompleteme.txt	/*youcompleteme-multi-file-refactor*
-youcompleteme-option-1-use-compilation-database-46	youcompleteme.txt	/*youcompleteme-option-1-use-compilation-database-46*
+youcompleteme-note-minimum-requirements-have-changed	youcompleteme.txt	/*youcompleteme-note-minimum-requirements-have-changed*
+youcompleteme-option-1-use-compilation-database-45	youcompleteme.txt	/*youcompleteme-option-1-use-compilation-database-45*
 youcompleteme-option-2-provide-flags-manually	youcompleteme.txt	/*youcompleteme-option-2-provide-flags-manually*
 youcompleteme-options	youcompleteme.txt	/*youcompleteme-options*
 youcompleteme-plugging-an-arbitrary-lsp-server	youcompleteme.txt	/*youcompleteme-plugging-an-arbitrary-lsp-server*
@@ -151,6 +156,7 @@ youcompleteme-quick-feature-summary	youcompleteme.txt	/*youcompleteme-quick-feat
 youcompleteme-quick-start-installing-all-completers	youcompleteme.txt	/*youcompleteme-quick-start-installing-all-completers*
 youcompleteme-refactoring-commands	youcompleteme.txt	/*youcompleteme-refactoring-commands*
 youcompleteme-references	youcompleteme.txt	/*youcompleteme-references*
+youcompleteme-requirements	youcompleteme.txt	/*youcompleteme-requirements*
 youcompleteme-rust	youcompleteme.txt	/*youcompleteme-rust*
 youcompleteme-rust-semantic-completion	youcompleteme.txt	/*youcompleteme-rust-semantic-completion*
 youcompleteme-semantic-completion-for-other-languages	youcompleteme.txt	/*youcompleteme-semantic-completion-for-other-languages*
@@ -159,7 +165,6 @@ youcompleteme-signature-help	youcompleteme.txt	/*youcompleteme-signature-help*
 youcompleteme-troubleshooting	youcompleteme.txt	/*youcompleteme-troubleshooting*
 youcompleteme-user-guide	youcompleteme.txt	/*youcompleteme-user-guide*
 youcompleteme-using-omnifunc-for-semantic-completion	youcompleteme.txt	/*youcompleteme-using-omnifunc-for-semantic-completion*
-youcompleteme-warning-support-for-python-2-has-been-dropped	youcompleteme.txt	/*youcompleteme-warning-support-for-python-2-has-been-dropped*
 youcompleteme-windows	youcompleteme.txt	/*youcompleteme-windows*
 youcompleteme-working-with-third-party-packages	youcompleteme.txt	/*youcompleteme-working-with-third-party-packages*
 youcompleteme-working-with-virtual-environments	youcompleteme.txt	/*youcompleteme-working-with-virtual-environments*

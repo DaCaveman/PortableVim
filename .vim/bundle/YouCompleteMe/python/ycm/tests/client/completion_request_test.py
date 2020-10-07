@@ -26,19 +26,21 @@ from ycm.client import completion_request
 
 class ConvertCompletionResponseToVimDatas_test:
   """ This class tests the
-      completion_request._ConvertCompletionResponseToVimDatas method """
+      completion_request.ConvertCompletionResponseToVimDatas method """
 
   def _Check( self, completion_data, expected_vim_data ):
-    vim_data = completion_request._ConvertCompletionDataToVimData(
+    vim_data = completion_request.ConvertCompletionDataToVimData(
         completion_data )
 
     try:
       assert_that( vim_data, equal_to( expected_vim_data ) )
     except Exception:
-      print( "Expected:\n'{}'\nwhen parsing:\n'{}'\nBut found:\n'{}'".format(
-          expected_vim_data,
-          completion_data,
-          vim_data ) )
+      print( "Expected:\n"
+               f"'{ expected_vim_data }'\n"
+             "when parsing:\n'"
+               f"{ completion_data }'\n"
+             "But found:\n"
+               f"'{ vim_data }'" )
       raise
 
 
