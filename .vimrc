@@ -242,6 +242,8 @@ nnoremap								E 				@e
 nnoremap 								<leader>h		:call BlacklistFiletype()<CR>
 nnoremap 								<localleader>t	:call CopyOut()<CR>
 nnoremap 								<leader>/		:call GrepBuffers("<C-R><C-W>")<CR>
+nnoremap 								<localleader>e	wbve"oyy:%s/\<o\>/
+nnoremap 								<localleader>E	wbve"oyy:tabdo %s/\<o\>/
 "au FileType qf nnoremap <buffer> 		<CR> 			<CR>:tabdo :ccl<CR>
 
 "____________________________________________________________________________________________________________________
@@ -437,8 +439,11 @@ let g:rapidShortenQFPath = 0 " don't shorten paths in quickfix
 let g:rapidAutoComment = 0 " don't continue comments with o, O or Enter
 let g:rapidSpaceIndent = 0 " don't change 'sts', 'sw', 'et' and 'sr'
 "let g:rapidConcealStructs = 0 " switch concealing off completely
-"let g:rapidConcealStructs = 1 " show structure values at cursorline (default)
 let g:rapidConcealStructs = 1 " conceal all structure values
+au BufNewFile,BufRead *.mod set expandtab
+"au BufNewFile,BufRead *.mod set fileencoding=latin1
+au BufNewFile,BufRead *.sys set expandtab
+"au BufNewFile,BufRead *.sys set fileencoding=utf-8
 "____________________________________________________________________________________________________________________
 " KUKA krl
 "
@@ -454,6 +459,7 @@ let g:krlSpaceIndent = 0 " don't change 'sts', 'sw', 'et' and 'sr'
 let g:krlFoldLevel = 2 " close all folds on startup
 let g:krlKeyWord = 1 " don't treat $, # and & as word char
 au BufNewFile,BufRead *.src set textwidth=999
+au BufNewFile,BufRead *.src set fileencoding=utf-8
 "____________________________________________________________________________________________________________________
 " FANUC karel
 "
