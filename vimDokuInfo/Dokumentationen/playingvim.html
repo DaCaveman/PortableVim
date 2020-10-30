@@ -1,0 +1,349 @@
+<!DOCTYPE html PUBLIC "-//W3C//Dtd html 4.01 Transitional//EN">
+<html><head>
+<link rel="shortcut icon" href="http://www.friedhoff.org/favicon.ico">
+<link rel="stylesheet" type="text/css" href="playingvim-Dateien/css.htm">
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+<meta name="robots" content="index,follow,noarchive">
+<title>Chris Friedhoff - PlayingVim</title>
+</head>
+<body>
+<a name="top"></a>
+<table class="tb">
+<tbody><tr><td class="tdb" colspan="2"><img class="ia" src="playingvim-Dateien/tp.jpg" alt="Chris Friedhoff"></td></tr><tr>
+</tr><tr><td class="tdc" colspan="2"><table class="tc"><tbody><tr><td class="tdd"><a class="aa" href="http://www.friedhoff.org/playingvim-print.html">printerFriendly</a></td></tr></tbody></table></td></tr><tr><td class="tde" align="center" valign="top" width="1"><table class="td"><tbody><tr><td><img alt="" src="playingvim-Dateien/opac.gif" border="0" height="1" width="4"></td><td><img alt="" src="playingvim-Dateien/opac.gif" border="0" height="1" width="10"></td><td><img alt="" src="playingvim-Dateien/opac.gif" border="0" height="1" width="10"></td><td><img alt="" src="playingvim-Dateien/opac.gif" border="0" height="1" width="70"></td></tr><tr><td></td><td colspan="3" class="tdf"><a class="ab" href="http://www.friedhoff.org/index.html">Home</a></td></tr>
+<tr><td></td><td colspan="3" class="tdf"><a class="ab" href="http://www.friedhoff.org/lifebook.html">LifeBook</a></td></tr>
+<tr><td></td><td colspan="3" class="tdf"><a class="ab" href="http://www.friedhoff.org/ma311.html">MA311</a></td></tr>
+<tr><td></td><td colspan="3" class="tdf"><a class="ab" href="http://www.friedhoff.org/survivingvim.html">SurvivingVim</a></td></tr>
+<tr><td></td><td colspan="3" class="tdg"><a class="ac" href="http://www.friedhoff.org/playingvim.html">PlayingVim</a></td></tr>
+<tr><td></td><td colspan="3" class="tdf"><a class="ab" href="http://www.friedhoff.org/survivingshell.html">SurvivingShell</a></td></tr>
+<tr><td></td><td colspan="3" class="tdf"><a class="ab" href="http://www.friedhoff.org/lesezugriff.html">Lesezugriff</a></td></tr>
+<tr><td></td><td colspan="3" class="tdf"><a class="ab" href="http://www.friedhoff.org/posixfilecaps.html">POSIXFileCaps</a></td></tr>
+<tr><td></td><td colspan="3" class="tdf"><a class="ab" href="http://www.friedhoff.org/downloads.html">Downloads</a></td></tr>
+<tr><td></td><td colspan="3" class="tdf"><a class="ab" href="http://www.friedhoff.org/odin.html">Odin</a></td></tr>
+<tr><td></td><td colspan="3" class="tdf"><a class="ab" href="http://www.friedhoff.org/about.html">About</a></td></tr>
+<tr><td></td><td colspan="3" class="tdf"><a class="ab" href="http://www.friedhoff.org/email.html">Email</a></td></tr>
+</tbody></table></td>
+<td class="tdl" valign="top"><table class="tg">
+<tbody><tr><td class="tdm">Playing Vim - Vim für Fortgeschrittene</td></tr>
+<tr><td class="tdo">Die Leser des Linux Journals haben beim Linux 
+Journal Readers' Choice Awards 2005, 2004, 2003, 2002 und 2001 den Vim 
+in der Kategorie Texteditor zum beliebtesten seiner Art gewählt. Seine 
+Beliebtheit beruht auf seinem effizienten UI- und Editier-Konzept, dass 
+einem hervorragend erlaubt, ASCII-Dateien schnell und ökonomisch zu 
+bearbeiten. Sicher, diese Effizienzmöglichkeit bedeutet für den User 
+eine steile Lernkurve und nicht jeder mag zuerst in einen Lernaufwand 
+investieren um später mit mehr Freude Editiertätigkeiten an Sourcecode-,
+ Text- und Konfigurationsdateien vornehmen zu können.<br>"Playing Vim" 
+richtet sich an diejenigen, die den Erstkontakt mit Vim überlebt und 
+sich nach dem Schock sogar weiter mit dem Vim beschäftigt haben. Sie 
+finden hier Ideen und Anregungen, wie der Editor genutzt werden kann.<br>Für diejenigen, die sich noch nicht so weit fühlen, lohnt sich ein Blick auf "<a href="http://www.friedhoff.org/survivingvim.html">Surviving Vim</a>".</td></tr>
+<tr><td class="tdp">"Playing Vim" wird zum Warmwerden mit einer kurze 
+Wiederholung des Basics - wie in "Surviving Vim" beschrieben - beginnen.
+ Danach geht es in die Tiefen der Möglichkeiten des Vim Texte schneller 
+und effizienter zu edizieren.</td></tr>
+<tr><td class="tdr"><ul class="ua">
+<li class="la"><a href="#File%20Explorer" class="ae">File Explorer</a></li>
+<li class="la"><a href="#Schnelles%20%28Weiter%29Suchen" class="ae">Schnelles (Weiter)Suchen</a></li>
+<li class="la"><a href="#Tabs%20und%20Spaces%20und%20Trailling%20Spaces" class="ae">Tabs und Spaces und Trailling Spaces</a></li>
+<li class="la"><a href="#Substitute" class="ae">Substitute</a></li>
+<li class="la"><a href="#Wiederholung%20des%20letzten%20Edit-Kommandos" class="ae">Wiederholung des letzten Edit-Kommandos</a></li>
+<li class="la"><a href="#Switch%20Case" class="ae">Switch Case</a></li>
+<li class="la"><a href="#Swapping%20of%20Characters%20or%20Lines" class="ae">Swapping of Characters or Lines</a></li>
+<li class="la"><a href="#Deletion%20Buffer" class="ae">Deletion Buffer</a></li>
+<li class="la"><a href="#Copy%20Buffer" class="ae">Copy Buffer</a></li>
+<li class="la"><a href="#Option%20handling" class="ae">Option handling</a></li>
+<li class="la"><a href="#Howto%20write%20a%20file" class="ae">Howto write a file</a></li>
+<li class="la"><a href="#Drucken" class="ae">Drucken</a></li>
+<li class="la"><a href="#Howto%20open%20a%20file" class="ae">Howto open a file</a></li>
+<li class="la"><a href="#Range" class="ae">Range</a></li>
+<li class="la"><a href="#Movement%20und%20Textobjects" class="ae">Movement und Textobjects</a></li>
+<li class="la"><a href="#Matching%20Brackets" class="ae">Matching Brackets</a></li>
+<li class="la"><a href="#Visual%20Mode" class="ae">Visual Mode</a></li>
+<li class="la"><a href="#Modes" class="ae">Modes</a></li>
+<li class="la"><a href="#Verschl%FCsselung" class="ae">Verschlüsselung</a></li>
+<li class="la"><a href="#Completion" class="ae">Completion</a></li>
+<li class="la"><a href="#Vim%20und%20Shell" class="ae">Vim und Shell</a></li>
+<li class="la"><a href="#Modeline%20-%20per%20file%20settings" class="ae">Modeline - per file settings</a></li>
+<li class="la"><a href="#Moving" class="ae">Moving</a></li>
+<li class="la"><a href="#Persistenz" class="ae">Persistenz</a></li>
+<li class="la"><a href="#Hilfe" class="ae">Hilfe</a></li>
+<li class="la"><a href="#Buffer" class="ae">Buffer</a></li>
+<li class="la"><a href="#Sonderzeichen" class="ae">Sonderzeichen</a></li>
+<li class="la"><a href="#Marks%20-%20Markierungen" class="ae">Marks - Markierungen</a></li>
+<li class="la"><a href="#Systembuffer%20-%20Austausch%20zwischen%20Vim%20und%20anderen%20Programmen" class="ae">Systembuffer - Austausch zwischen Vim und anderen Programmen</a></li>
+<li class="la"><a href="#Indenting" class="ae">Indenting</a></li>
+<li class="la"><a href="#abc%20der%20Kommandos" class="ae">abc der Kommandos</a></li>
+<li class="la"><a href="#und%20zum%20Schluss%20..." class="ae">und zum Schluss ...</a></li>
+</ul></td></tr><tr><td class="tdo">"Playing Vim" erwartet Grundknowhow 
+des Users in Bezug auf Vim und Shell. Syntaxfile- und Plugin-Erstellung 
+werden nicht behandelt (vielleicht später).</td></tr>
+<tr><td><a name="File Explorer">&nbsp;</a></td></tr><tr><td class="tdn">File Explorer</td></tr>
+<tr><td class="tdo">
+Auch Vim hat einen File Explorer</td></tr>
+<tr><td class="tdp">
+:Ex(plore) -&gt; file explorer; [ENTER] -&gt; opens file; [o] -&gt; opens file in split window<br>:Sex(plore) -&gt; file explorer in split window<br>vim . -&gt; startet vim mit Fileexplorer für das aktuelle Verzeichnis</td></tr>
+<tr><td class="tds"><a href="#top" class="af">top</a>&nbsp;</td></tr>
+<tr><td><a name="Schnelles (Weiter)Suchen">&nbsp;</a></td></tr><tr><td class="tdn">Schnelles (Weiter)Suchen</td></tr>
+<tr><td class="tdo">
+Ohne viel Tipperei ein Wort suchen.</td></tr>
+<tr><td class="tdp">
+Im Command Mode kann man nach dem Wort unter dem Cursor mit * vorwärts 
+suchen und mit # rückwärts suchen. Mit [n] wird in die selbe Richtung 
+weiter gesucht und mit [N] in die entgegengesetzte Richtung.<br>[*] -&gt; vorwärts suchen nach Wort unter dem Cursor<br>[#] -&gt; rückwärts suchen nach Wort unter dem Cursor<br>[n] -&gt; in die selbe Richtung weiter suchen<br>[N] -&gt; in die entgegengesetzte Richtung weitersuchen</td></tr>
+<tr><td class="tds"><a href="#top" class="af">top</a>&nbsp;</td></tr>
+<tr><td><a name="Tabs und Spaces und Trailling Spaces">&nbsp;</a></td></tr><tr><td class="tdn">Tabs und Spaces und Trailling Spaces</td></tr>
+<tr><td class="tdo">
+Tabs oder Spaces, was soll ich nehmen, das ist hier die Frage (die hier nicht beantwortet wird).</td></tr>
+<tr><td class="tdp">
+<h5>see the difference between tabs and spaces and trailing blanks</h5><br>:set listchars=tab:&gt;-,trail:-,eol:&lt;<br>oder :set listchars=tab:»·,trail:· ([ALTGR]-[x] -&gt; » [ALTGR]-[.] -&gt; ·<br>:set (no)list<br><br><h5>no tabs, only spaces (tab is 4 spaces)</h5><br>:set tabstop=4 -&gt; tab is 4 chars long<br>:set shiftwidth=4 -&gt; number of space chars inserted for indentation<br>:set expandtab -&gt; space instead of tab<br>:set softtabstop=4 -&gt; makes the tab-spaces feel like real tabs<br>:retab -&gt; convert exisiting tabs in spaces<br>~/.vimrc -&gt; au FileType make setlocal noexpandtab -&gt; turn off expandtab for editing makefiles</td></tr>
+<tr><td class="tds"><a href="#top" class="af">top</a>&nbsp;</td></tr>
+<tr><td><a name="Substitute">&nbsp;</a></td></tr><tr><td class="tdn">Substitute</td></tr>
+<tr><td class="tdo">
+Mit Hilfe Regulärer Ausdrücke können Ersetzungen vorgenommen werden. Ein kleiner Einblick in Regexp.</td></tr>
+<tr><td class="tdp">
+:[range]s[ubstitute]/pattern/replace/[g][c][i][I]<br><br>[range] -&gt; [addr1[,addr2]] -&gt; wenn nicht angegeben, wird :s auf die aktuelle Zeile angewandt<br>- addr1 -&gt; auf dieser Zeile wird : angewendet<br>- addr1,addr1 -&gt; im Bereich beider Zeilen wird :s angewendet<br>- % -&gt; auf die ganze Datei wird :s angewendet, wie 1,$<br>pattern -&gt; nach was gesucht wird<br>- im einfachsten Fall wie geschrieben, z.B. alt sucht nach alt, halt, alte u.s.w.<br>- besteht aus qualifieer und quantifieer<br>- qualifieer: wie a oder abc oder [a-z] oder . (jedes Zeichen)<br>-
+ quantifieer: wie * (0&lt;=), + (0&lt;), ? (0 oder 1), = (0 oder 1), 
+{n,m} (n bis m), {n} (genau n), {n,} (mindestens n), {,m} (0 bis m), 
+u.s.w<br>- hold buffer, der über (pattern) definiert und über n, wobei (n=1-9) ist, referenziert wird<br>- | alternation<br>- ^ start of line<br>- $ end of line<br>- &lt; start of word (escape with backslash)<br>- &gt; end of word (escape with backslash)<br>replace -&gt; mit was ersetzt wird<br>- im einfachsten Fall wie geschrieben<br>- hold buffer aus pattern<br>- &amp; replaced by pattern match<br>g -&gt; global, alle Vorkommen einer Zeile<br>c -&gt; confirm, vor jeder Ersetzung wird um Bestätigung gebeten<br>i -&gt; ignore case for pattern<br>I -&gt; respect case for pattern<br><br><h5>Beispiele</h5><br>:%/s*$// -&gt; trim end-of-line tabs and spaces</td></tr>
+<tr><td class="tds"><a href="#top" class="af">top</a>&nbsp;</td></tr>
+<tr><td><a name="Wiederholung des letzten Edit-Kommandos">&nbsp;</a></td></tr><tr><td class="tdn">Wiederholung des letzten Edit-Kommandos</td></tr>
+<tr><td class="tdo">
+Statt die letzte Editaktion nochmals einzutippen ...</td></tr>
+<tr><td class="tdp">
+... hilft die Eingabe von [.].<br>[.] -&gt; Wiederholung des letzten Editkommandos</td></tr>
+<tr><td class="tds"><a href="#top" class="af">top</a>&nbsp;</td></tr>
+<tr><td><a name="Switch Case">&nbsp;</a></td></tr><tr><td class="tdn">Switch Case</td></tr>
+<tr><td class="tdo">
+Die Feststelltaste war gedrückt und alles ist GROSS geschrieben, kein Problem.</td></tr>
+<tr><td class="tdp">
+Mit ~ kann man im Command Mode die Zeichen unter dem Cursor im Case toggeln. Aus klein wird GROSS und aus GROSS wird klein.<br>[~] -&gt; toggle case of character</td></tr>
+<tr><td class="tds"><a href="#top" class="af">top</a>&nbsp;</td></tr>
+<tr><td><a name="Swapping of Characters or Lines">&nbsp;</a></td></tr><tr><td class="tdn">Swapping of Characters or Lines</td></tr>
+<tr><td class="tdo">
+Zeichen oder Zeilen zu vertauschen ist nur ein paar Befehle entfernt.</td></tr>
+<tr><td class="tdp">
+Getippt und zwei Zeichen vertauscht? Mit [x]+[p] lassen sich zwei Zeichen vertauschen.<br>Die Reihenfolge der Zeilen stimmt nicht? Mit [d]+[d]+[p] sind zwei Zeilen vertauscht.<br>[x] -&gt; löscht Zeichen unter dem Cursor<br>[p] -&gt; fügt Zeichen hinter dem Cursor ein<br>[d]+[d] -&gt; löscht Zeile<br>[p] fügt Zeile unter dem Cursor ein<br>[x]+[p] -&gt; swap two characters<br>[d]+[d]+[p] -&gt; swap two lines</td></tr>
+<tr><td class="tds"><a href="#top" class="af">top</a>&nbsp;</td></tr>
+<tr><td><a name="Deletion Buffer">&nbsp;</a></td></tr><tr><td class="tdn">Deletion Buffer</td></tr>
+<tr><td class="tdo">
+In Vim kann man auf die letzten neun Löschungen zugreifen.</td></tr>
+<tr><td class="tdp">
+Wenn etwas gelöscht wird, wird es von Vim im Deletion Buffer 
+vorgehalten. Dieser Deletion Buffer ist neun Einträge groß. Mit "np 
+(n=1-9) kann man auf diese Deletion Buffer zugreifen.<br>"2p -&gt; einfügen der vorletzten Löschung hinter oder unter der Cursorposition<br>"1pu.u.u.u.u.u.u.u.u -&gt; step through deletion buffer</td></tr>
+<tr><td class="tds"><a href="#top" class="af">top</a>&nbsp;</td></tr>
+<tr><td><a name="Copy Buffer">&nbsp;</a></td></tr><tr><td class="tdn">Copy Buffer</td></tr>
+<tr><td class="tdo">
+Wenn man etwas kopieren möchte, kann man es zur späteren Verwendung in einen benannten Buffer legen.</td></tr>
+<tr><td class="tdp">
+Wenn man etwas editiert, fügt man auch immer wieder das selbe ein. Man 
+kann in Vim mehrere Copy Buffer nutzen, um verschiedene Sachen zu 
+kopieren und nach Bedarf einfügen. Der Copy Buffer ist 26 Einträge groß.
+ Mit "CHARy (CHAR=a-z) wird das Markierte in den Copy Buffer CHAR gelegt
+ und mit "CHARp wird es hinter/unter dem Cursor eingefügt.<br>"hy -&gt; markiertes wird in den Copy Buffer h gelegt<br>"hp -&gt; das sich im Copy Buffer h befindende wird hinter/unter dem Cursor eingefügt</td></tr>
+<tr><td class="tds"><a href="#top" class="af">top</a>&nbsp;</td></tr>
+<tr><td><a name="Option handling">&nbsp;</a></td></tr><tr><td class="tdn">Option handling</td></tr>
+<tr><td class="tdo">
+Neben der Möglichkeit Optionen über die ~/.vimrc und Modelines zu 
+verwalten, könne sie auch über die Ex Command Line gesetzt und abgefragt
+ werden.</td></tr>
+<tr><td class="tdp">
+Die Ex Command Line erreicht man über [:] im Command Modus. Mit :set wird die Abfrage oder das Setzen der Option eingeleitet.<br>:set OPTION -&gt; setzen der Option OPTION<br>:set noOPTION -&gt; das Nichtsetzen einer Option<br>:set OPTION! -&gt; toggeln der Option<br>:set OPTION? -&gt; Abfragen einer Option<br>:set all? -&gt; Abfragen aller gesetzter Optionen<br>:set all&amp; -&gt; set all options to their default value<br>:set -&gt; Abfragen aller Optionen, die vom Default-Wert abweichen</td></tr>
+<tr><td class="tds"><a href="#top" class="af">top</a>&nbsp;</td></tr>
+<tr><td><a name="Howto write a file">&nbsp;</a></td></tr><tr><td class="tdn">Howto write a file</td></tr>
+<tr><td class="tdo">
+Es gibt einige Wege, wie man das, was im Buffer ist, auf die Festplatte bringen kann.</td></tr>
+<tr><td class="tdp">
+:w -&gt; schreibt den Buffer in die geöffnete Datei<br>:w NEWFILE -&gt; schreibt den Buffer in eine neue Datei mit Namen NEWFILE<br>:15,42w NEWFILE -&gt; schreibt die Zeilen 15 bis 42 in die (neue) Datei NEWFILE<br>:w &gt;&gt; OTHERFILE -&gt; hängt den Buffer an die Datei OTHERFILE an<br>:15,42w &gt;&gt; OTHERFILE -&gt; hängt die Zeilen 15 bis 42 an die Datei OTHERFILE an<br>:x -&gt; schreibt bei modifizierten Buffer und beendet Vim (bei nicht-modifiziertem Buffer wird die c-time nicht geändert)<br>ZZ -&gt; wie :x</td></tr>
+<tr><td class="tds"><a href="#top" class="af">top</a>&nbsp;</td></tr>
+<tr><td><a name="Drucken">&nbsp;</a></td></tr><tr><td class="tdn">Drucken</td></tr>
+<tr><td class="tdo">
+Manchmal möchte man etwas ausdrucken.</td></tr>
+<tr><td class="tdp">
+:hardcopy -&gt; Vim übergibt das erstellte PostScript lpr<br>:w !lp -&gt; Der Buffer wird als Stream lp übergeben (:w! lp or :w!lp -&gt; force writing of file lp)<br>:10,20w !lp -&gt; die Zeilen 10 bis 20 werden lp übergeben<br>:10,20hardcopy -&gt; für die Zeilen 10 bis 20 wird ein PostScript erstellt und lpr übergeben</td></tr>
+<tr><td class="tds"><a href="#top" class="af">top</a>&nbsp;</td></tr>
+<tr><td><a name="Howto open a file">&nbsp;</a></td></tr><tr><td class="tdn">Howto open a file</td></tr>
+<tr><td class="tdo">
+Verschieden Wege eine Datei zu öffnen.</td></tr>
+<tr><td class="tdp">
+$ vim FILE -&gt; der normale Weg FILE zu öffnen<br>$ vim + FILE -&gt; öffnet FILE in der letzten Zeile<br>$ vim +n FILE -&gt; öffnet FILE in Zeile n<br>$ vim /PATTERN FILE -&gt; öffnet FILE beim ersten Vorkommen von PATTERN<br>:e[edit] FILE -&gt; öffnet FILE bei geöffnetem Vim<br>:sp[lit] FILE -&gt; öffnet FILE und splittet den Screen horizontal, um die schon geöffnete Datei weiter anzuzeigen<br>:vs[plit] FILE -&gt; öffnet FILE und splittet den Screen vertikal, um die schon geöffnete Datei weiter anzuzeigen</td></tr>
+<tr><td class="tds"><a href="#top" class="af">top</a>&nbsp;</td></tr>
+<tr><td><a name="Range">&nbsp;</a></td></tr><tr><td class="tdn">Range</td></tr>
+<tr><td class="tdo">
+Viele EX-Kommandos lassen sich über Ranges steuern. Hier eine kleine Zusammenfassung.</td></tr>
+<tr><td class="tdp">
+:n,md -&gt; delete from line n to m<br>:23,45d -&gt; die Zeilen 23 bis 45 werden gelöscht<br>0 -&gt; vor erster Zeile<br>1 -&gt; erste Zeile<br>$ -&gt; letzte Zeile<br>. -&gt; aktuelle Zeile<br>-n -&gt; von aktueller Zeile n zurück<br>+m -&gt; von aktueller Zeile m weiter<br>:n,+m -&gt; von Zeile n und m Zeilen weiter<br>:1,$ -&gt; der ganze Buffer<br>:% -&gt; der ganze Buffer</td></tr>
+<tr><td class="tds"><a href="#top" class="af">top</a>&nbsp;</td></tr>
+<tr><td><a name="Movement und Textobjects">&nbsp;</a></td></tr><tr><td class="tdn">Movement und Textobjects</td></tr>
+<tr><td class="tdo">
+Verschiedenen Command Mode Befehlen sind Textobjekte als Operationsziel 
+mitzugeben. Die Textobjekte sind gleichzeitig Movementbefehle im Command
+ Mode.</td></tr>
+<tr><td class="tdp">
+w -&gt; word; eg dw -&gt; delete word<br>) -&gt; end of sentence; d) -&gt; delete to end of sentence<br>} -&gt; end of paragraph; d} -&gt; delete to end of paragraph<br>j -&gt; one line down ; dj -&gt; delete current and next line</td></tr>
+<tr><td class="tds"><a href="#top" class="af">top</a>&nbsp;</td></tr>
+<tr><td><a name="Matching Brackets">&nbsp;</a></td></tr><tr><td class="tdn">Matching Brackets</td></tr>
+<tr><td class="tdo">
+Nicht geschlossene Klammernpaare sind immer eine Freude beim entwickeln.</td></tr>
+<tr><td class="tdp">
+Wenn der Cursor auf einer Klammer - (), {}, [] - eines Klammernpaares 
+ist, springt der Cursor im Command Mode mit % auf die entsprechende 
+zweite Klammer.<br>% -&gt; Cursor springt auf die zweite Klammer eines Klammerpaares</td></tr>
+<tr><td class="tds"><a href="#top" class="af">top</a>&nbsp;</td></tr>
+<tr><td><a name="Visual Mode">&nbsp;</a></td></tr><tr><td class="tdn">Visual Mode</td></tr>
+<tr><td class="tdo">
+Command Mode und Ex Mode Befehle, denen ein Bereich übergeben werden kann, können dies auch über den Visual Mode bekommen.</td></tr>
+<tr><td class="tdp">
+v -&gt; Visual Mode<br>V -&gt; Visual Mode linewise<br>[STRG]-[v] -&gt; Visual Block Mode<br>Mit
+ v, V oder [STRG]-v in den Visual Mode den Bereich markieren, auf den 
+der Befehl angewendet werden soll. Danach den gewünschten Befehl 
+eingeben.</td></tr>
+<tr><td class="tds"><a href="#top" class="af">top</a>&nbsp;</td></tr>
+<tr><td><a name="Modes">&nbsp;</a></td></tr><tr><td class="tdn">Modes</td></tr>
+<tr><td class="tdo">
+Vim ist ein modaler Editor.</td></tr>
+<tr><td class="tdp">
+<h5>Normal Mode (Command Mode)</h5><br>Vim startet im Normal Mode.<br>Mit [ESC] kommt man zurück in den Normal Mode.<br><br><h5>Insert Mode</h5><br>Der Insert Mode erlaubt das Eingeben von Text.<br>Mit i, I, a, A, c, o, O, r kommt man in den Insert Mode.<br><br><h5>Ex Mode (Last Line Mode)</h5><br>Ex Mode Kommandos werden über [:] eingeleitet und mit [ENTER] abgeschlossen.<br><br><h5>Visual Mode</h5><br>Der Visual Mode dient dem Markieren von Textteilen.<br>Mit
+ [v] startet der Character-orientierte Visual Mode. Mit [V] startet der 
+zeilenorientierte Visual Mode. Mit [CTRL]-[v] startet der 
+blockorientierte Visual Mode.</td></tr>
+<tr><td class="tds"><a href="#top" class="af">top</a>&nbsp;</td></tr>
+<tr><td><a name="Verschlüsselung">&nbsp;</a></td></tr><tr><td class="tdn">Verschlüsselung</td></tr>
+<tr><td class="tdo">
+Vim kann die zu bearbeitende Datei beim nächsten Schreiben verschlüsseln.</td></tr>
+<tr><td class="tdp">
+:X -&gt; fragt nach dem Schlüssel für die Verschlüsselung<br>:set key= -&gt; Schaltet die Verschlüsselung für die Datei wieder aus, indem der Schlüssel (key) leer gesetzt wird.<br>:help encryption</td></tr>
+<tr><td class="tds"><a href="#top" class="af">top</a>&nbsp;</td></tr>
+<tr><td><a name="Completion">&nbsp;</a></td></tr><tr><td class="tdn">Completion</td></tr>
+<tr><td class="tdo">
+Vim verfügt über verschiedene Completion Features für verschiedene Situationen.</td></tr>
+<tr><td class="tdp">
+<h5>Insert Mode</h5><br>[STRG]-[n], [STRG]-[p] -&gt; word completion in insert mode<br>[STRG]-[x]+[STRG]-[l] -&gt; line completion in insert mode<br><br><h5>Command Line</h5><br>[CTRL]-[d] -&gt; in command line: command line completion<br>[TAB] -&gt; in command line: command line completion<br>:h[elp] WORD [STRG]-[d] -&gt; list of all topics containing WORD; [TAB] to step through list</td></tr>
+<tr><td class="tds"><a href="#top" class="af">top</a>&nbsp;</td></tr>
+<tr><td><a name="Vim und Shell">&nbsp;</a></td></tr><tr><td class="tdn">Vim und Shell</td></tr>
+<tr><td class="tdo">
+Von Vim aus kann man mit Shellbefehlen interagieren oder die Shell starten.</td></tr>
+<tr><td class="tdp">
+:shell -&gt; startet eine Subshell; [STRG]-[d] beendet die Subshell<br>[STRG]-[z] -&gt; wurde Vim in einer Jobcontrol-Shell gestartet, wird hiermit Vim in den Hintergrund gesetzt (fg holt Vim zurück)<br>:!date -&gt; ausführen des date Shell Kommandos<br>:r!date -&gt; einlesen des Ergebnisses des date Shell Kommandos an die Stelle des Cursors<br>:23,45!sort -&gt; sortieren der Zeilen 23 bis 45 durch sort<br>:w !lp -&gt; den Inhalt des Buffers nach lp pipen<br>:w &gt;&gt; OTHERFILE -&gt; den Buffer an OTHERFILE anhängen</td></tr>
+<tr><td class="tds"><a href="#top" class="af">top</a>&nbsp;</td></tr>
+<tr><td><a name="Modeline - per file settings">&nbsp;</a></td></tr><tr><td class="tdn">Modeline - per file settings</td></tr>
+<tr><td class="tdo">
+Über die ~/.vimrc konfiguriert man sich seinen Vim. Möchte man jedoch 
+für eine bestimmte Datei eine andere Konfiguration, kann man über eine 
+modeline dies festlegen.<br>Weiter ist dieses Feature hilfreich, um bei 
+Dateiweitergabe unabhängig von der lokalen Vimkonfiguration eine 
+Konfiguration voraussetzen zu können.</td></tr>
+<tr><td class="tdp">
+within the first or last 5 lines<br>// vim: set noexpandtab tabstop=4 shiftwidth=4:<br>:help modeline</td></tr>
+<tr><td class="tds"><a href="#top" class="af">top</a>&nbsp;</td></tr>
+<tr><td><a name="Moving">&nbsp;</a></td></tr><tr><td class="tdn">Moving</td></tr>
+<tr><td class="tdo">
+Immer wieder möchte man einen Teil einer Datei an einen anderen Ort in der Datei verschieben. Hier hilft de Move Befehl.</td></tr>
+<tr><td class="tdp">
+:g/^/m0/ -&gt; reverse order of lines<br>:20,30m50 -&gt; move line 20 through 30 after line 50</td></tr>
+<tr><td class="tds"><a href="#top" class="af">top</a>&nbsp;</td></tr>
+<tr><td><a name="Persistenz">&nbsp;</a></td></tr><tr><td class="tdn">Persistenz</td></tr>
+<tr><td class="tdo">
+Mit Hilfe der 'history' und 'viminfo' Konfigurationsdirektive kann man 
+die Informationen einer Vim-Session zur Nächsten übertragen.</td></tr>
+<tr><td class="tdp">
+Vim hält eine History seiner Command Line vor, wenn :set history= größer
+ Null ist. Für die Suche wie die Ex-Style Kommandos werden separate 
+History-Tables vorgehalten.<br>In der ~/.vimrc wird die Größe der History gesetzt. (default=20)<br><pre>set history=50</pre><br>Innerhalb von Vim greift man auf die History der Ex-Style Kommandos zu mit<br><pre>:history</pre><br>und auf die History der Search Strings mit<br><pre>:history /</pre><br><br>Zur Persistenz verschiedener Informationen wird die viminfo Direktive genutzt.<br>Über
+ die damit gesteuerte ~/.viminfo Datei lassen sich Informationen zur 
+History der Command Line und Search Pattern speichern, Texte in den 
+Registern (Copy und Delete Buffer), Marks für verschiedene Dateien, die 
+Buffer Liste und globale Variablen.<br>Innerhalb von Vim kann man sich die einkompilierten Features anzeigen lassen, um zu sehen, ob +vimfinfo aufgeführt ist.<br><pre>:version</pre><br>Die zur Persistenz genutzte Datei ist defaultmäßig ~/.viminfo.<br>Die aktuell gesetzte viminfo Direktive lässt sich innerhalb von Vim abrufen.<br><pre>:set viminfo?</pre><br>Konfiguriert wird die viminfo Direktive in der ~/.vimrc mit<br><pre>set viminfo=%,'20,/100,:100,&lt;500,f1,n~/.vim/viminfo</pre><br>% -&gt; save and restore buffer list<br>'20 -&gt; save marks for this many files<br>/100 -&gt; number of lines from search history<br>:100 -&gt; number of lines from command line history<br>&lt;500 -&gt; how many lines are saved for each register<br>f1 -&gt; save global marks<br>n -&gt; name of viminfo file<br>Die einzelnen Direktiven werden mit Komma separiert. Die n-Direktive muss an letzter Stelle stehen.<br><br>Die
+ Informationen lassen sich zwischen zwei Vim-Sessions austauschen, indem
+ in der einen mittels :wv per Hand die ~/.viminfo Datei geschrieben und 
+in der anderen mittels :rv (eventuell :rv! zum Überschreiben der schon 
+angefallenen neuen Informationen) die Informationen der ~/.viminfo 
+eingelesen werden.<br><br><pre>:help viminfo<br>:help 'viminfo'</pre></td></tr>
+<tr><td class="tds"><a href="#top" class="af">top</a>&nbsp;</td></tr>
+<tr><td><a name="Hilfe">&nbsp;</a></td></tr><tr><td class="tdn">Hilfe</td></tr>
+<tr><td class="tdo">
+Vim ist sehr gut dokumentiert und hat eine sehr gute Hilfe. Ein paar Tipps zur Bedienung.</td></tr>
+<tr><td class="tdp">
+:help BEGRIFF [ENTER]-&gt; zeigt die erste Fundstelle zu BEGRIFF<br><br><h5>mehrere Fundstellen finden (1)</h5><br>:help BEGRIFF [STRG]-[d] -&gt; zeigt alle Fundstellen zu Begriff<br>:help BEGRIFF [TAB] -&gt; läuft alle Fundstellen durch<br><br><h5>über die Hilfe greppen</h5><br>:helpgrep BEGRIFF [ENTER] -&gt; grept über die Dokumentation nach BEGRIFF<br>:cw[indow] -&gt; öffnet ein Fenster mit allen Fundstellen von :helpgrep; mit Cursortasten durchlaufen; [ENTER] öffnet Fundstelle<br>:helpgrep BEGRIFFc -&gt; grept case-insensitiv über die Dokumentation nach BEGRIFF<br>:help 'OPTION' -&gt; spring zur Beschreibung der OPTION in options.txt<br><br><h5>navigieren</h5><br>[STRG]-[]] -&gt; jumps to tag<br>[STRG]-[t] oder [STRG]-[o] -&gt; jumps back<br><br><h5>mehrere Fundstellen finden (2)</h5><br>:tag /BEGRIFF -&gt; springt zur ersten Fundstelle mit BEGRIFF<br>:tnext -&gt; springt zur nächsten Fundstelle<br><br><h5>Hilfe in einem neuen Konsolenfenster öffnen</h5><br>:!xterm -e vim +help &amp;<br>:!xterm -e gvim +help &amp;<br>:!gvim +help &amp;<br><br>:helpf[ind] -&gt; shows a dialog to enter and gives a little help<br><br>Prepend i_ for Insert Mode Commands<br>Prepend c_ for Command Line editing Commands<br>Prepend ' for option name</td></tr>
+<tr><td class="tds"><a href="#top" class="af">top</a>&nbsp;</td></tr>
+<tr><td><a name="Buffer">&nbsp;</a></td></tr><tr><td class="tdn">Buffer</td></tr>
+<tr><td class="tdo">
+In Vim wird das Bearbeitete als Buffer bezeichnet. Die geladene Datei 
+wird erst durch das Speichern des Buffers geändert. Buffer können activ,
+ hidden oder inactiv sein. Ein active Buffer wurde von einer Datei 
+geladen und ist im Fenster dargestellt. Ein hidden ist eine geladene 
+Datei, die jedoch nicht dargestellt wird. Ein inactive Buffer ist ein 
+nicht dargestellter und leerer Buffer, dessen Optionen und Marks für die
+ zugrunde liegende Datei über die .viminfo bekannt sind.</td></tr>
+<tr><td class="tdp">
+:buffers -&gt; zeigt die Bufferliste an; active Buffer mit 'a' und hidden mit 'h'<br>:files -&gt; zeigt die Bufferliste an; active Buffer mit 'a' und hidden mit 'h'<br>:ls -&gt; zeigt die Bufferliste an; active Buffer mit 'a' und hidden mit 'h'<br>[STRG]-[^] -&gt; Hin- und herspringen zw dem aktuellen und letzten Buffer<br>[N]-[STRG]-[^] -&gt; zeigt Buffer mit Zahl N aus :buffers an, öffnet gegebenenfalls die Datei<br>:[N]buffer -&gt; zeigt Buffer mit Zahl N aus :buffers an, öffnet gegebenenfalls die Datei<br>:[N]sbuffer -&gt; splittet das Fenster und zeigt Buffer mit Zahl N aus :buffers an, öffnet gegebenenfalls die Datei</td></tr>
+<tr><td class="tds"><a href="#top" class="af">top</a>&nbsp;</td></tr>
+<tr><td><a name="Sonderzeichen">&nbsp;</a></td></tr><tr><td class="tdn">Sonderzeichen</td></tr>
+<tr><td class="tdo">
+Sonderzeichen und andere durch die Tastatur nicht direkt eingebbare Zeichen lassen sich im Insert-Modus via [STRG]-[k] eingeben.</td></tr>
+<tr><td class="tdp">
+:digraphs -&gt; Liste der Sonderzeichen und deren Tastenkombination<br>[STRG]-[k]+[DIGRAPH] -&gt; Eingabe des Sonderzeichen aus :digraphs mit der Tastenkombination DIGRAPH<br>[STRG]-[k]+[u]+['] -&gt; ú<br>[STRG]-[k]+[o]+[/] -&gt; ø<br>[STRG]-[k]+[a]+[&gt;] -&gt; â</td></tr>
+<tr><td class="tds"><a href="#top" class="af">top</a>&nbsp;</td></tr>
+<tr><td><a name="Marks - Markierungen">&nbsp;</a></td></tr><tr><td class="tdn">Marks - Markierungen</td></tr>
+<tr><td class="tdo">
+Vim erlaubt das Setzen von Marken. Zu diesen Marken kann gesprungen 
+werden. Sie können weiter als Objekte oder Adressen für Operationen 
+genutzt werden. Zur dateiweiten Identifizierung werden Kleinbuchstaben 
+[a-z] genutzt (local marks). Großbuchstaben [A-Z] markieren Marks über 
+die Dateigrenze hinweg (global marks).</td></tr>
+<tr><td class="tdp">
+ma -&gt; setzen des Mark a an der aktuellen Cursorposition<br>`a -&gt; springt zur Stelle des Mark a<br>'a -&gt; springt zum Zeilenanfang des Mark a<br>:'a,'b move . -&gt; verschiebt den Text zwischen den Marks a und b an die aktuelle Stelle<br>mB -&gt; setzen des global Marks B<br>`B -&gt; springt zum global Mark B, öffnet die Datei gegebenenfalls und zeigt die Datei im Fenster an</td></tr>
+<tr><td class="tds"><a href="#top" class="af">top</a>&nbsp;</td></tr>
+<tr><td><a name="Systembuffer - Austausch zwischen Vim und anderen Programmen">&nbsp;</a></td></tr><tr><td class="tdn">Systembuffer - Austausch zwischen Vim und anderen Programmen</td></tr>
+<tr><td class="tdo">
+Über den Systembuffer oder auch Zwischenablage kann Text zwischen Vim 
+und anderen Programmen (oder einer anderen Vim Session) ausgetauscht 
+werden. Der Systembuffer wird über "* erreicht.</td></tr>
+<tr><td class="tdp">
+["]+[*]+[p] -&gt; fügt den Inhalt der Systemzwischenablage hinter / unter dem Cursor ein<br>["]+[*]+[y]+[3]+[w] -&gt; kopiert die nächsten drei Wörter in die Systemzwischenablage</td></tr>
+<tr><td class="tds"><a href="#top" class="af">top</a>&nbsp;</td></tr>
+<tr><td><a name="Indenting">&nbsp;</a></td></tr><tr><td class="tdn">Indenting</td></tr>
+<tr><td class="tdo">
+Vim unterstützt beim Neueinrücken (re-indent) von Code.</td></tr>
+<tr><td class="tdp">
+[=]+[=] -&gt; die aktuelle Zeile wird entsprechend der Position im Code neu eingerückt (re-indent)<br>[=]+[a]+[{] -&gt; der aktuelle Codeblock wird neu eingerückt (re-indent)<br>[g]+[g]+[=]+[G] -&gt; der Code der aktuellen Datei wird neu eingerückt (re-indent)</td></tr>
+<tr><td class="tds"><a href="#top" class="af">top</a>&nbsp;</td></tr>
+<tr><td><a name="abc der Kommandos">&nbsp;</a></td></tr><tr><td class="tdn">abc der Kommandos</td></tr>
+<tr><td class="tdo">
+Das kleine Alphabet der Kommandos. Siehe auch :help index.</td></tr>
+<tr><td class="tdp">
+a -&gt; append<br>b -&gt; backward by word<br>c -&gt; change<br>d -&gt; delete<br>e -&gt; forward by word (to end of)<br>f -&gt; move to character towards right (fCHAR)<br>g -&gt; :help g (Commands starting with 'g')<br>h -&gt; left move<br>i -&gt; insert mode<br>j -&gt; down move<br>k -&gt; up move<br>l -&gt; right move<br>m -&gt; set mark{a-Z}<br>n -&gt; repeat search<br>o -&gt; open line under cursor position<br>p -&gt; paste<br>q -&gt; :help q (Complex repeats)<br>r -&gt; replace<br>s -&gt; substitute<br>t -&gt; until befor CHAR (tCHAR) towards right<br>u -&gt; undo<br>v -&gt; visual mode<br>w -&gt; foreward by word (to start of)<br>x -&gt; delete character under cursor<br>y -&gt; yank (copy)<br>z -&gt; :help z (Commands starting with 'z')<br><br>A -&gt; append to end of line<br>B -&gt; backward by word (like b)<br>C -&gt; change to end of line<br>D -&gt; delete to end of line<br>E -&gt; forward by word (to end of)<br>F -&gt; move to character towards left (FCHAR)<br>G -&gt; goto line<br>H -&gt; cursor to top line of screen<br>I -&gt; insert to beginning of line<br>J -&gt; join lines<br>K -&gt; :help K<br>L -&gt; cursor to low line of screen<br>M -&gt; cursor to middle line of screen<br>N -&gt; search again in opposite direction<br>O -&gt; open line above cursor position<br>P -&gt; paste before / over cursor position<br>Q -&gt; switch to ex mode<br>R -&gt; replace mode<br>S -&gt; delete Line<br>T -&gt; until after CHAR (tCHAR) towards right<br>U -&gt; undo all latest changes on one line<br>V -&gt; visual mode per line<br>W -&gt; foreward by word (to start of) (like w)<br>X -&gt; delete characters before the cursor<br>Y -&gt; yank (copy) line<br>ZZ -&gt; write if modified and quit (like :x)<br><br>. -&gt; repeat last edit command<br>: -&gt; enter ex command<br>/ -&gt; search foreward<br>" -&gt; hold register, benannter copy und delete buffer<br>0 -&gt; start of line<br>^ -&gt; first character of line<br>$ -&gt; end of line<br>% -&gt; matching bracket<br>( -&gt; start of sentence<br>) -&gt; end of sentence<br>{ -&gt; start of paragraph<br>} -&gt; end of paragraph<br>? -&gt; search backward<br>~ -&gt; toggle case of character<br>* -&gt; search word under cursor foreward<br># -&gt; search word under cursor backward<br>+ -&gt; line downward, on the first non-blank character<br>- -&gt; line upward, on the first non-blank character<br>&amp; -&gt; :s//~/ (repeat last substitute)<br>&gt;&gt; -&gt; shift line by value of shiftwidth<br>&lt;&lt; -&gt; unshift line by value of shiftwidth</td></tr>
+<tr><td class="tds"><a href="#top" class="af">top</a>&nbsp;</td></tr>
+<tr><td><a name="und zum Schluss ...">&nbsp;</a></td></tr><tr><td class="tdn">und zum Schluss ...</td></tr>
+<tr><td class="tdo">
+... das Wichtigste</td></tr>
+<tr><td class="tdp">
+:h 42<br>:h holy-grail<br>:h!</td></tr>
+<tr><td class="tds"><a href="#top" class="af">top</a>&nbsp;</td></tr>
+<tr><td class="tdp"><h5>Lizenz</h5><br>Der Inhalt dieser Seite steht unter folgenden Lizenzen: <a href="http://www.uvm.nrw.de/kunden/uvm/www.nsf/0/ECD5ADAFFF804489C1256D3900274DD5?OpenDocument">UVM Lizenz (unveränderte Inhalte)</a> und <a href="http://creativecommons.org/licenses/nd-nc/1.0/">Creative Commons Licence</a>, siehe auch: <a href="http://www.linuxtag.org/typo3site/licence.html">www.linuxtag.org/typo3site/licence.html</a>.</td></tr>
+</tbody></table></td></tr>
+<tr><td colspan="2" class="tdh"><table class="te"><tbody><tr><td class="tdi">Chris Friedhoff</td></tr></tbody></table></td></tr>
+<tr><td>&nbsp;</td><td class="tdj"><table class="tf">
+<tbody><tr><td class="tdk"><div id="sitemap"><ul><li>Sitemap<ul>
+<li><a href="http://www.friedhoff.org/index.html">Home</a></li>
+<li><a href="http://www.friedhoff.org/lifebook.html">LifeBook</a></li>
+<li><a href="http://www.friedhoff.org/ma311.html">MA311</a></li>
+<li><a href="http://www.friedhoff.org/survivingvim.html">SurvivingVim</a></li>
+<li><a href="http://www.friedhoff.org/playingvim.html">PlayingVim</a></li>
+<li><a href="http://www.friedhoff.org/survivingshell.html">SurvivingShell</a></li>
+<li><a href="http://www.friedhoff.org/lesezugriff.html">Lesezugriff</a></li>
+<li><a href="http://www.friedhoff.org/posixfilecaps.html">POSIXFileCaps</a></li>
+<li><a href="http://www.friedhoff.org/downloads.html">Downloads</a></li>
+<li><a href="http://www.friedhoff.org/odin.html">Odin</a></li>
+<li><a href="http://www.friedhoff.org/about.html">About</a></li>
+<li><a href="http://www.friedhoff.org/email.html">Email</a></li>
+</ul></li></ul></div>
+</td></tr>
+<tr><td class="tdk">Chris Friedhoff</td></tr>
+<tr><td class="tdk">Copyright © 2006 by Chris Friedhoff - all rights reserved, alle Rechte vorbehalten.</td></tr>
+<tr><td class="tdk"><a href="http://www.friedhoff.org/email.html" class="ad">info@friedhoff.org</a></td></tr>
+<tr><td class="tdk">last modified: Sun, 08 Jan 2006 11:10:46 GMT</td></tr>
+</tbody></table>
+</td></tr></tbody></table>
+
+</body></html>

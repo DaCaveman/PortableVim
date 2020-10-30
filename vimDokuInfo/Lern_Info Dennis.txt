@@ -1,0 +1,269 @@
+//------------------------------------------------------------------------------
+Vorgänge: 
+
+	Dateien sichern: 
+		- Datei mswin.vim
+		#- Datei _vimrc
+		#- Datei _gvimrc
+		- Datei wombat
+	
+	$HOME ist C:\Dokumente und Einstellungen\M.Ohlert
+	dort liegen die Dateien
+		- _viminfo
+		- .ctags
+
+	- Suchtreffer auflisten, wie?
+	- Wörterbuch einbinden und Rechtschreibprüfung
+
+//------------------------------------------------------------------------------
+Schriftart einstellen
+
+	- Leerzeichen durch _ ersetzen
+	- :set guifont=* ruft popup menu auf
+	
+//------------------------------------------------------------------------------
+Datei öffnen / speichern browser
+
+	- gvim .               -> Start mit Explorer
+	- :Ex                  -> Explorer
+	- :Sex                 -> Split- Explorer
+	- :Tex                 -> Tab- Explorer
+	- :browse confirm e    -> Im gleichen Fenster
+	- :browse sp           -> Split
+	- :browse tabnew       -> Tab
+	- :browse w(q)         -> Speichern als Fenster
+
+//------------------------------------------------------------------------------
+Diverse Tipps
+
+	- : <up> <down>  -> Letztes Commando (wie DOS)
+	- / <up> <down>  -> Letztes Commando (wie DOS)
+	- ~ Groß/Klein- Literal wechseln
+	- Kommando mit ? zeigt Status, :set listchars?
+	- Status bei Kommando mit Zuweisung z.B. :set guifont
+	- ga zeigt Wert des Zeichens
+	- :g/Suchmuster/Aktion/ bsp.: reverse order of lines
+		- :g/^/m0/ 
+	- :20,30m50 -> move line 20 through 30 after line 50
+	- :wa Write all, xa save changes and exit all, qa qa!
+	- m[ove]
+	- g[lobal]
+	- :reg -> Zeigt alle register
+	- :e $VIM/_vimrc
+	- :g/^/m0/ -> reverse order of lines
+	- Vim OPL -> special registers
+
+//------------------------------------------------------------------------------
+Diverse Bewegung
+
+	- Zahl + CTRL-D / U setzt die zu scrollende Zeilenanzahl
+
+//------------------------------------------------------------------------------
+Kopieren und einfügen aus der Windows- Zwischenablage
+
+
+Befehl:
+
+	set clipboard=unnamed
+	
+	y & p
+
+
+Mehrere Register verwenden
+
+Befehl:
+
+	"aY -> Kopiert in Register a
+
+	"ap -> Fügt aus Register a ein
+
+
+Tips:
+
+	yy/Y   -> Eine Zeile kopieren
+	gg0vG$ -> Alles makieren
+
+	Block kopieren: 
+
+		- Anfang mit bsp. ma (Marke a) markieren
+		- An Zeilenende springen
+		- Bereich mit d'a löschen
+		- Zu Zielbereich wechseln und p
+		
+		- oder - 
+		
+		- Visual- Mode und dd + p
+		
+		- oder - 
+		
+		:20,30m50 -> Zeile 20 bis einschließlich 30 nach Zeile 50 verschieben
+
+//------------------------------------------------------------------------------
+
+Undo -> u
+Redo -> Ctrl-R
+
+Return last modified line -> U
+
+//------------------------------------------------------------------------------
+Wort / Satzvervollständigung
+
+CTRL-A -> Inc einen integer
+CTRL-X -> Dec einen integer
+
+CTRL-X        -> Tag- Suche
+CTRL-X CTRL-L -> Complete next line
+CTRL-X CTRL-i -> Word selcetion
+CTRL-P        -> Word Vervollständigung suche Rückwärts
+CTRL-N        -> Word Vervollständigung suche Vorwärts
+
+//------------------------------------------------------------------------------
+Suche und ersetzen
+
+	- Suchen /<pattern>/offset
+		- offset ist optional mit
+		  +/- n = Zeilen
+		  e     = Ende
+		  s+/-n = Vom start des treffers
+		  b+/-n = Vom start des treffers
+	- // geht zum Anfang des nächsten Treffers
+	- //e geht zum Ende des aktuellen Treffers
+		- bsp.: //<CR>, c//e <CR>  --> Anfang treffer tausche bis Ende treffer
+	- Ersetzen Bereich, Suchmuster, Ersatz, Alle/Bestätigen
+			  :1,55s/Suchtext/Ersatztext/g  -> Zeile 1-55, Alle ersetzen
+			  :%s/Suchtext/Ersatztext/c     -> Ganze Datei, Bestätigen
+	- (g)* (Muster)Wort am Cursor vorwärts suchen
+	- (g)# (Muster)Wort am Cursor rückwärts suchen
+	- :bufdo %s/pattern/replace/ge | update -> Suche/Ersetzen in allen buffern
+	          |    |       |    |      |
+			  |    |       |    |      +- Write all chsnged files
+			  |    |       |    +- g= change all occurrences in each line global
+			  |    |       |       e= No error if pattern is not found
+			  |    |       +- replace
+			  |    +- pattern
+			  +- search / replace all lines
+	- :windo -> Wie bufdo nur mit Fenstern
+	- :tabdo -> Wie bufdo nur mit Tabs
+	- Nur ganzes Wort finden \<pattern\>
+	- Groß/Klein- Schreibung: set (no)ignorecase [ic] oder besser
+	  \c = \cpattern -> :help \c
+	- Hervorhebung löschen nohlsearch, bzw.: nohls
+	
+	Ersetzen mit Register a
+:%s/foo/\=@a/g
+//------------------------------------------------------------------------------
+Damit werden ^M Zeilenumbrüche durch nichts ersetzt bzw. mit etwas anderem ersetzen
+
+:%s /"Strg-Q" "Strg-M"//g
+
+//------------------------------------------------------------------------------
+Wort unter Curser suchen
+
+*
+
+//------------------------------------------------------------------------------
+Zeichen in der Zeile suchen
+
+f<pattern>
+
+//------------------------------------------------------------------------------
+Suchen nach zusammenstellungen
+register a existiert
+
+:execute '/Suchstring' . @a . 'Suchstring' ...
+Besser:
+/<C-r>register"derString"<C-R>register"weitererString" usw.
+
+//------------------------------------------------------------------------------
+delete every line that contains pattern
+
+:%g!/{pattern}/[cmd]
+			Execute the Ex command [cmd] (default ":p") on the
+			lines within [range] where {pattern} does NOT match.
+			cmd d = delete
+
+
+//------------------------------------------------------------------------------
+Visueller Modus und blockweise editieren
+
+	- A überschreibt auch Zeilen im Block die kürzer sind
+	- I fügt ein
+	- c ersetzt, C löscht bis zum Ende der Zeile und fügt dann ein
+	- cw Wort erseten
+	- r überschreibt den markierten Bereich mit einem Zeichen, z.B. rx mit x
+	- R überschreiben
+
+	Dann mit <ESC> abschließen
+
+	Im Blockmodus mit $ bis zum Ende aller Zeilen makieren
+
+//------------------------------------------------------------------------------
+Makro anlegen
+
+	- Start mit qa -> Makro in register a
+	- Ende mit q
+	- Abrufen des Makros mit @a
+
+Ansehen des Registers(Makros) mit :reg a oder :reg (es werden alle Register angezeigt)
+Mit " a p wird das Makro in Textform in vim angezeigt, dort kann es verändert werden
+Im Visuellen Modus markieren und dann mit " a y die geänderte version in das Register schieben
+
+//------------------------------------------------------------------------------
+Makros in mehreren Tabs durchlaufen lassen
+
+die Vorlage mit " xx y in das register xx schieben
+das makro in dem die Vorlage benutzt wird mit " xx y in das register xx schieben
+Ein makro erstellen in dem das Makro xx auf gerufen wird und danach das Tab gewechselt wird
+alle Tabs mit :wqa speichern
+
+//------------------------------------------------------------------------------
+Abbrevaiton und map
+
+	- :ab <lhs> <rhs>, z.B.: :ab #a //-----------------------
+	- :una <lhs> hebt abbreviation wieder auf
+
+//------------------------------------------------------------------------------
+Zu Klammern springen
+
+	- %         -> Die aktuelle Klammer/Zeile
+	- [{ ]}     -> Nächst höhere Ebene
+	- [[ ]]     -> Nächste höhste Ebene
+	
+//------------------------------------------------------------------------------
+Suchergebnisse auflisten
+:vimgrep /pattern/ %
+Quickfix öffnen
+:cope
+Quickfix wieder schließen
+:ccl
+//------------------------------------------------------------------------------
+KRL
+Auflisten des unter dem Curse stehenden Wortes in der Datei
+
+,u
+
+//------------------------------------------------------------------------------
+KRL/ABB
+  "gd" to see declaration of current word
+  Das aktuelle Fenster wird geschlossen und ein neues Fenster wird geöffnet
+  :cll zu schliessen der unterteilung
+//------------------------------------------------------------------------------
+Position markieren
+	- ma  markieren an Position a
+	- 'a an Position a springen
+//------------------------------------------------------------------------------
+Menubar, Scrollbar anzeigen/ausblenden
+"strg und F1"
+oder
+:set go=mcerb
+Beim nächsten Neustart wird die Menubar wieder ausgeblendet
+//------------------------------------------------------------------------------
+Merge über Datei_Menü
+	-:do :diffget bekommt den "anderen Block" vom anderen Fenster
+	-:dp :diffput Schiebt den "anderen Block" ins andere Fenster
+	-:xxdiffget oder :xxdiffput nur Zeile xx vom bzw. ins andere Fenster schieben
+
+//------------------------------------------------------------------------------
+Multipattern search
+|  Pattern A   |OP|   Pattern B  | Nicht
+/^\(.*patternA\)\&^\(.*patternB\)\@!

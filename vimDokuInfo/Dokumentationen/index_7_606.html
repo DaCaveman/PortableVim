@@ -1,0 +1,120 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+  <meta http-equiv="Content-Language" content="de, en">
+  <meta name="Author" content="Georg Kainzbauer">
+  <meta name="Keywords" content="Good to Know Database, GTKDB, Good2Know Database">
+<title>Mehrere Dateien gleichzeitig mit vim bearbeiten - Good to Know Database</title>  <link rel="shortcut icon" href="http://www.gtkdb.de/style/images/favicon.ico">
+  <link rel="stylesheet" href="index_7_606-Dateien/style.css" type="text/css">
+  <link rel="alternate" type="application/rss+xml" title="GTKDB News" href="http://www.gtkdb.de/rss.xml">
+</head>
+<body>
+<center>
+<div class="header"><img src="index_7_606-Dateien/header.jpg" alt="Good to Know Database"></div>
+<div class="menu"><form action="#" method="post">
+<table>
+  <tbody><tr>
+    <td><a href="http://www.gtkdb.de/index.html">Startseite</a></td>
+    <td width="10"></td>
+    <td><a href="http://www.gtkdb.de/search.html">Suche</a></td>
+    <td width="10"></td>
+    <td><a href="http://www.gtkdb.de/rss.xml">RSS</a></td>
+    <td width="10"></td>
+    <td><a href="http://www.gtkdb.de/disclaimer.html">Disclaimer</a></td>
+    <td width="10"></td>
+    <td><a href="http://www.gtkdb.de/impressum.html">Impressum</a></td>
+    <td width="10"></td>
+    <td><a href="http://www.gtkdb.de/mail.html">Kontakt</a></td>
+    <td width="10"></td>
+    <td><a href="http://www.gtkdb.de/login.html">Login</a></td>    <td width="30"></td>
+    <td>Kategorie:</td>
+    <td>
+      <select name="type" size="1" onchange='location = "index_" + this.options[this.selectedIndex].value + ".html";'>
+        <option value="16">BSD</option><option value="19">DOS</option><option value="18">Elektronik</option><option value="8">Entertainment</option><option value="12">JavaScript</option><option value="7" selected="selected">Linux</option><option value="3">Microsoft Internet Explorer</option><option value="6">Mozilla, Firefox, Thunderbird</option><option value="11">MySQL</option><option value="15">Netzwerk</option><option value="4">PHP</option><option value="1">Sonstiges</option><option value="20">Unix</option><option value="17">Windows 7</option><option value="13">Windows Server 2003</option><option value="14">Windows Server 2008</option><option value="10">Windows Vista</option><option value="2">Windows XP</option>      </select>
+    </td>
+  </tr>
+</tbody></table>
+</form>
+</div>
+<div class="main">
+  <h1>Mehrere Dateien gleichzeitig mit vim bearbeiten</h1><hr>Dank den 
+sogenannten Splitscreens können mehrere Dateien und/oder verschiedene 
+Ausschnitte einer Datei gleichzeitig mit dem Editor <i>vim</i> angezeigt
+ und bearbeitet werden. Wenn Sie eine Datei in zwei Fenstern geöffnet 
+haben, werden Änderungen in einem Fenster automatisch auch im zweiten 
+Fenster vorgenommen.<br>
+<br>
+Mit dem folgenden Befehl wird ein horizontaler Splitscreen aufgerufen in welchem die gleiche Datei angezeigt wird.<br>
+<br>
+<div class="code"><b>:split</b></div><br>
+Alternativ können Sie auch die folgende Tastenkombination im Befehlsmodus verwenden.<br>
+<br>
+<div class="code"><b>CTRL-W N</b>&nbsp;&nbsp;&nbsp;&nbsp;Neues Fenster öffnen</div><br>
+Wird ein Dateiname angegeben, wird diese Datei im neuen horizontalen Splitscreen angezeigt.<br>
+<br>
+<div class="code"><b>:split dateiname</b></div><br>
+Einen horizontalen Splitscreen für eine neue Datei können Sie durch folgenden Befehl aufrufen.<br>
+<br>
+<div class="code"><b>:new</b></div><br>
+Um die aktuelle Datei nochmals in einem vertikalen Splitscreen zu öffnen, verwenden Sie den folgenden Befehl.<br>
+<br>
+<div class="code"><b>:vsplit</b></div><br>
+Auch hier kann eine andere Datei in einem neuen vertikalen Splitscreen geöffnet werden.<br>
+<br>
+<div class="code"><b>:vsplit dateiname</b></div><br>
+Einen vertikalen Splitscreen für ein neues Dokument erhalten Sie mit dem folgenden Kommando.<br>
+<br>
+<div class="code"><b>:vnew</b></div><br>
+Wenn Sie zwei Dateien direkt von der Shell in horizontalen Splitscreens öffnen wollen, geben Sie die Option <i>-o</i> an.<br>
+<br>
+<div class="code">[georg@centos5 ~]$ <b>vi -o dateiname1 dateiname2</b></div><br>
+Für die Ausgabe in vertikalen Splitscreens verwenden Sie die Option <i>-O</i>.<br>
+<br>
+<div class="code">[georg@centos5 ~]$ <b>vi -O dateiname1dateiname2</b></div><br>
+Mit den folgenden Tastenkombinationen können Sie zwischen den Splitscreens wechseln.<br>
+<br>
+<div class="code"><b>CTRL-W W</b>&nbsp;&nbsp;&nbsp;&nbsp;Zum nächsten Fenster wechseln<br>
+<b>CTRL-W I</b>&nbsp;&nbsp;&nbsp;&nbsp;Zum rechten Fenster wechseln<br>
+<b>CTRL-W H</b>&nbsp;&nbsp;&nbsp;&nbsp;Zum linken Fenster wechseln<br>
+<b>CTRL-W K</b>&nbsp;&nbsp;&nbsp;&nbsp;Zum oberen Fenster wechseln<br>
+<b>CTRL-W J</b>&nbsp;&nbsp;&nbsp;&nbsp;Zum unteren Fenster wechseln</div><br>
+Die Größe des aktuellen Splitscreens können Sie mit den folgenden Tastenkombinationen anpassen.<br>
+<br>
+<div class="code"><b>CTRL-W +</b>&nbsp;&nbsp;&nbsp;&nbsp;Horizontaler Splitscreen: Fenster vergrößern<br>
+<b>CTRL-W -</b>&nbsp;&nbsp;&nbsp;&nbsp;Horizontaler Splitscreen: Fenster verkleinern<br>
+<b>CTRL-W &lt;</b>&nbsp;&nbsp;&nbsp;&nbsp;Vertikaler Splitscreen: Fenster vergrößern<br>
+<b>CTRL-W &gt;</b>&nbsp;&nbsp;&nbsp;&nbsp;Vertikaler Splitscreen: Fenster verkleinern</div><br>
+Die Anordnung der Fenser können Sie mit den folgenden Tastenkombinationen verändern.<br>
+<br>
+<div class="code"><b>CTRL-W X</b>&nbsp;&nbsp;&nbsp;&nbsp;Zwei Fenster tauschen<br>
+<b>CTRL-W R</b>&nbsp;&nbsp;&nbsp;&nbsp;Alle Fenster rotieren</div><br>
+Die ausgewählte Datei und den dazugehörigen Splitscreen können Sie mit dem folgenden Befehl schließen.<br>
+<br>
+<div class="code"><b>:q</b></div><br>
+Sollten Sie die Änderungen an der Datei verwerfen wollen, geben Sie zusätzlich ein Ausrufezeichen an.<br>
+<br>
+<div class="code"><b>:q!</b></div><br>
+Die Änderungen werden durch das folgende Kommando gespeichert bevor die Datei geschlossen wird.<br>
+<br>
+<div class="code"><b>:x</b></div><br>
+Alle geöffneten Dateien werden wie folgt geschlossen.<br>
+<br>
+<div class="code"><b>:qa</b></div><br>
+Alle Änderungen werden verworfen und die geöffneten Dateien werden wie folgt geschlossen.<br>
+<br>
+<div class="code"><b>:qa!</b></div><br>
+Das folgende Kommando speichert Änderungen an allen Dateien und schließt diese.<br>
+<br>
+<div class="code"><b>:xa</b></div><br>
+Weitere Informationen zu den Splitscreens finden Sie in der Online-Hilfe.<br>
+<br>
+<div class="code"><b>:h split</b></div><br><div class="history"><br>Dieser Eintrag wurde am 04.05.2009 erstellt und zuletzt am 18.05.2009 bearbeitet.</div><br><b>Direkter Link zu dieser Seite: </b><a href="http://www.gtkdb.de/index_7_606.html">http://www.gtkdb.de/index_7_606.html</a><br><br><a href="http://www.gtkdb.de/index.html">[ Zur Startseite ]</a>&nbsp;&nbsp;&nbsp;<a href="http://www.gtkdb.de/index_7.html">[ Zur Kategorie ]</a><br><br><br><a href="http://validator.w3.org/check?uri=referer" target="_blank"><img src="index_7_606-Dateien/valid-xhtml10.png" alt="Valid XHTML 1.0 Transitional" style="width: 88px; height: 31px; border: 0px none;"></a>
+<a href="http://jigsaw.w3.org/css-validator/" target="_blank"><img src="index_7_606-Dateien/vcss.gif" alt="Valid CSS" style="width: 88px; height: 31px; border: 0px none;"></a>
+<a href="http://feed2.w3.org/check.cgi?url=http%3A//www.gtkdb.de/rss.xml" target="_blank"><img src="index_7_606-Dateien/valid-rss-rogers.png" alt="Valid Atom 1.0" style="width: 88px; height: 31px; border: 0px none;"></a>
+<br><hr>
+<div class="footline">© 2004-2012 by Georg Kainzbauer</div>
+</div>
+</center>
+
+
+</body></html>

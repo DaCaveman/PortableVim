@@ -1,0 +1,333 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<link rel="shortcut icon" href="http://static.wikiwikiweb.de/favicon.ico">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="edit_on_doubleclick" content="/">
+<meta name="robots" content="index,follow">
+
+<title>Vim - LinuxWiki.org - Linux Wiki und Freie Software</title>
+<script type="text/javascript" src="Vim_Minimum_Befehle-Dateien/common.js"></script>
+
+<script type="text/javascript">
+<!--
+var search_hint = "Suche";
+//-->
+</script>
+
+<script type="text/javascript">
+<!-- // GUI edit link and i18n
+var gui_editor_link_href = "/action/edit/Vim?action=edit&editor=gui";
+var gui_editor_link_text = "Editieren (GUI)";
+//-->
+</script>
+
+<link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="Vim_Minimum_Befehle-Dateien/common.css">
+<link rel="stylesheet" type="text/css" charset="utf-8" media="screen" href="Vim_Minimum_Befehle-Dateien/screen.css">
+<link rel="stylesheet" type="text/css" charset="utf-8" media="print" href="Vim_Minimum_Befehle-Dateien/print.css">
+<link rel="stylesheet" type="text/css" charset="utf-8" media="projection" href="Vim_Minimum_Befehle-Dateien/projection.css">
+
+<!-- css only for MS IE6/IE7 browsers -->
+<!--[if lt IE 8]>
+   <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="/moin_static19/modernized/css/msie.css">
+<![endif]-->
+
+
+
+<link rel="alternate" type="application/wiki" title="Editieren" href="http://linuxwiki.de/action/edit/Vim?action=edit">
+
+<link rel="Start" href="http://linuxwiki.de/StartSeite">
+<link rel="Alternate" title="Wiki Quelltext" href="http://linuxwiki.de/Vim?action=raw">
+<link rel="Alternate" media="print" title="Druckansicht" href="http://linuxwiki.de/Vim?action=print">
+<link rel="Search" href="http://linuxwiki.de/SeiteFinden">
+<link rel="Index" href="http://linuxwiki.de/TitelIndex">
+<link rel="Glossary" href="http://linuxwiki.de/WortIndex">
+<link rel="Help" href="http://linuxwiki.de/HilfeZumFormatieren">
+</head>
+
+<body dir="ltr" lang="de">
+
+<div id="header">
+
+<form id="searchform" method="get" action="/Vim">
+<div>
+<input name="action" value="fullsearch" type="hidden">
+<input name="context" value="180" type="hidden">
+<label for="searchinput">Suchen:</label>
+<input id="searchinput" name="value" size="20" onfocus="searchFocus(this)" onblur="searchBlur(this)" onkeyup="searchChange(this)" onchange="searchChange(this)" alt="Search" type="text">
+<input id="titlesearch" name="titlesearch" value="Titel" alt="Search Titles" type="submit">
+<input id="fullsearch" name="fullsearch" value="Text" alt="Search Full Text" type="submit">
+</div>
+</form>
+<script type="text/javascript">
+<!--// Initialize search form
+var f = document.getElementById('searchform');
+f.getElementsByTagName('label')[0].style.display = 'none';
+var e = document.getElementById('searchinput');
+searchChange(e);
+searchBlur(e);
+//-->
+</script>
+
+<div id="logo"><a href="http://linuxwiki.de/StartSeite"><img src="Vim_Minimum_Befehle-Dateien/linuxwiki-org.png" alt="LinuxWiki Logo"></a></div>
+<div id="username"><a href="http://linuxwiki.de/action/login/Vim?action=login" id="login" rel="nofollow">Anmelden</a></div>
+<h1 id="locationline">
+
+<span id="pagelocation"><a class="backlink" href="http://linuxwiki.de/action/fullsearch/Vim?action=fullsearch&amp;value=linkto%3A%22Vim%22&amp;context=180" rel="nofollow" title="Hier klicken für eine Liste der Seiten, die auf diese verweisen">Vim</a></span>
+</h1>
+
+
+<ul id="navibar">
+<li class="wikilink"><a href="http://linuxwiki.de/StartSeite">StartSeite</a></li><li class="wikilink"><a href="http://linuxwiki.de/Aktuelle%C3%84nderungen">AktuelleÄnderungen</a></li><li class="wikilink"><a href="http://linuxwiki.de/SeiteFinden">SeiteFinden</a></li><li class="wikilink"><a href="http://linuxwiki.de/HilfeInhalt">HilfeInhalt</a></li><li class="current"><a href="http://linuxwiki.de/Vim">Vim</a></li>
+</ul>
+
+<div id="pageline"><hr style="display:none;"></div>
+
+<ul class="editbar"><li><a href="http://linuxwiki.de/action/edit/Vim?action=edit&amp;editor=text" name="texteditlink" rel="nofollow">Editieren (Text)</a></li><li class="toggleCommentsButton" style="display:none;"><a href="#" class="nbcomment" onclick="toggleComments();return false;">Kommentare</a></li><li><a class="nbinfo" href="http://linuxwiki.de/action/info/Vim?action=info" rel="nofollow">Info</a></li><li><a class="nbattachments" href="http://linuxwiki.de/action/AttachFile/Vim?action=AttachFile" rel="nofollow">Dateianhänge</a></li><li>
+<form class="actionsmenu" method="GET" action="/Vim">
+<div>
+    <label>Weitere Aktionen:</label>
+    <select name="action" onchange="if ((this.selectedIndex != 0) &amp;&amp;
+                      (this.options[this.selectedIndex].disabled == false)) {
+                this.form.submit();
+            }
+            this.selectedIndex = 0;">
+        <option selected="selected" value="raw">Rohform</option>
+<option value="print">Druckansicht</option>
+<option value="RenderAsDocbook">Docbook ausgeben</option>
+<option value="refresh">Cache löschen</option>
+<option value="show" disabled="disabled" class="disabled">-----------------------------------</option>
+<option value="SpellCheck">Rechtschreibung prüfen</option>
+<option value="LikePages">Ähnliche Seiten</option>
+<option value="LocalSiteMap">ÜbersichtsKarte</option>
+<option value="show" disabled="disabled" class="disabled">-----------------------------------</option>
+<option value="RenamePage" disabled="disabled" class="disabled">Seite umbenennen</option>
+<option value="DeletePage" disabled="disabled" class="disabled">Seite löschen</option>
+<option value="show" disabled="disabled" class="disabled">-----------------------------------</option>
+<option value="MyPages">Meine Seiten</option>
+<option value="show" disabled="disabled" class="disabled">Abo für Benutzer</option>
+<option value="show" disabled="disabled" class="disabled">-----------------------------------</option>
+<option value="show" disabled="disabled" class="disabled">Spam entfernen</option>
+<option value="show" disabled="disabled" class="disabled">Diese Revision restaurieren</option>
+<option value="PackagePages">Seiten paketieren</option>
+<option value="SyncPages">Seiten synchronisieren</option>
+<option value="show" disabled="disabled" class="disabled">-----------------------------------</option>
+<option value="Load">Laden</option>
+<option value="Save">Speichern</option>
+<option value="SlideShow">SlideShow</option>
+    </select>
+    <input value="Los!" type="submit">
+    
+</div>
+<script type="text/javascript">
+<!--// Init menu
+actionsMenuInit('Weitere Aktionen:');
+//-->
+</script>
+</form>
+</li></ul>
+
+</div>
+
+<div id="page" dir="ltr" lang="de">
+<div dir="ltr" id="content" lang="de"><span class="anchor" id="top"></span>
+<span class="anchor" id="line-1"></span><p class="line862">Vim ist ein vielseitiger Editor, der sich über Makros erweitern läßt. Er bietet <a href="http://linuxwiki.de/Vim/SyntaxHighlighting">/SyntaxHighlighting</a> und eine grafische Oberfläche basierend auf <a href="http://linuxwiki.de/GTK">GTK</a>. Diese heißt gvim. <span class="anchor" id="line-2"></span>Die <a href="http://linuxwiki.de/KDE">KDE</a>-Version
+ hieß Kvim, war aber meistens buggy, und wird auch schon einige Jahre 
+nicht mehr weiterentwickelt. Die Entwickler stecken die Arbeit jetzt in 
+ein Projekt namens Kyzis. Ansonsten kann man aber die grafische 
+GTK-Oberfläche auch unter KDE verwenden. <span class="anchor" id="line-3"></span><span class="anchor" id="line-4"></span></p><p class="line862">Der Vim ist ein <a href="http://linuxwiki.de/Klon">Klon</a> des original <a href="http://linuxwiki.de/vi">vi</a>. <span class="anchor" id="line-5"></span><span class="anchor" id="line-6"></span></p><p class="line862">Homepage: <a class="http" href="http://www.vim.org/">http://www.vim.org/</a> <span class="anchor" id="line-7"></span><span class="anchor" id="line-8"></span></p><p class="line862">Lizenz: <a class="http" href="http://vimdoc.sourceforge.net/cgi-bin/vim2html2.pl?page=uganda.txt#license">Vim-Lizenz</a> <span class="anchor" id="line-9"></span><span class="anchor" id="line-10"></span></p><p class="line862">Es gibt auch ein recht gutes <a class="http" href="http://www.truth.sk/vim/vimbook-OPL.pdf">Online-Buch</a> (en) im PDF-Format über Vim, siehe dort auch insbesondere die Programmiertipps ab S.67. <span class="anchor" id="line-11"></span><span class="anchor" id="line-12"></span></p><p class="line867"></p><div class="table-of-contents"><p class="table-of-contents-heading">Inhaltsverzeichnis</p><ol><li>
+<a href="#Vim_-_das_.2BANw-berlebensnotwendige">Vim - das Überlebensnotwendige</a></li><li>
+<a href="#Weitere_Befehle">Weitere Befehle</a></li><li>
+<a href="#Beispiele">Beispiele</a></li><li>
+<a href="#Syntax-Highlighting">Syntax-Highlighting</a></li><li>
+<a href="#Automatische_Einr.2BAPw-ckung">Automatische Einrückung</a></li><li>
+<a href="#A.22Top-Ten.22_der_Vim_Befehle">"Top-Ten" der Vim Befehle</a></li><li>
+<a href="#Die_.2BAH4ALw.vimrc_bzw._.2BAH4ALw.gvimrc">Die ~/.vimrc bzw. ~/.gvimrc</a></li><li>
+<a href="#Plugins_.2BAC8_Ftplugins">Plugins / Ftplugins</a></li><li>
+<a href="#Vim_und_Tabellen">Vim und Tabellen</a></li><li>
+<a href="#Hilfe-System">Hilfe-System</a></li><li>
+<a href="#Weitere_Links">Weitere Links</a></li><li>
+<a href="#Tipps_.26_Tricks">Tipps &amp; Tricks</a><ol><li>
+<a href="#Debian">Debian</a></li><li>
+<a href="#Navigation_in_langen_Zeilen">Navigation in langen Zeilen</a></li><li>
+<a href="#Cream">Cream</a></li><li>
+<a href="#Pida">Pida</a></li><li>
+<a href="#cscope">cscope</a></li></ol></li><li>
+<a href="#Humor">Humor</a></li><li>
+<a href="#Fragen">Fragen</a></li></ol></div> <span class="anchor" id="line-13"></span><span class="anchor" id="line-14"></span><p class="line867">
+</p><h1 id="Vim_-_das_.2BANw-berlebensnotwendige">Vim - das Überlebensnotwendige</h1>
+<span class="anchor" id="line-15"></span><ul><li>Aufruf: <span class="anchor" id="line-16"></span><ul><li><p class="line891"><tt>vim&nbsp;datei.txt</tt> <sup><a href="#fnref-7ebe23f59655a2469f6595c6424870101debe60b" id="fndef-7ebe23f59655a2469f6595c6424870101debe60b-0">1</a></sup> <span class="anchor" id="line-17"></span></p></li></ul></li><li>Moduswechsel im Editiermodus: <span class="anchor" id="line-18"></span><ul><li><p class="line891"><tt>i</tt> - Insert-Modus (Texteinfüge-Modus) anschalten. Wichtig: vorher keinen Text eingeben! <span class="anchor" id="line-19"></span></p></li><li><p class="line891"><tt>&lt;Esc&gt;</tt> - Insert- oder Replace-Modus verlassen, zurück in Kommandomodus <span class="anchor" id="line-20"></span></p></li></ul></li><li>im Kommandomodus: <span class="anchor" id="line-21"></span><ul><li><p class="line891"><tt>:w</tt> - speichern <span class="anchor" id="line-22"></span></p></li><li><p class="line891"><tt>:q</tt> - beenden (wenn man nichts geändert bzw. bereits gespeichert hat) <span class="anchor" id="line-23"></span></p></li><li><p class="line891"><tt>:q!</tt> - beenden ohne speichern, Änderungen verwerfen <span class="anchor" id="line-24"></span><span class="anchor" id="line-25"></span></p></li></ul></li></ul><p class="line874">So, soviel zum Überlebensnotwendigen mit Vim. <span class="anchor" id="line-26"></span><span class="anchor" id="line-27"></span></p><p class="line867">
+</p><h1 id="Weitere_Befehle">Weitere Befehle</h1>
+<span class="anchor" id="line-28"></span><ul><li>Aufruf: <span class="anchor" id="line-29"></span><ul><li><p class="line891"><tt>vim&nbsp;+123&nbsp;buggyprogram.c</tt>, um direkt zu Zeile 123 zu springen <span class="anchor" id="line-30"></span></p></li></ul></li><li>im Kommandomodus: <span class="anchor" id="line-31"></span><ul><li><p class="line891"><tt>u</tt> - Undo. Letzte Änderung zurücknehmen. <span class="anchor" id="line-32"></span></p></li><li><p class="line891"><tt>R</tt> - Replace-Modus (Überschreib-Modus) anschalten. <span class="anchor" id="line-33"></span></p></li><li><p class="line891"><tt>P</tt> - Textpuffer vor aktueller Zeile einfügen <span class="anchor" id="line-34"></span></p></li><li><p class="line891"><tt>p</tt> - Textpuffer nach aktueller Zeile einfügen <span class="anchor" id="line-35"></span></p></li><li><p class="line891"><tt>G</tt> - An das Ende der aktuellen Datei springen <span class="anchor" id="line-36"></span></p></li><li><p class="line891"><tt>gg</tt> - An den Anfang der aktuellen Datei springen <span class="anchor" id="line-37"></span></p></li><li><p class="line891"><tt>nG</tt> oder <tt class="backtick">ngg</tt>- Gehe zur Zeile n <span class="anchor" id="line-38"></span></p></li><li><p class="line891"><tt>&lt;Strg-w&gt;&nbsp;v</tt> - Fenster vertikal teilen <span class="anchor" id="line-39"></span></p></li><li><p class="line891"><tt>&lt;Strg-w&gt;&nbsp;w</tt> - Cursor in das nächste Fenster <span class="anchor" id="line-40"></span></p></li><li><p class="line891"><tt>&lt;Strg-w&gt;&nbsp;W</tt> - Cursor in das vorherige Fenster <span class="anchor" id="line-41"></span></p></li><li><p class="line891"><tt>/&lt;RegExp&gt;</tt> vorwärts suchen <span class="anchor" id="line-42"></span></p></li><li><p class="line891"><tt>?&lt;RegExp&gt;</tt> rückwärts suchen <span class="anchor" id="line-43"></span><span class="anchor" id="line-44"></span></p></li></ul></li><li class="gap">Ex-Befehle <span class="anchor" id="line-45"></span><ul><li><p class="line891"><tt>:split</tt> - Fenster horizontal teilen <span class="anchor" id="line-46"></span></p></li><li><p class="line891"><tt>:vsplit</tt> - Fenster vertikal teilen <span class="anchor" id="line-47"></span></p></li><li><p class="line891"><tt>:help</tt> - öffnet die Hilfe <span class="anchor" id="line-48"></span></p></li><li><p class="line891"><tt>:help&nbsp;&lt;Befehl&gt;</tt> - öffnet die Hilfe zu &lt;Befehl&gt; <span class="anchor" id="line-49"></span></p></li><li><p class="line891"><tt>:help&nbsp;holy-grail</tt> - zeigt alle Befehle an, die mit einem Doppelpunkt beginnen <span class="anchor" id="line-50"></span></p></li><li><p class="line891"><tt>:x</tt> - speichern und beenden <span class="anchor" id="line-51"></span></p></li><li><p class="line891"><tt>:123</tt> - auf Zeile 123 springen <span class="anchor" id="line-52"></span></p></li><li><p class="line891"><tt>:$</tt> oder <tt>G</tt> - an das Ende der Datei springen <span class="anchor" id="line-53"></span></p></li><li><p class="line891"><tt>:%s/&lt;RegExp&gt;/&lt;String&gt;/g</tt> im gesamten Text suchen und ersetzen <span class="anchor" id="line-54"></span></p></li><li><p class="line891"><tt>:s/&lt;RegExp&gt;/&lt;String&gt;/</tt> in der aktuellen Zeile suchen und bei der ersten Übereinstimmung ersetzen <span class="anchor" id="line-55"></span></p></li><li><p class="line891"><tt>:s/&lt;RegExp&gt;/&lt;String&gt;/g</tt> in der aktuellen Zeile suchen und bei allen Übereinstimmungen ersetzen <span class="anchor" id="line-56"></span></p></li></ul>Generell kann allen Befehlen ein Bereich (range) vorangestellt werden. <span class="anchor" id="line-57"></span><span class="anchor" id="line-58"></span></li></ul><p class="line867">
+</p><h1 id="Beispiele">Beispiele</h1>
+<span class="anchor" id="line-59"></span><ul><li>dd <span class="anchor" id="line-60"></span><ul><li style="list-style-type:none">Löschen der aktuellen Zeile <span class="anchor" id="line-61"></span></li></ul></li><li>yy <span class="anchor" id="line-62"></span><ul><li style="list-style-type:none">Aktuelle Zeile in den Kopierpuffer bringen <span class="anchor" id="line-63"></span></li></ul></li><li>123G <span class="anchor" id="line-64"></span><ul><li style="list-style-type:none">In Zeile 123 springen <span class="anchor" id="line-65"></span></li></ul></li><li>Einrücken (Indenting) oder Ausrücken (Dedenting) von Blöcken: <span class="anchor" id="line-66"></span><ul><li>V <span class="anchor" id="line-67"></span></li><li>(ein paarmal Cursor runter, um den Block zu markieren) <span class="anchor" id="line-68"></span></li><li><p class="line891">&gt; bzw. &lt; <span class="anchor" id="line-69"></span></p></li></ul></li><li>ggg?G <span class="anchor" id="line-70"></span><ul><li style="list-style-type:none"><p class="line862">Ein gg springt zum Kopf der Datei. Von da bis zum Ende wird die Datei mit Rot13 verschlüsselt. <img alt=";)" src="Vim_Minimum_Befehle-Dateien/smile4.png" title=";)" height="16" width="16"> <span class="anchor" id="line-71"></span><span class="anchor" id="line-72"></span></p></li></ul></li><li class="gap"><p class="line891"><tt>:1,$&nbsp;s/Hallo/Hello/g</tt> <span class="anchor" id="line-73"></span></p><ul><li style="list-style-type:none">Zeile 1 bis letzte Zeile: Hallo durch Hello ersetzen, beliebig oft je Zeile. <span class="anchor" id="line-74"></span></li><li>"%" ist mit "1,$" gleichbedeutend <span class="anchor" id="line-75"></span></li></ul></li><li><p class="line891"><tt>:'a,'b&nbsp;s/Hallo/Hello/g</tt> <span class="anchor" id="line-76"></span></p><ul><li style="list-style-type:none">von Marke a bis Marke b Hallo durch Hello ersetzen <span class="anchor" id="line-77"></span></li></ul></li><li><p class="line891"><tt>.,.+3&nbsp;s/1/2/</tt> <span class="anchor" id="line-78"></span></p><ul><li style="list-style-type:none">Aktuelle Zeile bis 3 Zeilen weiter: 1 durch 2 ersetzen, nur das erste mal in der Zeile. <span class="anchor" id="line-79"></span></li></ul></li><li><p class="line891"><tt>/^Name:/&nbsp;s/Robby/Robert/g</tt> <span class="anchor" id="line-80"></span></p><ul><li style="list-style-type:none">In jeder Zeile, in der am Anfang Name: steht, Robby durch Robert ersetzen, auch mehrmals. <span class="anchor" id="line-81"></span><span class="anchor" id="line-82"></span></li></ul></li></ul><p class="line862">Mit <tt>vimtutor</tt> bekommt man eine Einführung in und im Vim. <span class="anchor" id="line-83"></span><span class="anchor" id="line-84"></span></p><p class="line867">
+</p><h1 id="Syntax-Highlighting">Syntax-Highlighting</h1>
+<span class="anchor" id="line-85"></span><ul><li><p class="line862">Zum Einschalten <tt class="backtick">:syntax&nbsp;on</tt> im Editor oder <tt class="backtick">syntax&nbsp;on</tt> in die <tt class="backtick">.vimrc</tt>. <span class="anchor" id="line-86"></span></p></li><li><p class="line862">Syntax auswählen über <tt class="backtick">:su&nbsp;$VIMRUNTIME/syntax/html.vim</tt> als Beispiel für HTML. <span class="anchor" id="line-87"></span></p></li><li>Eigene Syntax Files kommen in ~/.vim/syntax/ . <span class="anchor" id="line-88"></span></li><li><p class="line862">Ein Beispiel für selbstgebautes Syntax-Highlighting findet sich auf <a href="http://linuxwiki.de/ExternalEdit">ExternalEdit</a>. <span class="anchor" id="line-89"></span><span class="anchor" id="line-90"></span></p></li></ul><p class="line867">
+</p><h1 id="Automatische_Einr.2BAPw-ckung">Automatische Einrückung</h1>
+<span class="anchor" id="line-91"></span><p class="line862">Kann man über die Optionen <tt class="backtick">autoindent,&nbsp;smartindent</tt> und <tt class="backtick">cindent</tt> steuern. <span class="anchor" id="line-92"></span><span class="anchor" id="line-93"></span></p><p class="line862">Wer etwa will das Tabs nur 4 Leerzeichen breit angezeigt werden sollte <tt class="backtick">set&nbsp;tabstop=4</tt> setzen und evtl. auch noch <tt class="backtick">set&nbsp;shiftwidth=4</tt> setzten damit auch im falle von <tt class="backtick">cindent</tt> etc. richtig eingerückt wird. <span class="anchor" id="line-94"></span><span class="anchor" id="line-95"></span></p><p class="line862">Wenn man per X11 Copy&amp;Paste Inhalte z.B. aus nem Web-Browser übernehmen will, sollte man autoindent vorher abschalten per <tt class="backtick">:set&nbsp;noai</tt> - dann muss man nicht das ansonsten entstehende "Treppenmuster" entfernen. <span class="anchor" id="line-96"></span><span class="anchor" id="line-97"></span></p><p class="line867">
+</p><h1 id="A.22Top-Ten.22_der_Vim_Befehle">"Top-Ten" der Vim Befehle</h1>
+<span class="anchor" id="line-98"></span><ol type="1"><li><p class="line891"><strong>u</strong>
+ Die undo Funktion ist immens wichtig. Schön ist auch, daß vim im 
+Gegensatz zu vi mehr als eine Änderung rückgängig machen kann. <span class="anchor" id="line-99"></span><span class="anchor" id="line-100"></span></p></li><li class="gap"><p class="line891"><strong>&lt;STRG-p&gt;</strong> bzw. <strong>&lt;STRG-n&gt;</strong>
+ (also STRG-Taste und p oder n gleichzeitig) Ich editiere vor allem 
+C/C++-Code und oft weiß ich 10 Zeilen später nicht mehr, ob ich die 
+Variable jetzt vrglStr, vrglstring, vrgl_string oder vrgl_String genannt
+ habe. Also im Code die Zeilen zurück, nachschauen usw.? NEIN, 
+einfacher: Ich tippe vrgl (soweit kann ich mich noch erinnern <img alt=";-)" src="Vim_Minimum_Befehle-Dateien/smile4.png" title=";-)" height="16" width="16">
+ ) und dann &lt;STRG-p&gt; - jetzt sucht Vim rückwärts nach Worten, die 
+mit vrgl anfangen. Der erste Treffer wird angezeigt und ich kann einfach
+ weiter schreiben. Würde es noch mehr Wörter geben, die mit vrgl 
+anfangen, werden die der Reihenfolge nach angezeigt, ich muss nur 
+nochmal &lt;STRG-p&gt; drücken. Das p steht für Previous. Wer das ganze 
+mit &lt;STRG-n&gt; ausprobiert, sieht, dass n für Next steht, also 
+einfach die Suchrichtung umgekehrt ist. <span class="anchor" id="line-101"></span><span class="anchor" id="line-102"></span></p></li><li class="gap"><p class="line891"><strong>#</strong> und <strong>*</strong>
+ Wenn der Cursor über einem Wort steht und Du drückst #, dann heißt das 
+für den Vim "suche rückwärts nach diesem Wort und bringe den Cursor dort
+ hin". * macht das gleiche, nur ist hier die Suchrichtung vorwärts. <span class="anchor" id="line-103"></span><span class="anchor" id="line-104"></span></p></li><li class="gap"><p class="line891"><strong>%</strong>
+ Steht der Cursor über einer Klammer, springt % zu der dazugehörigen 
+öffnenden bzw. schließenden Klammer. Das funktioniert auch mit dem vi. 
+Mit folgendem Skript <a class="http" href="http://www.vim.org/scripts/script.php?script_id=39">http://www.vim.org/scripts/script.php?script_id=39</a>
+ funktioniert das auch mit Sprachen, die andere Kontrollstrukturen 
+haben, wie etwa TeX oder XML. Befindet man sich also über einem Tag und 
+drückt % springt vim zum entsprechenden Gegenstück. <span class="anchor" id="line-105"></span><span class="anchor" id="line-106"></span></p></li><li class="gap"><p class="line891"><strong>:%s/windows/linux/g</strong> Suchfunktion: windows suchen, durch linux ersetzen, g steht für alle Vorkommen in einer Zeile, % für den gesamten Text <span class="anchor" id="line-107"></span><span class="anchor" id="line-108"></span></p></li><li class="gap"><p class="line891"><strong>v</strong>, <strong>V</strong> und <strong>ctrl-V</strong>
+ Zeichen, Zeilen und Blockweises visuelles Markieren. Nach dem Markieren
+ kann mit I Text eingefügt werden. c ändert den Markierten Text, x oder d
+ löscht ihn und &gt; und &lt; rücken ihn ein. <span class="anchor" id="line-109"></span><span class="anchor" id="line-110"></span></p></li><li class="gap"><p class="line891"><strong>=</strong> Dient der korrekten Ausrichtung von Programm Texten. Einfach mal =% oder == ausprobieren. <span class="anchor" id="line-111"></span><span class="anchor" id="line-112"></span></p></li><li class="gap"><p class="line891"><strong>:noh</strong>
+ Schaltet die Hervorhebung von Suchergebnissen ab, die bei kurzen 
+Suchstrings sehr irritierend werden kann. Alternativ kann man auch nach 
+einer definitiv nicht vorhandenen Zeichenfolge suchen (z.B. <strong>/cdnnsdcjsd</strong>). <span class="anchor" id="line-113"></span><span class="anchor" id="line-114"></span></p></li></ol><p class="line867">
+</p><h1 id="Die_.2BAH4ALw.vimrc_bzw._.2BAH4ALw.gvimrc">Die ~/.vimrc bzw. ~/.gvimrc</h1>
+<span class="anchor" id="line-115"></span><p class="line862">Das sind 
+die Konfigurationsdateien für den Vim. Beim Start des Gvim wird 
+zusätzlich auch die ~/.gvimrc gesourced. Sind keine rc's im 
+Homeverzeichnis, so werden die defaults durchlaufen. Bei Debian sind die
+ in /etc/vim ansonsten im Installationsverszeichnis von Vim, das 
+normalerweise /usr/share/vim ist. In der ~/.vimrc (hier ein <a class="http" href="http://dotfiles.com/files/9/419_vimrc">Beispiel</a>) und ~/.gvimrc lassen sich jetzt tolle Sache unterbringen, wie z.B. das bevorzugte Color-Scheme usw. <span class="anchor" id="line-116"></span><span class="anchor" id="line-117"></span></p><p class="line867">
+</p><h1 id="Plugins_.2BAC8_Ftplugins">Plugins / Ftplugins</h1>
+<span class="anchor" id="line-118"></span><p class="line862">Vim unterstützt Plugins und zwar systemweit oder benutzerspezifisch. Es gibt davon inzwischen über 1200, siehe <a class="http" href="http://www.vim.org/">http://www.vim.org</a>. Plugins gibts zu den verscheidensten Themen: CVS-Tools, Projekt-Verwaltung, Kalender, schon mal mit Vim Tetris gespielt? <span class="anchor" id="line-119"></span><span class="anchor" id="line-120"></span></p><p class="line874">Ftplugin
+ bedeutet File-Typ spezifisches Plugin. So gibt es ftplugins die z.B. 
+die Syntax von HTML oder Python oder usw. besonders unterstützen. <span class="anchor" id="line-121"></span><span class="anchor" id="line-122"></span></p><p class="line874">Es ist nicht schwer, sich einfache Plugins selber zu schreiben, z.B. um sich zusätzliche Menubars selber einzubinden. <span class="anchor" id="line-123"></span><span class="anchor" id="line-124"></span></p><p class="line867">
+</p><h1 id="Vim_und_Tabellen">Vim und Tabellen</h1>
+<span class="anchor" id="line-125"></span><p class="line862">Wer unter vim mit Tabellen arbeitet, wird Bedarf an <em><strong>Sortierfunktionen</strong></em> haben. <span class="anchor" id="line-126"></span><span class="anchor" id="line-127"></span></p><p class="line862">Das <strong>alphabetische Sortieren</strong> von Spalten beherrscht folgendes Script: <span class="anchor" id="line-128"></span><span class="anchor" id="line-129"></span></p><p class="line867"><a class="http" href="http://www.vim.org/scripts/script.php?script_id=310">:call Cream_sortfile()</a> <span class="anchor" id="line-130"></span><span class="anchor" id="line-131"></span></p><p class="line862">Es kann sogar <strong>Datumseinträge sortieren</strong>. <span class="anchor" id="line-132"></span><span class="anchor" id="line-133"></span></p><p class="line862">Das Sortieren von Spalten <strong>nach der Größe von Zahlen</strong> kann es <strong>nicht</strong>. <span class="anchor" id="line-134"></span><span class="anchor" id="line-135"></span></p><p class="line867"><tt class="backtick">&nbsp;-&gt;&nbsp;Eine&nbsp;diesbezügliche&nbsp;Ergänzung&nbsp;wäre&nbsp;toll.&nbsp;;)</tt> <span class="anchor" id="line-136"></span><span class="anchor" id="line-137"></span></p><p class="line862">Da einige Webbrowser wie z. B. <strong>w3m</strong> das Einbinden von Editoren beherrschen, kann VIM natürlich auch "wiki".  Ein kleines <a class="http" href="http://www.vim.org/scripts/script.php?script_id=725">Skript</a> für Wiki-Syntax gibt's ebenfalls. <span class="anchor" id="line-138"></span><span class="anchor" id="line-139"></span></p><ul><li><p class="line862">Auch mit <a href="http://linuxwiki.de/Mozilla">Mozilla</a> und <a class="http" href="http://mozex.mozdev.org/">Mozex</a> gut nutzbar (<a class="http" href="http://www.newsforge.com/article.pl?sid=04/10/12/1644203">Anleitung</a>) . <img alt=":)" src="Vim_Minimum_Befehle-Dateien/smile.png" title=":)" height="16" width="16"> <span class="anchor" id="line-140"></span></p></li><li><p class="line862">Mit <a class="https" href="https://addons.mozilla.org/de/firefox/addon/4125">It's all text</a> kann man in Firefox sehr bequem Texte in einem externen Editor bearbeiten. <span class="anchor" id="line-141"></span><span class="anchor" id="line-142"></span></p></li></ul><p class="line867">
+</p><h1 id="Hilfe-System">Hilfe-System</h1>
+<span class="anchor" id="line-143"></span><p class="line874">Das Hilfesystem von Vim ist sehr leicht (natürlich wieder benutzerspezifisch) zu erweitern. <span class="anchor" id="line-144"></span><span class="anchor" id="line-145"></span></p><p class="line867">
+</p><h1 id="Weitere_Links">Weitere Links</h1>
+<span class="anchor" id="line-146"></span><ul><li><p class="line891"><a class="http" href="http://tnerual.eriogerg.free.fr/vim.html">VIM Referenzkarte</a> <span class="anchor" id="line-147"></span></p></li><li><p class="line891"><a class="http" href="http://www-user.tu-chemnitz.de/%7Ehot/VIM/VIM/vikurz.html">Vim Kurzeinführung in vim</a> <span class="anchor" id="line-148"></span></p></li><li><p class="line891"><a class="http" href="http://lug.fh-swf.de/vim/vim-kurzanleitung.pdf">gVim-Kurzanleitung (PDF)</a> <span class="anchor" id="line-149"></span></p></li><li><p class="line891"><a class="http" href="http://herbert.the-little-red-haired-girl.org/cgi-bin/xml2html.cgi/html/vi/index.html?DEFSTYLE=multilingual.style&amp;LANGUAGE=schwob">Vi auf schwäbisch</a> <span class="anchor" id="line-150"></span></p></li><li><p class="line862">Mit dem Aufbau von VIM-Makros beschäftigt sich <a class="http" href="http://www.linux-magazin.de/Artikel/ausgabe/2001/11/vim/vim.html">Linux-Magazin</a>. <span class="anchor" id="line-151"></span></p></li><li><p class="line862">kleine und gut verständliche Einführung in vi, aber auch für vim gültig: <a class="http" href="http://www.tripbit.org/articles/Der_vi_Editor_und_seine_Handhabung.htm">http://www.tripbit.org/articles/Der_vi_Editor_und_seine_Handhabung.htm</a> <span class="anchor" id="line-152"></span></p></li><li><p class="line862">Folding, also das Zusammenfalten von Textpassagen bspw. anhand von geschweiften Klammern in C++, um Methoden auszublenden etc.: <a class="http" href="http://www.pl-berichte.de/t_programme/vim_fold.html">http://www.pl-berichte.de/t_programme/vim_fold.html</a> <span class="anchor" id="line-153"></span></p></li><li><p class="line862">eine "Spickzettel"-Methode um den vi zu erlernen gibt es auch: <a class="http" href="http://gentoo.de/doc/de/vi-guide.xml">http://gentoo.de/doc/de/vi-guide.xml</a> <span class="anchor" id="line-154"></span><span class="anchor" id="line-155"></span></p></li></ul><p class="line867">
+</p><h1 id="Tipps_.26_Tricks">Tipps &amp; Tricks</h1>
+<span class="anchor" id="line-156"></span><p class="line867">
+</p><h2 id="Debian">Debian</h2>
+<span class="anchor" id="line-157"></span><p class="line862">gvim funktioniert erst nach <tt>apt-get&nbsp;install&nbsp;vim-gtk</tt>. Allerdings schließt dies beispielsweise das Paket vim-perl (Vi IMproved mit Perl-Scripting-support) aus. <span class="anchor" id="line-158"></span><span class="anchor" id="line-159"></span></p><p class="line867">
+</p><h2 id="Navigation_in_langen_Zeilen">Navigation in langen Zeilen</h2>
+<span class="anchor" id="line-160"></span><p class="line874">Problem: 
+Navigieren in langen Zeilen: Solange ich eine Zeile nicht mit Return 
+abschließe, wird die ggf. auf dem Bildschirm automatisch umgebrochen, 
+geht also z.B. über zwei Bildschirmzeilen. Die Tasten Pfeil-rauf, 
+Pfeil-runter, Pos1 und Ende beziehen sich nun nicht auf die 
+Bildschirmzeilen, sondern auf die tatsächlichen Zeilen (bis zum 
+Zeilenende-Zeichen). Wie kann ich denn bequem die Bildschirmzeilen 
+navigieren? Wie komme ich z.B. von der Bildschirmzeile 2 direkt zu dem 
+auf dem Bildschirm darüberliegenden Zeichen? Bei "normalen" 
+Textverarbeitungen ja mit Pfeil-rauf. Und bei vim? <span class="anchor" id="line-161"></span><span class="anchor" id="line-162"></span></p><p class="line874">Um sich in Bildschirmzeilen zu bewegen, kann man im Normalmodus <span class="anchor" id="line-163"></span><span class="anchor" id="line-164"></span></p><ul><li><p class="line891"><tt>gj</tt> für abwärts und <span class="anchor" id="line-165"></span></p></li><li><p class="line891"><tt>gk</tt> für aufwärts benutzen. <span class="anchor" id="line-166"></span><span class="anchor" id="line-167"></span></p></li></ul><p class="line862">Bei Bedarf kann man auch die Cursortasten entsprechend anpassen. (Siehe auch: Vim FAQ, Abschnitt <a class="http" href="http://vimdoc.sourceforge.net/cgi-bin/vimfaq2html3.pl#9.4">9.4</a>) <span class="anchor" id="line-168"></span><span class="anchor" id="line-169"></span></p><p class="line867">
+</p><h2 id="Cream">Cream</h2>
+<span class="anchor" id="line-170"></span><p class="line867"><a href="http://linuxwiki.de/Cream">Cream</a> als einfache Konfiguration für Vim verwenden. <span class="anchor" id="line-171"></span><span class="anchor" id="line-172"></span></p><p class="line867">
+</p><h2 id="Pida">Pida</h2>
+<span class="anchor" id="line-173"></span><p class="line862">Pida ist 
+eine grafische IDE, die als Editor einen VIM (alternativ auch Cream) 
+eingebettet hat - und bietet viele Zusatzfeatures z.B. zum Thema 
+Versionskontrolle etc. <a class="http" href="http://pida.co.uk/screenshots">Pida IDE Website</a> <span class="anchor" id="line-174"></span><span class="anchor" id="line-175"></span></p><p class="line867">
+</p><h2 id="cscope">cscope</h2>
+<span class="anchor" id="line-176"></span><p class="line874">cscope ist 
+ein interaktives Programm zum navigieren im Quellcode. Als erstes wird 
+im Quellcode-Verzeichnis mit dem Befehl cscope-indexer eine Datenbank 
+(cscope.out) angelegt. Hier werden die Informationen der Codeanalyse 
+gespeichert. <span class="anchor" id="line-177"></span><span class="anchor" id="line-178"></span></p><p class="line867"><span class="anchor" id="line-179"></span><span class="anchor" id="line-180"></span><span class="anchor" id="line-181"></span><span class="anchor" id="line-182"></span><span class="anchor" id="line-183"></span><span class="anchor" id="line-184"></span><span class="anchor" id="line-185"></span><span class="anchor" id="line-186"></span><span class="anchor" id="line-187"></span><span class="anchor" id="line-188"></span><span class="anchor" id="line-189"></span><span class="anchor" id="line-190"></span><span class="anchor" id="line-191"></span><span class="anchor" id="line-192"></span><span class="anchor" id="line-193"></span></p><pre><span class="anchor" id="line-1"></span>user@host:/tmp/codetest$ tree
+<span class="anchor" id="line-2"></span>.
+<span class="anchor" id="line-3"></span>
+<span class="anchor" id="line-4"></span>`-- src
+<span class="anchor" id="line-5"></span>    |-- main.c
+<span class="anchor" id="line-6"></span>    `-- test.c
+<span class="anchor" id="line-7"></span>user@host:/tmp/codetest$ cscope-indexer -r
+<span class="anchor" id="line-8"></span>user@host:/tmp/codetest$ tree
+<span class="anchor" id="line-9"></span>.
+<span class="anchor" id="line-10"></span>|-- cscope.files
+<span class="anchor" id="line-11"></span>|-- cscope.out
+<span class="anchor" id="line-12"></span>`-- src
+<span class="anchor" id="line-13"></span>    |-- main.c
+<span class="anchor" id="line-14"></span>    `-- test.c</pre><span class="anchor" id="line-194"></span><p class="line874">Nun startet wir vim im Verzeichnis in der sich die Datenbank befindet (/tmp/codetest). <span class="anchor" id="line-195"></span><span class="anchor" id="line-196"></span></p><p class="line867"><tt>user@host:/tmp/codetest$&nbsp;vim</tt> <span class="anchor" id="line-197"></span><span class="anchor" id="line-198"></span></p><p class="line874">Zum erstellen einer Datenbankverbindung wird folgender Befehl eingegeben: <span class="anchor" id="line-199"></span><span class="anchor" id="line-200"></span></p><p class="line867"><tt>:cscope&nbsp;add&nbsp;.</tt> <span class="anchor" id="line-201"></span><span class="anchor" id="line-202"></span></p><p class="line874">Mit show lassen sich die Datenbankverbindungen anzeigen: <span class="anchor" id="line-203"></span><span class="anchor" id="line-204"></span></p><p class="line867"><tt>:cscope&nbsp;show</tt> <span class="anchor" id="line-205"></span><span class="anchor" id="line-206"></span></p><p class="line874">Nun wollen wir die main-Funktion suchen, dies wird mit folgendem Befehl gemacht: <span class="anchor" id="line-207"></span><span class="anchor" id="line-208"></span></p><p class="line867"><tt>:cscope&nbsp;find&nbsp;g&nbsp;main</tt> <span class="anchor" id="line-209"></span><span class="anchor" id="line-210"></span></p><p class="line874">vim öffnet die Datei in der sich die main-Funktion befindet und springt zu der richtigen Zeile. <span class="anchor" id="line-211"></span><span class="anchor" id="line-212"></span></p><p class="line874">Die Hilfe wird mit :cscope help angezeigt: <span class="anchor" id="line-213"></span><span class="anchor" id="line-214"></span></p><p class="line867"><span class="anchor" id="line-215"></span><span class="anchor" id="line-216"></span><span class="anchor" id="line-217"></span><span class="anchor" id="line-218"></span><span class="anchor" id="line-219"></span><span class="anchor" id="line-220"></span><span class="anchor" id="line-221"></span><span class="anchor" id="line-222"></span><span class="anchor" id="line-223"></span><span class="anchor" id="line-224"></span><span class="anchor" id="line-225"></span><span class="anchor" id="line-226"></span><span class="anchor" id="line-227"></span><span class="anchor" id="line-228"></span><span class="anchor" id="line-229"></span><span class="anchor" id="line-230"></span></p><pre><span class="anchor" id="line-1-1"></span>cscope Befehle:
+<span class="anchor" id="line-2-1"></span>add  : Eine neue Datenbank hinzufügen (Verwendung: add file|dir [pre-path] [flags])
+<span class="anchor" id="line-3-1"></span>find : Muster suchen                  (Verwendung: find c|d|e|f|g|i|s|t name)
+<span class="anchor" id="line-4-1"></span>       c: Find functions calling this function
+<span class="anchor" id="line-5-1"></span>       d: Find functions called by this function
+<span class="anchor" id="line-6-1"></span>       e: Find this egrep pattern
+<span class="anchor" id="line-7-1"></span>       f: Find this file
+<span class="anchor" id="line-8-1"></span>       g: Find this definition
+<span class="anchor" id="line-9-1"></span>       i: Find files #including this file
+<span class="anchor" id="line-10-1"></span>       s: Find this C symbol
+<span class="anchor" id="line-11-1"></span>       t: Find assignments to
+<span class="anchor" id="line-12-1"></span>help : diese Nachricht anzeigen       (Verwendung: help)
+<span class="anchor" id="line-13-1"></span>kill : Verbindung abbrechen           (Verwendung: kill #)
+<span class="anchor" id="line-14-1"></span>reset: Verbindungen reinitialisieren  (Verwendung: reset)
+<span class="anchor" id="line-15"></span>show : Verbindungen anzeigen          (Verwendung: show)</pre><span class="anchor" id="line-231"></span><p class="line867">
+</p><h1 id="Humor">Humor</h1>
+<span class="anchor" id="line-232"></span><p class="line867"><span class="anchor" id="line-233"></span></p><p class="line862">Das Kommandozeichen ! bedeutet soviel wie force - tippt mal :help! ein <img alt=":)" src="Vim_Minimum_Befehle-Dateien/smile.png" title=":)" height="16" width="16"> <span class="anchor" id="line-234"></span><span class="anchor" id="line-235"></span></p><p class="line867">
+</p><h1 id="Fragen">Fragen</h1>
+<span class="anchor" id="line-236"></span><div class="footnotes"><ol><li><p><a id="fnref-7ebe23f59655a2469f6595c6424870101debe60b"></a><span class="anchor" id="line-1-1"></span>auf Systemen wo vim als default installiert ist, kann auch nur "vi" benutzt werden  (<a href="#fndef-7ebe23f59655a2469f6595c6424870101debe60b-0">1</a>)</p></li></ol></div><span class="anchor" id="bottom"></span></div><p id="pageinfo" class="info" dir="ltr" lang="de">Vim  (zuletzt geändert am 2010-01-14 12:26:01 durch <span title="SebastianSchmid @ p4FF06BD5.dip.t-dialin.net[79.240.107.213]"><a href="http://linuxwiki.de/SebastianSchmid" title="SebastianSchmid @ p4FF06BD5.dip.t-dialin.net[79.240.107.213]">SebastianSchmid</a></span>)</p>
+
+<div id="pagebottom"></div>
+</div>
+
+
+<div id="footer">
+<ul class="editbar"><li><a href="http://linuxwiki.de/action/edit/Vim?action=edit&amp;editor=text" name="texteditlink" rel="nofollow">Editieren (Text)</a></li><li class="toggleCommentsButton" style="display:none;"><a href="#" class="nbcomment" onclick="toggleComments();return false;">Kommentare</a></li><li><a class="nbinfo" href="http://linuxwiki.de/action/info/Vim?action=info" rel="nofollow">Info</a></li><li><a class="nbattachments" href="http://linuxwiki.de/action/AttachFile/Vim?action=AttachFile" rel="nofollow">Dateianhänge</a></li><li>
+<form class="actionsmenu" method="GET" action="/Vim">
+<div>
+    <label>Weitere Aktionen:</label>
+    <select name="action" onchange="if ((this.selectedIndex != 0) &amp;&amp;
+                      (this.options[this.selectedIndex].disabled == false)) {
+                this.form.submit();
+            }
+            this.selectedIndex = 0;">
+        <option selected="selected" value="raw">Rohform</option>
+<option value="print">Druckansicht</option>
+<option value="RenderAsDocbook">Docbook ausgeben</option>
+<option value="refresh">Cache löschen</option>
+<option value="show" disabled="disabled" class="disabled">-----------------------------------</option>
+<option value="SpellCheck">Rechtschreibung prüfen</option>
+<option value="LikePages">Ähnliche Seiten</option>
+<option value="LocalSiteMap">ÜbersichtsKarte</option>
+<option value="show" disabled="disabled" class="disabled">-----------------------------------</option>
+<option value="RenamePage" disabled="disabled" class="disabled">Seite umbenennen</option>
+<option value="DeletePage" disabled="disabled" class="disabled">Seite löschen</option>
+<option value="show" disabled="disabled" class="disabled">-----------------------------------</option>
+<option value="MyPages">Meine Seiten</option>
+<option value="show" disabled="disabled" class="disabled">Abo für Benutzer</option>
+<option value="show" disabled="disabled" class="disabled">-----------------------------------</option>
+<option value="show" disabled="disabled" class="disabled">Spam entfernen</option>
+<option value="show" disabled="disabled" class="disabled">Diese Revision restaurieren</option>
+<option value="PackagePages">Seiten paketieren</option>
+<option value="SyncPages">Seiten synchronisieren</option>
+<option value="show" disabled="disabled" class="disabled">-----------------------------------</option>
+<option value="Load">Laden</option>
+<option value="Save">Speichern</option>
+<option value="SlideShow">SlideShow</option>
+    </select>
+    <input value="Los!" type="submit">
+    
+</div>
+<script type="text/javascript">
+<!--// Init menu
+actionsMenuInit('Weitere Aktionen:');
+//-->
+</script>
+</form>
+</li></ul>
+
+<ul id="credits">
+<li><a href="http://moinmo.in/" title="This site uses the MoinMoin Wiki software.">MoinMoin Powered</a></li><li><a href="http://moinmo.in/Python" title="MoinMoin is written in Python.">Python Powered</a></li><li><a href="http://moinmo.in/GPL" title="MoinMoin is GPL licensed.">GPL licensed</a></li><li><a href="http://validator.w3.org/check?uri=referer" title="Click here to validate this page.">Valid HTML 4.01</a></li>
+</ul>
+
+
+</div>
+
+
+
+</body></html>

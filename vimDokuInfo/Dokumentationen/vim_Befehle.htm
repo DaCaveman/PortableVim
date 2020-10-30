@@ -1,0 +1,946 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head profile="http://gmpg.org/xfn/11">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+	<title>Vim Kurzreferenz «  Flash Systems</title>
+
+	<style type="text/css" media="screen">
+		@import url( http://www.flashsystems.de/wp-content/themes/flashlight/style.css );
+	</style>
+
+	<link rel="pingback" href="http://www.flashsystems.de/xmlrpc.php">
+		<link rel="archives" title="März 2012" href="http://www.flashsystems.de/articles/date/2012/03">
+	<link rel="archives" title="Februar 2012" href="http://www.flashsystems.de/articles/date/2012/02">
+	<link rel="archives" title="Januar 2012" href="http://www.flashsystems.de/articles/date/2012/01">
+	<link rel="archives" title="November 2011" href="http://www.flashsystems.de/articles/date/2011/11">
+	<link rel="archives" title="Oktober 2011" href="http://www.flashsystems.de/articles/date/2011/10">
+	<link rel="archives" title="August 2011" href="http://www.flashsystems.de/articles/date/2011/08">
+	<link rel="archives" title="Juni 2011" href="http://www.flashsystems.de/articles/date/2011/06">
+	<link rel="archives" title="April 2011" href="http://www.flashsystems.de/articles/date/2011/04">
+	<link rel="archives" title="März 2011" href="http://www.flashsystems.de/articles/date/2011/03">
+	<link rel="archives" title="Februar 2011" href="http://www.flashsystems.de/articles/date/2011/02">
+	<link rel="archives" title="Januar 2011" href="http://www.flashsystems.de/articles/date/2011/01">
+	<link rel="archives" title="Dezember 2010" href="http://www.flashsystems.de/articles/date/2010/12">
+	<link rel="archives" title="Oktober 2010" href="http://www.flashsystems.de/articles/date/2010/10">
+	<link rel="archives" title="September 2010" href="http://www.flashsystems.de/articles/date/2010/09">
+	<link rel="archives" title="August 2010" href="http://www.flashsystems.de/articles/date/2010/08">
+	<link rel="archives" title="Juli 2010" href="http://www.flashsystems.de/articles/date/2010/07">
+	<link rel="archives" title="Juni 2010" href="http://www.flashsystems.de/articles/date/2010/06">
+	<link rel="archives" title="Mai 2010" href="http://www.flashsystems.de/articles/date/2010/05">
+	<link rel="archives" title="April 2010" href="http://www.flashsystems.de/articles/date/2010/04">
+	<link rel="archives" title="Januar 2010" href="http://www.flashsystems.de/articles/date/2010/01">
+	<link rel="archives" title="Februar 2009" href="http://www.flashsystems.de/articles/date/2009/02">
+	<link rel="archives" title="September 2008" href="http://www.flashsystems.de/articles/date/2008/09">
+	<link rel="archives" title="Juli 2008" href="http://www.flashsystems.de/articles/date/2008/07">
+	<link rel="archives" title="Juni 2008" href="http://www.flashsystems.de/articles/date/2008/06">
+	<link rel="archives" title="April 2008" href="http://www.flashsystems.de/articles/date/2008/04">
+	<link rel="archives" title="Februar 2008" href="http://www.flashsystems.de/articles/date/2008/02">
+		<link rel="alternate" type="application/rss+xml" title="Flash Systems » Feed" href="http://www.flashsystems.de/feed">
+<link rel="alternate" type="application/rss+xml" title="Flash Systems » Kommentar Feed" href="http://www.flashsystems.de/comments/feed">
+<link rel="stylesheet" id="highlight-css" href="vim_Befehle-Dateien/flashlight.css" type="text/css" media="all">
+<link rel="stylesheet" id="wp_dlmp_styles-css" href="vim_Befehle-Dateien/styles.css" type="text/css" media="all">
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://www.flashsystems.de/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://www.flashsystems.de/wp-includes/wlwmanifest.xml"> 
+<link rel="prev" title="Batch-Dateien und Netzlaufwerke" href="http://www.flashsystems.de/articles/832">
+<link rel="next" title="Neues Statistikmodul" href="http://www.flashsystems.de/articles/1124">
+<meta name="generator" content="WordPress 3.3.1">
+<link rel="canonical" href="http://www.flashsystems.de/articles/842">
+<link rel="shortlink" href="http://www.flashsystems.de/?p=842">
+	<style type="text/css">
+	.download-info .download-button {
+		background-image: url(http://www.flashsystems.de/wp-content/plugins/download-monitor/page-addon/downloadbutton.gif);
+	}
+	.download-info .more-button {
+		background-image: url(http://www.flashsystems.de/wp-content/plugins/download-monitor/page-addon/morebutton.gif);
+	}
+	</style>
+ 
+	<script type="text/javascript">
+	 //<![CDATA[ 
+	function toggleLinkGrp(id) {
+	   var e = document.getElementById(id);
+	   if(e.style.display == 'block')
+			e.style.display = 'none';
+	   else
+			e.style.display = 'block';
+	}
+	// ]]>
+	</script> 
+	<style type="text/css">
+sup {
+	vertical-align: 60%;
+	font-size: 75%;
+	line-height: 100%;
+}
+sub {
+	vertical-align: -10%;
+	font-size: 75%;
+	line-height: 100%;
+}
+.amp {
+	font-family: Baskerville, "Goudy Old Style", "Palatino", "Book Antiqua", "Warnock Pro", serif;
+	font-weight: normal;
+	font-style: italic;
+	font-size: 1.1em;
+	line-height: 1em;
+}
+.caps {
+	font-size: 90%;
+}
+.dquo {
+	margin-left:-.40em;
+}
+.quo {
+	margin-left:-.2em;
+}
+/* because formatting .numbers should consider your current font settings, we will not style it here */
+</style>
+<script type="text/javascript" src="vim_Befehle-Dateien/tw-sack.js"></script>
+</head>
+
+<body class="single single-post postid-842 single-format-standard">
+
+<div class="pagetitle">
+  <div class="common blackbar"></div>
+  <div class="common black">  Vim Kurzreferenz</div>
+  <div class="common white">  Vim Kurzreferenz</div>
+</div>
+
+<!-- begin sidebar -->
+<div class="menubar">
+  <div class="logo"><a href="http://www.flashsystems.de/">&nbsp;</a></div>
+  <div class="sidebar">
+<div class="widget"><h2>Blog</h2>		<ul>
+	<li class="cat-item cat-item-1"><a href="http://www.flashsystems.de/articles/category/allgemein" title="Alle unter Allgemein abgelegten Artikel ansehen">Allgemein</a>
+<ul class="children">
+	<li class="cat-item cat-item-38"><a href="http://www.flashsystems.de/articles/category/allgemein/firefox-allgemein" title="Alle unter Firefox abgelegten Artikel ansehen">Firefox</a>
+</li>
+	<li class="cat-item cat-item-48"><a href="http://www.flashsystems.de/articles/category/allgemein/grabbelkiste" title="Alle unter Grabbelkiste abgelegten Artikel ansehen">Grabbelkiste</a>
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-10"><a href="http://www.flashsystems.de/articles/category/hardware" title="Alle unter Hardware abgelegten Artikel ansehen">Hardware</a>
+</li>
+	<li class="cat-item cat-item-12"><a href="http://www.flashsystems.de/articles/category/kb" title="Alle unter Knowledge Base abgelegten Artikel ansehen">Knowledge Base</a>
+<ul class="children">
+	<li class="cat-item cat-item-41"><a href="http://www.flashsystems.de/articles/category/kb/c" title="Alle unter C# abgelegten Artikel ansehen">C#</a>
+</li>
+	<li class="cat-item cat-item-18"><a href="http://www.flashsystems.de/articles/category/kb/entwicklung" title="Alle unter Entwicklung abgelegten Artikel ansehen">Entwicklung</a>
+</li>
+	<li class="cat-item cat-item-28"><a href="http://www.flashsystems.de/articles/category/kb/linux" title="Alle unter Linux abgelegten Artikel ansehen">Linux</a>
+</li>
+	<li class="cat-item cat-item-27"><a href="http://www.flashsystems.de/articles/category/kb/windows" title="Alle unter Windows abgelegten Artikel ansehen">Windows</a>
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-3"><a href="http://www.flashsystems.de/articles/category/news" title="Alle unter Neuigkeiten abgelegten Artikel ansehen">Neuigkeiten</a>
+</li>
+	<li class="cat-item cat-item-4"><a href="http://www.flashsystems.de/articles/category/software" title="Alle unter Software abgelegten Artikel ansehen">Software</a>
+<ul class="children">
+	<li class="cat-item cat-item-11"><a href="http://www.flashsystems.de/articles/category/software/boox" title="Software für das Onyx Boox oder BeBook neo.">Boox/BeBook</a>
+</li>
+	<li class="cat-item cat-item-7"><a href="http://www.flashsystems.de/articles/category/software/win32" title="Alle unter Win32 abgelegten Artikel ansehen">Win32</a>
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-6"><a href="http://www.flashsystems.de/articles/category/thinktank" title="Alle unter Think Tank abgelegten Artikel ansehen">Think Tank</a>
+</li>
+		</ul>
+<div class="bottom"></div></div><div class="widget"><h2>Seiten</h2>		<ul>
+			<li class="page_item page-item-126"><a href="http://www.flashsystems.de/software">Software</a>
+<ul class="children">
+	<li class="page_item page-item-150"><a href="http://www.flashsystems.de/software/autostart-protector">Autostart Protector</a></li>
+	<li class="page_item page-item-104"><a href="http://www.flashsystems.de/software/disk-optimizer">Disk Optimizer</a></li>
+	<li class="page_item page-item-452"><a href="http://www.flashsystems.de/software/newsflash">NewsFlash</a></li>
+</ul>
+</li>
+<li class="page_item page-item-22"><a href="http://www.flashsystems.de/hardware">Hardware</a>
+<ul class="children">
+	<li class="page_item page-item-182"><a href="http://www.flashsystems.de/hardware/pocket-pc-ladesperre">PPC Ladesperre</a></li>
+	<li class="page_item page-item-219"><a href="http://www.flashsystems.de/hardware/vdr-remote-adapter">VDR Remote Adapter</a></li>
+	<li class="page_item page-item-24"><a href="http://www.flashsystems.de/hardware/vdr-sanitizer">VDR Sanitizer</a></li>
+</ul>
+</li>
+<li class="page_item page-item-159"><a href="http://www.flashsystems.de/downloads">Downloads</a></li>
+<li class="page_item page-item-404"><a href="http://www.flashsystems.de/uber-mich">Über mich</a></li>
+<li class="page_item page-item-440"><a href="http://www.flashsystems.de/tag-cloud">Tag Cloud</a></li>
+<li class="page_item page-item-93"><a href="http://www.flashsystems.de/links">Links</a></li>
+		</ul>
+		<div class="bottom"></div></div><div class="widget"><h2>Werkzeuge</h2>			<ul>
+						<li><a href="https://ssl.kundenserver.de/flashsystems.de/wp-login.php">Anmelden</a></li>
+			<li><a href="http://www.flashsystems.de/feed" title="Abonniere diese Website mit RSS 2.0">Artikel-Feed (<abbr title="Really Simple Syndication">RSS</abbr>)</a></li>
+			<li><a href="http://www.flashsystems.de/comments/feed" title="Die neuesten Kommentare zu allen Beiträgen als RSS">Kommentare als <abbr title="Really Simple Syndication">RSS</abbr></a></li>
+			<li><a href="http://wordpress.org/" title="Powered by WordPress, state-of-the-art semantic personal publishing platform.">WordPress.org</a></li>
+						</ul>
+<div class="bottom"></div></div><div class="widget"><h2>Zugriffe</h2><ul>
+<li>Diese Seite: 143</li>
+<li class="divider"></li>
+<li>Alle Seiten:
+<ul>
+<li>Hits (gesamt): 3623</li>
+<li>Hits (heute): 45</li>
+</ul></li>
+</ul><div class="bottom"></div></div>  </div>
+</div>
+<!-- end sidebar -->
+
+<div class="body">
+<!-- end header -->
+
+<div class="pagenav">
+  </div>
+
+
+
+<div class="post-842 post type-post status-publish format-standard hentry category-kb category-linux tag-kb tag-linux tag-vim item" id="post-842">
+  <div class="headline">            
+    <div class="chevron">&nbsp;</div>
+    <h1><a href="http://www.flashsystems.de/articles/842" rel="bookmark">Vim Kurzreferenz</a></h1>      
+  </div>
+  <div class="content">
+    <p>Nachdem ich gerade auf gehär­teten Linux-Systemen unterwegs bin, 
+bei denen der einzige instal­lierte Editor Vim ist, musste ich mir jetzt
+ doch einmal etwas mehr als nur die Grund­lagen der VI-Bedienung 
+aneignen. Vi und sein Nachkomme Vim (Vi improved) ist ein sehr 
+mächtigter Editor mit einer ebenso steilen Lernkurve. Daher hier eine 
+(nicht ganz so kurze) Kurzüber­sicht der wichtigsten Kommandos für Vim.<span id="more-842"></span></p>
+
+<h1>Modi</h1>
+
+<p>Vim kennt — wie auch Vi — drei Modi. Der Editor startet norma­ler­weise im <em>Komman­do­modus</em>.
+ In diesem Modus lassen sich die nachfolgend beschrie­benen Befehle 
+eingeben. Betätigt man eine, der im Kapitel »Einfü­ge­modus« 
+darge­stellten Tasten, landet man im… genau: <em>Einfü­ge­modus</em>. 
+Dieser erlaubt es, Text in das Dokument einzu­geben. Da wir ja nicht 
+mehr in den 80er Jahren leben, kann man auch in diesem Modus mit 
+Backspace– und Entf-Taste Text löschen bzw. mit den Pfeil­tasten den 
+Cursor bewegen.</p>
+
+<p>Etwas beson­deres ist der <em>Visuelle</em>–Modus. Dieser erlaubt es,
+ Text zu selek­tieren und entspricht in etwa der Shift-Taste in Notepad.
+ Jedoch lassen sich auch hier alle Kommandos zur Bewegung im Text 
+verwenden. Details hierzu findet man im Kapitel »Visueller Modus«.</p>
+
+<h1>Laden, Speichern, Beenden</h1>
+
+<p><a class="medialink" href="http://www.flashsystems.de/articles/842/command" rel="attachment wp-att-977"><img src="vim_Befehle-Dateien/Command.gif" alt="VIM Laden und Speichern Kommandos" title="VIM Laden und Speichern Kommandos" class="alignright size-full wp-image-977" height="220" width="642"></a></p>
+
+<p>Ich habe versucht die einzelnen VIm-Kommandos möglichst eingängig 
+darzu­stellen. Kleine Syntax­dia­gramme zeigen die verschie­denen 
+Kombi­na­ti­ons­mög­lich­keiten. In den Tabellen ist in der Spalte 
+»Kürzel für« das Wort angegeben, für welches der Befehl steht. Diese 
+lassen sich nicht verwenden, jedoch kann ich mir die Befehle besser 
+merken, vielleicht geht es Ihnen ähnlich.</p>
+
+<table>
+<thead>
+<tr>
+  <th align="left">Kommando</th>
+  <th align="left">Kürzel für</th>
+  <th align="left">Beschreibung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="left"><code>:q</code></td>
+  <td align="left">quit</td>
+  <td align="left">Beendet den Editor.</td>
+</tr>
+<tr>
+  <td align="left"><code>:q!</code></td>
+  <td align="left">quit!</td>
+  <td align="left">Beendet den Editor und verwirft dabei alle Änderungen.</td>
+</tr>
+<tr>
+  <td align="left"><code>:wq</code></td>
+  <td align="left">write, quit</td>
+  <td align="left">Speichert die Änderungen und beendet den Editor.</td>
+</tr>
+</tbody>
+</table>
+
+<p>Wie der Befehl <code>:wq</code> zeigt, lassen sich einzelne Befehle kombi­nieren. <code>:wq</code> ist quasi die Zusam­men­setzung aus dem Befehl <code>:w</code> und <code>:q</code>. Das sollte man sich merken, denn auch die Auswahl­be­fehle lassen sich auf diese Art kombi­nieren.</p>
+
+<table>
+<thead>
+<tr>
+  <th align="left">Kommando</th>
+  <th align="left">Kürzel für</th>
+  <th align="left">Beschreibung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="left"><code>:w</code></td>
+  <td align="left">write</td>
+  <td align="left">Speichert die Änderungen an der Datei ab.</td>
+</tr>
+<tr>
+  <td align="left"><code>:w [Dateiname]</code></td>
+  <td align="left">write</td>
+  <td align="left">Speichert die Änderungen in einer neuen Datei ab.</td>
+</tr>
+<tr>
+  <td align="left"><code>:e [Dateiname]</code></td>
+  <td align="left">edit</td>
+  <td align="left">Öffnet eine Datei.</td>
+</tr>
+<tr>
+  <td align="left"><code>:split [Dateiname]</code></td>
+  <td align="left">split window</td>
+  <td align="left">Öffnet eine Datei in einem neuen, horizontal geteilten Fenster.</td>
+</tr>
+<tr>
+  <td align="left"><code>:vsplit [Dateiname]</code></td>
+  <td align="left">vertical split window</td>
+  <td align="left">Öffnet eine Datei in einem neuen, vertikal geteilten Fenster.</td>
+</tr>
+<tr>
+  <td align="left"><code>:browse w</code></td>
+  <td align="left">browse for write</td>
+  <td align="left">Speichert eine Datei, bietet jedoch vorher einen Datei­se­lektor an.</td>
+</tr>
+<tr>
+  <td align="left"><code>:browse e</code></td>
+  <td align="left">browse for edit</td>
+  <td align="left">Öffnet eine Datei, welche sich über einen Datei­se­lektor auswählen lässt.</td>
+</tr>
+</tbody>
+</table>
+
+<p>Das Kommando <code>:browse w</code> zeigt eine andere Art der vorher erwähnten Kombi­nation von Befehlen. Hier übernimmt der Befehl <code>:browse</code> das Kommando <code>w</code>, welches er ausführt, sobald die Datei­auswahl beendet ist.</p>
+
+<h1>Bewegen</h1>
+
+<p>Man kann sich nicht nur mit den Pfeil­tasten innerhalb des Editors 
+bewegen. Zusätzlich gibt es noch einige Kommandos, welche sich nicht nur
+ zum Bewegen des Cursors als nützlich erweisen:</p>
+
+<table>
+<thead>
+<tr>
+  <th align="left">Kommando</th>
+  <th align="left">Kürzel für</th>
+  <th align="left">Beschreibung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="left"><code>w</code></td>
+  <td align="left">word</td>
+  <td align="left">Springt zum Anfang des nächsten Wortes.</td>
+</tr>
+<tr>
+  <td align="left"><code>^</code></td>
+  <td align="left"></td>
+  <td align="left">Springt zum Anfang der Zeile.</td>
+</tr>
+<tr>
+  <td align="left"><code>$</code></td>
+  <td align="left"></td>
+  <td align="left">Springt zum Ende der Zeile.</td>
+</tr>
+<tr>
+  <td align="left"><code>e</code></td>
+  <td align="left">end</td>
+  <td align="left">Springt zum Ende des aktuellen Wortes. Wenn der Cursor schon auf einem Wortende steht, zum Ende des nächsten Wortes.</td>
+</tr>
+<tr>
+  <td align="left"><code>b</code></td>
+  <td align="left">beginning</td>
+  <td align="left">Springt rückwärts zum Wortanfang. Wenn der Cursor schon auf einem Wortanfang steht, zum Anfang des voraus­ge­henden Wortes.</td>
+</tr>
+<tr>
+  <td align="left"><code>G</code></td>
+  <td align="left">goto</td>
+  <td align="left">Springt an das Ende der Datei.</td>
+</tr>
+<tr>
+  <td align="left"><code>[Zeile]G</code></td>
+  <td align="left">goto</td>
+  <td align="left">Springt zur angege­benen Zeile.</td>
+</tr>
+<tr>
+  <td align="left"><code>gg</code></td>
+  <td align="left">goto</td>
+  <td align="left">Springt an den Anfang der Datei.</td>
+</tr>
+</tbody>
+</table>
+
+<p>Diese Bewegungs­be­fehle sollte man sich gut merken. Sie lassen sich nämlich auch mit anderen Befehlen (z.B. <code>d</code>) kombi­nieren.</p>
+
+<h1>Bearbeiten</h1>
+
+<h2>Einfü­ge­modus</h2>
+
+<p><a class="medialink" href="http://www.flashsystems.de/articles/842/changemode" rel="attachment wp-att-1052"><img src="vim_Befehle-Dateien/ChangeMode.gif" alt="VIM Moduswechselkommandos" title="VIM Moduswechselkommandos" class="alignright size-full wp-image-1052" height="297" width="330"></a></p>
+
+<p>Diese Kommandos wechseln in den Einfü­ge­modus und positio­nieren ggf. den Cursor:
+</p><table>
+<thead>
+<tr>
+  <th align="left">Kommando</th>
+  <th align="left">Kürzel für</th>
+  <th align="left">Beschreibung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="left"><code>i</code></td>
+  <td align="left">insert</td>
+  <td align="left">Einfügen an der Position links vom Cursor.</td>
+</tr>
+<tr>
+  <td align="left"><code>I</code></td>
+  <td align="left">insert</td>
+  <td align="left">Einfügen am Anfang der aktuellen Zeile.</td>
+</tr>
+<tr>
+  <td align="left"><code>a</code></td>
+  <td align="left">append</td>
+  <td align="left">Einfügen an der Position rechts vom Cursor. Der 
+Cursor wird dabei so versetzt, dass die neuen Zeichen wieder links vom 
+Cursor auftauchen.</td>
+</tr>
+<tr>
+  <td align="left"><code>A</code></td>
+  <td align="left">append</td>
+  <td align="left">Anfügen am Ende der Zeile.</td>
+</tr>
+<tr>
+  <td align="left"><code>o</code></td>
+  <td align="left">open new line</td>
+  <td align="left">Eine neue Zeile unterhalb des Cursors einfügen.</td>
+</tr>
+<tr>
+  <td align="left"><code>O</code></td>
+  <td align="left">open new line</td>
+  <td align="left">Eine neue Zeile überhalb des Cursors einfügen.</td>
+</tr>
+<tr>
+  <td align="left"><code>r</code></td>
+  <td align="left">replace</td>
+  <td align="left">Ersetzt das Zeichen unter dem Cursor.</td>
+</tr>
+<tr>
+  <td align="left"><code>c</code></td>
+  <td align="left">change</td>
+  <td align="left">Ersetzt eine definierte Anzahl von Zeichen (siehe unten).</td>
+</tr>
+</tbody>
+</table><p></p>
+
+<h1>Bearbeiten mit Puffer</h1>
+
+<p><a class="medialink" href="http://www.flashsystems.de/articles/842/moveselectcopy" rel="attachment wp-att-1053"><img src="vim_Befehle-Dateien/MoveSelectCopy.gif" alt="VIM Bewegen, Ausschneiden, Kopieren" title="VIM Bewegen, Ausschneiden, Kopieren" class="alignnone size-full wp-image-1053" height="302" width="767"></a></p>
+
+<p>Die folgenden Befehle erlauben das Ausschneiden (Löschen), Kopieren 
+und Einfügen von Elementen über den Puffer (die Zwischen­ablage).</p>
+
+<h2>Löschen/Ausschneiden</h2>
+
+<p>Das Lösch­kom­mando <code>d</code> kann zusammen mit den Bewegungs­be­fehlen verwendet werden und ermög­licht dann mächtige Löschope­ra­tionen:</p>
+
+<table>
+<thead>
+<tr>
+  <th align="left">Kommando</th>
+  <th align="left">Kürzel für</th>
+  <th align="left">Beschreibung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="left"><code>dw</code></td>
+  <td align="left">delete word</td>
+  <td align="left">Löscht bis zum Anfang des nächsten Wortes (einschließlich der dem aktuellen Wort nachfol­genden Leerzeichen).*</td>
+</tr>
+<tr>
+  <td align="left"><code>de</code></td>
+  <td align="left">delete end</td>
+  <td align="left">Löscht bis zum Ende des aktuellen Wortes (ohne die nachfol­genden Leerzeichen).*</td>
+</tr>
+<tr>
+  <td align="left"><code>db</code></td>
+  <td align="left">delete beginning</td>
+  <td align="left">Löscht alle Zeichen links vom Cursor bis zum Anfang des aktuellen Wortes.*</td>
+</tr>
+<tr>
+  <td align="left"><code>d^</code></td>
+  <td align="left"></td>
+  <td align="left">Löscht alle Zeichen links vom Cursor bis zum Anfang der Zeile.*</td>
+</tr>
+<tr>
+  <td align="left"><code>d$</code></td>
+  <td align="left"></td>
+  <td align="left">Löscht alle Zeichen — inkl. dem Zeichen unter dem Cursor — bis zum Ende der Zeile.*</td>
+</tr>
+<tr>
+  <td align="left"><code>dd</code></td>
+  <td align="left">delete delete</td>
+  <td align="left">Löscht die gesamte Zeile.</td>
+</tr>
+<tr>
+  <td align="left"><code>dG</code></td>
+  <td align="left">delete Goto end</td>
+  <td align="left">Löscht die aktuelle Zeile und alle Zeilen bis zum Ende der Datei.</td>
+</tr>
+<tr>
+  <td align="left"><code>dgg</code></td>
+  <td align="left">delete goto beginning</td>
+  <td align="left">Löscht die aktuelle Zeile und alle Zeilen bis zum Anfang der Datei.</td>
+</tr>
+<tr>
+  <td align="left"><code>d/[Suchmuster]</code></td>
+  <td align="left"></td>
+  <td align="left">Löscht alle Zeichen — inkl. dem Zeichen unter dem 
+Cursor — nach rechts bis zum Auftreten des Suchmusters. Das Muster 
+bleibt erhalten. Dieser Befehl ist eine Kombi­nation von delete und dem 
+Suchbefehl <code>/</code>.</td>
+</tr>
+<tr>
+  <td align="left"><code>x</code></td>
+  <td align="left">extin­guish</td>
+  <td align="left">Löscht das Zeichen unter dem Cursor.</td>
+</tr>
+</tbody>
+</table>
+
+<p>Jedes Lösch­kom­mando kopiert die gelöschten Zeichen in den Puffer. 
+Somit löscht man eigentlich nicht, sondern schneidet immer aus.</p>
+
+<p>Das Kommando <code>x</code> gehört eigentlich nicht zu den mit <code>d</code> einge­lei­teten Lösch­kom­mandos, jedoch passt es thema­tisch hier am besten hin.</p>
+
+<h2>Kopieren</h2>
+
+<p>Kopiert wird über das Komando <code>y</code> (yank = heraus­reißen). Dieses Kommando kann mit allen Erwei­te­rungen des Lösch­kom­mandos <code>d</code> kombi­niert werden. D.h. <code>yw</code>, <code>ye</code>, <code>yb</code>, <code>y^</code>, <code>y$</code>, <code>yG</code>, <code>ygg</code>, <code>y/[Suchmuster]</code> funktio­nieren wie gewohnt. Sogar <code>yy</code> (analog zu <code>dd</code> funktio­niert um eine ganze Zeile auszu­schneiden. Beim Einfügen über <code>p</code> wird die Zeile dann unter der aktiven Zeile eingefügt.</p>
+
+<h2>Einfügen</h2>
+
+<p>Eingefügt wird der Inhalt des Puffers über das Kommando <code>p</code> (put).
+</p><table>
+<thead>
+<tr>
+  <th align="left">Kommando</th>
+  <th align="left">Kürzel für</th>
+  <th align="left">Beschreibung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="left"><code>p</code></td>
+  <td align="left">put</td>
+  <td align="left">Fügt den Inhalt des Puffers rechts vom Cursor ein.</td>
+</tr>
+<tr>
+  <td align="left"><code>P</code></td>
+  <td align="left">put</td>
+  <td align="left">Fügt den Inhalt des Puffers links vom Cursor ein.</td>
+</tr>
+</tbody>
+</table><p></p>
+
+<h2>Ersetzen</h2>
+
+<p>Über das Kommando <code>c</code> (change) können einzelne Wörter oder
+ ganze Satzteile ersetzt werden. Das Kommando lässt sich mit allen 
+Erwei­te­rungen des Lösch­kom­mandos <code>d</code> kombi­nieren. D.h. <code>cw</code>, <code>ce</code>, <code>cb</code>, <code>c^</code>, <code>c$</code>, <code>cG</code>, <code>cgg</code>, <code>c/[Suchmuster]</code> funktio­nieren wie gewohnt. Sogar <code>cc</code> (analog zu <code>dd</code> funktio­niert um eine ganze Zeile zu ändern.</p>
+
+<p>Ich finde die Kompa­ti­bi­li­täts­option <code>$</code> sehr hilfreich. Hierdurch bleibt beim <code>c</code>–Kommando
+ der überschriebene Text stehen und es wird ein $-Zeichen am Ende des 
+überschrie­benen Bereichs angezeigt. Am Ende des Bereichs wird der 
+folgende Text automa­tisch weiter­ge­schoben. Hierdurch sieht man, was 
+man überschreibt. Aktiviert wird diese Option durch <code>:set cpoptions+=$</code>.</p>
+
+<h2>Zeilen zusam­men­fügen</h2>
+
+<p>Das Kommando <code>J</code> (join) fügt die aktuelle und die nächste 
+Zeile zusammen. Das ist besonders hilfreich, wenn man mal wieder aus 
+Versehen einen Zeilen­um­bruch eingefügt hat.</p>
+
+<h2>Einrücken</h2>
+
+<p>Über das Kommando <code>&lt;&lt;</code> und <code>&gt;&gt;</code> 
+lassen sich Zeilen ein– und ausrücken. Die Länge dieser Ein-/Ausrückung 
+wird durch den Parameter shift­width festgelegt. Im visuellen Modus 
+lassen sich alle selek­tierten Zeilen mit nur einem Drücken von <code>&lt;</code> oder <code>&gt;</code> ein-/ausrücken.</p>
+
+<h1>Wieder­ho­lungen</h1>
+
+<p>Den meisten Kommandos kann eine Zahl voran­ge­stellt werden, um die Anzahl der gewünschten Wieder­ho­lungen zu markieren. <code>2dw</code> zum Beispiel löscht zwei Wörter. <code>2x</code>Löscht die nächsten zwei Zeichen und <code>2yw</code> würde die nächsten zwei Zeichen in den Puffer kopieren.</p>
+
+<h1>Undo, Redo</h1>
+
+<p>Sollte man einen Fehler gemacht haben, so erlaubt Vim unter­schied­liche Rückgängig– und Wiederholen-Operationen:</p>
+
+<table>
+<thead>
+<tr>
+  <th align="left">Kommando</th>
+  <th align="left">Kürzel für</th>
+  <th align="left">Beschreibung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="left"><code>u</code></td>
+  <td align="left">undo</td>
+  <td align="left">Macht die letzte Änderung rückgängig.</td>
+</tr>
+<tr>
+  <td align="left"><code>U</code></td>
+  <td align="left">undo line</td>
+  <td align="left">Macht die letzte Änderung an der aktuellen Zeile rückgängig.</td>
+</tr>
+<tr>
+  <td align="left"><code>.</code></td>
+  <td align="left"></td>
+  <td align="left">Wiederholt die letzte Operation.</td>
+</tr>
+</tbody>
+</table>
+
+<p>Das »Wiederholen«-Kommando kann nicht nur Kommandos sondern auch 
+Eingaben im Insert-Mode wieder­holen. Somit können längere Textein­gaben
+ leicht nochmals an anderer Stelle ausge­führt werden. 
+Cursor­be­we­gungen werden weder von Undo– noch vom Wiederholen-Kommando
+ erfasst.</p>
+
+<h1>Suchen und Ersetzen</h1>
+
+<h2>Suchen</h2>
+
+<p>Mit dem Kommando <code>/</code> wird die Suchfunktion aktiviert. Einfach nach dem <code>/</code> den Suchbe­griff eingeben und mit Return bestä­tigen. Um den nächsten Suchtreffer zu finden wird das Kommando <code>n</code> (next) verwendet.</p>
+
+<h2>Ersetzen</h2>
+
+<p><a class="medialink" href="http://www.flashsystems.de/articles/842/searchreplace" rel="attachment wp-att-976"><img src="vim_Befehle-Dateien/SearchReplace.gif" alt="VIM Ersetzen" title="VIM Ersetzen" class="alignnone size-full wp-image-976" height="128" width="800"></a></p>
+
+<table>
+<thead>
+<tr>
+  <th align="left">Kommando</th>
+  <th align="left">Kürzel für</th>
+  <th align="left">Beschreibung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="left"><code>:[range]s/[von]/[nach]/</code></td>
+  <td align="left">search replace</td>
+  <td align="left">Ersetzt im angege­benen Bereich (»[range]«) <em>das erste</em> Vorkommen von »[von]« durch »[nach]«.</td>
+</tr>
+<tr>
+  <td align="left"><code>:[range]s/[von]/[nach]/g</code></td>
+  <td align="left">search replace global</td>
+  <td align="left">Ersetzt im angege­benen Bereich (»[range]«) das <em>alle</em> Vorkommen von »[von]« durch »[nach]«.</td>
+</tr>
+</tbody>
+</table>
+
+<p>Wie die Liste zeigt, unter­stützt das »Suchen und Ersetzen«-Kommando unter­schied­liche Suchbe­reiche:</p>
+
+<table>
+<thead>
+<tr>
+  <th align="left">Range</th>
+  <th align="left">Suchbe­reich</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="left">(leer)</td>
+  <td align="left">Wird kein Range angegeben, so bezieht sich die Suche auf die aktuelle Zeile.</td>
+</tr>
+<tr>
+  <td align="left"><code>%</code></td>
+  <td align="left">Steht für das gesamte Dokument.</td>
+</tr>
+<tr>
+  <td align="left"><code>[von],[bis]</code></td>
+  <td align="left">Sucht und ersetzt von Zeile »[von]« bis Zeile [»bis«].</td>
+</tr>
+</tbody>
+</table>
+
+<p><code>:1,5s/asdf/jklö/g</code> ersetzt also von Zeile 1 bis 5 alle Vorkommen von »asdf« durch »jklö«. Würde man das <code>g</code> am Schluss entfallen lassen, so würde nur das erste Vorkommen ersetzt.</p>
+
+<h2>Schnell­suche</h2>
+
+<p>Um das Suche nach Worten zu verein­fachen, welche bereits im Dokument vorkommen, bietet Vim noch zwei Schnell­such­be­fehle:</p>
+
+<table>
+<thead>
+<tr>
+  <th align="left">Kommando</th>
+  <th align="left">Beschreibung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="left"><code>*</code></td>
+  <td align="left">Vorwärts nach dem Wort unter dem Cursor suchen.</td>
+</tr>
+<tr>
+  <td align="left"><code>#</code></td>
+  <td align="left">Rückwärts nach dem Wort unter dem Cursor suchen.</td>
+</tr>
+<tr>
+  <td align="left"><code>%</code></td>
+  <td align="left">Passende Klammer suchen (siehe unten).</td>
+</tr>
+<tr>
+  <td align="left"><code>[[</code></td>
+  <td align="left">Beginn des aktuellen Abschnitts (Funktion).</td>
+</tr>
+<tr>
+  <td align="left"><code>]]</code></td>
+  <td align="left">Ende des aktuellen Abschnitts (Funktion).</td>
+</tr>
+</tbody>
+</table>
+
+<h2>Passende Klammer finden</h2>
+
+<p>Eine, gerade für Program­mierer wichtige, Funktion ist das Finden von Klammer­paaren. Hierfür bietet Vim das Kommando <code>%</code>.
+ Dieses setzt den Cursor auf die zugehörige öffnende bzw. schlie­ßende 
+Klammer. Dies funktio­niert mit runden, eckigen und geschweiften 
+Klammern.</p>
+
+<h1>Kommandos ausführen</h1>
+
+<p>Gerade beim Entwi­ckeln von Scripten kann es hilfreich sein, nicht 
+jedes mal den Editor verlassen zu müssen um einen Befehl auf der 
+Komman­do­zeile auszu­führen. Hierfür bietet Vim unter­schied­liche 
+Möglich­keiten:</p>
+
+<table>
+<thead>
+<tr>
+  <th align="left">Kommando</th>
+  <th align="left">Beschreibung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="left"><code>:![Kommando]</code></td>
+  <td align="left">Kommando auf der Shell ausführen.</td>
+</tr>
+<tr>
+  <td align="left"><code>:sh</code></td>
+  <td align="left">Öffnet eine Shell.</td>
+</tr>
+<tr>
+  <td align="left"><code>:make</code></td>
+  <td align="left">Führt das Kommando make aus. Der Output von gcc wird 
+gleich verar­beitet und die Fehler­mel­dungen stehen dann in Vim zur 
+Verfügung.</td>
+</tr>
+</tbody>
+</table>
+
+<h1>Visueller Modus</h1>
+
+<p>Im visuellen Modus erlaubt es Vim den Text über die Bewegungs­be­fehle zu selek­tieren. Danach können Opera­tionen wie <code>d</code> (delete) oder <code>y</code> (yank) ausge­führt werden.</p>
+
+<p>Der visuelle Modus wird über das Kommando <code>v</code> aktiviert. Im visuellen Modus lassen sich alle selek­tierten Zeilen mit <code>&lt;</code> oder <code>&gt;</code> ein-/ausrücken.</p>
+
+<h1>Fenster und Tabs</h1>
+
+<h2>Fenster</h2>
+
+<p>Bevor wir zu den Tabs in Vim kommen, zuerst noch eine kurze Übersicht
+ über die Kommandos, welche das Arbeiten mit mehreren Fenstern erlauben:
+</p><table>
+<thead>
+<tr>
+  <th align="left">Kommando</th>
+  <th align="left">Kürzel für</th>
+  <th align="left">Beschreibung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="left"><code>[Strg]+w [Strg]+w</code></td>
+  <td align="left">Window</td>
+  <td align="left">Wechselt in das nächste Fenster.</td>
+</tr>
+<tr>
+  <td align="left"><code>[Strg]+w =</code></td>
+  <td align="left">Macht alle Fenster etwa gleich groß.</td>
+  <td align="left"></td>
+</tr>
+<tr>
+  <td align="left"><code>[Strg]+w _</code></td>
+  <td align="left">Maximiert das aktuelle Fenster (horizontal).</td>
+  <td align="left"></td>
+</tr>
+<tr>
+  <td align="left"><code>[Strg]+w</code></td>
+  <td align="left"></td>
+  <td align="left">Maximiert das aktuelle Fenster (vertikal).</td>
+</tr>
+<tr>
+  <td align="left"><code>[Strg]+w +</code></td>
+  <td align="left">Verkleinert das aktuelle Fenster (horizontal).</td>
+  <td align="left"></td>
+</tr>
+<tr>
+  <td align="left"><code>[Strg]+w -</code></td>
+  <td align="left">Vergrößert das aktuelle Fenster (horizontal).</td>
+  <td align="left"></td>
+</tr>
+<tr>
+  <td align="left"><code>[Strg]+w &lt;</code></td>
+  <td align="left">Verkleinert das aktuelle Fenster (vertikal).</td>
+  <td align="left"></td>
+</tr>
+<tr>
+  <td align="left"><code>[Strg]+w &gt;</code></td>
+  <td align="left">Vergrößert das aktuelle Fenster (vertikal).</td>
+  <td align="left"></td>
+</tr>
+</tbody>
+</table><p></p>
+
+<p>Mit dem Kommando <code>:new</code> (horizontal) und <code>vnew</code> (vertikal) lassen sich jederzeit neue Fenster erzeugen.</p>
+
+<h2>Tabs</h2>
+
+<table>
+<thead>
+<tr>
+  <th align="left">Kommando</th>
+  <th align="left">Kürzel für</th>
+  <th align="left">Beschreibung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="left">:tabe [Datei]</td>
+  <td align="left">tab edit</td>
+  <td align="left">Öffnet ein neues Tab zum Bearbeiten der angege­benen Datei.</td>
+</tr>
+<tr>
+  <td align="left">:tabc</td>
+  <td align="left">tab close</td>
+  <td align="left">Schließt das aktuelle Tab.</td>
+</tr>
+<tr>
+  <td align="left">:tabn</td>
+  <td align="left">tab next</td>
+  <td align="left">Wechselt auf das nächste Tab.</td>
+</tr>
+<tr>
+  <td align="left">:tabp</td>
+  <td align="left">tab previous</td>
+  <td align="left">Wechselt auf das vorher­ge­hende Tab.</td>
+</tr>
+<tr>
+  <td align="left">:tabn [Nummer]</td>
+  <td align="left">tab next</td>
+  <td align="left">Wechselt auf das Tab mit der Nummer [Nummer]. Das Tab ganz links hat die Nummer 1.</td>
+</tr>
+</tbody>
+</table>
+
+<p>Um mehrere Dateien gleich in mehreren Tabs zu öffnen ist die Komman­do­zei­len­option <code>-p</code> sehr nützlich.</p>
+
+<h1>Wichtige Variablen</h1>
+
+<p>Variablen lassen sich über <code>:set [Variable]</code> setzen. Ein Ausru­fe­zeichen nach dem Varia­blen­namen setzt die Option wieder zurück. D.h. <code>:set ruler</code> aktiviert die Option, <code>:set rule!</code>
+ deakti­viert diese. Optionen, welchen Werte zugewiesen werden können 
+(z.B. tabstop oder background), werden wie gewohnt mit einem =-Zeichen 
+verwendet.</p>
+
+<table>
+<thead>
+<tr>
+  <th align="left">Option</th>
+  <th align="left">Beschreibung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="left">ruler</td>
+  <td align="left">Blendet die aktuelle Position des Cursors innerhalb der Datei in der Fußzeile ein.</td>
+</tr>
+<tr>
+  <td align="left">showcmd</td>
+  <td align="left">Zeigt das aktuelle Kommando in der Fußzeile an. Sehr praktisch für mehrteilige Kommandos.</td>
+</tr>
+<tr>
+  <td align="left">showmode</td>
+  <td align="left">Zeigt den aktuellen Modus (Insert, Visual, etc.) in der Fußzeile an.</td>
+</tr>
+<tr>
+  <td align="left">number</td>
+  <td align="left">Zeigt Zeilen­nummern in der linken Spalte an.</td>
+</tr>
+<tr>
+  <td align="left">hlsearch</td>
+  <td align="left">Hervor­heben der Sucher­geb­nisse aktivieren.</td>
+</tr>
+<tr>
+  <td align="left">tabstop</td>
+  <td align="left">Legt die Weite eines Tabs fest. Praktisch, wenn man etwas mehr Übersicht und etwas weniger Einzug haben möchte.</td>
+</tr>
+<tr>
+  <td align="left">shift­width</td>
+  <td align="left">Legt fest, wie weit der <code>&lt;&lt;</code>- und <code>&gt;&gt;</code>–Operator den Text einrückt.</td>
+</tr>
+<tr>
+  <td align="left">expandtab</td>
+  <td align="left">Tabs werden als Leerzeichen eingefügt. Dieser Modus 
+ist nicht immer sinnvoll, kann aber in Konfi­gu­ra­ti­ons­da­teien, 
+welche keine Tabs verstehen, den Tag retten.</td>
+</tr>
+<tr>
+  <td align="left">background</td>
+  <td align="left">Kann auf light oder dark gesetzt werden. Passt das Farbschema an helle (weiß) oder dunkle (schwarz) Termi­nal­hin­ter­gründe an.</td>
+</tr>
+<tr>
+  <td align="left">scrollbind</td>
+  <td align="left">Synchro­ni­siert das Scrolling für alle Fenster, in 
+welchen diese Option gesetzt ist. Sehr hilfreich beim Vergleichen von 
+Dateien.</td>
+</tr>
+</tbody>
+</table>
+
+<p>Natürlich werde ich diesen Artikel erweitern, wenn sich heraus­stellt, dass ich etwas Wichtiges vergessen habe <img src="vim_Befehle-Dateien/icon_wink.gif" alt=";)" class="wp-smiley"> </p>
+
+      </div>
+  <div class="metapopup"><span>17.10.2010</span>
+    <div>
+            
+      <h2>Besucher:</h2>193      
+      <h2>Tags:</h2>
+      <a href="http://www.flashsystems.de/articles/tag/kb" rel="tag">Knowledge Base</a><br><a href="http://www.flashsystems.de/articles/tag/linux" rel="tag">Linux</a><br><a href="http://www.flashsystems.de/articles/tag/vim" rel="tag">Vim</a>    </div>
+  </div>
+</div>
+
+
+
+<div class="pagenav bottom">            
+  </div>
+
+<!-- begin footer -->
+</div>
+
+<!-- begin search form -->
+<div class="searchform">
+  <form action="/" method="get" accept-charset="urf-8">
+    <input id="searchinput" name="s" type="text">
+    <input value="Suchen" id="searchsubmit" type="submit">
+  </form>
+</div>
+<!-- end search form -->
+ 
+
+
+
+
+</body></html>
+<!-- end footer -->

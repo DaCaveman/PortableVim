@@ -1,0 +1,313 @@
+/* ########## Allgemein ########## */
+
+body {
+  padding: 0px;
+  margin: 2px;
+  background-color: #999999;
+  color: #000000;
+  font-size: 12px;
+  text-align: center;
+  text-decoration: none;
+  }
+
+a, a:link, a:visited {
+  background-color: #CCCCCC;
+  color: #000000;
+  font-size: 12px;
+  font-weight: bold;
+  font-family: Helvetica,Arial,serif;
+  text-align: left;
+  text-decoration: none;
+  }
+
+a:hover, a:active {
+  background-color: #BBBBBB;
+  color: #000000;
+  }
+
+h1 {
+  margin: 0px;
+  font-size: 20px;
+  text-align: center;
+  text-decoration: underline;
+  font-weight: bold;
+  }
+
+.footline {
+  background-color: #CCCCCC;
+  color: #000000;
+  font-size: 12px;
+  text-align: center;
+  text-decoration: none;
+  }
+
+/* ########## Header ########## */
+
+.header {
+  padding: 0px;
+  margin: 0px;
+  position: relative;
+  width: 990px;
+  overflow: hidden;
+  border: 1px solid #000000;
+  background-color: #CCCCCC;
+  color: #000000;
+  font-size: 48px;
+  font-weight: bold;
+  font-style: italic;
+  font-family: Lucida,Calligraphy,serif;
+  text-align: center;
+  text-decoration: none;
+  }
+
+/* ########## Menü ########## */
+
+.menu {
+  padding: 5px;
+  margin-top: 2px;
+  position: relative;
+  width: 980px;
+  border: 1px solid #000000;
+  background-color: #CCCCCC;
+  color: #000000;
+  font-size: 12px;
+  text-align: left;
+  text-decoration: none;
+  }
+
+.menu table {
+  padding: 0px;
+  border-style: none;
+  border-width: 0px;
+  border-spacing: 1px;
+  background-color: #CCCCCC;
+  color: #000000;
+  font-size: 12px;
+  font-weight: bold;
+  font-family: Helvetica,Arial,serif;
+  text-align: left;
+  text-decoration: none;
+  }
+
+.menu select {
+  border: 1px solid #000000;
+  background-color: #BBBBBB;
+  color: #000000;
+  font-size: 12px;
+  font-family: Helvetica,Arial,serif;
+  }
+
+.menu form {
+  margin: 0px;
+  }
+
+/* ########## Main ########## */
+
+.main {
+  padding: 5px;
+  margin-top: 2px;
+  position: relative;
+  width: 980px;
+  min-height: 500px;
+  overflow: auto;
+  border: 1px solid #000000;
+  background-color: #CCCCCC;
+  color: #000000;
+  font-size: 14px;
+  text-align: left;
+  text-decoration: none;
+  }
+
+/* ########## Content ########## */
+
+.content {
+  background-color: #CCCCCC;
+  color: #000000;
+  font-size: 14px;
+  text-align: left;
+  text-decoration: none;
+  }
+
+.code {
+  padding: 7px;
+  margin-left: 10px;
+  margin-right: 10px;
+  max-height: 400px;
+  overflow: auto;
+  white-space: nowrap;
+  border: 1px solid #777777;
+  background-color: #CCCCCC;
+  color: #000000;
+  font-size: 12px;
+  font-family: monospace;
+  text-align: left;
+  text-decoration: none;
+  }
+
+.history {
+  background-color: #CCCCCC;
+  color: #000000;
+  font-size: 11px;
+  text-align: left;
+  text-decoration: none;
+  }
+
+/* ########## Startseite ########## */
+
+.home table {
+  padding: 0px;
+  border-style: none;
+  border-width: 0px;
+  border-spacing: 1px;
+  background-color: #CCCCCC;
+  color: #000000;
+  font-size: 12px;
+  font-weight: bold;
+  font-family: Helvetica,Arial,serif;
+  text-align: left;
+  text-decoration: none;
+  }
+
+.home th {
+  padding-bottom: 10px;
+  font-size: 14px;
+  font-weight: bold;
+  }
+
+/* ########## Search ########## */
+
+.search table {
+  padding: 0px;
+  border-style: none;
+  border-width: 0px;
+  border-spacing: 1px;
+  background-color: #CCCCCC;
+  color: #000000;
+  font-size: 14px;
+  text-align: left;
+  text-decoration: none;
+  }
+
+.search input {
+  border: 1px solid #000000;
+  background-color: #BBBBBB;
+  color: #000000;
+  font-size: 12px;
+  font-family: Helvetica,Arial,serif;
+  }
+
+.search .submit {
+  font-weight: bold;
+  }
+
+/* ########## Login ########## */
+
+.login table {
+  padding: 0px;
+  border-style: none;
+  border-width: 0px;
+  border-spacing: 1px;
+  background-color: #CCCCCC;
+  color: #000000;
+  font-size: 14px;
+  text-align: left;
+  text-decoration: none;
+  }
+
+.login input {
+  border: 1px solid #000000;
+  background-color: #BBBBBB;
+  color: #000000;
+  font-size: 12px;
+  font-family: Helvetica,Arial,serif;
+  }
+
+.login .submit {
+  font-weight: bold;
+  }
+
+/* ########## Kontaktformular ########## */
+
+.contact input {
+  width: 500px;
+  border: 1px solid #000000;
+  background-color: #BBBBBB;
+  color: #000000;
+  font-size: 12px;
+  font-family: Helvetica,Arial,serif;
+  }
+
+.contact .submit {
+  width: 150px;
+  font-weight: bold;
+  }
+
+.contact textarea {
+  width: 500px;
+  height: 200px;
+  border: 1px solid #000000;
+  background-color: #BBBBBB;
+  color: #000000;
+  font-size: 12px;
+  font-family: Helvetica,Arial,serif;
+  }
+
+/* ########## Admin-Bereich ########## */
+
+.admin table {
+  padding: 0px;
+  border-style: none;
+  border-width: 0px;
+  border-spacing: 1px;
+  background-color: #CCCCCC;
+  color: #000000;
+  font-size: 14px;
+  text-align: left;
+  text-decoration: none;
+  }
+
+.admin td {
+  vertical-align: top;
+  }
+
+.admin input {
+  width: 300px;
+  border: 1px solid #000000;
+  background-color: #BBBBBB;
+  color: #000000;
+  font-size: 12px;
+  font-family: Helvetica,Arial,serif;
+  }
+
+.admin .submit {
+  width: 100px;
+  font-weight: bold;
+  }
+
+.admin textarea {
+  width: 500px;
+  height: 200px;
+  border: 1px solid #000000;
+  background-color: #BBBBBB;
+  color: #000000;
+  font-size: 12px;
+  font-family: Helvetica,Arial,serif;
+  }
+
+.admin .large {
+  width: 750px;
+  height: 750px;
+  }
+
+.admin select {
+  border: 1px solid #000000;
+  background-color: #BBBBBB;
+  color: #000000;
+  font-size: 12px;
+  font-family: Helvetica,Arial,serif;
+  }
+
+.admin ul {
+  padding-left: 20px;
+  margin: 0px;
+  }

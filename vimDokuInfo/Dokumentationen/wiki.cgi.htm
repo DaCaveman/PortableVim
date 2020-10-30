@@ -1,0 +1,161 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html><head>
+ 	<title>Wiki4D: EditorSupport/VimEditor</title>
+ 	<link rel="stylesheet" type="text/css" href="wiki.cgi-Dateien/d_style.css">
+        <link rel="shortcut icon" href="http://prowiki.org/wiki4d/upload/duser/favicon.png">
+ 	
+ 	<!--[if !IE 7]>
+		<style type="text/css">
+			#wrap {display:table;height:100%}
+		</style>
+	<![endif]-->
+
+ 	<meta http-equiv="content-language" content="en">
+	<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+	<meta name="keywords" content="d programming language digital mars compiler dmd gdc" lang="en">
+
+ </head>
+ 
+  <body>
+ 	<div id="page-wrap">
+
+ 		<div id="main"> 
+ 		
+
+ 			<div id="header"></div>	
+            <div id="header-text">Last update March 6, 2012</div>
+ 			
+ 			
+ 			<div id="sidebar">
+ 			
+ 				<div id="sidebar-navi">
+ 					<ul id="sub-blue">
+ 						<li><a class="level-1">About</a></li>
+ 						<li><a href="http://prowiki.org/wiki4d/wiki.cgi?NeighborHood" class="level-2">The D Community</a></li>
+ 						<li><a href="http://prowiki.org/wiki4d/wiki.cgi?HowTo" class="level-2">How To...</a></li>
+ 						<li><a href="http://prowiki.org/wiki4d/wiki.cgi?BestPractices" class="level-2">Best Practices</a></li>
+						<li><a href="http://prowiki.org/wiki4d/wiki.cgi?D__Tutorial" class="level-2">Tutorials</a></li>
+ 						<li><a href="http://prowiki.org/wiki4d/wiki.cgi?MoreLinks" class="level-2">More Links</a></li>
+ 					</ul>
+ 					
+ 					
+ 					<br>
+ 					<ul id="sub-red">
+ 						<li><a href="http://prowiki.org/wiki4d/wiki.cgi?DevelopmentWithD" class="level-1">Development</a></li>
+						<li><a href="http://prowiki.org/wiki4d/wiki.cgi?DevelopmentWithD/Tools/Build" class="level-2">Build Tools</a></li>
+						<li><a href="http://prowiki.org/wiki4d/wiki.cgi?DebugEnvironments" class="level-2">Debuggers</a></li>
+						<li><a href="http://prowiki.org/wiki4d/wiki.cgi?EditorSupport" class="level-2">Editors and IDE's</a></li>
+ 						<li><a href="http://prowiki.org/wiki4d/wiki.cgi?GrammarParsers" class="level-2">Grammar Parsers</a></li>
+ 						<li><a href="http://prowiki.org/wiki4d/wiki.cgi?DigitalMarsTools" class="level-2">Digital Mars tools</a></li>
+ 						<li><a href="http://prowiki.org/wiki4d/wiki.cgi?LanguageDevel" class="level-2">Language Development</a></li>
+ 					</ul>
+ 					
+ 					
+ 					<br>
+ 					<ul id="sub-green">
+ 						<li><a class="level-1">Projects</a></li>
+ 						<li><a href="http://prowiki.org/wiki4d/wiki.cgi?AllLibraries" class="level-2">Libraries</a></li>
+ 						<li><a href="http://prowiki.org/wiki4d/wiki.cgi?GuiLibraries" class="level-2">GUI Libraries</a></li>
+ 						<li><a href="http://prowiki.org/wiki4d/wiki.cgi?DatabaseBindings" class="level-2">Database Bindings</a></li>
+ 						<li><a href="http://prowiki.org/wiki4d/wiki.cgi?Games" class="level-2">Games</a></li>
+ 					</ul>
+ 					
+ 					
+ 					<br>
+ 					<ul id="sub-olive">
+ 						<li><a href="http://prowiki.org/wiki4d/wiki.cgi?FrontPage" class="level-1">Wiki4D</a></li>
+ 						<li><a href="http://prowiki.org/wiki4d/wiki.cgi?TestPage" class="level-2">Test Page</a></li>
+ 						<li><a href="http://prowiki.org/wiki4d/wiki.cgi?MessageBoard" class="level-2">Message Board</a></li>
+ 						<li><a href="http://prowiki.org/wiki4d/wiki.cgi?Search" class="level-2">Search</a></li>
+ 						<li><a href="http://prowiki.org/wiki4d/wiki.cgi?FolderContributors" class="level-2">Contributors</a></li>
+ 						<li><a href="http://prowiki.org/wiki4d/wiki.cgi?action=spx" class="level-2">Index</a></li>
+ 						<li><a href="http://prowiki.org/wiki4d/wiki.cgi?HelpCenter" class="level-2">Help</a></li>
+ 					</ul>
+ 				
+ 				</div>
+ 			
+ 			</div>
+ 			<div id="main">
+ 				<div id="nav-bar">
+ 					<a href="http://prowiki.org/wiki4d/wiki.cgi?FrontPage" class="nav" title="front page">FrontPage</a> | <a href="http://prowiki.org/wiki4d/wiki.cgi?action=browse&amp;id=RecentChanges" class="nav" title="recent changes">News</a> | <a href="http://prowiki.org/wiki4d/wiki.cgi?TestPage" class="nav" title="sand box">TestPage</a> | <a href="http://prowiki.org/wiki4d/wiki.cgi?MessageBoard" class="nav" title="MessageBoard">MessageBoard</a> | <a href="http://prowiki.org/wiki4d/wiki.cgi?Search" class="nav" title="Search">Search</a> | <a href="http://prowiki.org/wiki4d/wiki.cgi?FolderContributors" class="nav" title="Contributors">Contributors</a> | <a href="http://prowiki.org/wiki4d/wiki.cgi?FolderFolders" class="nav" title="Folders">Folders</a> | <a href="http://prowiki.org/wiki4d/wiki.cgi?action=spx" class="nav" title="Index">Index</a> | <a href="http://prowiki.org/wiki4d/wiki.cgi?HelpCenter" class="nav" title="Help">Help</a> | <a href="http://prowiki.org/wiki4d/wiki.cgi?action=editprefs&amp;oldid=EditorSupport/VimEditor&amp;id=EditorSupport/VimEditor" class="nav" title="edit user preferences">Preferences</a> | <a href="http://prowiki.org/wiki4d/wiki.cgi?action=browse&amp;id=WelcomeVisitor&amp;continue=EditorSupport/VimEditor" class="nav edit" title="edit page EditorSupport/VimEditor" rel="nofollow">Edit</a><br>
+
+ 				</div>
+ 				
+ 				<div id="content">
+ 				
+ 					<h1><span class="titlestem"><a href="http://prowiki.org/wiki4d/wiki.cgi?EditorSupport">Editor Support</a> / </span><br>
+<a href="http://prowiki.org/wiki4d/wiki.cgi?search=VimEditor&amp;title=off&amp;word=on&amp;case=on&amp;bl=on&amp;mp=EditorSupport" class="title" rel="nofollow">Vim Editor</a></h1>
+ 				
+ 					<strong></strong>
+					<br>
+					<br>
+ 					<a href="http://www.vim.org/" class="body" target="_blank"><img src="wiki.cgi-Dateien/icon_world.gif" style="vertical-align: -4px;" border="0"> Webpage</a>
+<p>
+As of version 6.3, D syntax highlighting is included in the main distribution. There may also be newer versions for the <a href="https://github.com/JesseKPhillips/d.vim" class="body" target="_blank"><img src="wiki.cgi-Dateien/icon_world.gif" style="vertical-align: -4px;" border="0"> D syntax file</a>.
+</p><p>
+<a name="Make"></a><a name="Makeanderrorformats"></a><a name="section1"></a></p><h2><div style=" float:right; "><a href="http://prowiki.org/wiki4d/wiki.cgi?action=edit&amp;id=EditorSupport/VimEditor&amp;section=1"><img src="wiki.cgi-Dateien/icon_edit.gif" border="0"></a></div>Make and error formats</h2><p>
+for <strong>DMD:</strong> set errorformat+=%f(%l):\ %m
+</p><p>
+You can also set up a "make" program like this: set makeprg="rebuild\ %\ -c\"
+</p><p>
+<a name="Using"></a><a name="Usingctagsandthetaglistplugin"></a><a name="section2"></a></p><h2><div style=" float:right; "><a href="http://prowiki.org/wiki4d/wiki.cgi?action=edit&amp;id=EditorSupport/VimEditor&amp;section=2"><img src="wiki.cgi-Dateien/icon_edit.gif" border="0"></a></div>Using ctags and the taglist plugin</h2><p>
+You can download the ctag binary patched with D support from this wiki page: <a href="http://prowiki.org/wiki4d/wiki.cgi?ReferenceForTools/ExuberantCtags" class="body">ReferenceForTools/ExuberantCtags</a>
+</p><p>
+Make sure your ctag binary is in your <strong>path</strong>, or otherwise callable from a shell/command prompt.
+</p><p>
+The Taglist plugin can be downloaded from: <a href="http://vim.sourceforge.net/scripts/script.php?script_id=273" class="body" target="_blank"><img src="wiki.cgi-Dateien/icon_world.gif" style="vertical-align: -4px;" border="0"> http://vim.sourceforge.net/scripts/script.php?script_id=273</a>
+</p><p>
+You will need to add a variable to your vimrc file, and provide some 
+formatting options. Furthermore, you will need to activate filetype 
+detection. Here's what your vimrc might look like:
+</p><p>
+</p><ol>
+<li>filetype on</li>
+<li>filetype plugin on</li>
+<li>autocmd BufNewFile,BufRead *.di setfiletype d</li>
+<li>let tlist_d_settings='d;c:classes;d:macro definitions;e:enumerators'</li>
+<li>nnoremap &lt;silent&gt; &lt;F2&gt; :TlistToggle&lt;CR&gt;</li>
+<p>
+</p></ol>
+You might want to change the keybinding for TlistToggle to suit your needs.
+The complete list of formatting options for the D language can be shown by calling <strong>ctags --list-kinds=d</strong>.
+For more on extending <strong>taglist</strong>, refer to: <a href="http://vim-taglist.sourceforge.net/extend.html" class="body" target="_blank"><img src="wiki.cgi-Dateien/icon_world.gif" style="vertical-align: -4px;" border="0"> http://vim-taglist.sourceforge.net/extend.html</a>
+<p>
+You should now be able to call <strong>:TlistOpen</strong> with some D files opened in Vim.
+</p><p>
+<a name="Using"></a><a name="UsingCscope"></a><a name="section3"></a></p><h2><div style=" float:right; "><a href="http://prowiki.org/wiki4d/wiki.cgi?action=edit&amp;id=EditorSupport/VimEditor&amp;section=3"><img src="wiki.cgi-Dateien/icon_edit.gif" border="0"></a></div>Using Cscope</h2><p>
+See <a href="http://prowiki.org/wiki4d/wiki.cgi?ReferenceForTools/Cscope" class="body">ReferenceForTools/Cscope</a>
+</p><p>
+<a name="Bugs"></a><a name="section4"></a></p><h2><div style=" float:right; "><a href="http://prowiki.org/wiki4d/wiki.cgi?action=edit&amp;id=EditorSupport/VimEditor&amp;section=4"><img src="wiki.cgi-Dateien/icon_edit.gif" border="0"></a></div>Bugs</h2><p>
+<a href="https://github.com/JesseKPhillips/d.vim" class="body" target="_blank"><img src="wiki.cgi-Dateien/icon_world.gif" style="vertical-align: -4px;" border="0"> d.vim</a> has been moved to <a href="https://github.com/" class="body" target="_blank"><img src="wiki.cgi-Dateien/icon_world.gif" style="vertical-align: -4px;" border="0"> GitHub</a>
+ where there is a bug tracking system and a more open development 
+process. Releases will still be placed on the vim scripts page, but now 
+contributions can be much more easily be managed in the open for all to 
+partake.
+
+
+					<br>
+ 			 	
+ 				</p></div>
+ 				<div id="content-menu">
+ 					<a href="http://prowiki.org/wiki4d/wiki.cgi?FrontPage" class="nav" title="front page">FrontPage</a> | <a href="http://prowiki.org/wiki4d/wiki.cgi?action=browse&amp;id=RecentChanges" class="nav" title="recent changes">News</a> | <a href="http://prowiki.org/wiki4d/wiki.cgi?TestPage" class="nav" title="sand box">TestPage</a> | <a href="http://prowiki.org/wiki4d/wiki.cgi?MessageBoard" class="nav" title="MessageBoard">MessageBoard</a> | <a href="http://prowiki.org/wiki4d/wiki.cgi?Search" class="nav" title="Search">Search</a> | <a href="http://prowiki.org/wiki4d/wiki.cgi?FolderContributors" class="nav" title="Contributors">Contributors</a> | <a href="http://prowiki.org/wiki4d/wiki.cgi?FolderFolders" class="nav" title="Folders">Folders</a> | <a href="http://prowiki.org/wiki4d/wiki.cgi?action=spx" class="nav" title="Index">Index</a> | <a href="http://prowiki.org/wiki4d/wiki.cgi?HelpCenter" class="nav" title="Help">Help</a> | <a href="http://prowiki.org/wiki4d/wiki.cgi?action=editprefs&amp;oldid=EditorSupport/VimEditor&amp;id=EditorSupport/VimEditor" class="nav" title="edit user preferences">Preferences</a> | <a href="http://prowiki.org/wiki4d/wiki.cgi?action=browse&amp;id=WelcomeVisitor&amp;continue=EditorSupport/VimEditor" class="nav edit" title="edit page EditorSupport/VimEditor" rel="nofollow">Edit</a><br>
+
+ 					
+					<p><a href="http://prowiki.org/wiki4d/wiki.cgi?action=browse&amp;id=WelcomeVisitor&amp;continue=EditorSupport/VimEditor" class="nav" title="edit page EditorSupport/VimEditor" rel="nofollow">Edit text of this page</a> (date of last change: March 6, 2012 17:23 <a href="http://prowiki.org/wiki4d/wiki.cgi?action=browse&amp;diff=4&amp;id=EditorSupport/VimEditor" class="nav" rel="nofollow">(diff)</a>)</p>
+ 				</div>
+ 			
+ 			</div>
+ 		
+ 		</div>
+ 		
+ 		
+ 	</div>
+ 
+ 	<div id="footer" align="center"> 
+ 		(C) subject to the FDL (Free Documentation License)<br>
+		last change: March 6, 2012
+ 	
+ 	</div>
+ 
+
+</body></html>

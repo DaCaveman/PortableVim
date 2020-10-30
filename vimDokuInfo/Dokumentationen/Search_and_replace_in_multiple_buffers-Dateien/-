@@ -1,0 +1,14 @@
+/* generated javascript */
+var skin = 'oasis';
+var stylepath = 'http://images.wikia.nocookie.net/__cb51060/common/skins';
+
+/* MediaWiki:Common.js */
+try{
+/* Any JavaScript here will be loaded for all users on every page load. */
+
+
+/* MediaWiki:Oasis.js */
+
+ } catch(err) {
+ window._customJSerror = err;
+ } 

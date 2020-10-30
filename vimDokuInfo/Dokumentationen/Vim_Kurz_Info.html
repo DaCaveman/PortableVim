@@ -1,0 +1,1844 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional">
+<html><head>
+<meta name="generator" content="HTML Tidy for Linux/x86 (vers 1st September 2004), see www.w3.org">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>Kurzeinführung VIM</title>
+
+<style type="text/css">
+ div.c1 {text-align: center}
+</style>
+</head>
+<body>
+<div class="c1">
+<h2>Kurzeinführung VIM</h2>
+</div>
+<hr>
+<h2>Index</h2>
+<ul>
+<li><p><a href="#vorbem">Vorbemerkung</a></p></li>
+<li><p><a href="#aufruf">Aufruf des Editors</a></p></li>
+<li><p><a href="#konzepte">Grundlegende Konzepte</a></p></li>
+<li><p><a href="#curspos">Positionierung des Cursors im Kommando-Modus</a></p></li>
+<li><p><a href="#lezeich">Löschen und Einfügen von Zeichen</a></p></li>
+<li><p><a href="#lezeil">Löschen und Einfügen von Zeilen</a></p></li>
+<li><p><a href="#suchers">Suchen und Ersetzen</a></p></li>
+<li><p><a href="#kopie">Kopieren</a></p></li>
+<li><p><a href="#status">Anzeige des Status</a></p></li>
+<li><p><a href="#optionen">Anzeige und Einstellung von Optionen</a></p></li>
+<li><p><a href="#beenden">Abspeichern und Beenden</a></p></li>
+<li><p><a href="#sonstige">Auswahl sonstiger nützlicher Kommandos</a></p></li>
+<li><p><a href="#vismod">Verwendung des visuellen Modus</a></p></li>
+<li><p><a href="#mpuffer">Arbeit mit mehreren Puffern und Fenstern</a></p></li>
+<li><p><a href="#syntax">Syntax Highlighting</a></p></li>
+</ul>
+
+<hr>
+<!-- //////////////////////////////////////////////////////////////// -->
+
+<h4><a name="vorbem" id="vorbem">Vorbemerkung</a></h4>
+
+<p>
+Das vorliegende Dokument ist als Einführung in die Nutzung des hauptsächlich
+von Bram Moolenaar entwickelten, bildschirmorientierten Text-Editors <b>VIM</b>
+(<b>V</b>i <b>IM</b>proved) gedacht, der zur Familie der dem
+Unix-Standard-Editor <b>Vi</b> ähnlichen Editoren gehört.
+</p>
+
+<p>
+Die meisten Vi-Kommandos funktionieren beim VIM identisch. Er bietet allerdings
+gegenüber dem alten Vi eine große Zahl von Erweiterungen und Verbesserungen,
+die die Arbeit deutlich vereinfachen und effektivieren.
+</p>
+
+<p>
+Die nachfolgenden Darstellungen gelten größtenteils ab VIM 4.x, teilweise aber
+erst ab Vim 5.x bzw. Vim 6.x. Es empfiehlt sich generell, eine aktuelle
+VIM-Version zu nutzen, um von neuen Möglichkeiten profitieren zu können. Auf
+Grund der hohen Kompatibilität zu älteren Versionen ist ein Wechsel zu einer
+höheren VIM-Version erfahrungsgemäß problemlos möglich.
+</p>
+
+<p>
+VIM steht für eine breite Palette von Betriebssystem- und Rechner-Plattformen
+zur Verfügung und wird sehr stark genutzt, auch als Ersatz für den Original-Vi.
+Bei heutigen Linux-Distributionen versteckt sich hinter dem Kommando
+<b>vi</b> bereits der VIM und nicht mehr wie früher der Vi-Clone Elvis.
+</p>
+
+<!-- //////////////////////////////////////////////////////////////// -->
+<hr>
+
+<h4><a name="aufruf" id="aufruf">Aufruf des Editors</a></h4>
+
+<pre>   <b>vim [Optionen] [Dateinamen]</b>
+</pre>
+
+<p>
+Die Wahl des Namens, unter dem man den Editor aufruft, kann dessen Zustand nach
+dem Start beeinflussen. Dieselbe Wirkung lässt sich durch entsprechende Optionen
+des Kommandos <b>vim</b> erreichen. Die folgende Tabelle zeigt einige
+typische Beispiele:
+</p>
+
+<blockquote>
+<table summary="" border="" cellpadding="3">
+<tbody><tr>
+<th>Kommandoname</th>
+<th>äquivalente Option bei <b>vim</b></th>
+<th>Wirkung</th>
+</tr>
+<tr>
+<td valign="top"><b>view</b></td>
+<td valign="top"><b>-R</b></td>
+<td valign="top">
+<p>
+Start mit gesetzter Option <b>readonly</b>
+</p>
+
+<p>
+Dadurch wird das unbeabsichtigte Überschreiben der editierten Dateien
+verhindert.
+</p>
+</td>
+</tr>
+<tr>
+<td valign="top"><b>gvim</b></td>
+<td valign="top"><b>-g</b></td>
+<td valign="top">
+<p>
+Start der graphischen Oberfläche (GUI)
+</p>
+
+<p>
+Im Standardfall nutzt der VIM einen Text-Bildschirm und kann somit z.B. auf
+einer Linux-Text-Konsole sowie einem Terminal-Emulator wie <b>xterm</b> unter
+X-Windows eingesetzt werden.
+</p>
+</td>
+</tr>
+<tr>
+<td valign="top"><b>ex</b></td>
+<td valign="top"><b>-e</b></td>
+<td valign="top">
+Start im <a href="#exmode">Ex-Modus</a>, d.h. als zeilenorientierter
+Editor</td>
+</tr>
+</tbody></table>
+</blockquote>
+
+<p>
+Hinter dem Kommandonamen können Optionen und/oder Dateinamen angegeben werden.
+Optionen spielen in der Mehrzahl der praktischen Anwendungsfälle keine bzw.
+eine geringe Rolle. Wir wollen uns daher hier auf zwei Beispiele beschränken:
+</p>
+
+<blockquote>
+<table summary="" border="" cellpadding="3">
+<tbody><tr>
+<th>Kommandozeilen-Option</th>
+<th>Bedeutung</th>
+</tr>
+<tr>
+<td valign="top"><b>-b</b></td>
+<td valign="top">
+<p>
+Option <b>binary</b> setzen
+</p>
+
+<p>
+Dieser Modus gestattet das Editieren beliebiger Binärdateien, allerdings steht
+kein Hexadezimal-Editor zur Verfügung.
+</p>
+</td>
+</tr>
+<tr>
+<td valign="top"><b>-r</b></td>
+<td valign="top"><a href="#recovery">Recovery</a> durchführen</td>
+</tr>
+</tbody></table>
+</blockquote>
+
+<p>
+Verzichtet der Nutzer auf die Angabe von Argumenten, dann startet VIM mit einem
+leeren <a href="#puffer"><b>Puffer</b></a>, d.h., er lädt keine Datei zum
+Editieren. Ist die Dateiliste dagegen nicht leer, dann wird ihr erstes Element
+(das nicht selten das einzige überhaupt ist) nach dem Start des Editors
+automatisch zum aktuellen Dateinamen.
+</p>
+
+<p>
+Sofern diese Datei im Dateisystem existiert, wird ihr Inhalt in einen Puffer
+geladen und in einem <b>Fenster</b> zum Editieren bereitgestellt. Eine noch
+nicht existente Datei legt der Editor allerdings nicht automatisch an. Die
+Erzeugung neuer Dateien erfolgt erst beim durch ein Nutzerkommando veranlassten
+Abspeichern des Inhalts eines Editor-Puffers.
+</p>
+
+<p>
+Der Anwender hat die Möglichkeit, die Dateiliste in beiden Richtungen zu
+durchlaufen und die angegebenen Dateien nacheinander oder gleichzeitig in
+Fenstern darzustellen und so zu bearbeiten.
+</p>
+
+<p>
+Sofern eine Initialisierungsdatei (z.B. <b>$HOME/.vimrc</b> bei Unix oder
+<b>$VIM\_vimrc</b> bei Windows) existiert, wird sie während des Starts vom
+Editor gelesen und als Folge von Ex-Kommandos interpretiert, wobei auf den
+sonst erforderlichen Doppelpunkt vor dem Kommando verzichtet werden kann. Durch
+eine Initialisierungsdatei lassen sich ohne manuelle Eingriffe
+nutzerspezifische Einstellungen vornehmen.
+</p>
+
+<p>
+Beispielsweise kann man durch
+</p>
+
+<pre>  <b>set number</b>
+</pre>
+
+<p>
+festlegen, dass vor jeder Zeile des editierten Textes die Zeilennummer angezeigt
+werden soll.
+</p>
+
+<hr>
+<!-- //////////////////////////////////////////////////////////////// -->
+
+<h4><a name="konzepte" id="konzepte">Grundlegende Konzepte</a></h4>
+
+<p>
+<a name="puffer" id="puffer">Der</a> VIM liest jede zu bearbeitende Datei in einen
+von ihm verwalteten <b>Puffer</b>, der sich entweder komplett im Hauptspeicher
+oder auch teilweise in einer Swap-Datei befindet. Alle Änderungen werden nur in
+diesem Puffer vollzogen. Die zu bearbeitende Datei wird so lange nicht
+verändert, bis der Nutzer das Abspeichern des Inhalts explizit anordnet.
+</p>
+
+<p>
+Der Name der Swap-Datei entspricht unter Unix dem Muster <b>.*.sw?</b>.
+Anstelle des Sterns wird der Name der editierten Datei eingesetzt. Die erste
+und meist einzige Swap-Datei hat die Endung <b>.swp</b>. Für alle weiteren
+Swap-Dateien wird der letzte Buchstabe der Endung schrittweise dekrementiert,
+also <b>.swo</b>, <b>.swn</b> bis <b>.swa</b>. Sofern letztere existiert, wird
+keine weitere Swap-Datei angelegt.
+</p>
+
+<p>
+VIM ist in der Lage, mehrere Puffer gleichzeitig zu verwalten und diese in
+mehreren Fenstern auf dem Bildschirm darzustellen. Im Standardfall verhält sich
+der VIM allerdings wie der Original-Vi und verwaltet nur einen Puffer und genau
+ein Fenster, das mit Ausnahme der untersten Zeile den gesamten Bildschirm
+überdeckt.
+</p>
+
+<p>
+Der untere, standardmäßig genau eine Zeile umfassende Bereich des
+Editor-Bildschirms dient der Anzeige von Status-Informationen (z.B. Warnungen
+und Fehlermeldungen, Nummer der aktuellen Zeile und Spalte, aktueller <a href="#modus">Modus</a>) sowie der Eingabe von Kommandos im Kommandozeilen-Modus.
+</p>
+
+<p>
+Sind mehrere Fenster aktiv, so wird jeweils an deren unterem Rand eine
+fensterbezogene Statuszeile dargestellt, die für das unterste Fenster
+allerdings optional unterdrückt werden kann.
+</p>
+
+<p>
+<a name="recovery" id="recovery">Eine</a> der Stärken des VIM ist seine
+<b>Recovery</b>-Fähigkeit. Konkret bedeutet das, dass auch bei Crash der
+Maschine oder des Editors der letzte Stand der Editor-Puffer weitestgehend bzw.
+vollständig wiederhergestellt werden kann, sofern nicht explizit die Pflege der
+bereits erwähnten Swap-Datei unterdrückt wurde. Um das Recovery einzuleiten,
+ist der VIM mit der Option <b>-r</b> aufzurufen, z.B.
+</p>
+
+<pre>  <b>vim -r intro.html</b>
+</pre>
+
+<p>
+zur Wiederherstellung der Datei <b>intro.html</b>. Das Recovery stützt sich auf
+die Swap-Datei.
+</p>
+
+<p>
+<a name="modus" id="modus">Alle</a> Vi-Versionen unterscheiden verschiedene
+<b>Modi</b>. Der jeweils aktive Modus legt fest, wie die vom Anwender
+eingegebenen Zeichen interpretiert werden. Dieses Modus-Konzept, das den Vi
+sehr deutlich von den meisten anderen Editoren unterscheidet, ist für Anfänger
+meist gewöhnungsbedürftig, gestattet aber dem erfahrenen Bediener ein sehr
+schnelles und effizientes Arbeiten.
+</p>
+
+<p>
+Der VIM kennt sechs Basis-Modi:
+</p>
+
+<ul>
+<li>
+<p>
+<b>Kommando-Modus</b> (<i>Command mode</i>), auch <b>Normal-Modus</b>
+(<i>Normal mode</i>) genannt
+</p>
+
+<p>
+Alle Eingaben werden als Editor-Kommandos betrachtet. Es erfolgt also kein
+Einfügen der eingegebenen Zeichen in den Editor-Puffer, wie das bei den meisten
+anderen Editoren der Fall ist. Nach dem Start befindet man sich in der Regel im
+Kommando-Modus.
+</p>
+</li>
+
+<li>
+<p>
+<b>Visueller Modus</b> (<i>Visual mode</i>)
+</p>
+
+<p>
+Dieser Modus dient der Markierung eines zusammenhängenden Teils des Textes, der
+dabei optisch hervorgehoben wird. Kommandos zur Cursor-Positionierung verändern
+die Grenzen der Markierung. Der hervorgehobene Bereich lässt sich auf
+verschiedene Weise bearbeiten, z.B. löschen, kopieren oder ersetzen.
+</p>
+</li>
+
+<li>
+<p>
+<b>Select-Modus</b> (<i>Select mode</i>)
+</p>
+
+<p>
+Er ermöglicht die beispielsweise von MS Windows her bekannte Arbeitsweise,
+einen zu verändernden Textabschnitt zu markieren und anschließend durch Eingabe
+des neuen Textes zu ersetzen.
+</p>
+
+<p>
+Anmerkung: Derselbe Effekt lässt sich auch sehr bequem mit Hilfe des visuellen
+Modus erzielen.
+</p>
+</li>
+
+<li>
+<p>
+<b>Einfüge-Modus</b> (<i>Insert mode</i>)
+</p>
+
+<p>
+Bis auf wenige Ausnahmen werden alle eingegebenen Zeichen in den Puffer
+eingefügt. Mit <b>Esc</b> verlässt man den Einfüge-Modus wieder.
+</p>
+</li>
+
+<li>
+<p>
+<b>Kommandozeilen-Modus</b> (<i>Command-line mode</i>)
+</p>
+
+<p>
+Er gestattet die Eingabe einzeiliger Kommandos am unteren Rand des
+Editor-Bildschirms. Dazu gehören:
+</p>
+
+<blockquote>
+<table summary="" border="" cellpadding="3">
+<tbody><tr>
+<td valign="top">Ex-Kommandos</td>
+<td valign="top"><b>:</b></td>
+</tr>
+<tr>
+<td valign="top">Such-Kommandos</td>
+<td valign="top"><b>/</b> und <b>?</b></td>
+</tr>
+<tr>
+<td valign="top">Filter-Kommandos</td>
+<td valign="top"><b>!</b></td>
+</tr>
+</tbody></table>
+</blockquote>
+
+<p>
+Nach der Ausführung des Kommandos verlässt der Editor den Kommandozeilen-Modus
+wieder.
+</p>
+</li>
+
+<li>
+<p>
+<a name="exmode" id="exmode"><b>Ex-Modus</b> (<i>Ex mode</i>)</a>
+</p>
+
+<p>
+Hier arbeitet der Editor nicht mehr bildschirmorientiert, sondern
+zeilenorientiert. Das hat u.a. zur Folge, dass man sich nicht mehr mit Hilfe
+eines Cursors durch den Text bewegen und so die aktuelle Position im Puffer
+festlegen kann. Außerdem wird auf dem Bildschirm nicht mehr automatisch der
+aktuelle Zustand eines Textausschnitts dargestellt.
+</p>
+
+<p>
+Dem Anwender stehen im wesentlichen die Kommandos des Kommandozeilen-Modus zur
+Verfügung. Der Editor verlässt den Ex-Modus allerdings nicht automatisch nach
+der Ausführung eines Kommandos, sondern erst dann, wenn dies der Bediener durch
+das Ex-Kommando <b>vi</b> bzw. <b>visual</b> explizit anweist.
+</p>
+</li>
+</ul>
+
+<p>
+Als Spezialfall des Einfüge-Modus ist der <b>Ersetzungs-Modus</b> (<i>Replace
+mode</i>) zu sehen, in dem die neu eingegebenen Zeichen existierende Zeichen
+des Textes überschreiben, es sei denn, es gibt an der aktuellen Cursor-Position
+keine alten Zeichen mehr. Dann wird eingefügt.
+</p>
+
+<p>
+Die folgende Tabelle zeigt die wichtigsten Übergänge vom Kommando-Modus in die
+anderen Modi sowie die anschließende Rückkehr in den Kommando-Modus:
+</p>
+
+<blockquote>
+<table summary="" border="" cellpadding="3">
+<tbody><tr>
+<th>Wechsel zum</th>
+<th>durch</th>
+<th>Rückkehr zum Kommando-Modus</th>
+</tr>
+<tr>
+<td valign="top">Einfüge-Modus</td>
+<td valign="top">Kommandos zum Einfügen von <a href="#lezeich">Zeichen</a> und <a href="#lezeil">Zeilen</a><br>
+  <b>i</b>&nbsp;&nbsp;<b>a</b>&nbsp;&nbsp;<b>I</b>&nbsp;&nbsp;<b>A</b>&nbsp;&nbsp;<b>c</b> 
+  <b>C</b>&nbsp;&nbsp;<b>o</b>&nbsp;&nbsp;<b>O</b></td>
+<td valign="top"><b>Esc</b></td>
+</tr>
+<tr>
+<td valign="top">Ersetzungs-Modus</td>
+<td valign="top"><b>R</b></td>
+<td valign="top"><b>Esc</b></td>
+</tr>
+<tr>
+<td valign="top">Kommandozeilen-Modus</td>
+<td valign="top"><b>:</b>&nbsp;&nbsp;<b>/</b>&nbsp;&nbsp;<b>?</b> 
+<b>!</b></td>
+<td valign="top">
+  <ul>
+  <li>
+  <p>
+  <b>Esc</b> zum Abbruch
+  </p>
+  </li>
+  <li>
+  <p>
+  <b>NewLine</b> bzw. <b>LineFeed</b> (Enter-Taste) zur
+  Ausführung des Kommandos
+  </p>
+  </li>
+  </ul>
+</td>
+</tr>
+<tr>
+<td valign="top">visuellen Modus</td>
+<td valign="top">
+  <b>v</b>&nbsp;(zeichenweise&nbsp;Markierung)<br>
+  <b>V</b>&nbsp;(zeilenweise&nbsp;Markierung)<br>
+  <b>Ctrl-V</b>&nbsp;(Markierung&nbsp;rechteckiger&nbsp;Blöcke)</td>
+<td valign="top">
+  <ul>
+  <li>
+  <p>
+  Abbruch durch die Wiederholung des einleitenden Kommandos oder
+  auch <b>Esc</b>
+  </p>
+  </li>
+  <li>
+  <p>
+  Manipulation des markierten Blocks durch ein entsprechendes
+  Kommando, z.B. <b>d</b>, <b>c</b> oder <b>~</b> (Tilde)
+  </p>
+  </li>
+  </ul>
+</td>
+</tr>
+<tr>
+<td valign="top">Select-Modus</td>
+<td valign="top">
+  <b>gh</b>&nbsp;(zeichenweise&nbsp;Markierung)<br>
+  <b>gH</b>&nbsp;(zeilenweise&nbsp;Markierung)<br>
+  <b>gCtrl-H</b>&nbsp;(Markierung&nbsp;rechteckiger&nbsp;Blöcke)</td>
+<td valign="top">
+  <ul>
+  <li>
+  <p>
+  Abbruch durch <b>Esc</b>
+  </p>
+  </li>
+  
+  <li>
+  <p>
+  Manipulation des markierten Blocks durch ein entsprechendes Kommando. Die
+  Eingabe eines druckbaren Zeichens bewirkt das Löschen des markierten Bereichs
+  und den anschließenden Übergang in den Einfüge-Modus, wobei das eingegebene
+  Zeichen an der aktuellen Cursor-Position in den Editor-Puffer eingefügt wird.
+  Der Einfüge-Modus wird wie gewohnt durch <b>Esc</b> beendet.
+  </p>
+  </li>
+  </ul>
+</td>
+</tr>
+<tr>
+<td valign="top">Ex-Modus</td>
+<td valign="top"><b>Q</b></td>
+<td valign="top"><b>vi</b> bzw. <b>visual</b></td>
+</tr>
+</tbody></table>
+</blockquote>
+
+<p>
+Als Zwischenspeicher für verschiedene Daten verwaltet der VIM <b>Register</b>,
+von denen eines unbenannt ist. Alle anderen haben einen genau ein Zeichen
+langen Namen.
+</p>
+
+<p>
+Beispielsweise der jeweils zuletzt gelöschte Textteil wird im unbenannten
+Register aufbewahrt, so dass er bei Bedarf an beliebigen Stellen desselben oder
+auch eines anderen Textes wieder eingefügt werden kann. Der Nutzer hat aber
+auch die Möglichkeit, bestimmte Textteile in benannten Registern zu speichern
+und später von dort wieder abzurufen. In der Mehrzahl der Fälle dürfte das
+unbenannte Register ausreichen.
+</p>
+
+<p>
+Interessant ist auch die Eigenschaft des VIM, das zuletzt gegebene Einfüge-
+bzw. Löschkommando durch Eingabe eines Punktes (<b>.</b>) im Kommando-Modus an
+beliebigen Stellen wiederholen zu können. Dadurch lässt sich häufig der Aufwand
+enorm reduzieren.
+</p>
+
+<p>
+Ebenfalls sehr wichtig ist der mehrstufige <b>Undo-/Redo</b>-Mechanismus.
+<b>Undo</b> gestattet, die letzten (vielleicht sehr komplexen oder
+katastrophalen) Änderungen schrittweise rückgängig zu machen. Die maximale
+Anzahl von Undo-Schritten wird durch die Option <b>undolevels</b> festgelegt
+und beträgt bei Unix standardmäßig 1000. Unerwünschte Undo-Schritte können
+mittels <b>Redo</b> schrittweise rückgängig gemacht werden. Dabei führt der
+Editor die durch Undo bereits rückgängig gemachten Operationen erneut aus.
+</p>
+
+<p>
+Der VIM ist in der Lage, automatisch Backup-Dateien anzulegen. Das bedeutet,
+sofern eine Datei, in die ein Pufferinhalt abgespeichert werden soll, bereits
+existiert, wird sie umbenannt, bevor der Editor den Pufferinhalt auf den
+Datenträger schreibt. Dadurch wird das Überschreiben des existierenden Inhalts
+vermieden.
+</p>
+
+<p>
+Falls die <a href="#options">Option</a> <b>backup</b> gesetzt ist, wird die
+umbenannte alte Datei erhalten, d.h. nicht automatisch gelöscht, nachdem der
+Pufferinhalt fehlerfrei gesichert werden konnte. In diesem Fall steht nach der
+Abspeicherung neben der neuen Version eines Dokuments auch noch dessen
+Vorgängerversion im Dateisystem zur Verfügung. Das kann sehr hilfreich sein,
+wenn man z.B. aus Versehen umfangreiche Modifikationen an einer Datei
+vorgenommen hat oder einfach nur mittels des Kommandos <b>diff</b> feststellen
+möchte, ob man auch genau die beabsichtigten Änderungen erzielt hat.
+</p>
+
+<p>
+Generell ist zu den VIM-Kommandos anzumerken, dass viele von ihnen mehrfach
+hintereinander ausgeführt werden können, indem man vor dem eigentlichen
+Kommando eine ganze Zahl angibt, die besagt, wie oft das Kommando anzuwenden
+ist. Je nach Situation kann es sich bei dieser Zahl auch um eine Zeilenzahl
+oder -nummer handeln. Wird diese Zahl nicht angegeben, dann nimmt der Editor in
+der Regel eine Eins an. In der vorliegenden Beschreibung wird eine solche
+optionale Zahl durch durch das Präfix <b><i>[n]</i></b> symbolisiert.
+</p>
+
+<p>
+Ex-Kommandos beziehen sich häufig auf einen <b>Zeilenbereich</b>
+(<i>range</i>). Dieser lässt sich auf unterschiedliche Weise angeben. Die genaue
+Syntax würde den Rahmen der vorliegenden Abhandlung sprengen. Sie sollte bei
+Bedarf der Online-Hilfe des VIM entnommen werden (<b>:help :range</b>).
+</p>
+
+<p>
+Eine sehr einfache Möglichkeit der Beschreibung von Zeilen bzw. Zeilenbereichen
+besteht in der Angabe von Zeilennummern. Hier einige Beispiele:
+</p>
+
+<blockquote>
+<table summary="" border="" cellpadding="3">
+<tbody><tr>
+<td valign="top"><b>12</b></td>
+<td valign="top">Zeile 12</td>
+</tr>
+<tr>
+<td valign="top"><b>10,16</b></td>
+<td valign="top">Zeilen 10 bis 16</td>
+</tr>
+<tr>
+<td valign="top"><b>.</b><br>
+(Punkt)</td>
+<td valign="top">aktuelle Zeile</td>
+</tr>
+<tr>
+<td valign="top"><b>$</b></td>
+<td valign="top">letzte Zeile des Puffers</td>
+</tr>
+<tr>
+<td valign="top"><b>%</b></td>
+<td valign="top">alle Zeilen (äquivalent zu <b>1,$</b>)</td>
+</tr>
+</tbody></table>
+</blockquote>
+
+<p>
+Die Angabe eines Bereichs (nachfolgend durch <i>[Bereich]</i> symbolisiert) ist
+optional. Wird sie weggelassen, beziehen sich manche Kommandos standardmäßig
+auf die aktuelle Zeile und andere auf den gesamten Puffer. Für die unten
+folgenden Kommandos wird der jeweilige Standard-Bereich angegeben.
+</p>
+
+<p>
+Die Namen der meisten Ex-Kommandos müssen nicht voll ausgeschrieben werden, da
+der Editor die betreffenden Kommandos bereits eindeutig identifizieren kann,
+sobald die ersten <i>n</i> Zeichen ihres Namens angegeben wurden, wobei die
+Zahl <i>n</i> vom jeweiligen Kommando abhängt.
+</p>
+
+<p>
+In der nachfolgenden Diskussion sowie im Online-Handbuch des VIM werden die
+optionalen Buchstaben eines Kommando-Namens in der Regel in eckige Klammern
+eingeschlossen. So besagt z.B. die Notation <b>co[py]</b>, dass das Kommando
+<b>copy</b> bereits nach Eingabe von <b>co</b> eindeutig spezifiziert ist
+(<i>n</i> hat hier also den Wert 2).
+</p>
+
+<p>
+Der VIM unterstützt eine automatische Vervollständigung verschiedener Elemente
+der Ex-Kommandozeile. Dies betrifft die Namen von Kommandos, Optionen, Dateien
+und Tags. Durch Eingabe des über die Option <b>wildchar</b> festgelegten
+Zeichens (standardmäßig der Tabulator) wird das vor dem Cursor befindliche
+Muster (meist der Anfang eines Namens) so weit wie möglich vervollständigt.
+<b>Ctrl-D</b> listet alle Namen auf, die zu dem vor dem Cursor stehenden Muster
+passen. Weitere Details sind in der Online-Hilfe zu finden (<b>:help
+cmdline-completion</b>).
+</p>
+
+<hr>
+<!-- //////////////////////////////////////////////////////////////// -->
+
+<h4><a name="curspos" id="curspos">Positionierung des Cursors im Kommando-Modus</a></h4>
+
+<p>
+Die Cursor- und Bild-Tasten (<b>PageUp</b>, <b>PageDown</b>) sowie <b>Home</b>
+und <b>End</b> haben die übliche Wirkung. Im Unterschied zum Original-Vi sind
+diese Tasten auch im Einfüge-Modus nutzbar.
+</p>
+
+<p>
+Nachfolgend wird mehrfach der Begriff <b>Whitespace-Zeichen</b> verwendet.
+Darunter versteht man Tabulatoren und Leerzeichen.
+</p>
+
+<blockquote>
+<table summary="" border="" cellpadding="3">
+<tbody><tr>
+<td valign="top"><b><i>[n]</i>&nbsp;G</b></td>
+<td valign="top">Sprung zu bestimmter Zeile
+<p>Beispiele:<br>
+<b>25G</b> für Zeile 25<br>
+<b>G</b> ohne <i>n</i> für die letzte Zeile</p>
+</td>
+</tr>
+<tr>
+<td valign="top"><b><i>[n]</i>&nbsp;|</b></td>
+<td valign="top">Sprung zu bestimmter Spalte
+<p>Beispiele:<br>
+<b>10|</b> für Spalte 10<br>
+<b>|</b> ohne <i>n</i> für die erste Spalte</p>
+</td>
+</tr>
+<tr>
+<td valign="top"><b>0</b><br>
+(Zahl Null)</td>
+<td valign="top">Sprung zum Zeilenanfang (Spalte 1)</td>
+</tr>
+<tr>
+<td valign="top"><b>$</b></td>
+<td valign="top">Sprung zum Zeilenende (letzte Spalte)</td>
+</tr>
+<tr>
+<td valign="top"><i>[n]</i>&nbsp;<b>w</b></td>
+<td valign="top">n Wörter vorwärts</td>
+</tr>
+<tr>
+<td valign="top"><i>[n]</i>&nbsp;<b>b</b></td>
+<td valign="top">n Wörter rückwärts</td>
+</tr>
+<tr>
+<td valign="top"><i>[n]</i>&nbsp;<b>W</b></td>
+<td valign="top">n WÖRTER vorwärts (WORT ist eine Folge von Nicht-Whitespace-Zeichen)</td>
+</tr>
+<tr>
+<td valign="top"><i>[n]</i>&nbsp;<b>B</b></td>
+<td valign="top">n WÖRTER rückwärts (WORT ist eine Folge von Nicht-Whitespace-Zeichen)</td>
+</tr>
+<tr>
+<td valign="top"><i>[n]</i>&nbsp;<b>H</b></td>
+<td valign="top">Cursor an den Anfang der n-ten vom oberen Rand gezählten Zeile eines
+Fensters positionieren</td>
+</tr>
+<tr>
+<td valign="top"><b>M</b></td>
+<td valign="top">Cursor an den Anfang der in der Mitte eines
+Fensters befindlichen Zeile positionieren</td>
+</tr>
+<tr>
+<td valign="top"><i>[n]</i>&nbsp;<b>L</b></td>
+<td valign="top">Cursor an den Anfang der n-ten vom unteren Rand gezählten Zeile eines
+Fensters positionieren</td>
+</tr>
+<tr>
+<td valign="top"><i>[n]</i>&nbsp;<b>Ctrl-F</b></td>
+<td valign="top">n Seiten vorwärts blättern</td>
+</tr>
+<tr>
+<td valign="top"><i>[n]</i>&nbsp;<b>Ctrl-B</b></td>
+<td valign="top">n Seiten rückwärts blättern</td>
+</tr>
+<tr>
+<td valign="top"><i>[n]</i>&nbsp;<b>Ctrl-D</b></td>
+<td valign="top">n Zeilen vorwärts blättern; wenn n fehlt:
+standardmäßig eine halbe Seite blättern</td>
+</tr>
+<tr>
+<td valign="top"><i>[n]</i>&nbsp;<b>Ctrl-U</b></td>
+<td valign="top">n Zeilen rückwärts rollen; wenn n fehlt:
+standardmäßig eine halbe Seite blättern</td>
+</tr>
+<tr>
+<td valign="top"><i>[n]</i>&nbsp;<b>Ctrl-E</b></td>
+<td valign="top">n Zeilen vorwärts rollen</td>
+</tr>
+<tr>
+<td valign="top"><i>[n]</i>&nbsp;<b>Ctrl-Y</b></td>
+<td valign="top">n Zeilen rückwärts rollen</td>
+</tr>
+<tr>
+<td valign="top"><i>[n]</i>&nbsp;<b>zt</b></td>
+<td valign="top">Zeile n oder (falls n fehlt) die aktuelle Zeile an den oberen Fensterrand
+verschieben</td>
+</tr>
+<tr>
+<td valign="top"><i>[n]</i>&nbsp;<b>zz</b></td>
+<td valign="top">Zeile n oder (falls n fehlt) die aktuelle Zeile in die Mitte des Fensters
+verschieben</td>
+</tr>
+<tr>
+<td valign="top"><i>[n]</i>&nbsp;<b>zb</b></td>
+<td valign="top">Zeile n oder (falls n fehlt) die aktuelle Zeile an den unteren Fensterrand
+verschieben</td>
+</tr>
+<tr>
+<td valign="top"><b>%</b></td>
+<td valign="top">sucht für bestimmte Text-Elemente, die unter
+oder hinter dem Cursor stehen, den bzw. die zugehörigen
+Partner
+<p>Folgende Text-Elemente werden akzeptiert:</p>
+<ul>
+<li><p>runde, eckige und geschweifte Klammern: <b>(&nbsp;[&nbsp;{&nbsp;}&nbsp;]&nbsp;)</b></p></li>
+<li><p>Begrenzer von Kommentaren der Programmiersprache C: <b>/*</b> und <b>*/</b></p></li>
+<li><p>folgende Direktiven des C-Präprozessors: <b>#if</b>,
+<b>#ifdef</b>, <b>#else</b>, <b>#elif</b>,
+<b>#endif</b></p></li>
+</ul>
+</td>
+</tr>
+<tr>
+<td valign="top"><i>[n]</i>&nbsp;<b>f&nbsp;<i>Zeichen</i></b></td>
+<td valign="top">nach rechts zum n-ten <i>Zeichen</i> gehen</td>
+</tr>
+<tr>
+<td valign="top"><i>[n]</i>&nbsp;<b>t&nbsp;<i>Zeichen</i></b></td>
+<td valign="top">nach rechts bis vor das n-te <i>Zeichen</i> gehen</td>
+</tr>
+<tr>
+<td valign="top"><i>[n]</i>&nbsp;<b>F&nbsp;<i>Zeichen</i></b></td>
+<td valign="top">nach links zum n-ten <i>Zeichen</i> gehen</td>
+</tr>
+<tr>
+<td valign="top"><i>[n]</i>&nbsp;<b>T&nbsp;<i>Zeichen</i></b></td>
+<td valign="top">nach links bis hinter das n-te <i>Zeichen</i> gehen</td>
+</tr>
+<tr>
+<td valign="top"><i>[n]</i>&nbsp;<b>;</b></td>
+<td valign="top">das letzte f-, F-, t- oder T-Kommando n Mal wiederholen</td>
+</tr>
+<tr>
+<td valign="top"><i>[n]</i>&nbsp;<b>,</b></td>
+<td valign="top">das letzte f-, F-, t- oder T-Kommando n Mal in entgegengesetzter Richtung wiederholen</td>
+</tr>
+<tr>
+<td valign="top"><b>m&nbsp;<i>Marke</i></b></td>
+<td valign="top">Setzen einer Marke an der aktuellen Cursor-Position
+
+<p>
+<i>Marke</i> ist ein einzelner Buchstabe, wobei sich Kleinbuchstaben immer auf
+den aktuellen Editor-Puffer beziehen, wogegen Großbuchstaben für alle aktuell
+geladenen Puffer global gültig sind. Das Setzen einer Marke verändert die
+Cursor-Position nicht.
+</p>
+
+<p>
+Beispiel:<br>
+<b>ma</b> setzt Marke <b>a</b>
+</p>
+</td>
+</tr>
+<tr>
+<td valign="top"><b>`&nbsp;<i>Marke</i></b><br>
+(Accent grave)</td>
+<td valign="top">Sprung zu einer vorher gesetzten Marke</td>
+</tr>
+<tr>
+<td valign="top"><b>'&nbsp;<i>Marke</i></b><br>
+(Acccent aigu)</td>
+<td valign="top">Sprung zum ersten Nicht-Whitespace-Zeichen der
+durch <i>Marke</i> markierten Zeile</td>
+</tr>
+</tbody></table>
+</blockquote>
+
+<hr>
+
+<!-- //////////////////////////////////////////////////////////////// -->
+
+<h4><a name="lezeich" id="lezeich">Löschen und Einfügen von Zeichen</a></h4>
+
+<p>
+Das Präfix <b>[n]</b> gibt hier in der Regel an, wie oft die genannte Operation
+hintereinander auszuführen ist.
+</p>
+
+<blockquote>
+<table summary="" border="" cellpadding="3">
+<tbody><tr>
+<td valign="top"><i>[n]</i>&nbsp;<b>i</b></td>
+<td valign="top">Einfügen vor dem aktuellen Zeichen
+
+<p>
+Beispiel: Die Zeichenfolge <b>50i=</b> gefolgt von der Escape-Taste bewirkt,
+dass vor dem aktuellen Zeichen 50 Mal das Zeichen <b>=</b> eingefügt wird.
+</p>
+</td>
+</tr>
+<tr>
+<td valign="top"><i>[n]</i>&nbsp;<b>a</b></td>
+<td valign="top">Einfügen nach dem aktuellen Zeichen</td>
+</tr>
+<tr>
+<td valign="top"><i>[n]</i>&nbsp;<b>I</b></td>
+<td valign="top">Einfügen am Zeilenanfang, konkret vor dem
+ersten Nicht-Whitespace-Zeichen</td>
+</tr>
+<tr>
+<td valign="top"><i>[n]</i>&nbsp;<b>A</b></td>
+<td valign="top">Anfügen am Zeilenende</td>
+</tr>
+<tr>
+<td valign="top"><i>[n]</i>&nbsp;<b>x</b></td>
+<td valign="top">Zeichen unter dem Cursor löschen
+<p>Statt <b>x</b> kann auch die <b>Del</b>-Taste genutzt werden.</p>
+</td>
+</tr>
+<tr>
+<td valign="top"><i>[n]</i>&nbsp;<b>X</b></td>
+<td valign="top">Zeichen links vom Cursor löschen</td>
+</tr>
+<tr>
+<td valign="top"><i>[n]</i>&nbsp;<b>D</b></td>
+<td valign="top">Löschen ab Cursor bis zum Zeilenende sowie der n-1 folgenden Zeilen</td>
+</tr>
+<tr>
+<td valign="top"><i>[n]</i>&nbsp;<b>C</b></td>
+<td valign="top">Ersetzen ab Cursor bis zum Zeilenende sowie der n-1 folgenden Zeilen
+<p>
+Das Kommando C entspricht dem Kommando D mit anschließendem automatischem
+Wechsel in den Einfüge-Modus.
+</p>
+</td>
+</tr>
+<tr>
+<td valign="top"><i>[n]</i>&nbsp;<b>J</b></td>
+<td valign="top">Verbinden einer Zeile mit ihrem Nachfolger</td>
+</tr>
+<tr>
+<td valign="top"><i>[n]</i>&nbsp;<b>d <i>Cursor-Bewegung</i></b></td>
+<td valign="top">Löschen des durch eine Cursor-Bewegung
+spezifizierten Textes</td>
+</tr>
+<tr>
+<td valign="top"><i>[n]</i>&nbsp;<b>c <i>Cursor-Bewegung</i></b></td>
+<td valign="top">Ersetzen des durch eine Cursor-Bewegung
+spezifizierten Textes</td>
+</tr>
+</tbody></table>
+</blockquote>
+
+<p>
+Allgemein gilt, dass die zu den sog. Operatoren gehörenden Kommandos <b>d</b>
+und <b>c</b> denjenigen zusammenhängenden Teil des Textes löschen bzw.
+ersetzen, dessen Anfang und Ende durch die beiden vor und nach der
+<i>Cursor-Bewegung</i> aktuellen Cursor-Positionen beschrieben wird.
+</p>
+
+<p>
+Die Cursor-Bewegung kann durch ein beliebiges Kommando zur Positionierung des
+Cursors (z.B. auch ein Such-Kommando) erfolgen. Dabei unterscheidet man
+zwischen zeilen- und zeichenweisen Bewegungen. Letztere können den Endpunkt
+ein- oder ausschließen. Zeilenweise Bewegungen schließen dagegen den Endpunkt
+immer ein.
+</p>
+
+<p>
+Die Details sowie einige Ausnahmen sind dem Online-Handbuch zu entnehmen
+(<b>:help deleting</b>). </p><p>Hier einige Beispiele für die Anwendung der beiden
+genannten Operatoren, wobei als Startpunkt immer die aktuelle Cursor-Position
+verwendet wird:
+</p>
+
+<blockquote>
+<table summary="" border="" cellpadding="3">
+<tbody><tr>
+<td valign="top"><i>[n]</i>&nbsp;<b>dw</b></td>
+<td valign="top">Löschen nach rechts bis vor den Anfang des
+folgenden Wortes</td>
+</tr>
+<tr>
+<td valign="top"><i>[n]</i>&nbsp;<b>cw</b></td>
+<td valign="top">Ersetzen nach rechts bis zum Ende des aktuellen
+Wortes</td>
+</tr>
+<tr>
+<td valign="top"><i>[n]</i>&nbsp;<b>db</b></td>
+<td valign="top">Löschen nach links bis zum Anfang des
+aktuellen Wortes</td>
+</tr>
+<tr>
+<td valign="top"><i>[n]</i>&nbsp;<b>cb</b></td>
+<td valign="top">Ersetzen nach links bis zum Anfang des aktuellen
+Wortes</td>
+</tr>
+<tr>
+<td valign="top"><b>d0</b></td>
+<td valign="top">Löschen nach links bis zum Zeilenanfang</td>
+</tr>
+<tr>
+<td valign="top"><b>c0</b></td>
+<td valign="top">Ersetzen nach links bis zum Zeilenanfang</td>
+</tr>
+</tbody></table>
+</blockquote>
+
+<p>
+Durch Angabe eines numerischen Präfixes <i>n</i> vor den Kommandos <b>dw</b>,
+<b>cw</b>, <b>db</b> und <b>cb</b> lässt sich die jeweilige Operation <i>n</i>
+Mal hintereinander anwenden. So kann man beispielsweise durch das Kommando
+<b>3dw</b> drei Wörter nach rechts löschen, da das Kommando <b>dw</b> drei Mal
+hintereinander ausgeführt wird.
+</p>
+
+<p>
+<b>Hinweis</b>:<br>
+Anstelle der Operatoren kann man auch den sehr bequemen <a href="#vismod">visuellen Modus</a> verwenden.
+</p>
+
+<p>
+Wie bereits erwähnt, stehen im Einfüge-Modus die Cursor- und Bild-Tasten sowie
+<b>Home</b> und <b>End</b> zur Positionierung des Cursors zur Verfügung. Die
+Rückschritt-Taste (<b>BackSpace</b>) löscht im Einfüge-Modus immer ein Zeichen
+rückwärts, im Standardfall allerdings nur, wenn es sich um neu eingegebene
+Zeichen handelt. Nach Setzen einer speziellen Option (<b>:set bs=2</b>) kann
+die Rückschritt-Taste alle Zeichen inkl. Zeilentrenner löschen.
+</p>
+
+<hr>
+<!-- //////////////////////////////////////////////////////////////// -->
+
+<h4><a name="lezeil" id="lezeil">Löschen und Einfügen von Zeilen</a></h4>
+
+<blockquote>
+<table summary="" border="" cellpadding="3">
+<tbody><tr>
+<td valign="top"><i>[n]</i>&nbsp;<b>O</b><br>
+(Großbuchstabe O)</td>
+<td valign="top">Einfügen einer Leerzeile oberhalb der
+aktuellen Zeile</td>
+</tr>
+<tr>
+<td valign="top"><i>[n]</i>&nbsp;<b>o</b><br>
+(Kleinbuchstabe o)</td>
+<td valign="top">Einfügen einer Leerzeile unterhalb der
+aktuellen Zeile</td>
+</tr>
+<tr>
+<td valign="top"><b><i>[n]</i>&nbsp;dd</b></td>
+<td valign="top">Löschen der aktuellen Zeile</td>
+</tr>
+<tr>
+<td valign="top"><b>:<i>[Bereich]&nbsp;</i>d[elete]</b></td>
+<td valign="top">Löschen eines Zeilenbereichs (Standard: aktuelle Zeile)
+<p>Beispiele:<br>
+<b>:10d</b>   (Zeile 10)<br>
+<b>:50,$d</b>   (von Zeile 50 bis zum Textende)</p>
+</td>
+</tr>
+</tbody></table>
+</blockquote>
+
+<hr>
+<!-- //////////////////////////////////////////////////////////////// -->
+
+<h4><a name="suchers" id="suchers">Suchen und Ersetzen</a></h4>
+
+<p>
+Vorzugsweise sucht der VIM zyklisch, stoppt also nicht am Dateiende. Das
+Überschreiten des Dateiendes wird je nach Suchrichtung durch die Meldung
+</p>
+
+<pre>  <b>search hit TOP, continuing at BOTTOM</b>
+</pre>
+bzw.
+<pre>  <b>search hit BOTTOM, continuing at TOP</b>
+</pre>
+
+<p>
+bzw. eine entsprechende Übersetzung in eine andere Sprache im Status-Bereich
+angezeigt.
+</p>
+
+<p>
+Suchmuster werden generell als <a href="http://www-user.tu-chemnitz.de/%7Ehot/VIM/regexp.html"><b>reguläre
+Ausdrücke</b></a> interpretiert. Normale Suchoperationen können aber ohne
+dieses Wissen ausgeführt werden. Besteht das Suchmuster z.B. nur aus Buchstaben
+und Ziffern, dann sucht der VIM genau nach der spezifizierten Zeichenkette.
+</p>
+
+<blockquote>
+<table summary="" border="" cellpadding="3">
+<tbody><tr>
+<td valign="top"><i>[n]</i>&nbsp;<b>/<i>Muster</i></b></td>
+<td valign="top">Vorwärtssuche eines Musters</td>
+</tr>
+<tr>
+<td valign="top"><i>[n]</i>&nbsp;<b>?<i>Muster</i></b></td>
+<td valign="top">Rückwärtssuche eines Musters</td>
+</tr>
+<tr>
+<td valign="top"><i>[n]</i>&nbsp;<b>*</b></td>
+<td valign="top">Vorwärtssuche des Wortes unter dem Cursor</td>
+</tr>
+<tr>
+<td valign="top"><i>[n]</i>&nbsp;<b>#</b></td>
+<td valign="top">Rückwärtssuche des Wortes unter dem Cursor</td>
+</tr>
+<tr>
+<td valign="top"><i>[n]</i>&nbsp;<b>n</b></td>
+<td valign="top">Wiederholung der letzten Muster-Suche</td>
+</tr>
+<tr>
+<td valign="top"><i>[n]</i>&nbsp;<b>N</b></td>
+<td valign="top">Wiederholung der letzten Muster-Suche in umgekehrter Richtung</td>
+</tr>
+<tr>
+<td valign="top"><i>[n]</i>&nbsp;<b>r</b></td>
+<td valign="top">Ersetzen des aktuellen Zeichens</td>
+</tr>
+<tr>
+<td valign="top"><i>[n]</i>&nbsp;<b>R</b></td>
+<td valign="top">Umschalten in den Ersetzungs-Modus (<i>Replace</i>)
+<p>
+Der eingegebene Ersetzungstext wird n-1 Mal eingegeben.
+</p>
+</td>
+</tr>
+<tr>
+<td valign="top"><b>xp</b></td>
+<td valign="top">Vertauschen eines Zeichens mit seinem Nachfolger</td>
+</tr>
+<tr>
+<td valign="top"><b>ddp</b></td>
+<td valign="top">Vertauschen einer Zeile mit ihrem Nachfolger</td>
+</tr>
+<tr>
+<td valign="top"><i>[n]</i>&nbsp;<b>~</b><br>
+(Tilde)</td>
+<td valign="top">Umwandlung von Klein- in Großbuchstaben und
+umgekehrt</td>
+</tr>
+<tr>
+<td valign="top">
+<b>:<i>[Bereich]&nbsp;</i>s[ubstitute]/<i>alt</i>/<i>neu</i>/<i>Modifikator</i>&nbsp;<i>[n]</i></b></td>
+<td valign="top">
+Substitution innerhalb eines Zeilenbereichs (Standard: aktuelle Zeile)
+
+<p>
+Dieses Kommando ersetzt im angegebenen Bereich das Auftreten des Musters
+<i>alt</i> gegen die Zeichenkette <i>neu</i>. Das Kommando ist auf Grund der
+Nutzung regulärer Ausdrücke sehr mächtig.
+</p>
+
+<p>
+Der Modifikator beeinflusst die genaue Wirkungsweise der Substitution. Hier eine
+Auswahl:
+</p>
+
+ <ul>
+ <li><tt><b>c</b></tt>: jede Ersetzung ist vom Bediener zu bestätigen</li>
+ <li><tt><b>g</b></tt>: ersetze alle Vorkommen von <b>alt</b>, nicht nur die jeweils ersten einer Zeile</li>
+ <li><tt><b>i</b></tt>: Groß- und Kleinschreibung im Muster ignorieren</li>
+ <li><tt><b>I</b></tt>: Groß- und Kleinschreibung im Muster nicht ignorieren</li>
+ <li><tt><b>p</b></tt>: Ausgabe der kompletten Zeile, in der zuletzt substituiert wurde</li>
+ </ul>
+
+<p>
+Der optionale Zähler <b>n</b> (der hier nicht als Präfix, sondern als Suffix
+auftaucht) bewirkt, dass beginnend mit der letzten Zeile des Bereichs in n
+Zeilen die Substitutionen durchgeführt werden.
+</p>
+
+<p>
+Wenn der Modifikator und der Zähler fehlen, kann man das Trennzeichen hinter
+dem Muster weglassen.
+</p>
+
+<p>
+Das Trennzeichen zwischen den einzelnen Teilen des Kommandos muss nicht der
+Schrägstrich sein. Es sind bis auf folgende Ausnahmen alle Zeichen erlaubt:
+</p>
+
+<ul>
+<li>alphanumerische Zeichen</li>
+<li>Backslash (<b>\</b>)</li>
+<li>Doppelapostroph (<b>"</b>)</li>
+<li>Pipe-Strich (<b>|</b>)</li>
+</ul>
+
+<p>
+Die Verwendung eines alternativen Trenners ist speziell dann sinnvoll, wenn im
+Muster oder Modifikator selbst Schrägstriche vorkommen, weil man sich dann den
+Zusatzaufwand sparen kann, die Sonderbedeutung der Schrägstriche durch
+Voranstellen je eines Backslashs aufzuheben, wie folgendes Beispiel zeigt:
+</p>
+
+<pre>  <b>:s+/+//+</b>   statt  <b>:s/\//\/\//</b>
+</pre>
+
+<p>
+Die Nutzung der Alternativ-Trenner macht die Ausdrücke auch übersichtlicher.
+</p>
+
+<p>
+Anwendungsbeispiele finden sich im Abschnitt über <a href="http://www-user.tu-chemnitz.de/%7Ehot/VIM/regexp.html"><b>reguläre Ausdrücke</b></a>.
+</p>
+</td>
+</tr>
+</tbody></table>
+</blockquote>
+
+<p>
+<b>Hinweis</b>:<br>
+Die Suchmuster sowie die durch einen Doppelpunkt eingeleiteten Ex-Kommandos
+werden jeweils in eine eigene <b>History-Liste</b> eingetragen, um sie später
+in identischer oder modifizierter Form leicht wiederverwenden zu können. Das
+Durchlaufen der History-Listen geschieht mit Hilfe der Cursor-Tasten <b>Up</b>
+und <b>Down</b>. Innerhalb eines Eintrags kann man sich mit Hilfe der beiden
+anderen Cursor-Tasten (<b>Left</b> und <b>Right</b>) bewegen. <b>BackSpace</b>
+löscht das links vom Cursor stehende Zeichen. Buchstaben, Ziffern und
+Sonderzeichen werden an der Cursor-Position eingefügt.
+</p>
+
+<hr>
+<!-- //////////////////////////////////////////////////////////////// -->
+
+<h4><a name="kopie" id="kopie">Kopieren</a></h4>
+
+<p>
+Mit dem Operator <b>y</b> kann man Teile eines Puffers in ein Register
+kopieren, standardmäßig ins unbenannte Register. Hinter <b>y</b> folgt ein
+Kommando zur Cursor-Positionierung. Dadurch wird derjenige Teil des
+Pufferinhalts kopiert, dessen Anfang und Ende durch die beiden vor und nach der
+<i>Cursor-Bewegung</i> aktuellen Cursor-Positionen beschrieben wird.
+</p>
+
+<blockquote>
+<table summary="" border="" cellpadding="3">
+<tbody><tr>
+<td valign="top"><b><i>[n]</i>&nbsp;yy</b><br>
+<b><i>[n]</i>&nbsp;Y</b></td>
+<td valign="top">n Zeilen in das unbenannte Register kopieren
+
+<p>
+Anmerkung: Lösch-Operationen, z.B. das Kommando
+<b>dd</b>, kopieren standardmäßig den jeweils
+gelöschten Text ebenfalls in das unbenannte Register.
+</p>
+</td>
+</tr>
+<tr>
+<td valign="top"><b>y$</b></td>
+<td valign="top">Kopieren des Zeilenrestes in das unbenannte Register</td>
+</tr>
+<tr>
+<td valign="top"><i>[n]</i>&nbsp;<b>p</b><br>
+(Kleinbuchstabe p)</td>
+<td valign="top">Einfügen des Inhalts des unbenannten
+Registers hinter der aktuellen Stelle</td>
+</tr>
+<tr>
+<td valign="top"><i>[n]</i>&nbsp;<b>P</b><br>
+(Großbuchstabe P)</td>
+<td valign="top">Einfügen des Inhalts des unbenannten
+Registers vor der aktuellen Stelle</td>
+</tr>
+<tr>
+<td valign="top">
+<b>:<i>[Bereich]&nbsp;</i>co[py]&nbsp;<i>nach</i></b></td>
+<td valign="top">Kopieren eines Zeilenbereichs (Standard: aktuelle Zeile)
+<p>
+Der durch <i>Bereich</i> beschriebene Zeilenbereich wird hinter der durch
+<i>nach</i> spezifizierten Zeile in den Text eingefügt.
+</p>
+</td>
+</tr>
+</tbody></table>
+</blockquote>
+
+<p>
+Unter Nutzung des visuellen Modus kann man sehr bequem kopieren, indem man den
+zu kopierenden Bereich markiert, durch das Kommando <b>y</b> ins unbenannte
+Register kopiert und mit den Kommandos <b>p</b> oder <b>P</b> an beliebigen
+Stellen wieder einfügt.
+</p>
+
+<hr>
+<!-- //////////////////////////////////////////////////////////////// -->
+
+<h4><a name="status" id="status">Anzeige des Status</a></h4>
+
+<blockquote>
+<table summary="" border="" cellpadding="3">
+<tbody><tr>
+<td valign="top"><b>Ctrl-G</b></td>
+<td valign="top">aktuellen Dateinamen, Cursor-Position (sofern
+Option <b>ruler</b> nicht aktiv ist) und Datei-Status
+(<b>[Modified]</b>, <b>[readonly]</b>) anzeigen</td>
+</tr>
+<tr>
+<td valign="top"><b><i>Zahl</i> Ctrl-G</b></td>
+<td valign="top">wie <b>Ctrl-G</b>, aber den vollen Pfad des
+Dateinamens anzeigen. Falls die <i>Zahl</i> größer als 1
+ist, wird zusätzlich die Puffer-Nummer ausgegeben.</td>
+</tr>
+<tr>
+<td valign="top"><b>gCtrl-G</b></td>
+<td valign="top">Informationen über die aktuelle
+Cursor-Position anzeigen (logische und physische Spalte, Zeile,
+Zeichenposition im Text)</td>
+</tr>
+</tbody></table>
+</blockquote>
+
+<hr>
+<!-- //////////////////////////////////////////////////////////////// -->
+
+<h4><a name="optionen" id="optionen">Anzeige und Einstellung von Optionen</a></h4>
+
+<p>
+Der VIM kennt drei Arten von Optionen:
+</p>
+
+<blockquote>
+<table summary="" border="" cellpadding="3">
+<tbody><tr>
+<td valign="top">boolesche Optionen</td>
+<td valign="top">können nur ein- oder ausgeschaltet werden
+<p>Beispiel: <b>ruler</b></p>
+</td>
+</tr>
+<tr>
+<td valign="top">numerische Optionen</td>
+<td valign="top">haben einen numerischen Wert
+<p>Beispiel: <b>undolevels</b></p>
+</td>
+</tr>
+<tr>
+<td valign="top">Zeichenketten-Optionen</td>
+<td valign="top">haben eine Zeichenkette als Wert
+<p>Beispiel: <b>helpfile</b></p>
+</td>
+</tr>
+</tbody></table>
+</blockquote>
+
+<p>
+Die folgende Tabelle enthält einige nützliche Kommandos:
+</p>
+
+<blockquote>
+<table summary="" border="" cellpadding="3">
+<tbody><tr>
+<td valign="top"><b>:se[t]</b></td>
+<td valign="top">Anzeigen aller Optionen, die von ihrem
+Default-Wert abweichen</td>
+</tr>
+<tr>
+<td valign="top"><b>:se[t]&nbsp;all</b></td>
+<td valign="top">Anzeigen aller Optionen mit Ausnahme der
+Terminal-Optionen</td>
+</tr>
+<tr>
+<td valign="top"><b>:se[t]&nbsp;<i>Option</i></b></td>
+<td valign="top">Setzen boolescher Optionen bzw. Anzeige des Wertes
+von numerischen und Zeichenketten-Optionen</td>
+</tr>
+<tr>
+<td valign="top">
+<b>:se[t]&nbsp;<i>Option</i>=<i>Wert</i></b></td>
+<td valign="top">Setzen des Wertes von numerischen und
+Zeichenketten-Optionen
+<p>Beispiele:<br>
+<b>set undolevels=2000</b><br>
+<b>set helpfile=$VIM/doc/help.txt</b></p>
+</td>
+</tr>
+<tr>
+<td valign="top"><b>:se[t]&nbsp;<i>Option</i>?</b></td>
+<td valign="top">Anzeige des Wertes einer Option
+<p>Hinweis: Das abschließende Fragezeichen ist nur bei
+booleschen Optionen erforderlich.</p>
+<p>Beispiel:<br>
+<b>set binary?</b></p>
+</td>
+</tr>
+</tbody></table>
+</blockquote>
+
+<p>
+<a name="options" id="options">Ausgewählte Optionen
+(zusammen mit ihren Abkürzungen, sofern solche existieren) und
+deren Bedeutung:</a>
+</p>
+
+<blockquote>
+<table summary="" border="" cellpadding="3">
+<tbody><tr>
+<td valign="top"><b>list</b></td>
+<td valign="top">Repräsentation aller Tabulatoren durch
+<b>^I</b> (Ctrl-I) und Anzeige der Zeilenendezeichen als
+<b>$</b></td>
+</tr>
+<tr>
+<td valign="top"><b>number</b><br>
+<b>nu</b></td>
+<td valign="top">Voranstellen der Zeilennummer vor jede
+Textzeile</td>
+</tr>
+<tr>
+<td valign="top"><b>showmode</b><br>
+<b>smd</b></td>
+<td valign="top">Anzeige des aktuellen Modus im Status-Bereich,
+sofern sich der Editor im Einfüge-, Ersetzungs- oder visuellen
+Modus befindet</td>
+</tr>
+<tr>
+<td valign="top"><b>undolevels</b><br>
+<b>ul</b></td>
+<td valign="top">maximale Anzahl von Undo-Schritten</td>
+</tr>
+<tr>
+<td valign="top"><b>autoindent</b><br>
+<b>ai</b></td>
+<td valign="top">automatisches Einrücken in neu erzeugten
+Zeilen im Einfüge-Modus</td>
+</tr>
+<tr>
+<td valign="top"><b>ruler</b><br>
+<b>ru</b></td>
+<td valign="top">permanente Anzeige der aktuellen Zeilen- und
+Spaltennummer in der Statuszeile</td>
+</tr>
+<tr>
+<td valign="top"><b>magic</b></td>
+<td valign="top">einige Zeichen erhalten bei Suchmustern und
+Ersetzungs-Zeichenketten eine Sonderbedeutung</td>
+</tr>
+<tr>
+<td valign="top"><b>ignorecase</b><br>
+<b>ic</b></td>
+<td valign="top">Nichtbeachtung Groß-/Kleinschreibung bei der
+Suche</td>
+</tr>
+<tr>
+<td valign="top"><b>smartcase</b><br>
+<b>scs</b></td>
+<td valign="top">Ignorieren der Option <b>ignorecase</b>, sofern
+das Suchmuster mindestens einen Großbuchstaben
+enthält</td>
+</tr>
+<tr>
+<td valign="top"><b>backup</b><br>
+<b>bk</b></td>
+<td valign="top">beim Abspeichern eine Backup-Datei anlegen und erhalten
+(d.h. nicht löschen, nachdem der Pufferinhalt erfolgreich
+gesichert worden ist)</td>
+</tr>
+</tbody></table>
+</blockquote>
+
+<p>
+Durch Voranstellen von <b>no</b> vor eine boolesche Option wird diese
+ausgeschaltet, z.B. <b>:set&nbsp;nolist</b> oder <b>:set&nbsp;nonu</b>.
+</p>
+
+<hr>
+<!-- //////////////////////////////////////////////////////////////// -->
+
+<h4><a name="beenden" id="beenden">Abspeichern und Beenden</a></h4>
+
+<blockquote>
+<table summary="" border="" cellpadding="3">
+<tbody><tr>
+<td valign="top"><b>ZZ</b></td>
+<td valign="top">Abspeichern des Editor-Puffers, sofern Änderungen vorgenommen
+wurden, und nachfolgendes Schließen des Fensters
+
+<p>
+Sofern das letzte Fenster geschlossen wurde, wird der Editor
+beendet.
+</p>
+</td>
+</tr>
+<tr>
+<td valign="top"><b>:w[rite]</b></td>
+<td valign="top">Abspeichern des Editor-Puffers in die aktuelle Datei</td>
+</tr>
+<tr>
+<td valign="top"><b>:w[rite]&nbsp;<i>Datei</i></b></td>
+<td valign="top">Abspeichern des Editor-Puffers in eine spezifizierte Datei</td>
+</tr>
+<tr>
+<td valign="top">
+<b>:<i>Bereich&nbsp;</i>w[rite]&nbsp;<i>Datei</i></b></td>
+<td valign="top">Abspeichern des explizit angegebenen Zeilenbereichs in eine spezifizierte Datei</td>
+</tr>
+<tr>
+<td valign="top"><b>:e[dit] <i>Datei</i></b></td>
+<td valign="top">Editieren einer anderen Datei, sofern der aktuelle
+Puffer nicht modifiziert wurde</td>
+</tr>
+<tr>
+<td valign="top"><b>q!</b></td>
+<td valign="top">Beenden des Editors ohne Speichern
+<p>
+Sofern der Text nicht modifiziert wurde, kann das Ausrufezeichen
+entfallen. Falls mehrere Fenster offen sind, wird nur das aktuelle
+Fenster geschlossen, der Editor aber nicht beendet.
+</p>
+</td>
+</tr>
+<tr>
+<td valign="top"><b>:w[rite]!</b><br>
+<b>:w[rite]!&nbsp;<i>Datei</i></b></td>
+<td valign="top">Überschreiben einer Read-Only-Datei</td>
+</tr>
+</tbody></table>
+</blockquote>
+
+<hr>
+<!-- //////////////////////////////////////////////////////////////// -->
+
+<h4><a name="sonstige" id="sonstige">Auswahl sonstiger nützlicher Kommandos</a></h4>
+
+<blockquote>
+<table summary="" border="" cellpadding="3">
+<tbody><tr>
+<td valign="top"><b>:h[elp]</b><br>
+<b>:h[elp] <i>Thema</i></b></td>
+<td valign="top">Online-Hilfe aktivieren</td>
+</tr>
+<tr>
+<td valign="top"><b>:ve[rsion]</b></td>
+<td valign="top">Anzeige der Editor-Version</td>
+</tr>
+<tr>
+<td valign="top"><b><i>[n]</i>&nbsp;u</b></td>
+<td valign="top">Undo für das jeweils letzte Kommando
+(mehrstufig möglich)</td>
+</tr>
+<tr>
+<td valign="top"><b><i>[n]</i>&nbsp;Ctrl-R</b><br>
+<b>:red[o]</b></td>
+<td valign="top">Redo (Undo der Undo-Operation; ebenfalls mehrstufig möglich)
+<p>
+Mit <b>:redo</b> kann man aber immer nur genau einen Schritt rückgängig machen.
+</p>
+</td>
+</tr>
+<tr>
+<td valign="top"><b>U</b></td>
+<td valign="top">Undo aller Änderungen, die zuletzt in einer
+Zeile vorgenommen wurden</td>
+</tr>
+<tr>
+<td valign="top"><b><i>[n]</i>&nbsp;.</b><br>
+(Punkt)</td>
+<td valign="top">Wiederholung des letzten Einfüge- bzw.
+Lösch-Kommandos, wobei deren Zähler durch n ersetzt wird</td>
+</tr>
+<tr>
+<td valign="top"><b>:ar[gs]</b><br>
+<b>:files</b></td>
+<td valign="top">Anzeige der Dateiliste</td>
+</tr>
+<tr>
+<td valign="top"><b>:n[ext]</b></td>
+<td valign="top">Übergang zur nächsten Datei der
+Liste</td>
+</tr>
+<tr>
+<td valign="top"><b>:N[ext]</b></td>
+<td valign="top">Übergang zur vorherigen Datei der Liste</td>
+</tr>
+<tr>
+<td valign="top"><b>:rew[ind]</b></td>
+<td valign="top">Übergang zur ersten Datei der Liste</td>
+</tr>
+<tr>
+<td valign="top"><b>:la[st]</b></td>
+<td valign="top">Übergang zur letzten Datei der Liste</td>
+</tr>
+<tr>
+<td valign="top"><b>:r[ead] <i>Datei</i></b></td>
+<td valign="top">Einlesen einer Datei hinter die aktuelle
+Zeile</td>
+</tr>
+<tr>
+<td valign="top"><b>:0r[ead] <i>Datei</i></b></td>
+<td valign="top">Einlesen einer Datei vor die erste Zeile eines
+Textes</td>
+</tr>
+<tr>
+<td valign="top">
+<b>:<i>[Bereich]&nbsp;</i>g[lobal]/<i>Muster</i>/<i>Ex-Kommando</i></b><br>
+
+<b>:<i>[Bereich]&nbsp;</i>v[global]/<i>Muster</i>/<i>Ex-Kommando</i></b></td>
+<td valign="top">wiederholte Anwendung eines Ex-Kommandos auf einen
+Zeilenbereich
+
+<p>
+Sofern kein Bereich angegeben wird, beziehen sich diese beiden Kommandos auf
+den gesamten Text (wie bei <b>%</b> bzw. <b>1,$</b>).
+</p>
+
+<p>
+<b>g</b> wendet das jeweilige Ex-Kommando auf alle Zeilen des Bereichs an, die
+dem <i>Muster</i> entsprechen. <b>v</b> wendet dagegen das Ex-Kommando auf alle
+Zeilen an, die dem <i>Muster</i> nicht entsprechen.
+</p>
+
+<p>
+Anwendungsbeispiele finden sich im Abschnitt über <a href="http://www-user.tu-chemnitz.de/%7Ehot/VIM/regexp.html"><b>reguläre Ausdrücke</b></a>.
+</p>
+</td>
+</tr>
+<tr>
+<td valign="top"><b>q <i>Register</i></b></td>
+<td valign="top">Beginn der Aufzeichnung einer Tastenfolge in einem
+Register
+<p>Beispiel:<br>
+<b>qa</b> (Aufzeichnung in Register <b>a</b> starten)</p>
+</td>
+</tr>
+<tr>
+<td valign="top"><b>q</b></td>
+<td valign="top">Ende der Aufzeichnung einer Tastenfolge</td>
+</tr>
+<tr>
+<td valign="top"><b>@ <i>Register</i></b></td>
+<td valign="top">Ausführen des Inhalts eines Registers</td>
+</tr>
+<tr>
+<td valign="top"><b>Ctrl-A</b><br>
+<b><i>Zahl</i> Ctrl-A</b></td>
+<td valign="top">Addition einer Eins bzw. der angegebenen Zahl zu
+der Zahl unter bzw. der nächsten Zahl hinter dem Cursor</td>
+</tr>
+<tr>
+<td valign="top"><b>Ctrl-X</b><br>
+<b><i>Zahl</i> Ctrl-X</b></td>
+<td valign="top">Subtraktion einer Eins bzw. der angegebenen Zahl
+von der Zahl unter bzw. der nächsten Zahl hinter dem Cursor</td>
+</tr>
+</tbody></table>
+</blockquote>
+
+<hr>
+<!-- //////////////////////////////////////////////////////////////// -->
+
+<h4><a name="vismod" id="vismod">Verwendung des visuellen Modus</a></h4>
+
+<p>
+Ein besonders elegantes Arbeiten ist mit dem visuellen Modus möglich. Mehrere
+der mit den oben gezeigten Kommandos erreichbaren Wirkungen lassen sich im
+visuellen Modus wesentlich einfacher realisieren.
+</p>
+
+<p>
+Ein Textblock kann folgendermaßen markiert werden:
+</p>
+
+<blockquote>
+<table summary="" border="" cellpadding="3">
+<tbody><tr>
+<td valign="top"><b>v</b></td>
+<td valign="top">zeichenweise</td>
+</tr>
+<tr>
+<td valign="top"><b>V</b></td>
+<td valign="top">zeilenweise</td>
+</tr>
+<tr>
+<td valign="top"><b>Ctrl-V</b></td>
+<td valign="top">blockweise</td>
+</tr>
+<tr>
+<td valign="top"><b>gv</b></td>
+<td valign="top">erneute Markierung des Bereichs, der zuletzt im visuellen Modus
+markiert war (sofern es einen solchen gibt)</td>
+</tr>
+</tbody></table>
+</blockquote>
+
+<p>
+Nach der Markierung eines Textblocks können auf ihm u.a. folgende
+Operationen ausgeführt werden:
+</p>
+
+<blockquote>
+<table summary="" border="" cellpadding="3">
+<tbody><tr>
+<td valign="top"><b>!<i>Filter</i></b></td>
+<td valign="top">Filtern durch ein externes Programm
+
+<p>
+Beispiel:<br>
+<b>!<i>sort</i></b> bewirkt eine Sortierung des markierten
+Bereichs durch das externe Kommando <b>sort</b>.
+</p>
+</td>
+</tr>
+<tr>
+<td valign="top"><b>:</b></td>
+<td valign="top">Übergang zum Ex-Modus. Dabei werden automatisch die beiden
+speziellen Marken <b>'&lt;</b> und <b>'&gt;</b>, die den Anfang bzw. das
+Ende des markierten Bereichs kennzeichnen, auf die Kommandozeile
+übernommen.</td>
+</tr>
+<tr>
+<td valign="top"><b>&lt;</b></td>
+<td valign="top">Verschieben nach links (um die durch die Option
+<b>shiftwidth</b> bestimmte Anzahl von Positionen)</td>
+</tr>
+<tr>
+<td valign="top"><b>&gt;</b></td>
+<td valign="top">Verschieben nach rechts (um die durch die Option
+<b>shiftwidth</b> bestimmte Anzahl von Positionen)</td>
+</tr>
+<tr>
+<td valign="top"><b>c</b>   <b>C</b>    <b>r</b>  
+<b>R</b></td>
+<td valign="top">Substituieren, d.h. Löschen des alten Inhalts
+und Übergang zum Einfügen</td>
+</tr>
+<tr>
+<td valign="top"><b>d</b>   <b>D</b>    <b>x</b>  
+<b>X</b></td>
+<td valign="top">Löschen</td>
+</tr>
+<tr>
+<td valign="top"><b>J</b></td>
+<td valign="top">Verbinden zu einer Zeile</td>
+</tr>
+<tr>
+<td valign="top"><b>gq</b><br>
+(in älteren VIM-Versionen auch <b>Q</b>)</td>
+<td valign="top">Formatieren (Zeilen auf annähernd gleiche
+Länge bringen)</td>
+</tr>
+<tr>
+<td valign="top"><b>U</b></td>
+<td valign="top">Umwandeln der Klein- in Großbuchstaben</td>
+</tr>
+<tr>
+<td valign="top"><b>u</b></td>
+<td valign="top">Umwandeln der Groß- in Kleinbuchstaben</td>
+</tr>
+<tr>
+<td valign="top"><b>~</b><br>
+(Tilde)</td>
+<td valign="top">Umwandeln der Groß- in Kleinbuchstaben und
+umgekehrt</td>
+</tr>
+<tr>
+<td valign="top"><b>y</b>   <b>Y</b></td>
+<td valign="top">Kopieren ins unbenannte Register</td>
+</tr>
+<tr>
+<td valign="top"><b>o</b></td>
+<td valign="top">Vertauschen der Anfangs- und Ende-Markierung</td>
+</tr>
+</tbody></table>
+</blockquote>
+
+<hr>
+<!-- //////////////////////////////////////////////////////////////// -->
+
+<h4><a name="mpuffer" id="mpuffer">Arbeit mit mehreren Puffern und Fenstern</a></h4>
+
+<blockquote>
+<table summary="" border="" cellpadding="3">
+<tbody><tr>
+<td valign="top"><b>:sp[lit]</b></td>
+<td valign="top">horizontales Teilen des aktuellen Fensters
+
+<p>
+Wird noch eine Datei als Argument angegeben
+(<b>:split&nbsp;<i>Datei</i></b>), so wird diese zur aktuellen
+Datei im neuen Fenster (analog Kommando <b>:e</b>).
+</p>
+</td>
+</tr><tr>
+<td valign="top"><b>:vs[plit]</b></td>
+<td valign="top">vertikales Teilen des aktuellen Fensters
+
+<p>
+Wird noch eine Datei als Argument angegeben
+(<b>:vsplit&nbsp;<i>Datei</i></b>), so wird diese zur aktuellen
+Datei im neuen Fenster (analog Kommando <b>:e</b>).
+</p>
+</td>
+</tr>
+<tr>
+<td valign="top"><b>Ctrl-W&nbsp;Ctrl-W</b><br>
+<b>Ctrl-W w</b></td>
+<td valign="top">Wechsel des aktuellen Fensters</td>
+</tr>
+<tr>
+<td valign="top"><b>:ba[ll]</b></td>
+<td valign="top">pro Puffer genau ein Fenster auf dem Bildschirm
+darstellen</td>
+</tr>
+<tr>
+<td valign="top"><b>:wa[ll]</b></td>
+<td valign="top">alle modifizierten Puffer ins Dateisystem
+schreiben, ohne den Editor zu beenden</td>
+</tr>
+<tr>
+<td valign="top"><b>:xa[ll]</b></td>
+<td valign="top">alle modifizierten Puffer ins Dateisystem
+schreiben und Editor beenden</td>
+</tr>
+<tr>
+<td valign="top"><b>:qa[ll]</b></td>
+<td valign="top">alle Fenster schließen und den Editor
+beenden, sofern kein Puffer modifiziert wurde</td>
+</tr>
+</tbody></table>
+</blockquote>
+
+<p>
+Da die Register nicht puffer-/fensterbezogen sind, bieten sie sich zum
+Übertragen von Text zwischen Puffern/Fenstern an. So könnte man in einem
+Fenster einen bestimmten Text in ein Register speichern, dann in ein anderes
+Fenster wechseln und den Registerinhalt dort an einer beliebigen Stelle wieder
+einfügen.
+</p>
+
+<hr>
+<!-- //////////////////////////////////////////////////////////////// -->
+
+<h4><a name="syntax" id="syntax">Syntax Highlighting</a></h4>
+
+<p>
+Ab Version 5.0 verfügt der VIM über ein durch Konfigurationsdateien anpassbares,
+flexibles <b>Syntax Highlighting</b>. Für eine sehr große Anzahl von Sprachen
+bzw. Formaten (C, C++, Java, TeX, HTML, Shell, Maple, ...) sind bereits in der
+Standard-Distribution des VIM geeignete Syntax-Dateien enthalten, die vom
+Anwender unverändert genutzt bzw. bei Bedarf erweitert werden können.
+</p>
+
+<p>
+Das Syntax Highlighting bietet die Möglichkeit, verschiedene Teile eines Textes
+durch unterschiedliche Farben oder Fonts darzustellen und so optisch
+hervorzuheben bzw. leichter unterscheidbar zu machen. Derartige Textteile
+können z.B. Schlüsselwörter einer Programmiersprache oder Zeichenfolgen, die
+einem bestimmten Muster entsprechen, sein. Syntax Highlighting kann
+beispielsweise einem Programmierer helfen, bestimmte lexikalische oder
+syntaktische Fehler in einem Quelltext einfacher und schneller zu erkennen.
+</p>
+
+<blockquote>
+<table summary="" border="" cellpadding="3">
+<tbody><tr>
+<td valign="top"><b>:sy[ntax] on</b></td>
+<td valign="top">automatisches Syntax Highlighting unter Verwendung
+der zur VIM-Distribution gehörenden Syntax-Dateien einschalten
+
+<p>
+Das konkrete Highlighting-Format wird meist an Hand der Dateiendung und
+manchmal durch Analyse der ersten Zeile der Datei ermittelt.
+</p>
+</td>
+</tr>
+<tr>
+<td valign="top"><b>:sy[ntax] off</b></td>
+<td valign="top">Syntax Highlighting ausschalten</td>
+</tr>
+<tr>
+<td valign="top"><b>:so[urce] <i>Syntax-Datei</i></b></td>
+<td valign="top">gezielte Auswahl eines bestimmten
+Highlighting-Formats
+
+<p>
+Beispiel (für Vim 6.3):
+</p>
+
+<pre>  <b>:so&nbsp;$VIM/vim63/syntax/c.vim</b>
+</pre>
+
+<p>
+Sofern die zur VIM-Distribution gehörenden Syntax-Dateien unter
+<b>$VIM/<i>Vim-Version</i>/syntax/<i>Format</i>.vim</b> stehen, was dem
+Standard entspricht, so aktiviert dieses Kommando für den aktuellen Puffer das
+Syntax Highlighting für die Programmiersprache C. Um den vollen Funktionsumfang
+zur Verfügung zu haben, empfiehlt es sich, zusätzlich (am besten vorher) das
+automatische Syntax Highlighting durch <b>:syntax on</b> einzuschalten.
+</p>
+
+<p>
+Bei Verwendung der GUI-Version des VIM (<b>gvim</b>) kann man das gewünschte
+Highlighting-Format über ein Menü auswählen.
+</p>
+</td>
+</tr>
+</tbody></table>
+</blockquote>
+<hr>
+<address>
+<p><a href="http://www.tu-chemnitz.de/urz/kontakt.html?user=hot">Holger Trapp</a></p>
+letzte Modifikation: 25.10.2006
+</address>
+
+
+</body></html>

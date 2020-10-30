@@ -1,0 +1,1276 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en"><head><script src="Search_and_replace_in_multiple_buffers-Dateien/segments" type="text/javascript"></script><script async="" src="Search_and_replace_in_multiple_buffers-Dateien/analytics.js"></script><div class="kxhead" data-id="HixyqEjH" style="display:none;"><span data-alias="User Segments" class="kxtag" data-id="10304"><script type="text/javascript">Krux('require:segments')</script></span><span data-alias="Lotame (CrowdControl)" class="kxtag" data-id="10631"><script type="text/javascript">
+$.getScript("http://tags.crwdcntrl.net/c/206/cc.js", function() {
+   LOTCC.bcp();
+});
+</script></span><span data-alias="Visual DNA cookie match" class="kxtag" data-id="10709"><img src="Search_and_replace_in_multiple_buffers-Dateien/um_002.gif"></span><span data-alias="Krux Attribute Scraper" class="kxtag" data-id="10712"><script>
+(function(){
+        Krux.wgDartCustomKeyValues = Krux.require('util').parseKeyValues(wgDartCustomKeyValues || '', ';');
+    })();
+    Krux('scrape', {
+        page_attr_egenre: {
+            javascript: "Krux.wgDartCustomKeyValues.egnre"
+        },
+        page_attr_genre: {
+            javascript: "Krux.wgDartCustomKeyValues.gnre"
+        },
+        page_attr_platform: {
+            javascript: "Krux.wgDartCustomKeyValues.pform"
+        },
+        page_attr_publisher: {
+            javascript: "Krux.wgDartCustomKeyValues.pub"
+        },
+        page_attr_developer: {
+            javascript: "Krux.wgDartCustomKeyValues.dev"
+        },
+        page_attr_subject: {
+            javascript: "Krux.wgDartCustomKeyValues.sub"
+        },
+        page_attr_esrb: {
+            javascript: "Krux.wgDartCustomKeyValues.esrb"
+        },
+        page_attr_media: {
+            javascript: "Krux.wgDartCustomKeyValues.media"
+        }
+    });
+</script></span><span data-alias="DataLogix cookie match" class="kxtag" data-id="10713"><img src="Search_and_replace_in_multiple_buffers-Dateien/um.gif"></span><span data-alias="VisualDNA" class="kxtag" data-id="10491"><script type="text/javascript">
+(function(){var b,a;b=document.createElement("script");b.src="//a1.vdna-assets.com/analytics.js";b.async=true;a=document.getElementsByTagName("head")[0];a.insertBefore(b,a.firstChild);this.VDNA=this.VDNA||{};this.VDNA.queue=this.VDNA.queue||[];}());
+</script>
+<script type="text/javascript">
+VDNA.queue.push({
+    apiKey : "wikia",
+    method : "reportPageView"
+});
+</script></span></div><script src="Search_and_replace_in_multiple_buffers-Dateien/controltag" async="" type="text/javascript"></script><script src="Search_and_replace_in_multiple_buffers-Dateien/all.js" async=""></script>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=1200">
+
+	
+	<meta property="fb:page_id" content="384680703347">
+<meta name="description" content="Often search and replace is needed in multiple files. This tip uses the procedures from run a...">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Vim Tips Wiki">
+<meta property="og:title" content="Search and replace in multiple buffers">
+<meta property="og:image" content="http://images3.wikia.nocookie.net/__cb20110108235206/vim/images/8/89/Wiki-wordmark.png">
+<meta property="og:description" content="Often search and replace is needed in multiple files. This tip uses the procedures from run a...">
+<meta property="og:url" content="http://vim.wikia.com/wiki/Search_and_replace_in_multiple_buffers">
+<meta property="fb:app_id" content="112328095453510">
+<meta name="generator" content="MediaWiki 1.16.5">
+<meta name="keywords" content="Vim Tips Wiki,vim,Search and replace in multiple buffers,VimTip381,VimTip383,Search and replace,Run a command in multiple buffers,Search patterns">
+<link rel="alternate" type="application/x-wiki" title="Edit" href="http://vim.wikia.com/wiki/Search_and_replace_in_multiple_buffers?action=edit">
+<link rel="edit" title="Edit" href="http://vim.wikia.com/wiki/Search_and_replace_in_multiple_buffers?action=edit">
+<link rel="canonical" href="http://vim.wikia.com/wiki/Search_and_replace_in_multiple_buffers">
+<link rel="apple-touch-icon" href="http://images.wikia.com/vim/images/b/bc/Wiki.png">
+<link rel="shortcut icon" href="http://images3.wikia.nocookie.net/__cb51062/vim/images/6/64/Favicon.ico">
+<link rel="search" type="application/opensearchdescription+xml" href="http://vim.wikia.com/opensearch_desc.php" title="Vim Tips Wiki (en)">
+<link rel="copyright" href="http://community.wikia.com/wiki/Wikia:Licensing">
+<link rel="alternate" type="application/atom+xml" title="Vim Tips Wiki Atom feed" href="http://vim.wikia.com/wiki/Special:RecentChanges?feed=atom">
+	<title>Search and replace in multiple buffers - Vim Tips Wiki</title>
+	<!-- SASS-generated CSS file -->
+	<link rel="stylesheet" href="Search_and_replace_in_multiple_buffers-Dateien/oasis.css">
+	<!-- CSS injected by extensions -->
+	<link rel="stylesheet" href="Search_and_replace_in_multiple_buffers-Dateien/VideoHandlers.css"><link rel="stylesheet" href="Search_and_replace_in_multiple_buffers-Dateien/UserLoginDropdown.css"><link rel="stylesheet" href="Search_and_replace_in_multiple_buffers-Dateien/ChatRailModule.css"><style>			/* Add a pretty logo to Facebook links */
+			.mw-fblink {
+				background: url(http://static.ak.fbcdn.net/images/icons/favicon.gif) top left no-repeat !important;
+				padding-left: 17px !important;
+			}</style>	<link rel="stylesheet" href="Search_and_replace_in_multiple_buffers-Dateien/site_anon_css.css">
+	<script src="Search_and_replace_in_multiple_buffers-Dateien/ga.js" async="" type="text/javascript"></script><script type="text/javascript" async="" src="Search_and_replace_in_multiple_buffers-Dateien/quant.js"></script><script src="Search_and_replace_in_multiple_buffers-Dateien/beacon.js" async=""></script><script>
+var skin="oasis",
+stylepath="http://images.wikia.nocookie.net/__cb51060/common/skins",
+wgUrlProtocols="http\\:\\/\\/|https\\:\\/\\/|ftp\\:\\/\\/|irc\\:\\/\\/|gopher\\:\\/\\/|telnet\\:\\/\\/|nntp\\:\\/\\/|worldwind\\:\\/\\/|mailto\\:|news\\:|svn\\:\\/\\/|xmpp\\:",
+wgArticlePath="/wiki/$1",
+wgScriptPath="",
+wgScriptExtension=".php",
+wgScript="/index.php",
+wgVariantArticlePath=false,
+wgActionPaths={},
+wgServer="http://vim.wikia.com",
+wgCanonicalNamespace="",
+wgCanonicalSpecialPageName=false,
+wgNamespaceNumber=0,
+wgPageName="Search_and_replace_in_multiple_buffers",
+wgTitle="Search and replace in multiple buffers",
+wgAction="view",
+wgArticleId=2442,
+wgIsArticle=true,
+wgUserName=null,
+wgUserGroups=null,
+wgUserLanguage="en",
+wgContentLanguage="en",
+wgBreakFrames=false,
+wgCurRevisionId=30944,
+wgVersion="1.16.5",
+wgEnableAPI=true,
+wgEnableWriteAPI=true,
+wgSeparatorTransformTable=["", ""],
+wgDigitTransformTable=["", ""],
+wgMainPageTitle="Vim Tips Wiki",
+wgFormattedNamespaces={"-2": "Media", "-1": "Special", "0": "", "1": "Talk", "2": "User", "3": "User talk", "4": "Vim Tips Wiki", "5": "Vim Tips Wiki talk", "6": "File", "7": "File talk", "8": "MediaWiki", "9": "MediaWiki talk", "10": "Template", "11": "Template talk", "12": "Help", "13": "Help talk", "14": "Category", "15": "Category talk", "110": "Forum", "111": "Forum talk", "112": "Script", "113": "Script talk", "400": "Video", "401": "Video talk", "1100": "RelatedVideos", "1200": "Message Wall", "1201": "Thread", "1202": "Message Wall Greeting"},
+wgNamespaceIds={"media": -2, "special": -1, "": 0, "talk": 1, "user": 2, "user_talk": 3, "vim_tips_wiki": 4, "vim_tips_wiki_talk": 5, "file": 6, "file_talk": 7, "mediawiki": 8, "mediawiki_talk": 9, "template": 10, "template_talk": 11, "help": 12, "help_talk": 13, "category": 14, "category_talk": 15, "forum": 110, "forum_talk": 111, "script": 112, "script_talk": 113, "video": 400, "video_talk": 401, "relatedvideos": 1100, "message_wall": 1200, "thread": 1201, "message_wall_greeting": 1202, "image": 6, "image_talk": 7},
+wgSiteName="Vim Tips Wiki",
+wgCategories=["VimTip", "Searching"],
+wgMWSuggestTemplate="http://vim.wikia.com/api.php?action=opensearch\x26search={searchTerms}\x26namespace={namespaces}\x26suggest",
+wgDBname="vim",
+wgSearchNamespaces=[0],
+wgMWSuggestMessages=["with suggestions", "no suggestions"],
+wgRestrictionEdit=[],
+wgRestrictionMove=[],
+wgEnableAdMeldAPIClient=true,
+wgEnableAdMeldAPIClientPixels=true,
+wgEnableOpenXSPC=true,
+cityShort="tech",
+cscoreCat="Lifestyle",
+wgAdDriverCookieLifetime=1,
+wgHighValueCountries={"CA": 3, "DE": 3, "HU": 3, "UK": 3, "GB": 3, "FR": 3, "DK": 3, "BE": 3, "LU": 3, "NO": 3, "SE": 3, "FI": 3, "NL": 3, "PT": 3, "US": 3},
+wgAdDriverUseExpiryStorage=true,
+adLogicPageType="article",
+wgDartCustomKeyValues=null,
+wgEnableKruxTargeting=true,
+wgKruxCategoryId="HixyqEjH",
+wgTimeAgoi18n={"month": "a month ago", "months": "%d months ago", "day": "a day ago", "days": "%d days ago", "hour": "an hour ago", "hours": "%d hours ago", "minute": "a minute ago", "minutes": "%d minutes ago", "seconds": "a minute ago"},
+wgJSMessagesCB="51060.0.0",
+sassParams={"color-body": "#003816", "color-page": "#ffffff", "color-buttons": "#25883d", "color-links": "#2b54b5", "color-header": "#002c11", "background-image": "", "background-align": "center", "background-tiled": "false", "background-fixed": false, "page-opacity": "100", "wordmark-font": "cpmono"},
+wgAssetsManagerQuery="/__am/%4$d/%1$s/%3$s/%2$s",
+wgCdnRootUrl="http://images.wikia.nocookie.net",
+JSSnippetsStack=[],
+_gaq=[],
+_wtq=[],
+wgCatId=12,
+wgParentCatId=0,
+wgCityId="2827",
+wgBlankImgUrl="data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+wgMainpage="Vim Tips Wiki",
+wgStyleVersion="51060",
+wgExtensionsPath="http://images.wikia.nocookie.net/__cb51060/common/extensions",
+wgSitename="Vim Tips Wiki",
+wgAfterContentAndJS=[],
+wgMWrevId=null,
+wgYUIPackageURL="http://images.wikia.nocookie.net/__am/51060/group/-/yui",
+wgRevisionId=30944,
+wgWikiFactoryTagIds=[125],
+wgWikiFactoryTagNames=["technology"],
+wgCookieDomain=".wikia.com",
+wgCookiePath="/",
+ls_template_ns="Template",
+ls_file_ns="File",
+ExitstitialOutboundScreen="/wiki/Special:Outbound?f=Search_and_replace_in_multiple_buffers",
+wgExitstitialTitle="Leaving Vim Tips Wiki",
+wgExitstitialRegister="\x3ca href=\"#\" class=\"register\"\x3eRegister\x3c/a\x3e or \x3ca href=\"#\" class=\"login\"\x3eLogin\x3c/a\x3e to skip ads.",
+wgExitstitialButton="Skip This Ad",
+wgInterstitialPath="http://vim.wikia.com/wiki/Special:Interstitial?u=",
+wgEnableUserLoginExt=true,
+wgEnableImageLightboxExt=true,
+wgEnableWikiaFollowedPages=true,
+wgFollowedPagesPagerLimit=15,
+wgFollowedPagesPagerLimitAjax=600,
+WikiaEnableNewCreatepage=true,
+ContentNamespacesText=[""],
+fbAppId="112328095453510",
+fbScript="http://connect.facebook.net/en_US/all.js",
+fbUseMarkup=true,
+fbLogo=true,
+fbLogoutURL="/wiki/Special:UserLogout?returnto=Search_and_replace_in_multiple_buffers",
+fbReturnToTitle="Search_and_replace_in_multiple_buffers",
+fbScriptLangCode="en_US",
+csAddCategoryButtonText="Add category",
+csInfoboxCaption="Category options",
+csInfoboxCategoryText="Provide the name of the category:",
+csInfoboxSortkeyText="Alphabetize this article on the \"$1\" category page under the name: (optional)",
+csInfoboxSave="Save",
+csEmptyName="Provide category name (part before |)",
+csDefaultSort=null,
+csCategoryNamespaces="Category|Category",
+csDefaultNamespace="Category",
+csCodeView="Code view",
+csVisualView="Visual view",
+TOCimprovementsEnabled="1";
+</script>
+
+<!-- Used for page load time tracking -->
+<script>var wgNow = new Date();</script>
+
+	<script type="text/javascript" src="Search_and_replace_in_multiple_buffers-Dateien/wsl.js"></script>
+	<!-- Make IE recognize HTML5 tags. -->
+	<!--[if IE]>
+		<script>/*@cc_on'abbr article aside audio canvas details figcaption figure footer header hgroup mark menu meter nav output progress section summary time video'.replace(/\w+/g,function(n){document.createElement(n)})@*/</script>
+	<![endif]-->
+
+		<script src="data:text/javascript,void%200"></script><script>$gwsynctest= true</script><script></script><script src="data:text/javascript,void%200"></script><link href="Search_and_replace_in_multiple_buffers-Dateien/WikiaTooltip.css" media="screen" type="text/css" rel="stylesheet"><link media="print" type="text/css" rel="stylesheet" href="Search_and_replace_in_multiple_buffers-Dateien/cb51060typePrintCSSisOasistrue.css"></head>
+<body class="mediawiki ltr ns-0 ns-subject page-Search_and_replace_in_multiple_buffers TOCimprovements skin-oasis"><iframe id="0.8751867642754874" src="Search_and_replace_in_multiple_buffers-Dateien/a.htm" aria-hidden="true" style="display: none;" title="VisualDNA Analytics" height="0" width="0"></iframe>
+<!-- comScore -->
+<!-- Start for Comscore, page_view -->
+
+<!-- Begin comScore Tag -->
+<script type="text/javascript">
+var _comscore = _comscore || [];
+_comscore.push({ c1: "2", c2: "6177433",
+	options: {
+		url_append: "comscorekw=wikiacsid_lifestyle"
+	}
+});
+
+(function() {
+	var s = document.createElement("script"), el = document.getElementsByTagName("script")[0]; s.async = true;
+	s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+	el.parentNode.insertBefore(s, el);
+})();
+</script>
+<noscript>
+<img src="http://b.scorecardresearch.com/p?c1=2&amp;c2=6177433&amp;c3=&amp;c4=&amp;c5=&amp;c6=&amp;c7=http%3A%2F%2Fvim.wikia.com%2Fwiki%2FSearch_and_replace_in_multiple_buffers%3Fcomscorekw%3Dwikiacsid_lifestyle&amp;c15=&amp;cv=2.0&amp;cj=1" />
+</noscript>
+<!-- End comScore Tag -->
+
+<!-- quantServe -->
+<!-- Start for QuantServe, page_view -->
+<script type="text/javascript">
+  var _qevents = _qevents || [];
+
+  (function() {
+   var elem = document.createElement('script');
+
+   elem.src = (document.location.protocol == "https:" ? "https://secure" : "http://edge") + ".quantserve.com/quant.js";
+   elem.async = true;
+   elem.type = "text/javascript";
+   var scpt = document.getElementsByTagName('script')[0];
+   scpt.parentNode.insertBefore(elem, scpt);  
+  })();
+</script>
+<script type="text/javascript">
+var quantcastLabels = "";
+if (window.cityShort) {
+	quantcastLabels += cityShort;
+	if (window.wgDartCustomKeyValues) {
+		var keyValues = wgDartCustomKeyValues.split(';');
+		for (var i=0; i<keyValues.length; i++) {
+			var keyValue = keyValues[i].split('=');
+			if (keyValue.length >= 2) {
+				quantcastLabels += ',' + cityShort + '.' + keyValue[1];
+			}
+		}
+	}
+}
+_qevents.push( { qacct:"p-8bG6eLqkH6Avk", labels:quantcastLabels } );
+</script>
+<noscript>
+<div style="display: none;"><img src="//pixel.quantserve.com/pixel/p-8bG6eLqkH6Avk.gif" height="1" width="1" alt="Quantcast"/></div>
+</noscript>
+
+
+<!-- googleAnalytics -->
+<!-- Start for GA_Urchin, page_view -->
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-30014103-1']);
+  _gaq.push(['_setSampleRate', '10']);
+
+  _gaq.push(['_setCustomVar', 1, 'wiki', 'db=' + (window.wgDBname || 'unknown') + ';hub=' + (window.wgCatId || 'unknown') + ';lang=' + (window.wgContentLanguage || 'unknown'), 3]);
+  _gaq.push(['_setCustomVar', 3, 'AB',   'unknown', 3]);
+  _gaq.push(['_setCustomVar', 4, 'skin',  window.skin || 'unknown', 3]);
+  _gaq.push(['_setCustomVar', 5, 'user', (window.wgUserName == null) ? 'anon' : 'user', 3]);
+
+  _gaq.push(['_setDomainName', '.wikia.com']);
+
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script><noscript><img src="http://a.wikia-beacon.com/__track/view?c=2827&amp;lc=en&amp;lid=75&amp;x=vim&amp;y=&amp;u=0&amp;ip=199.21.99.125&amp;a=2442&amp;n=0" width="1" height="1" border="0" alt="" /></noscript>
+<script type="text/javascript">
+(function() {
+	var beaconCookie;
+	if (! beaconCookie) {
+		var result = RegExp("wikia_beacon_id=([A-Za-z0-9_-]{10})").exec(document.cookie);
+		if (result) {
+			beaconCookie = result[1];
+		}
+	}
+
+	var utma = RegExp("__utma=([0-9\.]+)").exec(document.cookie);
+	var utmb = RegExp("__utmb=([0-9\.]+)").exec(document.cookie);
+
+	var trackUrl = "http://a.wikia-beacon.com/__track/view?c=2827&amp;lc=en&amp;lid=75&amp;x=vim&amp;y=&amp;u=0&amp;ip=199.21.99.125&amp;a=2442&amp;n=0" + ((typeof document.referrer != "undefined") ? "&amp;r=" + escape(document.referrer) : "") + "&amp;cb=" + (new Date).valueOf() + (beaconCookie ? "&amp;beacon=" + beaconCookie : "") + (utma && utma[1] ? "&amp;utma=" + utma[1] : "") + (utmb && utmb[1] ? "&amp;utmb=" + utmb[1] : "");
+	document.write('<'+'script type="text/javascript" src="' + trackUrl + '"><'+'/script>');
+})();
+</script><script type="text/javascript" src="Search_and_replace_in_multiple_buffers-Dateien/view"></script>
+<!-- Start for GA_Urchin, onewiki -->
+<!-- No tracking for this wiki -->
+<!-- Start for GA_Urchin, pagetime -->
+
+<!-- Start for GA_Urchin, varnish-stat -->
+
+
+<h1>Wikia</h1>
+<div class="skiplinkcontainer">
+<a class="skiplink" rel="nofollow" href="#WikiaArticle">Skip to Content</a>
+<a class="skiplink wikinav" rel="nofollow" href="#WikiHeader">Skip to Wiki Navigation</a>
+<a class="skiplink sitenav" rel="nofollow" href="#GlobalNavigation">Skip to Site Navigation</a>
+</div>
+
+<div id="ad-skin" class="wikia-ad noprint"></div>
+<!-- BEGIN SLOTNAME: INVISIBLE_TOP -->
+<!-- Null Ad. Reason: Slot is disabled, slotname=INVISIBLE_TOP --><!-- END SLOTNAME: INVISIBLE_TOP -->
+<header id="WikiaHeader" class="WikiaHeader">
+	<nav>
+		<h1>Wikia Navigation</h1>
+		<ul>
+			<li class="WikiaLogo">
+				<a href="http://www.wikia.com/Wikia" rel="nofollow"><img src="data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D" class="sprite logo" alt="Wikia" height="23" width="91"></a>
+			</li>
+			<li class="start-a-wiki">
+				<a href="http://www.wikia.com/Special:CreateWiki" class="wikia-button">Start a wiki</a>
+			</li>
+			<li>
+				<ul id="GlobalNavigation" class="GlobalNavigation">
+					<li>
+						<a href="http://www.wikia.com/Entertainment">Entertainment <img src="data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D" class="chevron" height="0" width="0"></a>
+						<ul class="subnav">
+														<li>
+								<a href="http://www.wikia.com/Entertainment">What's Trending</a>
+								<ul class="catnav">
+									<li><a href="http://magiccity.wikia.com/wiki/Magic_City_Wiki">Magic City</a></li>
+									<li><a href="http://thehungergames.wikia.com/wiki/The_Hunger_Games_Wiki">The Hunger Games</a></li>
+									<li><a href="http://avatar.wikia.com/wiki/Avatar_Wiki">Legend of Korra</a></li>
+									<li><a href="http://clash-of-the-titans.wikia.com/wiki/Clash_of_the_Titans_Wiki">Wrath of the Titans</a></li>
+									<li><a href="http://www.wikia.com/Entertainment">More...</a></li>
+								</ul>
+							</li>
+							<li>
+								<a href="http://www.wikia.com/Entertainment">Movies</a>
+								<ul class="catnav">
+									<li><a href="http://movies.wikia.com/wiki/Ted_%28film%29">Ted</a></li>
+									<li><a href="http://horror-movies.wikia.com/wiki/Horror_Film_Wiki">The Cabin in the Woods</a></li>
+									<li><a href="http://clash-of-the-titans.wikia.com/wiki/Wrath_of_the_Titans">Wrath of the Titans</a></li>
+									<li><a href="http://titanic.wikia.com/wiki/Main_Page">Titanic 3D</a></li>
+									<li><a href="http://www.wikia.com/Entertainment">More...</a></li>
+								</ul>
+							</li>
+							<li>
+								<a href="http://www.wikia.com/Entertainment">TV</a>
+								<ul class="catnav">
+									<li><a href="http://gameofthrones.wikia.com/wiki/Game_of_Thrones_Wiki">Game of Thrones</a></li>
+									<li><a href="http://magiccity.wikia.com/wiki/Magic_City_Wiki">Magic City</a></li>
+									<li><a href="http://thekilling.wikia.com/wiki/The_Killing_Wiki">The Killing</a></li>
+									<li><a href="http://bbc-sherlock.wikia.com/wiki/Sherlock_Wiki">Sherlock</a></li>
+									<li><a href="http://www.wikia.com/Entertainment">More...</a></li>
+								</ul>
+							</li>
+							<li>
+								<a href="http://www.wikia.com/Entertainment">Music</a>
+								<ul class="catnav">
+									<li><a href="http://taylorswift.wikia.com/wiki/Eyes_Open">Taylor Swift</a></li>
+									<li><a href="http://thehungergames.wikia.com/wiki/The_Hunger_Games%3A_Songs_from_District_12_and_Beyond">Hunger Games Soundtrack</a></li>
+									<li><a href="http://countrymusic.wikia.com/wiki/Main_Page">Country Music Awards</a></li>
+									<li><a href="http://music.wikia.com/wiki/Wrecking_Ball">Bruce Springsteen</a></li>
+									<li><a href="http://www.wikia.com/Entertainment">More...</a></li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+					<li>
+						<a href="http://www.wikia.com/Video_Games">Video Games <img src="data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D" class="chevron" height="0" width="0"></a>
+						<ul class="subnav">
+														<li>
+								<a href="http://www.wikia.com/Video_Games">What's Hot</a>
+								<ul class="catnav">
+									<li><a href="http://batman.wikia.com/wiki/Batman%3A_Arkham_City">Batman: Arkham City</a></li>
+									<li><a href="http://callofduty.wikia.com/wiki/Call_of_Duty%3A_Modern_Warfare_3">Modern Warfare 3</a></li>
+									<li><a href="http://elderscrolls.wikia.com/wiki/Skyrim">Skyrim</a></li>
+									<li><a href="http://zelda.wikia.com/wiki/The_Legend_of_Zelda%3A_Skyward_Sword">Legend of Zelda</a></li>
+									<li><a href="http://www.wikia.com/Video_Games">More...</a></li>
+								</ul>
+							</li>
+							<li>
+								<a href="http://www.wikia.com/Video_Games">Game Guides</a>
+								<ul class="catnav">
+									<li><a href="http://elderscrolls.wikia.com/wiki/Quests_%28Skyrim%29">Skyrim</a></li>
+									<li><a href="http://batman.wikia.com/wiki/The_Riddler_%28Batman%3A_Arkham_City%29%23Challenges#Challenges">Riddler Trophies</a></li>
+									<li><a href="http://uncharted.wikia.com/wiki/Uncharted_3%3A_Drake%27s_Deception_walkthrough">Uncharted 3</a></li>
+									<li><a href="http://battlefield.wikia.com/wiki/Category%3AMaps_of_Battlefield_3">Battlefield 3 MP</a></li>
+									<li><a href="http://www.wikia.com/Video_Games">More...</a></li>
+								</ul>
+							</li>
+							<li>
+								<a href="http://swtor.wikia.com/wiki/Star_Wars%3A_The_Old_Republic_Wiki">The Old Republic</a>
+								<ul class="catnav">
+									<li><a href="http://swtor.wikia.com/wiki/Creatures">Creature Catalogue</a></li>
+									<li><a href="http://swtor.wikia.com/wiki/Planets">Planets to Visit</a></li>
+									<li><a href="http://swtor.wikia.com/wiki/Starships">Build Your Ship</a></li>
+									<li><a href="http://swtor.wikia.com/wiki/Special%3ARandom">Surprise Me!</a></li>
+									<li><a href="http://swtor.wikia.com/wiki/Star_Wars%3A_The_Old_Republic_Wiki">More Star Wars...</a></li>
+								</ul>
+							</li>
+							<li>
+								<a href="http://www.wikia.com/Video_Games">Best of 2011</a>
+								<ul class="catnav">
+									<li><a href="http://deadspace.wikia.com/wiki/Dead_Space_2">Dead Space 2</a></li>
+									<li><a href="http://gearsofwar.wikia.com/wiki/Gears_of_War_3">Gears of War 3</a></li>
+									<li><a href="http://infinityblade.wikia.com/wiki/Infinity_Blade_2">Infinity Blade II</a></li>
+									<li><a href="http://half-life.wikia.com/wiki/Portal_2">Portal 2</a></li>
+									<li><a href="http://www.wikia.com/Video_Games">More...</a></li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+					<li>
+						<a href="http://www.wikia.com/Lifestyle">Lifestyle <img src="data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D" class="chevron" height="0" width="0"></a>
+						<ul class="subnav">
+														<li>
+								<a href="http://www.wikia.com/Recipes">Body</a>
+								<ul class="catnav">
+									<li><a href="http://glutenfreerecipes.wikia.com/wiki/Gluten_Free_Recipes_Wiki">Gluten Free Recipes</a></li>
+									<li><a href="http://athletics.wikia.com/wiki/Athlepedia_Home">Athlepedia</a></li>
+									<li><a href="http://healthyrecipes.wikia.com/wiki/Healthy_Recipes_Wiki">Healthy Recipes</a></li>
+									<li><a href="http://haircolor.wikia.com/wiki/Haircolor_Wiki">Hair Color</a></li>
+									<li><a href="http://www.wikia.com/Recipes">More...</a></li>
+								</ul>
+							</li>
+							<li>
+								<a href="http://www.wikia.com/humanscience">Mind</a>
+								<ul class="catnav">
+									<li><a href="http://history.wikia.com/wiki/Main_Page">Page history</a></li>
+									<li><a href="http://humanscience.wikia.com/wiki/Welcome_to_Human_Science">Human Science</a></li>
+									<li><a href="http://how-to.wikia.com/wiki/How_To">How-To</a></li>
+									<li><a href="http://liberapedia.wikia.com/wiki/Main_Page">Liberapedia</a></li>
+									<li><a href="http://www.wikia.com/humanscience">More...</a></li>
+								</ul>
+							</li>
+							<li>
+								<a href="http://travel.wikia.com/wiki/Wikia_Travel">Soul</a>
+								<ul class="catnav">
+									<li><a href="http://green.wikia.com/wiki/Green_Wiki">Green</a></li>
+									<li><a href="http://gardening.wikia.com/wiki/Gardening_Wiki">Gardening</a></li>
+									<li><a href="http://travel.wikia.com/wiki/Travel_Wiki">Travel</a></li>
+									<li><a href="http://romanchurches.wikia.com/wiki/Main_Page">Roman Churches</a></li>
+									<li><a href="http://www.wikia.com/Lifestyle">More...</a></li>
+								</ul>
+							</li>
+							<li>
+								<a href="http://www.wikia.com/Lifestyle">Of Note</a>
+								<ul class="catnav">
+									<li><a href="http://olympics.wikia.com/wiki/Olympics_Wiki">2012 Olympics</a></li>
+									<li><a href="http://animals.wikia.com/wiki/Main_Page">Animals</a></li>
+									<li><a href="http://wikiality.wikia.com/Main_Page">Stephen Colbert</a></li>
+									<li><a href="http://youtube.wikia.com/wiki/YouTube_Wiki">Viral Videos</a></li>
+									<li><a href="http://www.wikia.com/Lifestyle">More...</a></li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</nav>
+	<ul id="AccountNavigation" class="AccountNavigation">
+	<li>
+		<a data-id="login" href="http://vim.wikia.com/wiki/Special:UserLogin?returnto=Search_and_replace_in_multiple_buffers&amp;type=login" rel="nofollow" class="ajaxLogin" accesskey="o">Log in</a>		<div id="UserLoginDropdown" class="UserLoginDropdown subnav">
+<form action="/wiki/Special:UserLogin" method="post" name="" class="WikiaForm ">
+	<fieldset>
+					<div class="input-group error general-errors">
+				<div class="error-msg"></div>
+			</div>
+																<input name="loginToken" value="" type="hidden">
+																<input name="returnto" value="" type="hidden">
+																<input name="returntoquery" value="" type="hidden">
+																<div class="input-group required   ">
+													<label>Username</label>
+							<input name="username" type="text">
+						
+											</div>
+																<div class="input-group required   ">
+													<label>Password</label>
+							<input name="password" value="" type="password">
+						
+											</div>
+																<div class="input-group    ">
+													<a href="#" class="forgot-password">Forgot your password?</a>						
+											</div>
+																<div class="input-group    ">
+													<label>
+								<input name="keeploggedin" value="1" type="checkbox"> Stay logged in							</label>
+						
+											</div>
+										</fieldset>
+
+	<div class="submits">
+									<input value="Log in" class="" name="" type="submit">
+						</div>
+</form>
+	<div class="sso-login">
+		<div class="sso-login-divider">
+			<span>Or</span>
+		</div>
+
+		<a href="#" class="wikia-button wikia-button-facebook sso-login-facebook" data-id="facebook" data-tooltip="Click the button to log in with Facebook"><img alt="" class="sprite facebook" src="data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D" height="14" width="15"> Connect</a>
+	</div></div>	</li>
+	<li>
+		<a data-id="register" href="http://vim.wikia.com/wiki/Special:UserLogin?returnto=Search_and_replace_in_multiple_buffers&amp;type=signup" rel="nofollow" class="ajaxRegister">Sign up</a>	</li>
+</ul>		<img src="data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D" class="banner-corner-left" height="0" width="0">
+	<img src="data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D" class="banner-corner-right" height="0" width="0">
+</header>
+
+<section id="WikiaPage" class="WikiaPage">
+	<div id="WikiaPageBackground" class="WikiaPageBackground"></div>
+	<div class="WikiaPageContentWrapper">
+		
+		<div class="WikiaAdvertPage">
+		<!-- BEGIN SLOTNAME: TOP_LEADERBOARD -->
+<div id="TOP_LEADERBOARD" class="wikia-ad noprint"><script type="text/javascript">	wgAfterContentAndJS.push(function() {
+		if (typeof(AdDriverDelayedLoader) != 'undefined') {
+			AdDriverDelayedLoader.appendItem(new AdDriverDelayedLoaderItem("TOP_LEADERBOARD", "728x90", "DART"));
+		}
+	});</script><script async="" src="data:text/javascript,document.write%28%27%3Cdiv%20id%3D%22Liftium_728x90_1%22%3E%3Ciframe%20width%3D%22728%22%20height%3D%2290%22%20id%3D%22TOP_LEADERBOARD_iframe%22%20noresize%3D%22true%22%20scrolling%3D%22no%22%20frameborder%3D%220%22%20marginheight%3D%220%22%20marginwidth%3D%220%22%20style%3D%22border%3Anone%3B%22%20target%3D%22_blank%22%3E%3C%2Fiframe%3E%3Cdiv%3E%27%29%3BLiftium.callInjectedIframeAd%28%22728x90%22%2C%20document.getElementById%28%22TOP_LEADERBOARD_iframe%22%29%29%3B">document.write('<div id="Liftium_728x90_1"><iframe width="728" height="90" id="TOP_LEADERBOARD_iframe" noresize="true" scrolling="no" frameborder="0" marginheight="0" marginwidth="0" style="border:none;" target="_blank"></iframe><div>');Liftium.callInjectedIframeAd("728x90", document.getElementById("TOP_LEADERBOARD_iframe"));</script><div id="Liftium_728x90_1"><iframe src="Search_and_replace_in_multiple_buffers-Dateien/a_002.htm" target="_blank" style="border: medium none; display: none;" marginwidth="0" marginheight="0" noresize="true" id="TOP_LEADERBOARD_iframe" frameborder="0" height="90" scrolling="no" width="728"></iframe><div></div><iframe style="display: none;" id="Liftium_728x90_1_997" marginwidth="0" marginheight="0" src="Search_and_replace_in_multiple_buffers-Dateien/a_003.htm" frameborder="0" height="90" scrolling="no" width="728"></iframe><iframe style="display: none;" id="Liftium_728x90_1_1104" marginwidth="0" marginheight="0" src="Search_and_replace_in_multiple_buffers-Dateien/a_004.htm" frameborder="0" height="90" scrolling="no" width="728"></iframe><iframe id="Liftium_728x90_1_896" marginwidth="0" marginheight="0" src="Search_and_replace_in_multiple_buffers-Dateien/a_005.htm" frameborder="0" height="90" scrolling="no" width="728"></iframe></div></div><script type="text/javascript">
+LiftiumOptions = {"pubid":999,"baseUrl":"\/__varnish_liftium\/","kv_wgDBname":"vim","kv_article_id":2442,"kv_wpage":"Search_and_replace_in_multiple_buffers","kv_Hub":"Technology","kv_skin":"oasis","kv_user_lang":"en","kv_cont_lang":"en","kv_isMainPage":false,"kv_page_type":"article","geoUrl":"http:\/\/geoiplookup.wikia.com\/","kv_domain":"vim.wikia.com","isCalledAfterOnload":1,"hasMoreCalls":1,"maxLoadDelay":6000};</script><!-- END SLOTNAME: TOP_LEADERBOARD -->
+		</div>
+
+		<header id="WikiHeader" class="WikiHeader">
+	<h1 class="wordmark medium graphic font-cpmono">
+	<a accesskey="z" href="http://vim.wikia.com/wiki/Vim_Tips_Wiki">
+					<img src="Search_and_replace_in_multiple_buffers-Dateien/Wiki-wordmark.png" alt="Vim Tips Wiki" height="60" width="125">
+			</a>
+</h1>
+ 
+	<nav>
+		<h1> Navigation</h1>
+		<ul>
+
+			<li>
+				<a href="http://vim.wikia.com/wiki/Vim_Tips_Wiki:Community_Portal">
+					Community portal				</a>
+			</li>
+			<li>
+				<a href="http://vim.wikia.com/wiki/Vim_Tips_Wiki:Todo">
+					To do				</a>
+			</li>
+			<li>
+				<a href="#">
+					Recently updated&nbsp;<img src="data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D" class="chevron" height="0" width="0">				</a>
+				<ul class="subnav">
+					<li>
+						<a href="http://vim.wikia.com/wiki/256_colors_in_vim">256 colors in vim</a>
+					</li>
+					<li>
+						<a href="http://vim.wikia.com/wiki/GoTo_a_Random_Line">GoTo a Random Line</a>
+					</li>
+					<li>
+						<a href="http://vim.wikia.com/wiki/Troubleshooting">Troubleshooting</a>
+					</li>
+					<li>
+						<a href="http://vim.wikia.com/wiki/Buffers">Buffers</a>
+					</li>
+					<li>
+						<a href="http://vim.wikia.com/wiki/Restore_missing_gvim_menu_bar_under_GNOME">Restore missing gvim menu bar under GNOME</a>
+					</li>
+					<li>
+						<a href="http://vim.wikia.com/wiki/VimTip1675">VimTip1675</a>
+					</li>
+					<li>
+						<a href="http://vim.wikia.com/wiki/VimTip1674">VimTip1674</a>
+					</li>
+
+				</ul>
+			</li>
+			<li>
+				<a href="http://vim.wikia.com/wiki/Category:VimTip">
+					Popular tips&nbsp;<img src="data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D" class="chevron" height="0" width="0">				</a>
+				<ul class="subnav">
+					<li>
+						<a href="http://vim.wikia.com/wiki/Search_and_replace">Search and replace</a>
+					</li>
+					<li>
+						<a href="http://vim.wikia.com/wiki/Best_Vim_Tips">Best Vim Tips</a>
+					</li>
+					<li>
+						<a href="http://vim.wikia.com/wiki/File_format">File format</a>
+					</li>
+					<li>
+						<a href="http://vim.wikia.com/wiki/Indenting_source_code">Indenting source code</a>
+					</li>
+					<li>
+						<a href="http://vim.wikia.com/wiki/Open_vimrc_file">Open vimrc file</a>
+					</li>
+					<li>
+						<a href="http://vim.wikia.com/wiki/Converting_tabs_to_spaces">Converting tabs to spaces</a>
+					</li>
+					<li>
+						<a href="http://vim.wikia.com/wiki/Change_the_color_scheme">Change the color scheme</a>
+					</li>
+
+				</ul>
+			</li>
+		</ul>
+	</nav>
+	<div class="buttons">
+		<a href="http://vim.wikia.com/wiki/Special:Random" title="Random Page" accesskey="x" class="wikia-button secondary" data-id="randompage"><img src="data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D" class="sprite random" height="0" width="0"> Random Page</a>		<a href="http://vim.wikia.com/wiki/Special:WikiActivity" title="Wiki Activity" accesskey="g" class="wikia-button secondary" data-id="wikiactivity"><img src="data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D" class="sprite activity" height="0" width="0"> Wiki Activity</a>	</div>
+	<div style="position: absolute; top: -1000px">
+		<a href="http://vim.wikia.com/wiki/Special:Watchlist" title="Special:Watchlist" accesskey="l">Watchlist</a>		<a href="http://vim.wikia.com/wiki/Special:RecentChanges" title="Special:RecentChanges" accesskey="r">Recent changes</a>	</div>
+		<img class="shadow-mask" src="data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D" height="0" width="0">
+</header>
+
+		
+		
+		
+		<article id="WikiaMainContent" class="WikiaMainContent">
+			<header id="WikiaPageHeader" class="WikiaPageHeader">
+	
+	<ul class="commentslikes">
+	<li class="comments">
+		<span class="commentsbubble">0</span>
+		<a href="http://vim.wikia.com/wiki/Talk:Search_and_replace_in_multiple_buffers" data-id="comment" title="Be the first to discuss this page" accesskey="t">Talk</a>
+	</li>
+	<li class="likes">
+		<fb:like layout="button_count" width="50" colorscheme="light" ref="content_page" href="http://vim.wikia.com/wiki/Search_and_replace_in_multiple_buffers"></fb:like>
+	</li>
+</ul>
+
+	<h1>Search and replace in multiple buffers</h1>
+
+<nav class="wikia-menu-button">
+	<a accesskey="e" href="http://vim.wikia.com/wiki/Search_and_replace_in_multiple_buffers?action=edit" data-id="edit">
+		<img alt="" class="sprite edit-pencil" src="data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D" height="16" width="22"> Edit	</a>
+
+	<span class="drop">
+		<img src="data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D" class="chevron">
+	</span>
+	<ul class="WikiaMenuElement">
+		<li>
+			<a href="http://vim.wikia.com/wiki/Search_and_replace_in_multiple_buffers?action=history" accesskey="h" data-id="history">History</a>
+		</li>
+	</ul>
+</nav>
+</header>
+
+
+			
+			<div id="WikiaArticle" class="WikiaArticle">
+								<div class="home-top-right-ads">
+								</div>
+
+
+				
+				<div><b><a href="http://vim.wikia.com/wiki/Search_and_replace_in_multiple_buffers" class="text">Tip 382</a></b> <a href="http://vim.wikia.com/wiki/Search_and_replace_in_multiple_buffers?printable=yes" class="text">Printable</a> <a href="http://vim.wikia.com/wiki/Search_and_replace_in_multiple_buffers?useskin=monobook" class="text">Monobook</a> <a href="http://vim.wikia.com/wiki/VimTip381" title="VimTip381" class="mw-redirect"><small>Previous</small></a> <a href="http://vim.wikia.com/wiki/VimTip383" title="VimTip383" class="mw-redirect"><small>Next</small></a>
+<p><b>created</b>&nbsp;2002 · <b>complexity</b>&nbsp;basic · <b>version</b>&nbsp;6.0
+</p>
+<hr>
+</div>
+<p>Often <a href="http://vim.wikia.com/wiki/Search_and_replace" title="Search and replace">search and replace</a> is needed in multiple files. This tip uses the procedures from <a href="http://vim.wikia.com/wiki/Run_a_command_in_multiple_buffers" title="Run a command in multiple buffers">run a command in multiple buffers</a> to show how a substitute may be executed multiple times using <tt>:argdo</tt> (all files in argument list), or <tt>:bufdo</tt> (all buffers), or <tt>:tabdo</tt> (all tabs), or <tt>:windo</tt> (all windows in the current tab).
+</p>
+<table id="toc" class="toc"><tbody><tr><td><div id="toctitle"><h2>Contents</h2> <span class="toctoggle">[<a href="javascript:toggleToc()" rel="nofollow" class="internal" id="togglelink">show</a>]</span></div>
+<ul>
+<li style="display: none;" class="toclevel-1 tocsection-1"><a rel="nofollow" href="#All_buffers"><span class="tocnumber">1</span> <span class="toctext">All buffers</span></a></li>
+<li style="display: none;" class="toclevel-1 tocsection-2"><a rel="nofollow" href="#All_windows"><span class="tocnumber">2</span> <span class="toctext">All windows</span></a></li>
+<li style="display: none;" class="toclevel-1 tocsection-3"><a rel="nofollow" href="#All_files_in_a_tree"><span class="tocnumber">3</span> <span class="toctext">All files in a tree</span></a></li>
+<li style="display: none;" class="toclevel-1 tocsection-4"><a rel="nofollow" href="#Replacing_current_word"><span class="tocnumber">4</span> <span class="toctext">Replacing current word</span></a></li>
+<li style="display: none;" class="toclevel-1 tocsection-5"><a rel="nofollow" href="#Comments"><span class="tocnumber">5</span> <span class="toctext">Comments</span></a></li>
+</ul>
+</td></tr></tbody></table><script>wgAfterContentAndJS.push(function() {if (window.showTocToggle) { window.tocShowText = "show"; window.tocHideText = "hide"; showTocToggle(); } });</script>
+<h2><span class="mw-headline" id="All_buffers">All buffers</span><span class="editsection"><a href="http://vim.wikia.com/wiki/Search_and_replace_in_multiple_buffers?action=edit&amp;section=1" title="Edit All buffers section"><img src="data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D" class="sprite edit-pencil">Edit</a></span></h2>
+<p>The following performs a search and replace in all buffers (all those listed with the <tt>:ls</tt> command):
+</p>
+<pre>:bufdo&nbsp;%s/pattern/replace/ge | update
+</pre>
+<table class="cleartable">
+<tbody><tr>
+<td><tt>bufdo</tt> </td><td> Apply the following commands to all buffers.
+</td></tr>
+<tr>
+<td><tt>%s</tt> </td><td> Search and replace all lines in the buffer.
+</td></tr>
+<tr>
+<td><tt>pattern</tt> </td><td> Search <a href="http://vim.wikia.com/wiki/Search_patterns" title="Search patterns">pattern</a>.
+</td></tr>
+<tr>
+<td><tt>replace</tt> </td><td> Replacement text.
+</td></tr>
+<tr>
+<td><tt>g</tt> </td><td> Change all occurrences in each line (global).
+</td></tr>
+<tr>
+<td><tt>e</tt> </td><td> No error if the pattern is not found.
+</td></tr>
+<tr>
+<td><tt>|</tt> </td><td> Separator between commands.
+</td></tr>
+<tr>
+<td><tt>update</tt> </td><td> Save (write file only if changes were made).
+</td></tr></tbody></table>
+<p>The command above uses <tt>:update</tt> to save each buffer, if it 
+was changed. That is necessary because, by default, Vim will not switch 
+away from a buffer if it has been changed.
+</p><p>One alternative is to set the <tt>'autowriteall'</tt> option so changed buffers are automatically saved when required:
+</p>
+<pre>:set autowriteall
+:bufdo&nbsp;%s/pattern/replace/ge
+</pre>
+<p>Another alternative is to set the <tt>'hidden'</tt> option so buffers do not need to be saved, then use <tt>:wa</tt> to save all changes (only changed buffers are written):
+</p>
+<pre>:set hidden
+:bufdo&nbsp;%s/pattern/replace/ge
+:wa
+</pre>
+<h2><span class="mw-headline" id="All_windows">All windows</span><span class="editsection"><a href="http://vim.wikia.com/wiki/Search_and_replace_in_multiple_buffers?action=edit&amp;section=2" title="Edit All windows section"><img src="data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D" class="sprite edit-pencil">Edit</a></span></h2>
+<p>If you are not dealing with a lot of files, it can be useful to 
+display each wanted file in its own window, then operate on each window.
+ For example, after opening multiple files with a shell command like <tt style="white-space:nowrap;">gvim *.c</tt>, you could choose which files you wanted to operate on like this:
+</p>
+<table class="cleartable">
+<tbody><tr>
+<td><tt>:sball</tt> </td><td> Split screen to show all buffers (one window per buffer).
+</td></tr>
+<tr>
+<td>... </td><td> Move to a window you do <i>not</i> want to change.
+</td></tr>
+<tr>
+<td><tt>&lt;C-w&gt;c</tt> </td><td> Close the window (press Ctrl-W then <tt>c</tt>).
+</td></tr>
+<tr>
+<td><tt>&lt;C-w&gt;T&lt;C-PageUp&gt;</tt> </td><td> Or, move the window to a new tab page, then switch back to the original tab.
+</td></tr>
+<tr>
+<td>... </td><td> Repeat until only buffers you want to change are displayed in the current tab page.
+</td></tr>
+<tr>
+<td style="white-space: nowrap;"> <tt>:windo&nbsp;%s/pattern/replace/ge</tt> </td><td> Search and replace in all visible windows.
+</td></tr>
+<tr>
+<td><tt>:wa</tt> </td><td> Save all changes.
+</td></tr></tbody></table>
+<h2><span class="mw-headline" id="All_files_in_a_tree">All files in a tree</span><span class="editsection"><a href="http://vim.wikia.com/wiki/Search_and_replace_in_multiple_buffers?action=edit&amp;section=3" title="Edit All files in a tree section"><img src="data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D" class="sprite edit-pencil">Edit</a></span></h2>
+<p>Suppose all *.cpp and *.h files in the current directory need to be 
+changed (not subdirectories). One approach is to use the argument list 
+(arglist):
+</p>
+<table class="cleartable">
+<tbody><tr>
+<td><tt>:arg *.cpp</tt> </td><td> All *.cpp files in current directory.
+</td></tr>
+<tr>
+<td><tt>:argadd *.h</tt> </td><td> And all *.h files.
+</td></tr>
+<tr>
+<td><tt>:arg</tt> </td><td> <i>Optional</i>: Display the current arglist.
+</td></tr>
+<tr>
+<td style="white-space: nowrap;"> <tt>:argdo&nbsp;%s/pattern/replace/ge | update</tt> </td><td> Search and replace in all files in arglist.
+</td></tr></tbody></table>
+<p>A similar procedure can perform the same operation on all wanted 
+files in the current directory, and in all subdirectories (or in any 
+specified tree of directories):
+</p>
+<table class="cleartable">
+<tbody><tr>
+<td><tt>:arg **/*.cpp</tt> </td><td> All *.cpp files in and below current directory.
+</td></tr>
+<tr>
+<td><tt>:argadd **/*.h</tt> </td><td> And all *.h files.
+</td></tr>
+<tr>
+<td><tt>...</tt> </td><td> As above, use <tt>:arg</tt> to list files, or <tt>:argdo</tt> to change.
+</td></tr></tbody></table>
+<p>In the above, a forward slash was used in <tt>**/*.cpp</tt>. That works on all systems (Unix and Windows). If wanted, a backslash can be used on Windows systems.
+</p>
+<h2><span class="mw-headline" id="Replacing_current_word">Replacing current word</span><span class="editsection"><a href="http://vim.wikia.com/wiki/Search_and_replace_in_multiple_buffers?action=edit&amp;section=4" title="Edit Replacing current word section"><img src="data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D" class="sprite edit-pencil">Edit</a></span></h2>
+<p>A common requirement is to replace the word under the cursor in a 
+number of files. Rather than automating the process, it is best to use 
+Vim's procedures. For example:
+</p>
+<table class="cleartable">
+<tbody><tr>
+<td><tt>:arg *.cpp</tt> </td><td> All *.cpp files in directory.
+</td></tr>
+<tr>
+<td><tt>:argadd *.h</tt> </td><td> And all *.h files.
+</td></tr>
+<tr>
+<td>... </td><td> Move cursor to word that is to be replaced.
+</td></tr>
+<tr>
+<td><tt>*</tt> </td><td> Search for that exact word.
+</td></tr>
+<tr>
+<td style="white-space: nowrap;"> <tt>:argdo&nbsp;%s//replace/ge | update</tt> </td><td> Search and replace in all files in arglist.
+</td></tr></tbody></table>
+<p>In the above substitute command:
+</p>
+<ul><li>The search pattern is empty, so the last search is used.
+</li><li>Type your replacement text instead of <tt>replace</tt>. If the text is similar to the current word press Ctrl-R then Ctrl-W to insert that word into the command line, then change it.
+</li></ul>
+<p>Alternatively, you might try the following user command or mapping.
+</p>
+<pre>" Search for current word and replace with given text for files in arglist.
+function! Replace(bang, replace)
+  let flag = 'ge'
+  if&nbsp;!a:bang
+    let flag .= 'c'
+  endif
+  let search = '\&lt;' . escape(expand('&lt;cword&gt;'), '/\.*$^~[') . '\&gt;'
+  let replace = escape(a:replace, '/\&amp;~')
+  execute 'argdo&nbsp;%s/' . search . '/' . replace . '/' . flag
+endfunction
+command! -nargs=1 -bang Replace&nbsp;:call Replace(&lt;bang&gt;0, &lt;q-args&gt;)
+nnoremap &lt;Leader&gt;r&nbsp;:call Replace(0, input('Replace '.expand('&lt;cword&gt;').' with: '))&lt;CR&gt;
+</pre>
+<p>For example:
+</p>
+<table class="cleartable">
+<tbody><tr>
+<td><tt>:arg *.c</tt> </td><td> All *.c files in current directory.
+</td></tr>
+<tr>
+<td><tt>:set hidden</tt> </td><td> Allow switching away from a changed buffer without saving.
+</td></tr>
+<tr>
+<td><tt>:set autowriteall</tt> </td><td> Or, use this for automatic saving (instead of <tt>:set hidden</tt>).
+</td></tr>
+<tr>
+<td>... </td><td> Move cursor to word that is to be replaced.
+</td></tr>
+<tr>
+<td><tt>:Replace whatever</tt> </td><td> Search and replace in all files in arglist; confirm each change.
+</td></tr>
+<tr>
+<td><tt>:Replace! whatever</tt> </td><td> Same, but do not confirm each change.
+</td></tr>
+<tr>
+<td><tt>:wa</tt> </td><td> Write all changed files (not needed if used <tt>:set autowriteall</tt>).
+</td></tr></tbody></table>
+<p>Instead of the <tt>:Replace</tt> command, you could use the mapping. Move the cursor to the word that is to be replaced and press <tt>\r</tt> (backslash, assuming the default Leader key, then <tt>r</tt>).
+</p><p>In the function, any special characters in the search word are 
+escaped for generality, although that is unlikely to be needed since a 
+word will not contain special characters. If the cursor is on the word <tt>old_text</tt>, the search pattern will be <tt>\&lt;old_text\&gt;</tt> so that only instances of the whole word are found.
+</p>
+<h2><span class="mw-headline" id="Comments">Comments</span><span class="editsection"><a href="http://vim.wikia.com/wiki/Search_and_replace_in_multiple_buffers?action=edit&amp;section=5" title="Edit Comments section"><img src="data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D" class="sprite edit-pencil">Edit</a></span></h2>
+<!-- 
+NewPP limit report
+Preprocessor node count: 128/1000000
+Post-expand include size: 1315/2097152 bytes
+Template argument size: 64/2097152 bytes
+Expensive parser function count: 0/100
+--><!-- Saved in parser cache with key vim:pcache:idhash:2442-0!1!0!!en!2 and timestamp 20120407073434 -->	<nav class="RelatedPagesModule noprint">
+		<h2>Read more</h2>
+		<ul>
+					<li>
+								<div style="cursor: pointer;" class="articleSnippet"><p>When searching with /, it would sometimes be nice to fold everything except for matches to your...</p></div>
+								<a href="http://vim.wikia.com/wiki/Folding_with_Regular_Expression" class="more">Folding with Regular Expression</a>
+			</li>
+					<li>
+								<div style="cursor: pointer;" class="articleSnippet"><p>Use either of the following commands to delete all empty lines: :g/^$/d :v/./d If you want to...</p></div>
+								<a href="http://vim.wikia.com/wiki/Remove_unwanted_empty_lines" class="more">Remove unwanted empty lines</a>
+			</li>
+					<li>
+								<div style="cursor: pointer;" class="articleSnippet"><p>Place the cursor on any variable in your program. gd will take you to the local declaration. gD...</p></div>
+								<a href="http://vim.wikia.com/wiki/Go_to_definition_using_g" class="more">Go to definition using g</a>
+			</li>
+				</ul>
+	</nav>
+<script>JSSnippetsStack.push({dependencies:[],getLoaders:function(){return [$.loadFacebookAPI]},callback:function(json){window.onFBloaded(json)},id:"window.onFBloaded"})</script><div class="printfooter">
+Retrieved from "<a href="http://vim.wikia.com/wiki/Search_and_replace_in_multiple_buffers">http://vim.wikia.com/wiki/Search_and_replace_in_multiple_buffers</a>"</div>
+
+			</div>
+
+			<nav id="WikiaArticleCategories" class="WikiaArticleCategories">
+	<h1>Related Categories</h1>
+	<div id="catlinks" class="catlinks"><div id="mw-normal-catlinks"><a href="http://vim.wikia.com/wiki/Special:Categories" title="Special:Categories" rel="nofollow">Categories</a>: <span dir="ltr"><a href="http://vim.wikia.com/wiki/Category:VimTip" title="Category:VimTip">VimTip</a></span> | <span dir="ltr"><a href="http://vim.wikia.com/wiki/Category:Searching" title="Category:Searching">Searching</a></span></div> <div id="csAddCategorySwitch" class="noprint" style="background:#DDD;position:relative;float:left;border: 1px solid #BBB;-moz-border-radius:3px;-webkit-border-radius:3px;padding:0 5px;line-height: 16px;"><img src="data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D" class="sprite-small add"><a href="#" onfocus="this.blur();" style="color: rgb(0, 0, 0); font-size: 0.85em; text-decoration: none; display: inline-block;" rel="nofollow">Add category</a></div></div></nav>
+			
+			
+	
+			
+			<div id="WikiaArticleBottomAd" class="noprint">
+				<!-- BEGIN SLOTNAME: PREFOOTER_LEFT_BOXAD -->
+<div id="PREFOOTER_LEFT_BOXAD" class="wikia-ad noprint"><script type="text/javascript">	wgAfterContentAndJS.push(function() {
+		if (typeof(AdDriverDelayedLoader) != 'undefined') {
+			AdDriverDelayedLoader.appendItem(new AdDriverDelayedLoaderItem("PREFOOTER_LEFT_BOXAD", "300x250", "DART"));
+		}
+	});</script><script async="" src="data:text/javascript,document.write%28%27%3Cdiv%20id%3D%22Liftium_300x250_3%22%3E%3Ciframe%20width%3D%22300%22%20height%3D%22250%22%20id%3D%22PREFOOTER_LEFT_BOXAD_iframe%22%20noresize%3D%22true%22%20scrolling%3D%22no%22%20frameborder%3D%220%22%20marginheight%3D%220%22%20marginwidth%3D%220%22%20style%3D%22border%3Anone%3B%22%20target%3D%22_blank%22%3E%3C%2Fiframe%3E%3Cdiv%3E%27%29%3BLiftium.callInjectedIframeAd%28%22300x250%22%2C%20document.getElementById%28%22PREFOOTER_LEFT_BOXAD_iframe%22%29%29%3B">document.write('<div id="Liftium_300x250_3"><iframe width="300" height="250" id="PREFOOTER_LEFT_BOXAD_iframe" noresize="true" scrolling="no" frameborder="0" marginheight="0" marginwidth="0" style="border:none;" target="_blank"></iframe><div>');Liftium.callInjectedIframeAd("300x250", document.getElementById("PREFOOTER_LEFT_BOXAD_iframe"));</script><div id="Liftium_300x250_3"><iframe src="Search_and_replace_in_multiple_buffers-Dateien/a_006.htm" target="_blank" style="border: medium none; display: none;" marginwidth="0" marginheight="0" noresize="true" id="PREFOOTER_LEFT_BOXAD_iframe" frameborder="0" height="250" scrolling="no" width="300"></iframe><div></div><iframe id="Liftium_300x250_3_894" marginwidth="0" marginheight="0" src="Search_and_replace_in_multiple_buffers-Dateien/a_007.htm" frameborder="0" height="250" scrolling="no" width="300"></iframe></div></div><!-- END SLOTNAME: PREFOOTER_LEFT_BOXAD -->
+				<!-- BEGIN SLOTNAME: PREFOOTER_RIGHT_BOXAD -->
+<div id="PREFOOTER_RIGHT_BOXAD" class="wikia-ad noprint"><script type="text/javascript">	wgAfterContentAndJS.push(function() {
+		if (typeof(AdDriverDelayedLoader) != 'undefined') {
+			AdDriverDelayedLoader.appendItem(new AdDriverDelayedLoaderItem("PREFOOTER_RIGHT_BOXAD", "300x250", "DART"));
+		}
+	});</script><script async="" src="data:text/javascript,document.write%28%27%3Cdiv%20id%3D%22Liftium_300x250_4%22%3E%3Ciframe%20width%3D%22300%22%20height%3D%22250%22%20id%3D%22PREFOOTER_RIGHT_BOXAD_iframe%22%20noresize%3D%22true%22%20scrolling%3D%22no%22%20frameborder%3D%220%22%20marginheight%3D%220%22%20marginwidth%3D%220%22%20style%3D%22border%3Anone%3B%22%20target%3D%22_blank%22%3E%3C%2Fiframe%3E%3Cdiv%3E%27%29%3BLiftium.callInjectedIframeAd%28%22300x250%22%2C%20document.getElementById%28%22PREFOOTER_RIGHT_BOXAD_iframe%22%29%29%3B">document.write('<div id="Liftium_300x250_4"><iframe width="300" height="250" id="PREFOOTER_RIGHT_BOXAD_iframe" noresize="true" scrolling="no" frameborder="0" marginheight="0" marginwidth="0" style="border:none;" target="_blank"></iframe><div>');Liftium.callInjectedIframeAd("300x250", document.getElementById("PREFOOTER_RIGHT_BOXAD_iframe"));</script><div id="Liftium_300x250_4"><iframe src="Search_and_replace_in_multiple_buffers-Dateien/a_008.htm" target="_blank" style="border: medium none; display: none;" marginwidth="0" marginheight="0" noresize="true" id="PREFOOTER_RIGHT_BOXAD_iframe" frameborder="0" height="250" scrolling="no" width="300"></iframe><div></div><iframe id="Liftium_300x250_4_894" marginwidth="0" marginheight="0" src="Search_and_replace_in_multiple_buffers-Dateien/a_009.htm" frameborder="0" height="250" scrolling="no" width="300"></iframe></div></div><!-- END SLOTNAME: PREFOOTER_RIGHT_BOXAD -->
+			</div>
+
+		</article><!-- WikiaMainContent -->
+
+	<div id="WikiaRail" class="WikiaRail">
+
+	<form id="WikiaSearch" class="WikiaSearch" action="index.php?title=Special:Search" method="get">
+	<input name="search" placeholder="Search this wiki" autocomplete="off" accesskey="f" type="text">
+	<input name="fulltext" value="0" type="hidden">
+	<input type="submit">
+	<button class="secondary"><img src="data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D" class="sprite search" height="17" width="21"></button>
+</form>
+<section class="WikiaPagesOnWikiModule module">
+	<h1>Pages on Vim Tips Wiki</h1>
+	<a href="http://vim.wikia.com/wiki/Special:CreatePage" title="Create a new page on this wiki" class="wikia-button createpage"><img src="data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D" class="sprite new" height="0" width="0"> Add a Page</a>	<div class="tally">
+		<em>1,593</em><span>pages on<br> this wiki</span>	</div>
+</section>
+<!-- BEGIN SLOTNAME: TOP_RIGHT_BOXAD -->
+<div id="TOP_RIGHT_BOXAD" class="wikia-ad noprint"><script type="text/javascript">	wgAfterContentAndJS.push(function() {
+		if (typeof(AdDriverDelayedLoader) != 'undefined') {
+			AdDriverDelayedLoader.appendItem(new AdDriverDelayedLoaderItem("TOP_RIGHT_BOXAD", "300x250", "DART"));
+		}
+	});</script><script async="" src="data:text/javascript,document.write%28%27%3Cdiv%20id%3D%22Liftium_300x250_2%22%3E%3Ciframe%20width%3D%22300%22%20height%3D%22250%22%20id%3D%22TOP_RIGHT_BOXAD_iframe%22%20noresize%3D%22true%22%20scrolling%3D%22no%22%20frameborder%3D%220%22%20marginheight%3D%220%22%20marginwidth%3D%220%22%20style%3D%22border%3Anone%3B%22%20target%3D%22_blank%22%3E%3C%2Fiframe%3E%3Cdiv%3E%27%29%3BLiftium.callInjectedIframeAd%28%22300x250%22%2C%20document.getElementById%28%22TOP_RIGHT_BOXAD_iframe%22%29%29%3B">document.write('<div id="Liftium_300x250_2"><iframe width="300" height="250" id="TOP_RIGHT_BOXAD_iframe" noresize="true" scrolling="no" frameborder="0" marginheight="0" marginwidth="0" style="border:none;" target="_blank"></iframe><div>');Liftium.callInjectedIframeAd("300x250", document.getElementById("TOP_RIGHT_BOXAD_iframe"));</script><div id="Liftium_300x250_2"><iframe src="Search_and_replace_in_multiple_buffers-Dateien/a_010.htm" target="_blank" style="border: medium none; display: none;" marginwidth="0" marginheight="0" noresize="true" id="TOP_RIGHT_BOXAD_iframe" frameborder="0" height="250" scrolling="no" width="300"></iframe><div></div><iframe style="display: none;" id="Liftium_300x250_2_996" marginwidth="0" marginheight="0" src="Search_and_replace_in_multiple_buffers-Dateien/a_011.htm" frameborder="0" height="250" scrolling="no" width="300"></iframe><iframe style="display: none;" id="Liftium_300x250_2_1103" marginwidth="0" marginheight="0" src="Search_and_replace_in_multiple_buffers-Dateien/a_012.htm" frameborder="0" height="250" scrolling="no" width="300"></iframe><iframe style="display: none;" id="Liftium_300x250_2_1138" marginwidth="0" marginheight="0" src="Search_and_replace_in_multiple_buffers-Dateien/a_013.htm" frameborder="0" height="250" scrolling="no" width="300"></iframe><iframe id="Liftium_300x250_2_894" marginwidth="0" marginheight="0" src="Search_and_replace_in_multiple_buffers-Dateien/a_014.htm" frameborder="0" height="250" scrolling="no" width="300"></iframe></div></div><!-- END SLOTNAME: TOP_RIGHT_BOXAD -->
+<!-- BEGIN SLOTNAME: TOP_RIGHT_BUTTON -->
+<div id="TOP_RIGHT_BUTTON" class="wikia-ad noprint"><script type="text/javascript">	wgAfterContentAndJS.push(function() {
+		if (typeof(AdDriverDelayedLoader) != 'undefined') {
+			AdDriverDelayedLoader.appendItem(new AdDriverDelayedLoaderItem("TOP_RIGHT_BUTTON", "300x100", "DART"));
+		}
+	});</script><script async="" src="data:text/javascript,document.write%28%27%3Cdiv%20id%3D%22Liftium_300x100_5%22%3E%3Ciframe%20width%3D%22300%22%20height%3D%22100%22%20id%3D%22TOP_RIGHT_BUTTON_iframe%22%20noresize%3D%22true%22%20scrolling%3D%22no%22%20frameborder%3D%220%22%20marginheight%3D%220%22%20marginwidth%3D%220%22%20style%3D%22border%3Anone%3B%22%20target%3D%22_blank%22%3E%3C%2Fiframe%3E%3Cdiv%3E%27%29%3BLiftium.callInjectedIframeAd%28%22300x100%22%2C%20document.getElementById%28%22TOP_RIGHT_BUTTON_iframe%22%29%29%3B">document.write('<div id="Liftium_300x100_5"><iframe width="300" height="100" id="TOP_RIGHT_BUTTON_iframe" noresize="true" scrolling="no" frameborder="0" marginheight="0" marginwidth="0" style="border:none;" target="_blank"></iframe><div>');Liftium.callInjectedIframeAd("300x100", document.getElementById("TOP_RIGHT_BUTTON_iframe"));</script><div id="Liftium_300x100_5"><iframe src="Search_and_replace_in_multiple_buffers-Dateien/a_015.htm" target="_blank" style="border: medium none;" marginwidth="0" marginheight="0" noresize="true" id="TOP_RIGHT_BUTTON_iframe" frameborder="0" height="0" scrolling="no" width="0"></iframe><div></div></div></div><!-- END SLOTNAME: TOP_RIGHT_BUTTON -->
+<section class="LatestPhotosModule module">
+	<h1>Latest Photos</h1>
+	<a href="http://vim.wikia.com/wiki/Special:Upload" title="Add a Photo" class="wikia-button upphotoslogin"><img src="data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D" class="sprite photo" height="0" width="0"> Add a Photo</a>	<div class="tally counter">
+		<em>71</em><span class="fixedwidth">photos on this wiki</span>	</div>
+
+			<a href="#" class="previous"><img src="data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D" class="latest-images-left" height="0" width="0"></a>
+		<a href="#" class="next"><img src="data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D" class="latest-images-right" height="0" width="0"></a>
+	<div class="carousel-container">
+		<div>
+			<ul class="carousel">
+			<li class="thumbs first-image"><a class="image" data-ref="File:Automator bash.png " href="http://vim.wikia.com/wiki/File:Automator_bash.png">
+						<img class="thumbimage" src="Search_and_replace_in_multiple_buffers-Dateien/82px-1614880326-Automator_bash.png" height="82" width="82">
+		</a>
+
+		<span class="thumbcaption">
+			by <a href="http://vim.wikia.com/wiki/User:Nfuria" title="User:Nfuria">Nfuria</a><br>
+			<time title="2012-03-12T22:41:03Z" class="timeago" datetime="2012-03-12T22:41:03Z">26 days ago</time><br>
+
+						Posted in			<a href="http://vim.wikia.com/wiki/Vim-sessions_under_Mac" title="Vim-sessions under Mac" class="wikia-gallery-item-posted">Vim-sessions under Mac</a>				</span>
+		</li>
+			<li class="thumbs"><a class="image" data-ref="File:Snapshot1.png " href="http://vim.wikia.com/wiki/File:Snapshot1.png">
+						<img class="thumbimage" src="Search_and_replace_in_multiple_buffers-Dateien/82px-129115401024-Snapshot1.png" height="82" width="82">
+		</a>
+
+		<span class="thumbcaption">
+			by <a href="http://vim.wikia.com/wiki/User:Ronnankde" title="User:Ronnankde">Ronnankde</a><br>
+			<time title="2012-03-12T14:55:11Z" class="timeago" datetime="2012-03-12T14:55:11Z">27 days ago</time><br>
+
+					</span>
+		</li>
+			<li class="thumbs"><a class="image" data-ref="File:Macvim vimrc.jpg " href="http://vim.wikia.com/wiki/File:Macvim_vimrc.jpg">
+						<img class="thumbimage" src="Search_and_replace_in_multiple_buffers-Dateien/82px-27111720900-Macvim_vimrc.jpg" height="82" width="82">
+		</a>
+
+		<span class="thumbcaption">
+			by <a href="http://vim.wikia.com/wiki/User:Phil_Dobbin" title="User:Phil Dobbin">Phil Dobbin</a><br>
+			<time title="2012-02-22T06:00:21Z" class="timeago" datetime="2012-02-22T06:00:21Z">a month ago</time><br>
+
+						Posted in			<a href="http://vim.wikia.com/wiki/File:Macvim_vimrc.jpg#filelinks" class="wikia-gallery-item-more">more...</a>				</span>
+		</li>
+			<li class="thumbs"><a class="image" data-ref="File:FountainSyntaxPlusRegexIndention.png " href="http://vim.wikia.com/wiki/File:FountainSyntaxPlusRegexIndention.png">
+						<img class="thumbimage" src="data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D" data-src="http://images1.wikia.nocookie.net/__cb50003/vim/images/thumb/3/35/FountainSyntaxPlusRegexIndention.png/82px-0%2C562%2C0%2C562-FountainSyntaxPlusRegexIndention.png" height="82" width="82">
+		</a>
+
+		<span class="thumbcaption">
+			by <a href="http://vim.wikia.com/wiki/User:Sonofagus" title="User:Sonofagus">Sonofagus</a><br>
+			<time title="2012-02-15T14:17:39Z" class="timeago" datetime="2012-02-15T14:17:39Z">a month ago</time><br>
+
+						Posted in			<a href="http://vim.wikia.com/wiki/Script:3880" title="Script:3880" class="wikia-gallery-item-posted">Script:3880</a>				</span>
+		</li>
+			<li class="thumbs"><a class="image" data-ref="File:Captură-ecran-.gvimrc (~) - GVIM.png " href="http://vim.wikia.com/wiki/File:Captur%C4%83-ecran-.gvimrc_%28%7E%29_-_GVIM.png">
+						<img class="thumbimage" src="data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D" data-src="http://images2.wikia.nocookie.net/__cb50003/vim/images/thumb/c/ce/Captur%C4%83-ecran-.gvimrc_%28~%29_-_GVIM.png/82px-178%2C656%2C0%2C477-Captur%C4%83-ecran-.gvimrc_%28~%29_-_GVIM.png" height="82" width="82">
+		</a>
+
+		<span class="thumbcaption">
+			by <a href="http://vim.wikia.com/wiki/User:Petux7" title="User:Petux7">Petux7</a><br>
+			<time title="2011-11-19T09:58:52Z" class="timeago" datetime="2011-11-19T09:58:52Z">4 months ago</time><br>
+
+					</span>
+		</li>
+			<li class="thumbs"><a class="image" data-ref="File:12.png " href="http://vim.wikia.com/wiki/File:12.png">
+						<img class="thumbimage" src="data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D" data-src="http://images1.wikia.nocookie.net/__cb50003/vim/images/thumb/9/9e/12.png/82px-316%2C1487%2C0%2C1170-12.png" height="82" width="82">
+		</a>
+
+		<span class="thumbcaption">
+			by <a href="http://vim.wikia.com/wiki/User:I.am.corpix" title="User:I.am.corpix">I.am.corpix</a><br>
+			<time title="2011-10-19T13:05:58Z" class="timeago" datetime="2011-10-19T13:05:58Z">5 months ago</time><br>
+
+					</span>
+		</li>
+			<li class="thumbs"><a class="image" data-ref="File:Autocomp.png " href="http://vim.wikia.com/wiki/File:Autocomp.png">
+						<img class="thumbimage" src="data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D" data-src="http://images4.wikia.nocookie.net/__cb50003/vim/images/thumb/a/a4/Autocomp.png/82px-238%2C445%2C0%2C206-Autocomp.png" height="82" width="82">
+		</a>
+
+		<span class="thumbcaption">
+			by <a href="http://vim.wikia.com/wiki/User:Andre3" title="User:Andre3">Andre3</a><br>
+			<time title="2011-09-09T22:26:06Z" class="timeago" datetime="2011-09-09T22:26:06Z">7 months ago</time><br>
+
+						Posted in			<a href="http://vim.wikia.com/wiki/Script:3092" title="Script:3092" class="wikia-gallery-item-posted">Script:3092</a>				</span>
+		</li>
+			<li class="thumbs"><a class="image" data-ref="File:Vim multiwindow.jpg " href="http://vim.wikia.com/wiki/File:Vim_multiwindow.jpg">
+						<img class="thumbimage" src="data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D" data-src="http://images3.wikia.nocookie.net/__cb50003/vim/images/thumb/a/a2/Vim_multiwindow.jpg/82px-316%2C1367%2C0%2C1050-Vim_multiwindow.jpg" height="82" width="82">
+		</a>
+
+		<span class="thumbcaption">
+			by <a href="http://vim.wikia.com/wiki/User:Mohdady" title="User:Mohdady">Mohdady</a><br>
+			<time title="2011-08-26T17:12:29Z" class="timeago" datetime="2011-08-26T17:12:29Z">7 months ago</time><br>
+
+					</span>
+		</li>
+			<li class="thumbs"><a class="image" data-ref="File:Muhammad Umair.JPG " href="http://vim.wikia.com/wiki/File:Muhammad_Umair.JPG">
+						<img class="thumbimage" src="data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D" data-src="http://images3.wikia.nocookie.net/__cb50003/vim/images/thumb/6/6b/Muhammad_Umair.JPG/82px-101%2C702%2C0%2C600-Muhammad_Umair.JPG" height="82" width="82">
+		</a>
+
+		<span class="thumbcaption">
+			by <a href="http://vim.wikia.com/wiki/User:MUS" title="User:MUS">MUS</a><br>
+			<time title="2011-07-22T20:13:44Z" class="timeago" datetime="2011-07-22T20:13:44Z">8 months ago</time><br>
+
+					</span>
+		</li>
+			<li class="thumbs"><a class="image" data-ref="File:Gohu-sample.png " href="http://vim.wikia.com/wiki/File:Gohu-sample.png">
+						<img class="thumbimage" src="data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D" data-src="http://images3.wikia.nocookie.net/__cb50003/vim/images/thumb/0/05/Gohu-sample.png/82px-129%2C380%2C0%2C250-Gohu-sample.png" height="82" width="82">
+		</a>
+
+		<span class="thumbcaption">
+			by <a href="http://vim.wikia.com/wiki/User:Dbbolton" title="User:Dbbolton">Dbbolton</a><br>
+			<time title="2011-07-01T11:32:54Z" class="timeago" datetime="2011-07-01T11:32:54Z">9 months ago</time><br>
+
+						Posted in			<a href="http://vim.wikia.com/wiki/The_perfect_programming_font" title="The perfect programming font" class="wikia-gallery-item-posted">The perfect programming font</a>				</span>
+		</li>
+			<li class="thumbs"><a class="image" data-ref="File:IDsearch-screenshot.jpg " href="http://vim.wikia.com/wiki/File:IDsearch-screenshot.jpg">
+						<img class="thumbimage" src="data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D" data-src="http://images3.wikia.nocookie.net/__cb50003/vim/images/thumb/0/00/IDsearch-screenshot.jpg/82px-300%2C1069%2C0%2C768-IDsearch-screenshot.jpg" height="82" width="82">
+		</a>
+
+		<span class="thumbcaption">
+			by <a href="http://vim.wikia.com/wiki/User:Banga.shrey" title="User:Banga.shrey">Banga.shrey</a><br>
+			<time title="2011-06-18T00:23:45Z" class="timeago" datetime="2011-06-18T00:23:45Z">9 months ago</time><br>
+
+						Posted in			<a href="http://vim.wikia.com/wiki/Script:3630" title="Script:3630" class="wikia-gallery-item-posted">Script:3630</a>				</span>
+		</li>
+				<li class="see-all last-image">
+			<a href="http://vim.wikia.com/wiki/Special:NewFiles" title="Special:NewFiles">See all photos</a>			<img src="data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D" data-src="http://images.wikia.nocookie.net/__cb51060/common/skins/oasis/images/empty_gallery.png">
+		</li>
+				</ul>
+		</div>
+	</div>
+	<a href="http://vim.wikia.com/wiki/Special:NewFiles" title="Special:NewFiles" class="more">See more &gt;</a>
+
+</section>
+<!-- BEGIN SLOTNAME: MIDDLE_RIGHT_BOXAD -->
+<!-- Null Ad from AdEngine::getPlaceHolderIframe--><!-- Null Ad. Reason: Slot is disabled, slotname=MIDDLE_RIGHT_BOXAD --><!-- END SLOTNAME: MIDDLE_RIGHT_BOXAD -->
+<section class="WikiaActivityModule module ">
+	<h1 class="activity-heading">Recent Wiki Activity</h1>
+	<ul>
+		<li>
+			<img src="data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D" class="sprite edit" height="20" width="20">
+			<em><a href="http://vim.wikia.com/wiki/256_colors_in_vim">256 colors in vim</a></em>
+			<div class="edited-by">edited by <a href="http://vim.wikia.com/wiki/User:Kanliot">Kanliot</a> 21 hours ago</div>
+		</li>
+		<li>
+			<img src="data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D" class="sprite edit" height="20" width="20">
+			<em><a href="http://vim.wikia.com/wiki/Jump_to_a_random_line">Jump to a random line</a></em>
+			<div class="edited-by">edited by <a href="http://vim.wikia.com/wiki/User:Udslk">Udslk</a> 1 day ago</div>
+		</li>
+		<li>
+			<img src="data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D" class="sprite edit" height="20" width="20">
+			<em><a href="http://vim.wikia.com/wiki/Troubleshooting">Troubleshooting</a></em>
+			<div class="edited-by">edited by <a href="http://vim.wikia.com/wiki/User:JohnBeckett">JohnBeckett</a> 1 day ago</div>
+		</li>
+		<li>
+			<img src="data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D" class="sprite edit" height="20" width="20">
+			<em><a href="http://vim.wikia.com/wiki/Buffers">Buffers</a></em>
+			<div class="edited-by">edited by <a href="http://vim.wikia.com/wiki/User:JohnBeckett">JohnBeckett</a> 1 day ago</div>
+		</li>
+	</ul>
+
+			<a href="http://vim.wikia.com/wiki/Special:WikiActivity" title="Special:WikiActivity" class="more">See more &gt;</a>	</section>
+
+<section class="ChatModule module"><div class="chat-live">Live!</div>
+<h1>Vim Tips Wiki Chat</h1>
+	
+	
+	<div class="chat-join">
+				<button onclick="onChatButtonClick()" class="loginToChat">
+			<img src="Search_and_replace_in_multiple_buffers-Dateien/chat_icon.png">
+			Start a Chat		</button>
+	</div>
+
+	
+</section><!-- BEGIN SLOTNAME: LEFT_SKYSCRAPER_2 -->
+<div id="LEFT_SKYSCRAPER_2" class="wikia-ad noprint"><script type="text/javascript">	wgAfterContentAndJS.push(function() {
+		if (typeof(AdDriverDelayedLoader) != 'undefined') {
+			AdDriverDelayedLoader.appendItem(new AdDriverDelayedLoaderItem("LEFT_SKYSCRAPER_2", "160x600", "DART"));
+		}
+	});</script><script async="" src="data:text/javascript,document.write%28%27%3Cdiv%20id%3D%22Liftium_160x600_6%22%3E%3Ciframe%20width%3D%22160%22%20height%3D%22600%22%20id%3D%22LEFT_SKYSCRAPER_2_iframe%22%20noresize%3D%22true%22%20scrolling%3D%22no%22%20frameborder%3D%220%22%20marginheight%3D%220%22%20marginwidth%3D%220%22%20style%3D%22border%3Anone%3B%22%20target%3D%22_blank%22%3E%3C%2Fiframe%3E%3Cdiv%3E%27%29%3BLiftium.callInjectedIframeAd%28%22160x600%22%2C%20document.getElementById%28%22LEFT_SKYSCRAPER_2_iframe%22%29%29%3B">document.write('<div id="Liftium_160x600_6"><iframe width="160" height="600" id="LEFT_SKYSCRAPER_2_iframe" noresize="true" scrolling="no" frameborder="0" marginheight="0" marginwidth="0" style="border:none;" target="_blank"></iframe><div>');Liftium.callInjectedIframeAd("160x600", document.getElementById("LEFT_SKYSCRAPER_2_iframe"));</script><div id="Liftium_160x600_6"><iframe src="Search_and_replace_in_multiple_buffers-Dateien/a_016.htm" target="_blank" style="border: medium none; display: none;" marginwidth="0" marginheight="0" noresize="true" id="LEFT_SKYSCRAPER_2_iframe" frameborder="0" height="600" scrolling="no" width="160"></iframe><div></div><iframe style="display: none;" id="Liftium_160x600_6_998" marginwidth="0" marginheight="0" src="Search_and_replace_in_multiple_buffers-Dateien/a_017.htm" frameborder="0" height="600" scrolling="no" width="160"></iframe><iframe style="display: none;" id="Liftium_160x600_6_1105" marginwidth="0" marginheight="0" src="Search_and_replace_in_multiple_buffers-Dateien/a_018.htm" frameborder="0" height="600" scrolling="no" width="160"></iframe><iframe id="Liftium_160x600_6_895" marginwidth="0" marginheight="0" src="Search_and_replace_in_multiple_buffers-Dateien/a_019.htm" frameborder="0" height="600" scrolling="no" width="160"></iframe></div></div><!-- END SLOTNAME: LEFT_SKYSCRAPER_2 -->
+
+</div>
+
+		<footer id="WikiaFooter" class="WikiaFooter notoolbar">
+	<!-- BEGIN SLOTNAME: LEFT_SKYSCRAPER_3 -->
+<div style="display: none;" id="LEFT_SKYSCRAPER_3" class="wikia-ad noprint"><script type="text/javascript">	wgAfterContentAndJS.push(function() {
+		if (typeof(AdDriverDelayedLoader) != 'undefined') {
+			AdDriverDelayedLoader.appendItem(new AdDriverDelayedLoaderItem("LEFT_SKYSCRAPER_3", "160x600", "DART"));
+		}
+	});</script></div><!-- END SLOTNAME: LEFT_SKYSCRAPER_3 -->
+
+	<div class="FooterAd"></div>
+	<section>
+	<div class="header-container">
+		<h1>Around Wikia's network</h1>
+		<a id="WikiaRandomWiki" href="http://community.wikia.com/wiki/Special:RandomWiki/2827" class="wikia-button">Random Wiki</a>
+	</div>
+	<script type="text/javascript">
+	wgAfterContentAndJS.push(function() {			fillElem_SPOTLIGHT_FOOTER_helper = function() {
+		if (typeof OA_output != 'undefined') {			if (typeof OA_output['14'] != 'undefined') {
+				$('#SPOTLIGHT_FOOTER_1').html(OA_output['14']);
+			}			if (typeof OA_output['15'] != 'undefined') {
+				$('#SPOTLIGHT_FOOTER_2').html(OA_output['15']);
+			}			if (typeof OA_output['16'] != 'undefined') {
+				$('#SPOTLIGHT_FOOTER_3').html(OA_output['16']);
+			}		}
+	};	fillElem_SPOTLIGHT_FOOTER = function () {
+		fillElem_SPOTLIGHT_FOOTER_helper();
+	};	if (typeof OA_output == 'undefined') {
+		fillElem_SPOTLIGHT_FOOTER_callback = function() {
+			fillElem_SPOTLIGHT_FOOTER_helper();	
+		};		if (typeof window.spcCallbacks == 'undefined') {
+			window.spcCallbacks = new Array();
+		}
+		window.spcCallbacks.push('fillElem_SPOTLIGHT_FOOTER_callback');
+	}
+	});
+</script>	<ul id="SPOTLIGHT_FOOTER" class="LazyLoadAd SPOTLIGHT_FOOTER">
+				<li class="WikiaSpotlight item-1" id="SPOTLIGHT_FOOTER_1">
+					</li>
+				<li class="WikiaSpotlight item-2" id="SPOTLIGHT_FOOTER_2">
+					</li>
+				<li class="WikiaSpotlight item-3" id="SPOTLIGHT_FOOTER_3">
+					</li>
+			</ul>
+</section>
+</footer>		<footer class="CorporateFooter">
+	<nav>
+		<h1>Wikia Inc Navigation</h1>
+		<div class="WikiaHubBranding HubBrandingBlackBackground">
+			<div class="wordmark">
+				<img src="data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D" class="sprite logo9">
+			</div>
+						    <div class="hub"><a class="sprite hub9" href="http://www.wikia.com/Lifestyle">Lifestyle</a></div>
+					</div>
+		<ul>
+			<li>
+							<a href="http://www.wikia.com/About"><span>About</span></a>
+						</li>
+				<li>
+							<a href="http://www.community.wikia.com/"><span>Community Central</span></a>
+						</li>
+				<li>
+							<a href="http://www.wikia.com/Careers">Careers</a>
+						</li>
+				<li>
+							<a href="http://www.wikia.com/Advertising">Advertise</a>
+						</li>
+				<li>
+							<a href="http://api.wikia.com/"><span>API</span></a>
+						</li>
+				<li>
+							<a href="http://vim.wikia.com/wiki/Special:Contact">Contact Wikia</a>
+						</li>
+				<li>
+							<a href="http://www.wikia.com/Terms_of_Use">Terms of Use</a>
+						</li>
+				<li>
+							<a href="http://www.wikia.com/Privacy_Policy">Privacy Policy</a>
+						</li>
+				<li>
+			<a href="http://community.wikia.com/wiki/Wikia:Licensing" title="w:Wikia:Licensing">CC-BY-SA</a>			</li>
+			</ul>
+	</nav>
+</footer>
+	</div>
+</section><!--WikiaPage-->
+
+		<!--[if lt IE 8]>
+			<script src="http://images.wikia.nocookie.net/__cb51060/common/skins/common/json2.js"></script>
+		<![endif]-->
+
+		<!--[if lt IE 9]>
+			<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+
+		<!-- Combined JS files (StaticChute) and head scripts -->
+		<script type="text/javascript">/*<![CDATA[*/ (function(){ wsl.loadScript(["http:\/\/ajax.googleapis.com\/ajax\/libs\/jquery\/1.6.1\/jquery.min.js","http:\/\/images.wikia.nocookie.net\/__am\/51060\/group\/-\/oasis_shared_js","http:\/\/images.wikia.nocookie.net\/__am\/51060\/group\/-\/oasis_extensions_js","\/__am\/51060\/group\/-\/oasis_anon_js","http:\/\/vim.wikia.com\/wiki\/-?action=raw&smaxage=86400&maxrev=0&gen=js&useskin=oasis","http:\/\/images.wikia.nocookie.net\/__am\/51060\/one\/-\/extensions\/wikia\/UserLogin\/js\/UserLoginDropdown.js","http:\/\/images.wikia.nocookie.net\/__cb51060\/common\/extensions\/wikia\/Chat\/js\/ChatRailModule.js"]); })(); /*]]>*/</script><script src="Search_and_replace_in_multiple_buffers-Dateien/jquery.js" type="text/javascript"></script><script src="Search_and_replace_in_multiple_buffers-Dateien/oasis_shared_js.js" type="text/javascript"></script><script src="Search_and_replace_in_multiple_buffers-Dateien/oasis_extensions_js.js" type="text/javascript"></script><script type="text/javascript" src="Search_and_replace_in_multiple_buffers-Dateien/config.js"></script><script src="Search_and_replace_in_multiple_buffers-Dateien/oasis_anon_js.js" type="text/javascript"></script><script src="Search_and_replace_in_multiple_buffers-Dateien/-" type="text/javascript"></script><script src="Search_and_replace_in_multiple_buffers-Dateien/UserLoginDropdown.js" type="text/javascript"></script><script src="Search_and_replace_in_multiple_buffers-Dateien/ChatRailModule.js" type="text/javascript"></script><script>/*<![CDATA[*/
+/* CategorySelect */
+wgAfterContentAndJS.push(function() {
+	$(".catlinks-allhidden").css("display", "block");
+	$('#csAddCategorySwitch').children('a').click(function(ev) {
+		ev.preventDefault();
+
+		$.getResources([
+			function(callback) {
+				$.getScript(wgServer + wgScriptPath + '?action=ajax&rs=CategorySelectGetCategories', callback);
+			},
+			$.loadYUI,
+			wgExtensionsPath + '/wikia/CategorySelect/CategorySelect.js?' + wgStyleVersion,
+			(window.skin == 'oasis' ? $.getSassCommonURL('/extensions/wikia/CategorySelect/oasis.scss') : wgExtensionsPath + '/wikia/CategorySelect/CategorySelect.css?' + wgStyleVersion)
+		],
+		function() {
+			csTrack('addCategory');
+			showCSpanel();
+		});
+
+		$('#catlinks').addClass('csLoading');
+	});
+});
+/*]]>*/</script>
+<!-- BEGIN SLOTNAME: INVISIBLE_1 -->
+<div id="INVISIBLE_1" class="wikia-ad noprint"><script type="text/javascript">	wgAfterContentAndJS.push(function() {
+		if (typeof(AdDriverDelayedLoader) != 'undefined') {
+			AdDriverDelayedLoader.appendItem(new AdDriverDelayedLoaderItem("INVISIBLE_1", "0x0", "DART"));
+		}
+	});</script><script async="" src="data:text/javascript,Liftium.callAd%28%220x0%22%29%3B">Liftium.callAd("0x0");</script><div id="Liftium_0x0_0"><iframe src="javascript:void(0)" name="__bkframe" frameborder="0" height="0" width="0"></iframe><script async="" src="data:text/javascript,%09%0D%0A%24.getScript%28%22http%3A%2F%2Fwww.bkrtx.com%2Fjs%2Fbk-static.js%22%2C%20function%28%29%20%7B%0D%0Avar%20bannedKVPairs%20%3D%20new%20Array%28%27src%27%2C%20%27artid%27%2C%20%27dmn%27%2C%20%27hostpre%27%2C%20%27pos%27%2C%20%27hasp%27%2C%20%27impct%27%2C%20%27loc%27%2C%20%27admeld%27%2C%20%27mtfIFPath%27%2C%20%27src%27%2C%20%27sz%27%2C%20%27mtfInline%27%2C%20%27tile%27%2C%20%27endtag%27%2C%20%27ord%27%2C%20%27dcopt%27%2C%20%27qcseg%27%2C%20%27s2%27%2C%20%27volum%27%2C%20%27dis%27%2C%20%27age%27%2C%20%27hhi%27%2C%20%27sex%27%2C%20%27aff%27%2C%20%27eth%27%2C%20%27kids%27%2C%20%27edu%27%29%3B%0D%0Avar%20dartKVPairs%20%3D%20AdConfig.DART.getUrl%28%27TOP_RIGHT_BOXAD%27%29.split%28%27%3B%27%29%3B%0D%0Avar%20exelateUrl%20%3D%20%27http%3A%2F%2Floadus.exelator.com%2Fload%2F%3Fp%3D232%26g%3D001%26c%3D23706%27%3B%0D%0Aif%20%28%24.isArray%28dartKVPairs%29%29%20%7B%0D%0Afor%20%28x%20in%20dartKVPairs%29%20%7B%0D%0Avar%20kvPair%20%3D%20dartKVPairs%5Bx%5D.split%28%27%3D%27%29%3B%0D%0Aif%20%28typeof%20kvPair%5B1%5D%20%3D%3D%20%27string%27%20%26%26%20%24.inArray%28kvPair%5B0%5D%2C%20bannedKVPairs%29%20%3D%3D%20-1%29%20%7B%0D%0Aswitch%28kvPair%5B0%5D%29%20%7B%0D%0Acase%20%27s0%27%3A%0D%0AkvPair%5B0%5D%20%3D%20%27ctg%27%3B%0D%0Abreak%3B%0D%0Acase%20%27s1%27%3A%0D%0AkvPair%5B0%5D%20%3D%20%27subctg%27%3B%0D%0Abreak%3B%0D%0Acase%20%27s2%27%3A%0D%0AkvPair%5B0%5D%20%3D%20%27section%27%3B%0D%0Abreak%3B%0D%0A%7D%0D%0A%0D%0AexelateUrl%20%3D%20exelateUrl%20%2B%20%27%26%27%20%2B%20kvPair%5B0%5D%20%2B%20%27%3D%27%20%2B%20kvPair%5B1%5D%3B%0D%0Abk_addPageCtx%28kvPair%5B0%5D%2C%20kvPair%5B1%5D%29%3B%0D%0A%7D%0D%0A%7D%0D%0A%7D%0D%0Abk_doJSTag%285040%2C%204%29%3B%0D%0A%24.getScript%28exelateUrl%29%3B%0D%0A%7D%29%3B%0D%0A" type="text/javascript">	
+$.getScript("http://www.bkrtx.com/js/bk-static.js", function() {
+var bannedKVPairs = new Array('src', 'artid', 'dmn', 'hostpre', 'pos', 'hasp', 'impct', 'loc', 'admeld', 'mtfIFPath', 'src', 'sz', 'mtfInline', 'tile', 'endtag', 'ord', 'dcopt', 'qcseg', 's2', 'volum', 'dis', 'age', 'hhi', 'sex', 'aff', 'eth', 'kids', 'edu');
+var dartKVPairs = AdConfig.DART.getUrl('TOP_RIGHT_BOXAD').split(';');
+var exelateUrl = 'http://loadus.exelator.com/load/?p=232&g=001&c=23706';
+if ($.isArray(dartKVPairs)) {
+for (x in dartKVPairs) {
+var kvPair = dartKVPairs[x].split('=');
+if (typeof kvPair[1] == 'string' && $.inArray(kvPair[0], bannedKVPairs) == -1) {
+switch(kvPair[0]) {
+case 's0':
+kvPair[0] = 'ctg';
+break;
+case 's1':
+kvPair[0] = 'subctg';
+break;
+case 's2':
+kvPair[0] = 'section';
+break;
+}
+
+exelateUrl = exelateUrl + '&' + kvPair[0] + '=' + kvPair[1];
+bk_addPageCtx(kvPair[0], kvPair[1]);
+}
+}
+}
+bk_doJSTag(5040, 4);
+$.getScript(exelateUrl);
+});
+</script></div></div><!-- END SLOTNAME: INVISIBLE_1 -->
+<!-- BEGIN SLOTNAME: INVISIBLE_2 -->
+<div id="INVISIBLE_2" class="wikia-ad noprint"><script type="text/javascript">	wgAfterContentAndJS.push(function() {
+		if (typeof(AdDriverDelayedLoader) != 'undefined') {
+			AdDriverDelayedLoader.appendItem(new AdDriverDelayedLoaderItem("INVISIBLE_2", "0x0", "DART"));
+		}
+	});</script><script async="" src="data:text/javascript,Liftium.callAd%28%220x0%22%29%3B">Liftium.callAd("0x0");</script><div id="Liftium_0x0_1"></div></div><!-- END SLOTNAME: INVISIBLE_2 -->
+<!-- No iframe placeholders called for AdEngine::getDelayedIframeLoadingCode -->
+
+<script type="text/javascript">/*<![CDATA[*/while(wgAfterContentAndJS.length>0){wgAfterContentAndJS.shift()();}/*]]>*/</script>
+<!-- BottomScripts -->
+
+<script>if (window.runOnloadHook) runOnloadHook();</script>
+<script>if (JSSnippetsStack.length) $.getScript('http://images.wikia.nocookie.net/__am/51060/one/-/extensions/wikia/JSSnippets/js/JSSnippets.js');</script><!-- Facebook integration -->
+<div id="fb-root"></div><!-- end Bottomscripts -->
+
+<!-- printable CSS -->
+<script type="text/javascript">/*<![CDATA[*/ setTimeout(function(){wsl.loadCSS(["\/__wikia_combined\/cb=51060&type=PrintCSS&isOasis=true"], 'print');}, 100); /*]]>*/</script>
+<!-- Served by ap-s36 in 0.241 secs. cpu: 0.190 -->
+
+
+
+<iframe style="border: 0px none; width: 0px; height: 0px; display: block;" src="Search_and_replace_in_multiple_buffers-Dateien/c206rand941966299pvyp2962dpyrtifr.htm" id="LOTCCFrameSun Apr 08 2012 17:04:30 GMT+0200"></iframe></body><!-- Ad slots to be called within AdModule on this page: TOP_LEADERBOARD, TOP_RIGHT_BOXAD, TEST_TOP_RIGHT_BOXAD, MIDDLE_RIGHT_BOXAD, INVISIBLE_1, INVISIBLE_2, LEFT_SKYSCRAPER_2, LEFT_SKYSCRAPER_3, PREFOOTER_LEFT_BOXAD, PREFOOTER_RIGHT_BOXAD, INVISIBLE_TOP, TOP_RIGHT_BUTTON, TOP_BUTTON --></html>

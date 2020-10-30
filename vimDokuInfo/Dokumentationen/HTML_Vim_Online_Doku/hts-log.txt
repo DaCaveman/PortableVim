@@ -1,0 +1,32 @@
+HTTrack3.44-1+htsswf+htsjava launched on Mon, 26 Mar 2012 13:39:26 at http://vimdoc.sourceforge.net/htmldoc/usr_toc.html +*.png +*.gif +*.jpg +*.css +*.js -ad.doubleclick.net/* -mime:application/foobar
+(winhttrack -qwC2%Ps2u1%s%uN0%I0p3DaK0H0%kf2A25000%f#f -F "Mozilla/4.5 (compatible; HTTrack 3.0x; Windows 98)" -%F "<!-- Mirrored from %s%s by HTTrack Website Copier/3.x [XR&CO'2010], %s -->" -%l "de, en, *" http://vimdoc.sourceforge.net/htmldoc/usr_toc.html -O1 D:\Michael_Ohlert\Downloads\Vim_Online_Doc +*.png +*.gif +*.jpg +*.css +*.js -ad.doubleclick.net/* -mime:application/foobar )
+
+Information, Warnings and Errors reported for this mirror:
+note:	the hts-log.txt file, and hts-cache folder, may contain sensitive information,
+	such as username/password authentication for websites mirrored in this project
+	do not share these files/folders if you want these information to remain private
+
+13:41:39	Error: 	"Not Found" (404) at link vimdoc.sourceforge.net/htmldoc/tags.html (from vimdoc.sourceforge.net/htmldoc/help.html)
+13:41:41	Error: 	"Not Found" (404) at link vimdoc.sourceforge.net/htmldoc/vimrc_example.html (from vimdoc.sourceforge.net/htmldoc/intro.html)
+13:41:41	Error: 	"Not Found" (404) at link vimdoc.sourceforge.net/htmldoc/tex.html (from vimdoc.sourceforge.net/htmldoc/usr_06.html)
+13:41:41	Error: 	"Not Found" (404) at link vimdoc.sourceforge.net/htmldoc/2html.html (from vimdoc.sourceforge.net/htmldoc/usr_06.html)
+13:41:41	Error: 	"Not Found" (404) at link vimdoc.sourceforge.net/htmldoc/menu.html (from vimdoc.sourceforge.net/htmldoc/syntax.html)
+13:41:41	Error: 	"Not Found" (404) at link vimdoc.sourceforge.net/htmldoc/c.html (from vimdoc.sourceforge.net/htmldoc/syntax.html)
+13:41:41	Error: 	"Not Found" (404) at link vimdoc.sourceforge.net/htmldoc/html.html (from vimdoc.sourceforge.net/htmldoc/syntax.html)
+13:41:41	Error: 	"Not Found" (404) at link vimdoc.sourceforge.net/htmldoc/java.html (from vimdoc.sourceforge.net/htmldoc/syntax.html)
+13:41:41	Error: 	"Not Found" (404) at link vimdoc.sourceforge.net/htmldoc/nroff.html (from vimdoc.sourceforge.net/htmldoc/syntax.html)
+13:41:41	Error: 	"Not Found" (404) at link vimdoc.sourceforge.net/htmldoc/asm.html (from vimdoc.sourceforge.net/htmldoc/syntax.html)
+13:41:41	Error: 	"Not Found" (404) at link vimdoc.sourceforge.net/htmldoc/groff.html (from vimdoc.sourceforge.net/htmldoc/syntax.html)
+13:41:41	Error: 	"Not Found" (404) at link vimdoc.sourceforge.net/htmldoc/csh.html (from vimdoc.sourceforge.net/htmldoc/syntax.html)
+13:41:41	Error: 	"Not Found" (404) at link vimdoc.sourceforge.net/htmldoc/one.html (from vimdoc.sourceforge.net/htmldoc/usr_08.html)
+13:41:41	Error: 	"Not Found" (404) at link vimdoc.sourceforge.net/htmldoc/two.html (from vimdoc.sourceforge.net/htmldoc/usr_08.html)
+13:41:41	Error: 	"Not Found" (404) at link vimdoc.sourceforge.net/htmldoc/three.html (from vimdoc.sourceforge.net/htmldoc/usr_08.html)
+13:41:41	Error: 	"Not Found" (404) at link vimdoc.sourceforge.net/htmldoc/main.html (from vimdoc.sourceforge.net/htmldoc/usr_08.html)
+13:41:41	Error: 	"Not Found" (404) at link vimdoc.sourceforge.net/htmldoc/mswin.html (from vimdoc.sourceforge.net/htmldoc/gui.html)
+13:41:42	Error: 	"Not Found" (404) at link vimdoc.sourceforge.net/htmldoc/netrw.html (from vimdoc.sourceforge.net/htmldoc/options.html)
+13:41:42	Error: 	"Not Found" (404) at link vimdoc.sourceforge.net/htmldoc/spellfile.html (from vimdoc.sourceforge.net/htmldoc/options.html)
+13:41:46	Error: 	"Not Found" (404) at link vimdoc.sourceforge.net/htmldoc/bugreport.html (from vimdoc.sourceforge.net/htmldoc/message.html)
+13:41:49	Error: 	"Not Found" (404) at link vimdoc.sourceforge.net/htmldoc/rgb.html (from vimdoc.sourceforge.net/htmldoc/gui_w16.html)
+
+HTTrack Website Copier/3.44-1 mirror complete in 2 minutes 25 seconds : 161 links scanned, 131 files written (8138679 bytes overall) [8229720 bytes received at 56756 bytes/sec], 16.1 requests per connection
+(21 errors, 0 warnings, 0 messages)

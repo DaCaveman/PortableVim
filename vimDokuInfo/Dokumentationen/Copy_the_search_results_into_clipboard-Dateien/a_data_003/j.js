@@ -1,0 +1,2 @@
+document.write('<script type="text/javascript" src="http://liftium.wikia.com/js/hop.js"><\/script>');
+document.write('<iframe src="http://a.tribalfusion.com/p.media/akmNYDWUMSWdQUmbjqPrrsYEQn3ajg2afPmabD1rZbhUWfQmPfZbmsYvotUK5EY95deq5AvZdpbjZcXVv0YGQ01sZbypafT5UZbSTFZbZcV6YTPTb3QVrMPtbu1WvpT63x4cZbWXrZbIVmqw4AZb8R6bA3tnr1HYLmdAu5ABYSFnQOsH3yl/3002246/adTag.html" width=0 height=0 style="visibility:hidden;" frameborder=0 marginheight=0 marginwidth=0 scrolling=no><\/iframe>\r\n');

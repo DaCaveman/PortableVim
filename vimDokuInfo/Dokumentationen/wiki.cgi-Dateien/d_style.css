@@ -1,0 +1,94 @@
+/* reset */
+html,body,div,li,ul,ol		{ margin: 0; padding: 0; }
+
+html				{ height: 100%; }
+body				{ height: 100%; padding: 0 5px; font-family: sans-serif; /*font-size: 12px;*/ line-height: 160%;  }
+
+
+
+/* layout */
+
+#page-wrap			{ min-width: 640px; max-width: 1280px; margin: 0px auto; position: relative; min-height:100%; }				
+#main				{ padding-bottom: 100px; overflow: auto; }
+
+						 
+#header				{min-width: 640px; max-width: 1280px;  margin: 0px auto; height: 80px; 
+							   background-image: url('dpl2.png'); left:20px; background-repeat: no-repeat ; padding-left:10px;  }
+#header-text                    { border-bottom: 2px solid black; margin-bottom: 18px; font-size:x-small; font-style: italic  }							  
+#sidebar			{ position: absolute; left: 0; right: 0; width: 130px; padding-left: 0px; }
+#content			{ margin-left: 160px; padding: 10px; }
+
+
+#footer 			{ font-size: small; position: relative; margin-top: -100px; height: 100px; clear:both; } 
+
+
+/* Opera Fix for sticky footer*/
+body:before 			{ content:""; height:100%; float:left; width:0; margin-top:-32767px; }
+
+
+/* sidebar */
+#sidebar-navi			{ width: 130px; }
+
+#sidebar-navi a			{ font-family: Arial; color: #222222; text-decoration: none; font-size: small; display: block; line-height: 130%; }
+#sidebar-navi a:hover		{ font-family: Arial; color: #000000; text-decoration: none; font-size: small; display: block; line-height: 130%; }
+
+#sidebar-navi li		{ list-style-type: none; }
+
+/* header */
+#nav-bar			{ font-size: 85%; text-align: center; margin: 0px 0px 10px 160px; padding: 5px;
+							  border: 1px solid #cccccc; background-color: #eeeeee; }
+a.nav, a:visited.nav		{ font-family: Arial; color: #222222; text-decoration: underline; font-size: small; line-height: 130%; }
+a:hover.nav					{ font-family: Arial; color: black; text-decoration: none; font-size: small; line-height: 130%; }
+
+
+
+/* navigation levels */
+.level-1			{ padding-left: 4px; font-weight: bold; font-variant: small-caps; }
+.level-2			{ padding-left: 10px; border-left: 2px #cccccc solid; background-color: #eeeeee;}
+
+
+#sub-blue                       { border-right: 1px #cccccc solid; border-bottom: 1px #cccccc solid;}
+#sub-blue a.level-1		{ background-color: #bbbbff; border-left: 2px blue solid;}
+#sub-blue a:hover.level-2 	{ background-color: #ddd; border-left: 2px #5555ff solid; }
+
+#sub-red                         { border-right: 1px #cccccc solid; border-bottom: 1px #cccccc solid;}
+#sub-red a.level-1		{ background-color: #ffbbbb; border-left: 2px red solid; }
+#sub-red a:hover.level-2	{ background-color: #ddd; border-left: 2px #ff5555 solid; }
+
+#sub-green                      { border-right: 1px #cccccc solid; border-bottom: 1px #cccccc solid;}
+#sub-green a.level-1		{ background-color: #bbffbb; border-left: 2px green solid; }
+#sub-green a:hover.level-2	{ background-color: #ddd; border-left: 2px #55ff55 solid; }
+
+#sub-olive                      { border-right: 1px #cccccc solid; border-bottom: 1px #cccccc solid;}
+#sub-olive a.level-1		{ background-color: #c5cc79; border-left: 2px olive solid;}
+#sub-olive a:hover.level-2	{ background-color: #ddd; border-left: 2px #c5cc79 solid; }
+				
+
+
+/* content */
+#content			{ font-family: sans-serif; font-size: 85%; line-height: 130%; }
+
+h1                              { font-size: 150%}
+h2                              { font-size: 140% }
+h3                              { font-size: 130% }                             
+h4                              { font-size: 120% }
+h5                              { font-size: 110% }
+h6                              { font-size: 100% }
+h1, h2, h3, h4, h5, h6 		{ font-family: sans-serif; margin-left: 0; border-bottom: 1px solid #aaaaaa; 
+						  	  margin: 15px 0; line-height: normal }
+						  	  
+#content a, a:visited		{ color: #0b26ff; text-decoration: none; }
+#content a:hover		{ color: #262626; text-decoration: underline; }
+
+#content li			{ margin: 0 15px 0 15px; list-style:{Insert:ListStyle}; }
+#content ul			{ margin: 0 15px 0 15px; list-style:{Insert:ListStyle}; }
+#content ol			{ margin: 0 15px 0 15px; list-style:{Insert:ListStyle}; }
+
+/* content-menu */
+#content-menu			{ margin-top: 20px; margin-left: 160px; font-family: sans-serif; font-size: small; line-height: 160%; text-align: center; 
+							  border: 1px solid #cccccc; background-color: #eeeeee; padding-top: 5px;}
+						  	  
+/* footer */
+#footer a			{ font-family: Arial; color: #000000; text-decoration: underline; font-size: small; }
+#footer a:hover			{ font-family: Arial; color: #000000; text-decoration: none; font-size: small; }
+

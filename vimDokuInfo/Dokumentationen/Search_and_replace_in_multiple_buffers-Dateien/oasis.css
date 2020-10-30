@@ -1,0 +1,898 @@
+/* Minify took 0.33259010314941 */
+
+.mw-plusminus-pos{color:#006400}.mw-plusminus-neg{color:#8b0000}.mw-plusminus-null{color:#aaa}span.comment{font-style:italic}span.changedby{font-size:95%}.texvc{direction:ltr;unicode-bidi:embed}img.tex{vertical-align:middle}span.texhtml{font-family:serif}#wikiPreview.ontop{margin-bottom:1em}#editform,#toolbar,#wpTextbox1{clear:both}div#mw-js-message{margin:1em
+5%;padding:0.5em 2.5%;border:solid 1px #ddd;background-color:#fcfcfc;color:#000}.editsection{float:right;margin-left:5px}h2#filehistory{clear:both}table.filehistory th,
+table.filehistory
+td{vertical-align:top}table.filehistory
+th{text-align:left}table.filehistory td.mw-imagepage-filesize,
+table.filehistory th.mw-imagepage-filesize{white-space:nowrap}table.filehistory td.filehistory-selected{font-weight:bold}li span.deleted,span.history-deleted{text-decoration:line-through;color:#888;font-style:italic}.not-patrolled{background-color:#ffa}.unpatrolled{font-weight:bold;color:red}div.patrollink{font-size:75%;text-align:right}body.ltr td.mw-label{text-align:right}body.ltr td.mw-input{text-align:left}body.ltr td.mw-submit{text-align:left}body.rtl td.mw-label{text-align:left}body.rtl td.mw-input{text-align:right}body.rtl td.mw-submit{text-align:right}td.mw-label{vertical-align:top}.prefsection td.mw-label{width:20%}.prefsection
+table{width:100%}td.mw-submit{white-space:nowrap}table.mw-htmlform-nolabel td.mw-label{width:0 !important}table.mw-htmlform-nolabel td.mw-input{width:100% !important}body.rtl
+.thumbcaption{text-align:right}body.rtl
+.magnify{float:left}body.ltr
+.thumbcaption{text-align:left}body.ltr
+.magnify{float:right}#wpCaptchaWordLabel{vertical-align:bottom;padding-bottom:10px}.mw-hidden-cats-hidden{display:none}.catlinks-allhidden{display:none}p.mw-ipb-conveniencelinks,p.mw-protect-editreasons,p.mw-filedelete-editreasons,p.mw-delete-editreasons,p.mw-revdel-editreasons{font-size:90%;float:right}.searchresults{}.searchresults
+p{margin-left:0.4em;margin-top:1em;margin-bottom:1.2em}div.searchresult{font-size:95%;width:38em}.mw-search-results{margin-left:0.4em}.mw-search-results
+li{padding-bottom:1em;list-style:none;list-style-image:none}.mw-search-results li
+a{font-size:108%}.mw-search-result-data{color:green;font-size:97%}.mw-search-formheader{margin-top:1em;border:1px
+solid}.mw-search-formheader div.search-types{float:left;padding-left:0.25em}.rtl .mw-search-formheader div.search-types{float:right}.mw-search-formheader div.search-types
+ul{margin:0
+!important;padding:0
+!important;list-style:none !important}.mw-search-formheader div.search-types ul
+li{float:left;margin:0;padding:0}.mw-search-formheader div.search-types ul li
+a{display:block;padding:0.5em}.mw-search-formheader div.search-types ul li.current
+a{color:inherit;cursor:default}.mw-search-formheader div.search-types ul li.current a:hover{text-decoration:none}.mw-search-formheader div.results-info{float:right;padding:0.5em;padding-right:0.75em}.mw-search-formheader div.results-info
+ul{margin:0
+!important;padding:0
+!important;list-style:none !important}.mw-search-formheader div.results-info ul
+li{float:right;margin:0;padding:0}fieldset#mw-searchoptions{margin:0;padding-left:0.75em !important;padding-right:0.75em !important;padding-bottom:0.5em !important;padding-top:0.5em !important;border:none;border:1px
+solid !important;border-top-width:0 !important}fieldset#mw-searchoptions
+legend{display:none}fieldset#mw-searchoptions
+h4{padding:0;margin:0;float:left}.rtl fieldset#mw-searchoptions
+h4{float:right}fieldset#mw-searchoptions div#mw-search-togglebox{float:right}.rtl fieldset#mw-searchoptions div#mw-search-togglebox{float:left}fieldset#mw-searchoptions div#mw-search-togglebox
+label{margin-right:0.25em}fieldset#mw-searchoptions div#mw-search-togglebox
+input{margin-left:0.25em}fieldset#mw-searchoptions
+table{float:left;margin-right:3em}fieldset#mw-searchoptions table
+td{padding-right:1em}.rtl fieldset#mw-searchoptions table
+td{padding-left:1em;padding-right:0}body.rtl fieldset#mw-searchoptions
+table{margin-right:0;margin-left:3em;float:right}fieldset#mw-searchoptions
+div.divider{clear:both;border-bottom:1px solid #DDD;padding-top:0.5em;margin-bottom:0.5em}td#mw-search-menu{padding-left:6em;font-size:85%}div#mw-search-interwiki{float:right;width:18em;border-style:solid;border-color:#AAA;border-width:1px;margin-top:2ex}.rtl div#mw-search-interwiki{float:left}div#mw-search-interwiki
+li{font-size:95%}.mw-search-interwiki-more{float:right;font-size:90%}.rtl .mw-search-interwiki-more{float:left}div#mw-search-interwiki-caption{text-align:center;font-weight:bold;font-size:95%}.mw-search-interwiki-project{font-size:97%;text-align:left;padding-left:0.2em;padding-right:0.15em;padding-bottom:0.2em;padding-top:0.15em;background-color:#ececec;border-top:1px solid #BBB}.rtl .mw-search-interwiki-project{text-align:right}span.searchalttitle{font-size:95%}div.searchdidyoumean{font-size:127%;margin-top:0.8em;color:#c00}div.searchdidyoumean
+em{font-weight:bold}.searchmatch{font-weight:bold}table#mw-search-top-table{background-color:transparent}td#mw-search-togglebox{text-align:right}table#mw-search-powertable{width:100%}form#powersearch{clear:both}.mw-userrights-disabled{color:#888}.mw-userrights-groups td,
+.mw-userrights-groups
+th{padding-right:1.5em}.os-suggest{overflow:auto;overflow-x:hidden;position:absolute;top:0px;left:0px;width:0px;background-color:white;background-color:Window;border-style:solid;border-color:#AAA;border-width:1px;z-index:99;font-size:95%}table.os-suggest-results{font-size:95%;cursor:pointer;border:0;border-collapse:collapse;width:100%}.os-suggest-result,.os-suggest-result-hl{white-space:nowrap;background-color:white;background-color:Window;color:black;color:WindowText;padding:2px}.os-suggest-result-hl,.os-suggest-result-hl-webkit{background-color:#4C59A6;color:white}.os-suggest-result-hl{background-color:Highlight;color:HighlightText}.os-suggest-toggle{position:relative;left:1ex;font-size:65%}.os-suggest-toggle-def{position:absolute;top:0px;left:0px;font-size:65%;visibility:hidden}.autocomment{color:gray}#pagehistory .history-user{margin-left:0.4em;margin-right:0.2em}#pagehistory
+span.minor{font-weight:bold}#pagehistory
+li{margin:1px}#pagehistory
+li.selected{background-color:#f9f9f9;border:1px
+dashed #aaa}.newpage,.minor,.bot{font-weight:bold}.mw-uctop{font-weight:bold}table.mw-listgrouprights-table
+tr{vertical-align:top}.listgrouprights-revoked{text-decoration:line-through}td.mw-statistics-numbers{text-align:right}h4.mw-specialpagesgroup{background-color:#dcdcdc;color:#000;padding:2px;margin: .3em 0em 0em 0em}.mw-specialpagerestricted{font-weight:bold}#shared-image-dup,#shared-image-conflict{font-style:italic}table.mw-emailuser-table{width:98%}td#mw-emailuser-sender,td#mw-emailuser-recipient{font-weight:bold}table.allpageslist{background-color:transparent}table.mw-allpages-table-form,table.mw-allpages-table-chunk{background-color:transparent;width:100%}td.mw-allpages-alphaindexline{text-align:right}td.mw-allpages-nav,p.mw-allpages-nav{text-align:right;font-size:smaller;margin-bottom:1em}table.mw-allpages-table-form
+tr{vertical-align:top}table#mw-prefixindex-list-table,table#mw-prefixindex-nav-table{width:98%;background-color:transparent}td#mw-prefixindex-nav-form{font-size:smaller;margin-bottom:1em;text-align:right;vertical-align:top}.mw-warning-with-logexcerpt{padding:3px;margin-bottom:3px;border:2px
+solid #2F6FAB;clear:both}.mw-warning-with-logexcerpt ul
+li{font-size:90%}span.mw-revdelundel-link,strong.mw-revdelundel-link{font-size:90%}span.mw-revdelundel-hidden,input.mw-revdelundel-hidden{visibility:hidden}td.mw-revdel-checkbox,th.mw-revdel-checkbox{padding-right:10px;text-align:center}a.feedlink{background:url("images/feed-icon.png") center left no-repeat;padding-left:16px}.plainlinks
+a{background:none !important;padding:0
+!important}table.wikitable{margin:1em
+1em 1em 0;background:#f9f9f9;border:1px
+#aaa solid;border-collapse:collapse}.wikitable th, .wikitable
+td{border:1px
+#aaa solid;padding:0.2em}.wikitable
+th{background:#f2f2f2;text-align:center}.wikitable
+caption{font-weight:bold}table.collapsed
+tr.collapsable{display:none}.visualClear{clear:both}#mw_trackbacks{border:solid 1px #bbf;background-color:#eef;padding:0.2em}.TablePager{min-width:80%}.TablePager_nav
+a{text-decoration:none}.TablePager{border-collapse:collapse}.TablePager, .TablePager td, .TablePager
+th{border:1px
+solid #aaa;padding:0
+0.15em 0 0.15em}.TablePager
+th{background-color:#eef}.TablePager
+td{background-color:#fff}.TablePager tr:hover
+td{background-color:#eef}.imagelist td, .imagelist
+th{white-space:nowrap}.imagelist
+.TablePager_col_links{background-color:#eef}.imagelist
+.TablePager_col_img_description{white-space:normal}.imagelist
+th.TablePager_sort{background-color:#ccf}#mw-allmessagestable .allmessages-customised
+td.am_default{background-color:#fcffc4}#mw-allmessagestable tr.allmessages-customised:hover
+td.am_default{background-color:#faff90}#mw-allmessagestable
+td.am_actual{background-color:#e2ffe2}#mw-allmessagestable tr.allmessages-customised:hover + tr.allmessages-customised
+td.am_actual{background-color:#b1ffb1}ul#filetoc{text-align:center;border:1px
+solid #aaa;background-color:#f9f9f9;padding:5px;font-size:95%;margin-bottom:0.5em;margin-left:0;margin-right:0}#filetoc
+li{display:inline;list-style-type:none;padding-right:2em}table.mw_metadata{font-size:0.8em;margin-left:0.5em;margin-bottom:0.5em;width:300px}table.mw_metadata
+caption{font-weight:bold}table.mw_metadata
+th{font-weight:normal}table.mw_metadata
+td{padding:0.1em}table.mw_metadata{border:none;border-collapse:collapse}table.mw_metadata td, table.mw_metadata
+th{text-align:center;border:1px
+solid #aaa;padding-left:0.1em;padding-right:0.1em}table.mw_metadata
+th{background-color:#f9f9f9}table.mw_metadata
+td{background-color:#fcfcfc}table.gallery{margin:2px;padding:2px}table.gallery
+tr{vertical-align:top}table.gallery
+td{vertical-align:top}table.gallery
+caption{font-weight:bold}div.gallerybox{margin:4px}div.gallerybox
+div.thumb{text-align:center;padding:5px}div.gallerytext{overflow:hidden;font-size:94%;padding:2px
+4px}table.mw-enhanced-rc{background:none;border:0;border-spacing:0}td.mw-enhanced-rc{white-space:nowrap;padding:0;vertical-align:top;font-family:monospace}#mw-addcategory-prompt{display:inline;margin-left:1em}#mw-addcategory-prompt
+input{margin-left:0.5em;margin-right:0.5em}.mw-remove-category{padding:8px;background-image:url(images/remove.png);background-position:center center;background-repeat:no-repeat}.mw-ajax-addcategory{padding-left:20px;background-image:url(images/add.png);background-position:left center;background-repeat:no-repeat}.mw-ajax-loader{background-image:url(images/ajax-loader.gif);background-position:center center;background-repeat:no-repeat;padding:16px;position:relative;top: -16px}.mw-small-spinner{padding:10px
+!important;margin-right:0.6em;background-image:url(images/spinner.gif);background-position:center center;background-repeat:no-repeat}a.sortheader{margin:0
+0.3em}.picture-attribution{display:none}.wikia-gallery{list-style:none;margin:16px
+0;padding:0}.wikia-gallery-caption{font-weight:bold;text-align:center}.wikia-gallery-row{white-space:nowrap}.wikia-gallery-item{display:inline-block;padding:1em;vertical-align:top;white-space:normal;margin:1px;text-align:left}.wikia-gallery-item
+.thumb{margin:0;overflow:visible;position:relative;text-align:center}.wikia-gallery-item .thumb
+a.image{background-position:50% 50%;background-repeat:no-repeat;display:block;height:100%;line-height:1px;overflow:hidden;text-decoration:none;vertical-align:middle;width:100%}.wikia-gallery-item .thumb
+div{margin:0
+auto}.wikia-gallery-item .thumb .gallery-image-wrapper{border-style:solid}.wikia-gallery-item .thumb .gallery-image-wrapper .broken-image{display:table-cell;line-height:15px;vertical-align:middle}.wikia-gallery-border-none .thumb .gallery-image-wrapper{border:none}.wikia-gallery-border-small .thumb .gallery-image-wrapper{border-width:1px}.wikia-gallery-border-medium .thumb .gallery-image-wrapper{border-width:2px}.wikia-gallery-border-large .thumb .gallery-image-wrapper{border-width:5px}.wikia-gallery-border-transparent .wikia-gallery-item
+.thumb{background:transparent;border-width:0}.wikia-gallery-captions-center .wikia-gallery-item{text-align:center}.wikia-gallery-captions-right .wikia-gallery-item{text-align:right}.wikia-gallery-caption-size-small .lightbox-caption{font-size:9px}.wikia-gallery-caption-size-medium .lightbox-caption{font-size:12px}.wikia-gallery-caption-size-large .lightbox-caption{font-size:16px}.wikia-gallery-position-center{text-align:center}.wikia-gallery-position-right{text-align:right}.wikia-gallery-spacing-small .wikia-gallery-item{padding:5px}.wikia-gallery-spacing-medium .wikia-gallery-item{padding:15px}.wikia-gallery-spacing-large .wikia-gallery-item{padding:25px}.wikia-gallery-captions-left .wikia-gallery-item .lightbox-caption,
+.wikia-gallery-captions-right .wikia-gallery-item .lightbox-caption{padding:3px}.wikia-gallery-captions-center .wikia-gallery-item .lightbox-caption{padding:3px
+0 3px 0}.wikia-gallery-item .thumb .lightbox-caption{bottom:0;left:0;position:absolute;text-align:left}.wikia-gallery-item>.lightbox-caption{margin-top:10px;display:block}.wikia-gallery-captions-center .thumb .lightbox-caption{text-align:center;width:100%}.wikia-gallery-captions-right .thumb .lightbox-caption{left:auto;right:0;text-align:right}.wikia-slideshow{clear:both}.wikia-slideshow-wrapper{position:relative;z-index:1}.slideshow-center .wikia-slideshow-wrapper{margin:0
+auto}.wikia-slideshow-caption{font-weight:bold;text-align:center}.wikia-slideshow-images-wrapper{padding:5px}.wikia-slideshow-images{list-style:none !important;margin:0
+!important;overflow:hidden;position:relative}.wikia-slideshow-images
+li{background-position:50% 50%;background-repeat:no-repeat;display:none;height:100%;left:0;position:absolute;top:0;width:100%;text-align:center}.wikia-slideshow-images li.wikia-slideshow-first-image{display:block}.wikia-slideshow-images
+label{display:none}.wikia-slideshow-link-overlay{display:none}.wikia-slideshow-wrapper .hover .wikia-slideshow-link-overlay{background-color:#000;color:#fff;display:block;left:0;opacity:0.8;padding:6px
+10px;position:absolute;top:0}.wikia-slideshow-images .wikia-slideshow-image{display:none}body.skin-monobook
+.WikiaBlogListingBox{display:none}body.skin-monobook
+.WikiaBlogListing{display:none}body.skin-oasis .wikia-slideshow-images .wikia-slideshow-image,
+body.wikiaSkinMonaco .wikia-slideshow-images .wikia-slideshow-image{cursor:pointer;display:block;height:100%;left:40px;position:absolute;top:0}.wikia-slideshow-image-caption{background:#000;bottom:0;color:#fff;left:0;max-height:50px;opacity:0.75;position:absolute;width:100%}.wikia-slideshow-image-caption-inner{display:block;font-size:0.95em;margin:8px;opacity:1;text-align:left}.wikia-slideshow .wikia-slideshow-image-caption-inner
+a{color:#fff !important}.wikia-slideshow-sprite{background-image:url(http://images.wikia.nocookie.net/__cb51060/common/extensions/wikia/WikiaPhotoGallery/images/slideshow-sprite.png);background-repeat:no-repeat}.wikia-slideshow-prev-next
+a{cursor:pointer;display:block;height:60px;width:40px;z-index:1000}.wikia-slideshow-prev{background-position: -160px 15px;left:0;position:absolute}.wikia-slideshow-next{background-position: -187px 15px;position:absolute;right:0}.wikia-slideshow-prev:hover{background-position: -240px 15px}.wikia-slideshow-next:hover{background-position: -268px 15px}.wikia-slideshow-toolbar{height:20px;padding:5px
+0}.wikia-slideshow-toolbar .wikia-slideshow-toolbar-counter{background-color:transparent;border-left-style:solid;border-left-width:1px;font-size:0.9em;margin:0
+6px;padding:2px
+6px}.wikia-slideshow-toolbar .wikia-slideshow-popout{cursor:pointer}.wikia-slideshow-toolbar
+a{margin:0
+3px !important}div.tnone{float:none;clear:both}div.videobox{background-color:#f9f9f9}.bigButtonContainer{margin-top: -11px;top:50%;position:absolute}.wikiaPlaceholder
+.bigButton{float:none;display:inline;margin:0
+auto;padding:0
+0 0 4px}.wikiaPlaceholder
+.bigButton{float:none}.wikiaPlaceholder .bigButton
+big{padding:3px
+3px 3px 9px}.wikiaPlaceholder .bigButton
+small{background-position: -295px 0;padding:3px;position:static;width:5px}.wikiaPlaceholder
+.thumbcaption{left:0}div.gallerybox
+div.thumb{background:#F9F9F9;border:1px
+solid #ccc;width:300px}.gallerybox
+.thumbcaption{position:absolute !important;bottom:0 !important;padding:5px
+!important;font-size:88%}.thumb
+embed{vertical-align:middle}.gallerybox .thumbcaption
+hr{color:#ccc}.videobox{position:relative}.video-add-wrapper{line-height:250px}div.main-page-tag-rcs{position:relative;width:300px;float:right;clear:right}div.main-page-tag-lcs-collapsed{overflow:hidden;height:1%}div.main-page-tag-lcs-exploded{float:left;width:100%;position:relative}.WikiaGrid .grid-1, .WikiaGrid .grid-2, .WikiaGrid .grid-3, .WikiaGrid .grid-4, .WikiaGrid .grid-5, .WikiaGrid .grid-6{display:inline;float:left;margin:0
+0 0 10px}.WikiaGrid .grid-1.alpha, .WikiaGrid .grid-2.alpha, .WikiaGrid .grid-3.alpha, .WikiaGrid .grid-4.alpha, .WikiaGrid .grid-5.alpha, .WikiaGrid .grid-6.alpha{margin:0}.WikiaGrid .grid-1{width:155px}.WikiaGrid .grid-2{width:320px}.WikiaGrid .grid-3{width:485px}.WikiaGrid .grid-4{width:650px}.WikiaGrid .grid-5{width:815px}.WikiaGrid .grid-6{width:980px}.WikiaMenuElement{background:white;display:block;list-style:none;padding:0}.WikiaMenuElement
+li{border-top:1px solid #ccc;float:none !important;margin:0;padding:0}.WikiaMenuElement li:hover{background-color:#d3e7d8 !important}.WikiaMenuElement li
+a{height:20px;line-height:22px}a.wikia-button, .wikia-single-button a,.wikia-menu-button,input[type="submit"],input[type="reset"],input[type="button"],.button,button{border-radius:4px;-moz-border-radius:4px;-webkit-border-radius:4px;background-color:#25883d;background-image: -moz-linear-gradient(top, #30b04f 35%, #25883d 65%);background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(35%, #30b04f), color-stop(65%, #25883d));background-image: -o-linear-gradient(top, #30b04f 35%, #25883d 65%);background-image: -ms-linear-gradient(top, #30b04f 35%, #25883d 65%);border:1px
+solid #25883d;color:white;cursor:pointer;display:inline-block;font-family:Helvetica,Arial,sans-serif;font-size:12px;height:19px;line-height:20px;margin:0;padding:0
+10px;text-decoration:none;white-space:nowrap}a.wikia-button:hover, .wikia-single-button a:hover,.wikia-menu-button:hover,input[type="submit"]:hover,input[type="reset"]:hover,input[type="button"]:hover,.button:hover,button:hover{background-color:#217836;background-image: -moz-linear-gradient(top, #2ca048 35%, #217836 65%);background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(35%, #2ca048), color-stop(65%, #217836));background-image: -o-linear-gradient(top, #2ca048 35%, #217836 65%);background-image: -ms-linear-gradient(top, #2ca048 35%, #217836 65%);text-decoration:none}a.wikia-button:active, .wikia-single-button a:active,.wikia-menu-button:active,input[type="submit"]:active,input[type="reset"]:active,input[type="button"]:active,.button:active,button:active{background-image: -moz-linear-gradient(top, #217836 35%, #2ca048 65%);background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(35%, #217836), color-stop(65%, #2ca048));background-image: -o-linear-gradient(top, #217836 35%, #2ca048 65%);background-image: -ms-linear-gradient(top, #217836 35%, #2ca048 65%);color:white}a.wikia-button[disabled], .wikia-single-button a[disabled],.wikia-menu-button[disabled],input[type="submit"][disabled],input[type="reset"][disabled],input[type="button"][disabled],.button[disabled],button[disabled]{cursor:default;opacity: .5}a.wikia-button[disabled]:active, .wikia-single-button a[disabled]:active,.wikia-menu-button[disabled]:active,input[type="submit"][disabled]:active,input[type="reset"][disabled]:active,input[type="button"][disabled]:active,.button[disabled]:active,button[disabled]:active{background-color:#25883d;background-image: -moz-linear-gradient(top, #30b04f 35%, #25883d 65%);background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(35%, #30b04f), color-stop(65%, #25883d));background-image: -o-linear-gradient(top, #30b04f 35%, #25883d 65%);background-image: -ms-linear-gradient(top, #30b04f 35%, #25883d 65%)}a.wikia-button img, .wikia-single-button a img, .wikia-menu-button img, input[type="submit"] img, input[type="reset"] img, input[type="button"] img, .button img, button
+img{vertical-align:text-bottom}a.wikia-button img.chevron, .wikia-single-button a img.chevron, .wikia-menu-button img.chevron, input[type="submit"] img.chevron, input[type="reset"] img.chevron, input[type="button"] img.chevron, .button img.chevron, button
+img.chevron{vertical-align:middle;margin-top:1px}a.wikia-button.secondary, .wikia-single-button a.secondary,.wikia-menu-button.secondary,input[type="submit"].secondary,input[type="reset"].secondary,input[type="button"].secondary,.button.secondary,button.secondary{background-color:#e5e5e5;background-image: -moz-linear-gradient(top, white 35%, #e5e5e5 65%);background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(35%, white), color-stop(65%, #e5e5e5));background-image: -o-linear-gradient(top, white 35%, #e5e5e5 65%);background-image: -ms-linear-gradient(top, white 35%, #e5e5e5 65%);border:1px
+solid #ccc;color:#3a3a3a}a.wikia-button.secondary:hover, .wikia-single-button a.secondary:hover,.wikia-menu-button.secondary:hover,input[type="submit"].secondary:hover,input[type="reset"].secondary:hover,input[type="button"].secondary:hover,.button.secondary:hover,button.secondary:hover{background-color:#dbdbdb;background-image: -moz-linear-gradient(top, #f5f5f5 35%, #dbdbdb 65%);background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(35%, #f5f5f5), color-stop(65%, #dbdbdb));background-image: -o-linear-gradient(top, #f5f5f5 35%, #dbdbdb 65%);background-image: -ms-linear-gradient(top, #f5f5f5 35%, #dbdbdb 65%)}a.wikia-button.secondary:active, .wikia-single-button a.secondary:active,.wikia-menu-button.secondary:active,input[type="submit"].secondary:active,input[type="reset"].secondary:active,input[type="button"].secondary:active,.button.secondary:active,button.secondary:active{background-color:#e5e5e5;background-image: -moz-linear-gradient(top, #dbdbdb 35%, #f5f5f5 65%);background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(35%, #dbdbdb), color-stop(65%, #f5f5f5));background-image: -o-linear-gradient(top, #dbdbdb 35%, #f5f5f5 65%);background-image: -ms-linear-gradient(top, #dbdbdb 35%, #f5f5f5 65%)}a.wikia-button.secondary img.chevron, .wikia-single-button a.secondary img.chevron, .wikia-menu-button.secondary img.chevron, input[type="submit"].secondary img.chevron, input[type="reset"].secondary img.chevron, input[type="button"].secondary img.chevron, .button.secondary img.chevron, button.secondary
+img.chevron{border-color:#3a3a3a transparent transparent}a.wikia-button.big, .wikia-single-button a.big,.wikia-menu-button.big,input[type="submit"].big,input[type="reset"].big,input[type="button"].big,.button.big,button.big{font-size:18px;line-height:23px;height:40px}a.wikia-button:-moz-focusring, .wikia-single-button a:-moz-focusring,.wikia-menu-button:-moz-focusring,input[type="submit"]:-moz-focusring,input[type="reset"]:-moz-focusring,input[type="button"]:-moz-focusring,.button:-moz-focusring,button:-moz-focusring{box-shadow:0px 0px 1px 1px highlight}input[type="submit"],input[type="reset"],input[type="button"],button{height:21px}input[type="submit"]::-moz-focus-inner,input[type="reset"]::-moz-focus-inner,input[type="button"]::-moz-focus-inner,button::-moz-focus-inner{padding:0;border:0}.wikia-menu-button{*display:inline;list-style:none;margin:0;padding:0;position:relative;text-align:left}.wikia-menu-button:hover{background-color:#25883d;background-image: -moz-linear-gradient(top, #30b04f 35%, #25883d 65%);background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(35%, #30b04f), color-stop(65%, #25883d));background-image: -o-linear-gradient(top, #30b04f 35%, #25883d 65%);background-image: -ms-linear-gradient(top, #30b04f 35%, #25883d 65%)}.wikia-menu-button a:hover{text-decoration:none}.wikia-menu-button > a, .wikia-menu-button .drop,.wikia-menu-button>li>a{display:inline-block}.wikia-menu-button > a:hover, .wikia-menu-button .drop:hover,.wikia-menu-button>li>a:hover{background-color:#217836;background-image: -moz-linear-gradient(top, #2ca048 35%, #217836 65%);background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(35%, #2ca048), color-stop(65%, #217836));background-image: -o-linear-gradient(top, #2ca048 35%, #217836 65%);background-image: -ms-linear-gradient(top, #2ca048 35%, #217836 65%)}.wikia-menu-button > a:active, .wikia-menu-button .drop:active,.wikia-menu-button>li>a:active{background-image: -moz-linear-gradient(top, #217836 35%, #2ca048 65%);background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(35%, #217836), color-stop(65%, #2ca048));background-image: -o-linear-gradient(top, #217836 35%, #2ca048 65%);background-image: -ms-linear-gradient(top, #217836 35%, #2ca048 65%);color:white}.wikia-menu-button>a,.wikia-menu-button>li>a{border-top-left-radius:4px;-moz-border-radius-topleft:4px;-webkit-border-top-left-radius:4px;border-bottom-left-radius:4px;-moz-border-radius-bottomleft:4px;-webkit-border-bottom-left-radius:4px;border-right:1px solid #7cb78a;color:white;padding:0
+8px 0 5px}.wikia-menu-button
+.drop{border-top-right-radius:4px;-moz-border-radius-topright:4px;-webkit-border-top-right-radius:4px;border-bottom-right-radius:4px;-moz-border-radius-bottomright:4px;-webkit-border-bottom-right-radius:4px;margin-left: -3px;padding-left:5px}.wikia-menu-button
+ul{background:white;border:1px
+solid #25883d;display:none;left: -1px;list-style:none;margin:0;position:absolute;top:19px;z-index:100;box-shadow:1px 2px 12px 0px #333;-moz-box-shadow:1px 2px 12px 0px #333;-webkit-box-shadow:1px 2px 12px 0px #333}.wikia-menu-button ul
+a{color:#3a3a3a;display:block;padding:9px
+9px 7px}.wikia-menu-button ul a:hover{background-color:#d3e7d8}.wikia-menu-button ul
+li{border-top:1px solid #ccc;line-height:normal}.wikia-menu-button ul li:first-child{border:0}.wikia-menu-button .icon, .wikia-menu-button
+img{vertical-align:text-bottom}.wikia-menu-button
+.chevron{border-top-color:white;margin:0
+7px 0 1px}.wikia-menu-button.active{border-bottom-right-radius:0;-moz-border-radius-bottomright:0;-webkit-border-bottom-right-radius:0;border-bottom-left-radius:0;-moz-border-radius-bottomleft:0;-webkit-border-bottom-left-radius:0}.wikia-menu-button.active
+ul{display:block}.wikia-menu-button.secondary{border:1px
+solid #ccc;*display:inline;list-style:none;margin:0;position:relative;text-align:left}.wikia-menu-button.secondary:hover{background-color:#e5e5e5;background-image: -moz-linear-gradient(top, white 35%, #e5e5e5 65%);background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(35%, white), color-stop(65%, #e5e5e5));background-image: -o-linear-gradient(top, white 35%, #e5e5e5 65%);background-image: -ms-linear-gradient(top, white 35%, #e5e5e5 65%)}.wikia-menu-button.secondary > a, .wikia-menu-button.secondary .drop,.wikia-menu-button.secondary>li>a{color:#3a3a3a;margin-top: -2px}.wikia-menu-button.secondary > a:hover, .wikia-menu-button.secondary .drop:hover,.wikia-menu-button.secondary>li>a:hover{background-color:#dbdbdb;background-image: -moz-linear-gradient(top, #f5f5f5 35%, #dbdbdb 65%);background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(35%, #f5f5f5), color-stop(65%, #dbdbdb));background-image: -o-linear-gradient(top, #f5f5f5 35%, #dbdbdb 65%);background-image: -ms-linear-gradient(top, #f5f5f5 35%, #dbdbdb 65%)}.wikia-menu-button.secondary > a:active, .wikia-menu-button.secondary .drop:active,.wikia-menu-button.secondary>li>a:active{background-color:#e5e5e5;background-image: -moz-linear-gradient(top, #dbdbdb 35%, #f5f5f5 65%);background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(35%, #dbdbdb), color-stop(65%, #f5f5f5));background-image: -o-linear-gradient(top, #dbdbdb 35%, #f5f5f5 65%);background-image: -ms-linear-gradient(top, #dbdbdb 35%, #f5f5f5 65%)}.wikia-menu-button.secondary>a{border-right:1px solid #ccc}.wikia-menu-button.secondary
+ul{background:white;border:2px
+solid #ccc;display:none;left: -1px;list-style:none;margin:0;position:absolute;top:19px;z-index:100}.wikia-menu-button.secondary ul
+a{color:#3a3a3a;display:block}.wikia-menu-button.secondary ul a:hover{background-color:#d3e7d8 !important}.wikia-menu-button.secondary ul
+li{border-top:1px solid #ccc;line-height:normal}.wikia-menu-button.secondary ul li:first-child{border:0}.wikia-menu-button.secondary.active{border-bottom-right-radius:0;-moz-border-radius-bottomright:0;-webkit-border-bottom-right-radius:0;border-bottom-left-radius:0;-moz-border-radius-bottomleft:0;-webkit-border-bottom-left-radius:0}.wikia-menu-button.secondary.active
+ul{display:block}.wikia-chiclet-button{opacity: .30;-khtml-opacity: .30;-moz-opacity: .30;-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=30)";filter:alpha(opacity=30);border-radius:0;-moz-border-radius:0;-webkit-border-radius:0;background-image:none;border:0;cursor:pointer;display:inline-block;height:19px;padding:0;position:relative;width:19px}.wikia-chiclet-button
+img{height:15px;left:2px;position:absolute;top:2px;width:15px}.wikia-chiclet-button:hover{opacity:1;-khtml-opacity:1;-moz-opacity:1;-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";filter:alpha(opacity=100);background-image:none}button.wikia-chiclet-button{line-height:1px}button.wikia-chiclet-button
+img{position:static;vertical-align:middle}.wikia-button.loginToEditProtectedPage{padding:0px
+5px}.wikia-button.loginToEditProtectedPage
+img{margin-right:8px}a.wikia-button-facebook{border-radius:2px;-moz-border-radius:2px;-webkit-border-radius:2px;border-color:#afbdd6;color:#fff;font-weight:bold;height:21px;padding:0
+6px}a.wikia-button-facebook,a.wikia-button-facebook:active,a.wikia-button-facebook:hover{background-color:#5e7bb2;background-image: -moz-linear-gradient(top, #5e7bb2 0%, #3c62a1 100%);background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #5e7bb2), color-stop(100%, #3c62a1));background-image: -o-linear-gradient(top, #5e7bb2 0%, #3c62a1 100%);background-image: -ms-linear-gradient(top, #5e7bb2 0%, #3c62a1 100%)}a.wikia-button-facebook>img{border-right:solid 1px #6381b4;margin-right:6px}#LEFT_SKYSCRAPER_2,#LEFT_SKYSCRAPER_3,#HOME_TOP_LEADERBOARD,#TOP_LEADERBOARD,#CORP_TOP_LEADERBOARD,#HUB_TOP_LEADERBOARD{text-align:center}#LEFT_SKYSCRAPER_2>div,#LEFT_SKYSCRAPER_3>div,#HOME_TOP_LEADERBOARD>div,#TOP_LEADERBOARD>div,#CORP_TOP_LEADERBOARD>div,#HUB_TOP_LEADERBOARD>div{margin-left:auto;margin-right:auto}#LEFT_SKYSCRAPER_2>div[id^=Liftium_],#LEFT_SKYSCRAPER_3>div[id^=Liftium_],#HOME_TOP_LEADERBOARD>div[id^=Liftium_],#TOP_LEADERBOARD>div[id^=Liftium_],#CORP_TOP_LEADERBOARD>div[id^=Liftium_],#HUB_TOP_LEADERBOARD>div[id^=Liftium_]{display:inline-block;text-align:center;zoom:1;*display:inline}#HOME_TOP_LEADERBOARD,#TOP_LEADERBOARD,#CORP_TOP_LEADERBOARD,#HUB_TOP_LEADERBOARD{padding:20px
+0 0}#HOME_TOP_LEADERBOARD.jumbo-leaderboard,#TOP_LEADERBOARD.jumbo-leaderboard,#CORP_TOP_LEADERBOARD.jumbo-leaderboard,#HUB_TOP_LEADERBOARD.jumbo-leaderboard{margin:0
+auto;padding-top:0;width:980px}#TOP_LEADERBOARD
+.jumbo{margin-top: -20px;margin-bottom: -20px}#CORP_TOP_LEADERBOARD.default-height,#HOME_TOP_LEADERBOARD.default-height,#HUB_TOP_LEADERBOARD.default-height,#TOP_LEADERBOARD.default-height{height:90px}.WikiaTopAds{*zoom:1;padding-top:10px;position:relative}.WikiaTopAds:after{clear:both;content:".";display:block;height:0;overflow:hidden;visibility:hidden}.WikiaTopAds.WikiaTopButtonLeft #CORP_TOP_LEADERBOARD, .WikiaTopAds.WikiaTopButtonLeft #HOME_TOP_LEADERBOARD, .WikiaTopAds.WikiaTopButtonLeft #HUB_TOP_LEADERBOARD, .WikiaTopAds.WikiaTopButtonLeft
+#TOP_LEADERBOARD{float:right;margin:0
+10px 0 0;padding:0}.WikiaTopAds.WikiaTopButtonLeft
+#TOP_BUTTON{margin:0
+0 0 10px;padding:0}.WikiaTopAds.WikiaTopButtonRight #CORP_TOP_LEADERBOARD, .WikiaTopAds.WikiaTopButtonRight #HOME_TOP_LEADERBOARD, .WikiaTopAds.WikiaTopButtonRight #HUB_TOP_LEADERBOARD, .WikiaTopAds.WikiaTopButtonRight
+#TOP_LEADERBOARD{float:left;margin:0
+0 0 10px;padding:0}.WikiaTopAds.WikiaTopButtonRight
+#TOP_BUTTON{margin:0
+10px 0 0;padding:0}#LEFT_SKYSCRAPER_3{clear:both;position:absolute;right:80px;top: -640px}.home-top-right-ads{float:right}#HOME_TOP_RIGHT_BOXAD{margin-bottom:10px;position:relative;width:300px;z-index:100}#TOP_RIGHT_BOXAD,#CORP_TOP_RIGHT_BOXAD{margin-bottom:10px;z-index:100}#CORP_TOP_RIGHT_BOXAD.default-height,#HOME_TOP_RIGHT_BOXAD.default-height,#TOP_RIGHT_BOXAD.default-height{height:250px}#PREFOOTER_LEFT_BOXAD.default-height,#PREFOOTER_RIGHT_BOXAD.default-height{height:250px}#HOME_TOP_RIGHT_BUTTON{display:none}.home-top-right-button-visible{display:block;margin-bottom:10px}#SPOTLIGHT_GLOBALNAV_1,#SPOTLIGHT_GLOBALNAV_2,#SPOTLIGHT_GLOBALNAV_3{width:269px}#SPOTLIGHT_GLOBALNAV_1.SPOTLIGHT_GLOBALNAV,#SPOTLIGHT_GLOBALNAV_2.SPOTLIGHT_GLOBALNAV,#SPOTLIGHT_GLOBALNAV_3.SPOTLIGHT_GLOBALNAV{width:255px}.GlobalNavigation .subnav
+.SPOTLIGHT_GLOBALNAV{left:10px;margin-top:17px;position:relative}.WikiaFooter section .SPOTLIGHT_FOOTER, .WikiaFooter #LEFT_SKYSCRAPER_2
+.SPOTLIGHT_FOOTER{padding:0px
+28px 33px}.WikiaFooter section .SPOTLIGHT_FOOTER .WikiaSpotlight, .WikiaFooter #LEFT_SKYSCRAPER_2 .SPOTLIGHT_FOOTER
+.WikiaSpotlight{height:123px;width:255px}#HOME_INVISIBLE_TOP,#INVISIBLE_TOP,#INVISIBLE_1,#INVISIBLE_2{position:absolute}body>a>img[src$="noad.gif"]{position:absolute;z-index:0}.SelfServeUrl{color:#666;font-size:10px;margin: -10px 0 10px 0;text-align:center}.home-top-right-ads
+.SelfServeUrl{position:relative;z-index:100}@font-face{font-family:'CPMono_v07Bold';src:url("http://images.wikia.nocookie.net/__cb51060/common/skins/oasis/fonts/cpmono/CPMono_v07_Bold-webfont.eot");src:local("☺"), url("http://images.wikia.nocookie.net/__cb51060/common/skins/oasis/fonts/cpmono/CPMono_v07_Bold-webfont.woff") format("woff"), url("http://images.wikia.nocookie.net/__cb51060/common/skins/oasis/fonts/cpmono/CPMono_v07_Bold-webfont.ttf") format("truetype"), url("http://images.wikia.nocookie.net/__cb51060/common/skins/oasis/fonts/cpmono/CPMono_v07_Bold-webfont.svg#webfont8SZ0NIeo") format("svg");font-weight:normal;font-style:normal}#WikiHeader .wordmark,.font-cpmono{font-family:"CPMono_v07Bold"}.sprite{background-color:transparent;background-image:url(http://images.wikia.nocookie.net/__cb51060/common/skins/oasis/images/sprite.png);background-repeat:no-repeat}.sprite.edit{background-position: -1016px -48px;height:20px;width:19px}.sprite.talk{background-position: -1080px -48px;height:20px;width:16px}.sprite.categorization{background-position: -1072px -32px;height:16px;width:22px}.sprite.move{background-position: -1048px -32px;height:16px;width:22px}.sprite.new{background-position: -1024px -32px;height:16px;width:22px}.sprite.photo{background-position: -1096px -32px;height:16px;width:26px}.sprite.video{background-position: -1128px -32px;height:16px;width:21px}.sprite.search{background-position: -1036px -48px;height:16px;width:21px}.sprite.mytools{background-position: -1112px -64px;height:15px;width:15px}.sprite.follow{background-position: -1112px -48px;height:15px;width:15px}.sprite.share{background-position: -1112px -80px;height:15px;width:15px}.sprite.logo{background-position: -269px 0px;height:26px;width:90px}.sprite.logo9,.sprite.logo2,.sprite.logo3,.sprite.logo4{height:16px;width:55px;margin:2px
+5px}.sprite.logo9{background-position: -210px 0px}.sprite.logo2{background-position: -60px 0px}.sprite.logo3{background-position: -130px 0px}.sprite.logo4{background-position:0px 0px}.sprite.hub9,.sprite.hub2,.sprite.hub3{display:block;text-indent: -9999px;height:11px;position:relative}.sprite.hub9{background-position: -210px -16px;width:52px}.sprite.hub2{background-position: -60px -16px;width:65px}.sprite.hub3{background-position: -130px -16px;width:77px}.sprite.drag{background-position: -1144px -64px;height:17px;width:16px}.sprite.trash{background-position: -1128px -48px;height:16px;width:16px}.sprite.activity{background-position: -1128px -80px;height:14px;width:17px}.sprite.random{background-position: -1144px -48px;height:13px;width:13px}.sprite.close{background-position: -1098px -66px;height:11px;width:11px}.sprite.edit-pencil{background-position: -1000px -48px;height:16px;width:16px}.sprite.edit-pencil-small{background-position: -1197px -69px;height:11px;width:11px}.sprite.blog{background-position: -1000px -32px;height:16px;width:22px}.sprite.message{background-position: -1058px -48px;height:16px;width:22px}.sprite.lock{background-position: -1128px -64px;height:12px;width:9px}.sprite.remove{background-position: -1128px -48px;height:16px;width:13px}.sprite.drag{background-position: -1147px -64px;height:17px;width:13px}.sprite.details{background-position: -1096px -48px;height:16px;width:16px}.sprite.ok{background-position: -1096px -80px;height:16px;width:16px}.sprite.error{background-position: -1176px -80px;height:16px;width:16px}.sprite.contribute{background-position: -1172px -13px;height:16px;width:22px}.sprite.question{background-position: -1144px -20px;height:12px;width:12px}.sprite.close-notification{background-position: -1001px -65px;height:8px;width:8px}.sprite.popout{background-position: -1176px -48px;height:23px;width:24px}.sprite.embed{background-position: -1153px -32px;height:9px;width:20px}.sprite.email{background-position: -1176px -32px;height:10px;width:14px}.sprite.share2{background-position: -1192px -32px;height:13px;width:13px}.sprite.gear{background-position: -1192px -80px;height:16px;width:16px}.sprite.shadow{background-position:0 -32px;height:13px;width:1000px}.sprite.facebook{background-position: -1160px -18px;height:14px;width:15px}.sprite-small{background-color:transparent;background-image:url(http://images.wikia.nocookie.net/__cb51060/common/skins/oasis/images/sprite.png);background-repeat:no-repeat;height:12px;width:12px}.sprite-small.close{background-position: -1146px -82px}.sprite-small.sorted{background-position: -1160px -48px}.sprite-small.sort{background-position: -1160px -64px}.sprite-small.add{background-position: -1160px -80px}.sprite-small.edit{background-position: -1196px -68px}.sprite-small.delete{background-position: -1196px -18px}a, abbr, address, article, aside, audio, b, blockquote, body, canvas, caption, cite, code, dd, del, details, dfn, div, dl, dt, em, embed, fieldset, figcaption, figure, footer, form, h1, .WikiaRail .module h2, .WikiaRail #RIGHT_SKYSCRAPER h2,h2,h3,h4,h5,h6,header,hgroup,html,i,iframe,img,ins,kbd,label,legend,li,mark,menu,nav,object,ol,p,pre,q,samp,section,#LEFT_SKYSCRAPER_2,small,span,strong,sub,summary,sup,time,ul,var,video{border:0;font-style:inherit;font-weight:inherit;margin:0;padding:0;vertical-align:baseline}article,aside,canvas,details,figcaption,figure,footer,header,hgroup,menu,nav,section,#LEFT_SKYSCRAPER_2,summary{display:block}a,ins{text-decoration:none}ul,ol{list-style:none}q:after,q:before{content:""}.modalWrapper{box-shadow:0 10px 60px 0px #7f7f7f;-moz-box-shadow:0 10px 60px 0px #7f7f7f;-webkit-box-shadow:0 10px 60px 0px #7f7f7f;background:white;border-width:5px;border-style:solid;border-color:#003816;border-color:rgba(0, 56, 22, 0.8);-moz-background-clip:padding;-webkit-background-clip:padding;background-clip:padding-box;color:#3a3a3a;position:absolute}.modalWrapper > h1, .modalWrapper > .WikiaRail .module h2, .WikiaRail .module .modalWrapper > h2, .modalWrapper > .WikiaRail #RIGHT_SKYSCRAPER h2, .WikiaRail #RIGHT_SKYSCRAPER .modalWrapper>h2{color:#2b54b5;font-size:22px;margin:20px
+60px 20px 20px;overflow:hidden}.modalWrapper
+.close{*zoom:1;float:right;margin:20px
+20px 0 0}.modalWrapper .close:after{clear:both;content:".";display:block;height:0;overflow:hidden;visibility:hidden}.modalWrapper
+.neutral{background:transparent}.modalWrapper
+.modalToolbar{text-align:right;background:transparent;margin-top:20px}.modalWrapper .modalToolbar
+a{margin-left:10px}.modalWrapper
+#WikiaConfirmOk{margin-left:2px}.modalContent{*zoom:1;font-size:13px;line-height:21px;display:block;margin:0
+20px 20px 20px}.modalContent:after{clear:both;content:".";display:block;height:0;overflow:hidden;visibility:hidden}.modalContent .MyToolsConfiguration .options-list{line-height:1}.blackout{background:white;left:0;opacity: .8;position:absolute;top:0;width:100%}yui-overlay,.yui-panel-container{position:absolute;z-index:20000002 !important}.yui-panel{left:0;position:relative;top:0}.mask{background:white;margin-top: -30px;opacity: .8;position:fixed;z-index:20000001 !important}.editor
+.mask{margin-top:0px}.skin-oasis
+#ImageUpload{background:white}.skin-oasis #ImageUpload, .skin-oasis
+#VideoEmbed{box-shadow:0 10px 60px 0px #7f7f7f;-moz-box-shadow:0 10px 60px 0px #7f7f7f;-webkit-box-shadow:0 10px 60px 0px #7f7f7f;border:5px
+solid #003816;padding:35px
+5px 5px 5px !important;position:absolute;width:auto !important}.skin-oasis #ImageUpload h1, .skin-oasis #ImageUpload .WikiaRail .module h2, .WikiaRail .module .skin-oasis #ImageUpload h2, .skin-oasis #ImageUpload .WikiaRail #RIGHT_SKYSCRAPER h2, .WikiaRail #RIGHT_SKYSCRAPER .skin-oasis #ImageUpload h2, .skin-oasis #VideoEmbed h1, .skin-oasis #VideoEmbed .WikiaRail .module h2, .WikiaRail .module .skin-oasis #VideoEmbed h2, .skin-oasis #VideoEmbed .WikiaRail #RIGHT_SKYSCRAPER h2, .WikiaRail #RIGHT_SKYSCRAPER .skin-oasis #VideoEmbed
+h2{color:#2b54b5;font-size:22px}.skin-oasis #ImageUpload .close, .skin-oasis #VideoEmbed
+.close{position:static;margin-top:4px;vertical-align:baseline}.skin-oasis #ImageUploadClose, .skin-oasis
+#VideoEmbedClose{border-radius:3px;-moz-border-radius:3px;-webkit-border-radius:3px;background-color:#25883d;background-image: -moz-linear-gradient(top, #30b04f 8%, #25883d 13%);background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(8%, #30b04f), color-stop(13%, #25883d));background-image: -o-linear-gradient(top, #30b04f 8%, #25883d 13%);background-image: -ms-linear-gradient(top, #30b04f 8%, #25883d 13%);height:19px;padding:0;right:5px;text-align:center;width:19px}.skin-oasis #ImageUploadClose a, .skin-oasis #VideoEmbedClose
+a{display:none}.skin-oasis #ImageUploadBorder, .skin-oasis
+#VideoEmbedBorder{display:none}.skin-oasis
+#ImageUploadBody{height:480px}.skin-oasis #ImageUploadProgress1, .skin-oasis
+#VideoEmbedProgress1{visibility:hidden}.skin-oasis .yui-back{display:inline-block;margin:0
+5px 0 0}.skin-oasis #VideoEmbedConflict .yui-back, .skin-oasis #ImageUploadConflict .yui-back{bottom:15px}body{background:#003816 url("http://images1.wikia.nocookie.net/__cb21710/common/skins/oasis/images/themes/oasis.png") top center repeat;color:#3a3a3a;font-family:Helvetica,Arial,sans-serif;font-size:12px;margin:0;overflow-x:auto;padding:0
+0 30px 0}body > h1, body > .WikiaRail .module h2, .WikiaRail .module body > h2, body > .WikiaRail #RIGHT_SKYSCRAPER h2, .WikiaRail #RIGHT_SKYSCRAPER body>h2{display:none}body{background-repeat:no-repeat}a{color:#2b54b5;text-decoration:none}a:hover{text-decoration:underline}.clearfix{*zoom:1}.clearfix:after{clear:both;content:".";display:block;height:0;overflow:hidden;visibility:hidden}.skiplinkcontainer{position:absolute;top:0;right:0}.skiplinkcontainer h1, .skiplinkcontainer .WikiaRail .module h2, .WikiaRail .module .skiplinkcontainer h2, .skiplinkcontainer .WikiaRail #RIGHT_SKYSCRAPER h2, .WikiaRail #RIGHT_SKYSCRAPER .skiplinkcontainer
+h2{display:none}.skiplinkcontainer
+.skiplink{display:block;margin:0
+auto;right:0;width:100px;position:absolute;top: -9999px}.skiplinkcontainer .skiplink:active, .skiplinkcontainer .skiplink:focus{top:0px}.color1{background-color:#25883d;color:white}.color1
+a{color:white}.color2{background-color:#ccc}.dark_text_1{color:#2b54b5}.dark_text_2{color:#2b54b5}.accent{background-color:#d4dcf0;border-color:#2b54b5;color:#3a3a3a}.neutral{background-color:#ccc;border-color:white;color:#3a3a3a}.avatar{border:1px
+solid white}.chevron{border-color:#FFF transparent transparent;border-style:solid;border-width:4px;width:0;vertical-align:middle;margin-top:2px}.banner-corner-left,.banner-corner-right{border-style:solid;border-width:2px;position:absolute;width:0}.WikiaHeader{background-color:#002c11;background-image: -moz-linear-gradient(left, #000b04 0, #002c11 50%, #000b04 100%);background-image: -webkit-gradient(linear, 0% 0%, 100% 0%, color-stop(0, #000b04), color-stop(50%, #002c11), color-stop(100%, #000b04));background-image: -o-linear-gradient(left, #000b04 0, #002c11 50%, #000b04 100%);background-image: -ms-linear-gradient(left, #000b04 0, #002c11 50%, #000b04 100%);border-top:3px solid #000;color:white;margin:0
+auto;position:relative;width:1014px;z-index:20000000}.WikiaHeader h1, .WikiaHeader .WikiaRail .module h2, .WikiaRail .module .WikiaHeader h2, .WikiaHeader .WikiaRail #RIGHT_SKYSCRAPER h2, .WikiaRail #RIGHT_SKYSCRAPER .WikiaHeader
+h2{display:none}.WikiaHeader
+nav{background-image:url(http://images.wikia.nocookie.net/__cb51060/common/skins/oasis/images/checkers.png);border-bottom:1px solid #000803;font-size:20px;height:34px}.WikiaHeader nav>ul>li:last-child{padding:0}.WikiaHeader
+li{float:left;height:22px;margin-top:7px;padding:0
+15px}.WikiaHeader li:first-child{border:0}.WikiaHeader li.start-a-wiki{border-left:1px solid #335640;margin-top:5px}.WikiaHeader li>.wikia-button{border:1px
+solid #b2d5bb;float:left;font-size:12px;height:17px;line-height:16px;padding:1px
+12px 0px;position:relative;top:2px}.WikiaHeader
+.chevron{border-top-color:#7f9588}.WikiaHeader
+.WikiaLogo{padding-left:25px;padding-right:23px}.WikiaHeader .WikiaLogo
+a{position:relative;top: -5px}.WikiaHeader .banner-corner-left, .WikiaHeader .banner-corner-right{border-width:3px;bottom: -6px}.WikiaHeader .banner-corner-left{border-color:#002c11 #002c11 transparent transparent;left:0}.WikiaHeader .banner-corner-right{border-color:#002c11 transparent transparent #002c11;right:0}.GlobalNavigation{}.GlobalNavigation
+li{border:0;height:30px;margin-top: -7px;padding:5px
+0 0}.GlobalNavigation>li>a{color:white;float:left;font-size:16px}.GlobalNavigation>li>a:visited,.GlobalNavigation>li>a:active{color:white}.GlobalNavigation>li:hover{background-image: -moz-linear-gradient(top, rgba(0, 0, 0, 0) 0, black 100%);background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0, rgba(0, 0, 0, 0)), color-stop(100%, black));background-image: -o-linear-gradient(top, rgba(0, 0, 0, 0) 0, black 100%);background-image: -ms-linear-gradient(top, rgba(0, 0, 0, 0) 0, black 100%)}.GlobalNavigation>li:hover>a{color:#fff}.GlobalNavigation
+a{border-left:1px solid #335640;display:inline-block;height:22px;line-height:24px;padding:0
+14px}.GlobalNavigation a:hover{text-decoration:none}.GlobalNavigation
+.subnav{*zoom:1;box-shadow:0 5px 10px 0px rgba(0, 0, 0, 0.5);-moz-box-shadow:0 5px 10px 0px rgba(0, 0, 0, 0.5);-webkit-box-shadow:0 5px 10px 0px rgba(0, 0, 0, 0.5);background:white;border-width:0px 4px 4px;border-style:solid;border-color:#000;display:none;left:13px;padding:10px
+0;position:absolute;top: -9999px;width:980px}.GlobalNavigation .subnav:after{clear:both;content:".";display:block;height:0;overflow:hidden;visibility:hidden}.GlobalNavigation
+.subnav.show{display:block;top:35px}.GlobalNavigation .subnav
+li{display:inline;font-size:15px;height:auto;margin:0
+0 0 10px;padding:0;position:static;width:230px}.GlobalNavigation .subnav li:hover{background:none}.GlobalNavigation .subnav li
+a{font-weight:bold}.GlobalNavigation .subnav .catnav
+li{border-top:1px dotted #ccc;font-size:14px;margin:0}.GlobalNavigation .subnav .catnav li:first-child{border-top-style:solid}.GlobalNavigation .subnav .catnav
+a{font-weight:normal;height:auto;line-height:1.3em;padding:7px
+5px}.GlobalNavigation .subnav .catnav a:hover{background-color:#d3e7d8}.GlobalNavigation .subnav
+a{border:0;color:#2b54b5;padding:4px
+0;display:block}.GlobalNavigation.WikiaComNav .Video_Games .subnav
+a{color:#8ca038}.GlobalNavigation.WikiaComNav .Entertainment .subnav
+a{color:#07b2e0}.GlobalNavigation.WikiaComNav .Lifestyle .subnav
+a{color:#f60}.GlobalNavigation.WikiaComNav .Video_Games:hover, .GlobalNavigation.WikiaComNav .Entertainment:hover, .GlobalNavigation.WikiaComNav .Lifestyle:hover{background:none}.GlobalNavigation.WikiaComNav .Video_Games:hover .chevron, .GlobalNavigation.WikiaComNav .Entertainment:hover .chevron, .GlobalNavigation.WikiaComNav .Lifestyle:hover
+.chevron{border-top-color:white}.GlobalNavigation.WikiaComNav .Video_Games:hover > a, .GlobalNavigation.WikiaComNav .Entertainment:hover > a, .GlobalNavigation.WikiaComNav .Lifestyle:hover>a{border-left:1px solid transparent}.GlobalNavigation.WikiaComNav .Video_Games:hover + li > a, .GlobalNavigation.WikiaComNav .Entertainment:hover + li > a, .GlobalNavigation.WikiaComNav .Lifestyle:hover+li>a{border-left:1px solid transparent}.GlobalNavigation.WikiaComNav .Video_Games:hover{background-color:#8ca038}.GlobalNavigation.WikiaComNav .Video_Games:hover .catnav li a:hover{background-color:#f3f5eb}.GlobalNavigation.WikiaComNav .Entertainment:hover{background-color:#07b2e0}.GlobalNavigation.WikiaComNav .Entertainment:hover .catnav li a:hover{background-color:#e6f7fb}.GlobalNavigation.WikiaComNav .Lifestyle:hover{background-color:#f60}.GlobalNavigation.WikiaComNav .Lifestyle:hover .catnav li a:hover{background-color:#ffefe5}.AccountNavigation{line-height:20px;list-style:none;position:absolute;top:1px;right:15px}.AccountNavigation
+li{border:0;height:30px;margin-top:0;padding:4px
+0 0;position:relative}.AccountNavigation li:hover{background-image: -moz-linear-gradient(top, rgba(0, 0, 0, 0) 0, black 100%);background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0, rgba(0, 0, 0, 0)), color-stop(100%, black));background-image: -o-linear-gradient(top, rgba(0, 0, 0, 0) 0, black 100%);background-image: -ms-linear-gradient(top, rgba(0, 0, 0, 0) 0, black 100%)}.AccountNavigation li.nohover:hover{background:transparent}.AccountNavigation li:last-child
+a{border:0}.AccountNavigation li>a{border-right:1px solid #335640;display:inline-block;height:22px;line-height:24px;padding:0
+15px}.AccountNavigation li>a:hover{text-decoration:none}.AccountNavigation li
+.chevron{position:relative;left:6px}.AccountNavigation #fbconnect
+a{border:none;line-height:1em;height:18px;padding:0}.AccountNavigation
+.avatar{float:left;margin-right:5px;vertical-align:middle}.AccountNavigation
+.subnav{background:white;border-width:2px 4px 4px;border-style:solid;border-color:#000;display:none;list-style:none;padding:0;position:absolute;box-shadow:0 5px 10px 0px rgba(0, 0, 0, 0.5);-moz-box-shadow:0 5px 10px 0px rgba(0, 0, 0, 0.5);-webkit-box-shadow:0 5px 10px 0px rgba(0, 0, 0, 0.5);display:block;top: -9999px;padding:0px}.AccountNavigation .subnav>li{border-top:1px solid #ccc;margin:0;padding:0}.AccountNavigation .subnav>li:first-child{border-top:none}.AccountNavigation .subnav>li>a{color:#3a3a3a;display:block;font-size:12px;padding:10px
+5px;white-space:nowrap}.AccountNavigation .subnav>li>a:hover{background-color:#d3e7d8;text-decoration:none}.AccountNavigation
+.subnav.show{right:0;top:34px}.AccountNavigation .subnav>li{float:none;height:auto}.AccountNavigation .subnav>li:hover{background-image:none}.AccountNavigation .subnav>li>a{padding:10px;color:#3a3a3a}.AccountNavigation .subnav>li>a:hover{box-shadow:inset 0 0 5px 0px #c8e1ce;-moz-box-shadow:inset 0 0 5px 0px #c8e1ce;-webkit-box-shadow:inset 0 0 5px 0px #c8e1ce;background-color:#d3e7d8}.AccountNavigation .subnav
+a{border-right:0}.AccountNavigation>li>a{color:white}.AccountNavigation>li>a:visited,.AccountNavigation>li>a:active{color:white}#AccountNavigation li
+a.new{color:#3a3a3a !important}.WikiaPage{border-bottom:1px solid #ccc;border-left:1px solid #ccc;border-right:1px solid #ccc;margin: -59px auto -39px;padding-top:59px;position:relative;width:1000px;z-index:1}.WikiaPage.V2{padding-top:0;margin:0px
+auto -39px}.WikiaPage > h1:first-child, .WikiaPage > .WikiaRail .module h2:first-child, .WikiaRail .module .WikiaPage > h2:first-child, .WikiaPage > .WikiaRail #RIGHT_SKYSCRAPER h2:first-child, .WikiaRail #RIGHT_SKYSCRAPER .WikiaPage>h2:first-child{display:none}.WikiaPage
+.WikiaPageBackground{opacity:1;-khtml-opacity:1;-moz-opacity:1;-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";filter:alpha(opacity=100);background:white;height:100%;left:0;position:absolute;top:0;width:100%}.WikiaPage
+.WikiaPageContentWrapper{position:relative}.WikiaAdvertPage{margin:0px
+auto;padding-bottom:0px;position:relative;width:1000px;z-index:1}.WikiaAdvertPage > h1:first-child, .WikiaAdvertPage > .WikiaRail .module h2:first-child, .WikiaRail .module .WikiaAdvertPage > h2:first-child, .WikiaAdvertPage > .WikiaRail #RIGHT_SKYSCRAPER h2:first-child, .WikiaRail #RIGHT_SKYSCRAPER .WikiaAdvertPage>h2:first-child{display:none}.WikiaAdvertPage
+.WikiaPageBackground{opacity:1;-khtml-opacity:1;-moz-opacity:1;-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";filter:alpha(opacity=100);background:white;height:100%;left:0;position:absolute;top:0;width:100%}.WikiaAdvertPage
+.WikiaPageContentWrapper{position:relative}.WikiaAdvertPage #HOME_TOP_LEADERBOARD, .WikiaAdvertPage #TOP_LEADERBOARD, .WikiaAdvertPage #CORP_TOP_LEADERBOARD, .WikiaAdvertPage
+#HUB_TOP_LEADERBOARD{padding:10px
+0 10px 0}.WikiaMainContent{float:left;position:relative;width:680px;z-index:1}.oasis-one-column
+.WikiaMainContent{width:1000px}.WikiaMainContent a.new, .WikiaMainContent a.new:visited{color:#C20}.WikiaArticleCategories{background-color:#f2f2f2;background-image: -moz-linear-gradient(top, white 50%, #f2f2f2 100%);background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(50%, white), color-stop(100%, #f2f2f2));background-image: -o-linear-gradient(top, white 50%, #f2f2f2 100%);background-image: -ms-linear-gradient(top, white 50%, #f2f2f2 100%);border:1px
+solid #ccc;clear:both;line-height:1.8em;padding:10px;margin:10px}.WikiaArticleCategories h1, .WikiaArticleCategories .WikiaRail .module h2, .WikiaRail .module .WikiaArticleCategories h2, .WikiaArticleCategories .WikiaRail #RIGHT_SKYSCRAPER h2, .WikiaRail #RIGHT_SKYSCRAPER .WikiaArticleCategories
+h2{display:none}.WikiaArticleFooter{padding:10px}#WikiaArticleBottomAd{*zoom:1;margin:50px
+10px 35px}#WikiaArticleBottomAd:after{clear:both;content:".";display:block;height:0;overflow:hidden;visibility:hidden}#PREFOOTER_LEFT_BOXAD{float:left;margin:0
+15px}#PREFOOTER_RIGHT_BOXAD{margin:0
+15px}.WikiaRail{float:right;padding:0
+10px;width:300px}.WikiaRail .module, .WikiaRail
+#RIGHT_SKYSCRAPER{*zoom:1;box-shadow:0px 2px 5px 0px #e0e0e0;-moz-box-shadow:0px 2px 5px 0px #e0e0e0;-webkit-box-shadow:0px 2px 5px 0px #e0e0e0;background:white;border:1px
+solid #ccc;margin-bottom:10px;padding:16px
+8px 8px;position:relative;word-wrap:break-word}.WikiaRail .module:after, .WikiaRail #RIGHT_SKYSCRAPER:after{clear:both;content:".";display:block;height:0;overflow:hidden;visibility:hidden}.WikiaRail .module header, .WikiaRail #RIGHT_SKYSCRAPER
+header{left: -3px;font-size:15px;padding:8px;position:absolute;width:288px}.WikiaRail .module details em, .WikiaRail #RIGHT_SKYSCRAPER details
+em{float:left}.WikiaRail .module .wikia-button, .WikiaRail #RIGHT_SKYSCRAPER .wikia-button{float:right}.WikiaRail .module .more, .WikiaRail #RIGHT_SKYSCRAPER
+.more{float:right;font-size:10px;font-weight:bold}.WikiaRail .module p, .WikiaRail #RIGHT_SKYSCRAPER
+p{line-height:21px;margin:0;padding:0}.WikiaRail .module .wikia-button, .WikiaRail #RIGHT_SKYSCRAPER .wikia-button{font-weight:normal}.WikiaRail .module h1, .WikiaRail #RIGHT_SKYSCRAPER h1, .WikiaRail .module h2, .WikiaRail #RIGHT_SKYSCRAPER .module h2, .WikiaRail .module #RIGHT_SKYSCRAPER h2, .WikiaRail .module #RIGHT_SKYSCRAPER h2, .WikiaRail #RIGHT_SKYSCRAPER .module h2, .WikiaRail #RIGHT_SKYSCRAPER
+h2{font-size:17px;font-weight:bold;margin-top:7px;margin-bottom:25px}.WikiaRail .module h2, .WikiaRail #RIGHT_SKYSCRAPER
+h2{clear:both;margin-top:0;margin-bottom:10px;padding-top:15px}.WikiaRail .module b, .WikiaRail #RIGHT_SKYSCRAPER
+b{font-weight:bold}.WikiaRail .module i, .WikiaRail #RIGHT_SKYSCRAPER
+i{font-style:italic}.WikiaRail .module .line-top, .WikiaRail #RIGHT_SKYSCRAPER .line-top{border-top:solid 1px #ccc}.WikiaRail .module .chevron, .WikiaRail #RIGHT_SKYSCRAPER
+.chevron{border-top-color:#3a3a3a}#TOP_BOXAD
+img{display:block}.tally{*zoom:1;font-size:10px;line-height:1.3em;padding-left:2px;text-transform:uppercase}.tally:after{clear:both;content:".";display:block;height:0;overflow:hidden;visibility:hidden}.tally
+em{float:left;font-size:30px;font-style:normal;letter-spacing: -1px;line-height:26px;margin-right:2px}.tally
+span{float:left}.tally
+span.fixedwidth{width:61px}.WikiaPagesOnWikiModule{padding-top:9px}.WikiaPagesOnWikiModule h1, .WikiaPagesOnWikiModule .WikiaRail .module h2, .WikiaRail .module .WikiaPagesOnWikiModule h2, .WikiaPagesOnWikiModule .WikiaRail #RIGHT_SKYSCRAPER h2, .WikiaRail #RIGHT_SKYSCRAPER .WikiaPagesOnWikiModule
+h2{display:none}.WikiaPagesOnWikiModule
+.sprite.new{margin:0
+5px;position:relative;top:1px}.WikiaPagesOnWikiModule
+a{padding-right:5px}.WikiaPagesOnWikiModule .wikia-button{margin-bottom:0.5em}.WikiaActivityModule h1.activity-heading, .WikiaActivityModule .WikiaRail .module h2.activity-heading, .WikiaRail .module .WikiaActivityModule h2.activity-heading, .WikiaActivityModule .WikiaRail #RIGHT_SKYSCRAPER h2.activity-heading, .WikiaRail #RIGHT_SKYSCRAPER .WikiaActivityModule h2.activity-heading{margin-bottom:0}.WikiaActivityModule
+ul{list-style:none;margin:10px
+0}.WikiaActivityModule
+li{font-size:12px;padding:6px
+3px 6px 30px;position:relative}.WikiaActivityModule li:first-child{border:0}.WikiaActivityModule li
+em{display:inline-block;font-size:14px;line-height:17px}.WikiaActivityModule
+.sprite{position:absolute;left:3px;top:8px}.WikiaActivityModule .edited-by{font-size:11px;margin-top:2px}.WikiaActivityModule .edited-by
+a{color:#2b54b5;font-size:11px}.WikiaActivityModule
+a{font-weight:normal}.WikiaActivityModule .page-title{font-size:14px}.WikiaActivityModule
+.more{font-weight:bold}.WikiaImageModule h1, .WikiaImageModule .WikiaRail .module h2, .WikiaRail .module .WikiaImageModule h2, .WikiaImageModule .WikiaRail #RIGHT_SKYSCRAPER h2, .WikiaRail #RIGHT_SKYSCRAPER .WikiaImageModule
+h2{display:none}.WikiaImageModule
+img{margin:10px
+0}.WikiaImageModule
+.caption{margin-bottom:10px;text-align:center}#WikiaSpotlightsModule{display:none;padding:8px
+8px 8px 15px}#WikiaSpotlightsModule
+header{background-color:#002c11;height:36px;left: -2px;padding:3px
+0 0 0;position:absolute;width:auto}#WikiaSpotlightsModule header h1, #WikiaSpotlightsModule header .WikiaRail .module h2, .WikiaRail .module #WikiaSpotlightsModule header h2, #WikiaSpotlightsModule header .WikiaRail #RIGHT_SKYSCRAPER h2, .WikiaRail #RIGHT_SKYSCRAPER #WikiaSpotlightsModule header
+h2{background-color:#002c11;background-image: -moz-linear-gradient(left, #000b04 0, #002c11 100%);background-image: -webkit-gradient(linear, 0% 0%, 100% 0%, color-stop(0, #000b04), color-stop(100%, #002c11));background-image: -o-linear-gradient(left, #000b04 0, #002c11 100%);background-image: -ms-linear-gradient(left, #000b04 0, #002c11 100%);border-bottom:2px solid white;border-top:1px solid white;color:white;display:block;font-size:15px;font-weight:normal;height:33px;margin:0;padding:0
+11px}#WikiaSpotlightsModule header h1 .logo, #WikiaSpotlightsModule header .WikiaRail .module h2 .logo, .WikiaRail .module #WikiaSpotlightsModule header h2 .logo, #WikiaSpotlightsModule header .WikiaRail #RIGHT_SKYSCRAPER h2 .logo, .WikiaRail #RIGHT_SKYSCRAPER #WikiaSpotlightsModule header h2
+.logo{filter:progid:DXImageTransform.Microsoft.Matrix(Dx=0, Dy=0, M11=0.7, M12=0, M21=0, M22=0.7);-moz-transform:matrix(0.7, 0, 0, 0.7, -16px, -3px);-webkit-transform:matrix(0.7, 0, 0, 0.7, -15, -2);left:8px;position:relative;top:7px}#WikiaSpotlightsModule header .banner-corner-left{border:1px
+solid transparent;border-color:#002c11 #002c11 transparent transparent;bottom:0;width:0}#WikiaSpotlightsModule header .banner-corner-right{border:19px
+solid transparent;border-right-width:20px;border-right-color:white;position:absolute;right:0px;top:0px}#WikiaSpotlightsModule
+ul{margin-top:65px;list-style:none}#WikiaSpotlightsModule ul
+li{*zoom:1;height:95px;margin-bottom:30px}#WikiaSpotlightsModule ul li:after{clear:both;content:".";display:block;height:0;overflow:hidden;visibility:hidden}#WikiaSpotlightsModule ul li
+.highlight{float:left;margin-right:10px}#WikiaSpotlightsModule ul li .highlight
+img{border:1px
+solid #ccc;height:95px;width:95px}#WikiaSpotlightsModule ul li
+em{display:block;font-weight:bold;margin-bottom:2px}#WikiaSpotlightsModule ul li
+.seemore{display:block;font-size:12px;font-weight:normal;margin-top:2px}#WikiaSpotlightsModule ul
+.placeholder{background-color:red}#WikiaSpotlightsModule
+.WikiaSpotlight{background-color:transparent;display:block;margin:30px
+0}#WikiaSpotlightsModule .WikiaSpotlight
+img{display:block}#WikiaSpotlightsModule .wikia-button{margin:0
+12px 12px 0;padding:0
+7px}#RIGHT_SKYSCRAPER{text-align:center}#RIGHT_SKYSCRAPER
+img{margin:40px
+auto}.WikiaSpotlight{background-color:white;color:#3a3a3a;display:inline-block;width:270px}#contentSub{font-size:14px;line-height:16px;padding:10px}#contentSub
+.commentslikes{display:inline;font-size:12px}#contentSub .commentslikes a:hover{text-decoration:none}#wikiaThrobber{opacity: .75;-khtml-opacity: .75;-moz-opacity: .75;-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=75)";filter:alpha(opacity=75);background:url("http://images.wikia.nocookie.net/__cb51060/common/skins/common/images/ajax.gif") no-repeat scroll center white;height:100%;left:0;width:100%;position:absolute;top:0;z-index:2}.commentslikes
+li{border-left:solid 1px #ccc;border-bottom:none !important;float:left;line-height:20px;padding:0
+10px}.commentslikes li:first-child{border-left:none}.commentslikes
+.likes{padding-right:0;height:22px;width:90px}.commentslikes
+.commentsbubble{background-color:#f2f2f2;background-image: -moz-linear-gradient(top, white 0%, #f2f2f2 100%);background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, white), color-stop(100%, #f2f2f2));background-image: -o-linear-gradient(top, white 0%, #f2f2f2 100%);background-image: -ms-linear-gradient(top, white 0%, #f2f2f2 100%);border-radius:2px;-moz-border-radius:2px;-webkit-border-radius:2px;border:solid 1px #ccc;display:inline-block;height:14px;line-height:15px;margin:0
+3px;min-width:15px;padding:0
+5px;position:relative;text-align:center}.commentslikes .commentsbubble:before{border-color:#ccc #cccccc transparent transparent;border-style:solid;border-width:5px;content:" ";height:0px;position:absolute;top:14px;left:3px;width:0px}.commentslikes .commentsbubble:after{border-color:#f2f2f2 #f2f2f2 transparent transparent;border-style:solid;border-width:4px;content:" ";height:0px;position:absolute;top:14px;left:4px;width:0px}.commentslikes .wikia-chiclet-button{vertical-align:middle;margin:0
+3px}.commentslikes
+.comments{*position:relative;*top: -2px;white-space:nowrap}a.comments>.commentsbubble{background-color:white;font-size:9px;vertical-align:top;border:solid 1px #ccc;display:inline-block;height:11px;line-height:11px;margin:2px
+3px 0 3px;min-width:15px;padding:0;position:relative;text-align:center}a.comments>.commentsbubble:before{border-color:#ccc #cccccc transparent transparent;border-style:solid;border-width:3px;content:" ";height:0px;position:absolute;top:11px;left:3px;width:0px}a.comments>.commentsbubble:after{border-color:white white transparent transparent;border-style:solid;border-width:2px;content:" ";height:0px;position:absolute;top:11px;left:4px;width:0px}.WikiHeader{clear:both;margin:0
+0 15px;padding:10px
+10px 9px;position:relative;z-index:1000}.WikiHeader
+.wordmark{font-weight:bold;width:250px;color:#2b54b5}.WikiHeader
+.wordmark.small{font-size:25px}.WikiHeader
+.wordmark.medium{font-size:30px}.WikiHeader
+.wordmark.large{font-size:40px}.WikiHeader .wordmark a:hover{text-decoration:none}.WikiHeader
+.wordmark.graphic{overflow:hidden}.WikiHeader h1:before, .WikiHeader .WikiaRail .module h2:before, .WikiaRail .module .WikiHeader h2:before, .WikiHeader .WikiaRail #RIGHT_SKYSCRAPER h2:before, .WikiaRail #RIGHT_SKYSCRAPER .WikiHeader h2:before, .WikiHeader .shadow-mask{bottom:0;height:8px;position:absolute;right:0;width:1000px}.WikiHeader h1:before, .WikiHeader .WikiaRail .module h2:before, .WikiaRail .module .WikiHeader h2:before, .WikiHeader .WikiaRail #RIGHT_SKYSCRAPER h2:before, .WikiaRail #RIGHT_SKYSCRAPER .WikiHeader h2:before{background:url(http://images.wikia.nocookie.net/__cb51060/common/skins/oasis/images/sprite.png) 0 -34px no-repeat;content:" ";z-index:1}.WikiHeader .shadow-mask{opacity: .75;-khtml-opacity: .75;-moz-opacity: .75;-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=75)";filter:alpha(opacity=75);background:white;z-index:2}.WikiHeader a:hover{text-decoration:none}.WikiHeader
+nav{bottom:9px;left:260px;position:absolute;width:460px}.WikiHeader nav > h1, .WikiHeader nav > .WikiaRail .module h2, .WikiaRail .module .WikiHeader nav > h2, .WikiHeader nav > .WikiaRail #RIGHT_SKYSCRAPER h2, .WikiaRail #RIGHT_SKYSCRAPER .WikiHeader nav>h2{display:none}.WikiHeader
+li{display:table-cell;*float:left;font-size:13px;padding: .4em 0;position:relative;vertical-align:bottom;*width:24%}.WikiHeader li:hover{background-color:#d4dcf0;background-image: -moz-linear-gradient(top, white 0%, #d4dcf0 100%);background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, white), color-stop(100%, #d4dcf0));background-image: -o-linear-gradient(top, white 0%, #d4dcf0 100%);background-image: -ms-linear-gradient(top, white 0%, #d4dcf0 100%)}.WikiHeader li:first-child
+a{border:0}.WikiHeader li
+a{border-left:1px solid #9c9c9c;color:#3a3a3a;display:block;padding:0
+8px;position:relative}.WikiHeader
+.subnav{background:white;border-color:#ccc;border-style:solid;border-width:1px 2px 2px;display:none;position:absolute;display:none;min-width:150px;padding:5px;top: -9999px;z-index:20000000}.WikiHeader .subnav>li{border-top:1px solid #ccc;display:block;padding:0}.WikiHeader .subnav>li>a{display:block;font-size:14px;padding:4px
+4px 2px}.WikiHeader .subnav>li>a:hover{background:#d4dcf0}.WikiHeader .subnav
+li{*float:none;*width:auto;padding:0}.WikiHeader .subnav li
+a{border:0;padding:8px
+4px;white-space:nowrap;font-size:13px}.WikiHeader .subnav li:first-child{border-top:0}.WikiHeader .subnav .edit-menu{text-align:right}.WikiHeader .subnav .edit-menu
+a{font-size:0.7em}.WikiHeader
+.buttons{bottom:15px;right:10px;position:absolute;text-align:right;width:270px}.WikiHeader .buttons
+a{border-radius:3px;-moz-border-radius:3px;-webkit-border-radius:3px;font-size:11px;height:17px;line-height:18px}.WikiHeader .buttons a
+img{left: -2px;position:relative;top:0;vertical-align:text-bottom}.WikiHeader .buttons a:first-child{margin-right:5px}.WikiHeader
+.chevron{border-top-color:#3a3a3a}.WikiHeaderRestyle{min-height:69px;margin:0
+0 3px;padding:25px
+10px 9px;position:relative;z-index:1000}.WikiHeaderRestyle
+.accent{background-color:#25883d}.WikiHeaderRestyle .accent
+a{color:white}.WikiHeaderRestyle
+.wordmark{font-weight:bold;width:250px;color:#2b54b5;margin-bottom:10px}.WikiHeaderRestyle
+.wordmark.small{font-size:25px}.WikiHeaderRestyle
+.wordmark.medium{font-size:30px}.WikiHeaderRestyle
+.wordmark.large{font-size:40px}.WikiHeaderRestyle .wordmark a:hover{text-decoration:none}.WikiHeaderRestyle
+.wordmark.graphic{overflow:hidden}.WikiHeaderRestyle h1:before, .WikiHeaderRestyle .WikiaRail .module h2:before, .WikiaRail .module .WikiHeaderRestyle h2:before, .WikiHeaderRestyle .WikiaRail #RIGHT_SKYSCRAPER h2:before, .WikiaRail #RIGHT_SKYSCRAPER .WikiHeaderRestyle h2:before, .WikiHeaderRestyle .shadow-mask{bottom:0;height:8px;position:absolute;right:0;width:1000px}.WikiHeaderRestyle h1:before, .WikiHeaderRestyle .WikiaRail .module h2:before, .WikiaRail .module .WikiHeaderRestyle h2:before, .WikiHeaderRestyle .WikiaRail #RIGHT_SKYSCRAPER h2:before, .WikiaRail #RIGHT_SKYSCRAPER .WikiHeaderRestyle h2:before{background:url(http://images.wikia.nocookie.net/__cb51060/common/skins/oasis/images/sprite.png) 0 -34px no-repeat;content:" ";z-index:1}.WikiHeaderRestyle .shadow-mask{opacity: .75;-khtml-opacity: .75;-moz-opacity: .75;-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=75)";filter:alpha(opacity=75);background:white;z-index:2}.WikiHeaderRestyle a:hover{text-decoration:none}.WikiHeaderRestyle>nav{left:275px;position:absolute;top:25px;width:574px;z-index:3}.WikiHeaderRestyle > nav > h1, .WikiHeaderRestyle > nav > .WikiaRail .module h2, .WikiaRail .module .WikiHeaderRestyle > nav > h2, .WikiHeaderRestyle > nav > .WikiaRail #RIGHT_SKYSCRAPER h2, .WikiaRail #RIGHT_SKYSCRAPER .WikiHeaderRestyle>nav>h2{display:none}.WikiHeaderRestyle>nav>ul{position:relative;z-index:1}.WikiHeaderRestyle > nav
+li{line-height:31px;display:inline-block;float:left;font-size:15px;border-bottom:1px solid #25883d;vertical-align:bottom}.WikiHeaderRestyle > nav li:first-child{border-left:none}.WikiHeaderRestyle > nav li:first-child
+a{border-left:1px solid transparent}.WikiHeaderRestyle > nav li>a{border-left:1px solid #d7d7d7;border-top:1px solid transparent;color:#3a3a3a;display:block;margin:0px;outline:none;padding:1px
+15px 0px 15px;position:relative}.WikiHeaderRestyle > nav
+li.marked{border-top-right-radius:3px;-moz-border-radius-topright:3px;-webkit-border-top-right-radius:3px;border-top-left-radius:3px;-moz-border-radius-topleft:3px;-webkit-border-top-left-radius:3px;background-color:#25883d}.WikiHeaderRestyle > nav li.marked>a{margin:1px
+3px;padding:0px
+12px;border-top:1px solid #30b04f;border-left:1px solid transparent;color:white}.WikiHeaderRestyle > nav li.marked>a:hover{text-decoration:underline}.WikiHeaderRestyle > nav li.marked>a[href="#"]{cursor:default}.WikiHeaderRestyle > nav li.marked>a[href="#"]:hover{text-decoration:none}.WikiHeaderRestyle > nav li.marked .subnav-2 > li a:hover{text-decoration:underline}.WikiHeaderRestyle > nav li.marked .subnav-2 .marked2 a:hover{text-decoration:none}.WikiHeaderRestyle > nav li.marked + li
+a{border-left:1px solid transparent}.WikiHeaderRestyle > nav
+.subnav{background:white;border-color:#ccc;border-style:solid;border-width:1px 2px 2px;display:none;position:absolute;display:none;min-width:150px;padding:5px
+1px;top: -9999px;z-index:20000000}.WikiHeaderRestyle > nav .subnav>li{border-top:1px solid #ccc;display:block;padding:0}.WikiHeaderRestyle > nav .subnav>li>a{display:block;font-size:14px;padding:4px
+4px 2px}.WikiHeaderRestyle > nav .subnav>li>a:hover{background:#d4dcf0}.WikiHeaderRestyle > nav .subnav
+li{*float:none;*width:auto;padding:0}.WikiHeaderRestyle > nav .subnav li
+a{border:0;padding:8px
+4px;white-space:nowrap;font-size:13px}.WikiHeaderRestyle > nav .subnav li:first-child{border-top:0}.WikiHeaderRestyle > nav .subnav .edit-menu{text-align:right}.WikiHeaderRestyle > nav .subnav .edit-menu
+a{font-size:0.7em}.WikiHeaderRestyle > nav .subnav-2{display:none;left:0;position:absolute;top:33px;width:729px;background-color:transparent}.WikiHeaderRestyle > nav .subnav-2
+li{background-color:transparent;border:none;font-size:13px;line-height:28px;padding:0px}.WikiHeaderRestyle > nav .subnav-2 li .subnav-2a{z-index:100;display:block;border:1px
+solid transparent;margin:2px
+0px 0px 3px;height:25px}.WikiHeaderRestyle > nav .subnav-2 li .subnav-2a>.chevron{opacity: .50;-khtml-opacity: .50;-moz-opacity: .50;-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";filter:alpha(opacity=50);border-top-color:white;height:4px;margin:0
+0 3px 5px;vertical-align:bottom}.WikiHeaderRestyle > nav .subnav-2 li.marked2 .subnav-2a{margin:2px
+0px 0px 3px;background:white;border:1px
+solid #30b04f;border-bottom:1px solid white;color:#3a3a3a;border-radius:0px;-moz-border-radius:0px;-webkit-border-radius:0px;border-top-right-radius:3px;-moz-border-radius-topright:3px;-webkit-border-top-right-radius:3px;border-top-left-radius:3px;-moz-border-radius-topleft:3px;-webkit-border-top-left-radius:3px}.WikiHeaderRestyle > nav .subnav-2 li.marked2 .subnav-2a>.chevron{opacity:1;-khtml-opacity:1;-moz-opacity:1;-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";filter:alpha(opacity=100);border-top-color:#3a3a3a}.WikiHeaderRestyle > nav .subnav-2 li.marked2 .subnav-2a:hover{background:#d3e7d8;color:#3a3a3a}.WikiHeaderRestyle > nav .subnav-3{z-index:90;display:none;top:25;margin-left:4px;min-width:150px;border:1px
+solid #30b04f;margin-left:3px;box-shadow:1px 2px 12px 0px #333;-moz-box-shadow:1px 2px 12px 0px #333;-webkit-box-shadow:1px 2px 12px 0px #333}.WikiHeaderRestyle > nav .subnav-3
+li{background:white;color:#3a3a3a;float:none;padding:0px;margin:0px}.WikiHeaderRestyle > nav .subnav-3 li
+a{border:0px
+solid #30b04f;border-radius:0px;-moz-border-radius:0px;-webkit-border-radius:0px;font-size:12px;line-height:25px;display:block;margin:0px;padding:5px
+9px;color:#3a3a3a}.WikiHeaderRestyle > nav .subnav-3 li a:hover{background:#d3e7d8;color:#3a3a3a}.WikiHeaderRestyle > nav a.subnav-3a{border:0}.WikiHeaderRestyle
+.navbackground{background-color:#25883d;height:32px;margin-top:1px;left:0;position:absolute;top:32px;width:729px}.WikiHeaderRestyle .navbackground
+div{background-color:#30b04f;height:1px;margin-top:1px;width:100%}.WikiHeaderRestyle .navbackground
+img{border-color:#1a602b transparent transparent #1a602b;border-width:2px;float:right;margin-top:30px}.WikiHeaderRestyle
+.buttons{bottom:15px;right:10px;position:absolute;text-align:right;width:270px;height:10px;top:27px;z-index:4}.WikiHeaderRestyle .buttons .wikia-button, .WikiHeaderRestyle .buttons .wikia-menu-button{height:20px;font-size:11px;margin-top:0px;vertical-align:top;z-index:3}.WikiHeaderRestyle .buttons .wikia-button[data-id=edit], .WikiHeaderRestyle .buttons .wikia-button a[data-id=edit], .WikiHeaderRestyle .buttons .wikia-menu-button[data-id=edit], .WikiHeaderRestyle .buttons .wikia-menu-button a[data-id=edit]{margin-right:2px;padding-right:8px;border-width:0px}.WikiHeaderRestyle .buttons
+.contribute{padding-top:1px;vertical-align:middle}.WikiHeaderRestyle .buttons .contribute>img{height:18px;margin-bottom:4px}.WikiHeaderRestyle .buttons .contribute>li{padding:2px
+0 0 5px}.WikiHeaderRestyle .buttons .contribute.active>li{background-color:white}.WikiHeaderRestyle .buttons .contribute
+ul{border:1px
+solid #ccc;border-top:0;padding:1px;width:150px;box-shadow:1px 8px 12px 0px #333;-moz-box-shadow:1px 8px 12px 0px #333;-webkit-box-shadow:1px 8px 12px 0px #333}.WikiHeaderRestyle .buttons .contribute ul li
+a{line-height:25px}.WikiHeaderRestyle .buttons .contribute ul li a:hover{color:#3a3a3a;background-color:#d3e7d8}.WikiHeaderRestyle .buttons .contribute>.drop>.chevron{height:4px;vertical-align:bottom}.WikiHeaderRestyle .buttons .contribute>.drop:hover{background:none}.WikiHeaderRestyle .buttons>.contribute:hover{background:none;background-color:#dbdbdb;background-image: -moz-linear-gradient(top, #f5f5f5 35%, #dbdbdb 65%);background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(35%, #f5f5f5), color-stop(65%, #dbdbdb));background-image: -o-linear-gradient(top, #f5f5f5 35%, #dbdbdb 65%);background-image: -ms-linear-gradient(top, #f5f5f5 35%, #dbdbdb 65%)}.WikiHeaderRestyle .buttons .share-button{padding:1px
+18px 0 9px;position:relative}.WikiHeaderRestyle .buttons .share-button .share-dot{display:block;height:7px;position:absolute;right:7px;top:7px;width:7px;border-radius:7px;-moz-border-radius:7px;-webkit-border-radius:7px;box-shadow:0px 0px 4px 0px #25883d;-moz-box-shadow:0px 0px 4px 0px #25883d;-webkit-box-shadow:0px 0px 4px 0px #25883d}.WikiHeaderRestyle .buttons .share-button.share-enabled .share-dot{background-color:#25883d}.WikiHeaderRestyle .buttons .share-button.share-enabled .share-pixel{background-color:#66ab77;display:block;height:2px;position:absolute;right:10px;top:9px;width:2px}.adm-dash-search{float:right;width:300px}#shareEmailModal
+.buttons{float:right}#shareEmailModal .buttons .cancel-button{margin-right:5px}.WikiHeaderPreview>nav{left:0}.WikiHeaderPreview>nav>.navbackground>.chevron{display:none}#EditPageRail .preview-validator-desc{margin-top:12px}.editpage-sourcewidemode-on #EditPageRail .preview-validator-desc{left:5px;position:absolute;top:20px}.editpage-sourcewidemode-on .editpage-wikianavmode #EditPageToolbar:after{height:25px}.WikiaPageHeader{clear:both;margin:0
+10px 10px 10px;position:relative;z-index:2}.WikiaPageHeader.separator{border-bottom:1px solid #ccc;padding:0
+0 15px 0}.WikiaPageHeader.editbox{padding:20px
+90px 0 0;margin:0
+0 10px}.WikiaPageHeader.editbox
+p{margin-top:4px}.ns-talk
+.WikiaPageHeader{padding-right:10px}.ns-talk .WikiaPageHeader .wikia-menu-button{float:right;top:7px}.WikiaPageHeader
+.commentslikes{float:right;padding:1px
+0;margin:0px
+-10px 4px 0}.WikiaPageHeader .commentslikes
+.likes{padding-top:1px}.WikiaPageHeader h1, .WikiaPageHeader .WikiaRail .module h2, .WikiaRail .module .WikiaPageHeader h2, .WikiaPageHeader .WikiaRail #RIGHT_SKYSCRAPER h2, .WikiaRail #RIGHT_SKYSCRAPER .WikiaPageHeader
+h2{display:inline;font-size:26px;margin:0
+10px 0 0;line-height:27px}.WikiaPageHeader h1 strong, .WikiaPageHeader .WikiaRail .module h2 strong, .WikiaRail .module .WikiaPageHeader h2 strong, .WikiaPageHeader .WikiaRail #RIGHT_SKYSCRAPER h2 strong, .WikiaRail #RIGHT_SKYSCRAPER .WikiaPageHeader h2
+strong{font-weight:bold;margin-right:5px}.WikiaPageHeader h1 i, .WikiaPageHeader .WikiaRail .module h2 i, .WikiaRail .module .WikiaPageHeader h2 i, .WikiaPageHeader .WikiaRail #RIGHT_SKYSCRAPER h2 i, .WikiaRail #RIGHT_SKYSCRAPER .WikiaPageHeader h2
+i{font-style:italic}.WikiaPageHeader .view-source{font-size:10px;position:relative;top: -2px}.WikiaPageHeader .view-source
+img{padding:0
+3px;vertical-align:baseline}.WikiaPageHeader .view-source
+.sprite{position:relative;top:1px}.WikiaPageHeader h2, .WikiaPageHeader
+p{border:none;font-size:14px;margin-top:4px}.WikiaPageHeader
+.subtitle{line-height:1.5em;margin:1em
+0}.WikiaPageHeader
+img{vertical-align:text-bottom}.WikiaPageHeader .wikia-button, .WikiaPageHeader .wikia-menu-button{margin-top:2px;vertical-align:top;z-index:3}.WikiaPageHeader .mainpage-tally{float:right;margin-right:10px;padding:1px
+0}.WikiaPageHeader .mainpage-tally>span{float:left}.WikiaPageHeader .mainpage-add-page{border-right:1px solid #ccc;float:right;line-height:20px;margin-top:2px;padding:0
+10px}.wikinav2
+.WikiaPageHeader{border-bottom:solid 1px #ccc;padding-bottom:7px;padding-right:175px;margin-bottom:10px}.wikinav2 .WikiaPageHeader>.comments{margin:2px
+10px 0 10px}.wikinav2 .WikiaPageHeader>.tally{position:absolute;right:0;top:0}.wikinav2 .WikiaPageHeader>.tally.mainpage-tally{position:static}.wikinav2.oasis-one-column
+.WikiaPageHeader{padding-right:505px}.wikinav2.oasis-one-column
+.WikiaPageHeader.WikiaPageHeaderDiffHistory{margin-right:10px;padding-right:320px}.wikinav2.oasis-one-column .WikiaPageHeader
+.tally{right:330px}.wikinav2.oasis-one-column
+.WikiaSearchHeader{position:absolute;right:10px;top:0;width:300px;z-index:3}.wikinav2.oasis-one-column .WikiaSearchHeader
+form{margin-bottom:0;padding-bottom:0;border-bottom:0}.oasis-one-column
+.WikiaPageHeader{padding-right:320px;position:relative}.oasis-one-column .WikiaPageHeader
+.WikiaSearch{position:absolute;right:0;top:1px}.oasis-one-column .WikiaPageHeader
+details{width:980px}.WikiaSearch{*zoom:1;margin-bottom:10px;position:relative}.WikiaSearch:after{clear:both;content:".";display:block;height:0;overflow:hidden;visibility:hidden}.WikiaSearch input[type="text"]{background-color:white;background-image: -moz-linear-gradient(top, #f2f2f2 0%, white 40%);background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #f2f2f2), color-stop(40%, white));background-image: -o-linear-gradient(top, #f2f2f2 0%, white 40%);background-image: -ms-linear-gradient(top, #f2f2f2 0%, white 40%);border:1px
+solid #ccc;font-size:15px;height:19px;outline:0;padding:3px;margin:0;-webkit-box-sizing:content-box;-webkit-appearance:textfield;background:white;color:#3a3a3a;width:248px;padding-right:47px}.WikiaSearch input[type="text"]::-webkit-input-placeholder{color:#757575}.WikiaSearch input[type="text"]:-moz-placeholder{color:#757575}.WikiaSearch input[type="text"].placeholder{color:#757575}.WikiaSearch input[type="text"].error{border:2px
+solid #f33}.WikiaSearch input[type="text"]:focus{background:white}.WikiaSearch
+button{border-radius:0;-moz-border-radius:0;-webkit-border-radius:0;border-width:0 0 0 1px;height:25px;line-height:1px;position:absolute;right:1px;top:1px}.WikiaSearch input[type="submit"]{display:none}.WikiaSearch
+.autocomplete{background:white;border-color:#ccc;border-style:solid;border-width:1px 2px 2px;display:none;position:absolute;margin-top:2px;position:relative;width:296px;z-index:20000000}.WikiaSearch .autocomplete>li{border-top:1px solid #ccc;display:block;padding:0}.WikiaSearch .autocomplete>li>a{display:block;font-size:14px;padding:4px
+4px 2px}.WikiaSearch .autocomplete>li>a:hover{background:#d4dcf0}.WikiaSearch .autocomplete
+div{font-size:14px;padding:4px
+4px 2px}.WikiaSearch .autocomplete
+.selected{background:#d4dcf0}.wikinav2 .WikiaRail > .WikiaSearch, .wikinav2 .WikiaSearchHeader>.WikiaSearch{padding-bottom:0px;margin-bottom:10px}.WikiaArticle{font-size:13px;line-height:21px;padding:0
+10px;position:relative;min-height:250px;z-index:1}.WikiaArticle h1, .WikiaArticle .WikiaRail .module h2, .WikiaRail .module .WikiaArticle h2, .WikiaArticle .WikiaRail #RIGHT_SKYSCRAPER h2, .WikiaRail #RIGHT_SKYSCRAPER .WikiaArticle h2, .WikiaArticle h2, .WikiaArticle h3, .WikiaArticle h4, .WikiaArticle h5, .WikiaArticle
+h6{margin: .5em 0 .2em}.WikiaArticle h1, .WikiaArticle .WikiaRail .module h2, .WikiaRail .module .WikiaArticle h2, .WikiaArticle .WikiaRail #RIGHT_SKYSCRAPER h2, .WikiaRail #RIGHT_SKYSCRAPER .WikiaArticle
+h2{font-size:24px}.WikiaArticle
+h2{border-bottom:solid 1px #ccc;font-size:18px;margin-top:30px;overflow:hidden}.WikiaArticle
+h3{font-size:16px}.WikiaArticle
+h4{font-size:14px}.WikiaArticle
+h5{font-size:12px}.WikiaArticle
+h6{font-size:11px}.WikiaArticle
+.editsection{float:none;font-size:13px;margin-left:10px;vertical-align:baseline}.WikiaArticle .editsection
+img{vertical-align:text-bottom}.WikiaArticle h1 .editsection, .WikiaArticle .WikiaRail .module h2 .editsection, .WikiaRail .module .WikiaArticle h2 .editsection, .WikiaArticle .WikiaRail #RIGHT_SKYSCRAPER h2 .editsection, .WikiaRail #RIGHT_SKYSCRAPER .WikiaArticle h2 .editsection, .WikiaArticle h5 .editsection, .WikiaArticle h6
+.editsection{display:none}.WikiaArticle
+.noarticletext{border:1px
+solid #d9d9d9;padding:0
+13px}.WikiaArticle b, .WikiaArticle
+strong{font-weight:bold}.WikiaArticle i, .WikiaArticle
+em{font-style:italic}.WikiaArticle
+sup{font-size:11px;line-height:0;vertical-align:super}.WikiaArticle
+sub{font-size:11px;line-height:0;vertical-align:sub}.WikiaArticle ul, .WikiaArticle
+ol{margin:0.4em 0 0.5em 2.5em}.WikiaArticle
+ol{list-style:decimal}.WikiaArticle
+ul{list-style:square}.WikiaArticle
+li{line-height:20px;margin:3px
+0}.WikiaArticle
+dl{margin:1em
+0}.WikiaArticle
+dt{font-weight:bold;margin-bottom:1px}.WikiaArticle
+dd{margin-bottom:1px;margin-left:24px}.WikiaArticle
+img{vertical-align:middle}.WikiaArticle
+blockquote{margin:12px
+40px}.WikiaArticle
+.center{text-align:center;width:100%}.WikiaArticle .center
+*{margin-left:auto;margin-right:auto}.WikiaArticle
+.thumbborder{border:1px
+solid #d9d9d9}.WikiaArticle
+.floatright{clear:right;float:right;position:relative;margin:0
+0 6px 6px;border:0}.WikiaArticle
+.floatleft{float:left;clear:left;position:relative;margin:0
+6px 6px 0;border:0}.WikiaArticle
+.thumbinner{background-color:#f2f2f2;background-image: -moz-linear-gradient(top, white 0%, #f2f2f2 100%);background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, white), color-stop(100%, #f2f2f2));background-image: -o-linear-gradient(top, white 0%, #f2f2f2 100%);background-image: -ms-linear-gradient(top, white 0%, #f2f2f2 100%);border:1px
+solid #d9d9d9;overflow:hidden;padding:3px;text-align:center}.WikiaArticle
+.thumbcaption{line-height:18px;padding:4px
+1px 0 1px;text-align:left}.WikiaArticle
+.tright{clear:right;float:right;margin:0
+0 16px 16px}.WikiaArticle
+.tleft{float:left;clear:left;margin:0
+16px 16px 0}.WikiaArticle
+.magnify{float:right;margin-top:4px}.WikiaArticle .picture-attribution{display:block;font-size:11px;margin-right:16px;text-align:left}.WikiaArticle .picture-attribution
+.avatar{margin-right:3px;vertical-align:middle}.WikiaArticle
+.toc{background-color:transparent;border:1px
+solid #d9d9d9;border-collapse:separate;margin:1em
+0;padding:5px}.WikiaArticle .toc
+ul{margin:0;list-style:none}.WikiaArticle .toc ul
+ul{margin-left:2em}.WikiaArticle .toc ul
+li{margin:0}.WikiaArticle
+#toctitle{text-align:center}.WikiaArticle #toctitle
+h2{border:none;display:inline;font-size:14px}.WikiaArticle #toctitle
+.toctoggle{font-size:12px}.WikiaArticle
+p{margin:0.4em 0 0.5em}.WikiaArticle p+p{margin:1em
+0}.WikiaArticle
+pre{background-color:#f2f2f2;border:1px
+solid #ccc;line-height:14px;overflow:auto;padding:12px}.WikiaArticle
+.printfooter{display:none}.WikiaArticle a.external:after, .WikiaArticle a[href^="gopher://"]:after{background-image:url(http://images.wikia.nocookie.net/__cb51060/common/skins/oasis/images/sprite.png);background-position:top right;background-repeat:no-repeat;content:"";display:inline-block;height:16px;padding:0px
+3px 0 0;vertical-align:text-top;width:10px}.WikiaArticle .plainlinks
+a{background-image:none;padding-right:0}.WikiaArticle .plainlinks a:after{display:none}.WikiaArticle
+#filetoc{text-align:center;border:1px
+solid #d9d9d9;background-color:transparent;padding:5px;font-size:12px;margin-bottom:5px;margin-left:0;margin-right:0}.WikiaArticle #filetoc
+li{display:inline;list-style-type:none;padding-right:23px}.WikiaArticle .mw_metadata th, .WikiaArticle .mw_metadata td, .WikiaArticle .mw_metadata .wikia-infobox th, .wikia-infobox .WikiaArticle .mw_metadata
+th{background-color:transparent;border:1px
+solid #ccc}.WikiaArticle .references>li:target{background-color:#dfe5f3}.WikiaArticle div.gallerybox
+div.thumb{background:#f2f2f2;border:1px
+solid #d9d9d9}.WikiaArticle
+fieldset{border:solid 1px #2b54b5;margin:1em
+0;padding:0
+1em 1em}.WikiaArticle fieldset
+legend{padding:7px}.WikiaArticle
+.infobox{border:1px
+solid #ccc;background-color:#f2f2f2;color:#3a3a3a;margin-bottom:0.5em;margin-left:1em;padding:0.2em;float:right;clear:right}.WikiaArticle .infobox[width="100%"]{float:none;margin-left:0}.WikiaArticle #mw-pages
+h3{font-weight:bold}.WikiaArticle #mw-pages
+ul{margin-left:16px}.WikiaArticle #pagehistory
+li.selected{background-color:#f2f2f2}.WikiaArticle td.diff-context, .WikiaArticle .wikia-infobox th.diff-context, .wikia-infobox .WikiaArticle th.diff-context{background-color:#f2f2f2}.WikiaArticle td.diff-deletedline, .WikiaArticle .wikia-infobox th.diff-deletedline, .wikia-infobox .WikiaArticle th.diff-deletedline, .WikiaArticle td.diff-addedline, .WikiaArticle .wikia-infobox th.diff-addedline, .wikia-infobox .WikiaArticle th.diff-addedline{color:#000}.WikiaArticle .fbconnect-synced-profile{border-bottom:solid 1px #ccc;margin-bottom:5px;padding-bottom:5px}.WikiaArticle .fbconnect-synced-profile
+th{width:25%;text-align:right;padding-right:10px;vertical-align:top}.WikiaArticle .fbconnect-synced-profile td, .WikiaArticle .fbconnect-synced-profile .wikia-infobox th, .wikia-infobox .WikiaArticle .fbconnect-synced-profile
+th{margin-left:8px;padding-right:10px}.WikiaArticle .user-interview-profile-container{*zoom:1;text-align:left;margin-top:0px;margin-left:10px;margin-bottom:10px}.WikiaArticle .user-interview-profile-container:after{clear:both;content:".";display:block;height:0;overflow:hidden;visibility:hidden}.WikiaArticle .user-interview-profile-container td, .WikiaArticle .user-interview-profile-container .wikia-infobox th, .wikia-infobox .WikiaArticle .user-interview-profile-container
+th{padding-right:20px}.WikiaArticle .user-interview-profile-container
+.avatar{float:left}.WikiaArticle .user-interview-profile-container .odd
+blockquote{background:#f5f5f5}.WikiaArticle .user-interview-profile-container .odd blockquote:after{border-color:transparent #f5f5f5 #f5f5f5 transparent}.WikiaArticle .user-interview-profile-container .even
+blockquote{background:#f4f6fb}.WikiaArticle .user-interview-profile-container .even blockquote:after{border-color:transparent #f4f6fb #f4f6fb transparent}.WikiaArticle .user-interview-profile-container
+blockquote{border-radius:5px;-moz-border-radius:5px;-webkit-border-radius:5px;border:1px
+solid #ccc;margin:0
+5px 10px 75px;padding:15px
+10px 10px 15px;position:relative}.WikiaArticle .user-interview-profile-container blockquote
+p{margin-bottom:1em}.WikiaArticle .user-interview-profile-container blockquote ul, .WikiaArticle .user-interview-profile-container blockquote
+ol{margin:0.4em 0 0.5em 2.5em}.WikiaArticle .user-interview-profile-container blockquote
+ol{list-style:decimal}.WikiaArticle .user-interview-profile-container blockquote
+ul{list-style:square}.WikiaArticle .user-interview-profile-container blockquote b, .WikiaArticle .user-interview-profile-container blockquote
+strong{font-weight:bold}.WikiaArticle .user-interview-profile-container blockquote i, .WikiaArticle .user-interview-profile-container blockquote
+em{font-style:italic}.WikiaArticle .user-interview-profile-container blockquote .article-comm-text{overflow:hidden;width:553px}.WikiaArticle .user-interview-profile-container
+blockquote.question{padding-top:10px}.WikiaArticle .user-interview-profile-container blockquote.answer:before{border-color:transparent #ccc #cccccc transparent;border-style:solid;border-width:11px;content:" ";height:0px;position:absolute;top:14px;left: -22px;width:0px}.WikiaArticle .user-interview-profile-container blockquote.answer:after{border-style:solid;border-width:10px;content:" ";height:0px;position:absolute;top:15px;left: -20px;width:0px}.WikiaArticle .user-interview-profile-container
+h3{font-size:12px;font-weight:bold}.wikia-infobox{border:1px
+#ccc solid;float:right;line-height:12px;padding:15px;margin-top:0px;margin-right:0px;margin-bottom:16px;margin-left:16px;font-size:13px;line-height:21px;line-height:15px;width:247px}.wikia-infobox td, .wikia-infobox
+th{overflow:hidden;padding-bottom:7px;padding-left:3px;padding-right:3px;padding-top:7px;vertical-align:top}.wikia-infobox
+th{font-weight:bold;text-align:left;vertical-align:top;width:20%}.wikia-infobox th.wikia-infobox-header{font-size:17px;font-weight:bold;margin-top:20px;padding-bottom:8px;padding-top:5px;padding-left:3px;padding-right:3px;text-align:left}.wikia-infobox th .wikia-infobox-section-header{border-top:1px #ccc solid;margin-top:7px;padding-top:20px}.wikia-infobox .wikia-infobox-image{text-align:center;overflow:hidden;padding:0;width:225px}.wikia-infobox .wikia-infobox-caption{text-align:center;font-size:12px}.wikia-infobox .wikia-infobox-caption{padding-bottom:10px\9}table.wikitable{background:#fafafa;border-collapse:collapse;border:1px
+#ccc solid;margin:1em
+1em 1em 0}table.wikitable th, table.wikitable td, table.wikitable .wikia-infobox th, .wikia-infobox table.wikitable
+th{border:1px
+#a6a6a6 solid;padding:0.2em}table.wikitable
+th{background:#f2f2f2;text-align:center}table.wikitable
+caption{font-weight:bold}.WikiaArticleInterlang{margin:10px;padding:10px;clear:both}.WikiaArticleInterlang
+h3{float:left;margin-right:5px}.WikiaArticleInterlang ul
+li{border-left:1px solid #ccc;float:left;line-height:15px;margin-bottom:6px;padding-left:5px;padding-right:5px}.WikiaArticleInterlang ul li:first-child{border:none;padding-left:0px}.WikiaArticleInterlang ul li.more-link{border:none}.WikiaArticleInterlang ul
+li.more{display:none}.WikiaWideTablesWrapper{position:relative}.WikiaWideTablesWrapper.border{border-right:1px dashed #ccc}.WikiaWideTablesWrapper>.table{overflow:hidden}.WikiaWideTablesWrapper>.popout{cursor:pointer;position:absolute;right: -12px;top:0}.WikiaWideTablesWrapper>.popout.float{position:fixed;left:50%;right:auto}.TablePager_nav
+a{text-decoration:none}.TablePager{border-collapse:collapse}.TablePager, .TablePager td, .TablePager .wikia-infobox th, .wikia-infobox .TablePager th, .TablePager
+th{border:1px
+solid #aaa;padding:0
+0.15em 0 0.15em}.TablePager
+th{background-color:#e6e6e6;color:#212121}.TablePager td, .TablePager .wikia-infobox th, .wikia-infobox .TablePager
+th{background-color:white;color:#2d2d2d}.TablePager td.highlited, .TablePager .wikia-infobox th.highlited, .wikia-infobox .TablePager
+th.highlited{background-color:#f2f2f2}.TablePager tr:hover td, .TablePager tr:hover .wikia-infobox th, .wikia-infobox .TablePager tr:hover
+th{background-color:#d9d9d9}.WikiaFooter{clear:both;padding-top:23px;position:relative;z-index:1}.WikiaFooter.float{z-index:20000000}.WikiaFooter.float
+.toolbar{bottom:0;position:fixed;top:auto}.WikiaFooter
+.toolbar{background-color:#002c11;background-image: -moz-linear-gradient(left, #000b04 0, #002c11 50%, #000b04 100%);background-image: -webkit-gradient(linear, 0% 0%, 100% 0%, color-stop(0, #000b04), color-stop(50%, #002c11), color-stop(100%, #000b04));background-image: -o-linear-gradient(left, #000b04 0, #002c11 50%, #000b04 100%);background-image: -ms-linear-gradient(left, #000b04 0, #002c11 50%, #000b04 100%);border-top:3px solid #000;color:white;height:20px;margin-left: -5px;position:absolute;top:0;width:1010px}.WikiaFooter .toolbar:after{background:url(http://images.wikia.nocookie.net/__cb51060/common/skins/oasis/images/sprite.png) 0 -32px no-repeat;content:" ";height:12px;left:5px;position:absolute;top:20px;width:1000px}.WikiaFooter
+.toolbar.small{left: -5px;margin-left:auto}.WikiaFooter .toolbar
+img{float:left;margin-right:5px;vertical-align:middle}.WikiaFooter .toolbar
+.tools{background-image:url(http://images.wikia.nocookie.net/__cb51060/common/skins/oasis/images/checkers.png);display:block;list-style:none;padding:0
+10px;z-index:1000}.WikiaFooter .toolbar .tools>li{border-left:1px solid #335640;float:left;height:16px;line-height:16px;margin-top:2px;padding:0
+10px}.WikiaFooter .toolbar .tools>li:first-child{border:0}.WikiaFooter .toolbar .tools > li
+img{margin:0
+6px 0 1px}.WikiaFooter .toolbar .tools>li>a{color:white}.WikiaFooter .toolbar .tools>li>span{color:#bfbfbf}.WikiaFooter .toolbar .tools
+img{cursor:pointer}.WikiaFooter .toolbar .tools .arrow-icon-ctr{position:relative;display:inline-block;zoom:1;width:15px;height:12px}.WikiaFooter .toolbar .tools .arrow-icon{position:absolute;width:0;height:0;border:4px
+solid transparent;border-bottom-color:white}.WikiaFooter .toolbar .tools .arrow-icon-single{top:2px;left:0}.WikiaFooter .toolbar .tools .arrow-icon-top{top:0;left:0}.WikiaFooter .toolbar .tools .arrow-icon-bottom{top:4px;left:0}.WikiaFooter .tools-menu{background:white;border-width:2px 4px 4px;border-style:solid;border-color:#000;display:none;list-style:none;padding:0;position:absolute;box-shadow:0 5px 10px 0px rgba(0, 0, 0, 0.5);-moz-box-shadow:0 5px 10px 0px rgba(0, 0, 0, 0.5);-webkit-box-shadow:0 5px 10px 0px rgba(0, 0, 0, 0.5);border-width:4px 4px 2px;bottom:22px;min-width:120px;right:0;z-index:1000}.WikiaFooter .tools-menu>li{border-top:1px solid #ccc;margin:0;padding:0}.WikiaFooter .tools-menu>li:first-child{border-top:none}.WikiaFooter .tools-menu>li>a{color:#3a3a3a;display:block;font-size:12px;padding:10px
+5px;white-space:nowrap}.WikiaFooter .tools-menu>li>a:hover{background-color:#d3e7d8;text-decoration:none}.WikiaFooter .tools-menu
+span{color:#9c9c9c;display:block;padding:10px
+5px}.WikiaFooter .header-container{*zoom:1}.WikiaFooter .header-container:after{clear:both;content:".";display:block;height:0;overflow:hidden;visibility:hidden}.WikiaFooter .header-container h1, .WikiaFooter .header-container .WikiaRail .module h2, .WikiaRail .module .WikiaFooter .header-container h2, .WikiaFooter .header-container .WikiaRail #RIGHT_SKYSCRAPER h2, .WikiaRail #RIGHT_SKYSCRAPER .WikiaFooter .header-container
+h2{font-size:18px;float:left;margin:17px
+0 17px 20px}.WikiaFooter .header-container .wikia-button{float:right;margin:17px
+20px}.WikiaFooter section, .WikiaFooter
+#LEFT_SKYSCRAPER_2{margin:0
+15px;border:1px
+solid #ccc;border-top-width:0}.WikiaFooter section > ul, .WikiaFooter #LEFT_SKYSCRAPER_2>ul{*zoom:1;background-image: -moz-linear-gradient(top, rgba(242, 242, 242, 0) 50%, #f2f2f2 100%);background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(50%, rgba(242, 242, 242, 0)), color-stop(100%, #f2f2f2));background-image: -o-linear-gradient(top, rgba(242, 242, 242, 0) 50%, #f2f2f2 100%);background-image: -ms-linear-gradient(top, rgba(242, 242, 242, 0) 50%, #f2f2f2 100%);list-style:none;margin:0;padding:0px
+35px 20px;text-align:center}.WikiaFooter section > ul:after, .WikiaFooter #LEFT_SKYSCRAPER_2>ul:after{clear:both;content:".";display:block;height:0;overflow:hidden;visibility:hidden}.WikiaFooter section > ul .item-1, .WikiaFooter #LEFT_SKYSCRAPER_2 > ul .item-1{float:left}.WikiaFooter section > ul .item-2, .WikiaFooter #LEFT_SKYSCRAPER_2 > ul .item-2{float:right}.WikiaFooter.notoolbar section, .WikiaFooter.notoolbar
+#LEFT_SKYSCRAPER_2{border-top-width:1px}.WikiaFooter .banner-corner-left{border-color:transparent #000 #000 transparent;left:0;top: -7px}.WikiaFooter .banner-corner-right{border-color:transparent transparent #002c11 #002c11;right: -5px;top: -7px}.CorporateFooter{*zoom:1;clear:both;font-size:11px;padding-bottom:10px}.CorporateFooter:after{clear:both;content:".";display:block;height:0;overflow:hidden;visibility:hidden}.CorporateFooter
+nav{margin-top:15px}.CorporateFooter nav > h1, .CorporateFooter nav > .WikiaRail .module h2, .WikiaRail .module .CorporateFooter nav > h2, .CorporateFooter nav > .WikiaRail #RIGHT_SKYSCRAPER h2, .WikiaRail #RIGHT_SKYSCRAPER .CorporateFooter nav>h2{display:none}.CorporateFooter
+.WikiaHubBranding{background:transparent;float:left;margin-left:15px;padding:1px}.CorporateFooter .WikiaHubBranding
+.wordmark{float:left;position:relative;width:66px}.CorporateFooter .WikiaHubBranding
+.hub{background:white;float:left;height:10px;padding:6px
+6px 7px 6px}.CorporateFooter
+.HubBrandingBlackBackground{background:black}.CorporateFooter
+ul{float:right;list-style:none outside none;margin-top:8px;margin-bottom:7px;display:inline-block;*width:1000px}.CorporateFooter ul
+li{display:table-cell;*float:left;padding-right:10px;padding-left:10px;border-left:solid 1px #2b54b5}.CorporateFooter ul li:first-child{border:none}.CorporateFooter ul li
+a{color:#2b54b5}.editor .WikiaFooter .toolbar:after{height:0}.WikiaConfirmation{background:#90e491;color:#002a39;font-family:Verdana,sans-serif;font-size:10px;padding:4px
+10px}.WikiaConfirmation.preview,.WikiaConfirmation.error{background-color:red;color:white}.WikiaConfirmation.preview p a, .WikiaConfirmation.error p
+a{color:white}.WikiaConfirmation.preview .accept-icon, .WikiaConfirmation.error .accept-icon{display:none}.WikiaConfirmation
+p{line-height:16px}.WikiaConfirmation p
+a{color:#002a39;text-decoration:underline}.WikiaConfirmation p
+.sprite.ok{vertical-align:text-bottom}.WikiaNotifications{bottom:30px;margin:0
+10px;position:absolute}.WikiaNotifications
+li{display:table-cell;padding:4px
+4px 0;vertical-align:bottom;*float:left;*height:150px;*position:relative;*width:210px}.WikiaNotifications li
+div{border-radius:4px;-moz-border-radius:4px;-webkit-border-radius:4px;box-shadow:0 0 5px 0px #7f7f7f;-moz-box-shadow:0 0 5px 0px #7f7f7f;-webkit-box-shadow:0 0 5px 0px #7f7f7f;background-color:#25883d;background-image: -moz-linear-gradient(top, #30b04f 35%, #25883d 65%);background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(35%, #30b04f), color-stop(65%, #25883d));background-image: -o-linear-gradient(top, #30b04f 35%, #25883d 65%);background-image: -ms-linear-gradient(top, #30b04f 35%, #25883d 65%);color:white;margin:0;max-width:175px;overflow:hidden;padding:10px
+20px;position:relative}.WikiaNotifications li div
+a{color:white;text-decoration:underline}.WikiaNotifications li div .close-notification{border:1px
+solid #FFF;cursor:pointer;position:absolute;right:3px;top:3px}.WikiaNotifications li
+div{*bottom:0;*left:0;*position:absolute;*width:175px !important}.WikiaNotifications
+.WikiaBadgeNotification{max-width:250px;padding:0;width:250px}.WikiaNotifications .WikiaBadgeNotification
+img{left: -25px;position:absolute;top: -10px}.WikiaNotifications .WikiaBadgeNotification
+p{margin-left:60px;padding:10px}.WikiaNotifications .WikiaBadgeNotification p
+big{display:block;font-weight:bold}.WikiaNotifications .WikiaBadgeNotification .notification-details{border-bottom-left-radius:4px;-moz-border-radius-bottomleft:4px;-webkit-border-bottom-left-radius:4px;border-bottom-right-radius:4px;-moz-border-radius-bottomright:4px;-webkit-border-bottom-right-radius:4px;background-color:#1a602b;padding:5px
+10px}.WikiaNotifications .WikiaBadgeNotification .notification-details
+a{color:white;text-decoration:underline}.notifications
+.WikiaMainContent{margin-bottom:150px}#WikiaFooter>#WikiaNotifications{top: -35px}.WikiaDataTable{background-color:white;background-image: -moz-linear-gradient(top, white 40%, #f2f2f2 100%);background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(40%, white), color-stop(100%, #f2f2f2));background-image: -o-linear-gradient(top, white 40%, #f2f2f2 100%);background-image: -ms-linear-gradient(top, white 40%, #f2f2f2 100%);border:1px
+solid #ccc;border-collapse:collapse;text-align:right;width:100%}.WikiaDataTable th, .WikiaDataTable td, .WikiaDataTable .wikia-infobox th, .wikia-infobox .WikiaDataTable
+th{padding:10px
+10px 7px 0}.WikiaDataTable th:first-child, .WikiaDataTable td:first-child, .WikiaDataTable .wikia-infobox th:first-child, .wikia-infobox .WikiaDataTable th:first-child{color:#25883d;padding-left:10px;text-align:left}.WikiaDataTable thead
+th{color:#30b04f}.WikiaDataTable .totals td, .WikiaDataTable .totals .wikia-infobox th, .wikia-infobox .WikiaDataTable .totals
+th{background:white;color:#30b04f;height:36px;font-size:16px;padding:0
+10px 0 0}.WikiaDataTable .totals td:first-child, .WikiaDataTable .totals .wikia-infobox th:first-child, .wikia-infobox .WikiaDataTable .totals th:first-child{padding:0}.WikiaDataTable .totals td:first-child .pointer, .WikiaDataTable .totals .wikia-infobox th:first-child .pointer, .wikia-infobox .WikiaDataTable .totals th:first-child
+.pointer{background:#25883d;color:white;font-size:13px;height:26px;margin-right:10px;padding:10px
+0 0 10px;position:relative}.WikiaDataTable .totals td:first-child .pointer:before, .WikiaDataTable .totals .wikia-infobox th:first-child .pointer:before, .wikia-infobox .WikiaDataTable .totals th:first-child .pointer:before{border:18px
+solid transparent;border-left:10px solid #25883d;content:"";height:0;position:absolute;right: -28px;bottom:0;width:0}.WikiaDataTable tfoot .supplemental-info{text-align:right}.WikiaDataTable tbody
+tr{border-top:1px solid #ccc}.WikiaDataTable tbody tr:first-child{border-top:none}.WikiaTable,.article-table{background:#fafafa;border-collapse:collapse;border:0px
+none #ccc;margin:1em
+1em 1em 0}.WikiaTable th, .article-table th, .WikiaTable td, .article-table td, .WikiaTable .wikia-infobox th, .wikia-infobox .WikiaTable th, .article-table .wikia-infobox th, .wikia-infobox .article-table
+th{border-bottom:1px #ccc solid;padding:6px
+12px}.WikiaTable th, .article-table
+th{background:#f2f2f2;text-align:left}.WikiaTable caption, .article-table
+caption{font-weight:bold}ul.tabs,ol.tabs{margin:0}.tabs{*zoom:1;border-bottom:1px solid #ccc;overflow:visible;padding-left:5px}.tabs:after{clear:both;content:".";display:block;height:0;overflow:hidden;visibility:hidden}.tabs
+li{float:left;list-style:none;margin:0
+1px;padding:0;position:relative}.tabs li
+a{border-top-left-radius:4px;-moz-border-radius-topleft:4px;-webkit-border-top-left-radius:4px;border-top-right-radius:4px;-moz-border-radius-topright:4px;-webkit-border-top-right-radius:4px;border:1px
+solid transparent;color:#3a3a3a;display:inline-block;font-size:14px;line-height:23px;padding:6px
+12px 3px;position:relative;top:1px;cursor:pointer}.tabs li a:hover{background-color:#bfcbe8;padding-bottom:2px;text-decoration:none}.tabs li
+.chevron{display:none}.tabs .selected
+a{border-bottom:1px solid transparent;border-left:1px solid #ccc;border-right:1px solid #ccc;border-top:1px solid #ccc;background:white;color:#3a3a3a;font-weight:bold;cursor:text}.tabs .selected a:hover{background-color:white;padding-bottom:3px}.tabs
+.accent{background-color:transparent}.ui-tabs{position:relative;padding: .2em;zoom:1}.ui-tabs .ui-tabs-nav{border-bottom:1px solid #ccc;overflow:hidden;padding-left:5px;margin-left:5px}.ui-tabs .ui-tabs-nav
+li{list-style:none;float:left;position:relative;top:1px;margin:0
+.2em 1px 0;border-bottom:0 !important;padding:0;white-space:nowrap}.ui-tabs .ui-tabs-nav li
+a{border-top-left-radius:5px;-moz-border-radius-topleft:5px;-webkit-border-top-left-radius:5px;border-top-right-radius:5px;-moz-border-radius-topright:5px;-webkit-border-top-right-radius:5px;background-color:#ccc;background-image: -moz-linear-gradient(top, #e5e5e5 50%, #d6d6d6 100%);background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(50%, #e5e5e5), color-stop(100%, #d6d6d6));background-image: -o-linear-gradient(top, #e5e5e5 50%, #d6d6d6 100%);background-image: -ms-linear-gradient(top, #e5e5e5 50%, #d6d6d6 100%);color:#3a3a3a;display:inline-block;font-size:12px;margin-top:7px;padding:6px
+20px 3px}.ui-tabs .ui-tabs-nav li a:hover{text-decoration:none}.ui-tabs .ui-tabs-nav li.ui-tabs-selected{margin-bottom:0;padding-bottom:1px}.ui-tabs .ui-tabs-nav li.ui-tabs-selected
+a{cursor:text;background-color:#92c39e;background-image: -moz-linear-gradient(top, #92c39e 50%, #509f63 100%);background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(50%, #92c39e), color-stop(100%, #509f63));background-image: -o-linear-gradient(top, #92c39e 50%, #509f63 100%);background-image: -ms-linear-gradient(top, #92c39e 50%, #509f63 100%);color:white;font-weight:bold}.ui-tabs .ui-tabs-nav li.ui-state-disabled a, .ui-tabs .ui-tabs-nav li.ui-state-processing
+a{cursor:text}.ui-tabs .ui-tabs-nav li a, .ui-tabs .ui-tabs-collapsible .ui-tabs-nav li.ui-tabs-selected
+a{cursor:pointer}.ui-tabs .ui-tabs-panel{display:block;border-width:0;padding:1em
+1.4em;background:none}.ui-tabs .ui-tabs-hide{display:none !important}.tabBody{display:none}.tabBody.selected{display:block}.wikia-paginator{height:30px}.wikia-paginator div
+ul{list-style:none;margin:0px
+auto 10px auto;padding:0px;list-style-type:none;text-align:center}.wikia-paginator div ul
+li{margin:0px;padding:0px;display:inline}.wikia-paginator div ul
+a{text-decoration:none}.wikia-paginator div ul .paginator-page{display:inline-block;height:16px;line-height:16px;margin:0px;min-width:20px;padding:2px;color:#2b54b5;border-right:solid 1px #25883d}.wikia-paginator div ul .paginator-page:hover{color:white;background-color:#25883d;text-decoration:none}.wikia-paginator div ul .paginator-page.active{color:white;background-color:#25883d;text-decoration:none;border:none}.wikia-paginator div ul .paginator-spacer{display:inline-block;height:16px;line-height:16px;margin:0px;min-width:20px;padding:2px;text-align:center;color:#2b54b5;border-right:solid 1px #25883d}.wikia-paginator div ul
+.special{padding:2px
+5px 2px 5px}.wikia-paginator div ul .no-border{border:none}.success{color:green;font-size:larger}.error{color:red;font-size:larger}.successbox,.errorbox{border-width:1px;border-style:solid;float:none;font-size:12px;line-height:normal;margin:5px
+0 15px;padding:5px
+25px;position:relative}.successbox .sprite.error, .successbox .sprite.ok, .errorbox .sprite.error, .errorbox
+.sprite.ok{position:absolute;top:4px;left:5px}.successbox h1, .successbox .WikiaRail .module h2, .WikiaRail .module .successbox h2, .successbox .WikiaRail #RIGHT_SKYSCRAPER h2, .WikiaRail #RIGHT_SKYSCRAPER .successbox h2, .successbox h2, .errorbox h1, .errorbox .WikiaRail .module h2, .WikiaRail .module .errorbox h2, .errorbox .WikiaRail #RIGHT_SKYSCRAPER h2, .WikiaRail #RIGHT_SKYSCRAPER .errorbox h2, .errorbox
+h2{text-decoration:underline}.successbox a, .errorbox
+a{text-decoration:underline}.successbox li, .errorbox
+li{list-style:disc outside none;margin:0
+0 0 20px;padding:4px
+0 0}.successbox{border-color:green;background-color:#dfd;color:green}.successbox
+a{color:green}.errorbox{border-color:#A91000;background:#F2CFD2;color:#A91000}.errorbox
+a{color:#A91000}.SpeechBubble{*zoom:1;margin:15px
+0}.SpeechBubble:after{clear:both;content:".";display:block;height:0;overflow:hidden;visibility:hidden}.SpeechBubble .speech-bubble-avatar{float:left}.SpeechBubble .speech-bubble-message{font-size:13px;line-height:21px;border-radius:5px;-moz-border-radius:5px;-webkit-border-radius:5px;background:#f5f5f5;border:1px
+solid #ccc;margin:0
+0 0 75px;padding:15px
+10px 10px 15px;position:relative}.SpeechBubble .speech-bubble-message
+p{margin-bottom:1em}.SpeechBubble .speech-bubble-message ul, .SpeechBubble .speech-bubble-message
+ol{margin:0.4em 0 0.5em 2.5em}.SpeechBubble .speech-bubble-message
+ol{list-style:decimal}.SpeechBubble .speech-bubble-message
+ul{list-style:square}.SpeechBubble .speech-bubble-message b, .SpeechBubble .speech-bubble-message
+strong{font-weight:bold}.SpeechBubble .speech-bubble-message i, .SpeechBubble .speech-bubble-message
+em{font-style:italic}.SpeechBubble .speech-bubble-message .article-comm-text{overflow:hidden;width:553px}.SpeechBubble .speech-bubble-message:before{border-color:transparent #ccc #cccccc transparent;border-style:solid;border-width:11px;content:" ";height:0px;position:absolute;top:14px;left: -22px;width:0px}.SpeechBubble .speech-bubble-message:after{border-color:transparent #f5f5f5 #f5f5f5 transparent;border-style:solid;border-width:10px;content:" ";height:0px;position:absolute;top:15px;left: -20px;width:0px}.SpeechBubble.even .speech-bubble-message, .SpeechBubble.owner .speech-bubble-message{background:#f4f6fb}.SpeechBubble.even .speech-bubble-message:after, .SpeechBubble.owner .speech-bubble-message:after{border-color:transparent #f4f6fb #f4f6fb transparent}.SpeechBubble .speech-bubble-message:hover
+.tools{visibility:visible}.SpeechBubble
+textarea{-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box;line-height:21px;font-family:"Helvetica","Arial",sans-serif;font-size:11px;width:100%}.SpeechBubble .edited-by{font-size:10px;line-height:18px}.SpeechBubble .stafflogo
+img{vertical-align:text-bottom}.SpeechBubble .wikia-button{margin:0;padding-left:15px;padding-right:15px}.SpeechBubble
+.buttons{*zoom:1;bottom:5px;position:absolute;right:5px}.SpeechBubble .buttons:after{clear:both;content:".";display:block;height:0;overflow:hidden;visibility:hidden}.SpeechBubble
+.permalink{color:#3a3a3a}.SpeechBubble .article-comm-input-text
+input{float:right;margin-left:10px}.SpeechBubble
+.tools{visibility:hidden;float:right;margin-right:10px;margin-top:3px;display:inline-block}.SpeechBubble .tools
+a{margin-right:3px}.SpeechBubble .tools
+img{margin-right:2px}.WikiaArticleComments{border-top:1px solid #ccc;margin:10px;padding-top:10px}.WikiaArticleComments h1, .WikiaArticleComments .WikiaRail .module h2, .WikiaRail .module .WikiaArticleComments h2, .WikiaArticleComments .WikiaRail #RIGHT_SKYSCRAPER h2, .WikiaRail #RIGHT_SKYSCRAPER .WikiaArticleComments
+h2{font-size:22px;margin-left:5px}.WikiaArticleComments
+.controls{float:right;font-size:11px;line-height:25px;list-style:none}.WikiaArticleComments .controls
+li{float:left;margin-left:5px}.WikiaArticleComments .controls li
+a{border-left:1px solid #ccc;padding:0
+5px}.WikiaArticleComments .controls li:first-child
+a{border:0}.WikiaArticleComments .controls
+.selected{color:#3a3a3a;cursor:default}.WikiaArticleComments
+.session{*zoom:1;font-size:12px;line-height:14px;padding-right:5px;float:left;width:60px}.WikiaArticleComments .session:after{clear:both;content:".";display:block;height:0;overflow:hidden;visibility:hidden}.WikiaArticleComments .session
+.avatar{vertical-align:middle}.WikiaArticleComments #article-comm-info{display:none}.WikiaArticleComments #article-comments{border-top:1px solid #ccc;margin-top:10px;padding-top:15px}.WikiaArticleComments
+form{*zoom:1;margin:10px
+0}.WikiaArticleComments form:after{clear:both;content:".";display:block;height:0;overflow:hidden;visibility:hidden}.WikiaArticleComments
+textarea{border:1px
+solid #ccc;height:75px;margin:15px
+5px;line-height:21px;margin:5px
+0 15px 0;padding:2px;font-size:12px;font-family:"Helvetica","Arial",sans-serif}.WikiaArticleComments #article-comm-form{margin-top:0}.WikiaArticleComments #article-comm-form
+textarea{margin-top:0;width:584px}.WikiaArticleComments
+.throbber{visibility:hidden;margin-right:6px;margin-top:3px;float:right}.WikiaArticleComments .wikia-button{float:right}.WikiaArticleComments .edited-by .wikia-button{margin-right:5px}.WikiaArticleComments
+.loading{opacity: .50;-khtml-opacity: .50;-moz-opacity: .50;-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";filter:alpha(opacity=50)}.WikiaArticleComments .article-comm-history{padding-left:10px}#article-comments
+.comments{clear:both;list-style:none}#article-comments .comments .article-comm-text{padding:0;min-height:0;width:100%}#article-comments .sub-comments{list-style:none;margin-bottom:20px;margin-left:85px}#article-comments .sub-comments
+textarea{width:420px}#article-comments .sub-comments .article-comm-text{overflow:hidden;padding:0;width:100%}.upper-pagination{padding-top:15px;margin-bottom:10px;border-top:1px solid #ccc}#article-comments-pagination,.article-comments-pagination{margin:0
+auto;text-align:center;color:#2b54b5}#article-comments-pagination a, .article-comments-pagination
+a{color:#2b54b5;border-right:solid 1px #2b54b5;padding:0
+5px;margin:0
+5px}#article-comments-pagination a.accent, .article-comments-pagination
+a.accent{color:White;background-color:#2b54b5}#article-comments-pagination-link-prev{border:none;margin-right:10px}#article-comments-pagination-link-next{border:none;margin-left:10px}.WikiaArticleAfterComments{font-size:13px;line-height:21px;padding:0
+10px;position:relative;z-index:1}.WikiaArticleAfterComments h1, .WikiaArticleAfterComments .WikiaRail .module h2, .WikiaRail .module .WikiaArticleAfterComments h2, .WikiaArticleAfterComments .WikiaRail #RIGHT_SKYSCRAPER h2, .WikiaRail #RIGHT_SKYSCRAPER .WikiaArticleAfterComments h2, .WikiaArticleAfterComments h2, .WikiaArticleAfterComments h3, .WikiaArticleAfterComments h4, .WikiaArticleAfterComments h5, .WikiaArticleAfterComments
+h6{margin: .5em 0 .2em}.WikiaArticleAfterComments
+h2{border-bottom:solid 1px #ccc;font-size:18px;margin-top:14px;overflow:hidden}.WikiaArticleAfterComments a.new, .WikiaArticleAfterComments a.new:visited{color:#c20}.WikiaArticleAfterComments ul, .WikiaArticleAfterComments
+ol{margin:0.4em 0 0.5em 2.5em}.WikiaArticleAfterComments
+ol{list-style:decimal}.WikiaArticleAfterComments
+ul{list-style:square}.WikiaArticleAfterComments
+p{margin:0.4em 0 0.5em}.WikiaForm>fieldset{border:0;margin:0;padding:0}.WikiaForm .input-group{clear:both;float:left;font-size:13px;line-height:13px;margin-bottom:5px;padding:5px
+7px}.WikiaForm .input-group input[type=text], .WikiaForm .input-group input[type=password], .WikiaForm .input-group
+textarea{box-shadow:inset 1px 1px 1px 0 #e5e5e5;-moz-box-shadow:inset 1px 1px 1px 0 #e5e5e5;-webkit-box-shadow:inset 1px 1px 1px 0 #e5e5e5;background-color:#f7f7f7;border:1px
+solid #ccc;color:#3a3a3a;font-size:13px;margin:0;padding:8px;-webkit-box-sizing:content-box;-webkit-appearance:textfield}.WikiaForm .input-group input[type=text]:focus, .WikiaForm .input-group input[type=password]:focus, .WikiaForm .input-group textarea:focus{background-color:#efefef}.WikiaForm .input-group input[type=text]::-webkit-input-placeholder, .WikiaForm .input-group input[type=text]:-moz-placeholder, .WikiaForm .input-group input[type=text].placeholder, .WikiaForm .input-group input[type=password]::-webkit-input-placeholder, .WikiaForm .input-group input[type=password]:-moz-placeholder, .WikiaForm .input-group input[type=password].placeholder, .WikiaForm .input-group textarea::-webkit-input-placeholder, .WikiaForm .input-group textarea:-moz-placeholder, .WikiaForm .input-group
+textarea.placeholder{color:#9c9c9c}.WikiaForm .input-group input[type=text].error, .WikiaForm .input-group input[type=password].error, .WikiaForm .input-group
+textarea.error{border:2px
+solid #f33}.WikiaForm .input-group
+label{display:block;line-height:15px;margin:0
+0 5px 0}.WikiaForm .input-group label
+.sprite{margin: -4px 0 0 3px}.WikiaForm .input-group
+strong{font-weight:bold}.WikiaForm .input-group.error{border-radius:3px;-moz-border-radius:3px;-webkit-border-radius:3px;background-color:#f2f2f2;color:#f43535}.WikiaForm .input-group.error .error-msg{font-size:11px;margin-top:5px}.WikiaForm .input-group.general-errors .error-msg{margin-top:0}.WikiaForm
+.spacer{clear:both}.WikiaForm input[type=submit].link{border-radius:0;-moz-border-radius:0;-webkit-border-radius:0;background:none;border:none;color:#2b54b5;line-height:13px;padding:0}.WikiaForm input[type=submit].link:hover{text-decoration:underline}.WikiaForm
+.submits{padding:0
+7px}#SharingToolbar{border-radius:5px;-moz-border-radius:5px;-webkit-border-radius:5px;background-color:rgba(255,255,255,0.35);display:none;padding:3px;position:absolute;left:1008px;top:10px;width:55px}#SharingToolbar.fixed{left:50%;position:fixed;margin-left:507px}#SharingToolbar .wikia-button{font-size:11px;margin-top:10px;padding-left:5px;padding-right:5px}#SharingToolbar .wikia-button
+.sprite{height:12px}#SharingToolbar>:first-child{margin:0
+0 5px 0}.global-notification
+.msg{background:#FEF4BC;color:#3a3a3a;display:inline-block;font-size:11px;line-height:12px;padding:8px
+11px;zoom:1;*display:inline}.global-notification .msg
+.warning{background:url(http://images.wikia.nocookie.net/__cb51060/common/extensions/wikia/GlobalNotification/bullet_error.png) -2px -3px no-repeat;display:block;float:left;height:10px;margin-right:5px;position:relative;top:1px;width:11px}body>.global-notification{position:fixed;text-align:center;top:0;width:100%;*z-index:20000001}body > .global-notification
+.msg{border-bottom-right-radius:10px;-moz-border-radius-bottomright:10px;-webkit-border-bottom-right-radius:10px;border-bottom-left-radius:10px;-moz-border-radius-bottomleft:10px;-webkit-border-bottom-left-radius:10px;border-bottom:1px solid #404040;border-left:1px solid #404040;border-right:1px solid #404040;position:relative;z-index:20000001}.modalWrapper>.global-notification{background:#FEF4BC}.modalWrapper > .global-notification
+.msg{background:none;width:100%}img.sprite,img.sprite-small{*behavior:expression((this.runtimeStyle.behavior="none")&&(/^data:.*;base64/i.test(this.src))&&(this.src="http://images1.wikia.nocookie.net/__cb41527/common/skins/common/blank.gif"))}.UploadPhotos input[type=checkbox]{cursor:pointer}.UploadPhotos
+.options{background:#f2f2f2;border-bottom:1px solid #d9d9d9;display:none;margin-top:10px;padding:15px}.UploadPhotos .options
+label{display:block;margin-top:15px}.UploadPhotos .options label:first-child{margin-top:0}.UploadPhotos .options
+textarea{height:4em;width:425px}.UploadPhotos
+.toggles{margin-top:15px}.UploadPhotos .toggles
+label{display:inline}.UploadPhotos
+.error{color:red}.UploadPhotos
+.advanced{display:inline-block;margin:15px
+0 5px}.UploadPhotos .advanced
+.chevron{border-color:#3a3a3a transparent transparent}.UploadPhotos .advanced
+.chevron.up{border-color:transparent transparent #3a3a3a;margin:0
+0 6px 0}.UploadPhotos
+.status{display:none;padding:10px}.UploadPhotos .step-2{display:none}.UploadPhotos .step-2 .wikia-gallery-item{display:block;margin:0
+auto;padding:0}.UploadPhotos .step-2 input[type=submit]{display:block;margin:0
+auto}.UploadPhotos .step-2
+.ajaxwait{display:block;margin:0
+auto}.UploadPhotos
+li{list-style:none}.UploadPhotos
+h3{color:red;margin-bottom:5px}.UploadPhotos .thumbinner, .UploadPhotos .wikia-gallery-item{margin:10px
+auto}.UploadPhotos
+.override{display:none}.UploadPhotos
+.ajaxwait{display:none}#UploadPhotosWrapper
+.modalContent{border:0}.LatestPhotosModule > h1, .LatestPhotosModule > .WikiaRail .module h2, .WikiaRail .module .LatestPhotosModule > h2, .LatestPhotosModule > .WikiaRail #RIGHT_SKYSCRAPER h2, .WikiaRail #RIGHT_SKYSCRAPER .LatestPhotosModule>h2{display:none}.LatestPhotosModule
+.tally{margin-bottom:10px}.LatestPhotosModule .empty-photos{border:1px
+solid #ccc;margin-bottom:10px}.LatestPhotosModule .empty-photos .temp-image{*zoom:1;border:10px
+solid #FFF;height:96px;padding-left:38px;padding-right:38px;padding-top:24px;background-color:#FFF;background-image:url(http://images.wikia.nocookie.net/__cb51060/common/skins/oasis/images/empty_gallery.png);background-repeat:no-repeat}.LatestPhotosModule .empty-photos .temp-image:after{clear:both;content:".";display:block;height:0;overflow:hidden;visibility:hidden}.LatestPhotosModule .empty-photos
+a{border-radius:3px;-moz-border-radius:3px;-webkit-border-radius:3px;background-color:rgba(43, 84, 181, 0.6);border:1px
+solid #FFF;color:#FFF;display:block;font-size:13px;font-weight:normal;padding:8px
+14px}.LatestPhotosModule .empty-photos a
+span{display:block;margin-top:3px}.LatestPhotosModule .wikia-button
+img{margin-right:5px;margin-top:1px}.LatestPhotosModule a:active{outline:none}.LatestPhotosModule a:-moz-any-link:focus{outline:none}.LatestPhotosModule
+a.previous{height:82px;float:left}.LatestPhotosModule
+a.next{height:82px;float:right}.LatestPhotosModule .latest-images-left{border-style:solid;border-width:9px;margin-top:35px;width:0;border-color:transparent #2b54b5 transparent #2b54b5;border-left-width:0px}.LatestPhotosModule .latest-images-left-inactive{border-color:transparent #ccc transparent #ccc}.LatestPhotosModule .latest-images-right{border-style:solid;border-width:9px;margin-top:35px;width:0;border-color:transparent transparent transparent #2b54b5;border-right-width:0px}.LatestPhotosModule .latest-images-right-inactive{border-color:transparent transparent transparent #ccc}.LatestPhotosModule
+.hidden{visibility:hidden}.LatestPhotosModule .carousel-container{height:90px;left:5px;overflow:hidden;position:relative;width:258px}.LatestPhotosModule .carousel-container
+div{position:relative}.LatestPhotosModule
+ul{display:block;left:4px;list-style:none;width:500px}.LatestPhotosModule ul
+li{border:1px
+solid #ccc;float:left;height:82px;margin-right:2px;margin-bottom:40px;position:relative;width:82px}.LatestPhotosModule ul
+li.blind{border-color:transparent}.LatestPhotosModule ul li
+a{display:block;height:82px}.LatestPhotosModule ul li
+img{height:82px;opacity:0.9;width:82px}.LatestPhotosModule ul li img:hover{opacity:1}.LatestPhotosModule ul li
+.thumbcaption{display:none}.LatestPhotosModule ul .see-all, .LatestPhotosModule ul .add-more{text-align:center}.LatestPhotosModule ul .see-all a, .LatestPhotosModule ul .add-more
+a{border:3px
+solid #FFF;font-size:14px;font-weight:bold;height:55px;*left:0;padding-top:21px;position:absolute;width:76px;z-index:1}.LatestPhotosModule ul .see-all img, .LatestPhotosModule ul .add-more
+img{left:0;opacity:1;position:absolute;top:0}.LatestPhotosModule ul .add-more
+a{font-size:11px;height:61px;padding-top:15px}.LatestPhotosModule ul .single-photo
+a{font-size:45px !important;height:67px;padding-top:9px}.LatestPhotosModule ul .single-photo:hover{text-decoration:none}.LatestPhotosModule
+.more{margin-top:8px}.LatestPhotosModule
+p{*zoom:1;clear:both;padding-bottom:10px;padding-top:5px;text-align:center}.LatestPhotosModule p:after{clear:both;content:".";display:block;height:0;overflow:hidden;visibility:hidden}.LatestPhotosModule .wikia-button{padding:0
+6px}.WikiaBlogPostHeader{background:none;border-bottom:1px solid #ccc}.WikiaBlogPostHeader
+.commentslikes{bottom:10px;position:absolute;right:0}.WikiaBlogPostHeader .author-details{*zoom:1;*display:inline;padding:8px
+0}.WikiaBlogPostHeader .author-details:after{clear:both;content:".";display:block;height:0;overflow:hidden;visibility:hidden}.WikiaBlogPostHeader .author-details
+.avatar{float:left;margin-right:5px}.WikiaBlogPostHeader .author-details .post-author{font-weight:bold}.WikiaBlogPostHeader .author-details
+a{color:#2b54b5}.WikiaBlogListingHeader{padding-bottom:25px}.wikiaSkinMonaco .WikiaBlogListing, .skin-oasis
+#wk_blogs_article{display:none}.skin-oasis .WikiaBlogListing, .wikiaSkinMonaco
+#wk_blogs_article{display:block !important}.wk_blogs_panel{display:none}.WikiaBlogListing
+ul{list-style:none;margin:0;padding:0
+10px}.WikiaBlogListing h1, .WikiaBlogListing .WikiaRail .module h2, .WikiaRail .module .WikiaBlogListing h2, .WikiaBlogListing .WikiaRail #RIGHT_SKYSCRAPER h2, .WikiaRail #RIGHT_SKYSCRAPER .WikiaBlogListing
+h2{font-size:22px;margin:0
+90px 0 0}.WikiaBlogListing
+.WikiaBlogListingPost{border-bottom:1px solid #ccc;padding:20px
+0}.WikiaBlogListing
+.commentslikes{position:absolute;right:10px;top:20px}.WikiaBlogListing
+.avatar{border:1px
+solid #ccc;float:left}.WikiaBlogListing .author-details{*zoom:1;margin:0
+0 10px 63px}.WikiaBlogListing .author-details:after{clear:both;content:".";display:block;height:0;overflow:hidden;visibility:hidden}.WikiaBlogListing .author-details
+span{display:block}.WikiaBlogListing .author-details span a, .WikiaBlogListing .author-details span a:visited{font-weight:bold}.WikiaBlogListing
+p{margin:0}.WikiaBlogListing p .read-more{margin:0
+20px}.WikiaBlogListingPost{padding-bottom:0px;position:relative}.WikiaBlogListingPost .commentslikes a:hover{text-decoration:none}.WikiaBlogListingPost:last-child{border:none}.WikiaBlogListingPost
+blockquote{margin:0}.WikiaBlogListingBox{display:block !important;line-height:16px;width:282px}.WikiaBlogListingBox .wikia-button{float:right;margin-top: -1px;padding:0px
+5px}.WikiaBlogListingBox .wikia-button
+a{color:white}.WikiaBlogListingBox
+.commentslikes{bottom:16px;position:absolute;right:0px}.WikiaBlogListingBox .commentslikes
+a{font-weight:normal}.WikiaBlogListingBox
+ul{margin:15px
+0 0}.WikiaBlogListingBox ul h1, .WikiaBlogListingBox ul .WikiaRail .module h2, .WikiaRail .module .WikiaBlogListingBox ul h2, .WikiaBlogListingBox ul .WikiaRail #RIGHT_SKYSCRAPER h2, .WikiaRail #RIGHT_SKYSCRAPER .WikiaBlogListingBox ul
+h2{margin-bottom:0 !important}.WikiaBlogListingBox ul
+.WikiaBlogListingPost{*zoom:1;border-top:solid 1px #ccc;list-style:none;padding:10px
+0;position:relative}.WikiaBlogListingBox ul .WikiaBlogListingPost:after{clear:both;content:".";display:block;height:0;overflow:hidden;visibility:hidden}.WikiaBlogListingBox ul .WikiaBlogListingPost:first-child{border:none}.WikiaBlogListingBox ul .WikiaBlogListingPost h1, .WikiaBlogListingBox ul .WikiaBlogListingPost .WikiaRail .module h2, .WikiaRail .module .WikiaBlogListingBox ul .WikiaBlogListingPost h2, .WikiaBlogListingBox ul .WikiaBlogListingPost .WikiaRail #RIGHT_SKYSCRAPER h2, .WikiaRail #RIGHT_SKYSCRAPER .WikiaBlogListingBox ul .WikiaBlogListingPost h2, .WikiaBlogListingBox ul .WikiaBlogListingPost details span, .WikiaBlogListingBox ul .WikiaBlogListingPost .author-details
+span{padding-left:0}.WikiaBlogListingBox ul .WikiaBlogListingPost h1, .WikiaBlogListingBox ul .WikiaBlogListingPost .WikiaRail .module h2, .WikiaRail .module .WikiaBlogListingBox ul .WikiaBlogListingPost h2, .WikiaBlogListingBox ul .WikiaBlogListingPost .WikiaRail #RIGHT_SKYSCRAPER h2, .WikiaRail #RIGHT_SKYSCRAPER .WikiaBlogListingBox ul .WikiaBlogListingPost
+h2{font-weight:bold;margin:0}.WikiaBlogListingBox ul .WikiaBlogListingPost .author-details{margin-left:35px}.WikiaBlogListingBox
+img{vertical-align:middle}.WikiaBlogListingBox h1, .WikiaBlogListingBox .WikiaRail .module h2, .WikiaRail .module .WikiaBlogListingBox h2, .WikiaBlogListingBox .WikiaRail #RIGHT_SKYSCRAPER h2, .WikiaRail #RIGHT_SKYSCRAPER .WikiaBlogListingBox
+h2{padding-bottom:0px}.WikiaBlogListingBox h1 a, .WikiaBlogListingBox .WikiaRail .module h2 a, .WikiaRail .module .WikiaBlogListingBox h2 a, .WikiaBlogListingBox .WikiaRail #RIGHT_SKYSCRAPER h2 a, .WikiaRail #RIGHT_SKYSCRAPER .WikiaBlogListingBox h2
+a{font-size:12px}.WikiaBlogListingBox
+h3{font-weight:bold;font-size:17px;line-height:17px;margin-left:0px}.WikiaBlogListingBox
+.reload{display:inline-block;position:relative;top: -2px}.WikiaBlogListingBox
+.avatar{float:left;height:25px;margin-right:1px;margin-top:3px;width:25px}.WikiaBlogListingBox details span, .WikiaBlogListingBox .author-details
+span{font-size:10px}.WikiaBlogListingBox details span a, .WikiaBlogListingBox .author-details span
+a{font-size:10px}.WikiaBlogListingBox
+blockquote{*zoom:1;overflow:hidden;clear:both;padding-top:7px;padding-bottom:19px}.WikiaBlogListingBox blockquote:after{clear:both;content:".";display:block;height:0;overflow:hidden;visibility:hidden}.WikiaBlogListingBox blockquote .read-more
+a{font-size:11px}.WikiaBlogListingBox blockquote
+p{line-height:21px}.WikiaArticle .WikiaBlogListingBox
+ul{border:1px
+solid #ccc;padding:0px
+8px 8px}.categoryCloudSection{border:1px
+solid lightgray;padding:15px}.wpCategoryTextarea{display:none}#wpCategoryInput,#wpCategoryButton{margin:4px
+2px 0}wpCategoryInput{width:230px}.matches-info{color:#060;font-style:italic;margin-right:1em}#blogPostForm
+div.formErrors{color:red;font-size:120%}.RelatedPagesModule{clear:both;margin:0
+10px}.RelatedPagesModule
+h2{border-bottom:solid 1px #ccc;font-size:18px;margin-top:30px;overflow:hidden}.RelatedPagesModule
+ul{*zoom:1;list-style:none;margin:5px
+0 15px}.RelatedPagesModule ul:after{clear:both;content:".";display:block;height:0;overflow:hidden;visibility:hidden}.RelatedPagesModule
+li{float:left;line-height:1.4em;margin-left:25px;padding:0;position:relative;width:200px}.RelatedPagesModule li:first-child{margin-left:0}.RelatedPagesModule li
+img{width:200px;height:100px;display:inline-block}.RelatedPagesModule
+.articleSnippet{height:100px;overflow:hidden;width:190px}.RelatedPagesModule .articleSnippet:before{content:'\201C';font-size:70px;left:0;position:absolute;top:25px}.RelatedPagesModule .articleSnippet
+p{font-size:16px;height:80px;line-height:1.25em;margin-left:35px;overflow:hidden;padding:0}.RelatedPagesModule
+.more{display:block;margin:5px
+0}#WikiaArticle
+.RelatedPagesModule{margin:0}#CreatePageContainer{padding:8px}#CreatePageDialogHeader{margin-bottom:20px;margin-top:8px}#CreatePageDialogSub{font-weight:bold;margin-bottom:8px}#CreatePageDialogChoose{font-weight:bold;margin-top:10px;margin-bottom:8px}#CreatePageDialogChoices{margin-bottom:8px;height:280px;overflow-y:auto;overflow-x:hidden;list-style-type:none;margin:0}#wpCreatePageDialogTitle{width:100%}#CreatePageContainer
+.chooser{float:left;width:48%;text-align:center;margin-bottom:12px}#CreatePageContainer div
+img{margin-top:8px}.wikiaSkinMonaco
+#CreatePageDialogWrapper{margin-top: -62px}.chooser
+div{width:80%;padding:1em
+1em 1em 1em}#CreatePageDialogChoices
+.accent{-moz-border-radius:10px;-webkit-border-radius:10px}#CreatePageDialogButton{clear:both}#CreatePageDialogTitleErrorMsg{margin-top:8px}.CreatePageError{font-weight:bold;color:red}#CreatePageDialogChoices
+li.long{width:100%;min-height:87px;margin-bottom:5px;text-align:left}#CreatePageDialogChoices li.long
+div{margin-left:88px;padding:12px
+0 0;margin-top:0}#CreatePageDialogChoices li.long div
+span{font-size:14px}#CreatePageDialogChoices li.long
+input{float:left;border-top-width:7px;margin-top:32px}#CreatePageDialogChoices li.long
+img{float:left;width:55px;margin-left:6px;margin-top:10px}#wpFBNameError{color:green;display:none}.fbConnectPushEventBar{padding-right:30px}.fbConnectPushEventBarlink{text-align:right;padding-right:30px}.fbConnectCblable{margin-left:16px}.fbConnectPushEventToggles
+td{padding-bottom:8px;padding-top:0}#fbConnectPushEventBar_show,#fbConnectPushEventBar_hide{font-size:80%}#fbConnectModalWrapper
+#userloginErrorBox{margin-bottom:0;margin-left:10px;width:565px}#wpLoginAndConnectCombo{margin-top:5px}#fbNowConnectBox
+div{height:110px;padding:5px;text-align:center}#fbLoginLastStep{margin-left:178px}#fbMsgImage{float:left;margin-top:3px;padding-right:10px}#wpFBLoginInfo{vertical-align:top;padding-top:10px;padding-bottom:10px;border-left:1px}#wpFBLoginInfo
+div{border-color:gray;border-left:1px solid gray;border-width:1px;height:170px;padding-left:5px}#wpFBLoginInfo div
+p{display:block;float:left;font-family:arial,sans-serif;font-size:10pt;font-weight:bold}.or-div{clear:both;font-weight:bold;margin:20px
+0 10px !important;text-align:center}.or-div
+span{position:relative;top: -7px}#AjaxLoginBox
+h1{font-size:11pt;font-weight:bold;padding:10px
+0;text-align:center}#AjaxLoginBox .wikia-tabs
+.selected{background-color:#fff}#AjaxLoginFBStart{position:relative;text-align:center}#AjaxLoginFBStart
+ul{font-size:8pt;position:absolute;right:0;text-align:left}#AjaxLoginFBStart li, #AjaxLoginConnectMarketing
+li{list-style-image:url('http://images.wikia.com/common/skins/common/bullet.gif')}#AjaxLoginLoginForm{overflow:hidden}#AjaxLoginSlider{margin:10px
+0;width:1500px}#AjaxLoginSlider .ajax-login-slider-panel{float:left;line-height:1.8em;min-height:150px;padding:10px;width:330px}.skin-oasis #AjaxLoginSlider .ajax-login-slider-panel{padding:12px}#AjaxLoginSlider
+p{margin-bottom: .5em}#AjaxLoginConnectMarketing{border-left:1px solid #AAA;border-right:1px solid #AAA}#AjaxLoginConnectMarketing
+div{border-style:solid;border-width:1px;padding:10px}.skin-oasis #AjaxLoginConnectMarketing
+div{border-width:0}#AjaxLoginConnectMarketing
+h1{font-size:12pt;font-weight:bold;text-align:left}#AjaxLoginConnectMarketing
+ul{margin:10px
+15px}#AjaxLoginConnectMarketing
+li{margin-bottom:5px}#AjaxLoginConnectMarketing
+.back{display:none;float:left}#AjaxLoginConnectMarketing
+.forward{float:right}.skin-oasis
+#AjaxLoginFBStart{display:none}.skin-oasis #AjaxLoginBox .or-div{display:none}#AjaxLoginConnectMarketing .ajax-login-fb-login{padding:10px
+0 20px 0}.skin-oasis
+#AjaxLoginConnectMarketing{border-right:none;margin-left:-10px}#wpName1Ajax,#wpPassword1Ajax{width:150px}.wpAjaxRegisterTable
+.wpAjaxLoginInput{padding-top:10px;vertical-align:top}.wpAjaxLoginLine{border-top:solid;border-width:1px;border-color:black}.wpAjaxLoginPreLine
+td{padding-bottom:15px}.wpAjaxLoginInput
+label{display:block;font-weight:bold;font-family:arial,sans-serif;font-size:10pt;float:left}.wpAjaxLoginInput input,.wpAjaxLoginInput
+select{width:250px}.wpAjaxLoginInput #uselang, .wpAjaxLoginInput input, #wpBirthDateTD .select-container{display:block}.wpAjaxRegisterTable{width:680px;margin-left:10px}.wpAjaxLoginData
+select{width:80px}.wpAjaxLoginInput
+.captcha{border:none;padding:0}.wpAjaxLoginInput .captcha
+.captchadesc{margin:0;width:136px}.wpAjaxLoginInput .captcha
+img{width:112px;height:55px;background-color:#EEE;padding:4px
+4px 4px 4px;border-style:solid;border-width:1px;border-color:#AAA;margin-left:6px;float:right;margin-right:70px}.wpAjaxLoginInput
+#wpCaptchaInfo{width:125px;display:inline-block}.wpAjaxLoginInput .captcha
+input{width:120px;display:inline}.wpAjaxLoginLine
+td{border-top-style:solid;border-top-color:#AAA;border-width:1px}.wpAjaxLoginLine
+td{padding-top:15px}#AjaxLoginButtons{text-align:center}.wpAjaxLoginInput
+.pseudolabel{font-weight:bold}.wpAjaxLoginInput #wpEmailInfo, .wpAjaxLoginInput
+#wpBirthDateInfo{margin-left:4px}#wpBirthDateInfoModal div,
+#wpUserCaptchaInfoModal div,
+#wpEmailInfoModal
+div{padding:8px
+8px 8px 8px}#wpUserCaptchaInfoModal
+p{line-height:1.5em;margin:0.4em 0 0.5em}#wpBirthDateInfoModal h1 div,
+#wpUserCaptchaInfoModal h1 div,
+#wpEmailInfoModal h1
+div{padding:0
+0 0 0}#wpName2Ajax,#wpPassword2Ajax,#wpName1Ajax,#wpPassword1Ajax{width:150px}.wpAjaxRegisterTable
+span{display:inline;height:20px}#userloginErrorBox,#userloginErrorBox2,#userloginErrorBox3{background-color:#FFC;border:1px
+solid #AAA;display:none;margin-left:10px;margin-right:10px;margin:1em
+3em 1em 0;padding:6px
+6px 6px 6px}#AjaxLoginReadOnlyMessage{line-height:22.5px}#AjaxLoginReadOnlyMessage
+h2{font-size:18px;margin-top:1em}#AjaxLoginReadOnlyMessage p+p{margin:1.5em 0}#AjaxLoginReadOnlyMessage
+em{font-style:italic}.UserLoginModal{opacity: .0;-khtml-opacity: .0;-moz-opacity: .0;-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";filter:alpha(opacity=0);height:400px}.UserLoginFacebook{opacity: .0;-khtml-opacity: .0;-moz-opacity: .0;-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";filter:alpha(opacity=0);height:400px}.UserLogin.ChangePassword
+.username{font-size:14px;font-weight:bold}.wikia-slideshow .wikia-slideshow-prev-next>a{background-image:none;cursor:pointer}.wikia-slideshow .wikia-slideshow-prev-next>a>span{background-color:#e5e5e5;background-image: -moz-linear-gradient(top, white 35%, #e5e5e5 65%);background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(35%, white), color-stop(65%, #e5e5e5));background-image: -o-linear-gradient(top, white 35%, #e5e5e5 65%);background-image: -ms-linear-gradient(top, white 35%, #e5e5e5 65%);display:inline-block;height:36px;line-height:36px;margin:12px
+0;text-align:center;width:28px}.wikia-slideshow .wikia-slideshow-prev-next>a>span>.chevron{border-width:6px 11px;margin-top: -2px}.wikia-slideshow .wikia-slideshow-prev-next>a.wikia-slideshow-next{text-align:right}.wikia-slideshow .wikia-slideshow-prev-next>a:hover>span{background-color:#dbdbdb;background-image: -moz-linear-gradient(top, #f5f5f5 35%, #dbdbdb 65%);background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(35%, #f5f5f5), color-stop(65%, #dbdbdb));background-image: -o-linear-gradient(top, #f5f5f5 35%, #dbdbdb 65%);background-image: -ms-linear-gradient(top, #f5f5f5 35%, #dbdbdb 65%)}.wikia-slideshow .wikia-slideshow-prev-next>.wikia-slideshow-prev>span{border-top-right-radius:6px;-moz-border-radius-topright:6px;-webkit-border-top-right-radius:6px;border-bottom-right-radius:6px;-moz-border-radius-bottomright:6px;-webkit-border-bottom-right-radius:6px}.wikia-slideshow .wikia-slideshow-prev-next>.wikia-slideshow-prev>span>.chevron{border-color:transparent #25883d transparent transparent;margin-left: -12px}.wikia-slideshow .wikia-slideshow-prev-next>.wikia-slideshow-next>span{border-top-left-radius:6px;-moz-border-radius-topleft:6px;-webkit-border-top-left-radius:6px;border-bottom-left-radius:6px;-moz-border-radius-bottomleft:6px;-webkit-border-bottom-left-radius:6px}.wikia-slideshow .wikia-slideshow-prev-next>.wikia-slideshow-next>span>.chevron{border-color:transparent transparent transparent #25883d;margin-right: -12px}

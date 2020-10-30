@@ -1,0 +1,33 @@
+
+/* Version: not-nginx Call to: http://vim.wikia.com/wiki/MediaWiki:Print.css?usemsgcache=yes&ctype=text/css&smaxage=86400&cb=51060&action=raw&maxage=86400 */
+/* CSS placed here will affect the print output */
+/* Version: not-nginx Call to: http://images.wikia.nocookie.net/__am/51060/sass/color-body%3D%2523003816%26color-page%3D%2523ffffff%26color-buttons%3D%252325883d%26color-links%3D%25232b54b5%26color-header%3D%2523002c11%26background-image%3D%26background-align%3Dcenter%26background-tiled%3Dfalse%26background-fixed%3D0%26page-opacity%3D100%26wordmark-font%3Dcpmono/skins/oasis/css/print.scss */
+/* Minify took 0.0092289447784424 */
+
+a.stub,a.new{color:#ba0000;text-decoration:none}#toc{border:1px
+solid #aaa;background-color:#f9f9f9;padding:5px}.tocindent{margin-left:2em}.tocline{margin-bottom:0px}div.floatright{float:right;clear:right;margin:0;position:relative;border:0.5em solid White;border-width:0.5em 0 0.8em 1.4em}div.floatright
+p{font-style:italic}div.floatleft{float:left;margin:0.3em 0.5em 0.5em 0;position:relative;border:0.5em solid White;border-width:0.5em 1.4em 0.8em 0}div.floatleft
+p{font-style:italic}div.thumb{margin-bottom:0.5em;border-style:solid;border-color:White;width:auto;overflow:hidden}div.thumbinner{border:1px
+solid #ccc;padding:3px
+!important;background-color:#f9f9f9;font-size:94%;text-align:center}html
+.thumbimage{border:1px
+solid #ccc}html
+.thumbcaption{border:none;padding:0.3em 0 0.1em 0}div.magnify{display:none}div.tright{float:right;clear:right;border-width:0.5em 0 0.8em 1.4em}div.tleft{float:left;margin-right:0.5em;border-width:0.5em 1.4em 0.8em 0}img.thumbborder{border:1px
+solid #ddd}table.rimage{float:right;width:1pt;position:relative;margin-left:1em;margin-bottom:1em;text-align:center}body{background:White;color:Black;margin:0;padding:0}.noprint,div#jump-to-nav,div.top,div#column-one,#colophon,.editsection,.toctoggle,.tochidden,div#f-poweredbyico,div#f-copyrightico,li#viewcount,li#about,li#disclaimer,li#privacy,#mw-hidden-catlinks{display:none}ul{list-style-type:square}#content{background:none;border:none ! important;padding:0
+! important;margin:0
+! important}#footer{background:white;color:black;border-top:1px solid black}h1,h2,h3,h4,h5,h6{font-weight:bold}p,.documentDescription{margin:1em
+0 ! important;line-height:1.2em}.tocindent
+p{margin:0
+0 0 0 ! important}pre{border:1pt dashed black;white-space:pre;font-size:8pt;overflow:auto;padding:1em
+0;background:white;color:black}table.listing,
+table.listing
+td{border:1pt solid black;border-collapse:collapse}a{color:Black !important;background:none !important;padding:0
+!important}a:link,a:visited{color:#520;background:transparent;text-decoration:underline}#content a.external.text:after, #content a.external.autonumber:after{content:" (" attr(href) ") "}#globalWrapper{width:100% !important;min-width:0 !important}#content{background:white;color:black}#column-content{margin:0
+!important}#column-content
+#content{padding:1em;margin:0
+!important}a,a.external,a.new,a.stub{color:black ! important;text-decoration:none ! important}a,a.external,a.new,a.stub{color:inherit ! important;text-decoration:inherit ! important}img{border:none}img.tex{vertical-align:middle}span.texhtml{font-family:serif}#siteNotice{display:none}div.gallerybox{border:1px
+solid #ccc;background-color:#f9f9f9;width:150px}div.gallerytext{overflow:visible}table.diff{background:white}td.diff-otitle{background:#fff}td.diff-ntitle{background:#fff}td.diff-addedline{background:#cfc;font-size:smaller;border:solid 2px black}td.diff-deletedline{background:#ffa;font-size:smaller;border:dotted 2px black}td.diff-context{background:#eee;font-size:smaller}.diffchange{color:silver;font-weight:bold;text-decoration:underline}*{overflow:visible !important}html{background:#fff}#WikiaHeader,#WikiHeader,#WikiaRail,#WikiaFooter{display:none}#WikiaPage{background:#fff;border:none;padding:0;margin:0;width:auto}#WikiaMainContent{float:none;width:auto}#WikiaPageHeader .commentslikes, #WikiaPageHeader details, #WikiaPageHeader p, #WikiaPageHeader h2, #WikiaPageHeader a, #WikiaPageHeader
+ul{display:none}#WikiaArticle{min-height:1px}#WikiaArticle .thumbinner
+div{background:#fff;border:none}#WikiaArticle
+p{line-height:1.8em;margin:0.4em 0 0.5em !important}#WikiaArticle p+p{margin:1em
+0 !important}#WikiaArticleCategories{background:#fff}

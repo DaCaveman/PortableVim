@@ -1,0 +1,245 @@
+  1 " Modeline and Notes {
+  2 "   vim: set foldmarker={,} foldlevel=0 spell:
+  3 "
+  4 "   This is my personal .vimrc, I don't recommend you copy it, just
+  5 "   use the "   pieces you want(and understand!).  When you copy a
+  6 "   .vimrc in its entirety, weird and unexpected things can happen.
+  7 "
+  8 "   If you find an obvious mistake hit me up at:
+  9 "   http://robertmelton.com/contact (many forms of communication)
+ 10 " }
+ 11
+ 12 " Basics {
+ 13     set nocompatible " explicitly get out of vi-compatible mode
+ 14     set noexrc " don't use local version of .(g)vimrc, .exrc
+ 15     set background=dark " we plan to use a dark background
+ 16     set cpoptions=aABceFsmq
+ 17     "             |||||||||
+ 18     "             ||||||||+-- When joining lines, leave the cursor
+ 19     "             |||||||      between joined lines
+ 20     "             |||||||+-- When a new match is created (showmatch)
+ 21     "             ||||||      pause for .5
+ 22     "             ||||||+-- Set buffer options when entering the
+ 23     "             |||||      buffer
+ 24     "             |||||+-- :write command updates current file name
+ 25     "             ||||+-- Automatically add <CR> to the last line
+ 26     "             |||      when using :@r
+ 27     "             |||+-- Searching continues at the end of the match
+ 28     "             ||      at the cursor position
+ 29     "             ||+-- A backslash has no special meaning in mappings
+ 30     "             |+-- :write updates alternative file name
+ 31     "             +-- :read updates alternative file name
+ 32     syntax on " syntax highlighting on
+ 33 " }
+ 34
+ 35 " General {
+ 36     filetype plugin indent on " load filetype plugins/indent settings
+ 37     set autochdir " always switch to the current file directory
+ 38     set backspace=indent,eol,start " make backspace a more flexible
+ 39     set backup " make backup files
+ 40     set backupdir=~/.vim/backup " where to put backup files
+ 41     set clipboard+=unnamed " share windows clipboard
+ 42     set directory=~/.vim/tmp " directory to place swap files in
+ 43     set fileformats=unix,dos,mac " support all three, in this order
+ 44     set hidden " you can change buffers without saving
+ 45     " (XXX: #VIM/tpope warns the line below could break things)
+ 46     set iskeyword+=_,$,@,%,# " none of these are word dividers
+ 47     set mouse=a " use mouse everywhere
+ 48     set noerrorbells " don't make noise
+ 49     set whichwrap=b,s,h,l,<,>,~,[,] " everything wraps
+ 50     "             | | | | | | | | |
+ 51     "             | | | | | | | | +-- "]" Insert and Replace
+ 52     "             | | | | | | | +-- "[" Insert and Replace
+ 53     "             | | | | | | +-- "~" Normal
+ 54     "             | | | | | +-- <Right> Normal and Visual
+ 55     "             | | | | +-- <Left> Normal and Visual
+ 56     "             | | | +-- "l" Normal and Visual (not recommended)
+ 57     "             | | +-- "h" Normal and Visual (not recommended)
+ 58     "             | +-- <Space> Normal and Visual
+ 59     "             +-- <BS> Normal and Visual
+ 60     set wildmenu " turn on command line completion wild style
+ 61     " ignore these list file extensions
+ 62     set wildignore=*.dll,*.o,*.obj,*.bak,*.exe,*.pyc,
+ 63                     \*.jpg,*.gif,*.png
+ 64     set wildmode=list:longest " turn on wild mode huge list
+ 65 " }
+ 66
+ 67 " Vim UI {
+ 68     set cursorcolumn " highlight the current column
+ 69     set cursorline " highlight current line
+ 70     set incsearch " BUT do highlight as you type you
+ 71                    " search phrase
+ 72     set laststatus=2 " always show the status line
+ 73     set lazyredraw " do not redraw while running macros
+ 74     set linespace=0 " don't insert any extra pixel lines
+ 75                      " betweens rows
+ 76     set list " we do what to show tabs, to ensure we get them
+ 77               " out of my files
+ 78     set listchars=tab:>-,trail:- " show tabs and trailing
+ 79     set matchtime=5 " how many tenths of a second to blink
+ 80                      " matching brackets for
+ 81     set nohlsearch " do not highlight searched for phrases
+ 82     set nostartofline " leave my cursor where it was
+ 83     set novisualbell " don't blink
+ 84     set number " turn on line numbers
+ 85     set numberwidth=5 " We are good up to 99999 lines
+ 86     set report=0 " tell us when anything is changed via :...
+ 87     set ruler " Always show current positions along the bottom
+ 88     set scrolloff=10 " Keep 10 lines (top/bottom) for scope
+ 89     set shortmess=aOstT " shortens messages to avoid
+ 90                          " 'press a key' prompt
+ 91     set showcmd " show the command being typed
+ 92     set showmatch " show matching brackets
+ 93     set sidescrolloff=10 " Keep 5 lines at the size
+ 94     set statusline=%F%m%r%h%w[%L][%{&ff}]%y[%p%%][%04l,%04v]
+ 95     "              | | | | |  |   |      |  |     |    |
+ 96     "              | | | | |  |   |      |  |     |    + current
+ 97     "              | | | | |  |   |      |  |     |       column
+ 98     "              | | | | |  |   |      |  |     +-- current line
+ 99     "              | | | | |  |   |      |  +-- current % into file
+100     "              | | | | |  |   |      +-- current syntax in
+101     "              | | | | |  |   |          square brackets
+102     "              | | | | |  |   +-- current fileformat
+103     "              | | | | |  +-- number of lines
+104     "              | | | | +-- preview flag in square brackets
+105     "              | | | +-- help flag in square brackets
+106     "              | | +-- readonly flag in square brackets
+107     "              | +-- rodified flag in square brackets
+108     "              +-- full path to file in the buffer
+109 " }
+110
+111 " Text Formatting/Layout {
+112     set completeopt= " don't use a pop up menu for completions
+113     set expandtab " no real tabs please!
+114     set formatoptions=rq " Automatically insert comment leader on return,
+115                           " and let gq format comments
+116     set ignorecase " case insensitive by default
+117     set infercase " case inferred by default
+118     set nowrap " do not wrap line
+119     set shiftround " when at 3 spaces, and I hit > ... go to 4, not 5
+120     set smartcase " if there are caps, go case-sensitive
+121     set shiftwidth=4 " auto-indent amount when using cindent,
+122                       " >>, << and stuff like that
+123     set softtabstop=4 " when hitting tab or backspace, how many spaces
+124                        "should a tab be (see expandtab)
+125     set tabstop=8 " real tabs should be 8, and they will show with
+126                    " set list on
+127 " }
+128
+129 " Folding {
+130     set foldenable " Turn on folding
+131     set foldmarker={,} " Fold C style code (only use this as default
+132                         " if you use a high foldlevel)
+133     set foldmethod=marker " Fold on the marker
+134     set foldlevel=100 " Don't autofold anything (but I can still
+135                       " fold manually)
+136     set foldopen=block,hor,mark,percent,quickfix,tag " what movements
+137                                                       " open folds
+138     function SimpleFoldText() " {
+139         return getline(v:foldstart).' '
+140     endfunction " }
+141     set foldtext=SimpleFoldText() " Custom fold text function
+142                                    " (cleaner than default)
+143 " }
+144
+145 " Plugin Settings {
+146     let b:match_ignorecase = 1 " case is stupid
+147     let perl_extended_vars=1 " highlight advanced perl vars
+148                               " inside strings
+149
+150     " TagList Settings {
+151         let Tlist_Auto_Open=0 " let the tag list open automagically
+152         let Tlist_Compact_Format = 1 " show small menu
+153         let Tlist_Ctags_Cmd = 'ctags' " location of ctags
+154         let Tlist_Enable_Fold_Column = 0 " do show folding tree
+155         let Tlist_Exist_OnlyWindow = 1 " if you are the last, kill
+156                                         " yourself
+157         let Tlist_File_Fold_Auto_Close = 0 " fold closed other trees
+158         let Tlist_Sort_Type = "name" " order by
+159         let Tlist_Use_Right_Window = 1 " split to the right side
+160                                         " of the screen
+161         let Tlist_WinWidth = 40 " 40 cols wide, so i can (almost always)
+162                                  " read my functions
+163         " Language Specifics {
+164             " just functions and classes please
+165             let tlist_aspjscript_settings = 'asp;f:function;c:class' 
+166             " just functions and subs please
+167             let tlist_aspvbs_settings = 'asp;f:function;s:sub' 
+168             " don't show variables in freaking php
+169             let tlist_php_settings = 'php;c:class;d:constant;f:function' 
+170             " just functions and classes please
+171             let tlist_vb_settings = 'asp;f:function;c:class' 
+172         " }
+173     " }
+174 " }
+175
+176 " Mappings {
+177     " ROT13 - fun
+178     map <F12> ggVGg?
+179
+180     " space / shift-space scroll in normal mode
+181     noremap <S-space> <C-b>
+182     noremap <space> <C-f>
+183
+184     " Make Arrow Keys Useful Again {
+185         map <down> <ESC>:bn<RETURN>
+186         map <left> <ESC>:NERDTreeToggle<RETURN>
+187         map <right> <ESC>:Tlist<RETURN>
+188         map <up> <ESC>:bp<RETURN>
+189     " }
+190 " }
+191
+192 " Autocommands {
+193     " Ruby {
+194         " ruby standard 2 spaces, always
+195         au BufRead,BufNewFile *.rb,*.rhtml set shiftwidth=2 
+196         au BufRead,BufNewFile *.rb,*.rhtml set softtabstop=2 
+197     " }
+198     " Notes {
+199         " I consider .notes files special, and handle them differently, I
+200         " should probably put this in another file
+201         au BufRead,BufNewFile *.notes set foldlevel=2
+202         au BufRead,BufNewFile *.notes set foldmethod=indent
+203         au BufRead,BufNewFile *.notes set foldtext=foldtext()
+204         au BufRead,BufNewFile *.notes set listchars=tab:\ \
+205         au BufRead,BufNewFile *.notes set noexpandtab
+206         au BufRead,BufNewFile *.notes set shiftwidth=8
+207         au BufRead,BufNewFile *.notes set softtabstop=8
+208         au BufRead,BufNewFile *.notes set tabstop=8
+209         au BufRead,BufNewFile *.notes set syntax=notes
+210         au BufRead,BufNewFile *.notes set nocursorcolumn
+211         au BufRead,BufNewFile *.notes set nocursorline
+212         au BufRead,BufNewFile *.notes set guifont=Consolas:h12
+213         au BufRead,BufNewFile *.notes set spell
+214     " }
+215     au BufNewFile,BufRead *.ahk setf ahk 
+216 " }
+217
+218 " GUI Settings {
+219 if has("gui_running")
+220     " Basics {
+221         colorscheme metacosm " my color scheme (only works in GUI)
+222         set columns=180 " perfect size for me
+223         set guifont=Consolas:h10 " My favorite font
+224         set guioptions=ce 
+225         "              ||
+226         "              |+-- use simple dialogs rather than pop-ups
+227         "              +  use GUI tabs, not console style tabs
+228         set lines=55 " perfect size for me
+229         set mousehide " hide the mouse cursor when typing
+230     " }
+231
+232     " Font Switching Binds {
+233         map <F8> <ESC>:set guifont=Consolas:h8<CR>
+234         map <F9> <ESC>:set guifont=Consolas:h10<CR>
+235         map <F10> <ESC>:set guifont=Consolas:h12<CR>
+236         map <F11> <ESC>:set guifont=Consolas:h16<CR>
+237         map <F12> <ESC>:set guifont=Consolas:h20<CR>
+238     " }
+239 endif
+240 " }
+
+
+set nobackup        // No Backupfile .***~
+set nowritebackup   // Write directly to file
+set noswapfile      //

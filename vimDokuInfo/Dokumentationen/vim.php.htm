@@ -1,0 +1,2306 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><head><!--::-->
+        <title>Nitidelo | Texteditor Vim</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="description" content="Der Texteditor Vim - Eine kurze Beschreibung, Grundbefehle, Tipps und Tricks.">
+
+        <!-- (en) Add your meta data here -->
+
+        <!-- (de) Fuegen Sie hier ihre Meta-Daten ein -->
+        <link href="vim.php-Dateien/lightbox.css" rel="stylesheet" type="text/css">
+        <link href="vim.php-Dateien/layout_vertical_listnav.css" rel="stylesheet" type="text/css">
+        <!--[if lte IE 7]>
+        <link href="vim/css/patches/patch_vertical_listnav.css" rel="stylesheet" type="text/css" />
+        <![endif]-->
+
+        <script src="vim.php-Dateien/ext-core.js" type="text/javascript"></script>
+        <script src="vim.php-Dateien/lightbox.js" type="text/javascript"></script>
+        <script src="vim.php-Dateien/vim.js" type="text/javascript"></script>
+
+    </head><!--;;-->
+
+    <body>
+
+        <div class="page_margins"><!--::-->
+
+            <div class="page">
+
+                <div id="header">
+
+                    <div id="topnav">
+
+                        <!-- start: skip link navigation -->
+                        <a class="skip" href="#navigation" title="skip link">skip to navigation</a><span class="hideme">.</span>
+                        <a class="skip" href="#content" title="skip link">Skip to content</a><span class="hideme">.</span>
+                        <!-- end: skip link navigation -->
+
+                        <span><!-- <a href="http://www.nitidelo.de/blog">Weblog</a> --><a href="http://is.gd/16z7h">Kontakt</a></span> </div>
+
+                    <h1>Nitidelo</h1>
+
+                    <!--<span>YAML &#8226; (X)HTML/CSS Framework</span>-->
+                </div><!--;;-->
+
+                <!-- begin: main content area #main -->
+                <div id="main">
+
+                    <!-- begin: #col1 - first float column -->
+
+                    <div id="col1"><!--::-->
+
+                        <div id="col1_content" class="clearfix">
+                            <!--
+                            <div id="keywords">
+
+                                <h6 class="vlist"><img src="vim/images/icon_google.gif" alt="Icon Google" />Keywords</h6>
+
+                                    <ul class="vlist">
+
+                                        <li><a href="#vim_speichern" id="vim_speichern_1">speichern</a></li>
+
+                                        <li><a href="#editierbefehle" id="vim_zeile_loeschen_1">zeile löschen</a></li>
+
+                                        <li><a href="#aufzeichnen" id="vim_aufzeichnen_1">aufzeichnen</a></li>
+
+                                        <li><a href="#zeilenumbruch" id="zeilenumbruch_1">zeilenumbruch</a></li>
+
+                                        <li><a href="#einfuegen" id="vim_spalten_1">spalten einfügen bearbeiten</a></li>
+
+                                    </ul>
+
+                            </div>
+                            -->
+                            <h6 class="vlist"><img src="vim.php-Dateien/table.png" alt="Icon Tabelle">Vim-Befehle</h6><!--::-->
+
+                            <div id="tabellen">
+
+                                <ul class="vlist">
+
+                                    <li><a href="#editierbefehle" id="editierbefehle_1">Editierbefehle</a></li>
+
+                                    <li><a href="#bewegungsbefehle1" id="bewegungsbefehle1_1">Bewegungsbefehle I</a></li>
+
+                                    <li><a href="#andereoperationen" id="andereoperationen_1">Andere Operationen</a></li>
+
+                                    <li><a href="#erstellenundbearbeiten" id="erstellenundbearbeiten_1">Befehle zum Erstellen und Bearbeiten von Text</a></li>
+
+                                    <li><a href="#markierungsbefehle" id="markierungsbefehle_1">Markierungsbefehle</a></li>
+
+                                    <li><a href="#marken" id="marken_1">Marken</a></li>
+
+                                    <li><a href="#bewegungsbefehle2" id="bewegungsbefehle2_1">Bewegungsbefehle II</a></li>
+
+                                    <li><a href="#textbloecke" id="textbloecke_1">Textblöcke</a></li>
+
+                                    <li><a href="#aufrufoptionen" id="aufrufoptionen_1">Aufrufoptionen</a></li>
+
+                                </ul>
+
+                            </div> <!--;;-->
+
+                            <h6 class="vlist"><img src="vim.php-Dateien/lightbulb.png" alt="Icon Gluehbirne">Tipps &amp; Tricks</h6><!--::-->
+
+                            <ul class="vlist" id="tipps">
+
+                                <li><a href="#hilfe_anzeigen" id="a1">Vim-Hilfe anzeigen</a></li>
+
+                                <li><a href="#hilfe_navigieren" id="a2">Im Help-File navigieren</a></li>
+
+                                <li><a href="#quote" id="a3">Text zwischen Anführungszeichen löschen</a></li>
+
+                                <li><a href="#autocompletion" id="a4">Autocompletion</a></li>
+
+                                <li><a href="#korrektur" id="a5">Korrektur von Befehlen</a></li>
+
+                                <li><a href="#jumpbackliste" id="a6">Jump-Back-Liste</a></li>
+
+                                <li><a href="#verschluesseln" id="a7">Datei verschlüsseln</a></li>
+
+                                <li><a href="#pastetoggle" id="a8">Automatische Einrückungen (Treppeneffekt) nach Copy &amp; Paste verhindern</a></li>
+
+                                <li><a href="#suchen" id="a9">Suchen</a></li>
+
+                                <li><a href="#nohl" id="a10">Hervorhebungen der Suche entfernen</a></li>
+
+                                <li><a href="#dateibrowser" id="a11">Vim als Dateibrowser</a></li>
+
+                                <li><a href="#einruecken" id="a12">Aktuelle Zeile einrücken</a></li>
+
+                                <li><a href="#ausblenden" id="a13">Textbereiche ausblenden (falten)</a></li>
+
+                                <li><a href="#faltungen_speichern" id="a14">Manuelle Faltungen (folds) speichern</a></li>
+
+                                <li><a href="#vertauschen" id="a15">Vertauschen Zeichen/Wörter/Zeilen</a></li>
+
+                                <li><a href="#einfuegen" id="a16">Spalten einfügen/bearbeiten</a></li>
+
+                                <li><a href="#erneut_markieren" id="a17">Den zuletzt visuell markierten Bereich erneut markieren</a></li>
+
+                                <li><a href="#abkuerzungen" id="a18">Abkürzungen</a></li>
+
+                                <li><a href="#zeilennummerierung" id="a19">Zeilennummerierung</a></li>
+
+                                <li><a href="#schrift_und_farbe" id="a20">Schriftart &amp; Farbschema<img src="vim.php-Dateien/windows.png" class="os" alt="Windows"></a></li>
+
+                                <li><a href="#datei_unterm_cursor" id="a21">Datei unterm Cursor öffnen</a></li>
+
+                                <li><a href="#readonly" id="a22">Datei im Readonly-Modus öffnen</a></li>
+
+                                <li><a href="#grosskleinschreibung" id="a23">Groß- und Kleinschreibung ändern</a></li>
+
+                                <li><a href="#register" id="a24">In benanntes Register kopieren</a></li>
+
+                                <li><a href="#zeilenumbruch" id="a25">Zeilenumbruch</a></li>
+
+                                <li><a href="#kommandozeile" id="a26">Kommandozeilen-Editor<img src="vim.php-Dateien/tux.png" class="os" alt="Tux"></a></li>
+
+                                <li><a href="#splitten" id="a27">Fenster splitten</a></li>
+
+                                <li><a href="#wiederholen" id="a28">Letzte Aktion wiederholen</a></li>
+
+                                <li><a href="#aufzeichnen" id="a29">Tastenfolge aufzeichnen</a></li>
+
+                                <li><a href="#drucken" id="a30">Drucken mit Vim</a></li>
+
+                                <li><a href="#dateiname" id="a31">Dateinamen schreiben</a></li>
+
+                                <li><a href="#lernprogramm" id="a32">Vim Lernprogramm</a></li>
+
+                                <li><a href="#vim2html" id="a33">vim2html</a></li>
+
+                                <li><a href="#maxfenster" id="a34">Mit maximiertem Fenster starten<img src="vim.php-Dateien/windows.png" class="os" alt="Windows"></a></li>
+
+                                <li><a href="#tabs" id="a35">Leerzeichen statt Tabstops</a></li>
+
+                                <li><a href="#modelines" id="a36">Modelines</a></li>
+
+                                <li><a href="#carriagereturn" id="a37">Carriage Return entfernen</a></li>
+
+                                <li><a href="#zwischenspeicher" id="a38">Copy &amp; Paste aus und in den Zwischenspeicher</a></li>
+
+                                <li><a href="#altgr" id="a39">»alt gr« Mapping<img src="vim.php-Dateien/tux.png" class="os" alt="Tux"></a></li>
+
+                                <li><a href="#vimrc" id="a40">vimrc öffnen</a></li>
+
+                                <li><a href="#sudo" id="a41">Schreibrechte »ohne« sudo<img src="vim.php-Dateien/tux.png" class="os" alt="Tux"></a></li>
+
+                                <li><a href="#foldcolors" id="a42">Foldcolors</a></li>
+
+                                <li><a href="#viewfiles" id="a43">View-Datei(en) löschen<img src="vim.php-Dateien/tux.png" class="os" alt="Tux"></a></li>
+
+                                <li><a href="#vimdiff" id="a44">Git Diff mit Vimdiff<img src="vim.php-Dateien/tux.png" class="os" alt="Tux"></a></li>
+
+                                <li><a href="#textareas" id="a45">Firefox: Edit textareas with Vim</a></li>
+
+                                <li><a href="#countpattern" id="a46">Häufigkeit einer Zeichenfolge ermitteln</a></li>
+
+                                <li><a href="#hightlight" id="a47">Zeichenkette in Datei(en) hervorheben</a></li>
+
+                                <li><a href="#mapping" id="a48">ESC-Mapping</a></li>
+
+                                <li><a href="#foldtext" id="a49">Foldtext</a></li>
+
+                            </ul><!--;;-->
+
+                        </div>
+
+                    </div><!--;;-->
+                    <!-- end: #col1 --><!--;;-->
+
+                    <!-- begin: #col2 second float column -->
+                    <div id="col2"><!--::-->
+
+                        <div id="col2_content" class="clearfix">
+                            
+                            <ul class="vlist">
+                                <li><img src="vim.php-Dateien/film.png" style="float: left; padding-right: 7px;" alt="Icon Screencast"><a href="http://www.screencast.com/users/Lothar65/folders/Jing/media/b9b37103-6936-4c0f-98b0-c00940480107">Screencast</a></li>
+
+                                <li><img src="vim.php-Dateien/wrench_orange.png" style="float: left; padding-right: 7px;" alt="Icon Werkzeugschluessel"><a href="http://www.nitidelo.de/vim/vimrc.html">Meine Vim-Konfigurationsdatei</a></li>
+
+                            </ul>
+
+                            <h6 class="vlist"><img src="vim.php-Dateien/world_link.png" alt="Icon Kette">Links</h6><!--::-->
+
+                            <ul class="vlist">
+
+                                <li><a href="http://www.vim.org/download.php">Vim-Download</a></li>
+
+                                <li><a href="http://vim.runpaint.org/">Vim Recipes - new and free cookbook in PDF and HTML</a></li>
+
+                                <li><a href="http://www.moolenaar.net/habits_de.pdf">Sieben Angewohnheiten für das effektive Editieren von Textdateien (Bram Moolenaar)</a></li>
+                                <li><a href="http://gentoo.de/doc/de/vi-guide.xml">vi lernen -- die »Spickzettel«-Methode</a></li>
+
+                                <li><a href="http://www.rayninfo.co.uk/vimtips.html">Best of Vim Tips</a></li>
+
+                                <li><a href="http://www.zdnet.de/builder/program/0,39023551,39124907,00.htm">Vim für Programmierer (Tutorial)</a></li>
+                                <li><a href="http://www.tipp10.de/">TIPP10 - Kostenloser und intelligenter 10-Finger-Schreibtrainer</a></li>
+
+                                <li><a href="http://planetxml.de/vim-php-manual.php">PHP Manual in Vim</a></li>
+
+                            </ul><!--;;-->
+
+                            <h6 class="vlist"><img src="vim.php-Dateien/plugin_link.png" alt="Icon Plugins">Plugins</h6><!--::-->
+
+                            <ul class="vlist">
+
+                                <li><a href="http://www.vim.org/scripts/script.php?script_id=1218">The NERD Commenter<br>(Easy commenting of code)</a></li>
+
+                                <!-- <li><a href="http://www.vimoutliner.org">VimOutliner</a></li> -->
+
+                                <li><a href="http://www.vim.org/scripts/script.php?script_id=2607">TaskList (TODO, XXX, FIXME)</a></li>
+
+                                <li><a href="https://chrome.google.com/webstore/detail/dbepggeogbaibhgnhhndojpepiihcmeb">Vimium (Chrome Erweiterung)</a></li>
+
+                            </ul><!--;;-->
+
+                            <h3>Tipps &amp; Tricks</h3><!--::-->
+
+                            <div id="markCol2">
+
+                            <div id="hilfe_anzeigen"> 
+                                <div id="b1">
+
+                                    <h4>Vim-Hilfe anzeigen</h4>
+
+                                    <p>Die ausführlichste Vim-Dokumentation steckt in Vim selbst. (Englisch).</p>
+
+                                    <p>Kommandozeilen-Modus:</p>
+
+                                    <p><code>
+                                    :h[elp]<br>
+
+                                    :h[elp] <i>Befehl</i><br>
+                                    :h[elp] toc (User-Manual)<br>
+                                    </code></p>
+
+                                    </div>
+                                </div>
+
+                                <hr>
+
+                                <div id="hilfe_navigieren">
+                                    <div id="b2">
+
+                                        <h4>Im Help-File navigieren</h4>
+
+                                        <p> Worte zwischen senkrechten Strichen bilden einen Link: <code>|example|</code></p>
+
+                                        <p>Die Links lassen sich mit der Maus anklicken wenn folgende Option gesetzt wurde: <code>set mouse=a</code></p>
+
+                                        <p>Oder mit der Tastatur wenn sich der Cursor auf dem Link befindet:</p>
+
+                                        <p><code>Strg-AltGr-9</code></p>
+
+                                        <p>Das ist recht umständlich. Hier ein Mapping: <code>map &lt;F12&gt; &lt;C-]&gt;</code></p>
+
+                                        <p>Zurück zum Ausgangspunkt: <code class="vim">Strg-T</code></p>
+
+                                    </div>
+                                </div>
+
+                                <hr>
+
+                                <div id="quote">
+
+                                    <div id="b3">
+
+                                        <h4>Text zwischen Anführungszeichen löschen</h4>
+
+                                        <p>Normaler Modus: <code>ci"</code></p>
+
+                                        <p>oder für Tag-Objekte</p>
+
+                                        <p>Normaler Modus: <code>cit</code></p>
+
+                                    </div>
+                                </div>
+
+                                <hr>
+
+                                <div id="autocompletion">
+                                    <div id="b4">
+
+                                        <h4>Autocompletion</h4>
+
+                                        <p>Wenn man im Einfüge-Modus beginnt ein Wort zu schreiben und danach <code>Strg-P</code> drückt, schlägt Vim ähnliche Worte vor die bereits im Text enthalten sind.</p>
+
+                                        <p>Zeile vervollständigen: <code>Strg-X</code> dann <code>Strg-L</code></p>
+
+                                    </div>
+                                </div>
+
+                                <hr>
+
+                                <div id="korrektur">
+                                    <div id="b5">
+
+                                        <h4>Korrektur von Befehlen</h4>
+
+                                        <p>Mit <code>u</code> wird der zuletzt ausgeführte Befehl rückgängig gemacht (Undo). Mit <code>Strg-R</code> wird die letzte änderung wiederhergestellt (Redo).</p>
+                                       
+                                    </div>
+                                </div>
+
+                                <hr>
+
+                                <div id="jumpbackliste">
+                                    <div id="b6">
+
+                                        <h4>Jump-Back-Liste</h4>
+
+                                        <p>Mit <code>Strg-O</code> und <code>Strg-I</code> kann man zu den zuletzt bearbeiteten Zeilen/Dateien springen.</p>
+
+                                    </div>
+                                </div>
+
+                                <hr>
+
+                                <div id="verschluesseln">
+                                    <div id="b7">
+
+                                        <h4>Datei verschlüsseln</h4>
+
+                                        <p>Achtung: Schwache Chiffrierung (<a href="http://de.wikipedia.org/wiki/PKZIP">PkZip</a>)</p>
+
+                                        <p>Im Kommandozeilen-Modus:</p>
+                                        
+                                        <p>
+                                        1. <code>:X</code><br>
+                                        2. Passwort eingeben<br>
+
+                                        3. <code>:w</code>
+                                        </p>
+
+                                        <p>Verschlüsselung rückgängig machen:</p>
+
+                                        <p>
+                                        1. <code>:set key=</code><br>
+
+                                        2. <code>:w</code>
+                                        </p>
+                                        <p>
+                                        Sicherer: <a href="http://bcrypt.sourceforge.net/">Bcrypt</a>, <a href="http://www.winstonsmith.info/julia/elettra/">Elettra</a>, <a href="http://www.gnupg.org/">GnuPG</a>
+                                        </p>
+                                        <p>
+                                        Ab Vim Version 7.3 ist <a href="http://de.wikipedia.org/wiki/Blowfish">Blowfish</a>-Verschlüsselung möglich:
+                                        </p>
+                                        <p>
+                                            <code>set cryptmethod=blowfish</code>
+                                        </p>
+
+                                    </div>
+
+                                </div>
+
+                                <hr>
+
+                                <div id="pastetoggle">
+                                    <div id="b8">
+
+                                        <h4>Automatische Einrückungen (Treppeneffekt) nach Copy &amp; Paste verhindern</h4>
+
+                                        <p>Folgende Zeile in die Vim-Konfigurationsdatei (.vimrc) einfügen: <code>set pastetoggle=&lt;F8&gt;</code></p>
+
+                                    </div>
+                                </div>
+
+                                <hr>
+
+                                <div id="suchen">
+
+                                    <div id="b9">
+
+                                        <h4>Suchen</h4>
+
+                                        <p>Vorwärtssuche eines Musters:</p>
+
+                                        <p><code>/muster</code></p>
+
+                                        <p>Rückwärtssuchen eines Musters:</p>
+
+                                        <p><code>?muster</code></p>
+
+                                        <p>Vorwärtssuche des Wortes unter dem Cursor: <code>*</code></p>
+
+                                        <p>Rückwärtssuchen des Wortes unter dem Cursor: <code>#</code></p>
+
+                                        <p>Wiederholung der letzten Suche: <code>n</code></p>
+
+                                        <p>Wiederholung der letzten Suche in umgekehrter Richtung: <code>N</code></p>
+
+                                    </div>
+                                </div>
+
+                                <hr>
+
+                                <div id="nohl">
+                                    <div id="b10">
+
+                                        <h4>Hervorhebungen der Suche entfernen</h4>
+
+                                        <p>Mapping (Strg-L):</p>
+
+                                        <p><code>map &lt;silent&gt; &lt;c-l&gt; :silent nohl&lt;cr&gt;</code></p>
+
+                                    </div>
+                                </div>
+
+                                <hr>
+
+                                <div id="dateibrowser">
+                                    <div id="b11">
+
+                                        <h4>Vim als Dateibrowser</h4>
+
+                                        <p>Kommandozeilen-Modus:</p>
+
+                                        <p>Split &amp; Explore: <code>:Sex[plore]</code></p>
+
+                                        <p>Tab &amp; Explore: <code>:Tex[plore]</code></p>
+
+                                    </div>
+                                </div>
+
+                                <hr>
+
+                                <div id="einruecken">
+                                    <div id="b12">
+
+                                        <h4>Aktuelle Zeile einrücken</h4>
+
+                                        <p>Im Normal-Modus: <code>&gt;&gt;</code></p>
+
+                                    </div>
+                                </div>
+
+                                <hr>
+
+                                <div id="ausblenden">
+                                    <div id="b13">
+
+                                        <h4>Textbereiche ausblenden (falten)</h4>
+
+                                        <p>
+                                        Manuelle Faltung erreicht man 
+durch Markierung einer Region (Visual-Modus) und anschließendem Drücken 
+von <code>zf</code>. Durch <code>zd</code> wird ein Fold wieder gelöscht, jedoch bleibt dessen Inhalt erhalten, er wird nur entfaltet.
+                                        </p>
+
+                                        <p>Open fold: <code>zo</code></p>
+
+                                        <p>Close fold: <code>zc</code></p>
+
+                                        <p>Open all folds: <code>zR</code></p>
+
+                                        <p>Close all folds: <code>zM</code></p>
+
+                                        <p>Eine andere Methode Textbereiche auszublenden ist folgende Zeilen in seine <code>.vimrc</code> einzufügen:</p>
+                                        <p><code>set foldmethod=marker</code></p>
+
+                                        <p>Standardmäßig werden <code>::</code> zum Anfang und <code>;;</code> zum Ende einer Faltung verwendet.</p>
+
+                                        <p>Beispiel:</p>
+
+                                        <p><code>Fold-Start ::<br>
+                                            --- lots of stuff ---<br>
+                                            Closing tag ;;</code>
+                                        </p>
+                                        
+                                    </div>
+
+                                </div>
+
+                                <hr>
+
+                                <div id="faltungen_speichern">
+                                    <div id="b14">
+
+                                        <h4>Mauelle Faltungen speichern</h4>
+
+                                        <p>Im Kommandozeilen-Modus:</p>
+
+                                        <p>Speichern: <code>:mkvie[w]</code></p>
+
+                                        <p>Laden: <code>:lo[adview]</code></p>
+
+                                        <p>View-Dateien speichern Cursorpositionen, Faltungen, lokale Optionen/Mappings/Abkürzungen.</p>
+
+                                    </div>
+
+                                </div>
+
+                                <hr>
+
+                                <div id="vertauschen">
+                                    <div id="b15">
+
+                                        <h4>Vertauschen /Zeichen/Wörter/Zeilen</h4>
+
+                                        <p>Buchstabendreher lassen sich mit <code>xp</code> korrigieren.</p>
+
+                                        <p>Mit <code>deep</code> lassen sich zwei Wörter vertauschen (Cursor muss sich vorm ersten Wort befinden).</p>
+
+                                        <p>Zeilen können mit <code>ddp</code> vertauscht werden.</p>
+
+                                    </div>
+                                </div>
+
+                                <hr>
+
+                                <div id="einfuegen">
+                                    <div id="b16">
+
+                                        <h4>Spalten einfügen/bearbeiten</h4>
+
+                                        
+                                        <p>Beispiel Auskommentierung:<br>Im Normal-Modus mit <code>Strg-V</code> in den visuellen Blockmodus schalten, Zeilenanfänge markieren und dieses Kommando eingeben: <code>I#</code> und <code>Esc.</code></p> 
+
+                                    </div>
+                                </div>
+
+                                <hr>
+
+                                <div id="erneut_markieren">
+                                    <div id="b17">
+
+                                        <h4>Den zuletzt visuell markierten Bereich erneut markieren</h4>
+                                        
+                                        <p>Im Normal-Modus: <code>gv</code></p>
+
+                                    </div>
+                                </div>
+
+                                <hr>
+
+                                <div id="abkuerzungen">
+                                    <div id="b18">
+
+                                        <h4>Abkürzungen</h4>
+                                        
+                                        <p>Definieren: <code>:ab abk <i>Ausdruck</i></code></p>
+
+                                        <p>Abkürzungen expandieren 
+sofort, wenn man die Leertaste oder einen Zeilenumbruch eintippt oder 
+mit Esc in den Kommandozeilen-Modus zurückkehrt.</p>
+
+                                        <p>Entfernen: <code>:unab: <i>abk</i></code></p>
+
+                                        <p>Auflisten: <code>:ab</code></p>
+
+                                        <p>Abkürzungen lassen sich natürlich auch dauerhaft in der Konfigurations-Datei (.vimrc) speichern.</p>
+
+                                    </div>
+                                </div>
+
+                                <hr>
+
+                                <div id="zeilennummerierung">
+
+                                    <div id="b19">
+
+                                        <h4>Zeilennummerierung</h4>
+                                        
+                                        <p>
+                                        <code>:set nu[mber]<br>
+                                        :set nonu[mber]</code>
+                                        </p>
+
+                                    </div>
+                                </div>
+
+                                <hr>
+
+                                <div id="schrift_und_farbe">
+                                    <div id="b20">
+
+                                        <h4>Schriftart &amp; Farbschema<img src="vim.php-Dateien/windows.png" class="os" alt="Windows"></h4>
+
+                                        
+                                        <p>Folgenden Zeilen in die Vim-Konfigurationsdatei (_vimrc) einfügen:</p>
+
+                                        <p>
+                                        <code>set guifont=ProggyCleanTT:h12<br>
+                                        colorscheme koehler</code>
+                                        </p>
+                                        <p>
+
+                                            <a href="http://www.nitidelo.de/vim/images/ProggyClean.png" rel="lightbox" title="ProggyCleanTT">Screenshot</a>
+                                        </p>
+                                        <p>
+                                            <a href="http://www.proggyfonts.com/index.php?menu=download">Download Proggy Clean</a>
+                                        </p>
+
+                                    </div>
+                                </div>
+
+                                <hr>
+
+                                <div id="datei_unterm_cursor">
+                                    <div id="b21">
+
+                                        <h4>Datei unterm Cursor öffnen</h4>
+                                        
+                                        <p>Im Normal o. Visual-Modus: <code>gf</code></p>
+
+                                        <p>Neuer Tab: <code>Strg-W gf</code></p>
+
+                                    </div>
+                                </div>
+
+                                <hr>
+
+                                <div id="readonly">
+                                    <div id="b22">
+
+                                        <h4>Datei im Readonly-Modus öffnen</h4>
+
+                                        
+                                        <p><code>vim -M <i>Datei</i></code></p>
+
+                                    </div>
+                                </div>
+
+                                <hr>
+
+                                <div id="grosskleinschreibung">
+                                    <div id="b23">
+
+                                        <h4>Groß- und Kleinschreibung ändern</h4>
+                                        
+                                        <p>Zeile großgeschrieben: <code>VU</code></p>
+
+                                        <p>Zeile kleingeschrieben: <code>Vu</code></p>
+
+                                        <p>Wort großgeschrieben: <code>veU</code></p>
+
+                                        <p>Wort kleingeschrieben: <code>veu</code></p>
+
+                                        <p>Zwei Zeilen zusammenfügen:</p>
+
+                                        <p>Im Normal-Modus: <code>J</code></p>
+
+                                    </div>
+                                </div>
+
+                                <hr>
+
+                                <div id="register">
+                                    <div id="b24">
+
+                                        <h4>In benanntes Register kopieren</h4>
+
+                                        <p>
+                                        Um etwas in ein Register zu 
+kopieren werden dem Kopierbefehl Anführungszeichen und der Name des 
+gewünschten Registers vorangestellt.
+                                        </p>
+
+                                        <p>Zeile in Register <code>a</code> kopieren: <code>"ayy</code></p>
+
+                                        <p>Text aus Register <code>a</code> einfügen: <code>"ap</code></p>
+
+                                        <p>Anzeigen aller Registerinhalte <code>:reg</code></p>
+
+                                    </div>
+                                </div>
+
+                                        
+                                <hr>
+
+                                <div id="zeilenumbruch">
+                                    <div id="b25">
+
+                                        <h4>Zeilenumbruch</h4>
+
+                                        <p>Zeilenumbruch nach <i>n</i> Zeichen:</p>
+
+                                        <p><code>set t[ext]w[idth]=<i>n</i></code></p>
+
+                                        <p>Zeilenumbruch nachträglich:</p>
+
+                                        <p>Text im Visual-Mode markieren und <code>gq</code> eingeben. Oder unter Linux im Kommandozeilen-Modus:</p>
+
+                                        <p><code>:%!fmt -30</code></p>
+
+                                        <p>Zwei Zeilen zusammenfügen:</p>
+
+                                        <p>Im Normal-Modus: <code>J</code></p> 
+
+                                        <p>Zeilenumbruch abschalten:</p> 
+
+                                        <p><code>set nowrap</code></p>
+
+                                    </div>
+                                </div>
+
+                                <hr>
+
+                                <div id="foldtext">
+                                    <div id="b49">
+
+                                        <h4>Foldtext</h4>
+
+                                        <pre>set foldtext=MyFoldText()
+
+function MyFoldText()
+  let line = getline(v:foldstart)
+  let sub = substitute(line, '/\*\|\*/\|::\d\=', '', 'g')
+  return v:folddashes . sub
+endfunction
+                                        </pre>
+
+                                    </div>
+                                </div>
+
+                                </div>
+
+                                    </div>
+                                </div>
+
+                                <!--;;-->
+
+                            </div>
+                        </div><!--;;-->
+                    <!-- end: #col2 -->
+
+                        <!-- begin: #col3 static column -->
+                        <div id="col3"><!--::-->
+                            <div id="col3_content" class="clearfix"> <a id="content" name="content"></a>
+                                <!-- Skiplink-Anker: Content -->
+                                <h2>Vim</h2>
+
+                                <h3>Eine kurze Beschreibung</h3>
+                                <p>Vim («Vi - IMproved») ist ein 
+Texteditor. Das Besondere an Vim ist, dass er sich komplett und schnell 
+mit der Tastatur bedienen lässt. Mit der grafischen Oberfläche sind zwar
+ viele Befehle auch mit der Maus erreichbar, aber fast immer ist man mit
+ der Tastatur schneller.</p>
+                                <p>Zu diesem Zweck ist der Editor in mehrere Modi eingeteilt:</p>
+
+                                <ul id="ul_bgcolor">
+                                    <li>
+
+                                    <strong>Normal-Modus</strong><br>
+                                    Nach dem Start befindet man sich im 
+Normal-Modus. Hier kann man keinen Text tippen, denn alle Tasten sind 
+mit Kommandos wie Ausschneiden, Einfügen und vielem mehr belegt.
+                                    </li>
+                                    <li>
+                                    <strong>Kommandozeilen-Modus</strong><br>
+                                    Indem man einen Doppelpunkt tippt, 
+begibt man sich in den Kommandozeilen-Modus. Hier können ausführlichere 
+Dinge wie Speichern, Laden und Einstellungen ändern vorgenommen werden.
+                                    </li>
+
+                                    <li>
+                                    <strong>Einfüge-Modus</strong><br>
+                                    Im Einfüge-Modus kann man wie 
+gewohnt Text schreiben. Durch Drücken der i-Taste gelangt man vom 
+Normal-Modus in den Einfüge-Modus. über die Esc-Taste gehts wieder in 
+den Normal-Modus.
+                                    </li>
+                                    <li>
+                                    <strong>Visual-Modus</strong><br>
+
+                                    Schließlich gibt es noch den 
+visuellen Modus um einen Text zu markieren an dem Operationen 
+vorgenommen werden sollen.
+                                    </li>
+                                </ul>
+                                <p>
+                                Vim benötigt eine nicht unbedeutende 
+Einarbeitungszeit, auch, da sich die Bedienung vollkommen von allen 
+üblichen Editoren unterscheidet. Hat man jedoch einige Zeit damit 
+gearbeitet, legt man auch eine überdurchschnittliche Produktivität an 
+den Tag, da die Bedienung sehr konsistent ist und man nicht dauernd von 
+der Tastatur auf die Maus wechseln muss. Gerade für Programmierer eignet
+ sich der Editor wegen vieler ausgefeilter Funktionen in diesem Gebiet 
+und der hohen Konfigurierbarkeit gut. Für Gelegenheitsbenutzer (wegen 
+des hohen Lernaufwandes) und als Textverarbeitung (wegen fehlender 
+Formatierungsmöglichkeiten) ist er jedoch nicht besonders gut geeignet.
+                                </p>
+
+                                <p>
+                                Vim steht unter einer GPL-kompatiblen 
+»Charityware«-Lizenz. Das bedeutet, dass Vim frei verteilt werden darf, 
+jedoch erbitten die Entwickler bei Gefallen eine Spende für Kinder in 
+Uganda durch das ICCF.
+                                </p>
+                                <p>
+                                Vim wird von Bram Moolenaar und vielen Freiwilligen entwickelt. 
+                                </p>
+
+                                <h3>Vim Grundbefehle</h3>
+
+                                <div id="vim_speichern">
+
+                                    <table id="vim_speichern_2">
+
+                                        <thead>
+                                            <tr>
+                                                <th colspan="2"><b>Datei speichern und Vim beenden</b></th>
+                                            </tr>
+                                            <tr>
+
+                                                <th>Operation</th>
+                                                <th>Befehl</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            <tr>
+                                                <td>Aktuelle Datei speichern und Vim verlassen</td>
+
+                                                <td>:wq oder ZZ</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Vim beenden ohne Datei zu speichern</td>
+                                                <td>:q!</td>
+                                            </tr>
+                                            <tr>
+
+                                                <td>Aktuelle Datei speichern</td>
+                                                <td>:w</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Aktuelle Datei als <i>Datei</i> speichern<br>(vergleichbar »Speichern unter«)</td>
+                                                <td>:w <i>Datei</i></td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>Erzwingt das überschreiben von <i>Datei</i><br>(auch schreibgeschützte)</td>
+                                                <td>:w! <i>Datei</i></td>
+                                            </tr>
+                                        </tbody>
+
+                                    </table>
+                                </div>
+                                <div id="editierbefehle">
+
+                                    <table id="editierbefehle_2">
+
+                                        <thead> 
+                                        <tr>
+                                            <th scope="col" colspan="4"><b>Editierbefehle</b></th>
+                                        </tr>
+                                        <tr>
+
+                                            <th>Textobjekt</th>
+                                            <th>ändern</th>
+                                            <th>Löschen</th>
+                                            <th>Kopieren</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        <tr>
+                                            <td>1 Wort</td>
+                                            <td>cw</td>
+                                            <td>dw</td>
+                                            <td>yw</td>
+
+                                        </tr>
+                                        <tr>
+                                            <td>2 Wörter, ohne Satzzeichen</td>
+                                            <td>2cW <i>oder</i> c2W</td>
+                                            <td>2dW <i>oder</i> d2W</td>
+
+                                            <td>ycW <i>oder</i> y2W</td>
+                                        </tr>
+                                        <tr id="vim_zeile_loeschen_2">
+                                            <td>1 Zeile</td>
+                                            <td>cc</td>
+                                            <td>dd</td>
+
+                                            <td>yy <i>oder</i> Y</td>
+                                        </tr>
+                                        <tr>
+                                            <td>3 Wörter rückwärts</td>
+                                            <td>3cb <i>oder</i> c3b</td>
+
+                                            <td>3db <i>oder</i> d3b</td>
+                                            <td>3yb <i>oder</i> y3b</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Bis Zeilenanfang</td>
+
+                                            <td>c0</td>
+                                            <td>d0</td>
+                                            <td>y0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Bis Zeilenende</td>
+                                            <td>c$ <i>oder</i> C</td>
+
+                                            <td>d$ <i>oder</i> D</td>
+                                            <td>y$</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Einzelne Zeichen</td>
+                                            <td>r</td>
+
+                                            <td>x <i>oder</i> X</td>
+                                            <td>yl <i>oder</i> yh</td>
+                                        </tr>
+                                        <tr>
+                                            <td>5 Zeichen</td>
+
+                                            <td>5 s</td>
+                                            <td>5x</td>
+                                            <td>5yl</td>
+                                        </tr>
+                                    </tbody>
+
+                                    </table>
+                                </div>
+
+                                <div id="bewegungsbefehle1">
+
+                                    <table id="bewegungsbefehle1_2">
+
+                                        <thead>
+                                            <tr>
+                                                <th colspan="2"><b>Bewegungsbefehle I</b></th>
+                                            </tr>
+                                            <tr>
+
+                                                <th>Bewegung</th>
+                                                <th>Befehl</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            <tr>
+                                                <td>links, unten, oben, rechts</td>
+
+                                                <td>h, j, k, l</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Zum ersten Zeichen der folgenden Zeile</td>
+                                                <td>+</td>
+                                            </tr>
+                                            <tr>
+
+                                                <td>Zum ersten Zeichen der vorangegangenen Zeile</td>
+                                                <td>-</td>
+                                            </tr>
+                                            <tr>
+                                                <td>An das Wortende (ohne/mit Satzzeichen)</td>
+                                                <td>e/E</td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>Wortweise vorwärts (ohne/mit Satzzeichen)</td>
+                                                <td>w/W</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Wortweise rückwärts (ohne/mit Satzzeichen)</td>
+
+                                                <td>b/B</td>
+                                            </tr>
+                                            <tr>
+                                                <td>An den Zeilenanfang</td>
+                                                <td>0</td>
+                                            </tr>
+                                            <tr>
+
+                                                <td>An das Zeilenende</td>
+                                                <td>$</td>
+                                            </tr>
+                                        </tbody>
+
+                                    </table>
+
+                                </div>
+
+                                <div id="andereoperationen">
+
+                                    <table id="andereoperationen_2">
+
+                                        <thead>
+                                            <tr>
+                                                <th colspan="2"><b>Andere Operationen</b></th>
+                                            </tr>
+                                            <tr>
+
+                                                <th>Operation</th>
+                                                <th>Befehl</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            <tr>
+                                                <td>Text aus Register einfügen</td>
+
+                                                <td>P oder p</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Vi aufrufen; mit Datei, falls angegeben</td>
+                                                <td>vi <i>datei</i></td>
+                                            </tr>
+                                            <tr>
+
+                                                <td>änderungen speichern</td>
+                                                <td>:w</td>
+                                            </tr>
+                                            <tr>
+                                                <td>änderungen speichern, Editor verlassen</td>
+                                                <td>:wq oder ZZ</td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>Nichts speichern, Editor verlassen</td>
+                                                <td>:q!</td>
+                                            </tr>
+                                        </tbody>
+
+                                    </table>
+                                </div>
+
+                                <div id="erstellenundbearbeiten">
+
+                                    <table id="erstellenundbearbeiten_2">
+
+                                        <thead>
+                                            <tr>
+                                                <th colspan="2"><b>Befehle zum Erstellen und Bearbeiten von Text</b></th>
+                                            </tr>
+                                            <tr>
+
+                                                <th>Editierarbeit</th>
+                                                <th>Befehl</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            <tr>
+                                                <td>
+
+                                                    Text an der aktuellen Position einfügen
+                                                </td>
+                                                <td>
+                                                    i
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Text am Zeilenanfang einfügen
+                                                </td>
+
+                                                <td>
+                                                    I
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Text an der aktuellen Position anfügen
+                                                </td>
+                                                <td>
+
+                                                    a
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Text am Zeilenende anfügen
+                                                </td>
+                                                <td>
+                                                    A
+                                                </td>
+
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Unterhalb des Cursors eine neue Zeile einfügen
+                                                </td>
+                                                <td>
+                                                    o
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>
+                                                    Oberhalb des Cursors eine neue Zeile einfügen
+                                                </td>
+                                                <td>
+                                                    O
+                                                </td>
+                                            </tr>
+                                            <tr>
+
+                                                <td>
+                                                    Zeile löschen und Text ersetzen
+                                                </td>
+                                                <td>
+                                                    S
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+
+                                                    Vorhandene Zeichen mit neuem Text überschreiben
+                                                </td>
+                                                <td>
+                                                    R
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Aktuelle und folgende Zeile zusammenführen
+                                                </td>
+
+                                                <td>
+                                                    J
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Groß-/Kleinschreibung umsetzen
+                                                </td>
+                                                <td>
+
+                                                    ~
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Letzte Aktion wiederholen
+                                                </td>
+                                                <td>
+                                                    .
+                                                </td>
+
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Letzte änderung zurücknehmen
+                                                </td>
+                                                <td>
+                                                    u
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>
+                                                    Zeile in ihren ursprünglichen Zustand zurückversetzen
+                                                </td>
+                                                <td>
+                                                    U
+                                                </td>
+                                            </tr>
+                                        </tbody>
+
+                                    </table>
+                                </div>
+
+                                <div id="markierungsbefehle">
+
+                                    <table id="markierungsbefehle_2">
+
+                                        <thead>
+                                            <tr>
+                                                <th colspan="2"><b>Markierungsbefehle</b></th>
+
+                                            </tr>
+                                            <tr>
+                                                <th>
+                                                    Befehl
+                                                </th>
+                                                <th>
+                                                    Bedeutung
+                                                </th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    m<i>x</i>
+                                                </td>
+                                                <td>
+                                                    Markiert aktuelle Position des Cursors mit <i>x</i>
+
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    '<i>x</i>
+                                                </td>
+                                                <td>
+                                                    Bewegt den Cursor an das erste Zeichen der mit <i>x</i> markierten Zeile
+                                                </td>
+
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    `<i>x</i>
+                                                </td>
+                                                <td>
+                                                    Bewegt den Cursor zu dem Zeichen, das mit <i>x</i> markiert wurde
+                                                </td>
+
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    ``
+                                                </td>
+                                                <td>
+                                                    Zurück zu der 
+Stelle, an der der Cursor vor dem letzten Bewegungsbefehl stand
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>
+                                                    ''
+                                                </td>
+                                                <td>
+                                                    Zurück zum ersten 
+Zeichen der Zeile, in der der Cursor vor dem letzten Bewegungsbefehl 
+stand
+                                                </td>
+                                            </tr>
+                                            <tr>
+
+                                                <td>
+                                                    :marks
+                                                </td>
+                                                <td>
+                                                    Listet alle Marken auf (Normal-Modus)
+                                                </td>
+                                            </tr>
+                                        </tbody>
+
+                                    </table>
+
+                                </div>
+
+                                <div id="marken">
+
+                                    <table id="marken_2">
+
+                                        <thead>
+                                            <tr>
+                                                <th colspan="2">
+                                                    <b>Marken</b>
+
+                                                </th>
+                                            </tr>
+                                            <tr>
+                                                <th>
+                                                    Marken
+                                                </th>
+                                                <th>
+                                                    Bedeutung
+                                                </th>
+                                            </tr>
+
+                                        </thead>
+
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    a-z
+                                                </td>
+                                                <td>
+                                                    Lokal gültige Marken
+                                                </td>
+
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    A-Z
+                                                </td>
+                                                <td>
+                                                    Global gültige Marken (Zusätzlich an den Dateinamen gebunden)
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>
+                                                    0-9
+                                                </td>
+                                                <td>
+                                                    In diesen Marken 
+werden die Cursorposition und der Dateiname beim Beenden der letzten 
+Vim-Sitzung gespeichert
+                                                </td>
+                                            </tr>
+                                        </tbody>
+
+                                    </table>
+                                </div>
+
+                                <div id="bewegungsbefehle2">
+
+                                    <table id="bewegungsbefehle2_2">
+
+                                        <thead>
+                                            <tr>
+                                                <th colspan="2">
+
+                                                    <b>Bewegungsbefehle II</b>
+                                                </th>
+                                            </tr>
+                                            <tr>
+                                                <th>
+                                                    Bewegung
+                                                </th>
+                                                <th>
+                                                    Befehl
+                                                </th>
+
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    Um einen Bildschirm vorwärts scrollen.
+                                                </td>
+                                                <td>
+
+                                                    Strg-F
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Um einen Bildschirm rückwärts scrollen.
+                                                </td>
+                                                <td>
+                                                    Strg-B
+                                                </td>
+
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Um einen halben Bildschirm vorwärts scrollen.
+                                                </td>
+                                                <td>
+                                                    Strg-D
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>
+                                                    Um einen halben Bildschirm rückwärts scrollen.
+                                                </td>
+                                                <td>
+                                                    Strg-U
+                                                </td>
+                                            </tr>
+                                            <tr>
+
+                                                <td>
+                                                    Bildschirm eine Zeile hochsscrollen.
+                                                </td>
+                                                <td>
+                                                    Strg-E
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Bildschirm eine Zeile runter scrollen.
+                                                </td>
+
+                                                <td>
+                                                    Strg-Y
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Aktuelle Zeile an den oberen Bilschirmrand scrollen.
+                                                </td>
+                                                <td>
+                                                    z <i>Enter</i>
+
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Aktuelle Zeile in die Bildschirmmitte scrollen.
+                                                </td>
+                                                <td>
+                                                    z. oder zz
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>
+                                                    Aktuelle Zeile an den unteren Bildschirmrand scrollen.
+                                                </td>
+                                                <td>
+                                                    z-
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+
+                                                    Cursor zur obersten Zeile des Bildschirms bewegen.
+                                                </td>
+                                                <td>
+                                                    H
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Cursor zur mittleren Zeile auf dem Bildschirm scrollen.
+                                                </td>
+
+                                                <td>
+                                                    M
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Cursor zur untersten Zeile des Bildschirms bewegen.
+                                                </td>
+                                                <td>
+                                                    L
+                                                </td>
+
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Cursor auf das erste Zeichen der nächsten Zeile.
+                                                </td>
+                                                <td>
+                                                    + oder Enter
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>
+                                                    Cursor auf das erste Zeichen der vorigen Zeile.
+                                                </td>
+                                                <td>
+                                                    -
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+
+                                                    Cursor auf das erste
+ Zeichen der aktuellen Zeile. (Leerzeichen und Tabulatoren werden 
+ignoriert).
+                                                </td>
+                                                <td>
+                                                    ^
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Cursor auf Spalte <i>n</i> der aktuellen Zeile.        
+                                                </td>
+
+                                                <td>
+                                                    <i>n</i>|
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Cursor an das Wortende.
+                                                </td>
+                                                <td>
+
+                                                    e
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Cursor an das Wortende (Interpunktionszeichen werden ignoriert).
+                                                </td>
+                                                <td>
+                                                    E
+                                                </td>
+
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Cursor an den Satzanfang.
+                                                </td>
+                                                <td>
+                                                    (
+                                                </td>
+                                            </tr>
+                                            <tr>
+
+                                                <td>
+                                                    Cursor an den Anfang des nächsten Satzes.
+                                                </td>
+                                                <td>
+                                                    )
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+
+                                                    Cursor an den Absatzanfang.
+                                                </td>
+                                                <td>
+                                                    {
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Cursor an den Anfang des nächsten Absatzes.
+                                                </td>
+
+                                                <td>
+                                                    }
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Cursor an den Abschnittsanfang.
+                                                </td>
+                                                <td>
+                                                    [[
+                                                </td>
+
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Cursor an den Anfang des nächsten Abschitts.
+                                                </td>
+                                                <td>
+                                                    ]]
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>
+                                                    Vorwärts nach einem Muster suchen.
+                                                </td>
+                                                <td>
+                                                    /<i>muster</i>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>
+                                                    Rückwärts nach einem Muster suchen.
+                                                </td>
+                                                <td>
+                                                    ?<i>muster</i>
+                                                </td>
+
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Suche in gleicher Richtung wiederholen
+                                                </td>
+                                                <td>
+                                                    n
+                                                </td>
+                                            </tr>
+                                            <tr>
+
+                                                <td>
+                                                    Suche in umgekehrter Richtung wiederholen.
+                                                </td>
+                                                <td>
+                                                    N
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Suche wiederholen, vorwärts.
+                                                </td>
+
+                                                <td>
+                                                    /
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Suche wiederholen rückwärts.
+                                                </td>
+                                                <td>
+
+                                                    ?
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Cursor auf nächstes Vorkommen des Zeichens <i>x</i> in der aktuellen Zeile.
+                                                </td>
+
+                                                <td>
+                                                    f<i>x</i>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Cursor auf voriges Zeichen vor dem nächsten Vorkommen des Zeichens <i>x</i> in der aktuellen Zeile.
+                                                </td>
+
+                                                <td>
+                                                    F<i>x</i>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Cursor vor das Zeichen des nächsten Vorkommen des Zeichens <i>x</i> in der aktuellen Zeile.
+                                                </td>
+
+                                                <td>
+                                                    t<i>x</i>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Letzten Suchbefehl in gleicher Richtung wiederholen.
+                                                </td>
+
+                                                <td>
+                                                    ;
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Letzten Suchbefehl in umgekehrter Richtung wiederholen.
+                                                </td>
+                                                <td>
+                                                    ´
+                                                </td>
+
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Cursor in Zeile <i>n</i>.
+                                                </td>
+                                                <td>
+                                                    <i>n</i>G
+                                                </td>
+
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Cursor an Dateianfang.
+                                                </td>
+                                                <td>
+                                                    gg
+                                                </td>
+                                            </tr>
+                                            <tr>
+
+                                                <td>
+                                                    Cursor an Dateiende.
+                                                </td>
+                                                <td>
+                                                    G
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Cursor an die zuletzt editierte Stelle zurück.
+                                                </td>
+
+                                                <td>
+                                                    ``
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Cursor auf das erste Zeichen der zuletzt editierten Stelle.
+                                                </td>
+                                                <td>
+                                                    ´´
+                                                </td>
+
+                                            </tr>
+                                        </tbody>
+
+                                    </table>
+                                </div>
+
+                                <div id="textbloecke">
+
+                                    <table id="textbloecke_2">
+
+                                        <thead>
+
+                                            <tr>
+                                                <th colspan="2">
+                                                    <b>Auswahl von Textblöcken im visuellen Modus</b>
+                                                </th>
+                                            </tr>
+                                            <tr>
+                                                <th>
+                                                    Befehl
+                                                </th>
+
+                                                <th>
+                                                    Auswahl
+                                                </th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    aw/aW
+                                                </td>
+
+                                                <td>
+                                                    Ein Wort (mit Leerzeichen, ohne/mit Satzzeichen)
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    iw/iW
+                                                </td>
+                                                <td>
+                                                    Ein inneres Wort (ohne Leerzeichen, ohne/mit Satzzeichen)
+                                                </td>
+
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    as
+                                                </td>
+                                                <td>
+                                                    Ein Satz (mit Leerzeichen)
+                                                </td>
+                                            </tr>
+                                            <tr>
+
+                                                <td>
+                                                    is
+                                                </td>
+                                                <td>
+                                                    Ein innerer Satz (ohne Leerzeichen)
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    ap
+                                                </td>
+
+                                                <td>
+                                                    Ein Absatz (mit Leerzeichen)
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    ip
+                                                </td>
+                                                <td>
+                                                    Ein innerer Absatz (ohne Leerzeichen)
+                                                </td>
+
+                                            </tr>
+                                        </tbody>
+
+                                    </table>
+                                </div>
+
+                                <div id="aufrufoptionen">
+
+                                    <table id="aufrufoptionen_2">
+
+                                        <thead>
+
+                                            <tr>
+                                                <th colspan="2">
+                                                    <b>Aufrufoptionen</b>
+                                                </th>
+                                            </tr>
+                                            <tr>
+                                                <th>
+                                                    Option
+                                                </th>
+
+                                                <th>
+                                                    Bedeutung
+                                                </th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    +<i>n datei</i>
+
+                                                </td>
+                                                <td>
+                                                    öffnet <i>datei</i> bei der Zeilennummer <i>n</i>
+                                                </td>
+                                            </tr>
+                                            <tr>
+
+                                                <td>
+                                                    + <i>datei</i>
+                                                </td>
+                                                <td>
+                                                    öffnet <i>datei</i> bei der letzten Zeile
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>
+                                                    +/<i>muster datei</i>
+                                                </td>
+                                                <td>
+                                                    öffnet <i>datei</i> beim ersten Auftreten von <i>muster</i>
+
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    +<i>cmd</i>
+                                                </td>
+                                                <td>
+                                                    Das Ex-Kommando <i>cmd</i> wird nach dem Start ausgeführt
+                                                </td>
+
+                                            </tr>
+                                        </tbody>
+
+                                    </table>
+                                </div>
+
+                                <!-- Subtemplate: 2 Spalten mit 50/50 Teilung -->
+                                <div class="subcolumns">
+                                  <div class="c50l">
+                                    <div class="subcl">
+
+                                      <!-- Inhalt linker Block -->
+
+                                    <div id="markCol3-1">
+
+                                    <div id="kommandozeile">
+                                        <div id="b26">
+
+                                            <h4>Kommandozeilen-Editor<img src="vim.php-Dateien/tux.png" class="os" alt="Tux"></h4>
+
+                                            <p>In die .bashrc diese Zeile einfügen:</p>
+
+                                            <p><code>set -o vi</code></p>
+
+                                        </div>
+                                    </div>
+
+                                    <hr>
+
+                                    <div id="splitten">
+                                        <div id="b27">
+
+                                            <h4>Fenster splitten</h4>
+
+                                            <p>Im Kommandozeilen-Modus:</p>
+
+                                            <p><code>:sp[lit] <i>Datei</i></code></p>
+
+                                            <p>oder</p>
+
+                                            <p><code>vim -o <i>Datei1 Datei2</i></code></p>
+
+                                            <p>Zwischen den Fenstern wechseln:</p>
+
+                                            <p><code>Strg-W W</code></p>
+
+                                            <p>Fenster max. Größe:</p>
+
+                                            <p><code>Strg-W _</code></p>
+
+                                            <p>Alle Fenster gleiche Größe:</p>
+
+                                            <p><code>Strg-W =</code></p>
+
+                                            <p>Exakte Größe bestimmen:</p>
+
+                                            <p><code>z{n} [Enter]</code></p>
+
+                                        </div>
+                                    </div>
+
+                                    <hr>
+
+                                    <div id="wiederholen">
+                                        <div id="b28">
+
+                                            <h4>Letzte Aktion wiederholen</h4>
+
+                                            <p>Die letzte Aktion wird durch drücken der Punkt-Taste wiederholt (Normal-Modus)</p>
+
+                                        </div>
+                                    </div>
+
+                                    <hr>
+
+                                    <div id="carriagereturn">
+                                        <div id="b37">
+
+                                            <h4>Carriage Return entfernen</h4>
+
+                                            <p><code>:%s/^M//g</code></p>
+
+                                            <p>
+                                            Dabei muss man das <code>^M</code> durch Drücken von <code>STRG+V,</code> gefolgt von <code>STRG+M,</code> eingeben. <code>STRG+V</code> dient dazu, die nachfolgend gedrückte Tastenkombination direkt in den Text zu übernehmen.
+                                            </p>
+
+                                        </div>
+                                    </div>
+
+                                    <hr>
+
+                                    <div id="zwischenspeicher">
+                                        <div id="b38">
+
+                                            <h4>Copy &amp; Paste aus und in den Zwischenspeicher</h4>
+
+                                            <p>Kopieren: <code>"+y</code></p>
+
+                                            <p>Einfügen: <code>"+p</code> oder Tasten <code>Shift</code> &amp; <code>Einfg</code></p>
+
+                                        </div>
+                                    </div>
+
+                                    <hr>
+
+                                    <div id="altgr">
+                                        <div id="b39">
+
+                                            <h4>»alt gr« Mapping<img src="vim.php-Dateien/tux.png" class="os" alt="Tux"></h4>
+
+                                            
+                                            <p>
+                                            Als Programmierer und 
+10-Finger-Tipper ist es unter Linux nervig die eckigen und geschweiften 
+Klammern mit der Taste »alt gr» erzeugen zu müssen.
+                                            </p>
+
+                                            <p>
+                                            <a href="http://forum.ubuntuusers.de/topic/strg-%2B-alt-alt-gr-wie-in-windows/#post-2128638">Workaround Ubuntusers</a>
+                                            </p>
+
+                                        </div>
+                                    </div>
+
+                                    <hr>
+
+                                    <div id="sudo">
+                                        <div id="b41">
+
+                                            <h4>Schreibrechte »ohne« sudo<img src="vim.php-Dateien/tux.png" class="os" alt="Tux"></h4>
+
+                                            <p><code>
+                                                :w !sudo tee %
+                                            </code></p>
+
+                                            <p>Mapping:<br><code>
+                                                cmap w!! %!sudo tee &gt; /dev/null %
+                                            </code></p>
+
+                                        </div>
+                                  </div>
+
+                                  <hr>
+
+                                    <div id="foldcolors">
+                                        <div id="b42">
+
+                                            <h4>Foldcolors</h4>
+                                            
+                                            <p>
+                                            Folgende Zeile in die .vimrc oder in das bevorzugte Colorscheme.
+                                            </p>
+
+                                            <p><code>
+                                            hi Folded guibg=black guifg=gold cterm=none ctermbg=black ctermfg=darkgreen
+                                            </code></p>
+                                            
+                                        </div>
+                                     </div>
+                                  <hr>
+
+                                    <div id="vimdiff">
+                                        <div id="b44">
+
+                                            <h4>Git Diff mit Vimdiff<img src="vim.php-Dateien/tux.png" class="os" alt="Tux"></h4>
+
+                                            <p>
+                                            <a href="http://technotales.wordpress.com/2009/05/17/git-diff-with-vimdiff/">Jonathan's Techno-tales</a>
+                                            </p>
+                                            
+                                        </div>
+                                    </div>
+                                  <hr>
+
+                                    <div id="countpattern">
+                                        <div id="b46">
+
+                                            <h4>Häufigkeit einer Zeichenfolge ermitteln</h4>
+
+                                            <p><code>:%s/zeichenfolge//gn</code></p>
+                                            <p>
+                                                Das Flag <code>n</code> zählt die Anzahl der Treffer. Es werden keine Änderungen vorgenommen.
+                                            </p>
+                                            
+                                        </div>
+                                  </div>
+                                  <hr>
+
+                                    <div id="hightlight">
+                                        <div id="b47">
+
+                                            <h4>Zeichenkette in Datei hervorheben</h4>
+
+                                            <p>Folgende 2 autocommands in vimrc einfügen:</p>
+                                            
+                                            <p><code>au BufRead,BufNewFile *.log syn match fehler /Error/</code></p>
+                                            <p><code>au BufRead,BufNewFile *.log hi fehler guifg=white guibg=red ctermfg=white ctermbg=red</code></p>
+                                            
+                                        </div>
+                                  </div>
+
+                                    </div>
+
+                                    </div>
+
+                                  </div>
+
+                                  <div class="c50r" style="border-left: 1px solid #eee;">
+                                    <div class="subcr">
+                                      <!-- Inhalt rechter Block -->
+
+                                    <div id="markCol3-2">
+
+                                    <div id="aufzeichnen">
+                                        <div id="b29">
+
+                                            <h4>Tastenfolge aufzeichnen</h4>
+
+                                            <p>Aufnahme im Normal-Modus starten: <code>qa</code></p>
+
+                                            <p>Die Aufnahme wird mit <code>q</code> im Normal-Modus beendet und mit <code>@a</code> abgespielt.</p>
+
+                                        </div>
+                                    </div>
+
+                                    <hr>
+
+                                    <div id="drucken">
+                                        <div id="b30">
+
+                                            <h4>Drucken im Vim</h4>
+
+                                            <p><code>:ha[rdcopy]</code></p>
+
+                                        </div>
+                                    </div>
+
+                                    <hr>
+
+                                    <div id="dateiname">
+                                        <div id="b31">
+
+                                            <h4>Dateinamen schreiben</h4>
+
+                                            <p>Im Einfügemodus: <code>Strg-R %</code></p>
+
+                                        </div>
+                                    </div>
+
+                                    <hr>
+
+                                    <div id="lernprogramm">
+                                        <div id="b32">
+
+                                            <h4>Vim Lernprogramm</h4>
+
+                                            <p>In der Linux-Shell <code>vimtutor</code> eingeben.Unter Windows, im Vim-Verzeichnis, die Datei <code>vimtutor.bat</code> starten.</p> 
+                                        </div>
+
+                                    </div>
+
+                                    <hr>
+
+                                    <div id="vim2html">
+                                        <div id="b33">
+
+                                            <h4>vim2html</h4>
+                                            <p><code>:runtime! syntax/2html.vim</code></p>
+
+                                            <p>Optionen:</p>
+
+                                            <p>
+                                            <code>:let use_xhtml = 1<br>
+                                            :let html_use_css = 1</code>
+                                            </p>
+
+                                        </div>
+
+                                    </div>
+
+                                    <hr>
+
+                                    <div id="maxfenster">
+                                        <div id="b34">
+
+                                            <h4>Mit maximiertem Fenster starten<img src="vim.php-Dateien/windows.png" class="os" alt="Windows"></h4>
+
+                                            <p>Folgendes Auto-Kommando in die _vimrc eingeben:</p>
+
+                                            <p><code>au GUIEnter * simalt ~x</code></p>
+
+                                        </div>
+                                    </div>
+
+                                    <hr>
+
+                                    <div id="tabs">
+                                        <div id="b35">
+
+                                            <h4>Leerzeichen statt Tabstops</h4>
+
+                                            <p>Folgende Zeilen in die _vimrc eintragen:</p>
+                                            
+                                            <p>
+                                            <code>set tabstop=4<br>
+                                            set shiftwidth=4<br>
+                                            set expandtab</code>
+
+                                            </p>
+
+                                        </div>
+                                    </div>
+
+                                    <hr>
+
+                                    <div id="modelines">
+                                        <div id="b36">
+
+                                            <h4>Modelines</h4>
+
+                                            <p>Mit Hilfe von Modelines 
+lassen sich VIM-Optionen in und für eine Datei setzen. Die Optionen 
+müssen in den ersten oder letzten fünf Zeilen des Dokumentes stehen.</p>
+
+                                            <p>Beispiel:</p>
+
+                                            <p><code>vim:nonumber:textwidth=78</code></p>
+
+                                            <p>Wenn die Zeile mit einem Kommentarzeichen beginnt muss ein Leerzeichen vor die Anweisungen gesetzt werden.</p>
+
+                                        </div>
+                                    </div>
+
+                                    <hr>
+
+                                    <div id="vimrc">
+                                        <div id="b40">
+
+                                            <h4>vimrc öffnen</h4>
+
+                                            <p>Im Kommandozeilen-Modus:</p>
+
+                                            <p><code>
+                                                :e $MYVIMRC<br>
+                                                <!-- :e $MYGVIMRC -->
+                                            </code></p>
+
+                                            <p>
+
+                                            Dank »file name completion« reicht es »<code>:e $m</code>« zu tippen und anschließend die Tab-Taste zu drücken. 
+                                            </p>
+
+                                            <p>
+                                                Änderungen »on the fly« übernehmen:<code> :source $MYVIMRC<br></code>
+                                            </p>
+
+                                        </div>
+                                  </div>
+
+                                    <hr>
+
+                                    <div id="viewfiles">
+                                        <div id="b43">
+
+                                            <h4>View-Datei(en) löschen<img src="vim.php-Dateien/tux.png" class="os" alt="Tux"></h4>
+
+                                            <p><a href="http://www.nitidelo.de/vim/downloads/rmview.sh">Download Bash-Script</a></p>
+
+                                        </div>
+
+                                    </div>
+
+                                    <hr>
+
+                                    <div id="textareas">
+                                        <div id="b45">
+
+                                            <h4>Firefox: Edit textareas with Vim</h4>
+
+                                            <p>
+                                                <a href="https://addons.mozilla.org/de/firefox/addon/4125">Download Firefox-Addon</a>
+                                            </p>
+
+                                            <p>
+                                               Vim im Gnome-Terminal ausführen: <a href="http://www.nitidelo.de/vim/downloads/termvim.sh">Download Start-Script</a>
+                                            </p>
+
+                                            <p>
+                                                In den Einstellungen des
+ Addons muss nun noch der Pfad zum Skript angegeben werden.
+                                            </p>
+                                            
+                                        </div>
+                                    </div>
+
+                                    <hr>
+
+                                    <div id="mapping">
+                                        <div id="b48">
+
+                                            <h4>ESC-Mapping</h4>
+
+                                            <p>
+                                                <code>
+                                                    :imap jj &lt;esc&gt;
+                                                </code>
+                                            </p>
+                                            
+                                        </div>
+                                    </div>
+
+
+                                  </div>
+
+                                </div> 
+
+                            </div>
+
+                            <!-- IE column clearing -->
+                            <div id="ie_clearing">&nbsp;</div>
+                        </div><!--;;-->
+                        <!-- end: #col3 -->
+
+                    </div>
+                    <!-- end: #main -->
+
+                    <!-- begin: #footer -->
+                    <div id="footer">
+                        <!-- <div style="float: right;"><a href="#">XHTML1.0</a></div>-->
+                        Layout based on <a href="http://www.yaml.de/">YAML</a> | <a href="http://validator.w3.org/check?uri=referer">XHTML1.0</a></div>
+
+                    <!-- end: #footer -->
+
+                </div>
+            </div>
+<!--
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-9570858-4");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+-->
+    
+
+</body></html>

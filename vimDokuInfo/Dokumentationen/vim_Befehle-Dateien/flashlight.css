@@ -1,0 +1,103 @@
+/* Geshi styles for flashlight */
+
+/*Highlighted code*/
+.body .item .content .hlcode
+{
+  /*background-color: #404040;*/
+  background:url("../images/linenumback.png");
+  color: white;
+  white-space: normal;
+  font-size: 0.9em;
+}
+
+.body .item .content .hlcode OL
+{
+  list-style-type: decimal-leading-zero;
+  list-style-position: outside;
+  padding: 0;
+  margin-left: 3em;
+
+  /*border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #404040;*/
+
+  background-color: #F0F0F0;
+}
+
+.body .item .content .hlcode OL LI
+{
+  padding-left: 2px;
+  margin-top: 1px;
+
+  background-color: #E0E0E0;
+}
+
+.body .item .content .hlcode OL LI DIV
+{
+  color: black;
+}
+
+/* Comments */
+.co1,
+.coMULTI
+{
+  color:#606060;	
+}
+
+/* Methods */
+.me1
+{
+  color:#black;
+}
+
+.me2 {	
+  color:#4004000;
+}
+
+/* Symbols */
+.sy0
+{
+}
+
+/* brackets */
+.br0
+{
+  font-weight: bold;
+}
+
+/* strings */
+.st0
+{
+  color:#006000;
+  font-weight: bold;
+}
+
+/* Keywords */
+.kw1
+{
+  color: #600000;
+}
+.kw2
+{
+  color:#600000;
+  font-style: italic;		
+}
+
+.kw3
+{
+  color:#600000;
+  font-weight: bold;		
+}
+
+/* Numbers */
+.nu0
+{
+  color:#000060;
+  font-weight: bold;
+}
+
+/* Variables  */
+.re0
+{
+  color:#000060;
+}

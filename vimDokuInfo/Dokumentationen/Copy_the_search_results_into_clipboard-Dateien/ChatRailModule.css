@@ -1,0 +1,22 @@
+/* Minify took 0.01280403137207 */
+
+.UserStatsMenu{background:white;border:3px
+solid #003816;display:none;font-size:12px;padding:5px;position:absolute;z-index:100}.UserStatsMenu
+.info{background:#d4dcf0;line-height:15px;margin-bottom:5px;padding:5px
+5px 5px 35px;position:relative}.UserStatsMenu .info
+img{height:24px;position:absolute;left:5px;top:5px;width:24px}.UserStatsMenu .info
+.username{display:block;font-weight:bold}.UserStatsMenu .info
+.edits{display:block}.UserStatsMenu .info
+.since{display:block;white-space:nowrap}.UserStatsMenu .actions
+li{border-top:1px solid #ccc}.UserStatsMenu .actions li:first-child{border-top:none}.UserStatsMenu .actions li
+a{display:block;padding:5px}.UserStatsMenu .actions li a:hover{background:#d4dcf0;text-decoration:none}.ChatModule .chat-live{border-top-left-radius:3px;-moz-border-radius-topleft:3px;-webkit-border-top-left-radius:3px;border-top-right-radius:3px;-moz-border-radius-topright:3px;-webkit-border-top-right-radius:3px;border-bottom-left-radius:3px;-moz-border-radius-bottomleft:3px;-webkit-border-bottom-left-radius:3px;background:#25883d;color:white;float:right;font-size:14px;margin-right: -13px;padding:5px
+12px;position:relative}.ChatModule .chat-live:before{border-width:2px;border-style:solid;border-color:#12441e transparent transparent #12441e;content:url(http://images.wikia.nocookie.net/__cb51060/common/skins/common/blank.gif);height:0px;width:0px;position:absolute;bottom: -4px;right:0}.ChatModule .chat-join{text-align:right}.ChatModule
+.avatar{border:1px
+solid #ccc;height:32px;margin-right:10px;vertical-align:middle;width:32px}.ChatModule .chat-whos-here{margin:10px
+0}.ChatModule .chat-whos-here
+h2{display:block !important;margin-bottom:8px}.ChatModule .chat-whos-here
+.avatar{margin:0}.ChatModule .chat-whos-here>ul{*zoom:1}.ChatModule .chat-whos-here>ul:after{clear:both;content:".";display:block;height:0;overflow:hidden;visibility:hidden}.ChatModule .chat-whos-here>ul>li{display:block;float:left;margin:0
+0 0 10px;position:relative}.ChatModule .chat-whos-here>ul>li:first-child{margin:0}.ChatModule.module
+h1{margin-bottom:15px}.ChatModule.module
+h2{font-size:13px;padding:0}.ChatModule
+.UserStatsMenu{right:30px;top:0;z-index:1000}.WikiaRail{*position:relative;*z-index:1}.ChatModule{*position:relative;*z-index:1}
