@@ -1488,11 +1488,19 @@ if get(g:,'rapidConcealStructKeyMap',0)
   nmap <silent><buffer> <M-C-F3> <plug>RapidShowStructsAtCursor
   " conceal no structure values
   nmap <silent><buffer> <M-C-F2> <plug>RapidShowStructs
+  " conceal all structure values
+  nmap <silent><buffer> <S-M-C-F4> <plug>RapidConcealStructsAll
+  " conceal less structure values
+  nmap <silent><buffer> <S-M-C-F3> <plug>RapidShowStructsAtCursorAll
+  " conceal no structure values
+  nmap <silent><buffer> <S-M-C-F2> <plug>RapidShowStructsAll
 elseif get(g:,'rapidConcealStructsKeyMap',0)
   " deprecated
   " compatiblity
   nmap <silent><buffer> <M-C-F3> <plug>RapidShowStructs
   nmap <silent><buffer> <M-C-F2> <plug>RapidConcealStructs
+  nmap <silent><buffer> <S-M-C-F3> <plug>RapidShowStructsAll
+  nmap <silent><buffer> <S-M-C-F2> <plug>RapidConcealStructsAll
 endif
 
 " }}} Configurable mappings
@@ -1557,9 +1565,12 @@ if get(g:,'rapidMoveAroundKeyMap',1) " depends on move around key mappings
 endif
 
 " conceal all structure values
-nnoremap <silent><buffer> <plug>RapidConcealStructs       :call <SID>RapidConcealLevel(2)<CR>
-nnoremap <silent><buffer> <plug>RapidShowStructsAtCursor  :call <SID>RapidConcealLevel(1)<CR>
-nnoremap <silent><buffer> <plug>RapidShowStructs          :call <SID>RapidConcealLevel(0)<CR>
+nnoremap <silent><buffer> <plug>RapidConcealStructs                       :call <SID>RapidConcealLevel(2)<CR>
+nnoremap <silent><buffer> <plug>RapidShowStructsAtCursor                  :call <SID>RapidConcealLevel(1)<CR>
+nnoremap <silent><buffer> <plug>RapidShowStructs                          :call <SID>RapidConcealLevel(0)<CR>
+nnoremap <expr><silent><buffer> <plug>RapidConcealStructsAll &diff ?      ':windo call <SID>RapidConcealLevel(2)<CR>' : ':tabdo call <SID>RapidConcealLevel(2)<CR>'
+nnoremap <expr><silent><buffer> <plug>RapidShowStructsAtCursorAll &diff ? ':windo call <SID>RapidConcealLevel(1)<CR>' : ':tabdo call <SID>RapidConcealLevel(1)<CR>'
+nnoremap <expr><silent><buffer> <plug>RapidShowStructsAll &diff ?         ':windo call <SID>RapidConcealLevel(0)<CR>' : ':tabdo call <SID>RapidConcealLevel(0)<CR>'
 
 " }}} <plug> mappings
 

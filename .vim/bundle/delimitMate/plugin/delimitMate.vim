@@ -356,8 +356,8 @@ function! s:ExtraMappings() "{{{
   " Jump over next delimiters
   inoremap <expr><buffer> <Plug>delimitMateJumpMany <SID>TriggerAbb()."\<C-R>=delimitMate#JumpMany()\<CR>"
   if !hasmapto('<Plug>delimitMateJumpMany', 'i') && maparg("<C-G>g", 'i') == ''
-    imap <silent> <buffer> <C-L> <Plug>delimitMateJumpMany
-    nmap <silent> <buffer> <C-L> <Plug>delimitMateJumpMany
+    imap <silent> <buffer> <C-Tab> <Plug>delimitMateJumpMany
+    nmap <silent> <buffer> <C-Tab> <Plug>delimitMateJumpMany
   endif
 endfunction "}}}
 

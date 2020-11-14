@@ -50,6 +50,7 @@ Plugin 'jalvesaq/Nvim-R'
 Plugin 'chrisbra/csv.vim'
 Plugin 'othree/html5.vim'
 Plugin 'Raimondi/delimitMate'
+Plugin 'rickhowe/diffchar.vim'
 "Plugin 'chaoren/vim-wordmotion'
 "
 " All of your Plugins must be added before the following line
@@ -105,6 +106,10 @@ set mouse=a             " use mouse everywhere
 "set shortmess+=I        " don't show splashscreen
 "set directory=.,d:\tmp
 set directory=.,~\.vim_backup
+"____________________________________________________________________________________________________________________
+"Diff
+"
+set diffopt+=internal,algorithm:patience
 "____________________________________________________________________________________________________________________
 " gVim appearance
 "
@@ -168,51 +173,61 @@ endif
 let mapleader = ","	
 let maplocalleader = "ö"
 noremap									<F9>	 		<Esc>:bufdo tab split<CR>:tablast<CR>:tabclose<CR>
-noremap									<F2>	 		<ESC>:if &guifont=~#'Fira_Code:h8'<Bar>set guifont=Fira_Code:h10.5<Bar>set lines=55<Bar>else<Bar>set guifont=Fira_Code:h8<Bar>set lines=55<Bar>endif<CR>
+"noremap									<F2>	 		<ESC>:if &guifont=~#'Fira_Code:h8'<Bar>set guifont=Fira_Code:h10.5<Bar>set lines=55<Bar>wincmd =<Bar>else<Bar>set guifont=Fira_Code:h8<Bar>set lines=55<Bar>wincmd =<Bar>endif<CR>
+noremap									<F2>	 		<ESC>:call WindowSize()<CR>
+noremap									<M-F2>	 		<ESC>:call WindowDiffSize()<CR>
 noremap									<F3>			<ESC>:if &lines=~#'55'<Bar>set lines=75<Bar>else<Bar>set lines=55<Bar>endif<CR>
 nmap									<localleader>h 	<plug>(YCMHover)
-"____________________________________________________________________________________________________________________
+noremap <expr>							<C-h> &diff ?	'<ESC><c-w><c-w>' : '<ESC><c-w>h'
+noremap <expr>							<C-j> &diff ?	'<ESC>]c' : '<ESC><c-w>j'
+noremap <expr>							<C-k> &diff ?	'<ESC>[c' : '<ESC><c-w>k'
+noremap <expr>							<C-l> &diff ?	'<ESC><c-w><c-w>' : '<ESC><c-w>l'
+noremap									<localleader>g 	:diffge<CR>
+noremap									<localleader>p 	:diffpu<CR>
+"___________________________________________________________________________________________________________________
 " Terminal mode mapping
 "
-tnoremap								<C-h>			<Esc><c-w>h
-tnoremap								<C-j>			<Esc><c-w>j
-tnoremap								<C-k>			<Esc><c-w>k
-tnoremap								<C-l>			<Esc><c-w>l
+"tnoremap								<C-h>			<Esc><c-w>h
+"tnoremap								<C-j>			<Esc><c-w>j
+"tnoremap								<C-k>			<Esc><c-w>k
+"tnoremap								<C-l>			<Esc><c-w>l
 tnoremap								<C-V>			<C-W>"*
 tnoremap								<Esc>			<C-\><C-n>
 "tnoremap								<S-Esc>			<C-\><C-n>:q!<CR>
 "____________________________________________________________________________________________________________________
 " Insert mode mapping
 "
-inoremap								<C-h>			<Esc><c-w>h
-inoremap								<C-j>			<Esc><c-w>j
-inoremap								<C-k>			<Esc><c-w>k
-inoremap								<C-l>			<Esc><c-w>l
+"inoremap								<C-h>			<Esc><c-w>h
+"inoremap								<C-j>			<Esc><c-w>j
+"inoremap								<C-k>			<Esc><c-w>k
+"inoremap								<C-l>			<Esc><c-w>l
 "digraph
 inoremap								<C-d>			<C-k>
 "____________________________________________________________________________________________________________________
 " Visual mode mapping
 "
-vnoremap								<C-h>			<Esc><c-w>h
-vnoremap								<C-j>			<Esc><c-w>j
-vnoremap								<C-k>			<Esc><c-w>k
-vnoremap								<C-l>			<Esc><c-w>l
+"vnoremap								<C-h>			<Esc><c-w>h
+"vnoremap								<C-j>			<Esc><c-w>j
+"vnoremap								<C-k>			<Esc><c-w>k
+"vnoremap								<C-l>			<Esc><c-w>l
 au BufNewFile,BufRead *.py vnoremap 	<localleader>ss	"yy<c-w>j<c-w>"y<CR><c-w>k
 vnoremap								<				<gv
 vnoremap								>				>gv
 vnoremap 								yp				"0p
 vnoremap 								yP				"0P
 vnoremap 								yy				y
+vnoremap 								do				:diffge<CR>
+vnoremap 								dp				:diffpu<CR>
 "____________________________________________________________________________________________________________________
 " normal mode mapping
 "
 nnoremap								<TAB>			:tabn<CR>
 nnoremap								<S-TAB>			:tabp<CR>
 nnoremap								<C-F1>			:if &go=~#'m'<Bar>set go-=mcerb<Bar>else<Bar>set go+=mcerb<Bar>endif<CR>
-nnoremap								<C-h>			<c-w>h
-nnoremap								<C-j>			<c-w>j
-nnoremap								<C-k>			<c-w>k
-nnoremap								<C-l>			<c-w><c-w>l
+"nnoremap								<C-h>			<c-w>h
+"nnoremap								<C-j>			<c-w>j
+"nnoremap								<C-k>			<c-w>k
+"nnoremap								<C-l>			<c-w><c-w>l
 nnoremap								<F6>			:YcmForceCompileAndDiagnostics<CR>
 nnoremap								<F5>			:TlistToggle <CR>                                  " taglist
 nnoremap								<M-F5>			:TlistUpdate<CR>                                 " taglist
@@ -242,8 +257,8 @@ nnoremap								E 				@e
 nnoremap 								<leader>h		:call BlacklistFiletype()<CR>
 nnoremap 								<localleader>t	:call CopyOut()<CR>
 nnoremap 								<leader>/		:call GrepBuffers("<C-R><C-W>")<CR>
-nnoremap 								<localleader>e	wbve"oyy:%s/\<o\>/
-nnoremap 								<localleader>E	wbve"oyy:tabdo %s/\<o\>/
+nnoremap 								<localleader>e	wbve"oyy:%s/\<o\>/o/g
+nnoremap 								<localleader>E	wbve"oyy:tabdo %s/\<o\>/o/g
 "au FileType qf nnoremap <buffer> 		<CR> 			<CR>:tabdo :ccl<CR>
 
 "____________________________________________________________________________________________________________________
@@ -328,6 +343,36 @@ function CopyOut()
 endfunction
 
 "____________________________________________________________________________________________________________________
+"WindowSizeChange
+"
+function WindowSize()
+	if &guifont=~#'Fira_Code:h8'
+		set guifont=Fira_Code:h10.5
+		set columns=136                   " columns
+		set lines=55
+		wincmd =
+	else
+		set guifont=Fira_Code:h8
+		set columns=136                   " columns
+		set lines=55
+		wincmd =
+	endif
+endfunction
+
+function WindowDiffSize()
+	"if &diff && &columns!=999 && &columns!=272
+	if &columns!=999 && &columns!=272
+		set columns=999
+		set lines=999
+		wincmd =
+	"elseif &diff && &columns==272
+	elseif &columns==272
+		set columns=136                   " columns
+		set lines=55
+		wincmd =
+	endif
+endfunction
+"____________________________________________________________________________________________________________________
 "Quckfix window
 "
 set switchbuf+=newtab
@@ -397,6 +442,7 @@ let g:rainbow_active = 0
 "lightline
 "
 let g:lightline = {'colorscheme': 'gruvbox',}
+"let g:lightline = {'colorscheme': 'solarized',}
 set noshowmode
 "____________________________________________________________________________________________________________________
 " taglist
