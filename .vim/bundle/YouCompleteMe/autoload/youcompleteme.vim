@@ -63,7 +63,9 @@ let s:pollers = {
 let s:buftype_blacklist = {
       \   'help': 1,
       \   'terminal': 1,
-      \   'quickfix': 1
+      \   'quickfix': 1,
+      \   'popup': 1,
+      \   'nofile': 1,
       \ }
 let s:last_char_inserted_by_user = v:true
 let s:enable_hover = 0
@@ -478,6 +480,9 @@ function! s:AllowedToCompleteInBuffer( buffer )
   endif
 
   let filetype = getbufvar( a:buffer, '&filetype' )
+  if empty( filetype )
+    let filetype = 'ycm_nofiletype'
+  endif
 
   let whitelist_allows = type( g:ycm_filetype_whitelist ) != v:t_dict ||
         \ has_key( g:ycm_filetype_whitelist, '*' ) ||
@@ -487,7 +492,7 @@ function! s:AllowedToCompleteInBuffer( buffer )
 
   let allowed = whitelist_allows && blacklist_allows
 
-  if empty( filetype ) || !allowed || s:DisableOnLargeFile( a:buffer )
+  if !allowed || s:DisableOnLargeFile( a:buffer )
     return 0
   endif
 

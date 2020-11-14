@@ -46,7 +46,6 @@ function! Test_Using_Ondemand_Resolve()
 
   call assert_report( "Didn't find the resolve type in the YcmDebugInfo" )
 
-  %bwipeout!
 endfunction
 
 function! Test_ResolveCompletion_OnChange()
@@ -55,9 +54,9 @@ function! Test_ResolveCompletion_OnChange()
   " Only the java completer actually uses the completion resolve
   call youcompleteme#test#setup#OpenFile(
         \ '/third_party/ycmd/ycmd/tests/java/testdata/simple_eclipse_project' .
-        \ '/src/com/test/MethodsWithDocumentation.java', { 'delay': 15 } )
+        \ '/src/com/test/TestWithDocumentation.java', { 'delay': 15 } )
 
-  call setpos( '.', [ 0, 33, 20 ] )
+  call setpos( '.', [ 0, 6, 21 ] )
   " Required to trigger TextChangedI
   " https://github.com/vim/vim/issues/4665#event-2480928194
   call test_override( 'char_avail', 1 )
@@ -106,13 +105,12 @@ function! Test_ResolveCompletion_OnChange()
     endif
   endfunction
 
-  call FeedAndCheckMain( 'C.', funcref( 'Check1' ) )
+  call FeedAndCheckMain( 'cw', funcref( 'Check1' ) )
 
   call assert_false( pumvisible(), 'pumvisible()' )
   call assert_equal( 1, found_getAString )
 
   call test_override( 'ALL', 0 )
-  %bwipeout!
 endfunction
 
 function! Test_DontResolveCompletion_AlreadyResolved()
@@ -121,9 +119,9 @@ function! Test_DontResolveCompletion_AlreadyResolved()
   " Only the java completer actually uses the completion resolve
   call youcompleteme#test#setup#OpenFile(
         \ '/third_party/ycmd/ycmd/tests/java/testdata/simple_eclipse_project' .
-        \ '/src/com/test/MethodsWithDocumentation.java', { 'delay': 15 } )
+        \ '/src/com/test/TestWithDocumentation.java', { 'delay': 15 } )
 
-  call setpos( '.', [ 0, 34, 12 ] )
+  call setpos( '.', [ 0, 7, 12 ] )
   " Required to trigger TextChangedI
   " https://github.com/vim/vim/issues/4665#event-2480928194
   call test_override( 'char_avail', 1 )
@@ -162,5 +160,4 @@ function! Test_DontResolveCompletion_AlreadyResolved()
   call assert_false( pumvisible(), 'pumvisible()' )
 
   call test_override( 'ALL', 0 )
-  %bwipeout!
 endfunction

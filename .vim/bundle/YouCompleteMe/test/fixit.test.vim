@@ -34,12 +34,11 @@ function! Test_Ranged_Fixit_Works()
   call assert_match( '        String \(x\|string\) = "Did something useful: "' .
                      \ ' + w.getWidgetInfo();', getline( 34 ) )
   call assert_match( '\t\tSystem.out.println( \(x\|string\) );', getline( 35 ) )
-  %bwipeout!
   delfunction SelectEntry
 endfunction
 
 function! Test_Unresolved_Fixit_Works()
-  call youcompleteme#test#setup#OpenFile( '/test/testdata/cpp/fixit.c', {} )
+  call youcompleteme#test#setup#OpenFile( '/test/testdata/cpp/fixit.cpp', {} )
   call setpos( '.', [ 0, 3, 15 ] )
   call assert_equal( '  printf("%s",1);', getline( '.' ) )
   function! SelectEntry( id ) closure

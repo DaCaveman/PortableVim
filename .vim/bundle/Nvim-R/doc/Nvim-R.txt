@@ -364,7 +364,7 @@ Start/Close
   . Start R (custom)                                   \rc
   --------------------------------------------------------
   . Close R (no save)                                  \rq
-  . Stop R                                          :RStop
+  . Stop (interrupt) R                                 :RStop
 -----------------------------------------------------------
 
 Send
@@ -1301,10 +1301,16 @@ put in your |vimrc|:
 >
    let R_rnowebchunk = 0
 <
-Similarly, in Rmd files the grave accent is replaced with chunk delimiters
-unless you put in your |vimrc|:
+Similarly, in Rmd files the grave accent (backtick) is replaced with chunk
+delimiters unless you put in your |vimrc|:
 >
    let R_rmdchunk = 0
+<
+You can also define a different shortcut for `R_rmdchunk`. For example, to use
+two backticks instead of one to trigger the completion of the chunk delimiter,
+put in your |vimrc|:
+>
+   let R_rmdchunk = '``'
 <
 While editing R code, `_` is replaced with `<-`. If you want to bind other
 keys to be replaced by `<-`, set the value of |R_assign_map| in your
@@ -2406,15 +2412,23 @@ maps for most functions because the way the function is called is different in
 each Vim mode. Thus, key bindings must be made for Normal mode, Insert mode,
 and Visual mode.
 
-To customize a key binding you should put in your |vimrc| something like:
+To customize a key binding you could put something like this in your |vimrc|:
 >
-   nmap <LocalLeader>sr <Plug>RStart
-   imap <LocalLeader>sr <Plug>RStart
-   vmap <LocalLeader>sr <Plug>RStart
+    function! s:customNvimRMappings()
+       nmap <buffer> <Leader>sr <Plug>RStart
+       imap <buffer> <Leader>sr <Plug>RStart
+       vmap <buffer> <Leader>sr <Plug>RStart
+    endfunction
+    augroup myNvimR
+       au!
+       autocmd filetype r call s:customNvimRMappings()
+    augroup end
+
 <
-The above example shows how to change key binding used to start R from
-<LocalLeader>rf to <LocalLeader>sr. After changing the maps in your |vimrc|,
-you have to restart Vim.
+The above example shows how to add a key binding to start R for <Leader>sr
+for just r buffers. The default <LocalLeader>rf still exists. After changing
+the maps in your |vimrc|, you have to restart Vim. If you want to remove the
+default mappings, you can set |R_user_maps_only| .
 
 Only the custom key bindings for Normal mode are shown in Vim's menu, but
 you can type |:map| to see the complete list of current mappings, and below is
@@ -3161,6 +3175,7 @@ Examples:
  * New options: R_clear_console, R_debug, R_auto_start.
  * Replace options R_in_buffer, R_term and R_term_cmd with a single option:
    R_external_term.
+ * Make R_rmdchunk more flexible.
  * Change default key binding for calling debug() from \db to \bg to avoid
    conflict with \d (send line).
 
