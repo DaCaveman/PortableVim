@@ -51,7 +51,7 @@ Plugin 'chrisbra/csv.vim'
 Plugin 'othree/html5.vim'
 Plugin 'Raimondi/delimitMate'
 Plugin 'rickhowe/diffchar.vim'
-"Plugin 'chaoren/vim-wordmotion'
+Plugin 'romainl/vim-qf'
 "
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -478,10 +478,11 @@ let NERDTreeMapOpenInTab='<ENTER>'
 "____________________________________________________________________________________________________________________
 " ABB rapid
 "
-let tlist_rapid_settings='rapid;p:procedure;f:function;t:trap;e:eio'
+"let g:knopVerbose = 1 " don't show messages
+let tlist_rapid_settings='rapid;p:procedure;r:record;f:function;t:trap;e:eio'
 let g:rapidFormatComments = 0 " don't break comment lines automatically
 let g:rapidCommentIndent = 1 " indent comments starting in 1st column too
-let g:rapidShortenQFPath = 0 " don't shorten paths in quickfix
+let g:rapidShortenQFPath = 1 " don't shorten paths in quickfix
 let g:rapidAutoComment = 0 " don't continue comments with o, O or Enter
 let g:rapidSpaceIndent = 0 " don't change 'sts', 'sw', 'et' and 'sr'
 "let g:rapidConcealStructs = 0 " switch concealing off completely
