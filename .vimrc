@@ -218,6 +218,7 @@ vnoremap 								yP				"0P
 vnoremap 								yy				y
 vnoremap 								do				:diffge<CR>
 vnoremap 								dp				:diffpu<CR>
+vnoremap 								<localleader>/	:<C-U>execute "vimgrep /" . expand("<cword>") . "/gj **/*.*"<CR>
 "____________________________________________________________________________________________________________________
 " normal mode mapping
 "
@@ -260,7 +261,14 @@ nnoremap 								<leader>/		:call GrepBuffers("<C-R><C-W>")<CR>
 nnoremap 								<localleader>e	wbve"oyy:%s/\<o\>/o/g
 nnoremap 								<localleader>E	wbve"oyy:tabdo %s/\<o\>/o/g
 "au FileType qf nnoremap <buffer> 		<CR> 			<CR>:tabdo :ccl<CR>
+autocmd FileType qf nnoremap <buffer> <Enter> <C-W><Enter><C-W>T
+autocmd FileType nerdtree nnoremap <buffer> <localleader>/ :vimgrep //gj **/*.*<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
 
+"____________________________________________________________________________________________________________________
+" command-line mapping
+"
+cnoremap								<C-h>			<Left>
+cnoremap								<C-l>			<Right>
 "____________________________________________________________________________________________________________________
 "Terminal Window
 "
@@ -375,7 +383,7 @@ endfunction
 "____________________________________________________________________________________________________________________
 "Quckfix window
 "
-set switchbuf+=newtab
+set switchbuf+=usetab,newtab
 aug QFClose
   au!
   au WinEnter * if winnr('$') == 1 && &buftype == "quickfix"|q|endif
@@ -475,6 +483,7 @@ let g:SimpylFold_fold_docstring = 1
 "
 let NERDTreeMapOpenInTab='\r'
 let NERDTreeMapOpenInTab='<ENTER>'
+let NERDTreeChDirMode=2
 "____________________________________________________________________________________________________________________
 " ABB rapid
 "
