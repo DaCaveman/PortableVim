@@ -178,10 +178,12 @@ noremap									<F2>	 		<ESC>:call WindowSize()<CR>
 noremap									<M-F2>	 		<ESC>:call WindowDiffSize()<CR>
 noremap									<F3>			<ESC>:if &lines=~#'55'<Bar>set lines=75<Bar>else<Bar>set lines=55<Bar>endif<CR>
 nmap									<localleader>h 	<plug>(YCMHover)
-noremap <expr>							<C-h> &diff ?	'<ESC><c-w><c-w>' : '<ESC><c-w>h'
+"noremap <expr>							<C-h> &diff ?	'<ESC><c-w><c-w>' : '<ESC><c-w>h'
+noremap <expr>							<C-h> &diff ?	'<ESC><c-w>h' : '<ESC><c-w>h'
 noremap <expr>							<C-j> &diff ?	'<ESC>]c' : '<ESC><c-w>j'
 noremap <expr>							<C-k> &diff ?	'<ESC>[c' : '<ESC><c-w>k'
-noremap <expr>							<C-l> &diff ?	'<ESC><c-w><c-w>' : '<ESC><c-w>l'
+"noremap <expr>							<C-l> &diff ?	'<ESC><c-w><c-w>' : '<ESC><c-w>l'
+noremap <expr>							<C-l> &diff ?	'<ESC><c-w>l' : '<ESC><c-w>l'
 noremap									<localleader>g 	:diffge<CR>
 noremap									<localleader>p 	:diffpu<CR>
 "___________________________________________________________________________________________________________________
