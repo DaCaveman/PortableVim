@@ -266,6 +266,9 @@ nnoremap 								<localleader>E	wbve"oyy:tabdo %s/\<o\>/o/g
 "au FileType qf nnoremap <buffer> 		<CR> 			<CR>:tabdo :ccl<CR>
 autocmd FileType qf nnoremap <buffer> <Enter> <C-W><Enter><C-W>T
 autocmd FileType nerdtree nnoremap <buffer> <localleader>/ :vimgrep //gj **/*.*<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
+au BufNewFile,BufRead *.html nnoremap 	<M-F11> 		:silent !start powershell -NoExit browser-sync start --server --files .<CR>
+au BufNewFile,BufRead *.css nnoremap 	<M-F11> 		:silent !start powershell -NoExit browser-sync start --server --files .<CR>
+au BufNewFile,BufRead *.js nnoremap 	<M-F11> 		:silent !start powershell -NoExit browser-sync start --server --files .<CR>
 
 "____________________________________________________________________________________________________________________
 " command-line mapping
