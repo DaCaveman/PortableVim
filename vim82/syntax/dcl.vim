@@ -1,8 +1,8 @@
 " Vim syntax file
 " Language:	DCL (Digital Command Language - vms)
-" Maintainer:	Charles E. Campbell <NcampObell@SdrPchip.AorgM-NOSPAM>
+" Maintainer:	Charles E. Campbell <NdrOchipS@PcampbellAfamily.Mbiz>
 " Last Change:	Mar 26, 2019
-" Version:	13
+" Version:	12
 " URL:	http://www.drchip.org/astronaut/vim/index.html#SYNTAX_DCL
 
 " quit when a syntax file was already loaded

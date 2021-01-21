@@ -3,7 +3,7 @@
 " Maintainer:  Debian Vim Maintainers
 " Former Maintainers: Gerfried Fuchs <alfie@ist.org>
 "                     Wichert Akkerman <wakkerma@debian.org>
-" Last Change: 2020 Apr 27
+" Last Change: 2019 Oct 20
 " URL: https://salsa.debian.org/vim-team/vim-debian/blob/master/syntax/debchangelog.vim
 
 " Standard syntax initialization
@@ -24,7 +24,7 @@ let s:supported = [
       \ 'wheezy', 'jessie', 'stretch', 'buster', 'bullseye', 'bookworm',
       \ 'sid', 'rc-buggy',
       \
-      \ 'trusty', 'xenial', 'bionic', 'eoan', 'focal', 'groovy', 'devel'
+      \ 'trusty', 'xenial', 'bionic', 'disco', 'eoan', 'focal', 'devel'
       \ ]
 let s:unsupported = [
       \ 'frozen', 'buzz', 'rex', 'bo', 'hamm', 'slink', 'potato',
@@ -33,8 +33,7 @@ let s:unsupported = [
       \ 'warty', 'hoary', 'breezy', 'dapper', 'edgy', 'feisty',
       \ 'gutsy', 'hardy', 'intrepid', 'jaunty', 'karmic', 'lucid',
       \ 'maverick', 'natty', 'oneiric', 'precise', 'quantal', 'raring', 'saucy',
-      \ 'utopic', 'vivid', 'wily', 'yakkety', 'zesty', 'artful', 'cosmic',
-      \ 'disco'
+      \ 'utopic', 'vivid', 'wily', 'yakkety', 'zesty', 'artful', 'cosmic'
       \ ]
 let &cpo=s:cpo
 
@@ -44,7 +43,7 @@ exe 'syn match debchangelogFirstKV	contained "; \('.s:urgency.'\|'.s:binNMU.'\)"
 exe 'syn match debchangelogOtherKV	contained ", \('.s:urgency.'\|'.s:binNMU.'\)"'
 exe 'syn match debchangelogTarget	contained "\%( \%('.join(s:supported, '\|').'\)\>[-[:alnum:]]*\)\+"'
 exe 'syn match debchangelogUnsupportedTarget	contained "\%( \%('.join(s:unsupported, '\|').'\)\>[-[:alnum:]]*\)\+"'
-syn match debchangelogUnreleased	contained / UNRELEASED/
+syn keyword debchangelogUnreleased	contained UNRELEASED
 syn match debchangelogVersion	contained "(.\{-})"
 syn match debchangelogCloses	contained "closes:\_s*\(bug\)\=#\=\_s\=\d\+\(,\_s*\(bug\)\=#\=\_s\=\d\+\)*"
 syn match debchangelogLP	contained "\clp:\s\+#\d\+\(,\s*#\d\+\)*"

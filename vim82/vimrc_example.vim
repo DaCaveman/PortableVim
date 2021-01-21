@@ -1,13 +1,12 @@
 " An example for a vimrc file.
 "
 " Maintainer:	Bram Moolenaar <Bram@vim.org>
-" Last change:	2019 Dec 17
+" Last change:	2019 Jan 26
 "
 " To use it, copy it to
-"	       for Unix:  ~/.vimrc
+"     for Unix and OS/2:  ~/.vimrc
 "	      for Amiga:  s:.vimrc
-"	 for MS-Windows:  $VIM\_vimrc
-"	      for Haiku:  ~/config/settings/vim/vimrc
+"  for MS-DOS and Win32:  $VIM\_vimrc
 "	    for OpenVMS:  sys$login:.vimrc
 
 " When started as "evim", evim.vim will already have done these settings, bail

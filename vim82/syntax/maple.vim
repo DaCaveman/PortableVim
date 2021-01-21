@@ -1,8 +1,8 @@
 " Vim syntax file
 " Language:	Maple V (based on release 4)
-" Maintainer:	Charles E. Campbell <NcampObell@SdrPchip.AorgM-NOSPAM>
+" Maintainer:	Charles E. Campbell <NdrOchipS@PcampbellAfamily.Mbiz>
 " Last Change:	Mar 26, 2019
-" Version:	17
+" Version:	16
 " URL:	http://www.drchip.org/astronaut/vim/index.html#SYNTAX_MAPLE
 "
 " Package Function Selection: {{{1

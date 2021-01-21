@@ -1,8 +1,8 @@
 " Vim syntax file
 " Language:	rpcgen
-" Maintainer:	Charles E. Campbell <NcampObell@SdrPchip.AorgM-NOSPAM>
+" Maintainer:	Charles E. Campbell <NdrOchipS@PcampbellAfamily.Mbiz>
 " Last Change:	Aug 31, 2016
-" Version:	13
+" Version:	12
 " URL:	http://www.drchip.org/astronaut/vim/index.html#SYNTAX_RPCGEN
 
 if exists("b:current_syntax")

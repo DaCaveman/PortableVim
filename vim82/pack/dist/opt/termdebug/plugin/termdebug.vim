@@ -2,7 +2,7 @@
 "
 " Author: Bram Moolenaar
 " Copyright: Vim license applies, see ":help license"
-" Last Change: 2020 Jun 12
+" Last Change: 2019 Dec 11
 "
 " WORK IN PROGRESS - Only the basics work
 " Note: On MS-Windows you need a recent version of gdb.  The one included with
@@ -657,10 +657,8 @@ func s:InstallCommands()
   command Source call s:GotoSourcewinOrCreateIt()
   command Winbar call s:InstallWinbar()
 
-  if !exists('g:termdebug_map_K') || g:termdebug_map_K
-    let s:k_map_saved = maparg('K', 'n', 0, 1)
-    nnoremap K :Evaluate<CR>
-  endif
+  " TODO: can the K mapping be restored?
+  nnoremap K :Evaluate<CR>
 
   if has('menu') && &mouse != ''
     call s:InstallWinbar()
@@ -710,10 +708,7 @@ func s:DeleteCommands()
   delcommand Source
   delcommand Winbar
 
-  if exists('s:k_map_saved') && !empty(s:k_map_saved)
-    call mapset('n', 0, s:k_map_saved)
-    unlet s:k_map_saved
-  endif
+  nunmap K
 
   if has('menu')
     " Remove the WinBar entries from all windows where it was added.

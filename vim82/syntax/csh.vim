@@ -1,8 +1,8 @@
 " Vim syntax file
 " Language:	C-shell (csh)
-" Maintainer:	Charles E. Campbell <NcampObell@SdrPchip.AorgM-NOSPAM>
+" Maintainer:	Charles E. Campbell <NdrOchipS@PcampbellAfamily.Mbiz>
 " Last Change:	Aug 31, 2016
-" Version:	14
+" Version:	13
 " URL:	http://www.drchip.org/astronaut/vim/index.html#SYNTAX_CSH
 
 " quit when a syntax file was already loaded
