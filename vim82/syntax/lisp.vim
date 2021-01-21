@@ -1,8 +1,8 @@
 " Vim syntax file
 " Language:    Lisp
-" Maintainer:  Charles E. Campbell <NcampObell@SdrPchip.AorgM-NOSPAM>
+" Maintainer:  Charles E. Campbell <NdrOchipS@PcampbellAfamily.Mbiz>
 " Last Change: Jul 11, 2019
-" Version:     30
+" Version:     29
 " URL:	http://www.drchip.org/astronaut/vim/index.html#SYNTAX_LISP
 "
 "  Thanks to F Xavier Noria for a list of 978 Common Lisp symbols taken from HyperSpec

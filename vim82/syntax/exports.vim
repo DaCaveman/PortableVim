@@ -1,8 +1,8 @@
 " Vim syntax file
 " Language:	exports
-" Maintainer:	Charles E. Campbell <NcampObell@SdrPchip.AorgM-NOSPAM>
+" Maintainer:	Charles E. Campbell <NdrOchipS@PcampbellAfamily.Mbiz>
 " Last Change:	Aug 31, 2016
-" Version:	8
+" Version:	7
 " Notes:		This file includes both SysV and BSD 'isms
 " URL:	http://www.drchip.org/astronaut/vim/index.html#SYNTAX_EXPORTS
 

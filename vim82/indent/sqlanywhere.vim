@@ -1,8 +1,7 @@
 " Vim indent file
 " Language:    SQL
 " Maintainer:  David Fishburn <dfishburn dot vim at gmail dot com>
-" Last Change By Maintainer: 2017 Jun 13
-" Last Change: by Stephen Wall, #5578, 2020 Jun 07
+" Last Change: 2017 Jun 13
 " Version:     3.0
 " Download:    http://vim.sourceforge.net/script.php?script_id=495
 
@@ -68,73 +67,68 @@ set cpo&vim
 " IS is excluded, since it is difficult to determine when the
 " ending block is (especially for procedures/functions).
 let s:SQLBlockStart = '^\s*\%('.
-                \ 'if\>.*\<then\|'.
-                \ 'then\|else\>\|'.
-                \ 'elseif\>.*\<then\|'.
-                \ 'elsif\>.(\<then\|'.
-                \ 'while\>.*\<loop\|'.
-                \ 'for\>.*\<loop\|'.
-                \ 'foreach\>.*\<loop\|'. 
-                \ 'loop\|do\|declare\|begin\|'.
+                \ 'if\|else\|elseif\|elsif\|'.
+                \ 'while\|loop\|do\|for\|'.
+                \ 'begin\|'.
                 \ 'case\|when\|merge\|exception'.
                 \ '\)\>'
 let s:SQLBlockEnd = '^\s*\(end\)\>'
 
-" The indent level is also based on unmatched parentheses
+" The indent level is also based on unmatched paranethesis
 " If a line has an extra "(" increase the indent
 " If a line has an extra ")" decrease the indent
-function! s:CountUnbalancedParen( line, paren_to_check )
+function! s:CountUnbalancedParan( line, paran_to_check )
     let l = a:line
     let lp = substitute(l, '[^(]', '', 'g')
     let l = a:line
     let rp = substitute(l, '[^)]', '', 'g')
 
-    if a:paren_to_check =~ ')'
-        " echom 'CountUnbalancedParen ) returning: ' .
+    if a:paran_to_check =~ ')'
+        " echom 'CountUnbalancedParan ) returning: ' .
         " \ (strlen(rp) - strlen(lp))
         return (strlen(rp) - strlen(lp))
-    elseif a:paren_to_check =~ '('
-        " echom 'CountUnbalancedParen ( returning: ' .
+    elseif a:paran_to_check =~ '('
+        " echom 'CountUnbalancedParan ( returning: ' .
         " \ (strlen(lp) - strlen(rp))
         return (strlen(lp) - strlen(rp))
     else
-        " echom 'CountUnbalancedParen unknown paren to check: ' .
-        " \ a:paren_to_check
+        " echom 'CountUnbalancedParan unknown paran to check: ' .
+        " \ a:paran_to_check
         return 0
     endif
 endfunction
 
 " Unindent commands based on previous indent level
-function! s:CheckToIgnoreRightParen( prev_lnum, num_levels )
+function! s:CheckToIgnoreRightParan( prev_lnum, num_levels )
     let lnum = a:prev_lnum
     let line = getline(lnum)
     let ends = 0
-    let num_right_paren = a:num_levels
-    let ignore_paren = 0
+    let num_right_paran = a:num_levels
+    let ignore_paran = 0
     let vircol = 1
 
-    while num_right_paren > 0
+    while num_right_paran > 0
         silent! exec 'norm! '.lnum."G\<bar>".vircol."\<bar>"
-        let right_paren = search( ')', 'W' )
-        if right_paren != lnum
+        let right_paran = search( ')', 'W' )
+        if right_paran != lnum
             " This should not happen since there should be at least
-            " num_right_paren matches for this line
+            " num_right_paran matches for this line
             break
         endif
         let vircol      = virtcol(".")
 
         " if getline(".") =~ '^)'
-        let matching_paren = searchpair('(', '', ')', 'bW',
+        let matching_paran = searchpair('(', '', ')', 'bW',
                     \ 's:IsColComment(line("."), col("."))')
 
-        if matching_paren < 1
+        if matching_paran < 1
             " No match found
             " echom 'CTIRP - no match found, ignoring'
             break
         endif
 
-        if matching_paren == lnum
-            " This was not an unmatched parentheses, start the search again
+        if matching_paran == lnum
+            " This was not an unmatched parantenses, start the search again
             " again after this column
             " echom 'CTIRP - same line match, ignoring'
             continue
@@ -142,23 +136,23 @@ function! s:CheckToIgnoreRightParen( prev_lnum, num_levels )
 
         " echom 'CTIRP - match: ' . line(".") . '  ' . getline(".")
 
-        if getline(matching_paren) =~? '\(if\|while\)\>'
+        if getline(matching_paran) =~? '\(if\|while\)\>'
             " echom 'CTIRP - if/while ignored: ' . line(".") . '  ' . getline(".")
-            let ignore_paren = ignore_paren + 1
+            let ignore_paran = ignore_paran + 1
         endif
 
         " One match found, decrease and check for further matches
-        let num_right_paren = num_right_paren - 1
+        let num_right_paran = num_right_paran - 1
 
     endwhile
 
     " Fallback - just move back one
     " return a:prev_indent - shiftwidth()
-    return ignore_paren
+    return ignore_paran
 endfunction
 
 " Based on the keyword provided, loop through previous non empty
-" non comment lines to find the statement that initiated the keyword.
+" non comment lines to find the statement that initated the keyword.
 " Return its indent level
 "    CASE ..
 "    WHEN ...
@@ -301,26 +295,26 @@ function! GetSQLIndent()
         " echom 'prevl - SQLBlockStart - indent ' . ind . '  line: ' . prevline
     elseif prevline =~ '[()]'
         if prevline =~ '('
-            let num_unmatched_left = s:CountUnbalancedParen( prevline, '(' )
+            let num_unmatched_left = s:CountUnbalancedParan( prevline, '(' )
         else
             let num_unmatched_left = 0
         endif
         if prevline =~ ')'
-            let num_unmatched_right  = s:CountUnbalancedParen( prevline, ')' )
+            let num_unmatched_right  = s:CountUnbalancedParan( prevline, ')' )
         else
             let num_unmatched_right  = 0
-            " let num_unmatched_right  = s:CountUnbalancedParen( prevline, ')' )
+            " let num_unmatched_right  = s:CountUnbalancedParan( prevline, ')' )
         endif
         if num_unmatched_left > 0
-            " There is a open left parenthesis
+            " There is a open left paranethesis
             " increase indent
             let ind = ind + ( shiftwidth() * num_unmatched_left )
         elseif num_unmatched_right > 0
-            " if it is an unbalanced parenthesis only unindent if
+            " if it is an unbalanced paranethesis only unindent if
             " it was part of a command (ie create table(..)  )
             " instead of part of an if (ie if (....) then) which should
             " maintain the indent level
-            let ignore = s:CheckToIgnoreRightParen( prevlnum, num_unmatched_right )
+            let ignore = s:CheckToIgnoreRightParan( prevlnum, num_unmatched_right )
             " echom 'prevl - ) unbalanced - CTIRP - ignore: ' . ignore
 
             if prevline =~ '^\s*)'
@@ -363,8 +357,8 @@ function! GetSQLIndent()
         " elseif line =~ '^\s*)\s*;\?\s*$'
         " elseif line =~ '^\s*)'
     elseif line =~ '^\s*)'
-        let num_unmatched_right  = s:CountUnbalancedParen( line, ')' )
-        let ignore = s:CheckToIgnoreRightParen( v:lnum, num_unmatched_right )
+        let num_unmatched_right  = s:CountUnbalancedParan( line, ')' )
+        let ignore = s:CheckToIgnoreRightParan( v:lnum, num_unmatched_right )
         " If the line ends in a ), then reduce the indent
         " This catches items like:
         " CREATE TABLE T1(
@@ -374,7 +368,7 @@ function! GetSQLIndent()
         " But we do not want to unindent a line like:
         " IF ( c1 = 1
         " AND  c2 = 3 ) THEN
-        " let num_unmatched_right  = s:CountUnbalancedParen( line, ')' )
+        " let num_unmatched_right  = s:CountUnbalancedParan( line, ')' )
         " if num_unmatched_right > 0
         " elseif strpart( line, strlen(line)-1, 1 ) =~ ')'
         " let ind = ind - shiftwidth()

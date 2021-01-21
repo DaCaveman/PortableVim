@@ -28,11 +28,6 @@ set cpo&vim
 
 let s:maxoff = 50	" maximum number of lines to look backwards for ()
 
-" See if the specified line is already user-dedented from the expected value.
-function s:Dedented(lnum, expected)
-  return indent(a:lnum) <= a:expected - shiftwidth()
-endfunction
-
 function GetPythonIndent(lnum)
 
   " If this line is explicitly joined: If the previous line was also joined,
@@ -163,12 +158,12 @@ function GetPythonIndent(lnum)
   " If the previous line was a stop-execution statement...
   if getline(plnum) =~ '^\s*\(break\|continue\|raise\|return\|pass\)\>'
     " See if the user has already dedented
-    if s:Dedented(a:lnum, indent(plnum))
-      " If so, trust the user
-      return -1
+    if indent(a:lnum) > indent(plnum) - shiftwidth()
+      " If not, recommend one dedent
+      return indent(plnum) - shiftwidth()
     endif
-    " If not, recommend one dedent
-    return indent(plnum) - shiftwidth()
+    " Otherwise, trust the user
+    return -1
   endif
 
   " If the current line begins with a keyword that lines up with "try"
@@ -196,7 +191,7 @@ function GetPythonIndent(lnum)
     endif
 
     " Or the user has already dedented
-    if s:Dedented(a:lnum, plindent)
+    if indent(a:lnum) <= plindent - shiftwidth()
       return -1
     endif
 
@@ -208,12 +203,7 @@ function GetPythonIndent(lnum)
   "       + c)
   " here
   if parlnum > 0
-    " ...unless the user has already dedented
-    if s:Dedented(a:lnum, plindent)
-        return -1
-    else
-        return plindent
-    endif
+    return plindent
   endif
 
   return -1

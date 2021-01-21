@@ -1,8 +1,8 @@
 " Vim syntax file
 " Language:	AmigaDos
-" Maintainer:	Charles E. Campbell <NcampObell@SdrPchip.AorgM-NOSPAM>
+" Maintainer:	Charles E. Campbell <NdrOchipS@PcampbellAfamily.Mbiz>
 " Last Change:	Aug 31, 2016
-" Version:     10
+" Version:     9
 " URL:	http://www.drchip.org/astronaut/vim/index.html#SYNTAX_AMIGA
 
 " quit when a syntax file was already loaded
