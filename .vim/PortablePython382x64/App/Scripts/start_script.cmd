@@ -5,4 +5,4 @@ REM PRINT python --version
 python -c "import sys; print('Python' + sys.version)"
 doskey pip=python -m pip $*
 REM Add Scripts Path
-SET PATH=%PYTHONPATH%\Scripts;%PATH%
+SET PATH=%PYTHONPATH%\Scripts;%PATH%;e:\_VimPortable\.vim\PortablePython382x64\App\Python\;

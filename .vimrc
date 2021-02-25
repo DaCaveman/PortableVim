@@ -34,7 +34,7 @@ Plugin 'VundleVim/Vundle.vim'
 " different version somewhere else.
 " Plugin 'ascenator/L9', {'name': 'newL9'}
 "
-Plugin 'ycm-core/YouCompleteMe'
+"Plugin 'ycm-core/YouCompleteMe'
 Plugin 'tmhedberg/SimpylFold'
 Plugin 'vim-scripts/indentpython.vim'
 Plugin 'preservim/nerdtree'
@@ -236,7 +236,7 @@ nnoremap								<C-F12>			<Esc>:wqa!<CR>                                       "
 nnoremap								<F12>			<Esc>:w!<CR>                                           " speichern
 nnoremap								<F11> 			<ESC>:silent !start powershell<CR>
 au BufNewFile,BufRead *.py nnoremap 	<M-F11> 		:silent !start powershell -NoExit python %<CR>
-"au BufNewFile,BufRead *.py nnoremap 	<M-T> 			:term python %<CR>
+au BufNewFile,BufRead *.py nnoremap 	<M-T> 			:term python %<CR>
 au BufNewFile,BufRead *.py nnoremap 	<localleader>rc	:call CheckTerm1()<CR>
 au BufNewFile,BufRead *.py nnoremap 	<localleader>rf	:call CheckTerm2()<CR>
 au BufNewFile,BufRead *.py nnoremap 	<localleader>l	V"yy<c-w>j<c-w>"y<c-w>k
