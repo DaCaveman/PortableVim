@@ -1,6 +1,7 @@
 --langdef=rapid
 --langmap=rapid:.mod
 --regex-rapid=/\<[Pp][Rr][Oo][Cc]\>[ \t]*([a-zA-Z0-9_]+)/\1/p,procedure/
+--regex-rapid=/\<[Rr][Ee][Cc][Oo][Rr][Dd]\>[ \t]*([a-zA-Z0-9_]+)/\1/r,record/
 --regex-rapid=/\<[Ff][Uu][Nn][Cc]\>[ \t]*([a-zA-Z]+)[ \t]*([a-zA-Z0-9_]+)/\2/f,function/
 --regex-rapid=/\<[Tt][Rr][Aa][Pp]\>[ \t]*([a-zA-Z0-9_]+)/\1/t,trap/
 

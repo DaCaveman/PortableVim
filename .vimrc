@@ -34,7 +34,7 @@ Plugin 'VundleVim/Vundle.vim'
 " different version somewhere else.
 " Plugin 'ascenator/L9', {'name': 'newL9'}
 "
-"Plugin 'ycm-core/YouCompleteMe'
+Plugin 'ycm-core/YouCompleteMe'
 Plugin 'tmhedberg/SimpylFold'
 Plugin 'vim-scripts/indentpython.vim'
 Plugin 'preservim/nerdtree'
@@ -51,7 +51,7 @@ Plugin 'chrisbra/csv.vim'
 Plugin 'othree/html5.vim'
 Plugin 'Raimondi/delimitMate'
 Plugin 'rickhowe/diffchar.vim'
-"Plugin 'chaoren/vim-wordmotion'
+Plugin 'romainl/vim-qf'
 "
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -178,10 +178,12 @@ noremap									<F2>	 		<ESC>:call WindowSize()<CR>
 noremap									<M-F2>	 		<ESC>:call WindowDiffSize()<CR>
 noremap									<F3>			<ESC>:if &lines=~#'55'<Bar>set lines=75<Bar>else<Bar>set lines=55<Bar>endif<CR>
 nmap									<localleader>h 	<plug>(YCMHover)
-noremap <expr>							<C-h> &diff ?	'<ESC><c-w><c-w>' : '<ESC><c-w>h'
+"noremap <expr>							<C-h> &diff ?	'<ESC><c-w><c-w>' : '<ESC><c-w>h'
+noremap <expr>							<C-h> &diff ?	'<ESC><c-w>h' : '<ESC><c-w>h'
 noremap <expr>							<C-j> &diff ?	'<ESC>]c' : '<ESC><c-w>j'
 noremap <expr>							<C-k> &diff ?	'<ESC>[c' : '<ESC><c-w>k'
-noremap <expr>							<C-l> &diff ?	'<ESC><c-w><c-w>' : '<ESC><c-w>l'
+"noremap <expr>							<C-l> &diff ?	'<ESC><c-w><c-w>' : '<ESC><c-w>l'
+noremap <expr>							<C-l> &diff ?	'<ESC><c-w>l' : '<ESC><c-w>l'
 noremap									<localleader>g 	:diffge<CR>
 noremap									<localleader>p 	:diffpu<CR>
 "___________________________________________________________________________________________________________________
@@ -218,6 +220,7 @@ vnoremap 								yP				"0P
 vnoremap 								yy				y
 vnoremap 								do				:diffge<CR>
 vnoremap 								dp				:diffpu<CR>
+vnoremap 								<localleader>/	:<C-U>execute "vimgrep /" . expand("<cword>") . "/gj **/*.*"<CR>
 "____________________________________________________________________________________________________________________
 " normal mode mapping
 "
@@ -236,7 +239,8 @@ nnoremap								<C-F12>			<Esc>:wqa!<CR>                                       "
 nnoremap								<F12>			<Esc>:w!<CR>                                           " speichern
 nnoremap								<F11> 			<ESC>:silent !start powershell<CR>
 au BufNewFile,BufRead *.py nnoremap 	<M-F11> 		:silent !start powershell -NoExit python %<CR>
-au BufNewFile,BufRead *.py nnoremap 	<M-T> 			:term python %<CR>
+au BufNewFile,BufRead *.py nnoremap		<M-t> 			:term python %<CR>
+nnoremap								<M-t> 			:term python<CR>
 au BufNewFile,BufRead *.py nnoremap 	<localleader>rc	:call CheckTerm1()<CR>
 au BufNewFile,BufRead *.py nnoremap 	<localleader>rf	:call CheckTerm2()<CR>
 au BufNewFile,BufRead *.py nnoremap 	<localleader>l	V"yy<c-w>j<c-w>"y<c-w>k
@@ -260,7 +264,17 @@ nnoremap 								<leader>/		:call GrepBuffers("<C-R><C-W>")<CR>
 nnoremap 								<localleader>e	wbve"oyy:%s/\<o\>/o/g
 nnoremap 								<localleader>E	wbve"oyy:tabdo %s/\<o\>/o/g
 "au FileType qf nnoremap <buffer> 		<CR> 			<CR>:tabdo :ccl<CR>
+autocmd FileType qf nnoremap <buffer> <Enter> <C-W><Enter><C-W>T
+autocmd FileType nerdtree nnoremap <buffer> <localleader>/ :vimgrep //gj **/*.*<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
+au BufNewFile,BufRead *.html nnoremap 	<M-F11> 		:silent !start powershell -NoExit browser-sync start --server --files .<CR>
+au BufNewFile,BufRead *.css nnoremap 	<M-F11> 		:silent !start powershell -NoExit browser-sync start --server --files .<CR>
+au BufNewFile,BufRead *.js nnoremap 	<M-F11> 		:silent !start powershell -NoExit browser-sync start --server --files .<CR>
 
+"____________________________________________________________________________________________________________________
+" command-line mapping
+"
+cnoremap								<C-h>			<Left>
+cnoremap								<C-l>			<Right>
 "____________________________________________________________________________________________________________________
 "Terminal Window
 "
@@ -375,7 +389,7 @@ endfunction
 "____________________________________________________________________________________________________________________
 "Quckfix window
 "
-set switchbuf+=newtab
+set switchbuf+=usetab,newtab
 aug QFClose
   au!
   au WinEnter * if winnr('$') == 1 && &buftype == "quickfix"|q|endif
@@ -475,13 +489,15 @@ let g:SimpylFold_fold_docstring = 1
 "
 let NERDTreeMapOpenInTab='\r'
 let NERDTreeMapOpenInTab='<ENTER>'
+let NERDTreeChDirMode=2
 "____________________________________________________________________________________________________________________
 " ABB rapid
 "
-let tlist_rapid_settings='rapid;p:procedure;f:function;t:trap;e:eio'
+"let g:knopVerbose = 1 " don't show messages
+let tlist_rapid_settings='rapid;p:procedure;r:record;f:function;t:trap;e:eio'
 let g:rapidFormatComments = 0 " don't break comment lines automatically
 let g:rapidCommentIndent = 1 " indent comments starting in 1st column too
-let g:rapidShortenQFPath = 0 " don't shorten paths in quickfix
+let g:rapidShortenQFPath = 1 " don't shorten paths in quickfix
 let g:rapidAutoComment = 0 " don't continue comments with o, O or Enter
 let g:rapidSpaceIndent = 0 " don't change 'sts', 'sw', 'et' and 'sr'
 "let g:rapidConcealStructs = 0 " switch concealing off completely
