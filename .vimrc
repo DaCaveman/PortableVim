@@ -38,7 +38,7 @@ Plugin 'ycm-core/YouCompleteMe'
 Plugin 'tmhedberg/SimpylFold'
 Plugin 'vim-scripts/indentpython.vim'
 Plugin 'preservim/nerdtree'
-Plugin 'vim-syntastic/syntastic'
+"Plugin 'vim-syntastic/syntastic'
 Plugin 'preservim/nerdcommenter'
 Plugin 'morhetz/gruvbox'
 Plugin 'altercation/vim-colors-solarized'
@@ -478,7 +478,7 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 0
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
-"let g:syntastic_python_checkers = ['flake8', 'pyflakes', 'pylint', 'python']
+let g:syntastic_python_checkers = ['flake8', 'pyflakes', 'pylint', 'python']
 "____________________________________________________________________________________________________________________
 " SimpylFold
 "
