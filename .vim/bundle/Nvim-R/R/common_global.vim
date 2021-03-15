@@ -534,6 +534,9 @@ function ShowRSysLog(slog, fname, msg)
 endfunction
 
 function RSetDefaultPkg()
+    if !exists('s:r_default_pkgs')
+        let s:r_default_pkgs  = $R_DEFAULT_PACKAGES
+    endif
     if $R_DEFAULT_PACKAGES == ""
         let $R_DEFAULT_PACKAGES = "datasets,utils,grDevices,graphics,stats,methods,nvimcom"
     elseif $R_DEFAULT_PACKAGES !~ "nvimcom"
@@ -767,10 +770,14 @@ function StartNClientServer(w)
     if g:R_objbr_openlist
         let $NVIMR_OPENLS = "TRUE"
     endif
+    if g:R_objbr_allnames
+        let $NVIMR_OBJBR_ALLNAMES = "TRUE"
+    endif
     let g:rplugin.jobs["ClientServer"] = StartJob([nvc], g:rplugin.job_handlers)
     "let g:rplugin.jobs["ClientServer"] = StartJob(['valgrind', '--log-file=/tmp/nclientserver_valgrind_log', '--leak-check=full', nvc], g:rplugin.job_handlers)
     unlet $NVIMR_OPENDF
     unlet $NVIMR_OPENLS
+    unlet $NVIMR_OBJBR_ALLNAMES
 endfunction
 
 function UpdatePathForR()
@@ -869,7 +876,9 @@ function FinishStartingR()
         call AddForDeletion(g:rplugin.tmpdir . "/run_cmd.bat")
     endif
 
-    let start_options = []
+    " Reset R_DEFAULT_PACKAGES to its original value (see https://github.com/jalvesaq/Nvim-R/issues/554):
+    let start_options = ['Sys.setenv("R_DEFAULT_PACKAGES" = "' . s:r_default_pkgs . '")']
+
     if g:R_objbr_allnames
         let start_options += ['options(nvimcom.allnames = TRUE)']
     else
@@ -1273,6 +1282,7 @@ else
 endif
 
 let s:func_offset = -2
+let s:rdebugging = 0
 function StopRDebugging()
     if !g:R_debug
         return
@@ -1281,6 +1291,7 @@ function StopRDebugging()
     "sign unplace rdebugcurline
     sign unplace 1
     let s:func_offset = -2 " Did not seek yet
+    let s:rdebugging = 0
 endfunction
 
 function FindDebugFunc(srcref)
@@ -1360,8 +1371,9 @@ function RDebugJump(fnm, lnum)
         let fname = expand(a:fnm)
     endif
 
+    let bname = bufname("%")
 
-    if fname != g:rplugin.rscript_name && fname != expand("%") && fname != expand("%:p")
+    if !bufloaded(fname) && fname != g:rplugin.rscript_name && fname != expand("%") && fname != expand("%:p")
         if filereadable(fname)
             exe 'sb ' . g:rplugin.rscript_name
             if &modified
@@ -1379,17 +1391,23 @@ function RDebugJump(fnm, lnum)
         endif
     endif
 
-    exe ':' . flnum
-    "normal! zz
+    if bufloaded(fname)
+        exe 'sb ' . fname
+        exe ':' . flnum
+    endif
 
+    " Call sign_place() and sign_unplace() when requiring Vim 8.2 and Neovim 0.5
     "call sign_unplace('rdebugcurline')
     "call sign_place(1, 'rdebugcurline', 'dbgline', fname, {'lnum': flnum})
     sign unplace 1
     exe 'sign place 1 line=' . flnum . ' name=dbgline file=' . fname
-    if type(g:R_external_term) == v:t_number && g:R_external_term == 0
+    if g:R_dbg_jump && !s:rdebugging && type(g:R_external_term) == v:t_number && g:R_external_term == 0
         exe 'sb ' . g:rplugin.R_bufname
         startinsert
+    else
+        exe 'sb ' . bname
     endif
+    let s:rdebugging = 1
 endfunction
 
 function RFormatCode() range
@@ -1524,16 +1542,16 @@ function GetROutput(outf)
 endfunction
 
 function RViewDF(oname, ...)
-    let tsvnm = g:rplugin.tmpdir . '/' . a:oname . '.tsv'
-    call AddForDeletion(tsvnm)
-
     if exists('g:R_csv_app')
+        let tsvnm = g:rplugin.tmpdir . '/' . a:oname . '.tsv'
+        call system('cp "' . g:rplugin.tmpdir . '/Rinsert" "' . tsvnm . '"')
+        call AddForDeletion(tsvnm)
+
         if g:R_csv_app =~# '^terminal:'
             let csv_app = split(g:R_csv_app, ':')[1]
             if executable(csv_app)
-                call system('cp "' . g:rplugin.tmpdir . '/Rinsert" "' . a:oname . '.tsv"')
                 tabnew
-                exe 'terminal ' . csv_app . ' ' . a:oname . '.tsv'
+                exe 'terminal ' . csv_app . ' ' . substitute(tsvnm, ' ', '\\ ', 'g')
                 startinsert
             else
                 call RWarningMsg('R_csv_app ("' . csv_app . '") is not executable')
@@ -1551,9 +1569,9 @@ function RViewDF(oname, ...)
         endif
 
         normal! :<Esc>
-        call system('cp "' . g:rplugin.tmpdir . '/Rinsert" "' . tsvnm . '"')
         if has("nvim")
-            call jobstart([g:R_csv_app, tsvnm], {'detach': v:true})
+            let appcmd = split(g:R_csv_app) + [tsvnm]
+            call jobstart(appcmd, {'detach': v:true})
         elseif has("win32")
             silent exe '!start "' . g:R_csv_app . '" "' . tsvnm . '"'
         else
@@ -1563,12 +1581,15 @@ function RViewDF(oname, ...)
     endif
 
     let location = get(a:, 1, "tabnew")
-    silent exe location . ' ' . substitute(tsvnm, ' ', '\\ ', 'g')
+    silent exe location . ' ' . a:oname
     silent 1,$d
     silent exe 'read ' . substitute(g:rplugin.tmpdir, ' ', '\\ ', 'g') . '/Rinsert'
     silent 1d
-    set filetype=csv
-    set nomodified
+    setlocal filetype=csv
+    setlocal nomodified
+    setlocal bufhidden=wipe
+    setlocal noswapfile
+    set buftype=nofile
     redraw
 endfunction
 
@@ -1802,7 +1823,9 @@ function SendSelectionToR(...)
         let j = col("'>") - i
         let l = getline("'<")
         let line = strpart(l, i, j)
-        let line = CleanOxygenLine(line)
+        if &filetype == "r"
+            let line = CleanOxygenLine(line)
+        endif
         let ok = g:SendCmdToR(line)
         if ok && a:2 =~ "down"
             call GoDown()
@@ -1845,7 +1868,9 @@ function SendSelectionToR(...)
     let curline = line("'<")
     for idx in range(0, len(lines) - 1)
         call setpos(".", [0, curline, 1, 0])
-        let lines[idx] = CleanOxygenLine(lines[idx])
+        if &filetype == "r"
+            let lines[idx] = CleanOxygenLine(lines[idx])
+        endif
         let curline += 1
     endfor
     call setpos(".", curpos)
@@ -3166,9 +3191,9 @@ function RVimLeave()
     if has('nvim')
         for job in keys(g:rplugin.jobs)
             if IsJobRunning(job)
-                if job == 'ClientServer'
+                if job == 'ClientServer' || job == 'BibComplete'
                     " Avoid warning of exit status 141
-                    call JobStdin(g:rplugin.jobs["ClientServer"], "8\n")
+                    call JobStdin(g:rplugin.jobs[job], "8\n")
                     sleep 20m
                 endif
             endif
@@ -3527,8 +3552,18 @@ function CloseFloatWin(...)
     if has('nvim')
         let id = win_id2win(s:float_win)
         if id > 0
-            call nvim_win_close(s:float_win, 1)
-            let s:float_win = 0
+            let ok = 1
+            try
+                call nvim_win_close(s:float_win, 1)
+            catch /E5/
+                " Cannot close the float window after cycling through all the
+                " items and going back to the original uncompleted pattern
+                let ok = 0
+            finally
+                if ok
+                    let s:float_win = 0
+                endif
+            endtry
         endif
     else
         call popup_close(s:float_win)
@@ -3711,6 +3746,9 @@ function CompleteR(findstart, base)
             return Ofun(a:findstart, a:base)
         endif
 
+        " The base might have changed because the user has hit the backspace key
+        call CloseFloatWin()
+
         if string(g:SendCmdToR) != "function('SendCmdToR_fake')"
             " Check if we need function arguments
             let line = getline(".")
@@ -3766,6 +3804,11 @@ function CompleteR(findstart, base)
                     let nl +=1
                 endif
             endwhile
+        endif
+
+        if a:base == ''
+            " Require at least one character to try omni completion
+            return []
         endif
 
         if exists('s:compl_menu')
@@ -3969,6 +4012,7 @@ let g:R_esc_term          = get(g:, "R_esc_term",           1)
 let g:R_close_term        = get(g:, "R_close_term",         1)
 let g:R_buffer_opts       = get(g:, "R_buffer_opts", "winfixwidth nobuflisted")
 let g:R_debug             = get(g:, "R_debug",              1)
+let g:R_dbg_jump          = get(g:, "R_dbg_jump",           1)
 let g:R_wait              = get(g:, "R_wait",              60)
 let g:R_wait_reply        = get(g:, "R_wait_reply",         2)
 let g:R_never_unmake_menu = get(g:, "R_never_unmake_menu",  0)

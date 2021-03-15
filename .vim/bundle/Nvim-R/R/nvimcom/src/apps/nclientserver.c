@@ -28,6 +28,7 @@ static char strT[8];
 static int OpenDF;
 static int OpenLS;
 static int nvimcom_is_utf8;
+static int allnames;
 
 static char tmpdir[256];
 static char liblist[576];
@@ -96,6 +97,7 @@ static char *grow_compl_buffer()
     if(compl_buffer){
         compl_buffer_size += 32768;
         char *tmp = calloc(compl_buffer_size, sizeof(char));
+        strcpy(tmp, compl_buffer);
         free(compl_buffer);
         compl_buffer = tmp;
     } else {
@@ -688,7 +690,7 @@ char *count_sep(char *b1)
                 fflush(stderr);
                 free(b1);
                 return NULL;
-}
+            }
         }
         s++;
     }
@@ -764,8 +766,8 @@ char *read_file(const char *fn)
         free(buffer);
         fprintf(stderr, "Error reading '%s'\n", fn);
         fflush(stderr);
-    return NULL;
-}
+        return NULL;
+    }
     fclose(f);
     return buffer;
 }
@@ -793,8 +795,8 @@ char *read_omnils_file(const char *fn, int *size)
             if(*p == '\006')
                 *p = 0;
             p++;
+        }
     }
-}
 
     return buffer;
 }
@@ -815,21 +817,21 @@ char *read_pkg_descr(const char *pkgnm)
         if(*s == '\t'){
             *s = 0;
             if(strcmp(nm, pkgnm) == 0){
-            s++;
-            dscr = s;
-            while(*s != '\t' && *s != 0){
                 s++;
-                if(*s == '\t'){
-                    *s = 0;
+                dscr = s;
+                while(*s != '\t' && *s != 0){
+                    s++;
+                    if(*s == '\t'){
+                        *s = 0;
                         char *pkgdscr = malloc(sizeof(char) * (1 + strlen(dscr)));
                         strcpy(pkgdscr, dscr);
                         fclose(f);
                         return pkgdscr;
+                    }
                 }
             }
         }
     }
-}
     fclose(f);
     return NULL;
 }
@@ -987,7 +989,7 @@ void update_pkg_list()
 
 ListStatus* search(const char *s)
 {
-    ListStatus *node = listTree; 
+    ListStatus *node = listTree;
     int cmp = strcmp(node->key, s);
     while(node && cmp != 0){
         if(cmp > 0)
@@ -1055,7 +1057,7 @@ static const char *write_ob_line(const char *p, const char *bs, char *prfx, int 
     const char *f[7];
     const char *s;    // Diagnostic pointer
     const char *bsnm; // Name of object including its parent list, data.frame or S4 object
-    int df;     // Is data.frame? If yes, start open unless closeddf = 1
+    int df;           // Is data.frame? If yes, start open unless closeddf = 1
     int i, j;
     int ne;
 
@@ -1069,11 +1071,11 @@ static const char *write_ob_line(const char *p, const char *bs, char *prfx, int 
         f[i] = p;
         i++;
         while(*p != 0)
-        p++;
+            p++;
         p++;
     }
     while(*p != '\n' && *p != 0)
-    p++;
+        p++;
     if(*p == '\n')
         p++;
 
@@ -1096,16 +1098,18 @@ static const char *write_ob_line(const char *p, const char *bs, char *prfx, int 
         while(s[i] && i < 159){
             descr[j] = s[i];
             if(s[i] == '\'' && s[i + 1] == '\'')
-            i++;
+                i++;
             i++; j++;
         }
         descr[j] = 0;
     }
 
-    if(f[1][0] == '\003')
-        fprintf(F2, "   %s(#%s\t%s\n", prfx, f[0], descr);
+    if(!(bsnm[0] == '.' && allnames == 0)){
+        if(f[1][0] == '\003')
+            fprintf(F2, "   %s(#%s\t%s\n", prfx, f[0], descr);
         else
-        fprintf(F2, "   %s%c#%s\t%s\n", prfx, f[1][0], f[0], descr);
+            fprintf(F2, "   %s%c#%s\t%s\n", prfx, f[1][0], f[0], descr);
+    }
 
     if(*p == 0)
         return p;
@@ -1127,55 +1131,55 @@ static const char *write_ob_line(const char *p, const char *bs, char *prfx, int 
             snprintf(base2, 127, "%s[[", bsnm); // S4 object always have names but base2 must be defined
         }
 
-            if(get_list_status(bsnm, df) == 0){
+        if(get_list_status(bsnm, df) == 0){
             while(str_here(p, base1) || str_here(p, base2)){
-                    while(*p != '\n')
-                        p++;
+                while(*p != '\n')
                     p++;
+                p++;
                 nLibObjs--;
-                }
-                return p;
             }
+            return p;
+        }
 
         if(str_here(p, base1) == 0 && str_here(p, base2) == 0)
             return p;
 
-            int len = strlen(prfx);
-            if(nvimcom_is_utf8){
-                int j = 0, i = 0;
-                while(i < len){
-                    if(prfx[i] == '\xe2'){
-                        i += 3;
-                        if(prfx[i-1] == '\x80' || prfx[i-1] == '\x94'){
-                            newprfx[j] = ' '; j++;
-                        } else {
-                            newprfx[j] = '\xe2'; j++;
-                            newprfx[j] = '\x94'; j++;
-                            newprfx[j] = '\x82'; j++;
-                        }
+        int len = strlen(prfx);
+        if(nvimcom_is_utf8){
+            int j = 0, i = 0;
+            while(i < len){
+                if(prfx[i] == '\xe2'){
+                    i += 3;
+                    if(prfx[i-1] == '\x80' || prfx[i-1] == '\x94'){
+                        newprfx[j] = ' '; j++;
                     } else {
-                        newprfx[j] = prfx[i];
-                        i++, j++;
+                        newprfx[j] = '\xe2'; j++;
+                        newprfx[j] = '\x94'; j++;
+                        newprfx[j] = '\x82'; j++;
                     }
+                } else {
+                    newprfx[j] = prfx[i];
+                    i++, j++;
                 }
-                newprfx[j] = 0;
-            } else {
-                for(int i = 0; i < len; i++){
-                    if(prfx[i] == '-' || prfx[i] == '`')
-                        newprfx[i] = ' ';
-                    else
-                        newprfx[i] = prfx[i];
-                }
-                newprfx[len] = 0;
             }
+            newprfx[j] = 0;
+        } else {
+            for(int i = 0; i < len; i++){
+                if(prfx[i] == '-' || prfx[i] == '`')
+                    newprfx[i] = ' ';
+                else
+                    newprfx[i] = prfx[i];
+            }
+            newprfx[len] = 0;
+        }
 
-            // Check if the next list element really is there
+        // Check if the next list element really is there
         while(str_here(p, base1) || str_here(p, base2)){
-                // Check if this is the last element in the list
-                s = p;
+            // Check if this is the last element in the list
+            s = p;
             while(*s != '\n')
-                    s++;
-                    s++;
+                s++;
+            s++;
             ne--;
             if(ne == 0){
                 snprintf(prefix, 112, "%s%s", newprfx, strL);
@@ -1213,7 +1217,7 @@ void hi_glbenv_fun()
             nm->name = p;
             nm->next = nmlist;
             nmlist = nm;
-    }
+        }
         while(*p != '\n')
             p++;
         p++;
@@ -1228,7 +1232,7 @@ void hi_glbenv_fun()
             if(nmlist)
                 printf(" ");
             free(nm);
-    }
+        }
         printf("')\n");
         fflush(stdout);
     }
@@ -1248,12 +1252,12 @@ void update_glblenv_buffer()
         if(glbnv_buffer[i] == '\003'){
             n++;
             i += 7;
-    }
+        }
 
     if(n != nGlbEnvFun){
         nGlbEnvFun = n;
         hi_glbenv_fun();
-}
+    }
 }
 
 void omni2ob()
@@ -1267,7 +1271,7 @@ void omni2ob()
         fflush(stderr);
         return;
     }
-    
+
     fprintf(F2, ".GlobalEnv | Libraries\n\n");
 
     const char *s = glbnv_buffer;
@@ -1276,10 +1280,10 @@ void omni2ob()
 
     fclose(F2);
     if(auto_obbr){
-    fputs("call UpdateOB('GlobalEnv')\n", stdout);
-    fflush(stdout);
+        fputs("call UpdateOB('GlobalEnv')\n", stdout);
+        fflush(stdout);
+    }
 }
-            }
 
 void lib2ob()
 {
@@ -1303,7 +1307,7 @@ void lib2ob()
         if(pkg->loaded){
             if(pkg->descr)
                 fprintf(F2, "   :#%s\t%s\n", pkg->name, pkg->descr);
-        else
+            else
                 fprintf(F2, "   :#%s\t\n", pkg->name);
             snprintf(lbnmc, 511, "%s:", pkg->name);
             stt = get_list_status(lbnmc, 0);
@@ -1382,6 +1386,10 @@ void objbr_setup()
         OpenLS = 1;
     else
         OpenLS = 0;
+    if(getenv("NVIMR_OBJBR_ALLNAMES"))
+        allnames = 1;
+    else
+        allnames = 0;
 
     // List tree sentinel
     listTree = new_ListStatus("base:", 0);
@@ -1394,7 +1402,7 @@ void objbr_setup()
         while(p){
             add_pkg(p, 0);
             p = strtok(NULL, ",");
-}
+        }
         free(s);
     } else {
         add_pkg("base", 0);
@@ -1422,7 +1430,7 @@ int count_twice(const char *b1, const char *b2, const char ch)
 
 char *parse_omnls(const char *s, const char *base, char *p)
 {
-    int i, nsz;
+    int i, nsz, n = 0;
     const char *f[7];
 
     while(*s != 0){
@@ -1527,6 +1535,11 @@ char *parse_omnls(const char *s, const char *base, char *p)
             p = str_cat(p, "', 'descr': '");
             p = str_cat(p, f[6]);
             p = str_cat(p, "'}},");
+            n++;
+            if(n > 1999){
+                // Truncate completion list if it's becoming too big.
+                break;
+            }
         } else {
             while(*s != '\n')
                 s++;
@@ -1540,8 +1553,6 @@ void complete(const char *base, const char *funcnm)
 {
     char *p, *s, *t;
     int sz;
-
-    // double tm = clock();
 
     memset(compl_buffer, 0, compl_buffer_size);
 
@@ -1584,10 +1595,6 @@ void complete(const char *base, const char *funcnm)
             p = parse_omnls(pd->omnils, base, p);
         pd = pd->next;
     }
-
-    //fprintf(stderr, "TIME %s = %f\n", base,
-    //        1000 * ((double)clock() - tm) / CLOCKS_PER_SEC);
-    //fflush(stderr);
 
     printf("call SetComplMenu([%s])\n", compl_buffer);
     fflush(stdout);

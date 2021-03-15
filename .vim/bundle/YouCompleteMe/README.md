@@ -233,11 +233,31 @@ officially supported.
 #### Quick start, installing all completers
 
 - Install YCM plugin via [Vundle][]
-- Install cmake, macvim and python; Note that the *system* vim is not supported.
+- Install cmake, macvim and python; Note that the pre-installed *macOS system* vim is not supported.
 
 ```
-brew install cmake macvim python mono go nodejs
+brew install cmake python mono go nodejs
 ```
+
+- For java support you must install a JDK, one way to do this is with homebrew:
+
+```
+$ brew install java
+$ sudo ln -sfn /usr/local/opt/openjdk/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk.jdk
+```
+
+- Pre-installed macOS *system* Vim does not support Python 3. So you need to install either a Vim that supports Python 3 OR [MacVim][] with [Homebrew][brew]:
+
+  - Option 1: Installing a Vim that supports Python 3
+  
+  ```
+  brew install vim
+  ```
+  - Option 2: Installing [MacVim][]
+  
+  ```
+  brew install macvim
+  ```
 
 - Compile YCM
 
@@ -255,11 +275,15 @@ YouCompleteMe, however they may not work for everyone. If the following
 instructions don't work for you, check out the [full installation
 guide](#full-installation-guide).
 
-[MacVim][] is required. YCM won't work with the pre-installed Vim from Apple as
-its Python support is broken. If you don't already use [MacVim][], install it
+A Vim that supports Python 3 or [MacVim][] is required. YCM won't work with the pre-installed Vim from Apple as
+its Python 3 support is broken. If you don't already use a Vim that supports Python 3 or [MacVim][], install it
 with [Homebrew][brew]. Install CMake as well:
 
-    brew install cmake macvim
+    brew install vim cmake     
+    
+   OR
+
+    brew install macvim cmake
 
 Install YouCompleteMe with [Vundle][].
 
@@ -323,16 +347,23 @@ that are conservatively turned off by default that you may want to turn on.
 
 ### Linux 64-bit
 
+The following assume you're using Ubuntu 20.04.
+
 #### Quick start, installing all completers
 
 - Install YCM plugin via [Vundle][]
 - Install cmake, vim and python
 
 ```
-apt install build-essential cmake vim python3-dev
+apt install build-essential cmake vim-nox python3-dev
 ```
 
-- Install mono-complete, go, node and npm
+- Install mono-complete, go, node, java and npm
+
+```
+apt install mono-complete golang nodejs default-jdk npm
+```
+
 - Compile YCM
 
 ```
@@ -1150,6 +1181,10 @@ Gradle projects require a [build.gradle][gradle-project]. Again, there is a
 The format of [build.gradle][gradle-project] files is way beyond the scope of
 this document, but we do recommend using the various tools that can generate
 them for you, if you're not familiar with them already.
+
+Some users have experienced issues with their jdt.ls  when using the Groovy
+language for their build.gradle. As such, try using
+[Kotlin](https://github.com/ycm-core/lsp-examples#kotlin) instead.
 
 #### Troubleshooting
 

@@ -542,7 +542,7 @@ autocmd BufRead,BufNewFile *.xaml set filetype=xaml" Highlight xaml syntax
 "
 set autoread
 au FocusGained,BufEnter * checktime
-au BufNewFile,BufRead *.py set textwidth=130
+au BufNewFile,BufRead *.py set textwidth=129
 au BufNewFile,BufRead *.py set tabstop=4
 au BufNewFile,BufRead *.py set softtabstop=4
 au BufNewFile,BufRead *.py set shiftwidth=4

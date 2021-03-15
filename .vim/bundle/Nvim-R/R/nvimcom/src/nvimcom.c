@@ -57,7 +57,8 @@ static char glbnvls[576];
 
 static char *glbnvbuf1;
 static char *glbnvbuf2;
-static unsigned long glbnvbufzise = 32768;
+static unsigned long lastglbnvbsz;
+static unsigned long glbnvbufsize = 32768;
 static int maxdepth = 6;
 static int curdepth = 0;
 static int autoglbenv = 0;
@@ -111,18 +112,19 @@ static char *nvimcom_strcat(char* dest, const char* src)
     return --dest;
 }
 
-static char *nvimcom_grow_buffers(char **b1, char **b2, unsigned long *bsize)
+static char *nvimcom_grow_buffers()
 {
-    *bsize += 32768;
-    char *tmp = (char*)calloc(*bsize, sizeof(char));
-    strcpy(tmp, *b1);
-    free(*b1);
-    *b1 = tmp;
-    tmp = (char*)calloc(*bsize, sizeof(char));
-    strcpy(tmp, *b2);
-    free(*b2);
-    *b2 = tmp;
-    return(*b2 + strlen(*b2));
+    lastglbnvbsz = glbnvbufsize;
+    glbnvbufsize += 32768;
+    char *tmp = (char*)calloc(glbnvbufsize, sizeof(char));
+    strcpy(tmp, glbnvbuf1);
+    free(glbnvbuf1);
+    glbnvbuf1 = tmp;
+    tmp = (char*)calloc(glbnvbufsize, sizeof(char));
+    strcpy(tmp, glbnvbuf2);
+    free(glbnvbuf2);
+    glbnvbuf2 = tmp;
+    return(glbnvbuf2 + strlen(glbnvbuf2));
 }
 
 static void nvimcom_set_finalmsg(const char *msg, char *finalmsg)
@@ -316,15 +318,14 @@ PkgInfo *nvimcom_get_pkg(const char *nm)
     return NULL;
 }
 
-static void nvimcom_write_file(char *b1, char *b2, const char *fn)
+static void nvimcom_write_file(char *b, const char *fn)
 {
-    strcpy(b1, b2);
     FILE *f = fopen(fn, "w");
     if(f == NULL){
         REprintf("Error: Could not write to '%s'. [nvimcom]\n", fn);
         return;
     }
-    fprintf(f, "%s", b1);
+    fprintf(f, "%s", b);
     fclose(f);
 }
 
@@ -348,8 +349,8 @@ static char *nvimcom_glbnv_line(SEXP *x, const char *xname, const char *curenv, 
     int er = 0;
     char buf[576];
 
-    if(glbnvbufzise < strlen(glbnvbuf2) + 1024)
-        p = nvimcom_grow_buffers(&glbnvbuf1, &glbnvbuf2, &glbnvbufzise);
+    if((strlen(glbnvbuf2 + lastglbnvbsz)) > 31744)
+        p = nvimcom_grow_buffers();
 
     p = nvimcom_strcat(p, curenv);
     snprintf(ebuf, 63, "%s", xname);
@@ -399,14 +400,11 @@ static char *nvimcom_glbnv_line(SEXP *x, const char *xname, const char *curenv, 
         snprintf(buf, 127, "\006\006 [%d]\006\n", length(*x));
         p = nvimcom_strcat(p, buf);
     } else if(xgroup == 1){
-        SEXP fmls = FORMALS(*x);
-        if(TYPEOF(fmls) == LISTSXP){
-            /* It would be necessary to port args2buff() from src/main/deparse.c to here but it's too big.
-               So, it's better to call nvimcom:::nvim.args() during omni completion. */
-            p = nvimcom_strcat(p, "[\002not_checked\002]\006\006\006\n");
-        } else {
-            p = nvimcom_strcat(p, "\006\006\006\n");
-        }
+        /* It would be necessary to port args2buff() from src/main/deparse.c to here but it's too big.
+           So, it's better to call nvimcom:::nvim.args() during omni completion.
+           FORMALS() may return an object that will later crash R:
+           https://github.com/jalvesaq/Nvim-R/issues/543#issuecomment-748981771 */
+        p = nvimcom_strcat(p, "[\002not_checked\002]\006\006\006\n");
     } else {
         PROTECT(lablab = allocVector(STRSXP, 1));
         SET_STRING_ELT(lablab, 0, mkChar("label"));
@@ -542,7 +540,7 @@ static void nvimcom_globalenv_list()
 
     tm = clock();
 
-    memset(glbnvbuf2, 0, glbnvbufzise);
+    memset(glbnvbuf2, 0, glbnvbufsize);
     char *p = glbnvbuf2;
 
     curdepth = 0;
@@ -574,7 +572,8 @@ static void nvimcom_globalenv_list()
     }
 
     if(changed){
-        nvimcom_write_file(glbnvbuf1, glbnvbuf2, glbnvls);
+        nvimcom_write_file(glbnvbuf2, glbnvls);
+        strcpy(glbnvbuf1, glbnvbuf2);
         double tmdiff = 1000 * ((double)clock() - tm) / CLOCKS_PER_SEC;
         if(verbose && tmdiff > 1000.0)
             REprintf("Time to build GlobalEnv omnils [%lu bytes]: %f ms\n", strlen(glbnvbuf2), tmdiff);
@@ -1160,8 +1159,8 @@ void nvimcom_Start(int *vrb, int *anm, int *swd, char **pth, char **vcv, char **
 #endif
 
     if(nvimcom_failure == 0){
-        glbnvbuf1 = (char*)calloc(glbnvbufzise, sizeof(char));
-        glbnvbuf2 = (char*)calloc(glbnvbufzise, sizeof(char));
+        glbnvbuf1 = (char*)calloc(glbnvbufsize, sizeof(char));
+        glbnvbuf2 = (char*)calloc(glbnvbufsize, sizeof(char));
         if(!glbnvbuf1 || !glbnvbuf2)
             REprintf("nvimcom: Error allocating memory.\n");
 
