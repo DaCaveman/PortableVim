@@ -29,13 +29,6 @@
 set encoding=utf-8
 scriptencoding utf-8
 
-" Check if Vim-R-plugin is installed
-if exists("*WaitVimComStart")
-    echohl WarningMsg
-    call input("Please, uninstall Vim-R-plugin before using Nvim-R. [Press <Enter> to continue]")
-    echohl None
-endif
-
 " Do this only once
 if exists("s:did_global_stuff")
     finish
@@ -46,6 +39,16 @@ if !exists('g:rplugin')
     let g:rplugin = {}
 endif
 let g:rplugin.debug_info = {}
+
+"==========================================================================
+" Check if there is more than one copy of Nvim-R
+" (e.g. from the Vimballl and from a plugin manager)
+"==========================================================================
+
+if exists("*RWarningMsg")
+    " A common_global.vim script was sourced from another version of NvimR.
+    finish
+endif
 
 "==========================================================================
 " Functions that are common to r, rnoweb, rhelp and rdoc
@@ -83,7 +86,8 @@ function RFloatWarn(wmsg)
                     \ 'col': winwidth(0) - realwidth,
                     \ 'row': &lines - 3 - wht, 'anchor': 'NW', 'style': 'minimal'}
         let s:float_warn = nvim_open_win(s:warn_buf, 0, opts)
-        call nvim_win_set_option(s:float_warn, 'winhl', 'Normal:WarningMsg')
+        hi FloatWarnNormal ctermfg=196 guifg=#ff0000 guibg=#222200
+        call nvim_win_set_option(s:float_warn, 'winhl', 'Normal:FloatWarnNormal')
         call timer_start(2000 * len(fmsgl), 'CloseRWarn')
     else
         let fline = &lines - 2 - wht
@@ -111,17 +115,17 @@ function RWarningMsg(wmsg)
 endfunction
 
 if has("nvim")
-    if !has("nvim-0.3.4")
-        call RWarningMsg("Nvim-R requires Neovim >= 0.3.4.")
+    if !has("nvim-0.4.3")
+        call RWarningMsg("Nvim-R requires Neovim >= 0.4.3.")
         let g:rplugin.failed = 1
         finish
     endif
 elseif v:version < "801"
-    call RWarningMsg("Nvim-R requires either Neovim >= 0.3.4 or Vim >= 8.1.")
+    call RWarningMsg("Nvim-R requires either Neovim >= 0.4.3 or Vim >= 8.1.1705")
     let g:rplugin.failed = 1
     finish
-elseif !has("channel") || !has("job")
-    call RWarningMsg("Nvim-R requires either Neovim >= 0.3.4 or Vim >= 8.1.\nIf using Vim, it must have been compiled with both +channel and +job features.\n")
+elseif !has("channel") || !has("job") || !has('patch-8.1.1705')
+    call RWarningMsg("Nvim-R requires either Neovim >= 0.4.3 or Vim >= 8.1.1705\nIf using Vim, it must have been compiled with both +channel and +job features.\n")
     let g:rplugin.failed = 1
     finish
 endif
@@ -187,49 +191,34 @@ function ReadRMsg()
 endfunction
 
 function CompleteChunkOptions(base)
+    " https://yihui.org/knitr/options/#chunk-options (2021-04-19)
+    let lines = readfile(g:rplugin.home . '/R/chunk_options')
+
+    let ktopt = []
+    for lin in lines
+        let dict = eval(lin)
+        let dict['abbr'] = dict['word']
+        let dict['word'] = dict['word'] . '='
+        let dict['menu'] = '= ' . dict['menu']
+        let dict['user_data']['cls'] = 'k'
+        let ktopt += [deepcopy(dict)]
+    endfor
+
     let rr = []
-    " https://github.com/yihui/yihui.name/blob/master/content/knitr/options.md
-    " 2017-02-03
-    let ktopt = ['eval=TRUE', 'echo=TRUE', 'results="markup|asis|hold|hide"',
-                \ 'warning=TRUE', 'error=TRUE', 'message=TRUE', 'split=FALSE',
-                \ 'include=TRUE', 'strip.white=TRUE', 'tidy=FALSE',
-                \ 'tidy.opts= ', 'prompt=FALSE', 'comment="##"',
-                \ 'highlight=TRUE', 'background="#F7F7F7"', 'cache=FALSE',
-                \ 'cache.path="cache/"', 'cache.vars= ',
-                \ 'cache.lazy=TRUE', 'cache.comments= ', 'cache.rebuild=FALSE',
-                \ 'dependson=""', 'autodep=FALSE', 'fig.path= ',
-                \ 'fig.keep="high|none|all|first|last"',
-                \ 'fig.show="asis|hold|animate|hide"', 'dev= ', 'dev.args= ',
-                \ 'fig.ext= ', 'dpi=72', 'fig.width=7', 'fig.height=7',
-                \ 'fig.asp= ', 'fig.dim=c(7, 7)', 'out.width="7in"',
-                \ 'out.height="7in"', 'out.extra= ', 'resize.width= ',
-                \ 'resize.height= ', 'fig.align="left|right|center"',
-                \ 'fig.ncol=""', 'fig.sep=""', 'fig.showtext=FALSE',
-                \ 'fig.env="figure"', 'fig.cap=""', 'fig.scap=""', 'fig.lp="fig:"',
-                \ 'fig.pos=""', 'fig.subcap= ', 'fig.process= ', 'interval=1',
-                \ 'aniopts="controls,loop"', 'ffmpeg.bitrate="1M"',
-                \ 'ffmpeg.format="webm"', 'code= ', 'ref.label= ', 'child= ',
-                \ 'engine="R"', 'engine.path=""', 'opts.label=""', 'purl=TRUE',
-                \ "R.options= "]
-    if &filetype == 'rnoweb'
-        let ktopt += ['external=TRUE', 'sanitize=FALSE', 'size="normalsize"']
-    endif
-    if &filetype == 'rmd' || &filetype == 'rrst'
-        let ktopt += ['fig.retina=1', 'class.output=""', 'class.source=""']
-        if &filetype == 'rmd'
-            let ktopt += ['collapse=FALSE']
-        endif
-    endif
 
     if strlen(a:base) > 0
         let newbase = '^' . substitute(a:base, "\\$$", "", "")
-        call filter(ktopt, 'v:val =~ newbase')
+        call filter(ktopt, 'v:val["abbr"] =~ newbase')
     endif
 
     call sort(ktopt)
     for kopt in ktopt
-        let tmp = split(kopt, "=")
-        call add(rr, {'word': tmp[0] . '=', 'abbr': tmp[0], 'menu': '= ' . tmp[1]})
+        if has('nvim-0.5.0') || has('patch-8.2.84')
+            call add(rr, kopt)
+        else
+            let s:user_data[kopt['word']] = remove(kopt, 'user_data')
+            call add(rr, kopt)
+        endif
     endfor
     return rr
 endfunction
@@ -248,8 +237,12 @@ function IsFirstRArg(lnum, cpos)
     return 1
 endfunction
 
-function FinishArgsCompletion()
-    let s:ArgCompletionFinished = 1
+function FinishArgsCompletion(base, rkey)
+    if exists('s:compl_menu')
+        unlet s:compl_menu
+    endif
+    call JobStdin(g:rplugin.jobs["ClientServer"], "5A" . a:base .
+                \ "\002" . a:rkey . "\n")
 endfunction
 
 function RGetFL(mode)
@@ -564,6 +557,9 @@ function CheckNvimcomVersion(build)
             else
                 let rversion = system(g:rplugin.Rcmd . ' --version')
                 let rversion = substitute(rversion, '.*R version \(\S\{-}\) .*', '\1', '')
+                if rversion < '4.0.0'
+                    call RWarningMsg("Nvim-R requires R >= 4.0.0")
+                endif
                 let g:rplugin.debug_info['R_version'] = rversion
                 if g:rplugin.R_version != rversion
                     let neednew = 1
@@ -767,10 +763,35 @@ function StartNClientServer(w)
     if g:R_objbr_openlist
         let $NVIMR_OPENLS = "TRUE"
     endif
+<<<<<<< HEAD
+=======
+    if g:R_objbr_allnames
+        let $NVIMR_OBJBR_ALLNAMES = "TRUE"
+    endif
+    if exists("g:R_omni_size")
+        let $NVIMR_MAX_CHANNEL_BUFFER_SIZE = string(g:R_omni_size)
+    else
+        if has("nvim") && g:rplugin.is_darwin
+            let $NVIMR_MAX_CHANNEL_BUFFER_SIZE = "7600"
+        else
+            let $NVIMR_MAX_CHANNEL_BUFFER_SIZE = "65000"
+        endif
+    endif
+    if g:R_omni_tmp_file
+        let $NVIMR_OMNI_TMP_FILE = "1"
+        call AddForDeletion(g:rplugin.tmpdir . "/nvimbol_finished")
+    endif
+>>>>>>> 87864f517842256d5ce67e84279739fb5d4a430f
     let g:rplugin.jobs["ClientServer"] = StartJob([nvc], g:rplugin.job_handlers)
     "let g:rplugin.jobs["ClientServer"] = StartJob(['valgrind', '--log-file=/tmp/nclientserver_valgrind_log', '--leak-check=full', nvc], g:rplugin.job_handlers)
     unlet $NVIMR_OPENDF
     unlet $NVIMR_OPENLS
+<<<<<<< HEAD
+=======
+    unlet $NVIMR_OBJBR_ALLNAMES
+    unlet $NVIMR_MAX_CHANNEL_BUFFER_SIZE
+    unlet $NVIMR_OMNI_TMP_FILE
+>>>>>>> 87864f517842256d5ce67e84279739fb5d4a430f
 endfunction
 
 function UpdatePathForR()
@@ -781,7 +802,7 @@ function UpdatePathForR()
             call RWarningMsg('"' . g:R_path . '" is not a directory. Fix the value of R_path in your vimrc.')
             return 0
         endif
-        if $PATH !~ '^' . g:rplugin.R_path
+        if substitute($PATH, '\\', '/', 'g') !~ '^' . g:rplugin.R_path
             if has("win32")
                 let $PATH = g:rplugin.R_path . ';' . substitute($PATH, ';' . g:rplugin.R_path . ';', ';', '')
             else
@@ -1044,7 +1065,7 @@ function SetNvimcomInfo(nvimcomversion, nvimcomhome, bindportn, rpid, wid, r_inf
     let g:Rout_prompt_str = substitute(g:Rout_prompt_str, '.*#N#', '', '')
     let g:Rout_continue_str = substitute(g:Rout_continue_str, '.*#N#', '', '')
 
-    if has('nvim') && type(g:R_external_term) == v:t_number && g:R_external_term == 0
+    if has('nvim') && has_key(g:rplugin, "R_bufname")
         " Put the cursor and the end of the buffer to ensure automatic scrolling
         " See: https://github.com/neovim/neovim/issues/2636
         let isnormal = mode() ==# 'n'
@@ -1411,7 +1432,7 @@ function RFormatCode() range
         let wco = 180
     endif
 
-    call SendToNvimcom("\x08" . $NVIMR_ID . 'nvimcom:::nvim_format(' . a:firstline . ', ' . a:lastline . ', ' . wco . ')')
+    call SendToNvimcom("\x08" . $NVIMR_ID . 'nvimcom:::nvim_format(' . a:firstline . ', ' . a:lastline . ', ' . wco . ', ' . &shiftwidth. ')')
 endfunction
 
 function FinishRFormatCode(lnum1, lnum2)
@@ -2144,7 +2165,7 @@ function SendLineToR(godown, ...)
     if ok
         if a:godown =~ "down"
             call GoDown()
-            if has_op
+            if exists('has_op') && has_op
                 call SendLineToR(a:godown)
             endif
         else
@@ -2217,7 +2238,7 @@ function ClearRInfo()
     let g:rplugin.nvimcom_port = 0
 
     " Legacy support for running R in a Tmux split pane
-    if exists('g:rplugin.tmux_split') && exists('g:R_tmux_title') && g:rplugin.tmux_split
+    if has_key(g:rplugin, "tmux_split") && exists('g:R_tmux_title') && g:rplugin.tmux_split
                 \ && g:R_tmux_title != 'automatic' && g:R_tmux_title != ''
         call system("tmux set automatic-rename on")
     endif
@@ -2252,7 +2273,7 @@ function RQuit(how)
 
     call g:SendCmdToR(qcmd)
 
-    if exists('g:rplugin.tmux_split') || a:how == 'save'
+    if has_key(g:rplugin, "tmux_split") || a:how == 'save'
         sleep 200m
     endif
 
@@ -2442,7 +2463,7 @@ function AskRDoc(rkeyword, package, getclass)
     call AddForDeletion(s:docfile)
 
     let firstobj = ""
-    if bufname("%") =~ "Object_Browser" || (exists("g:rplugin.R_bufname") && bufname("%") == g:rplugin.R_bufname)
+    if bufname("%") =~ "Object_Browser" || (has_key(g:rplugin, "R_bufname") && bufname("%") == g:rplugin.R_bufname)
         let savesb = &switchbuf
         set switchbuf=useopen,usetab
         exe "sb " . g:rplugin.rscript_name
@@ -2497,14 +2518,14 @@ function ShowRDoc(rkeyword)
         return
     endif
 
-    if exists("g:rplugin.R_bufname") && bufname("%") == g:rplugin.R_bufname
+    if has_key(g:rplugin, "R_bufname") && bufname("%") == g:rplugin.R_bufname
         " Exit Terminal mode and go to Normal mode
         stopinsert
     endif
 
     " Legacy support for running R in a Tmux split pane.
     " If the help command was triggered in the R Console, jump to Vim pane:
-    if exists('g:rplugin.tmux_split') && g:rplugin.tmux_split && !s:running_rhelp
+    if has_key(g:rplugin, "tmux_split") && g:rplugin.tmux_split && !s:running_rhelp
         let slog = system("tmux select-pane -t " . g:rplugin.editor_pane)
         if v:shell_error
             call RWarningMsg(slog)
@@ -2512,7 +2533,7 @@ function ShowRDoc(rkeyword)
     endif
     let s:running_rhelp = 0
 
-    if bufname("%") =~ "Object_Browser" || (exists("g:rplugin.R_bufname") && bufname("%") == g:rplugin.R_bufname)
+    if bufname("%") =~ "Object_Browser" || (has_key(g:rplugin, "R_bufname") && bufname("%") == g:rplugin.R_bufname)
         let savesb = &switchbuf
         set switchbuf=useopen,usetab
         exe "sb " . g:rplugin.rscript_name
@@ -2747,10 +2768,6 @@ function RAskHelp(...)
 endfunction
 
 
-function RArgsStatusLine()
-    return s:status_line[s:sttl_count]
-endfunction
-
 function PrintRObject(rkeyword)
     if bufname("%") =~ "Object_Browser"
         let firstobj = ""
@@ -2903,7 +2920,7 @@ endfunction
 
 " render a document with rmarkdown
 function! RMakeRmd(t)
-    if !exists("g:rplugin.pdfviewer")
+    if !has_key(g:rplugin, "pdfviewer")
         call RSetPDFViewer()
     endif
 
@@ -3022,23 +3039,6 @@ function RControlMaps()
     call RCreateMaps('nvi', 'RMakeWord',   'kw', ':call RMakeRmd("word_document")')
     call RCreateMaps('nvi', 'RMakeHTML',   'kh', ':call RMakeRmd("html_document")')
     call RCreateMaps('nvi', 'RMakeODT',    'ko', ':call RMakeRmd("odt_document")')
-endfunction
-
-
-function SpaceForRGrDevice()
-    let savesb = &switchbuf
-    set switchbuf=useopen,usetab
-    let splr = &splitright
-    set splitright
-    37vsplit Space_for_Graphics
-    setlocal nomodifiable
-    setlocal noswapfile
-    set buftype=nofile
-    set nowrap
-    set winfixwidth
-    exe "sb " . g:rplugin.curbuf
-    let &splitright = splr
-    exe "set switchbuf=" . savesb
 endfunction
 
 function RCreateStartMaps()
@@ -3282,6 +3282,10 @@ function FormatInfo(width, needblank)
     let info = ''
     if ud['cls'] == 'a'
         let info = ' ' . FormatTxt(ud['argument'], ' ', " \n  ", a:width - 1)
+    elseif ud['cls'] == 'l'
+        let info = ' ' . FormatTxt(ud['ttl'], ' ', " \n ", a:width - 1) . ' '
+        let info .= "\n————\n"
+        let info .= ' ' . FormatTxt(ud['descr'], ' ', " \n ", a:width - 1)
     else
         if ud['descr'] != ''
             let info = ' ' . FormatTxt(ud['descr'], ' ', " \n ", a:width - 1) . ' '
@@ -3320,45 +3324,6 @@ function CreateNewFloat(...)
     endif
 
     let wrd = s:compl_event['completed_item']['word']
-
-    if s:compl_event['completed_item']['user_data']['cls'] == 'f'
-        let usage = deepcopy(s:compl_event['completed_item']['user_data']['usage'])
-        call map(usage, 'join(v:val, " = ")')
-        let usage = join(usage, ", ")
-        if usage == 'not_checked'
-            " Function at the .GlobalEnv
-            let s:ArgCompletionFinished = 0
-            call delete(g:rplugin.tmpdir . "/args_for_completion")
-            call SendToNvimcom("\x08" . $NVIMR_ID . 'nvimcom:::nvim.GlobalEnv.fun.args("' . wrd . '")')
-            let ii = 20
-            while ii > 0 && s:ArgCompletionFinished == 0
-                let ii = ii - 1
-                sleep 30m
-            endwhile
-            if filereadable(g:rplugin.tmpdir . "/args_for_completion")
-                let usage = readfile(g:rplugin.tmpdir . "/args_for_completion")[0]
-                let usage = '[' . substitute(usage, "\002", "'", 'g') . ']'
-                let usage = eval(usage)
-                call map(usage, 'join(v:val, " = ")')
-                let usage = join(usage, ", ")
-            else
-                let usage = "COULD NOT GET ARGUMENTS"
-            endif
-        endif
-        let s:usage = wrd . '(' . usage . ')'
-    elseif  wrd =~ '\k\{-}\$\k\{-}'
-        let s:ArgCompletionFinished = 0
-        call delete(g:rplugin.tmpdir . "/args_for_completion")
-        call SendToNvimcom("\x08" . $NVIMR_ID . 'nvimcom:::nvim.get.summary(' . wrd . ', 59)')
-        let ii = 20
-        while ii > 0 && s:ArgCompletionFinished == 0
-            let ii = ii - 1
-            sleep 30m
-        endwhile
-        if filereadable(g:rplugin.tmpdir . "/args_for_completion")
-            let s:compl_event['completed_item']['user_data']['summary'] = readfile(g:rplugin.tmpdir . "/args_for_completion")
-        endif
-    endif
 
     " Get the required height for a standard float preview window
     let flines = FormatInfo(60, 1)
@@ -3541,64 +3506,92 @@ function OnCompleteDone()
     let s:user_data = {}
 endfunction
 
+" TODO: delete s:user_data when Ubuntu has('nvim-0.5.0') && has('patch-8.2.84')
 let s:user_data = {}
-function StartFloatWin()
+function AskForComplInfo()
     if ! pumvisible()
         return
     endif
-    " Other plugins (example, ncm-R) fill the 'user_data' dictionary
+    " Other plugins fill the 'user_data' dictionary
     if has_key(v:event, 'completed_item') && has_key(v:event['completed_item'], 'word')
+        let s:compl_event = deepcopy(v:event)
         if s:user_data != {}
-            let s:compl_event = deepcopy(v:event)
+            " TODO: Delete this code when Neovim 0.5 is released
             let s:compl_event['completed_item']['user_data'] = deepcopy(s:user_data[v:event['completed_item']['word']])
-            call timer_start(1, 'CreateNewFloat', {})
-        elseif has_key(v:event['completed_item'], 'user_data') &&
-                    \ type(v:event['completed_item']['user_data']) == v:t_dict &&
-                    \ has_key(v:event['completed_item']['user_data'], 'cls')
-            let s:compl_event = deepcopy(v:event)
-            " Neovim doesn't allow to open a float window from here:
-            call timer_start(1, 'CreateNewFloat', {})
+        endif
+        if has_key(s:compl_event['completed_item'], 'user_data') &&
+                    \ type(s:compl_event['completed_item']['user_data']) == v:t_dict
+            if has_key(s:compl_event['completed_item']['user_data'], 'pkg')
+                let pkg = s:compl_event['completed_item']['user_data']['pkg']
+                let wrd = s:compl_event['completed_item']['word']
+                " Request function description and usage
+                call JobStdin(g:rplugin.jobs["ClientServer"], "6" . wrd . "\002" . pkg . "\n")
+            else
+                " Neovim doesn't allow to open a float window from here:
+                call timer_start(1, 'CreateNewFloat', {})
+            endif
         endif
     elseif s:float_win
         call CloseFloatWin()
     endif
 endfunction
 
-" Delete the variable s:user_data, update syntax/rdocpreview.vim and change the condition below to
-" has('nvim-0.5.0') || has('patch-8.2.84') when it evaluates to TRUE in Ubuntu (perhaps, 20.10)
-if has('nvim-0.4.3') || has('patch-8.1.1705')
-    autocmd CompleteChanged * call StartFloatWin()
-    autocmd CompleteDone * call OnCompleteDone()
-endif
-
-function RGetNewBase(base)
-    if a:base =~ ":::"
-        return ["", "", ""]
-    elseif a:base =~ "::"
-        let newbase = substitute(a:base, ".*::", "", "")
-        let prefix = substitute(a:base, "::.*", "::", "")
-        let pkg = substitute(a:base, "::.*", "", "")
+function FinishGlbEnvFunArgs(fnm)
+    if filereadable(g:rplugin.tmpdir . "/args_for_completion")
+        let usage = readfile(g:rplugin.tmpdir . "/args_for_completion")[0]
+        let usage = '[' . substitute(usage, "\004", "'", 'g') . ']'
+        let usage = eval(usage)
+        call map(usage, 'join(v:val, " = ")')
+        let usage = join(usage, ", ")
+        let s:usage = a:fnm . '(' . usage . ')'
     else
-        let newbase = a:base
-        let prefix = ""
-        let pkg = ""
+        let s:usage = "COULD NOT GET ARGUMENTS"
     endif
-
-    " The char '$' at the end of `a:base` is treated as end of line, and
-    " the pattern is never found in `line`.
-    let newbase = '^' . substitute(newbase, "\\$$", "", "")
-    " A dot matches anything
-    let newbase = substitute(newbase, '\.', '\\.', 'g')
-    return [newbase, prefix, pkg]
+    call CreateNewFloat()
 endfunction
 
-function FormatTxt(text, splt, jn, maxl)
+function FinishGetSummary()
+    if filereadable(g:rplugin.tmpdir . "/args_for_completion")
+        let s:compl_event['completed_item']['user_data']['summary'] = readfile(g:rplugin.tmpdir . "/args_for_completion")
+    endif
+    call CreateNewFloat()
+endfunction
+
+function SetComplInfo(dctnr)
+    " Replace user_data with the complete version
+    let s:compl_event['completed_item']['user_data'] = deepcopy(a:dctnr)
+
+    if a:dctnr['cls'] == 'f'
+        let usage = deepcopy(a:dctnr['usage'])
+        call map(usage, 'join(v:val, " = ")')
+        let usage = join(usage, ", ")
+        if usage == 'not_checked'
+            " Function at the .GlobalEnv
+            call delete(g:rplugin.tmpdir . "/args_for_completion")
+            call SendToNvimcom("\x08" . $NVIMR_ID . 'nvimcom:::nvim.GlobalEnv.fun.args("' . a:dctnr['word'] . '")')
+            return
+        endif
+        let s:usage = a:dctnr['word'] . '(' . usage . ')'
+    elseif a:dctnr['word'] =~ '\k\{-}\$\k\{-}'
+        call delete(g:rplugin.tmpdir . "/args_for_completion")
+        call SendToNvimcom("\x08" . $NVIMR_ID . 'nvimcom:::nvim.get.summary(' . a:dctnr['word'] . ', 59)')
+        return
+    endif
+
+    if len(a:dctnr) > 0
+        call CreateNewFloat()
+    endif
+endfunction
+
+autocmd CompleteChanged * call AskForComplInfo()
+autocmd CompleteDone * call OnCompleteDone()
+
+function FormatPrgrph(text, splt, jn, maxlen)
     let wlist = split(a:text, a:splt)
     let txt = ['']
     let ii = 0
-    let maxlen = a:maxl - len(a:jn)
     for wrd in wlist
-        if strdisplaywidth(txt[ii] . a:splt . wrd) < maxlen
+        if strdisplaywidth(txt[ii] . a:splt . wrd) < a:maxlen
             let txt[ii] .= a:splt . wrd
         else
             let ii += 1
@@ -3609,40 +3602,35 @@ function FormatTxt(text, splt, jn, maxl)
     return join(txt, a:jn)
 endfunction
 
+function FormatTxt(text, splt, jn, maxl)
+    let maxlen = a:maxl - len(a:jn)
+    let atext = substitute(a:text, "\004", "'", "g")
+    let plist = split(atext, "\002")
+    let txt = ''
+    for prg in plist
+        let txt .= "\n " . FormatPrgrph(prg, a:splt, a:jn, maxlen)
+    endfor
+    let txt = substitute(txt, "^\n ", "", "")
+    return txt
+endfunction
+
 function GetRArgs(base, rkeyword0, firstobj, pkg)
     if string(g:SendCmdToR) == "function('SendCmdToR_fake')"
         return []
     endif
 
+    call delete(g:rplugin.tmpdir . "/args_for_completion")
     let msg = 'nvimcom:::nvim_complete_args("' . a:rkeyword0 . '", "' . a:base . '"'
     if a:firstobj != ""
         let msg .= ', firstobj = "' . a:firstobj . '"'
     elseif a:pkg != ""
         let msg .= ', pkg = ' . a:pkg
     endif
-    let msg .= ', extrainfo = TRUE)'
+    let msg .= ')'
 
     " Save documentation of arguments to be used by nclientserver
-    call delete(g:rplugin.tmpdir . "/args_for_completion")
-    let s:ArgCompletionFinished = 0
     call SendToNvimcom("\x08" . $NVIMR_ID . msg)
 
-    let ii = 20
-    while ii > 0 && s:ArgCompletionFinished == 0
-        let ii = ii - 1
-        sleep 30m
-    endwhile
-
-    if s:ArgCompletionFinished == 0 && ii == 0
-        return []
-    endif
-
-    if exists('s:compl_menu')
-        unlet s:compl_menu
-    endif
-    let s:waiting_compl_menu = 1
-    call JobStdin(g:rplugin.jobs["ClientServer"], "5A" . a:base .
-                \ "\002" . a:rkeyword0 . "\n")
     return WaitRCompletion()
 endfunction
 
@@ -3653,7 +3641,12 @@ function GetListOfRLibs(base)
         call filter(pd, 'v:val =~ "^" . a:base')
         for line in pd
             let tmp = split(line, "\x09")
-            call add(argls, {'word': tmp[0], 'menu': tmp[1], 'info': "Description: " . tmp[2]})
+            if has('nvim-0.5.0') || has('patch-8.2.84')
+                call add(argls, {'word': tmp[0], 'user_data': {'ttl': tmp[1], 'descr': tmp[2], 'cls': 'l'}})
+            else
+                call add(argls, {'word': tmp[0]})
+                let s:user_data[tmp[0]] = {'ttl': tmp[1], 'descr': tmp[2], 'cls': 'l'}
+            endif
         endfor
     endif
     return argls
@@ -3681,6 +3674,17 @@ function FindStartRObj()
         let s:argkey = argkey
     endif
     return idx2 - 1
+endfunction
+
+function ReadComplMenu()
+    if filereadable(g:rplugin.tmpdir . "/nvimbol_finished")
+        let txt = readfile(g:rplugin.tmpdir . "/nvimbol_finished")[0]
+        let s:compl_menu = deepcopy(eval(txt))
+        call delete(g:rplugin.tmpdir . "/nvimbol_finished")
+    else
+        let s:compl_menu = {}
+    endif
+    let s:waiting_compl_menu = 0
 endfunction
 
 function SetComplMenu(cmn)
@@ -3753,6 +3757,7 @@ function CompleteR(findstart, base)
                     endif
 
                     call UpdateRGlobalEnv(1)
+                    let s:waiting_compl_menu = 1
                     return GetRArgs(a:base, rkeyword0, firstobj, pkg)
                 endif
                 let idx -= 1
@@ -3788,33 +3793,22 @@ function WaitRCompletion()
     if exists('s:compl_menu')
         let s:is_completing = 1
         if has('nvim-0.5.0') || has('patch-8.2.84')
+            " 'user_data' might be a dictionary
             return s:compl_menu
-        elseif has('nvim-0.4.3') || has('patch-8.1.1705')
-            " They have float window, but 'user_data' must be string
+        else
+            " 'user_data' must be string (Ubuntu 20.04)
             let s:user_data = {}
             for item in s:compl_menu
                 let wrd = item['word']
-                let s:user_data[wrd] = deepcopy(item['user_data'])
-                let item['user_data'] = ''
-            endfor
-        else
-            " No support for float window: use the old preview window
-            for item in s:compl_menu
-                let wrd = item['word']
-                if item['user_data']['cls'] == 'a'
-                    let item['info'] = item['user_data']['argument']
-                elseif item['user_data']['cls'] == 'f'
-                    let usage = item['user_data']['usage']
-                    call map(usage, 'join(v:val, " = ")')
-                    let usage = wrd . '(' . join(usage, ", ") . ')'
-                    let item['info'] = FormatTxt('Description: ' . item['user_data']['descr'], ' ' , "\n ", winwidth(0)) .
-                                \ "\n" . FormatTxt('Usage: ' . usage . "\t", ' ' , "\n  ", winwidth(0))
+                if has_key(item, 'user_data')
+                    let s:user_data[wrd] = deepcopy(item['user_data'])
+                    let item['user_data'] = ''
                 endif
-                let item['user_data'] = ''
             endfor
         endif
         return s:compl_menu
     endif
+    return []
 endfunction
 
 function RSourceOtherScripts()
@@ -3884,7 +3878,7 @@ command RDebugInfo :call ShowRDebugInfo()
 "             rplugin_  for internal parameters
 "==========================================================================
 
-if !exists("g:rplugin.compldir")
+if !has_key(g:rplugin, "compldir")
     exe "source " . substitute(expand("<sfile>:h:h"), " ", "\\ ", "g") . "/R/setcompldir.vim"
 endif
 
@@ -3916,9 +3910,6 @@ else
         endif
     endif
 endif
-
-" For compatibility with ncm-R:
-let g:rplugin_tmpdir = g:rplugin.tmpdir
 
 let $NVIMR_TMPDIR = g:rplugin.tmpdir
 if !isdirectory(g:rplugin.tmpdir)
@@ -3979,6 +3970,7 @@ let g:R_openhtml          = get(g:, "R_openhtml",           1)
 let g:R_hi_fun            = get(g:, "R_hi_fun",             1)
 let g:R_hi_fun_paren      = get(g:, "R_hi_fun_paren",       0)
 let g:R_hi_fun_globenv    = get(g:, "R_hi_fun_globenv",     0)
+let g:R_omni_tmp_file     = get(g:, "R_omni_tmp_file",      1)
 let g:R_bracketed_paste   = get(g:, "R_bracketed_paste",    0)
 let g:R_clear_console     = get(g:, "R_clear_console",      1)
 
@@ -4117,7 +4109,7 @@ if g:R_objbr_h < 4
 endif
 
 " Control the menu 'R' and the tool bar buttons
-if !exists("g:rplugin.hasmenu")
+if !has_key(g:rplugin, "hasmenu")
     let g:rplugin.hasmenu = 0
 endif
 
@@ -4286,27 +4278,34 @@ if CheckNvimcomVersion(0)
     call StartNClientServer("Before_R")
 endif
 
-" Check if r-plugin/functions.vim exist
-let s:ff = split(globpath(&rtp, "r-plugin/functions.vim"), " ", "\n")
-" Check if other Vim-R-plugin files are installed
-let s:ft = split(globpath(&rtp, "ftplugin/r*_rplugin.vim"), " ", "\n")
-if len(s:ff) > 0 || len(s:ft) > 0
-    call RWarningMsg("It seems that Vim-R-plugin is installed.\n" .
-                \ "Please, completely uninstall it before using Nvim-R.\n" .
-                \ "Below is a list of what looks like Vim-R-plugin files:\n" . join(s:ff, "\n") . "\n" . join(s:ft) . "\n")
+" Check if Vim-R-plugin is installed
+if exists("*WaitVimComStart")
+    echohl WarningMsg
+    call input("Please, uninstall Vim-R-plugin before using Nvim-R. [Press <Enter> to continue]")
+    echohl None
 endif
 
-" Check if there is more than one copy of Nvim-R
-" (e.g. from the Vimballl and from a plugin manager)
-let s:ff = split(substitute(globpath(&rtp, "R/functions.vim"), "functions.vim", "", "g"), "\n")
-let s:ft = split(globpath(&rtp, "ftplugin/r*_nvimr.vim"), "\n")
-if len(s:ff) > 1 || len(s:ft) > 5
-    call RWarningMsg("It seems that Nvim-R is installed in more than one place.\n" .
-                \ "Please, remove one of them to avoid conflicts.\n" .
-                \ "Below is a list of some of the possibly duplicated directories and files:\n" . join(s:ff, "\n") . "\n" . join(s:ft, "\n") . "\n")
+let s:ff = split(globpath(&rtp, "R/functions.vim"))
+if len(s:ff) > 1
+    function WarnDupNvimR()
+        let ff = split(globpath(&rtp, "R/functions.vim"))
+        let msg = ["", "===   W A R N I N G   ===", "",
+                    \ "It seems that Nvim-R is installed in more than one place.",
+                    \ "Please, remove one of them to avoid conflicts.",
+                    \ "Below are the paths of the possibly duplicated installations:", ""]
+        for ffd in ff
+            let msg += ["  " . substitute(ffd, "R/functions.vim", "", "g")]
+        endfor
+        unlet ff
+        let msg  += ["", "Please, uninstall one version of Nvim-R.", ""]
+        exe len(msg) . "split Warning"
+        call setline(1, msg)
+        set nomodified
+        redraw
+    endfunction
+    autocmd VimEnter * call WarnDupNvimR()
 endif
 unlet s:ff
-unlet s:ft
 
 " 2016-08-25
 if exists("g:R_nvimcom_wait")

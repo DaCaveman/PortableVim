@@ -564,7 +564,15 @@ endfunction
 
 " FUNCTION: s:previewBookmark(bookmark) {{{1
 function! s:previewBookmark(bookmark) abort
+<<<<<<< HEAD
     call a:bookmark.activate(b:NERDTree, !a:bookmark.path.isDirectory ? {'stay': 1, 'where': 'h', 'keepopen': 1} : {})
+=======
+    if a:bookmark.path.isDirectory
+        execute 'NERDTreeFind '.a:bookmark.path.str()
+    else
+        call a:bookmark.activate(b:NERDTree, {'stay': 1, 'where': 'p', 'keepopen': 1})
+    endif
+>>>>>>> 81f3eaba295b3fceb2d032db57e5eae99ae480f8
 endfunction
 
 "FUNCTION: s:previewNodeCurrent(node) {{{1

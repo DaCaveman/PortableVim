@@ -189,10 +189,10 @@ noremap									<localleader>p 	:diffpu<CR>
 "___________________________________________________________________________________________________________________
 " Terminal mode mapping
 "
-"tnoremap								<C-h>			<Esc><c-w>h
-"tnoremap								<C-j>			<Esc><c-w>j
-"tnoremap								<C-k>			<Esc><c-w>k
-"tnoremap								<C-l>			<Esc><c-w>l
+tnoremap								<C-h>			<Esc><c-w>h
+tnoremap								<C-j>			<Esc><c-w>j
+tnoremap								<C-k>			<Esc><c-w>k
+tnoremap								<C-l>			<Esc><c-w>l
 tnoremap								<C-V>			<C-W>"*
 tnoremap								<Esc>			<C-\><C-n>
 "tnoremap								<S-Esc>			<C-\><C-n>:q!<CR>

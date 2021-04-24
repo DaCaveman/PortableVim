@@ -38,6 +38,8 @@ static int auto_obbr;
 static char *glbnv_buffer;
 static char *compl_buffer;
 static int compl_buffer_size;
+static long max_buffer_size;
+static char *omni_tmp_file;
 void omni2ob();
 void lib2ob();
 void update_pkg_list();
@@ -670,8 +672,13 @@ void start_server()
 #endif
 }
 
-char *count_sep(char *b1)
+char *count_sep(char *b1, int *size)
 {
+    *size = strlen(b1);
+    // Some packages do not export any objects.
+    if(*size == 1)
+        return b1;
+
     char *s = b1;
     int n = 0;
     while(*s){
@@ -693,47 +700,6 @@ char *count_sep(char *b1)
         s++;
     }
     return b1;
-}
-
-char *fix_string(char *b1)
-{
-    char *p1 = b1;
-    int n1 = 0;
-    int n2 = 0;
-    while(*p1){
-        if(*p1 == '\002')
-            n1++;
-        if(*p1 == '\'')
-            n2++;
-        p1++;
-    }
-    if(n1 == 0 && n2 == 0)
-        return b1;
-
-    char *b2 = calloc(strlen(b1) + 1 + n2, sizeof(char));
-    p1 = b1;
-    char *p2 = b2;
-    while(*p1){
-        if(*p1 == '\''){
-            *p2 = '\'';
-            p2++;
-            *p2 = *p1;
-            p1++;
-            p2++;
-            continue;
-        }
-        if(*p1 == '\002'){
-            *p2 = '\'';
-            p2++;
-            p1++;
-            continue;
-        }
-        *p2 = *p1;
-        p1++;
-        p2++;
-    }
-    free(b1);
-    return b2;
 }
 
 char *read_file(const char *fn)
@@ -776,16 +742,11 @@ char *read_omnils_file(const char *fn, int *size)
     if(!buffer)
         return NULL;
 
-    // Fix single quotes and backslashes
-    buffer = fix_string(buffer);
-
     // Ensure that there are exactly 7 \006 between new line characters
-    buffer = count_sep(buffer);
+    buffer = count_sep(buffer, size);
 
     if(!buffer)
         return NULL;
-
-    *size = strlen(buffer);
 
     if(buffer){
         char *p = buffer;
@@ -891,9 +852,10 @@ PkgData *new_pkg_data(const char *nm, int verbose)
     pd->nobjs = 0;
     if(pd->omnils){
         pd->loaded = 1;
-        for(int i = 0; i < size; i++)
-            if(pd->omnils[i] == '\n')
-                pd->nobjs++;
+        if(size > 2)
+            for(int i = 0; i < size; i++)
+                if(pd->omnils[i] == '\n')
+                    pd->nobjs++;
     }
     return pd;
 }
@@ -915,14 +877,9 @@ PkgData *get_pkg(const char *nm)
 
 void add_pkg(const char *nm, int verbose)
 {
-    if(pkgList){
-        PkgData *pd = pkgList;
-        while(pd->next)
-            pd = pd->next;
-        pd->next = new_pkg_data(nm, verbose);
-    } else {
-        pkgList = new_pkg_data(nm, verbose);
-    }
+    PkgData *tmp = pkgList;
+    pkgList = new_pkg_data(nm, verbose);
+    pkgList->next = tmp;
 }
 
 void update_pkg_list()
@@ -1307,7 +1264,7 @@ void lib2ob()
                 fprintf(F2, "   :#%s\t\n", pkg->name);
             snprintf(lbnmc, 511, "%s:", pkg->name);
             stt = get_list_status(lbnmc, 0);
-            if(pkg->omnils && stt == 1){
+            if(pkg->omnils && pkg->nobjs > 0 && stt == 1){
                 p = pkg->omnils;
                 nLibObjs = pkg->nobjs - 1;
                 while(*p){
@@ -1420,13 +1377,108 @@ int count_twice(const char *b1, const char *b2, const char ch)
     return n1 == n2;
 }
 
+// Return user_data of a specific item with function usage, title and
+// description to be displayed in the float window
+void compl_info(const char *wrd, const char *pkg)
+{
+    int i, nsz, len;
+    const char *f[7];
+    char *s;
+
+    if(strcmp(pkg, ".GlobalEnv") == 0){
+        s = glbnv_buffer;
+    } else {
+        PkgData *pd = pkgList;
+        while(pd){
+            if(strcmp(pkg, pd->name) == 0)
+                break;
+            else
+                pd = pd->next;
+        }
+
+        if(pd == NULL)
+            return;
+
+        s = pd->omnils;
+    }
+
+    memset(compl_buffer, 0, compl_buffer_size);
+    char *p = compl_buffer;
+
+    while(*s != 0){
+        if(strcmp(s, wrd) == 0){
+            i = 0;
+            while(i < 7){
+                f[i] = s;
+                i++;
+                while(*s != 0)
+                    s++;
+                s++;
+            }
+            while(*s != '\n' && *s != 0)
+                s++;
+            if(*s == '\n')
+                s++;
+
+            // Avoid buffer overflow if the information is bigger than compl_buffer.
+            nsz = strlen(f[4]) + strlen(f[5]) + strlen(f[6]) + 256;
+            len = p - compl_buffer;
+            while((compl_buffer_size - nsz - len) < 0){
+                p = grow_compl_buffer();
+                len = strlen(compl_buffer);
+            }
+
+
+            p = str_cat(p, "{'cls': '");
+            if(f[1][0] == '\003')
+                p = str_cat(p, "f");
+            else
+                p = str_cat(p, f[1]);
+            p = str_cat(p, "', 'word': '");
+            p = str_cat(p, wrd);
+            p = str_cat(p, "', 'pkg': '");
+            p = str_cat(p, f[3]);
+            p = str_cat(p, "', 'usage': [");
+            p = str_cat(p, f[4]);
+            p = str_cat(p, "], 'ttl': '");
+            p = str_cat(p, f[5]);
+            p = str_cat(p, "', 'descr': '");
+            p = str_cat(p, f[6]);
+            p = str_cat(p, "'}");
+            printf("call SetComplInfo(%s)\n", compl_buffer);
+            fflush(stdout);
+            return;
+        }
+        while(*s != '\n')
+            s++;
+        s++;
+    }
+    printf("call SetComplInfo({})\n");
+    fflush(stdout);
+}
+
+// Return the menu items for omni completion, but don't include function
+// usage, and tittle and description of objects because if the buffer becomes
+// too big it will be truncated.
 char *parse_omnls(const char *s, const char *base, char *p)
 {
+<<<<<<< HEAD
     int i, nsz;
+=======
+    int i, nsz, len;
+>>>>>>> 87864f517842256d5ce67e84279739fb5d4a430f
     const char *f[7];
 
     while(*s != 0){
         if(str_here(s, base)){
+            if(omni_tmp_file == NULL && (p - compl_buffer) >= max_buffer_size){
+                // Truncate completion list if it's becoming too big.
+                p = str_cat(p, "{'word': '");
+                p = str_cat(p, base);
+                p = str_cat(p, "', 'menu': 'LIST TRUNCATED ...', 'user_data': {'cls': 't', 'descr': ''}}");
+                return p;
+            }
+
             i = 0;
             while(i < 7){
                 f[i] = s;
@@ -1457,13 +1509,9 @@ char *parse_omnls(const char *s, const char *base, char *p)
             if(strlen(f[3]) > 64)
                 fprintf(stderr, "TOO BIG [3]: %s [%s]\n", f[1], f[0]);
 
-            nsz = strlen(f[0]);
-            nsz += strlen(f[4]);
-            nsz += strlen(f[5]);
-            nsz += strlen(f[6]);
-            nsz += 256;
-
-            int len = strlen(compl_buffer);
+            // Avoid buffer overflow if the information is bigger than compl_buffer.
+            nsz = strlen(f[0]) + 256;
+            len = p - compl_buffer;
             while((compl_buffer_size - nsz - len) < 0){
                 p = grow_compl_buffer();
                 len = strlen(compl_buffer);
@@ -1520,6 +1568,7 @@ char *parse_omnls(const char *s, const char *base, char *p)
                 p = str_cat(p, f[1]);
             p = str_cat(p, "', 'pkg': '");
             p = str_cat(p, f[3]);
+<<<<<<< HEAD
             p = str_cat(p, "', 'usage': [");
             p = str_cat(p, f[4]);
             p = str_cat(p, "], 'ttl': '");
@@ -1527,6 +1576,9 @@ char *parse_omnls(const char *s, const char *base, char *p)
             p = str_cat(p, "', 'descr': '");
             p = str_cat(p, f[6]);
             p = str_cat(p, "'}},");
+=======
+            p = str_cat(p, "'}}, "); // Don't include fields 4, 5 and 6 because big data will be truncated.
+>>>>>>> 87864f517842256d5ce67e84279739fb5d4a430f
         } else {
             while(*s != '\n')
                 s++;
@@ -1554,7 +1606,6 @@ void complete(const char *base, const char *funcnm)
         snprintf(buf, 511, "%s/args_for_completion", tmpdir);
         s = read_file(buf);
         if(s){
-            s = fix_string(s);
             sz = strlen(s) + 4;
             while(sz > compl_buffer_size)
                 p = grow_compl_buffer();
@@ -1580,18 +1631,35 @@ void complete(const char *base, const char *funcnm)
         p = parse_omnls(glbnv_buffer, base, p);
     PkgData *pd = pkgList;
     while(pd){
+        if(omni_tmp_file == NULL && (p - compl_buffer) >= max_buffer_size)
+            break;
         if(pd->omnils)
             p = parse_omnls(pd->omnils, base, p);
         pd = pd->next;
     }
 
+<<<<<<< HEAD
     //fprintf(stderr, "TIME %s = %f\n", base,
     //        1000 * ((double)clock() - tm) / CLOCKS_PER_SEC);
     //fflush(stderr);
 
     printf("call SetComplMenu([%s])\n", compl_buffer);
+=======
+    if(omni_tmp_file && (p - compl_buffer) >= max_buffer_size){
+        FILE *f = fopen(omni_tmp_file, "w");
+        if(f){
+            fprintf(f, "[%s]\n", compl_buffer);
+            fclose(f);
+        } else {
+            fprintf(stderr, "Could not write file '%s'\n", omni_tmp_file);
+            fflush(stderr);
+        }
+        printf("call ReadComplMenu()\n");
+    } else {
+        printf("call SetComplMenu([%s])\n", compl_buffer);
+    }
+>>>>>>> 87864f517842256d5ce67e84279739fb5d4a430f
     fflush(stdout);
-
 }
 
 int main(int argc, char **argv){
@@ -1623,6 +1691,15 @@ int main(int argc, char **argv){
     Windows_setup();
 #endif
 
+    if(getenv("NVIMR_MAX_CHANNEL_BUFFER_SIZE"))
+        max_buffer_size = atol(getenv("NVIMR_MAX_CHANNEL_BUFFER_SIZE"));
+    else
+        max_buffer_size = 7600;
+    if(getenv("NVIMR_OMNI_TMP_FILE")){
+        omni_tmp_file = calloc((strlen(tmpdir) + 18), sizeof(char));
+        sprintf(omni_tmp_file, "%s/nvimbol_finished", tmpdir);
+    }
+
     start_server();
 
     while(fgets(line, 1023, stdin)){
@@ -1639,7 +1716,7 @@ int main(int argc, char **argv){
                     p++;
                 *p = 0;
                 p++;
-                strncpy(NvimcomPort, msg, 15);
+                memcpy(NvimcomPort, msg, 15);
 #ifdef _WIN64
                 RConsole = (HWND)atoll(p);
 #else
@@ -1648,7 +1725,7 @@ int main(int argc, char **argv){
                 if(msg[0] == '0')
                     RConsole = NULL;
 #else
-                strncpy(NvimcomPort, msg, 15);
+                memcpy(NvimcomPort, msg, 15);
 #endif
                 break;
             case '2': // Send message
@@ -1720,6 +1797,15 @@ int main(int argc, char **argv){
                     msg++;
                     complete(base, msg);
                 }
+                break;
+            case '6':
+                msg++;
+                char *base = msg;
+                while(*msg != '\002')
+                    msg++;
+                *msg = 0;
+                msg++;
+                compl_info(base, msg);
                 break;
 #ifdef WIN32
             case '7':

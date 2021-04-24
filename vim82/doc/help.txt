@@ -221,6 +221,21 @@ Standard plugins ~
 |pi_zip.txt|       Zip archive explorer
 
 LOCAL ADDITIONS:				*local-additions*
+|vundle.txt|          Vundle, a plug-in manager for Vim.             *vundle*
+|youcompleteme.txt|  YouCompleteMe: a code-completion engine for Vim
+|SimpylFold.txt| No-BS Python code folding for Vim
+|NERDTree.txt|   A tree explorer plugin to rule the Vim world. Bwahahaha!!
+|NERD_commenter.txt|         Plugin for commenting code
+|solarized.vim| for Vim version 7.3 or newer. Modified: 2011 May 05
+|lightline.txt|	A light and configurable statusline/tabline for Vim
+|krl.txt|	Kuka Robot Language for Vim version 7.4	Last change: 10. Jun 2020
+|rapid.txt|	Abb Rapid Command for Vim version 7.4	Last change: 20. Feb 2020
+|Nvim-R.txt|                                                  *Nvim-R*
+|ft-csv.txt|	For Vim version 7.4	Last Change: Thu, 15 Jan 2015
+|delimitMate.txt|   Trying to keep those beasts at bay! v2.7     *delimitMate*
+|diffchar.txt|  Highlight the exact differences, based on characters and words
+|qf.txt|	A plugin to make working with the quickfix list/window smoother.
+|vundle.txt|          Vundle, a plug-in manager for Vim.             *vundle*
 
 ------------------------------------------------------------------------------
 *bars*		Bars example

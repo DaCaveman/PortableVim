@@ -142,8 +142,8 @@ nvim.primitive.args <- function(x)
     f <- sub(") $", "", sub("^function \\(", "", f[1]))
     f <- strsplit(f, ",")[[1]]
     f <- sub("^ ", "", f)
-    f <- sub(" = ", "\002], [\002", f)
-    paste(f, collapse = "\002]], [[\002")
+    f <- sub(" = ", "'], ['", f)
+    paste(f, collapse = "']], [['")
 }
 
 nvim.GlobalEnv.fun.args <- function(funcname)
@@ -151,7 +151,7 @@ nvim.GlobalEnv.fun.args <- function(funcname)
     sink(paste0(Sys.getenv("NVIMR_TMPDIR"), "/args_for_completion"))
     cat(nvim.args(funcname))
     sink()
-    .C("nvimcom_msg_to_nvim", 'FinishArgsCompletion()', PACKAGE="nvimcom")
+    .C("nvimcom_msg_to_nvim", paste0('FinishGlbEnvFunArgs("', funcname, '")'), PACKAGE="nvimcom")
     return(invisible(NULL))
 }
 
@@ -163,29 +163,39 @@ nvim.get.summary <- function(obj, wdth)
     print(summary(obj))
     sink()
     options(width = owd)
-    .C("nvimcom_msg_to_nvim", 'FinishArgsCompletion()', PACKAGE="nvimcom")
+    .C("nvimcom_msg_to_nvim", 'FinishGetSummary()', PACKAGE="nvimcom")
     return(invisible(NULL))
 }
 
 # For building omnls files
-nvim.fix.string <- function(x){
+nvim.fix.string <- function(x, sdq = TRUE)
+{
     x <- gsub("\n", "\\\\n", x)
     x <- gsub("\r", "\\\\r", x)
     x <- gsub("\t", "\\\\t", x)
-    x <- gsub('"', '\\\\"', x)
+    x <- gsub("'", "\004", x)
+    if(sdq){
+        x <- gsub('"', '\\\\"', x)
+    } else {
+        x <- sub("^\\s*", "", x)
+        x <- paste(x, collapse = "")
+    }
     x
 }
 
 # Adapted from: https://stat.ethz.ch/pipermail/ess-help/2011-March/006791.html
-nvim.args <- function(funcname, txt = "", pkg = NULL, objclass, extrainfo = FALSE, spath = FALSE)
+nvim.args <- function(funcname, txt = "", pkg = NULL, objclass, extrainfo = FALSE, sdq = TRUE)
 {
     frm <- NA
     funcmeth <- NA
     if(!missing(objclass) && nvim.grepl("[[:punct:]]", funcname) == FALSE){
-        mlen <- try(length(methods(funcname)), silent = TRUE)
+        saved.warn <- getOption("warn")
+        options(warn = -1)
+        on.exit(options(warn = saved.warn))
+        mlen <- try(length(methods(funcname)), silent = TRUE) # Still get warns
         if(class(mlen) == "integer" && mlen > 0){
             for(i in 1:length(objclass)){
-                funcmeth <- paste(funcname, ".", objclass[i], sep = "")
+                funcmeth <- paste0(funcname, ".", objclass[i])
                 if(existsFunction(funcmeth)){
                     funcname <- funcmeth
                     frm <- formals(funcmeth)
@@ -202,8 +212,8 @@ nvim.args <- function(funcname, txt = "", pkg = NULL, objclass, extrainfo = FALS
 
     if(is.na(frm[1])){
         if(is.null(pkg)){
-            deffun <- paste(funcname, ".default", sep = "")
-            if (existsFunction(deffun) && pkgname[1] != ".GlobalEnv" && !spath) {
+            deffun <- paste0(funcname, ".default")
+            if (existsFunction(deffun) && pkgname[1] != ".GlobalEnv") {
                 funcname <- deffun
                 funcmeth <- deffun
             } else if(!existsFunction(funcname)) {
@@ -217,12 +227,12 @@ nvim.args <- function(funcname, txt = "", pkg = NULL, objclass, extrainfo = FALS
             idx <- grep(paste0(":", pkg, "$"), search())
             if(length(idx)){
                 ff <- "NULL"
-                tr <- try(ff <- get(paste(funcname, ".default", sep = ""), pos = idx), silent = TRUE)
+                tr <- try(ff <- get(paste0(funcname, ".default"), pos = idx), silent = TRUE)
                 if(class(tr)[1] == "try-error")
                     ff <- get(funcname, pos = idx)
                 frm <- formals(ff)
             } else {
-                if(!isNamespaceLoaded(pkg) && !spath)
+                if(!isNamespaceLoaded(pkg))
                     loadNamespace(pkg)
                 ff <- getAnywhere(funcname)
                 idx <- grep(pkg, ff$where)
@@ -232,48 +242,47 @@ nvim.args <- function(funcname, txt = "", pkg = NULL, objclass, extrainfo = FALS
         }
     }
 
-    if(pkgname[1] == ".GlobalEnv" || spath)
-        extrainfo <- FALSE
-
-    if(extrainfo && length(frm) > 0){
+    if(pkgname[1] != ".GlobalEnv" && extrainfo && length(frm) > 0){
         arglist <- gbRd.args2txt(funcname, names(frm))
-        arglist <- lapply(arglist, nvim.fix.string)
+        arglist <- lapply(arglist, nvim.fix.string, sdq)
     }
 
     res <- NULL
     for(field in names(frm)){
         type <- typeof(frm[[field]])
         if(extrainfo){
-            str1 <- paste0("{\002word\002: \002", field)
+            str1 <- paste0("{'word': '", field)
             if (type == 'symbol') {
-                str2 <- paste0("\002, \002menu\002: \002 \002")
+                str2 <- paste0("', 'menu': ' '")
             } else if (type == 'character') {
-                str2 <- paste0(" = \002, \002menu\002: \002\"", nvim.fix.string(frm[[field]]), "\"\002")
+                str2 <- paste0(" = ', 'menu': '\"", nvim.fix.string(frm[[field]]), "\"'")
             } else if (type == 'logical' || type == 'double' || type == 'integer') {
-                str2 <- paste0(" = \002, \002menu\002: \002", as.character(frm[[field]]), "\002")
+                str2 <- paste0(" = ', 'menu': '", as.character(frm[[field]]), "'")
             } else if (type == 'NULL') {
-                str2 <- paste0(" = \002, \002menu\002: \002NULL\002")
+                str2 <- paste0(" = ', 'menu': 'NULL'")
             } else if (type == 'language') {
-                str2 <- paste0(" = \002, \002menu\002: \002", deparse(frm[[field]]), "\002")
+                str2 <- paste0(" = ', 'menu': '", nvim.fix.string(deparse(frm[[field]]), FALSE), "'")
             } else {
-                str2 <- paste0("\002, \002menu\002: \002 \002")
+                str2 <- paste0("', 'menu': ' '")
             }
-            res <- append(res, paste0(str1, str2,
-                                      ", \002user_data\002: {\002cls\002: \002a\002, \002argument\002: \002",
-                                      arglist[[field]], "\002}}, "))
+            if(pkgname[1] != ".GlobalEnv" && extrainfo && length(frm) > 0)
+                res <- append(res, paste0(str1, str2, ", 'user_data': {'cls': 'a', 'argument': '", arglist[[field]], "'}}, "))
+            else
+                res <- append(res, paste0(str1, str2, "}, "))
         } else {
             if (type == 'symbol') {
-                res <- append(res, paste0("[\002", field, "\002], "))
+                res <- append(res, paste0("['", field, "'], "))
             } else if (type == 'character') {
-                res <- append(res, paste0("[\002", field, "\002, \002\"", nvim.fix.string(frm[[field]]), "\"\002], "))
+                res <- append(res, paste0("['", field, "', '\"", nvim.fix.string(frm[[field]]), "\"'], "))
             } else if (type == 'logical' || type == 'double' || type == 'integer') {
-                res <- append(res, paste0("[\002", field, "\002, \002", as.character(frm[[field]]), "\002], "))
+                res <- append(res, paste0("['", field, "', '", as.character(frm[[field]]), "'], "))
             } else if (type == 'NULL') {
-                res <- append(res, paste0("[\002", field, "\002, \002", 'NULL', "\002], "))
+                res <- append(res, paste0("['", field, "', '", 'NULL', "'], "))
             } else if (type == 'language') {
-                res <- append(res, paste0("[\002", field, "\002, \002", deparse(frm[[field]]), "\002], "))
+                res <- append(res, paste0("['", field, "', '", nvim.fix.string(deparse(frm[[field]]), FALSE), "'], "))
             } else {
-                warning(paste0("nvim.args: typeof = ", type))
+                res <- append(res, paste0("['", field, "'], "))
+                warning(paste0("nvim.args: ", funcname, " [", field, "]", " (typeof = ", type, ")"))
             }
         }
     }
@@ -292,12 +301,12 @@ nvim.args <- function(funcname, txt = "", pkg = NULL, objclass, extrainfo = FALS
                 info <- pkgname[1]
             if(!is.na(funcmeth)){
                 if(info != "")
-                    info <- paste(info, ", ", sep = "")
-                info <- paste(info, "function:", funcmeth, "()", sep = "")
+                    info <- paste0(info, ", ")
+                info <- paste0(info, "function:", funcmeth, "()")
             }
             # TODO: Add the method name to the completion menu
             # if(info != "")
-            #    res <- paste(res, "\x04", info, sep = "")
+            #    res <- paste0(res, "\x04", info)
         }
     }
 
@@ -372,29 +381,19 @@ nvim.getclass <- function(x)
     return(cls)
 }
 
-nvim_complete_args <- function(rkeyword0, argkey, firstobj = "", pkg = NULL, extrainfo = FALSE)
+nvim_complete_args <- function(rkeyword0, argkey, firstobj = "", pkg = NULL)
 {
     if(firstobj == ""){
-        res <- nvim.args(rkeyword0, argkey, pkg, extrainfo = extrainfo)
+        res <- nvim.args(rkeyword0, argkey, pkg, extrainfo = TRUE, sdq = FALSE)
     } else {
         objclass <- nvim.getclass(firstobj)
         if(objclass[1] == "#E#" || objclass[1] == "")
-            res <- nvim.args(rkeyword0, argkey, pkg, extrainfo = extrainfo)
+            res <- nvim.args(rkeyword0, argkey, pkg, extrainfo = TRUE, sdq = FALSE)
         else
-            res <- nvim.args(rkeyword0, argkey, pkg, objclass, extrainfo = extrainfo)
+            res <- nvim.args(rkeyword0, argkey, pkg, objclass, extrainfo = TRUE, sdq = FALSE)
     }
     writeLines(text = res,
-               con = paste(Sys.getenv("NVIMR_TMPDIR"), "/args_for_completion", sep = ""))
-    .C("nvimcom_msg_to_nvim", 'FinishArgsCompletion()', PACKAGE="nvimcom")
-    return(invisible(NULL))
-}
-
-nvim.args.descr <- function(funcname)
-{
-    frm <- formals(get(funcname))
-    arglist <- gbRd.args2txt(funcname, names(frm))
-    writeLines(arglist,
-               con = paste(Sys.getenv("NVIMR_TMPDIR"), "/args_for_completion", sep = ""))
-    .C("nvimcom_msg_to_nvim", 'FinishArgsCompletion()', PACKAGE="nvimcom")
+               con = paste0(Sys.getenv("NVIMR_TMPDIR"), "/args_for_completion"))
+    .C("nvimcom_msg_to_nvim", paste0('FinishArgsCompletion("', argkey, '", "', rkeyword0,'")'), PACKAGE="nvimcom")
     return(invisible(NULL))
 }

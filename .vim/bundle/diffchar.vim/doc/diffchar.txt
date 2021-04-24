@@ -8,8 +8,13 @@
  |     || || |   | |   |  |__ |  _  ||  _  || |  | |
  |____| |_||_|   |_|   |_____||_| |_||_| |_||_|  |_|
 <
+<<<<<<< HEAD
 Last Change:	2020/05/01
 Version:	8.7
+=======
+Last Change:	2021/04/16
+Version:	8.9
+>>>>>>> 844a47c80e5d036013a38f0a02d1ee5fff828ed2
 Author:		Rick Howe <rdcxy754@ybb.ne.jp>
 Copyright:	(c) 2014-2020 by Rick Howe
 
@@ -122,6 +127,7 @@ OPTIONS                                                *diffchar-options*
     3   : 16 colors in fixed order
     100 : all colors defined in highlight option in dynamic random order
 
+<<<<<<< HEAD
 |g:DiffPairVisible|, |t:DiffPairVisible|
     Visibility of corresponding diff units
     0 : disable
@@ -132,6 +138,20 @@ OPTIONS                                                *diffchar-options*
 
 -----------------------------------------------------------------------------
 CHANGE HISTORY                                         *diffchar-history*
+=======
+Update : 8.9
+* Fixed not to overrule syntax highlighting.
+* Fixed to successfully sync with diff mode even without patch-8.1.414.
+* Changed the highlighting groups used in |g:DiffColors| option.
+
+Update : 8.8
+* Changed the highlighting groups used in |g:DiffColors| option, to completely
+  highlight a changed diff unit and to make each unit more visible.
+* Changed to use |hl-Cursor|, |hl-TermCursor|, or similar one, as appropriate,
+  to highlight a corresponding diff unit, for |g:DiffPairVisible| option.
+* Fixed to use proper |hl-Diff| highlighting groups even if they are linked.
+* Optimized how to draw each unit and then improved performance.
+>>>>>>> 844a47c80e5d036013a38f0a02d1ee5fff828ed2
 
 Update : 8.7
 * Enhanced |g:DiffPairVisible| option to show a corresponding diff unit as
