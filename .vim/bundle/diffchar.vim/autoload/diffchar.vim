@@ -8,13 +8,8 @@
 " |     || || |   | |   |  |__ |  _  ||  _  || |  | |
 " |____| |_||_|   |_|   |_____||_| |_||_| |_||_|  |_|
 "
-<<<<<<< HEAD
-" Last Change:	2020/05/01
-" Version:		8.7
-=======
 " Last Change:	2021/04/16
 " Version:		8.9
->>>>>>> 844a47c80e5d036013a38f0a02d1ee5fff828ed2
 " Author:		Rick Howe <rdcxy754@ybb.ne.jp>
 " Copyright:	(c) 2014-2020 by Rick Howe
 
@@ -39,10 +34,7 @@ let s:VF = {
 	\'GetMousePos': exists('*getmousepos'),
 	\'WinExecute': exists('*win_execute'),
 	\'DiffOptionSet': has('patch-8.0.736'),
-<<<<<<< HEAD
-=======
 	\'CountString': has('patch-8.0.794'),
->>>>>>> 844a47c80e5d036013a38f0a02d1ee5fff828ed2
 	\'StrikeAttr': has('patch-8.0.1038') &&
 					\(has('gui_running') || !empty(&t_Ts) && !empty(&t_Te)),
 	\'GettabvarFixed': has('patch-8.0.1160'),
@@ -62,39 +54,6 @@ function! s:SetDiffCharHL() abort
 			for hc in ['fg', 'bg', 'sp']
 				let at[hm . hc] = synIDattr(id, hc, hm)
 			endfor
-<<<<<<< HEAD
-			let at[hm] = join(filter(['bold', 'italic', 'reverse', 'inverse',
-									\'standout', 'underline', 'undercurl'] +
-								\(s:VF.StrikeAttr ? ['strikethrough'] : []),
-									\'synIDattr(id, v:val, hm) == 1'), ',')
-		endfor
-		let dh = {}
-		let dh.id = id
-		" 0: original, 1: for single color, 2: for multi color
-		let dh.0 = filter(at, '!empty(v:val)')
-		let dh.1 = (hl == 'DiffChange' || hl == 'DiffText') ?
-									\filter(copy(at), 'v:key =~ "bg$"') : dh.0
-		let dh.2 = (hl == 'DiffChange') ? dh.1 :
-											\(hl == 'DiffText') ? {} : dh.0
-		let s:DiffHL[hl] = dh
-	endfor
-	" adjust id to be equal to diff_hlID() in nvim
-	if s:VF.ValidDiffHLID == -1
-		let s:VF.ValidDiffHLID = s:CheckDiffHLID()
-	endif
-	if s:VF.ValidDiffHLID == 0
-		for hl in keys(s:DiffHL) | let s:DiffHL[hl].id -= 1 | endfor
-	endif
-	" set DiffChar specific highlights
-	let s:DCharHL = {'A': 'DiffAdd', 'D': 'DiffDelete', 'n': 'LineNr',
-							\'c': (s:VF.GUIColors ? 'Cursor' : 'VertSplit')}
-	for [fh, tn, th, ta] in [['DiffChange', 'C', 'dcDiffChange', ''],
-										\['DiffText', 'T', 'dcDiffText', ''],
-					\['DiffChange', 'E', 'dcDiffErase', 'bold,underline']] +
-			\(s:VF.StrikeAttr ?
-				\[['DiffDelete', 'D', 'dcDiffDelete', 'strikethrough']] : [])
-		let fa = copy(s:DiffHL[fh].0)
-=======
 			let dh.0[hm] = join(filter(['bold', 'underline', 'undercurl',
 				\'strikethrough', 'reverse', 'inverse', 'italic', 'standout'],
 								\'!empty(synIDattr(dh.it, v:val, hm))'), ',')
@@ -135,23 +94,15 @@ function! s:SetDiffCharHL() abort
 							\['C', 'E', 'dcDiffErase', 'bold,underline']] +
 		\(s:VF.StrikeAttr ? [['D', 'D', 'dcDiffDelete', 'strikethrough']] : [])
 		let fa = copy(s:DiffHL[fs].0)
->>>>>>> 844a47c80e5d036013a38f0a02d1ee5fff828ed2
 		if !empty(ta)
 			for hm in ['term', 'cterm', 'gui']
 				let fa[hm] = has_key(fa, hm) ? fa[hm] . ',' . ta : ta
 			endfor
 		endif
-<<<<<<< HEAD
-		call execute('highlight clear ' . th)
-		call execute('highlight ' . th . ' ' .
-						\join(map(items(fa), 'v:val[0] . "=" . v:val[1]')))
-		let s:DCharHL[tn] = th
-=======
 		call execute(['highlight clear ' . th,
 							\'highlight ' . th . ' ' .
 								\join(map(items(fa), 'join(v:val, "=")'))])
 		let s:DCharHL[ts] = th
->>>>>>> 844a47c80e5d036013a38f0a02d1ee5fff828ed2
 	endfor
 	" change diff highlights according to current DChar
 	call s:ToggleDiffHL(exists('t:DChar'))
@@ -247,14 +198,6 @@ function! s:InitializeDiffChar() abort
 	" a list of difference matching colors
 	let t:DChar.hgp = [s:DCharHL.T]
 	let dc = get(t:, 'DiffColors', g:DiffColors)
-<<<<<<< HEAD
-	if 1 <= dc && dc <= 3
-		let t:DChar.hgp += ['SpecialKey', 'Search', 'CursorLineNr',
-						\'Visual', 'WarningMsg', 'StatusLineNC', 'MoreMsg',
-						\'ErrorMsg', 'LineNr', 'Conceal', 'NonText',
-						\'ColorColumn', 'ModeMsg', 'PmenuSel', 'Title']
-									\[: ((dc == 1) ? 2 : (dc == 2) ? 6 : -1)]
-=======
 	if 1 <= dc && dc <= 4
 		" select all available hl which has bg and has not attribute
 		let [fd, bd] = map(['fg#', 'bg#'], 'synIDattr(hlID("Normal"), v:val)')
@@ -295,7 +238,6 @@ function! s:InitializeDiffChar() abort
 		endwhile
 		let t:DChar.hgp += values(hl)[: ((dc == 1) ? 2 : (dc == 2) ? 6 :
 														\(dc == 3) ? 14 : -1)]
->>>>>>> 844a47c80e5d036013a38f0a02d1ee5fff828ed2
 	elseif dc == 100
 		let hl = {}
 		let id = 1
@@ -303,16 +245,10 @@ function! s:InitializeDiffChar() abort
 			let nm = synIDattr(id, 'name')
 			if empty(nm) | break | endif
 			if index(values(s:DCharHL), nm) == -1 && id == synIDtrans(id) &&
-<<<<<<< HEAD
-				\!empty(filter(['fg', 'bg', 'sp', 'bold', 'italic', 'reverse',
-							\'inverse', 'standout', 'underline', 'undercurl',
-						\'strikethrough'], '!empty(synIDattr(id, v:val))'))
-=======
 				\!empty(filter(['fg', 'bg', 'sp', 'bold', 'underline',
 						\'undercurl', 'strikethrough', 'reverse', 'inverse',
 													\'italic', 'standout'],
 											'!empty(synIDattr(id, v:val))'))
->>>>>>> 844a47c80e5d036013a38f0a02d1ee5fff828ed2
 				let hl[reltimestr(reltime())[-2 :] . id] = nm
 			endif
 			let id += 1
@@ -869,24 +805,13 @@ function! s:HighlightDiffChar(key, lec) abort
 				endif
 				let hc[h] = get(hc, h, []) + [c]
 			endfor
-<<<<<<< HEAD
-			let pr = -(l * 10)
-			let t:DChar.mid[k][l] = [s:Matchaddpos(t:DChar.wid[k],
-												\s:DCharHL.C, [[l]], pr - 1)]
-=======
 			let t:DChar.mid[k][l] = [s:Matchaddpos(s:DCharHL.C, [[l]], -5, -1,
 												\{'window': t:DChar.wid[k]})]
->>>>>>> 844a47c80e5d036013a38f0a02d1ee5fff828ed2
 			for [h, c] in items(hc)
 				call map(c, '[l, v:val[0], v:val[1] - v:val[0] + 1]')
 				let t:DChar.mid[k][l] += map(range(0, len(c) - 1, 8),
-<<<<<<< HEAD
-											\'s:Matchaddpos(t:DChar.wid[k], h,
-												\c[v:val : v:val + 7], pr)')
-=======
 							\'s:Matchaddpos(h, c[v:val : v:val + 7], -3, -1,
 												\{"window": t:DChar.wid[k]})')
->>>>>>> 844a47c80e5d036013a38f0a02d1ee5fff828ed2
 			endfor
 		endfor
 	endfor
@@ -929,13 +854,8 @@ function! s:ShiftMatchaddLines(wid, lid, shift) abort
 		let lid[l + a:shift] = map(reverse(mx),
 				\'s:Matchaddpos(a:wid, v:val.group,
 					\map(filter(items(v:val), "v:val[0] =~ ''^pos\\d\\+$''"),
-<<<<<<< HEAD
-								\"[v:val[1][0] + a:shift] + v:val[1][1 :]"),
-											\v:val.priority - a:shift * 10)')
-=======
 			\"[v:val[1][0] + a:shift] + v:val[1][1 :]"), v:val.priority, -1,
 														\{"window": a:wid})')
->>>>>>> 844a47c80e5d036013a38f0a02d1ee5fff828ed2
 	endfor
 	return lid
 endfunction
