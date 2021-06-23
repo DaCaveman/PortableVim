@@ -6,3 +6,4 @@
 /.matplotlib
 *.whl
 *.pyc
+**/__pycache__
