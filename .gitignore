@@ -6,4 +6,7 @@
 /.matplotlib
 *.whl
 **/__pycache__
+!/.vim/bundle/YouCompleteMe/
+!/.vim/bundle/YouCompleteMe/*
+!/.vim/bundle/YouCompleteMe/**/*
 **/_.git
