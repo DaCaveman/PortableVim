@@ -6,3 +6,4 @@
 /.matplotlib
 *.whl
 **/__pycache__
+**/_.git
