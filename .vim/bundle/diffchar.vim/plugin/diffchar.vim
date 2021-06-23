@@ -11,7 +11,7 @@
 " Last Change:	2021/04/16
 " Version:		8.9
 " Author:		Rick Howe <rdcxy754@ybb.ne.jp>
-" Copyright:	(c) 2014-2020 by Rick Howe
+" Copyright:	(c) 2014-2021 by Rick Howe
 
 if exists('g:loaded_diffchar') || !has('diff') || v:version < 800
 	finish
@@ -53,29 +53,30 @@ endfor
 
 " a type of difference unit
 if !exists('g:DiffUnit')
-	"let g:DiffUnit = 'Word1'	" \w\+ word and any \W single character
-	 "let g:DiffUnit = 'Word2'	" non-space and space words
+	let g:DiffUnit = 'Word1'	" \w\+ word and any \W single character
+	" let g:DiffUnit = 'Word2'	" non-space and space words
 	" let g:DiffUnit = 'Word3'	" \< or \> character class boundaries
-	 let g:DiffUnit = 'Char'	" any single character
+	" let g:DiffUnit = 'Char'	" any single character
 	" let g:DiffUnit = 'CSV(,)'	" split characters
 endif
 
 " matching colors for changed units
 if !exists('g:DiffColors')
 	let g:DiffColors = 0		" always 1 color
-	 "let g:DiffColors = 1		" 4 colors in fixed order
-	" let g:DiffColors = 2		" 8 colors in fixed order
-	" let g:DiffColors = 3		" 16 colors in fixed order
-	" let g:DiffColors = 100	" all available colors in dynamic random order
+	" let g:DiffColors = 1		" up to 4 colors in fixed order
+	" let g:DiffColors = 2		" up to 8 colors in fixed order
+	" let g:DiffColors = 3		" up to 16 colors in fixed order
+	" let g:DiffColors = 4		" all available colors in fixed order
+	" let g:DiffColors = 100	" all colors in dynamic random order
 endif
 
 " a visibility of corresponding diff units
 if !exists('g:DiffPairVisible')
-	"let g:DiffPairVisible = 1	" highlight 
-	 "let g:DiffPairVisible = 2	" highlight + echo
+	let g:DiffPairVisible = 1	" highlight
+	" let g:DiffPairVisible = 2	" highlight + echo
 	" let g:DiffPairVisible = 3	" highlight + popup/floating at cursor pos
-	 "let g:DiffPairVisible = 4	" highlight + popup/floating at mouse pos
-	 let g:DiffPairVisible = 0	" disable
+	" let g:DiffPairVisible = 4	" highlight + popup/floating at mouse pos
+	" let g:DiffPairVisible = 0	" disable
 endif
 
 " Set this plugin's DiffCharExpr() to the diffexpr option if empty

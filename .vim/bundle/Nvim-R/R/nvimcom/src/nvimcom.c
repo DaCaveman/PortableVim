@@ -83,8 +83,7 @@ static char myport[128];
 
 typedef struct pkg_info_ {
     char *name;
-    int loaded;
-    int built;
+    char *version;
     struct pkg_info_ *next;
 } PkgInfo;
 
@@ -129,7 +128,8 @@ static void nvimcom_set_finalmsg(const char *msg, char *finalmsg)
 {
     // Prefix NVIMR_SECRET to msg to increase security
     strncpy(finalmsg, nvimsecr, 1023);
-    strncat(finalmsg, "call ", 1023);
+    if (*msg != '+')
+        strncat(finalmsg, "call ", 1023);
     if(strlen(msg) < 980){
         strncat(finalmsg, msg, 1023);
     } else {
@@ -281,18 +281,19 @@ void nvimcom_msg_to_nvim(char **cmd)
     nvimcom_nvimclient(*cmd, edsrvr);
 }
 
-static PkgInfo *nvimcom_pkg_info_new(const char *nm)
+static PkgInfo *nvimcom_pkg_info_new(const char *nm, const char *vrsn)
 {
     PkgInfo *pi = calloc(1, sizeof(PkgInfo));
     pi->name = malloc((strlen(nm)+1) * sizeof(char));
     strcpy(pi->name, nm);
-    pi->loaded = 1;
+    pi->version = malloc((strlen(vrsn)+1) * sizeof(char));
+    strcpy(pi->version, vrsn);
     return pi;
 }
 
-static void nvimcom_pkg_info_add(const char *nm)
+static void nvimcom_pkg_info_add(const char *nm, const char *vrsn)
 {
-    PkgInfo *pi = nvimcom_pkg_info_new(nm);
+    PkgInfo *pi = nvimcom_pkg_info_new(nm, vrsn);
     if(pkgList){
         pi->next = pkgList;
         pkgList = pi;
@@ -643,11 +644,14 @@ static void nvimcom_eval_expr(const char *buf)
 static int nvimcom_checklibs()
 {
     const char *libname;
-    char buf[256];
     char *libn;
+    char buf[128];
+    ParseStatus status;
+    int er = 0;
     SEXP a, l;
+    SEXP cmdSexp, cmdexpr, ans;
 
-    PkgInfo *pkg = pkgList;
+    PkgInfo *pkg;
 
     PROTECT(a = eval(lang1(install("search")), R_GlobalEnv));
 
@@ -659,12 +663,6 @@ static int nvimcom_checklibs()
 
     needsfillmsg = 1;
 
-    while(pkg){
-        pkg->loaded = 0;
-        pkg = pkg->next;
-    }
-
-    int k = 0;
     for(int i = 0; i < newnlibs; i++){
         PROTECT(l = STRING_ELT(a, i));
         libname = CHAR(l);
@@ -673,25 +671,28 @@ static int nvimcom_checklibs()
             libn = strstr(libn, ":");
             libn++;
             pkg = nvimcom_get_pkg(libn);
-            if(pkg)
-                pkg->loaded = 1;
-            else
-                nvimcom_pkg_info_add(libn);
-            k++;
+            if(!pkg){
+                snprintf(buf, 127, "utils::packageDescription('%s')$Version", libn);
+                PROTECT(cmdSexp = allocVector(STRSXP, 1));
+                SET_STRING_ELT(cmdSexp, 0, mkChar(buf));
+                PROTECT(cmdexpr = R_ParseVector(cmdSexp, -1, &status, R_NilValue));
+                if (status != PARSE_OK) {
+                    REprintf("nvimcom error parsing: %s\n", buf);
+                } else {
+                    PROTECT(ans = R_tryEval(VECTOR_ELT(cmdexpr, 0), R_GlobalEnv, &er));
+                    if(er){
+                        REprintf("nvimcom error executing: %s\n", buf);
+                    } else {
+                        nvimcom_pkg_info_add(libn, CHAR(STRING_ELT(ans, 0)));
+                    }
+                    UNPROTECT(1);
+                }
+                UNPROTECT(2);
+            }
         }
         UNPROTECT(1);
     }
     UNPROTECT(1);
-
-    pkg = pkgList;
-    while(pkg){
-        if(pkg->built == 0){
-            sprintf(buf, "nvimcom:::nvim.buildomnils('%s')", pkg->name);
-            nvimcom_eval_expr(buf);
-            pkg->built = 1;
-        }
-        pkg = pkg->next;
-    }
 
     char fn[576];
     snprintf(fn, 575, "%s/libnames_%s", tmpdir, getenv("NVIMR_ID"));
@@ -701,11 +702,10 @@ static int nvimcom_checklibs()
         return(newnlibs);
     }
     pkg = pkgList;
-    while(pkg){
-        if(pkg->loaded && pkg->built)
-            fprintf(f, "%s\n", pkg->name);
+    do {
+        fprintf(f, "%s_%s\n", pkg->name, pkg->version);
         pkg = pkg->next;
-    }
+    } while (pkg);
     fclose(f);
 
     return(newnlibs);
@@ -720,7 +720,7 @@ static Rboolean nvimcom_task(SEXP expr, SEXP value, Rboolean succeeded,
     nvimcom_checklibs();
     if(edsrvr[0] != 0 && needsfillmsg){
         needsfillmsg = 0;
-        nvimcom_nvimclient("FillRLibList()", edsrvr);
+        nvimcom_nvimclient("+BuildOmnils", edsrvr);
     }
     if(setwidth && getenv("COLUMNS")){
         int columns = atoi(getenv("COLUMNS"));
@@ -859,23 +859,21 @@ static void nvimcom_send_running_info(int bindportn)
 
 static void nvimcom_parse_received_msg(char *buf)
 {
-    char *bbuf;
+    char *p;
 
     if(verbose > 2){
-        bbuf = buf;
-        if(buf[0] < 30)
-            bbuf++;
-        REprintf("nvimcom Received: [%d] %s\n", buf[0], bbuf);
+        p = buf + strlen(getenv("NVIMR_ID")) + 1;
+        REprintf("nvimcom Received: [%c] %s\n", buf[0], p);
     }
 
     switch(buf[0]){
-        case 2:
+        case 'A':
             autoglbenv = 1;
             break;
-        case 3:
+        case 'N':
             autoglbenv = 0;
             break;
-        case 4: // Write GlobalEnvList_
+        case 'G': // Write GlobalEnvList_
 #ifdef WIN32
             if(!r_is_busy)
                 nvimcom_globalenv_list();
@@ -885,43 +883,48 @@ static void nvimcom_parse_received_msg(char *buf)
 #endif
             break;
 #ifdef WIN32
-        case 5:
-            bbuf = buf;
-            bbuf++;
-            if(strstr(bbuf, getenv("NVIMR_ID")) == bbuf){
-                bbuf += strlen(getenv("NVIMR_ID"));
+        case 'C': // Send command to Rgui Console
+            p = buf;
+            p++;
+            if(strstr(p, getenv("NVIMR_ID")) == p){
+                p += strlen(getenv("NVIMR_ID"));
                 r_is_busy = 1;
-                Rconsolecmd(bbuf);
+                Rconsolecmd(p);
             }
             break;
 #endif
-        case 6: // Evaluate lazy object
+        case 'L': // Evaluate lazy object
 #ifdef WIN32
             if(r_is_busy)
                 break;
 #endif
-            bbuf = buf;
-            bbuf++;
+            p = buf;
+            p++;
+            if(strstr(p, getenv("NVIMR_ID")) == p){
+                p += strlen(getenv("NVIMR_ID"));
 #ifdef WIN32
-            char flag_eval[512];
-            snprintf(flag_eval, 510, "%s <- %s", bbuf, bbuf);
-            nvimcom_eval_expr(flag_eval);
-            *flag_eval = 0;
+                char flag_eval[512];
+                snprintf(flag_eval, 510, "%s <- %s", p, p);
+                nvimcom_eval_expr(flag_eval);
+                *flag_eval = 0;
+                nvimcom_globalenv_list();
 #else
-            snprintf(flag_eval, 510, "%s <- %s", bbuf, bbuf);
-            nvimcom_fire();
+                snprintf(flag_eval, 510, "%s <- %s", p, p);
+                flag_glbenv = 1;
+                nvimcom_fire();
 #endif
+            }
             break;
-        case 8: // eval expression
-            bbuf = buf;
-            bbuf++;
-            if(strstr(bbuf, getenv("NVIMR_ID")) == bbuf){
-                bbuf += strlen(getenv("NVIMR_ID"));
+        case 'E': // eval expression
+            p = buf;
+            p++;
+            if(strstr(p, getenv("NVIMR_ID")) == p){
+                p += strlen(getenv("NVIMR_ID"));
 #ifdef WIN32
                 if(!r_is_busy)
-                    nvimcom_eval_expr(bbuf);
+                    nvimcom_eval_expr(p);
 #else
-                strncpy(flag_eval, bbuf, 510);
+                strncpy(flag_eval, p, 510);
                 nvimcom_fire();
 #endif
             } else {
@@ -1116,11 +1119,12 @@ static void nvimcom_server_thread(void *arg)
 #endif
 
 
-void nvimcom_Start(int *vrb, int *anm, int *swd, char **pth, char **vcv, char **rinfo)
+void nvimcom_Start(int *vrb, int *anm, int *swd, int *age, char **vcv, char **pth, char **rinfo)
 {
     verbose = *vrb;
     allnames = *anm;
     setwidth = *swd;
+    autoglbenv = *age;
 
     R_PID = getpid();
     strncpy(nvimcom_version, *vcv, 31);

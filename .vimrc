@@ -113,7 +113,7 @@ set diffopt+=internal,algorithm:patience
 "____________________________________________________________________________________________________________________
 " gVim appearance
 "
-set textwidth=200					  " automatic textwidth
+set textwidth=999					  " automatic textwidth
 set nocursorcolumn                    " highlight the current column
 set cursorline                        " highlight current line
 set list                              " show listchars
@@ -213,6 +213,7 @@ inoremap								<C-d>			<C-k>
 "vnoremap								<C-k>			<Esc><c-w>k
 "vnoremap								<C-l>			<Esc><c-w>l
 au BufNewFile,BufRead *.py vnoremap 	<localleader>ss	"yy<c-w>j<c-w>"y<CR><c-w>k
+vnoremap								*				"oyy/o
 vnoremap								<				<gv
 vnoremap								>				>gv
 vnoremap 								yp				"0p
@@ -221,6 +222,7 @@ vnoremap 								yy				y
 vnoremap 								do				:diffge<CR>
 vnoremap 								dp				:diffpu<CR>
 vnoremap 								<localleader>/	:<C-U>execute "vimgrep /" . expand("<cword>") . "/gj **/*.*"<CR>
+vnoremap 								<localleader>e	"oyy:%s/\<o\>/
 "____________________________________________________________________________________________________________________
 " normal mode mapping
 "

@@ -1,26 +1,7 @@
-"  This program is free software; you can redistribute it and/or modify
-"  it under the terms of the GNU General Public License as published by
-"  the Free Software Foundation; either version 2 of the License, or
-"  (at your option) any later version.
-"
-"  This program is distributed in the hope that it will be useful,
-"  but WITHOUT ANY WARRANTY; without even the implied warranty of
-"  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-"  GNU General Public License for more details.
-"
-"  A copy of the GNU General Public License is available at
-"  http://www.r-project.org/Licenses/
-
-"==========================================================================
-" ftplugin for R files
-"
-" Authors: Jakson Alves de Aquino <jalvesaq@gmail.com>
-"          Jose Claudio Faria
-"
-"          Based on previous work by Johannes Ranke
-"
-" Please see doc/Nvim-R.txt for usage details.
-"==========================================================================
+"==============================================================================
+" The variables defined here are not in the ftplugin directory because they
+" are common for all file types supported by Nvim-R.
+"==============================================================================
 
 
 " Set completion with CTRL-X CTRL-O to autoloaded function.
@@ -55,23 +36,13 @@ endif
 
 let g:rplugin.lastft = &filetype
 
-" Check if b:pdf_is_open already exists because this script is called when
-" FillRLibList() is called
+" Check if b:pdf_is_open already exists to avoid errors at other places
 if !exists("b:pdf_is_open")
     let b:pdf_is_open = 0
 endif
 
 if !exists("g:SendCmdToR")
     let g:SendCmdToR = function('SendCmdToR_fake')
-endif
-
-" Were new libraries loaded by R?
-if !exists("b:rplugin_new_libs")
-    let b:rplugin_new_libs = 0
-endif
-" When using as a global plugin for non R files, RCheckLibList will not exist
-if exists("*RCheckLibList") && !exists("*nvim_buf_set_option")
-    autocmd BufEnter <buffer> call RCheckLibList()
 endif
 
 autocmd! InsertLeave <buffer> if pumvisible() == 0 | pclose | endif

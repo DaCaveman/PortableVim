@@ -1,24 +1,150 @@
-#  This program is free software; you can redistribute it and/or modify
-#  it under the terms of the GNU General Public License as published by
-#  the Free Software Foundation; either version 2 of the License, or
-#  (at your option) any later version.
-#
-#  This program is distributed in the hope that it will be useful,
-#  but WITHOUT ANY WARRANTY; without even the implied warranty of
-#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#  GNU General Public License for more details.
-#
-#  A copy of the GNU General Public License is available at
-#  http://www.r-project.org/Licenses/
 
-### Jakson Alves de Aquino
-### Tue, January 18, 2011
+# For building omnls files
+nvim.fix.string <- function(x, sdq = TRUE)
+{
+    x <- gsub("\n", "\\\\n", x)
+    x <- gsub("\r", "\\\\r", x)
+    x <- gsub("\t", "\\\\t", x)
+    x <- gsub("'", "\004", x)
+    if(sdq){
+        x <- gsub('"', '\\\\"', x)
+    } else {
+        x <- sub("^\\s*", "", x)
+        x <- paste(x, collapse = "")
+    }
+    x
+}
 
-# This function writes two files: one with the names of all functions in all
-# packages (either loaded or installed); the other file lists all objects,
-# including function arguments. These files are used by Vim to highlight
-# functions and to complete the names of objects and the arguments of
-# functions.
+# Adapted from: https://stat.ethz.ch/pipermail/ess-help/2011-March/006791.html
+nvim.args <- function(funcname, txt = "", pkg = NULL, objclass, extrainfo = FALSE, sdq = TRUE)
+{
+    frm <- NA
+    funcmeth <- NA
+    if(!missing(objclass) && nvim.grepl("[[:punct:]]", funcname) == FALSE){
+        saved.warn <- getOption("warn")
+        options(warn = -1)
+        on.exit(options(warn = saved.warn))
+        mlen <- try(length(methods(funcname)), silent = TRUE) # Still get warns
+        if(class(mlen) == "integer" && mlen > 0){
+            for(i in 1:length(objclass)){
+                funcmeth <- paste0(funcname, ".", objclass[i])
+                if(existsFunction(funcmeth)){
+                    funcname <- funcmeth
+                    frm <- formals(funcmeth)
+                    break
+                }
+            }
+        }
+    }
+
+    if(is.null(pkg))
+        pkgname <- find(funcname, mode = "function")
+    else
+        pkgname <- pkg
+
+    if(is.na(frm[1])){
+        if(is.null(pkg)){
+            deffun <- paste0(funcname, ".default")
+            if (existsFunction(deffun) && pkgname[1] != ".GlobalEnv") {
+                funcname <- deffun
+                funcmeth <- deffun
+            } else if(!existsFunction(funcname)) {
+                return("")
+            }
+            if(is.primitive(get(funcname)))
+                return(nvim.primitive.args(funcname))
+            else
+                frm <- formals(get(funcname, envir = globalenv()))
+        } else {
+            idx <- grep(paste0(":", pkg, "$"), search())
+            if(length(idx)){
+                ff <- "NULL"
+                tr <- try(ff <- get(paste0(funcname, ".default"), pos = idx), silent = TRUE)
+                if(class(tr)[1] == "try-error")
+                    ff <- get(funcname, pos = idx)
+                frm <- formals(ff)
+            } else {
+                if(!isNamespaceLoaded(pkg))
+                    loadNamespace(pkg)
+                ff <- getAnywhere(funcname)
+                idx <- grep(pkg, ff$where)
+                if(length(idx))
+                    frm <- formals(ff$objs[[idx]])
+            }
+        }
+    }
+
+    if(pkgname[1] != ".GlobalEnv" && extrainfo && length(frm) > 0){
+        arglist <- gbRd.args2txt(funcname, names(frm))
+        arglist <- lapply(arglist, nvim.fix.string, sdq)
+    }
+
+    res <- NULL
+    for(field in names(frm)){
+        type <- typeof(frm[[field]])
+        if(extrainfo){
+            str1 <- paste0("{'word': '", field)
+            if (type == 'symbol') {
+                str2 <- paste0("', 'menu': ' '")
+            } else if (type == 'character') {
+                str2 <- paste0(" = ', 'menu': '\"", nvim.fix.string(frm[[field]]), "\"'")
+            } else if (type == 'logical' || type == 'double' || type == 'integer') {
+                str2 <- paste0(" = ', 'menu': '", as.character(frm[[field]]), "'")
+            } else if (type == 'NULL') {
+                str2 <- paste0(" = ', 'menu': 'NULL'")
+            } else if (type == 'language') {
+                str2 <- paste0(" = ', 'menu': '", nvim.fix.string(deparse(frm[[field]]), FALSE), "'")
+            } else {
+                str2 <- paste0("', 'menu': ' '")
+            }
+            if(pkgname[1] != ".GlobalEnv" && extrainfo && length(frm) > 0)
+                res <- append(res, paste0(str1, str2, ", 'user_data': {'cls': 'a', 'argument': '", arglist[[field]], "'}}, "))
+            else
+                res <- append(res, paste0(str1, str2, "}, "))
+        } else {
+            if (type == 'symbol') {
+                res <- append(res, paste0("['", field, "'], "))
+            } else if (type == 'character') {
+                res <- append(res, paste0("['", field, "', '\"", nvim.fix.string(frm[[field]]), "\"'], "))
+            } else if (type == 'logical' || type == 'double' || type == 'integer') {
+                res <- append(res, paste0("['", field, "', '", as.character(frm[[field]]), "'], "))
+            } else if (type == 'NULL') {
+                res <- append(res, paste0("['", field, "', '", 'NULL', "'], "))
+            } else if (type == 'language') {
+                res <- append(res, paste0("['", field, "', '", nvim.fix.string(deparse(frm[[field]]), FALSE), "'], "))
+            } else {
+                res <- append(res, paste0("['", field, "'], "))
+                warning(paste0("nvim.args: ", funcname, " [", field, "]", " (typeof = ", type, ")"))
+            }
+        }
+    }
+
+
+    if(!extrainfo)
+        res <- paste0(res, collapse='')
+
+
+    if(length(res) == 0 || res == ""){
+        res <- "[]"
+    } else {
+        if(is.null(pkg)){
+            info <- ""
+            if(length(pkgname) > 1)
+                info <- pkgname[1]
+            if(!is.na(funcmeth)){
+                if(info != "")
+                    info <- paste0(info, ", ")
+                info <- paste0(info, "function:", funcmeth, "()")
+            }
+            # TODO: Add the method name to the completion menu
+            # if(info != "")
+            #    res <- paste0(res, "\x04", info)
+        }
+    }
+
+    return(res)
+}
+
 
 nvim.grepl <- function(pattern, x) {
     res <- grep(pattern, x)
@@ -273,6 +399,7 @@ GetFunDescription <- function(pkg)
         x <- sub("\\\\details\\{.*", "", x)
         x <- CleanOmniLine(x)
         ttl <- sub(".*\\\\title\\{(.*?)\\}.*", "\\1", x)
+        ttl <- sub("^\\s*", "", sub("\\s*$", "", ttl))
         x <- sub(".*\\\\description\\{", "", x)
 
         # Get the matching bracket
@@ -313,41 +440,25 @@ nvim.bol <- function(omnilist, packlist, allnames = FALSE) {
     if(!missing(packlist) && is.null(NvimcomEnv$pkgdescr[[packlist]]))
         GetFunDescription(packlist)
 
-    if(getOption("nvimcom.verbose") > 3)
-        cat("Building files with lists of objects in loaded packages for",
-            "omni completion and Object Browser...\n")
-
     loadpack <- search()
     if(missing(packlist))
         listpack <- loadpack[grep("^package:", loadpack)]
     else
         listpack <- paste0("package:", packlist)
 
-    needunload <- FALSE
     for(curpack in listpack){
         curlib <- sub("^package:", "", curpack)
         if(nvim.grepl(curlib, loadpack) == FALSE){
-            cat("Loading   '", curlib, "'...\n", sep = "")
-            needunload <- try(require(curlib, character.only = TRUE))
-            if(needunload != TRUE){
-                needunload <- FALSE
+            ok <- try(require(curlib, warn.conflicts = FALSE,
+                                      quietly = TRUE, character.only = TRUE))
+            if(!ok)
                 next
-            }
         }
 
-        # Save title of package in pack_descriptions:
-        if(file.exists(paste0(Sys.getenv("NVIMR_COMPLDIR"), "/pack_descriptions")))
-            pack_descriptions <- readLines(paste0(Sys.getenv("NVIMR_COMPLDIR"),
-                                                  "/pack_descriptions"))
-        else
-            pack_descriptions <- character()
-        pack_descriptions <- c(paste(curlib,
-                           gsub("[\t\n\r ]+", " ", packageDescription(curlib)$Title),
-                           gsub("[\t\n\r ]+", " ", packageDescription(curlib)$Description),
-                           sep = "\t"), pack_descriptions)
-        pack_descriptions <- sort(pack_descriptions[!duplicated(pack_descriptions)])
-        writeLines(pack_descriptions,
-                   paste0(Sys.getenv("NVIMR_COMPLDIR"), "/pack_descriptions"))
+        # Save title of package in its decr_ file:
+        writeLines(paste(gsub("[\t\n\r ]+", " ", packageDescription(curlib)$Title),
+                         gsub("[\t\n\r ]+", " ", packageDescription(curlib)$Description), sep = "\t"),
+                   paste0(Sys.getenv("NVIMR_COMPLDIR"), "/descr_", curlib, "_", utils::packageDescription(curlib)$Version))
 
         obj.list <- objects(curpack, all.names = allnames)
         l <- length(obj.list)
@@ -395,49 +506,43 @@ nvim.bol <- function(omnilist, packlist, allnames = FALSE) {
             writeLines(text = '', con = omnilist)
             writeLines(text = '" No functions found.', con = sub("omnils_", "fun_", omnilist))
         }
-        if(needunload){
-            cat("Detaching '", curlib, "'...\n", sep = "")
-            try(detach(curpack, unload = TRUE, character.only = TRUE), silent = TRUE)
-            needunload <- FALSE
-        }
     }
     writeLines(text = "Finished",
                con = paste0(Sys.getenv("NVIMR_TMPDIR"), "/nvimbol_finished"))
     return(invisible(NULL))
 }
 
+# This function calls nvim.bol which writes three files in ~/.cache/Nvim-R:
+#   - descr_  : package description for the object browser
+#   - fun_    : function names for syntax highlighting
+#   - omnils_ : data for omni completion and object browser
 nvim.buildomnils <- function(p){
+    if(length(p) > 1){
+        for(pkg in p)
+            nvim.buildomnils(pkg)
+        return(invisible(NULL))
+    }
+    # No verbosity because running as Neovim job
+    options(nvimcom.verbose = 0)
+
     pvi <- utils::packageDescription(p)$Version
     bdir <- paste0(Sys.getenv("NVIMR_COMPLDIR"), "/")
     odir <- dir(bdir)
     pbuilt <- odir[grep(paste0("omnils_", p, "_"), odir)]
     fbuilt <- odir[grep(paste0("fun_", p, "_"), odir)]
 
-    # This option might not have been set if R is running remotely
-    if(is.null(getOption("nvimcom.verbose")))
-        options(nvimcom.verbose = 0)
 
-    if(length(pbuilt) > 0){
-        pvb <- sub(".*_.*_", "", pbuilt)
-        if(pvb == pvi){
-            if(file.info(paste0(bdir, "/README"))$mtime > file.info(paste0(bdir, pbuilt))$mtime){
-                unlink(c(paste0(bdir, pbuilt), paste0(bdir, fbuilt)))
-                nvim.bol(paste0(bdir, "omnils_", p, "_", pvi), p, TRUE)
-                if(getOption("nvimcom.verbose") > 3)
-                    cat("nvimcom R: omnils is older than the README\n")
-            } else{
-                if(getOption("nvimcom.verbose") > 3)
-                    cat("nvimcom R: omnils version is up to date:", p, pvi, "\n")
-            }
-        } else {
-            if(getOption("nvimcom.verbose") > 3)
-                cat("nvimcom R: omnils is outdated: ", p, " (", pvb, " x ", pvi, ")\n", sep = "")
-            unlink(c(paste0(bdir, pbuilt), paste0(bdir, fbuilt)))
-            nvim.bol(paste0(bdir, "omnils_", p, "_", pvi), p, TRUE)
-        }
-    } else {
-        if(getOption("nvimcom.verbose") > 3)
-            cat("nvimcom R: omnils does not exist:", p, "\n")
+    if(length(fbuilt) > 1 || length(pbuilt) > 1 || length(fbuilt) == 0 || length(pbuilt) == 0){
+        # omnils is either duplicated or inexistent
+        unlink(c(paste0(bdir, pbuilt), paste0(bdir, fbuilt)))
+        nvim.bol(paste0(bdir, "omnils_", p, "_", pvi), p, TRUE)
+        return(invisible(NULL))
+    }
+
+    pvb <- sub(".*_.*_", "", pbuilt)
+    if(pvb != pvi || file.info(paste0(bdir, "/README"))$mtime > file.info(paste0(bdir, pbuilt))$mtime){
+        # omnils is either outdated or older than the README
+        unlink(c(paste0(bdir, pbuilt), paste0(bdir, fbuilt)))
         nvim.bol(paste0(bdir, "omnils_", p, "_", pvi), p, TRUE)
     }
 }

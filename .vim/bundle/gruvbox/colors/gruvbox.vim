@@ -1039,7 +1039,7 @@ hi! link cStructure GruvboxOrange
 " Python: {{{
 
 "highlight BadWhitespace     guibg=#dc322f     guifg=#dc322f
-hi! BadWhitespace guibg=#dc322f     guifg=#dc322f
+hi! BadWhitespace guibg=#cea5fb guifg=#cea5fb
 hi! link pythonBuiltin GruvboxOrange
 hi! link pythonBuiltinObj GruvboxOrange
 hi! link pythonBuiltinFunc GruvboxOrange
