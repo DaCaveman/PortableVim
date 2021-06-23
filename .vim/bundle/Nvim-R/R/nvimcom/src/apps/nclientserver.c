@@ -28,6 +28,7 @@ static char strT[8];
 static int OpenDF;
 static int OpenLS;
 static int nvimcom_is_utf8;
+static int allnames;
 
 static char compldir[256];
 static char tmpdir[256];
@@ -113,25 +114,12 @@ static char *str_cat(char* dest, const char* src)
 
 static char *grow_buffer(char **b, int *sz)
 {
-<<<<<<< HEAD
-    if(compl_buffer){
-        compl_buffer_size += 32768;
-        char *tmp = calloc(compl_buffer_size, sizeof(char));
-        free(compl_buffer);
-        compl_buffer = tmp;
-    } else {
-        compl_buffer = calloc(32768, sizeof(char));
-        compl_buffer_size = 32768;
-    }
-    return(compl_buffer);
-=======
     *sz += 32768;
     char *tmp = calloc(*sz, sizeof(char));
     strcpy(tmp, *b);
     free(*b);
     *b = tmp;
     return tmp;
->>>>>>> 9d4723f78fe487880e9d1710ed59d1407f0137c2
 }
 
 int str_here(const char *o, const char *b)
@@ -747,7 +735,7 @@ char *count_sep(char *b1, int *size)
                 fflush(stderr);
                 free(b1);
                 return NULL;
-}
+            }
         }
         s++;
     }
@@ -782,8 +770,8 @@ char *read_file(const char *fn)
         free(buffer);
         fprintf(stderr, "Error reading '%s'\n", fn);
         fflush(stderr);
-    return NULL;
-}
+        return NULL;
+    }
     fclose(f);
     return buffer;
 }
@@ -806,8 +794,8 @@ char *read_omnils_file(const char *fn, int *size)
             if(*p == '\006')
                 *p = 0;
             p++;
+        }
     }
-}
 
     return buffer;
 }
@@ -823,64 +811,7 @@ char *read_pkg_descr(const char *pkgnm, const char *version)
         s = d;
         while(*s != '\t' && *s != 0)
             s++;
-<<<<<<< HEAD
-        if(*s == '\t'){
-            *s = 0;
-            if(strcmp(nm, pkgnm) == 0){
-            s++;
-            dscr = s;
-            while(*s != '\t' && *s != 0){
-                s++;
-                if(*s == '\t'){
-                    *s = 0;
-                        char *pkgdscr = malloc(sizeof(char) * (1 + strlen(dscr)));
-                        strcpy(pkgdscr, dscr);
-                        fclose(f);
-                        return pkgdscr;
-                }
-            }
-        }
-    }
-}
-    fclose(f);
-    return NULL;
-}
-
-char *get_cached_omnils(const char *onm, int verbose, int *size)
-{
-    DIR *d;
-    struct dirent *e;
-    char fnm[512];
-    char fname[512];
-    char *o;
-
-    d = opendir(getenv("NVIMR_COMPLDIR"));
-    if(d != NULL){
-        snprintf(fnm, 511, "omnils_%s_", onm);
-        while((e = readdir(d))){
-            if(strstr(e->d_name, fnm)){
-                snprintf(fname, 511, "%s/%s", getenv("NVIMR_COMPLDIR"), e->d_name);
-                closedir(d);
-                o = read_omnils_file(fname, size);
-                if(o == NULL){
-                    fprintf(stderr, "Error in omnils file: %s\n", onm);
-                    fflush(stderr);
-                }
-                return o;
-            }
-        }
-        closedir(d);
-        if(verbose){
-            fprintf(stderr, "Couldn't find omni file for \"%s\"\n", onm);
-            fflush(stderr);
-        }
-    } else {
-        fprintf(stderr, "Couldn't open the cache directory (%s)\n",
-                getenv("NVIMR_COMPLDIR"));
-        fflush(stderr);
-=======
         *s = 0;
->>>>>>> 9d4723f78fe487880e9d1710ed59d1407f0137c2
     }
     return d;
 }
@@ -1288,7 +1219,7 @@ void update_pkg_list()
 
 ListStatus* search(const char *s)
 {
-    ListStatus *node = listTree; 
+    ListStatus *node = listTree;
     int cmp = strcmp(node->key, s);
     while(node && cmp != 0){
         if(cmp > 0)
@@ -1356,7 +1287,7 @@ static const char *write_ob_line(const char *p, const char *bs, char *prfx, int 
     const char *f[7];
     const char *s;    // Diagnostic pointer
     const char *bsnm; // Name of object including its parent list, data.frame or S4 object
-    int df;     // Is data.frame? If yes, start open unless closeddf = 1
+    int df;           // Is data.frame? If yes, start open unless closeddf = 1
     int i, j;
     int ne;
 
@@ -1370,11 +1301,11 @@ static const char *write_ob_line(const char *p, const char *bs, char *prfx, int 
         f[i] = p;
         i++;
         while(*p != 0)
-        p++;
+            p++;
         p++;
     }
     while(*p != '\n' && *p != 0)
-    p++;
+        p++;
     if(*p == '\n')
         p++;
 
@@ -1395,11 +1326,6 @@ static const char *write_ob_line(const char *p, const char *bs, char *prfx, int 
     } else {
         i = 0; j = 0;
         while(s[i] && i < 159){
-<<<<<<< HEAD
-            descr[j] = s[i];
-            if(s[i] == '\'' && s[i + 1] == '\'')
-            i++;
-=======
             if(s[i] == '\004'){
                 if(nvimcom_is_utf8){
                     descr[j] = '\xe2';
@@ -1413,25 +1339,17 @@ static const char *write_ob_line(const char *p, const char *bs, char *prfx, int 
             } else {
                 descr[j] = s[i];
             }
->>>>>>> 9d4723f78fe487880e9d1710ed59d1407f0137c2
             i++; j++;
         }
         descr[j] = 0;
     }
 
-<<<<<<< HEAD
-    if(f[1][0] == '\003')
-        fprintf(F2, "   %s(#%s\t%s\n", prfx, f[0], descr);
-        else
-        fprintf(F2, "   %s%c#%s\t%s\n", prfx, f[1][0], f[0], descr);
-=======
     if(!(bsnm[0] == '.' && allnames == 0)){
         if(f[1][0] == '\003')
             fprintf(fl, "   %s(#%s\t%s\n", prfx, f[0], descr);
         else
             fprintf(fl, "   %s%c#%s\t%s\n", prfx, f[1][0], f[0], descr);
     }
->>>>>>> 9d4723f78fe487880e9d1710ed59d1407f0137c2
 
     if(*p == 0)
         return p;
@@ -1453,55 +1371,55 @@ static const char *write_ob_line(const char *p, const char *bs, char *prfx, int 
             snprintf(base2, 127, "%s[[", bsnm); // S4 object always have names but base2 must be defined
         }
 
-            if(get_list_status(bsnm, df) == 0){
+        if(get_list_status(bsnm, df) == 0){
             while(str_here(p, base1) || str_here(p, base2)){
-                    while(*p != '\n')
-                        p++;
+                while(*p != '\n')
                     p++;
+                p++;
                 nLibObjs--;
-                }
-                return p;
             }
+            return p;
+        }
 
         if(str_here(p, base1) == 0 && str_here(p, base2) == 0)
             return p;
 
-            int len = strlen(prfx);
-            if(nvimcom_is_utf8){
-                int j = 0, i = 0;
-                while(i < len){
-                    if(prfx[i] == '\xe2'){
-                        i += 3;
-                        if(prfx[i-1] == '\x80' || prfx[i-1] == '\x94'){
-                            newprfx[j] = ' '; j++;
-                        } else {
-                            newprfx[j] = '\xe2'; j++;
-                            newprfx[j] = '\x94'; j++;
-                            newprfx[j] = '\x82'; j++;
-                        }
+        int len = strlen(prfx);
+        if(nvimcom_is_utf8){
+            int j = 0, i = 0;
+            while(i < len){
+                if(prfx[i] == '\xe2'){
+                    i += 3;
+                    if(prfx[i-1] == '\x80' || prfx[i-1] == '\x94'){
+                        newprfx[j] = ' '; j++;
                     } else {
-                        newprfx[j] = prfx[i];
-                        i++, j++;
+                        newprfx[j] = '\xe2'; j++;
+                        newprfx[j] = '\x94'; j++;
+                        newprfx[j] = '\x82'; j++;
                     }
+                } else {
+                    newprfx[j] = prfx[i];
+                    i++, j++;
                 }
-                newprfx[j] = 0;
-            } else {
-                for(int i = 0; i < len; i++){
-                    if(prfx[i] == '-' || prfx[i] == '`')
-                        newprfx[i] = ' ';
-                    else
-                        newprfx[i] = prfx[i];
-                }
-                newprfx[len] = 0;
             }
+            newprfx[j] = 0;
+        } else {
+            for(int i = 0; i < len; i++){
+                if(prfx[i] == '-' || prfx[i] == '`')
+                    newprfx[i] = ' ';
+                else
+                    newprfx[i] = prfx[i];
+            }
+            newprfx[len] = 0;
+        }
 
-            // Check if the next list element really is there
+        // Check if the next list element really is there
         while(str_here(p, base1) || str_here(p, base2)){
-                // Check if this is the last element in the list
-                s = p;
+            // Check if this is the last element in the list
+            s = p;
             while(*s != '\n')
-                    s++;
-                    s++;
+                s++;
+            s++;
             ne--;
             if(ne == 0){
                 snprintf(prefix, 112, "%s%s", newprfx, strL);
@@ -1534,40 +1452,14 @@ void hi_glbenv_fun()
         while(*s != 0)
             s++;
         s++;
-<<<<<<< HEAD
-        if(*s == '\003'){
-            nm = calloc(1, sizeof(NameList));
-            nm->name = p;
-            nm->next = nmlist;
-            nmlist = nm;
-    }
-=======
         if (*s == '\003')
             printf("%s ", p);
->>>>>>> 9d4723f78fe487880e9d1710ed59d1407f0137c2
         while(*p != '\n')
             p++;
         p++;
     }
-<<<<<<< HEAD
-
-    if(nmlist){
-        printf("call UpdateLocalFunctions('");
-        while(nmlist){
-            printf("%s", nmlist->name);
-            nm = nmlist;
-            nmlist = nmlist->next;
-            if(nmlist)
-                printf(" ");
-            free(nm);
-    }
-        printf("')\n");
-        fflush(stdout);
-    }
-=======
     printf("')\n");
     fflush(stdout);
->>>>>>> 9d4723f78fe487880e9d1710ed59d1407f0137c2
 }
 
 void update_glblenv_buffer()
@@ -1584,12 +1476,12 @@ void update_glblenv_buffer()
         if(glbnv_buffer[i] == '\003'){
             n++;
             i += 7;
-    }
+        }
 
     if(n != nGlbEnvFun){
         nGlbEnvFun = n;
         hi_glbenv_fun();
-}
+    }
 }
 
 void omni2ob()
@@ -1603,13 +1495,8 @@ void omni2ob()
         fflush(stderr);
         return;
     }
-<<<<<<< HEAD
-    
-    fprintf(F2, ".GlobalEnv | Libraries\n\n");
-=======
 
     fprintf(f, ".GlobalEnv | Libraries\n\n");
->>>>>>> 9d4723f78fe487880e9d1710ed59d1407f0137c2
 
     const char *s = glbnv_buffer;
     while(*s)
@@ -1617,10 +1504,10 @@ void omni2ob()
 
     fclose(f);
     if(auto_obbr){
-    fputs("call UpdateOB('GlobalEnv')\n", stdout);
-    fflush(stdout);
+        fputs("call UpdateOB('GlobalEnv')\n", stdout);
+        fflush(stdout);
+    }
 }
-            }
 
 void lib2ob()
 {
@@ -1641,15 +1528,9 @@ void lib2ob()
     while(pkg){
         if(pkg->loaded){
             if(pkg->descr)
-<<<<<<< HEAD
-                fprintf(F2, "   :#%s\t%s\n", pkg->name, pkg->descr);
-        else
-                fprintf(F2, "   :#%s\t\n", pkg->name);
-=======
                 fprintf(f, "   :#%s\t%s\n", pkg->name, pkg->descr);
             else
                 fprintf(f, "   :#%s\t\n", pkg->name);
->>>>>>> 9d4723f78fe487880e9d1710ed59d1407f0137c2
             snprintf(lbnmc, 511, "%s:", pkg->name);
             stt = get_list_status(lbnmc, 0);
             if(pkg->omnils && pkg->nobjs > 0 && stt == 1){
@@ -1728,33 +1609,15 @@ void objbr_setup()
         OpenLS = 1;
     else
         OpenLS = 0;
+    if(getenv("NVIMR_OBJBR_ALLNAMES"))
+        allnames = 1;
+    else
+        allnames = 0;
 
     // List tree sentinel
     listTree = new_ListStatus("base:", 0);
 
-<<<<<<< HEAD
-    // Initialize the pkgList variable to enable omnicompletion even before R is loaded
-    if(getenv("R_DEFAULT_PACKAGES")){
-        char *s = malloc(sizeof(char) * (strlen(getenv("R_DEFAULT_PACKAGES"))+1));
-        strcpy(s, getenv("R_DEFAULT_PACKAGES"));
-        char *p = strtok(s, ",");
-        while(p){
-            add_pkg(p, 0);
-            p = strtok(NULL, ",");
-}
-        free(s);
-    } else {
-        add_pkg("base", 0);
-        add_pkg("utils", 0);
-        add_pkg("grDevices", 0);
-        add_pkg("graphics", 0);
-        add_pkg("stats", 0);
-        add_pkg("methods", 0);
-    }
-    grow_compl_buffer();
-=======
     compl_buffer = calloc(compl_buffer_size, sizeof(char));
->>>>>>> 9d4723f78fe487880e9d1710ed59d1407f0137c2
 }
 
 int count_twice(const char *b1, const char *b2, const char ch)
@@ -1854,11 +1717,7 @@ void compl_info(const char *wrd, const char *pkg)
 // too big it will be truncated.
 char *parse_omnls(const char *s, const char *base, char *p)
 {
-<<<<<<< HEAD
-    int i, nsz;
-=======
     int i, nsz, len;
->>>>>>> 87864f517842256d5ce67e84279739fb5d4a430f
     const char *f[7];
 
     while(*s != 0){
@@ -1962,17 +1821,7 @@ char *parse_omnls(const char *s, const char *base, char *p)
                 p = str_cat(p, f[1]);
             p = str_cat(p, "', 'pkg': '");
             p = str_cat(p, f[3]);
-<<<<<<< HEAD
-            p = str_cat(p, "', 'usage': [");
-            p = str_cat(p, f[4]);
-            p = str_cat(p, "], 'ttl': '");
-            p = str_cat(p, f[5]);
-            p = str_cat(p, "', 'descr': '");
-            p = str_cat(p, f[6]);
-            p = str_cat(p, "'}},");
-=======
             p = str_cat(p, "'}}, "); // Don't include fields 4, 5 and 6 because big data will be truncated.
->>>>>>> 87864f517842256d5ce67e84279739fb5d4a430f
         } else {
             while(*s != '\n')
                 s++;
@@ -1986,8 +1835,6 @@ void complete(const char *base, const char *funcnm)
 {
     char *p, *s, *t;
     int sz;
-
-    // double tm = clock();
 
     memset(compl_buffer, 0, compl_buffer_size);
     p = compl_buffer;
@@ -2031,13 +1878,6 @@ void complete(const char *base, const char *funcnm)
         pd = pd->next;
     }
 
-<<<<<<< HEAD
-    //fprintf(stderr, "TIME %s = %f\n", base,
-    //        1000 * ((double)clock() - tm) / CLOCKS_PER_SEC);
-    //fflush(stderr);
-
-    printf("call SetComplMenu([%s])\n", compl_buffer);
-=======
     if(omni_tmp_file && (p - compl_buffer) >= max_buffer_size){
         FILE *f = fopen(omni_tmp_file, "w");
         if(f){
@@ -2051,7 +1891,6 @@ void complete(const char *base, const char *funcnm)
     } else {
         printf("call SetComplMenu([%s])\n", compl_buffer);
     }
->>>>>>> 87864f517842256d5ce67e84279739fb5d4a430f
     fflush(stdout);
 }
 
