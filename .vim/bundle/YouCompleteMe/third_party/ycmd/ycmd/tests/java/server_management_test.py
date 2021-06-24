@@ -29,8 +29,6 @@ from hamcrest import ( assert_that,
                        has_entry,
                        has_item,
                        starts_with )
-from ycmd.completers.language_server.language_server_completer import (
-    LanguageServerConnectionTimeout )
 from ycmd.tests.java import ( PathToTestFile,
                               IsolatedYcmd,
                               SharedYcmd,
@@ -121,7 +119,7 @@ def ServerManagement_RestartServer_test( app ):
 def ServerManagement_WipeWorkspace_NoConfig_test( isolated_app ):
   with TemporaryTestDir() as tmp_dir:
     with isolated_app( {
-      'java_jdtls_use_clean_workspace': 0,
+      'java_jdtls_use_clean_workspace': 1,
       'java_jdtls_workspace_root_path': tmp_dir
     } ) as app:
       StartJavaCompleterServerInDirectory(
@@ -171,7 +169,7 @@ def ServerManagement_WipeWorkspace_NoConfig_test( isolated_app ):
 def ServerManagement_WipeWorkspace_WithConfig_test( isolated_app ):
   with TemporaryTestDir() as tmp_dir:
     with isolated_app( {
-      'java_jdtls_use_clean_workspace': 0,
+      'java_jdtls_use_clean_workspace': 1,
       'java_jdtls_workspace_root_path': tmp_dir
     } ) as app:
       StartJavaCompleterServerInDirectory(
@@ -334,16 +332,14 @@ def ServerManagement_OpenProject_RelativePathNoPath_test( app ):
                              'Usage: OpenProject <project directory>' ) )
 
 
-def ServerManagement_ProjectDetection_NoParent_test( isolated_app ):
+@IsolatedYcmd()
+def ServerManagement_ProjectDetection_NoParent_test( app ):
   with TemporaryTestDir() as tmp_dir:
-    with isolated_app() as app:
-      StartJavaCompleterServerInDirectory( app, tmp_dir )
-      # Run the debug info to check that we have the correct project dir (cwd)
-      request_data = BuildRequest(
-        filetype = 'java',
-        filepath = os.path.join( tmp_dir, 'foo.java' ) )
-      assert_that( app.post_json( '/debug_info', request_data ).json,
-                   CompleterProjectDirectoryMatcher( tmp_dir ) )
+    StartJavaCompleterServerInDirectory( app, tmp_dir )
+    # Run the debug info to check that we have the correct project dir (cwd)
+    request_data = BuildRequest( filetype = 'java' )
+    assert_that( app.post_json( '/debug_info', request_data ).json,
+                 CompleterProjectDirectoryMatcher( tmp_dir ) )
 
 
 @IsolatedYcmd()
@@ -422,9 +418,9 @@ def ServerManagement_ServerDies_test( app ):
 
   request_data = BuildRequest( filetype = 'java' )
   debug_info = app.post_json( '/debug_info', request_data ).json
-  print( f'Debug info: { debug_info }' )
+  print( 'Debug info: {0}'.format( debug_info ) )
   pid = debug_info[ 'completer' ][ 'servers' ][ 0 ][ 'pid' ]
-  print( f'pid: { pid }' )
+  print( 'pid: {0}'.format( pid ) )
   process = psutil.Process( pid )
   process.terminate()
 
@@ -453,9 +449,9 @@ def ServerManagement_ServerDiesWhileShuttingDown_test( app ):
 
   request_data = BuildRequest( filetype = 'java' )
   debug_info = app.post_json( '/debug_info', request_data ).json
-  print( f'Debug info: { debug_info }' )
+  print( 'Debug info: {0}'.format( debug_info ) )
   pid = debug_info[ 'completer' ][ 'servers' ][ 0 ][ 'pid' ]
-  print( f'pid: { pid }' )
+  print( 'pid: {0}'.format( pid ) )
   process = psutil.Process( pid )
 
 
@@ -499,9 +495,9 @@ def ServerManagement_ConnectionRaisesWhileShuttingDown_test( app ):
 
   request_data = BuildRequest( filetype = 'java' )
   debug_info = app.post_json( '/debug_info', request_data ).json
-  print( f'Debug info: { debug_info }' )
+  print( 'Debug info: {0}'.format( debug_info ) )
   pid = debug_info[ 'completer' ][ 'servers' ][ 0 ][ 'pid' ]
-  print( f'pid: { pid }' )
+  print( 'pid: {0}'.format( pid ) )
   process = psutil.Process( pid )
 
   completer = handlers._server_state.GetFiletypeCompleter( [ 'java' ] )
@@ -534,38 +530,3 @@ def ServerManagement_ConnectionRaisesWhileShuttingDown_test( app ):
   if process.is_running():
     process.terminate()
     raise AssertionError( 'jst.ls process is still running after exit handler' )
-
-
-@IsolatedYcmd()
-def ServerManagement_StartServer_Fails_test( app ):
-  filepath = PathToTestFile( 'simple_eclipse_project',
-                             'src',
-                             'com',
-                             'youcompleteme',
-                             'Test.java' )
-  with patch( 'ycmd.completers.language_server.language_server_completer.'
-              'LanguageServerConnection.AwaitServerConnection',
-              side_effect = LanguageServerConnectionTimeout ):
-    resp = app.post_json( '/event_notification',
-                   BuildRequest(
-                     event_name = 'FileReadyToParse',
-                     filetype = 'java',
-                     filepath = filepath,
-                     contents = ""
-                   ) )
-
-    assert_that( resp.status_code, equal_to( 200 ) )
-
-    request_data = BuildRequest( filetype = 'java' )
-    assert_that( app.post_json( '/debug_info', request_data ).json,
-                 has_entry(
-                   'completer',
-                   has_entry( 'servers', contains_exactly(
-                     has_entry( 'is_running', False )
-                   ) )
-                 ) )
-
-
-def Dummy_test():
-  # Workaround for https://github.com/pytest-dev/pytest-rerunfailures/issues/51
-  assert True

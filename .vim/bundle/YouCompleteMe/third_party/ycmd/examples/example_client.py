@@ -17,7 +17,7 @@
 import sys
 import platform
 if sys.version_info[ 0 ] < 3:
-  sys.exit( 'example_client.py requires Python 3.6+; detected Python ' +
+  sys.exit( 'example_client.py requires Python 3.5+; detected Python ' +
             platform.python_version() )
 
 from base64 import b64encode, b64decode
@@ -34,6 +34,7 @@ import urllib.parse
 import time
 
 import requests
+# enum34 on PyPi
 from enum import Enum
 
 HMAC_HEADER = 'X-Ycm-Hmac'
@@ -84,9 +85,10 @@ class YcmdHandle( object ):
     server_port = GetUnusedLocalhostPort()
     ycmd_args = [ sys.executable,
                   PATH_TO_YCMD,
-                  f'--port={server_port}',
-                  f'--options_file={options_file.name}',
-                  f'--idle_suicide_seconds={SERVER_IDLE_SUICIDE_SECONDS}' ]
+                  '--port={0}'.format( server_port ),
+                  '--options_file={0}'.format( options_file.name ),
+                  '--idle_suicide_seconds={0}'.format(
+                    SERVER_IDLE_SUICIDE_SECONDS ) ]
 
     std_handles = None if INCLUDE_YCMD_OUTPUT else subprocess.PIPE
     child_handle = subprocess.Popen( ycmd_args,
@@ -205,8 +207,8 @@ class YcmdHandle( object ):
       try:
         if total_slept > MAX_SERVER_WAIT_TIME_SECONDS:
           raise RuntimeError(
-            'waited for the server for '
-            f'{MAX_SERVER_WAIT_TIME_SECONDS} seconds, aborting' )
+              'waited for the server for {0} seconds, aborting'.format(
+                    MAX_SERVER_WAIT_TIME_SECONDS ) )
 
         if self.IsReady( filetype ):
           return
@@ -246,7 +248,7 @@ class YcmdHandle( object ):
     method = method.upper()
     request_uri = self._BuildUri( handler )
     args = [ 'http', '-v', method, request_uri ]
-    if isinstance( data, collections.abc.Mapping ):
+    if isinstance( data, collections.Mapping ):
       args.append( 'content-type:application/json' )
       data = ToUtf8Json( data )
 
@@ -389,14 +391,14 @@ def PythonSemanticCompletionResults( server ):
 
 
 def LanguageAgnosticIdentifierCompletion( server ):
-  # We're using vimscript here, but the language doesn't matter; the identifier
+  # We're using JavaScript here, but the language doesn't matter; the identifier
   # completion engine just extracts identifiers.
   server.SendEventNotification( Event.FileReadyToParse,
-                                test_filename = 'some_vimscript.vim',
-                                filetype = 'vim' )
+                                test_filename = 'some_javascript.js',
+                                filetype = 'javascript' )
 
-  server.SendCodeCompletionRequest( test_filename = 'some_vimscript.vim',
-                                    filetype = 'vim',
+  server.SendCodeCompletionRequest( test_filename = 'some_javascript.js',
+                                    filetype = 'javascript',
                                     line_num = 21,
                                     column_num = 6 )
 

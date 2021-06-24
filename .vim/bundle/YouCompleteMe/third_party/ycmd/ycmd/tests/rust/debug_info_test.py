@@ -36,7 +36,7 @@ def DebugInfo_RlsVersion_test( app ):
       'servers': contains_exactly( has_entries( {
         'name': 'Rust Language Server',
         'is_running': instance_of( bool ),
-        'executable': contains_exactly( instance_of( str ) ),
+        'executable': instance_of( str ),
         'pid': instance_of( int ),
         'address': none(),
         'port': none(),
@@ -61,10 +61,6 @@ def DebugInfo_RlsVersion_test( app ):
           has_entries( {
             'key': 'Version',
             'value': instance_of( str )
-          } ),
-          has_entries( {
-            'key': 'Rust Root',
-            'value': instance_of( str )
           } )
         )
       } ) )
@@ -86,7 +82,7 @@ def DebugInfo_NoRlsVersion_test( get_command_output, app ):
       'servers': contains_exactly( has_entries( {
         'name': 'Rust Language Server',
         'is_running': instance_of( bool ),
-        'executable': contains_exactly( instance_of( str ) ),
+        'executable': instance_of( str ),
         'pid': instance_of( int ),
         'address': none(),
         'port': none(),
@@ -111,17 +107,8 @@ def DebugInfo_NoRlsVersion_test( get_command_output, app ):
           has_entries( {
             'key': 'Version',
             'value': none()
-          } ),
-          has_entries( {
-            'key': 'Rust Root',
-            'value': instance_of( str )
           } )
         )
       } ) )
     } ) )
   )
-
-
-def Dummy_test():
-  # Workaround for https://github.com/pytest-dev/pytest-rerunfailures/issues/51
-  assert True

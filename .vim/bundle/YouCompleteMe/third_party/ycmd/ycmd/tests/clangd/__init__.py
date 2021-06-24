@@ -74,7 +74,8 @@ def RunAfterInitialized( app, test ):
                               expect_errors = expect_errors )
 
   if 'expect' in test:
-    print( f'Completer response: { json.dumps( response.json, indent = 2 ) }' )
+    print( "Completer response: {}".format( json.dumps( response.json,
+                                                        indent = 2 ) ) )
     assert_that( response.status_code,
                  equal_to( test[ 'expect' ][ 'response' ] ) )
     assert_that( response.json, test[ 'expect' ][ 'data' ] )

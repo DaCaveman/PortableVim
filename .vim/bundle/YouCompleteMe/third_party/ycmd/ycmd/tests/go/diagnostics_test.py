@@ -76,7 +76,7 @@ def Diagnostics_FileReadyToParse_test( app ):
 
   # It can take a while for the diagnostics to be ready.
   results = WaitForDiagnosticsToBeReady( app, filepath, contents, 'go' )
-  print( f'completer response: { pformat( results ) }' )
+  print( 'completer response: {}'.format( pformat( results ) ) )
 
   assert_that( results, DIAG_MATCHERS_PER_FILE[ filepath ] )
 
@@ -96,10 +96,16 @@ def Diagnostics_Poll_test( app ):
                                     { 'filepath': filepath,
                                       'contents': contents,
                                       'filetype': 'go' } ):
+      if message[ 'diagnostics' ][ 0 ][ 'text' ].endswith(
+          "is not part of a package" ):
+        continue
+      print( 'Message {}'.format( pformat( message ) ) )
       if 'diagnostics' in message:
-        if message[ 'filepath' ] not in DIAG_MATCHERS_PER_FILE:
-          continue
         seen[ message[ 'filepath' ] ] = True
+        if message[ 'filepath' ] not in DIAG_MATCHERS_PER_FILE:
+          raise AssertionError(
+            'Received diagnostics for unexpected file {}. '
+            'Only expected {}'.format( message[ 'filepath' ], to_see ) )
         assert_that( message, has_entries( {
           'diagnostics': DIAG_MATCHERS_PER_FILE[ message[ 'filepath' ] ],
           'filepath': message[ 'filepath' ]
@@ -114,10 +120,6 @@ def Diagnostics_Poll_test( app ):
     raise AssertionError(
       str( e ) +
       'Timed out waiting for full set of diagnostics. '
-      f'Expected to see diags for { json.dumps( to_see, indent = 2 ) }, '
-      f'but only saw { json.dumps( sorted( seen.keys() ), indent = 2 ) }.' )
-
-
-def Dummy_test():
-  # Workaround for https://github.com/pytest-dev/pytest-rerunfailures/issues/51
-  assert True
+      'Expected to see diags for {}, but only saw {}.'.format(
+        json.dumps( to_see, indent=2 ),
+        json.dumps( sorted( seen.keys() ), indent=2 ) ) )

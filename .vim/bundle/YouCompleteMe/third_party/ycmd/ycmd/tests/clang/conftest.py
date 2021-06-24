@@ -16,15 +16,12 @@
 # along with ycmd.  If not, see <http://www.gnu.org/licenses/>.
 
 import pytest
-from ycmd.tests.test_utils import ( ClearCompletionsCache,
-                                    IsolatedApp,
-                                    SetUpApp )
+from ycmd.tests.test_utils import ClearCompletionsCache, IsolatedApp, SetUpApp
 
 shared_app = None
 
 
-@pytest.fixture( scope='module', autouse=True )
-def set_up_shared_app():
+def setup_module():
   global shared_app
   shared_app = SetUpApp( { 'use_clangd': 0 } )
 

@@ -21,6 +21,7 @@ import os
 
 from ycmd import responses
 from ycmd import utils
+from ycmd.completers.language_server import simple_language_server_completer
 from ycmd.completers.language_server import language_server_completer
 
 
@@ -30,29 +31,24 @@ PATH_TO_GOPLS = os.path.abspath( os.path.join( os.path.dirname( __file__ ),
   '..',
   'third_party',
   'go',
-  'bin',
+  'src',
+  'golang.org',
+  'x',
+  'tools',
+  'cmd',
+  'gopls',
   utils.ExecutableName( 'gopls' ) ) )
 
 
 def ShouldEnableGoCompleter( user_options ):
-  server_exists = utils.FindExecutableWithFallback(
-      user_options[ 'gopls_binary_path' ],
-      PATH_TO_GOPLS )
+  server_exists = os.path.isfile( PATH_TO_GOPLS )
   if server_exists:
     return True
   utils.LOGGER.info( 'No gopls executable at %s.', PATH_TO_GOPLS )
   return False
 
 
-class GoCompleter( language_server_completer.LanguageServerCompleter ):
-  def __init__( self, user_options ):
-    super().__init__( user_options )
-    self._user_supplied_gopls_args = user_options[ 'gopls_args' ]
-    self._gopls_path = utils.FindExecutableWithFallback(
-        user_options[ 'gopls_binary_path' ],
-        PATH_TO_GOPLS )
-
-
+class GoCompleter( simple_language_server_completer.SimpleLSPCompleter ):
   def GetServerName( self ):
     return 'gopls'
 
@@ -66,9 +62,7 @@ class GoCompleter( language_server_completer.LanguageServerCompleter ):
 
 
   def GetCommandLine( self ):
-    cmdline = [ self._gopls_path ] + self._user_supplied_gopls_args + [
-                '-logfile',
-                self._stderr_file ]
+    cmdline = [ PATH_TO_GOPLS, '-logfile', self._stderr_file ]
     if utils.LOGGER.isEnabledFor( logging.DEBUG ):
       cmdline.append( '-rpc.trace' )
     return cmdline
@@ -98,18 +92,7 @@ class GoCompleter( language_server_completer.LanguageServerCompleter ):
 
 
   def DefaultSettings( self, request_data ):
-    return { 'hoverKind': 'Structured' }
-
-
-  def ExtraCapabilities( self ):
     return {
-      'workspace': { 'configuration': True }
+      'hoverKind': 'Structured',
+      'fuzzyMatching': False,
     }
-
-
-  def WorkspaceConfigurationResponse( self, request ):
-    # Returns the same settings for each "section", since gopls requests
-    # settings for each open project, but ycmd only has a single settings
-    # object per LSP completer.
-    return [ self._settings.get( 'ls', {} )
-             for i in request[ 'params' ][ 'items' ] ]

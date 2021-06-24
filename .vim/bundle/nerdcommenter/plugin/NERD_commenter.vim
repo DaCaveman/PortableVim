@@ -743,9 +743,7 @@ function s:CommentBlock(top, bottom, lSide, rSide, forceNested )
 
                     if s:Multipart()
                         "stick the right delimiter down
-                        "byte idx of the char next to the last char = (byte idx of last char + 1) + (last char byte len) - 1
-                        let rIndex = (rSide+strlen(leftSpaced)) + strlen(strcharpart(strpart(theLine, rSide+strlen(leftSpaced)-1), 0, 1)) - 1
-                        let theLine = strpart(theLine, 0, rIndex) . rightSpaced . strpart(theLine, rIndex)
+                        let theLine = strpart(theLine, 0, rSide+strlen(leftSpaced)) . rightSpaced . strpart(theLine, rSide+strlen(leftSpaced))
 
                         let firstLeftDelim = s:FindDelimiterIndex(s:Left(), theLine)
                         let lastRightDelim = s:LastIndexOfDelim(s:Right(), theLine)

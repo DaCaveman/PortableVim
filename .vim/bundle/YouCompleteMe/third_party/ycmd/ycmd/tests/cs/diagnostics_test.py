@@ -19,10 +19,11 @@ from hamcrest import ( assert_that, contains_exactly, contains_string, equal_to,
                        has_entries, has_entry, has_items )
 
 from ycmd.tests.cs import ( IsolatedYcmd, PathToTestFile, SharedYcmd,
-                            WrapOmniSharpServer )
+                            WrapOmniSharpServer, WaitUntilCsCompleterIsReady )
 from ycmd.tests.test_utils import ( BuildRequest,
                                     LocationMatcher,
                                     RangeMatcher,
+                                    StopCompleterServer,
                                     WithRetry )
 from ycmd.utils import ReadFile
 
@@ -43,15 +44,16 @@ def Diagnostics_Basic_test( app ):
     diag_data = BuildRequest( filepath = filepath,
                               filetype = 'cs',
                               contents = contents,
-                              line_num = 10,
+                              line_num = 11,
                               column_num = 2 )
 
     results = app.post_json( '/detailed_diagnostic', diag_data ).json
+
     assert_that( results,
                  has_entry(
                      'message',
                      contains_string(
-                       "Identifier expected" ) ) )
+                       "'Console' does not contain a definition for ''" ) ) )
 
 
 @SharedYcmd
@@ -77,7 +79,6 @@ def Diagnostics_ZeroBasedLineAndColumn_test( app ):
     ) )
 
 
-@WithRetry
 @SharedYcmd
 def Diagnostics_WithRange_test( app ):
   filepath = PathToTestFile( 'testy', 'DiagnosticRange.cs' )
@@ -109,29 +110,6 @@ def Diagnostics_MultipleSolution_test( app ):
                                 'solution-named-like-folder',
                                 'testy', 'Program.cs' ) ]
   for filepath in filepaths:
-    with WrapOmniSharpServer( app, filepath ):
-      contents = ReadFile( filepath )
-      event_data = BuildRequest( filepath = filepath,
-                                 event_name = 'FileReadyToParse',
-                                 filetype = 'cs',
-                                 contents = contents )
-
-      results = app.post_json( '/event_notification', event_data ).json
-      assert_that( results, has_items(
-        has_entries( {
-          'kind': equal_to( 'ERROR' ),
-          'text': contains_string( "Identifier expected" ),
-          'location': LocationMatcher( filepath, 10, 12 ),
-          'location_extent': RangeMatcher(
-              filepath, ( 10, 12 ), ( 10, 12 ) )
-        } )
-      ) )
-
-
-@IsolatedYcmd( { 'max_diagnostics_to_display': 1 } )
-def Diagnostics_MaximumDiagnosticsNumberExceeded_test( app ):
-  filepath = PathToTestFile( 'testy', 'MaxDiagnostics.cs' )
-  with WrapOmniSharpServer( app, filepath ):
     contents = ReadFile( filepath )
 
     event_data = BuildRequest( filepath = filepath,
@@ -140,27 +118,60 @@ def Diagnostics_MaximumDiagnosticsNumberExceeded_test( app ):
                                contents = contents )
 
     results = app.post_json( '/event_notification', event_data ).json
+    WaitUntilCsCompleterIsReady( app, filepath )
 
-    assert_that( results, contains_exactly(
+    event_data = BuildRequest( filepath = filepath,
+                               event_name = 'FileReadyToParse',
+                               filetype = 'cs',
+                               contents = contents )
+
+    results = app.post_json( '/event_notification', event_data ).json
+    assert_that( results, has_items(
       has_entries( {
         'kind': equal_to( 'ERROR' ),
-        'text': contains_string( "The type 'MaxDiagnostics' already contains "
-                                 "a definition for 'test'" ),
-        'location': LocationMatcher( filepath, 4, 16 ),
-        'location_extent': RangeMatcher( filepath, ( 4, 16 ), ( 4, 20 ) )
-      } ),
-      has_entries( {
-        'kind': equal_to( 'ERROR' ),
-        'text': contains_string( 'Maximum number of diagnostics exceeded.' ),
-        'location': LocationMatcher( filepath, 1, 1 ),
-        'location_extent': RangeMatcher( filepath, ( 1, 1 ), ( 1, 1 ) ),
-        'ranges': contains_exactly(
-          RangeMatcher( filepath, ( 1, 1 ), ( 1, 1 ) )
-        )
+        'text': contains_string( "Identifier expected" ),
+        'location': LocationMatcher( filepath, 10, 12 ),
+        'location_extent': RangeMatcher(
+            filepath, ( 10, 12 ), ( 10, 12 ) )
       } )
     ) )
 
 
-def Dummy_test():
-  # Workaround for https://github.com/pytest-dev/pytest-rerunfailures/issues/51
-  assert True
+@IsolatedYcmd( { 'max_diagnostics_to_display': 1 } )
+def Diagnostics_MaximumDiagnosticsNumberExceeded_test( app ):
+  filepath = PathToTestFile( 'testy', 'MaxDiagnostics.cs' )
+  contents = ReadFile( filepath )
+
+  event_data = BuildRequest( filepath = filepath,
+                             event_name = 'FileReadyToParse',
+                             filetype = 'cs',
+                             contents = contents )
+
+  app.post_json( '/event_notification', event_data ).json
+  WaitUntilCsCompleterIsReady( app, filepath )
+
+  event_data = BuildRequest( filepath = filepath,
+                             event_name = 'FileReadyToParse',
+                             filetype = 'cs',
+                             contents = contents )
+
+  results = app.post_json( '/event_notification', event_data ).json
+
+  assert_that( results, contains_exactly(
+    has_entries( {
+      'kind': equal_to( 'ERROR' ),
+      'text': contains_string( "The type 'MaxDiagnostics' already contains "
+                               "a definition for 'test'" ),
+      'location': LocationMatcher( filepath, 4, 16 ),
+      'location_extent': RangeMatcher( filepath, ( 4, 16 ), ( 4, 20 ) )
+    } ),
+    has_entries( {
+      'kind': equal_to( 'ERROR' ),
+      'text': contains_string( 'Maximum number of diagnostics exceeded.' ),
+      'location': LocationMatcher( filepath, 1, 1 ),
+      'location_extent': RangeMatcher( filepath, ( 1, 1 ), ( 1, 1 ) ),
+      'ranges': contains_exactly( RangeMatcher( filepath, ( 1, 1 ), ( 1, 1 ) ) )
+    } )
+  ) )
+
+  StopCompleterServer( app, 'cs', filepath )

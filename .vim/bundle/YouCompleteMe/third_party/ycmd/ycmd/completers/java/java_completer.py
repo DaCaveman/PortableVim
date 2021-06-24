@@ -25,7 +25,7 @@ import threading
 
 from ycmd import responses, utils
 from ycmd.completers.language_server import language_server_protocol as lsp
-from ycmd.completers.language_server import language_server_completer
+from ycmd.completers.language_server import simple_language_server_completer
 from ycmd.utils import LOGGER
 
 NO_DOCUMENTATION_MESSAGE = 'No documentation available for current context'
@@ -40,7 +40,7 @@ LANGUAGE_SERVER_HOME = os.path.abspath( os.path.join(
   'target',
   'repository' ) )
 
-PATH_TO_JAVA = None
+PATH_TO_JAVA = utils.PathToFirstExistingExecutable( [ 'java' ] )
 
 PROJECT_FILE_TAILS = [
   '.project',
@@ -102,16 +102,10 @@ WORKSPACE_ROOT_PATH_OPTION = 'java_jdtls_workspace_root_path'
 EXTENSION_PATH_OPTION = 'java_jdtls_extension_path'
 
 
-def ShouldEnableJavaCompleter( user_options ):
+def ShouldEnableJavaCompleter():
   LOGGER.info( 'Looking for jdt.ls' )
-
-  global PATH_TO_JAVA
-  PATH_TO_JAVA = utils.FindExecutableWithFallback(
-    user_options[ 'java_binary_path' ],
-    utils.FindExecutable( 'java' ) )
-
   if not PATH_TO_JAVA:
-    LOGGER.warning( "Not enabling java completion: Couldn't find java 11" )
+    LOGGER.warning( "Not enabling java completion: Couldn't find java" )
     return False
 
   if not os.path.exists( LANGUAGE_SERVER_HOME ):
@@ -148,7 +142,8 @@ def _CollectExtensionBundles( extension_path ):
 
   for extension_dir in extension_path:
     if not os.path.isdir( extension_dir ):
-      LOGGER.info( f'extension directory does not exist: { extension_dir }' )
+      LOGGER.info( 'extension directory does not exist: {0}'.format(
+        extension_dir ) )
       continue
 
     for path in os.listdir( extension_dir ):
@@ -156,24 +151,25 @@ def _CollectExtensionBundles( extension_path ):
       manifest_file = os.path.join( path, 'package.json' )
 
       if not os.path.isdir( path ) or not os.path.isfile( manifest_file ):
-        LOGGER.debug( f'{ path } is not an extension directory' )
+        LOGGER.debug( '{0} is not an extension directory'.format( path ) )
         continue
 
       manifest_json = utils.ReadFile( manifest_file )
       try:
         manifest = json.loads( manifest_json )
       except ValueError:
-        LOGGER.exception( f'Could not load bundle { manifest_file }' )
+        LOGGER.exception( 'Could not load bundle {0}'.format( manifest_file ) )
         continue
 
       if ( 'contributes' not in manifest or
            'javaExtensions' not in manifest[ 'contributes' ] or
            not isinstance( manifest[ 'contributes' ][ 'javaExtensions' ],
                            list ) ):
-        LOGGER.info( f'Bundle { manifest_file } is not a java extension' )
+        LOGGER.info( 'Bundle {0} is not a java extension'.format(
+          manifest_file ) )
         continue
 
-      LOGGER.info( f'Found bundle: { manifest_file }' )
+      LOGGER.info( 'Found bundle: {0}'.format( manifest_file ) )
 
       extension_bundles.extend( [
         os.path.join( path, p )
@@ -283,7 +279,7 @@ def _WorkspaceDirForProject( workspace_root_path,
                        utils.ToUnicode( project_dir_hash.hexdigest() ) )
 
 
-class JavaCompleter( language_server_completer.LanguageServerCompleter ):
+class JavaCompleter( simple_language_server_completer.SimpleLSPCompleter ):
   def __init__( self, user_options ):
     self._workspace_path = None
     super().__init__( user_options )
@@ -297,7 +293,8 @@ class JavaCompleter( language_server_completer.LanguageServerCompleter ):
       self._workspace_root_path = DEFAULT_WORKSPACE_ROOT_PATH
 
     if not isinstance( self._extension_path, list ):
-      raise ValueError( f'{ EXTENSION_PATH_OPTION } option must be a list' )
+      raise ValueError( '{0} option must be a list'.format(
+        EXTENSION_PATH_OPTION ) )
 
     if not self._extension_path:
       self._extension_path = [ DEFAULT_EXTENSION_PATH ]
@@ -384,9 +381,11 @@ class JavaCompleter( language_server_completer.LanguageServerCompleter ):
     if len( args ) > 0 and '--with-config' in args:
       with_config = True
 
-    self._RestartServer( request_data,
-                         wipe_workspace = True,
-                         wipe_config = with_config )
+    with self._server_state_mutex:
+      self.Shutdown()
+      self._StartAndInitializeServer( request_data,
+                                      wipe_workspace = True,
+                                      wipe_config = with_config )
 
 
   def _OpenProject( self, request_data, args ):
@@ -405,7 +404,10 @@ class JavaCompleter( language_server_completer.LanguageServerCompleter ):
         request_data[ 'working_dir' ],
         project_directory ) )
 
-    self._RestartServer( request_data, project_directory = project_directory )
+    with self._server_state_mutex:
+      self.Shutdown()
+      self._StartAndInitializeServer( request_data,
+                                      project_directory = project_directory )
 
 
   def _Reset( self ):
@@ -428,60 +430,52 @@ class JavaCompleter( language_server_completer.LanguageServerCompleter ):
     super()._Reset()
 
 
-  def _GetJvmArgs( self, request_data ):
-    return self._settings.get( 'server', {} ).get( 'jvm_args', [] )
-
 
   def StartServer( self,
                    request_data,
                    project_directory = None,
                    wipe_workspace = False,
                    wipe_config = False ):
-    try:
-      with self._server_info_mutex:
-        LOGGER.info( 'Starting jdt.ls Language Server...' )
+    with self._server_state_mutex:
+      LOGGER.info( 'Starting jdt.ls Language Server...' )
 
-        if project_directory:
-          self._java_project_dir = project_directory
-        elif 'project_directory' in self._settings:
-          self._java_project_dir = utils.AbsolutePath(
-            self._settings[ 'project_directory' ],
-            self._extra_conf_dir )
-        else:
-          self._java_project_dir = _FindProjectDir(
-            os.path.dirname( request_data[ 'filepath' ] ) )
+      if project_directory:
+        self._java_project_dir = project_directory
+      elif 'project_directory' in self._settings:
+        self._java_project_dir = utils.AbsoluatePath(
+          self._settings[ 'project_directory' ],
+          self._extra_conf_dir )
+      else:
+        self._java_project_dir = _FindProjectDir(
+          os.path.dirname( request_data[ 'filepath' ] ) )
 
-        self._workspace_path = _WorkspaceDirForProject(
-          self._workspace_root_path,
-          self._java_project_dir,
-          self._use_clean_workspace )
+      self._workspace_path = _WorkspaceDirForProject(
+        self._workspace_root_path,
+        self._java_project_dir,
+        self._use_clean_workspace )
 
-        if not self._use_clean_workspace and wipe_workspace:
-          if os.path.isdir( self._workspace_path ):
-            LOGGER.info( f'Wiping out workspace { self._workspace_path }' )
-            shutil.rmtree( self._workspace_path )
+      if not self._use_clean_workspace and wipe_workspace:
+        if os.path.isdir( self._workspace_path ):
+          LOGGER.info( 'Wiping out workspace {0}'.format(
+            self._workspace_path ) )
+          shutil.rmtree( self._workspace_path )
 
-        self._launcher_config = _LauncherConfiguration(
-            self._workspace_root_path,
-            wipe_config )
+      self._launcher_config = _LauncherConfiguration( self._workspace_root_path,
+                                                      wipe_config )
 
-        self._command = [ PATH_TO_JAVA ] + self._GetJvmArgs( request_data ) + [
-          '-Dfile.encoding=UTF-8',
-          '-Declipse.application=org.eclipse.jdt.ls.core.id1',
-          '-Dosgi.bundles.defaultStartLevel=4',
-          '-Declipse.product=org.eclipse.jdt.ls.core.product',
-          '-Dlog.level=ALL',
-          '-jar', self._launcher_path,
-          '-configuration', self._launcher_config,
-          '-data', self._workspace_path,
-        ]
+      self._command = [
+        PATH_TO_JAVA,
+        '-Dfile.encoding=UTF-8',
+        '-Declipse.application=org.eclipse.jdt.ls.core.id1',
+        '-Dosgi.bundles.defaultStartLevel=4',
+        '-Declipse.product=org.eclipse.jdt.ls.core.product',
+        '-Dlog.level=ALL',
+        '-jar', self._launcher_path,
+        '-configuration', self._launcher_config,
+        '-data', self._workspace_path,
+      ]
 
-        return super( JavaCompleter, self )._StartServerNoLock( request_data )
-    except language_server_completer.LanguageServerConnectionTimeout:
-      LOGGER.error( '%s failed to start, or did not connect successfully',
-                    self.GetServerName() )
-      self.Shutdown()
-      return False
+    return super().StartServer( request_data )
 
 
   def GetCodepointForCompletionRequest( self, request_data ):
@@ -523,11 +517,11 @@ class JavaCompleter( language_server_completer.LanguageServerCompleter ):
       if notification[ 'params' ][ 'type' ] == 'Started':
         self._started_message_sent = True
         return responses.BuildDisplayMessageResponse(
-          f'Initializing Java completer: { message }' )
+          'Initializing Java completer: {}'.format( message ) )
 
       if not self._started_message_sent:
         return responses.BuildDisplayMessageResponse(
-          f'Initializing Java completer: { message }' )
+          'Initializing Java completer: {}'.format( message ) )
 
     return super().ConvertNotificationToMessage( request_data, notification )
 

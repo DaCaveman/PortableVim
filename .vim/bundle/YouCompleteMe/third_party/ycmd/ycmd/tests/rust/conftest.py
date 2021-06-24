@@ -27,24 +27,26 @@ from ycmd.tests.test_utils import ( BuildRequest,
 shared_app = None
 
 
-@pytest.fixture( scope='module', autouse=True )
-def set_up_shared_app():
+def setup_module():
   global shared_app
   shared_app = SetUpApp()
   with IgnoreExtraConfOutsideTestsFolder():
     StartRustCompleterServerInDirectory( shared_app,
-                                         PathToTestFile( 'common' ) )
-  yield
-  StopCompleterServer( shared_app, 'rust' )
+                                         PathToTestFile( 'common', 'src' ) )
 
 
 def StartRustCompleterServerInDirectory( app, directory ):
   app.post_json( '/event_notification',
                  BuildRequest(
-                   filepath = os.path.join( directory, 'src', 'main.rs' ),
+                   filepath = os.path.join( directory, 'main.rs' ),
                    event_name = 'FileReadyToParse',
                    filetype = 'rust' ) )
   WaitUntilCompleterServerReady( app, 'rust' )
+
+
+def teardown_module():
+  global shared_app
+  StopCompleterServer( shared_app, 'rust' )
 
 
 @pytest.fixture
@@ -53,8 +55,10 @@ def app( request ):
   assert which == 'isolated' or which == 'shared'
   if which == 'isolated':
     with IsolatedApp( {} ) as app:
-      yield app
-      StopCompleterServer( app, 'rust' )
+      try:
+        yield app
+      finally:
+        StopCompleterServer( app, 'rust' )
   else:
     global shared_app
     ClearCompletionsCache()

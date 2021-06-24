@@ -16,9 +16,7 @@ exe "source " . substitute(expand("<sfile>:h:h"), ' ', '\ ', 'g') . "/R/common_b
 function! RrstIsInRCode(vrb)
     let chunkline = search("^\\.\\. {r", "bncW")
     let docline = search("^\\.\\. \\.\\.", "bncW")
-    if chunkline == line(".")
-        return 2
-    elseif chunkline > docline
+    if chunkline > docline && chunkline != line(".")
         return 1
     else
         if a:vrb
@@ -33,7 +31,7 @@ function! RrstPreviousChunk() range
     let chunk = len(rg)
     for var in range(1, chunk)
         let curline = line(".")
-        if RrstIsInRCode(0) == 1
+        if RrstIsInRCode(0)
             let i = search("^\\.\\. {r", "bnW")
             if i != 0
                 call cursor(i-1, 1)
@@ -143,9 +141,7 @@ endfunction
 
 " Send Rrst chunk to R
 function! SendRrstChunkToR(e, m)
-    if RrstIsInRCode(0) == 2
-        call cursor(line(".")+1, 1)
-    elseif RrstIsInRCode(0)
+    if RrstIsInRCode(0) == 0
         call RWarningMsg("Not inside an R code chunk.")
         return
     endif

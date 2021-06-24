@@ -17,7 +17,6 @@
 
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
-#include "Candidate.h"
 #include "IdentifierCompleter.h"
 #include "Utils.h"
 #include "TestUtils.h"
@@ -271,9 +270,10 @@ TEST( IdentifierCompleterTest, LotOfCandidates ) {
   // Generate a lot of candidates of the form [a-z]{5} in reverse order.
   std::vector< std::string > candidates;
   for ( int i = 0; i < 2048; ++i ) {
-    std::string candidate;
-    for ( int pos = 0, letter = i; pos < 5; letter /= 26, ++pos ) {
-      candidate.insert( size_t{ 0 }, 1, letter % 26 + 'a' );
+    std::string candidate = "";
+    int letter = i;
+    for ( int pos = 0; pos < 5; letter /= 26, ++pos ) {
+      candidate = std::string( 1, letter % 26 + 'a' ) + candidate;
     }
     candidates.insert( candidates.begin(), candidate );
   }
@@ -297,8 +297,7 @@ TEST( IdentifierCompleterTest, TagsEndToEndWorks ) {
 
   completer.AddIdentifiersToDatabaseFromTagFiles( tag_files );
 
-  std::string query = "fo";
-  EXPECT_THAT( completer.CandidatesForQueryAndType( query, "cpp" ),
+  EXPECT_THAT( completer.CandidatesForQueryAndType( "fo", "cpp" ),
                ElementsAre( "foosy",
                             "fooaaa" ) );
 
@@ -308,12 +307,11 @@ TEST( IdentifierCompleterTest, TagsEndToEndWorks ) {
 // Filetype checking
 TEST( IdentifierCompleterTest, ManyCandidateSimpleFileType ) {
   IdentifierCompleter completer;
-  std::string query = "fbr";
   EXPECT_THAT( IdentifierCompleter( {
                  "foobar",
                  "foobartest",
                  "Foobartest"
-               }, "c", "foo" ).CandidatesForQueryAndType( query, "c" ),
+               }, "c", "foo" ).CandidatesForQueryAndType( "fbr", "c" ),
                WhenSorted( ElementsAre( "Foobartest",
                                         "foobar",
                                         "foobartest" ) ) );
@@ -322,12 +320,11 @@ TEST( IdentifierCompleterTest, ManyCandidateSimpleFileType ) {
 
 TEST( IdentifierCompleterTest, ManyCandidateSimpleWrongFileType ) {
   IdentifierCompleter completer;
-  std::string query = "fbr";
   EXPECT_THAT( IdentifierCompleter( {
                  "foobar",
                  "foobartest",
                  "Foobartest"
-               }, "c", "foo" ).CandidatesForQueryAndType( query, "cpp" ),
+               }, "c", "foo" ).CandidatesForQueryAndType( "fbr", "cpp" ),
                IsEmpty() );
 }
 

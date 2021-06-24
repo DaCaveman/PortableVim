@@ -95,13 +95,13 @@ def GetCompilationInfoForFile( filename ):
 
 # This is the entry point; this function is called by ycmd to produce flags for
 # a file.
-def Settings( **kwargs ):
+def FlagsForFile( filename, **kwargs ):
   if not database:
     return {
       'flags': flags,
       'include_paths_relative_to_dir': DirectoryOfThisScript()
     }
-  filename = kwargs[ 'filename' ]
+
   compilation_info = GetCompilationInfoForFile( filename )
   if not compilation_info:
     return None

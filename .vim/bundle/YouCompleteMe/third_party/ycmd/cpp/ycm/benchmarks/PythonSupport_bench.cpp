@@ -16,19 +16,21 @@
 // along with ycmd.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "BenchUtils.h"
-#include "Repository.h"
+#include "CandidateRepository.h"
+#include "CharacterRepository.h"
+#include "CodePointRepository.h"
 #include "PythonSupport.h"
 
-#include <benchmark/benchmark.h>
+#include <benchmark/benchmark_api.h>
 
 namespace YouCompleteMe {
 
 class PythonSupportFixture : public benchmark::Fixture {
 public:
   void SetUp( const benchmark::State& ) {
-    Repository< CodePoint >::Instance().ClearElements();
-    Repository< Character >::Instance().ClearElements();
-    Repository< Candidate >::Instance().ClearElements();
+    CodePointRepository::Instance().ClearCodePoints();
+    CharacterRepository::Instance().ClearCharacters();
+    CandidateRepository::Instance().ClearCandidates();
   }
 };
 
@@ -48,14 +50,12 @@ BENCHMARK_DEFINE_F( PythonSupportFixture,
     candidates.append( candidate );
   }
 
-  pybind11::str candidate_property("insertion_text");
-  for ( auto _ : state ) {
+  while ( state.KeepRunning() ) {
     state.PauseTiming();
-    Repository< Character >::Instance().ClearElements();
-    Repository< Candidate >::Instance().ClearElements();
-    std::string query = "aA";
+    CharacterRepository::Instance().ClearCharacters();
+    CandidateRepository::Instance().ClearCandidates();
     state.ResumeTiming();
-    FilterAndSortCandidates( candidates, candidate_property, query,
+    FilterAndSortCandidates( candidates, "insertion_text", "aA",
                              state.range( 1 ) );
   }
 
@@ -78,15 +78,12 @@ BENCHMARK_DEFINE_F( PythonSupportFixture,
     candidates.append( candidate );
   }
 
-  pybind11::str candidate_property("insertion_text");
   // Store the candidates in the repository.
-  std::string query = "aA";
-  FilterAndSortCandidates( candidates, candidate_property, query,
+  FilterAndSortCandidates( candidates, "insertion_text", "aA",
                            state.range( 1 ) );
 
-  for ( auto _ : state ) {
-    std::string query = "aA";
-    FilterAndSortCandidates( candidates, candidate_property, query,
+  while ( state.KeepRunning() ) {
+    FilterAndSortCandidates( candidates, "insertion_text", "aA",
                              state.range( 1 ) );
   }
 

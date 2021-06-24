@@ -23,8 +23,7 @@ from ycmd.tests.test_utils import ( ClearCompletionsCache,
 shared_app = None
 
 
-@pytest.fixture( scope='module', autouse=True )
-def set_up_shared_app():
+def setup_module():
   global shared_app
   shared_app = SetUpApp()
 

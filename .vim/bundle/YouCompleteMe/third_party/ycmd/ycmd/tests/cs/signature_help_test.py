@@ -26,7 +26,8 @@ from ycmd.utils import ReadFile, LOGGER
 from ycmd.tests.cs import ( PathToTestFile,
                             IsolatedYcmd,
                             SharedYcmd,
-                            WrapOmniSharpServer )
+                            WrapOmniSharpServer,
+                            WaitUntilCsCompleterIsReady )
 from ycmd.tests.test_utils import ( BuildRequest,
                                     ParameterMatcher,
                                     SignatureMatcher,
@@ -200,6 +201,7 @@ def SignatureHelp_NotAFunction_NoError_test( app ):
 def GetCompletions_Basic_NoSigHelp_test( app ):
   filepath = PathToTestFile( 'testy', 'Program.cs' )
   with WrapOmniSharpServer( app, filepath ):
+    WaitUntilCsCompleterIsReady( app, filepath )
     contents = ReadFile( filepath )
 
     completion_data = BuildRequest( filepath = filepath,
@@ -223,8 +225,3 @@ def GetCompletions_Basic_NoSigHelp_test( app ):
         ),
         'errors': empty(),
       } ) )
-
-
-def Dummy_test():
-  # Workaround for https://github.com/pytest-dev/pytest-rerunfailures/issues/51
-  assert True

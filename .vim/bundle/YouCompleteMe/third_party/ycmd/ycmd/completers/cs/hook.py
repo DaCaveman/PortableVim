@@ -15,11 +15,8 @@
 # You should have received a copy of the GNU General Public License
 # along with ycmd.  If not, see <http://www.gnu.org/licenses/>.
 
-from ycmd.completers.cs.cs_completer import ( CsharpCompleter,
-                                              ShouldEnableCsCompleter )
+from ycmd.completers.cs.cs_completer import CsharpCompleter
 
 
 def GetCompleter( user_options ):
-  if not ShouldEnableCsCompleter( user_options ):
-    return None
   return CsharpCompleter( user_options )

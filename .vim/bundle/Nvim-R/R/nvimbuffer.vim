@@ -62,7 +62,11 @@ function CloseRTerm()
         endtry
         if g:R_close_term && g:rplugin.R_bufname == bufname("%")
             startinsert
-            call feedkeys(' ')
+            if g:R_clear_line
+                call feedkeys('a ')
+            else
+                call feedkeys(' ')
+            endif
         endif
         unlet g:rplugin.R_bufname
     endif

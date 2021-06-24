@@ -1,7 +1,3 @@
-# Editor temp files
-*.sw[a-z]
-*.un~
-
 # Compiled Object files
 *.slo
 *.lo
@@ -77,17 +73,15 @@ docs/package-lock.json
 
 # jdt.ls
 third_party/eclipse.jdt.ls
-third_party/lombok
 
 # TSServer
-third_party/tsserver/node_modules
-third_party/tsserver/package-lock.json
+third_party/tsserver
 
 # clangd local installation
 third_party/clangd
 
 # Rust
-third_party/rust-analyzer
+third_party/rls
 ycmd/tests/rust/testdata/common/target
 ycmd/tests/rust/testdata/formatting/target
 
@@ -97,14 +91,3 @@ third_party/generic_server/package-lock.json
 
 # clangd index data
 .clangd/
-.cache/
-
-# installation directory for gopls
-third_party/go
-
-third_party/regex-build
-
-# CMake FetchContent output directories
-cpp/ycm/benchmarks/benchmark/
-cpp/ycm/tests/gmock/
-cpp/absl

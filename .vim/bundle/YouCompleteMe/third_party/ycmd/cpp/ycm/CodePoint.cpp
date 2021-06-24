@@ -16,9 +16,8 @@
 // along with ycmd.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "CodePoint.h"
-#include "Repository.h"
+#include "CodePointRepository.h"
 
-#include <algorithm>
 #include <array>
 #include <cstring>
 
@@ -47,26 +46,39 @@ int GetCodePointLength( uint8_t leading_byte ) {
 }
 
 
-RawCodePoint FindCodePoint( std::string_view text ) {
+RawCodePoint FindCodePoint( const char *text ) {
 #include "UnicodeTable.inc"
 
   // Do a binary search on the array of code points to find the raw code point
   // corresponding to the text. If no code point is found, return the default
   // raw code point for that text.
   const auto& original = code_points.original;
+  auto first = original.begin();
+  const auto start = first;
+  size_t count = original.size();
 
-  auto it = std::lower_bound( original.begin(), original.end(), text );
-  if ( it != original.end() && text == *it ) {
-    auto index = static_cast< size_t >( std::distance( original.begin(), it ) );
-    return { *it,
-             code_points.normal[ index ],
-             code_points.folded_case[ index ],
-             code_points.swapped_case[ index ],
-             code_points.is_letter[ index ],
-             code_points.is_punctuation[ index ],
-             code_points.is_uppercase[ index ],
-             code_points.break_property[ index ],
-             code_points.combining_class[ index ] };
+  while ( count > 0 ) {
+    size_t step = count / 2;
+    auto it = first + step;
+    int cmp = std::strcmp( *it, text );
+    if ( cmp == 0 ) {
+      auto index = static_cast< size_t >( std::distance( start, it ) );
+      return { *it,
+               code_points.normal[ index ],
+               code_points.folded_case[ index ],
+               code_points.swapped_case[ index ],
+               code_points.is_letter[ index ],
+               code_points.is_punctuation[ index ],
+               code_points.is_uppercase[ index ],
+               code_points.break_property[ index ],
+               code_points.combining_class[ index ] };
+    }
+    if ( cmp < 0 ) {
+      first = ++it;
+      count -= step + 1;
+    } else {
+      count = step;
+    }
   }
 
   return { text, text, text, text, false, false, false, 0, 0 };
@@ -74,8 +86,8 @@ RawCodePoint FindCodePoint( std::string_view text ) {
 
 } // unnamed namespace
 
-CodePoint::CodePoint( std::string_view code_point )
-  : CodePoint( FindCodePoint( code_point ) ) {
+CodePoint::CodePoint( const std::string &code_point )
+  : CodePoint( FindCodePoint( code_point.c_str() ) ) {
 }
 
 
@@ -92,7 +104,7 @@ CodePoint::CodePoint( RawCodePoint&& code_point )
 }
 
 
-CodePointSequence BreakIntoCodePoints( std::string_view text ) {
+CodePointSequence BreakIntoCodePoints( const std::string &text ) {
   // NOTE: for efficiency, we don't check if the number of continuation bytes
   // and the bytes themselves are valid (they must start with bits '10').
   std::vector< std::string > code_points;
@@ -105,12 +117,12 @@ CodePointSequence BreakIntoCodePoints( std::string_view text ) {
     iter += length;
   }
 
-  return Repository< CodePoint >::Instance().GetElements( std::move( code_points ) );
+  return CodePointRepository::Instance().GetCodePoints( code_points );
 }
 
 
 const char* UnicodeDecodeError::what() const noexcept {
   return std::runtime_error::what();
-}
+};
 
 } // namespace YouCompleteMe

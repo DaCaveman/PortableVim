@@ -21,32 +21,17 @@ import os
 if sys.version_info[ 0 ] < 3:
   sys.exit( 8 )
 
-ROOT_DIR = os.path.abspath( os.path.join( os.path.dirname( __file__ ), '..' ) )
-DIR_OF_THIRD_PARTY = os.path.join( ROOT_DIR, 'third_party' )
-DIR_OF_WATCHDOG_DEPS = os.path.join( DIR_OF_THIRD_PARTY, 'watchdog_deps' )
-DIR_OF_REQUESTS_DEPS = os.path.join( DIR_OF_THIRD_PARTY, 'requests_deps' )
-sys.path[ 0:0 ] = [
-    os.path.join( ROOT_DIR ),
-    os.path.join( DIR_OF_THIRD_PARTY, 'bottle' ),
-    os.path.join( DIR_OF_THIRD_PARTY, 'regex-build' ),
-    os.path.join( DIR_OF_THIRD_PARTY, 'frozendict' ),
-    os.path.join( DIR_OF_THIRD_PARTY, 'jedi_deps', 'jedi' ),
-    os.path.join( DIR_OF_THIRD_PARTY, 'jedi_deps', 'parso' ),
-    os.path.join( DIR_OF_REQUESTS_DEPS, 'requests' ),
-    os.path.join( DIR_OF_REQUESTS_DEPS, 'chardet' ),
-    os.path.join( DIR_OF_REQUESTS_DEPS, 'certifi' ),
-    os.path.join( DIR_OF_REQUESTS_DEPS, 'idna' ),
-    os.path.join( DIR_OF_REQUESTS_DEPS, 'urllib3', 'src' ),
-    os.path.join( DIR_OF_WATCHDOG_DEPS, 'watchdog', 'build', 'lib3' ),
-    os.path.join( DIR_OF_WATCHDOG_DEPS, 'pathtools' ),
-    os.path.join( DIR_OF_THIRD_PARTY, 'waitress' ) ]
-sys.path.append( os.path.join( DIR_OF_THIRD_PARTY, 'jedi_deps', 'numpydoc' ) )
+sys.path.insert( 0, os.path.dirname( os.path.abspath( __file__ ) ) )
+from server_utils import SetUpPythonPath
+SetUpPythonPath()
 
 import atexit
+import sys
 import logging
 import json
 import argparse
 import signal
+import os
 import base64
 
 from ycmd import extra_conf_store, user_options_store, utils
@@ -152,8 +137,7 @@ def SetupOptions( options_file ):
 
 
 def CloseStdin():
-  if sys.stdin is not None:
-    sys.stdin.close()
+  sys.stdin.close()
   os.close( 0 )
 
 
@@ -200,13 +184,9 @@ def Main():
   CloseStdin()
   handlers.wsgi_server = StoppableWSGIServer( handlers.app,
                                               host = args.host,
-                                              port = args.port )
-  if sys.stdin is not None:
-    print( f'serving on http://{ handlers.wsgi_server.server_name }:'
-           f'{ handlers.wsgi_server.server_port }' )
-  handlers.wsgi_server.serve_forever()
-  handlers.wsgi_server.server_close()
-  handlers.ServerCleanup()
+                                              port = args.port,
+                                              threads = 30 )
+  handlers.wsgi_server.Run()
 
 
 if __name__ == "__main__":

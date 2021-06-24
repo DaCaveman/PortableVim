@@ -19,7 +19,6 @@ from ycmd.completers.cpp.clang_completer import ConvertCompletionData
 from ycmd.responses import BuildDiagnosticData
 from ycmd.tests.bindings import PathToTestFile
 from ycmd.tests.test_utils import ClangOnly
-from ycmd.utils import ImportCore
 
 from hamcrest import ( assert_that,
                        contains_exactly,
@@ -27,7 +26,7 @@ from hamcrest import ( assert_that,
                        contains_string,
                        has_entries,
                        has_properties )
-ycm_core = ImportCore()
+import ycm_core
 
 
 def EmplaceBack( vector, element ):
@@ -367,8 +366,3 @@ def CppBindings_CompletionDataVector_test():
                                'menu_text': 'a'
                              } )
                            ) )
-
-
-def Dummy_test():
-  # Workaround for https://github.com/pytest-dev/pytest-rerunfailures/issues/51
-  assert True

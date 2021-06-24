@@ -116,9 +116,7 @@ endfunction
 function! RmdIsInRCode(vrb)
     let chunkline = search("^[ \t]*```[ ]*{r", "bncW")
     let docline = search("^[ \t]*```$", "bncW")
-    if chunkline == line(".")
-        return 2
-    elseif chunkline > docline
+    if chunkline > docline && chunkline != line(".")
         return 1
     else
         if a:vrb
@@ -133,7 +131,7 @@ function! RmdPreviousChunk() range
     let chunk = len(rg)
     for var in range(1, chunk)
         let curline = line(".")
-        if RmdIsInRCode(0) == 1 || RmdIsInPythonCode(0)
+        if RmdIsInRCode(0) || RmdIsInPythonCode(0)
             let i = search("^[ \t]*```[ ]*{\\(r\\|python\\)", "bnW")
             if i != 0
                 call cursor(i-1, 1)
@@ -183,10 +181,7 @@ endfunction
 
 " Send R chunk to R
 function! SendRmdChunkToR(e, m)
-    if RmdIsInRCode(0) == 2
-        call cursor(line(".") + 1, 1)
-    endif
-    if RmdIsInRCode(0) != 1
+    if RmdIsInRCode(0) == 0
         if RmdIsInPythonCode(0) == 0
             call RWarningMsg("Not inside an R code chunk.")
         else

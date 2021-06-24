@@ -19,7 +19,7 @@
 
 #include <whereami.c>
 
-namespace std {
+namespace boost {
 
 namespace filesystem {
 
@@ -29,7 +29,7 @@ void PrintTo( const fs::path &path, std::ostream *os ) {
 
 } // namespace filesystem
 
-} // namespace std
+} // namespace boost
 
 namespace YouCompleteMe {
 
@@ -103,7 +103,7 @@ std::ostream& operator<<( std::ostream& os, const fs::path *path ) {
 }
 
 
-fs::path PathToTestFile( std::string_view filepath ) {
+fs::path PathToTestFile( const std::string &filepath ) {
   int dirname_length;
   int exec_length = wai_getExecutablePath( NULL, 0, NULL );
   std::unique_ptr< char[] > executable( new char [ exec_length ] );

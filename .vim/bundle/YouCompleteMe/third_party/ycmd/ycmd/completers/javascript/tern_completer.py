@@ -17,18 +17,14 @@
 
 import logging
 import os
-import urllib.request
-import urllib.error
-import json
+import requests
 import threading
 
 from subprocess import PIPE
 from ycmd import utils, responses
 from ycmd.completers.completer import Completer
 from ycmd.completers.completer_utils import GetFileLines
-from ycmd.utils import LOGGER, ToBytes, ToUnicode
-
-HTTP_OK = 200
+from ycmd.utils import LOGGER
 
 PATH_TO_TERN_BINARY = os.path.abspath(
   os.path.join(
@@ -117,7 +113,7 @@ class TernCompleter( Completer ):
     self._server_keep_logfiles = user_options[ 'server_keep_logfiles' ]
 
     # Used to ensure that starting/stopping of the server is synchronised
-    self._server_state_mutex = threading.Lock()
+    self._server_state_mutex = threading.RLock()
 
     self._do_tern_project_check = False
 
@@ -290,9 +286,9 @@ class TernCompleter( Completer ):
 
     try:
       target = self._GetServerAddress() + '/ping'
-      with urllib.request.urlopen( target ) as response:
-        return response.code == HTTP_OK
-    except urllib.error.URLError:
+      response = requests.get( target )
+      return response.status_code == requests.codes.ok
+    except requests.ConnectionError:
       return False
 
 
@@ -324,18 +320,14 @@ class TernCompleter( Completer ):
                  if 'javascript' in file_data[ x ][ 'filetypes' ] ],
     }
     full_request.update( request )
-    try:
-      response = urllib.request.urlopen(
-        self._GetServerAddress(),
-        data = ToBytes( json.dumps( full_request ) ) )
 
-      json_response = json.loads( response.read() )
-      response.close()
-      return json_response
-    except urllib.error.HTTPError as response:
-      exception = ToUnicode( response.fp.read() )
-      response.close()
-      raise RuntimeError( exception )
+    response = requests.post( self._GetServerAddress(),
+                              json = full_request )
+
+    if response.status_code != requests.codes.ok:
+      raise RuntimeError( response.text )
+
+    return response.json()
 
 
   def _GetResponse( self, query, codepoint, request_data ):
@@ -398,89 +390,81 @@ class TernCompleter( Completer ):
 
   def _StartServer( self, request_data ):
     with self._server_state_mutex:
-      return self._StartServerNoLock( request_data )
+      if self._server_started:
+        return
 
+      self._server_started = True
 
-  def _StartServerNoLock( self, request_data ):
-    if self._server_started:
-      return
+      LOGGER.info( 'Starting Tern server...' )
 
-    self._server_started = True
+      self._SetServerProjectFileAndWorkingDirectory( request_data )
 
-    LOGGER.info( 'Starting Tern server...' )
+      self._server_port = utils.GetUnusedLocalhostPort()
 
-    self._SetServerProjectFileAndWorkingDirectory( request_data )
+      command = [ PATH_TO_NODE,
+                  PATH_TO_TERN_BINARY,
+                  '--port',
+                  str( self._server_port ),
+                  '--host',
+                  SERVER_HOST,
+                  '--persistent',
+                  '--no-port-file' ]
 
-    self._server_port = utils.GetUnusedLocalhostPort()
+      if LOGGER.isEnabledFor( logging.DEBUG ):
+        command.append( '--verbose' )
 
-    command = [ PATH_TO_NODE,
-                PATH_TO_TERN_BINARY,
-                '--port',
-                str( self._server_port ),
-                '--host',
-                SERVER_HOST,
-                '--persistent',
-                '--no-port-file' ]
+      LOGGER.debug( 'Starting tern with the following command: %s', command )
 
-    if LOGGER.isEnabledFor( logging.DEBUG ):
-      command.append( '--verbose' )
+      self._server_stdout = utils.CreateLogfile(
+          LOGFILE_FORMAT.format( port = self._server_port, std = 'stdout' ) )
 
-    LOGGER.debug( 'Starting tern with the following command: %s', command )
+      self._server_stderr = utils.CreateLogfile(
+          LOGFILE_FORMAT.format( port = self._server_port, std = 'stderr' ) )
 
-    self._server_stdout = utils.CreateLogfile(
-        LOGFILE_FORMAT.format( port = self._server_port, std = 'stdout' ) )
+      # We need to open a pipe to stdin or the Tern server is killed.
+      # See https://github.com/ternjs/tern/issues/740#issuecomment-203979749
+      # For unknown reasons, this is only needed on Windows and for Python
+      # 3.4+ on other platforms.
+      with utils.OpenForStdHandle( self._server_stdout ) as stdout:
+        with utils.OpenForStdHandle( self._server_stderr ) as stderr:
+          self._server_handle = utils.SafePopen(
+            command,
+            stdin = PIPE,
+            stdout = stdout,
+            stderr = stderr,
+            cwd = self._server_working_dir )
 
-    self._server_stderr = utils.CreateLogfile(
-        LOGFILE_FORMAT.format( port = self._server_port, std = 'stderr' ) )
+      if self._ServerIsRunning():
+        LOGGER.info( 'Tern Server started with pid %d listening on port %d',
+                     self._server_handle.pid, self._server_port )
+        LOGGER.info( 'Tern Server log files are %s and %s',
+                     self._server_stdout, self._server_stderr )
 
-    # We need to open a pipe to stdin or the Tern server is killed.
-    # See https://github.com/ternjs/tern/issues/740#issuecomment-203979749
-    # For unknown reasons, this is only needed on Windows and for Python
-    # 3.4+ on other platforms.
-    with utils.OpenForStdHandle( self._server_stdout ) as stdout:
-      with utils.OpenForStdHandle( self._server_stderr ) as stderr:
-        self._server_handle = utils.SafePopen(
-          command,
-          stdin = PIPE,
-          stdout = stdout,
-          stderr = stderr,
-          cwd = self._server_working_dir )
-
-    if self._ServerIsRunning():
-      LOGGER.info( 'Tern Server started with pid %d listening on port %d',
-                   self._server_handle.pid, self._server_port )
-      LOGGER.info( 'Tern Server log files are %s and %s',
-                   self._server_stdout, self._server_stderr )
-
-      self._do_tern_project_check = True
-    else:
-      LOGGER.warning( 'Tern server did not start successfully' )
+        self._do_tern_project_check = True
+      else:
+        LOGGER.warning( 'Tern server did not start successfully' )
 
 
   def _RestartServer( self, request_data ):
     with self._server_state_mutex:
-      self._StopServerNoLock()
-      self._StartServerNoLock( request_data )
+      self._StopServer()
+      self._StartServer( request_data )
 
 
   def _StopServer( self ):
     with self._server_state_mutex:
-      return self._StopServerNoLock()
+      if self._ServerIsRunning():
+        LOGGER.info( 'Stopping Tern server with PID %s',
+                     self._server_handle.pid )
+        self._server_handle.terminate()
+        try:
+          utils.WaitUntilProcessIsTerminated( self._server_handle,
+                                              timeout = 5 )
+          LOGGER.info( 'Tern server stopped' )
+        except RuntimeError:
+          LOGGER.exception( 'Error while stopping Tern server' )
 
-
-  def _StopServerNoLock( self ):
-    if self._ServerIsRunning():
-      LOGGER.info( 'Stopping Tern server with PID %s',
-                   self._server_handle.pid )
-      self._server_handle.terminate()
-      try:
-        utils.WaitUntilProcessIsTerminated( self._server_handle,
-                                            timeout = 5 )
-        LOGGER.info( 'Tern server stopped' )
-      except RuntimeError:
-        LOGGER.exception( 'Error while stopping Tern server' )
-
-    self._CleanUp()
+      self._CleanUp()
 
 
   def _CleanUp( self ):
@@ -522,7 +506,7 @@ class TernCompleter( Completer ):
   def _GetDoc( self, request_data ):
     # Note: we use the 'type' request because this is the best
     # way to get the name, type and doc string. The 'documentation' request
-    # doesn't return the 'name' (strangely), whereas the 'type' request returns
+    # doesn't return the 'name' (strangely), wheras the 'type' request returns
     # the same docs with extra info.
     query = {
       'type':      'type',

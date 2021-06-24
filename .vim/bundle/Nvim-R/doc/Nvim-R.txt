@@ -5,7 +5,7 @@
 Authors: Jakson A. Aquino   <jalvesaq@gmail.com>
          Jose Claudio Faria <joseclaudio.faria@gmail.com>
 
-Version: 0.9.16
+Version: 0.9.15.1
 For Neovim >= 0.4.3 and Vim >= 8.1.1705
 
  1. Overview                                    |Nvim-R-overview|
@@ -128,8 +128,10 @@ Main dependencies:~
        include "nvimcom" among the packages to be loaded (see
        |nvimcom-not-loaded|).
 
-     - On Windows, you have to install Rtools40 to be able to build the
-       package: https://cran.r-project.org/bin/windows/Rtools/
+     - On Windows, you have to install Rtools to be able to build the package:
+       https://cran.r-project.org/bin/windows/Rtools/
+       You may also have to set the `PATH` environment variable in your
+       |vimrc| (see |Rtools-path|).
 
 
 Additional dependencies for editing Rnoweb documents:~
@@ -163,13 +165,12 @@ Additional suggestions for Unix (Linux, OS X, Cygwin, etc.):~
 
    Tmux >= 3.0:  http://tmux.sourceforge.net
 		 Tmux is required only if you want to run R in an external
-		 terminal emulator (see |R_external_term|).
+		 terminal emulator (see |R_in_buffer|).
 
    colorout:     https://github.com/jalvesaq/colorout/releases
                  Colorizes the R output in terminal emulators.
-		 (Mostly useful if running R in an external terminal emulator.
-		 See |R_external_term|). You should put in your Rprofile:
-		 `library(colorout)`
+		 (Not necessary if using Neovim with |R_in_buffer| = 1)
+		 You should put in your Rprofile: `library(colorout)`
 
 You may want to improve the configuration of your |vimrc| for a better use of
 the plugin. Please, see |Nvim-R-quick-setup| for some suggestions of
@@ -239,9 +240,7 @@ Finally, run the command `:RDebugInfo` after <LocalLeader>rf and check the
 path where nvimcom was installed.
 
 On Windows, nvimcom compilation will fail if your `.Rprofile` outputs anything
-during R Startup. It will also fail with a message about `--slave` not being a
-`gcc` option if either `make.exe` or `gcc.exe` from RTools40 are not the first
-ones found in your systems's `PATH` (see |R_path| and |Rtools-path|).
+during R Startup.
 
 
 ------------------------------------------------------------------------------
@@ -249,7 +248,7 @@ ones found in your systems's `PATH` (see |R_path| and |Rtools-path|).
 
 The plugin should work without the need of any configuration right after
 installed, but if you do not like how the plugin works, you could look at the
-section |Nvim-R-options| to see if there is an option that could make you
+section  |Nvim-R-options| to see if there is an option that could make you
 happier.
 
 You can also install additional plugins to get more useful functionality to
@@ -273,6 +272,21 @@ If you use RMarkdown to write academic papers and Zotero for reference
 management, you may want to try zotcite: https://github.com/jalvesaq/zotcite
 
 
+Auto omni completion~
+
+Nvim-R provides omni completion for R code, but it does not offer suggestions
+of completion while you type. Auto completion might slowdown R if its
+workspace has too many objects, data.frames with too many columns or lists
+with too many elements (see |R_ls_env_tol|). Anyway, if you want to try auto
+completion, you should install an additional plugin for this, for example:
+
+   https://github.com/yami-beta/asyncomplete-omni.vim
+
+or `coc-omni` for
+
+   https://github.com/neoclide/coc.nvim
+
+
 Other plugins~
 
 You may be interested in installing additional general plugins such as
@@ -285,7 +299,7 @@ customization.
 4. Use~
 
 By default, Nvim-R will run R in a built-in terminal emulator, but you can
-change this behavior (see |R_external_term|).
+change this behavior (see |R_in_buffer|).
 
 
 4.1. Key bindings~
@@ -400,7 +414,7 @@ Command
   . Search forward (SyncTeX)                           \gp
   . Go to LaTeX (SyncTeX)                              \gt
   --------------------------------------------------------
-  . Debug (function)                                   \bg
+  . Debug (function)                                   \db
   . Undebug (function)                                 \ud
   --------------------------------------------------------
   . Build tags file (cur dir)                  :RBuildTags
@@ -557,7 +571,7 @@ You can source all .R files in a directory with the Normal mode command
 ------------------------------------------------------------------------------
 								     *Rinsert*
 								     *Rformat*
-The command `:Rinsert` <cmd> inserts one or more lines with the output of the
+The command  `:Rinsert` <cmd>  inserts one or more lines with the output of the
 R command sent to R. By using this command we can avoid the need of copying
 and pasting the output R from its console to Vim. For example, to insert
 the output of `dput(levels(var))`, where `var` is a factor vector, we could do
@@ -627,13 +641,11 @@ highlighted only if their libraries are loaded by R (but see
 Note: If you have too many loaded packages Vim may be unable to load the
 list of functions for syntax highlight.
 
-Vim can automatically complete the names of R objects both as you type them
-and when CTRL-X CTRL-O is pressed in insert mode (to disable these features,
-see |R_auto_omni| and |R_set_omnifunc|; see also |omni-completion| for
-details). Omni completion shows in a pop up menu the name of the object, its
-class and its environment (most frequently, its package name). If the object
-is a function, the plugin also shows the function arguments in a attached
-float window.
+Vim can automatically complete the names of R objects when CTRL-X CTRL-O is
+pressed in insert mode (see |omni-completion| for details). Omni completion
+shows in a pop up menu the name of the object, its class and its environment
+(most frequently, its package name). If the object is a function, the plugin
+also shows the function arguments in a attached float  window.
 
 If a data.frame is found, while building the list of objects, the columns in
 the data.frame are added to the list but they are shown in the menu only after
@@ -641,7 +653,12 @@ you have inserted the '$' symbol after the data.frame name.
 
 Only the names of objects in .GlobalEnv and in loaded libraries are completed.
 If R is not running, only objects of libraries listed in |R_start_libs| will
+<<<<<<< HEAD
 have their names completed.
+=======
+have their names completed. The omni completion menu will be truncated if the
+buffer being transmitted becomes too big (see |R_omni_size|).
+>>>>>>> 87864f517842256d5ce67e84279739fb5d4a430f
 
 Vim uses one file to store the names of .GlobalEnv objects and a list of files
 for all other objects. The .GlobalEnv list is stored in the `$NVIMR_TMPDIR`
@@ -943,6 +960,7 @@ of
 |R_objbr_opendf|      Display data.frames open in the Object Browser
 |R_objbr_openlist|    Display lists open in the Object Browser
 |R_objbr_allnames|    Display hidden objects in the Object Browser
+|R_objbr_labelerr|    Show error if "label" attribute is invalid
 |R_nvimpager|         Use Vim to see R documentation
 |R_open_example|      Use Vim to display R examples
 |R_editor_w|          Minimum width of R script buffer
@@ -969,7 +987,6 @@ of
 |R_paragraph_begin|   Send paragraph from its beginning
 |R_parenblock|        Send lines until closing parenthesis
 |R_bracketed_paste|   Bracket R code in special escape sequences
-|R_clear_console|     Send <C-L> to clear R's console
 |R_source_args|       Arguments to R `source()` function
 |R_commented_lines|   Include commented lines in code sent to `source()`
 |R_latexcmd|          Command to run on .tex files
@@ -984,6 +1001,7 @@ of
 |R_openhtml|          Open HTML after processing either Rrst or Rmd
 |R_strict_rst|        Code style for generated rst files
 |R_insert_mode_cmds|  Allow R commands in insert mode
+|R_allnames|          Show names which begin with a dot
 |R_rmhidden|          Remove hidden objects from R workspace
 |R_source|            Source additional scripts
 |R_non_r_compl|       Bibliography completion
@@ -997,8 +1015,8 @@ of
 |R_disable_cmds|      List of commands to be disabled
 |R_tmpdir|            Where temporary files are created
 |R_compldir|          Where lists for omni completion are stored
-|R_set_omnifunc|      Should Nvim-R set the 'omnifunc'?
-|R_auto_omni|         List of files with auto omni completion enabled
+|R_omni_size|         Maximum size of buffer during omni completion
+|R_omni_tmp_file|     Save omni buffer in temporary file
 |R_remote_tmpdir|     Mount point of remote temporary directory
 |R_nvimcom_home|      Mount point of remote R library
 |Nvim-R-df-view|      Options for visualizing a data.frame or matrix
@@ -1025,6 +1043,14 @@ even if Vim is already started, put in your |vimrc|:
 							 *R-built-in-terminal*
 6.2. R in Vim/Neovim built-in terminal~
 							       *R_esc_term*
+							       *R_close_term*
+							       *R_hl_term*
+							       *R_OutDec*
+							       *R_setwidth*
+							       *R_buffer_opts*
+							       *R_in_buffer*
+6.1. R in Vim/Neovim buffer~
+
 By default, R runs in a Vim/Neovim buffer created with the command |:term|,
 and the <Esc> key is mapped to stop the Terminal mode and go to Normal mode.
 In Terminal mode, What you type is passed directly to R while in Normal mode
@@ -1041,7 +1067,6 @@ Normal mode.
 Nvim-R sets the option "editor" to a function that makes the object to be
 edited in a new tab when `R_esc_term` = 1 (the default value).
 
-							       *R_close_term*
 Neovim does not close its built-in terminal emulator when the application
 running in it quits, but Nvim-R does close it for you. If you rather prefer
 that the terminal remains open after R quits, put in your |vimrc|:
@@ -1055,11 +1080,19 @@ send a command to it, and (2) when we send a command to R, we want to see its
 output, Nvim-R will move the cursor to the last line of R Console before
 sending a command to it, forcing the auto scrolling of the terminal.
 
+<<<<<<< HEAD
+If you are using Neovim < 0.4.0, Nvim-R will enter the R Console to be able to
+move the cursor to its last line. This will trigger an auto command that
+relies on the cursor moving to the terminal window. If you have defined such
+auto command, you will may want to put the line below in your |init.vim| to
+disable the auto scrolling of the terminal:
+=======
 								   *R_hl_term*
 If you are using Neovim, Nvim-R will move the cursor to the end of R Console's
 buffer before sending a command to force the scrolling R output, but you can
 put the line below in your |init.vim| to disable the auto scrolling of the
 terminal:
+>>>>>>> 87864f517842256d5ce67e84279739fb5d4a430f
 >
    let R_auto_scroll = 0
 <
@@ -1074,7 +1107,6 @@ should set the value of R_hl_term in your |vimrc|. Example:
 >
    let R_hl_term = 0
 <
-								    *R_OutDec*
 Right after starting R, Nvim-R will try to detect if either the value of R's
 `OutDec` option is `","` or the current R script sets the `OutDec` option. If
 you are using Neovim to syntax highlight R's output and it is not correctly
@@ -1083,7 +1115,6 @@ should put in your |vimrc|:
 >
    let R_OutDec = ','
 <
-								  *R_setwidth*
 On Unix systems, BEFORE sending a command to R Console, if the terminal width
 has changed, Vim/Neovim will send to nvimcom the command `options(width=X)`,
 where X is the new terminal width. You can set the value of R_setwidth to 0 to
@@ -1109,7 +1140,6 @@ it has the disadvantage of setting it only after the command is executed. That
 is, the width will be outdated for the first command executed after a change
 in the number of columns of the R Console window.
 
-							       *R_buffer_opts*
 Nvim-R sets the option 'winfixwidth' in the window where R runs. This prevents
 the window of being automatically resized in some circumstances. It also sets
 the option 'nobuflisted'. You can set the value of `R_buffer_opts` to define
@@ -1152,7 +1182,7 @@ Tips:
 If you do not want to run R in Vim/Neovim's built in terminal emulator, you
 have to install Tmux >= 2.0, and then put in your |vimrc|:
 >
-   let R_external_term = 1
+   let R_in_buffer = 0
 <
 Then, R will start in an external terminal emulator (useful if you use two
 monitors and want Vim/Neovim and R separate from each other), and Tmux will be
@@ -1160,21 +1190,17 @@ used to send commands from Vim/Neovim to R.
 
 
 ------------------------------------------------------------------------------
-							     *R_external_term*
+								      *R_term*
+								  *R_term_cmd*
 							       *R_silent_term*
 6.3. Terminal emulator (Linux/Unix only)~
 
 Note: The options of this section are ignored on Mac OS X, where the command
 `open` is called to run the default application used to run shell scripts.
 
-R will run in Vim/Neovim's built-in terminal emulator, unless you set the
-value of `R_external_term`, which can be a numeric value (either `0` or `1`),
-the name of the terminal emulator (see list below) or the complete command to
-run the terminal emulator. On Windows, the only valid value is `1`, which will
-make Nvim-R to run `Rgui.exe`, and not really a terminal emulator.
-
-On Linux, the complete command for running the terminal is predefined for the
-following options:
+If |R_in_buffer| = 0 and the X Window System is running and Tmux is installed,
+then R will run in an external terminal emulator. The plugin uses the first
+terminal emulator that it finds in the following list:
 
     1. gnome-terminal,
     2. konsole,
@@ -1186,22 +1212,18 @@ following options:
     8. lxterminal
     9. xterm.
 
-The plugin runs the first terminal emulator that it finds from the above
-list. If your favorite terminal emulator is not selected, you may define it in
-your |vimrc|. Below are some examples of how to set the value of
-`R_external_term`:
+If Vim does not select your favorite terminal emulator, you may define it in
+your |vimrc| by setting the variable R_term, as shown below:
 >
-   let R_external_term = 1 " Run R in an external terminal (or Rgui.exe)
-   let R_external_term = 'xterm' " Run R in in xterm
+   let R_term = 'xterm'
 <
 If your terminal emulator is not listed above, or if you are not satisfied
 with the way your terminal emulator is called by the plugin, you may define in
-your |vimrc| the variable `R_external_term` as the complete command to run the
-terminal. Examples:
+your |vimrc| the variable R_term_cmd, as in the examples below:
 >
-   let R_external_term = 'xterm -title R -e'
-   let R_external_term = 'tilix -a session-add-right -e'
-   let R_external_term = 'xfce4-terminal --icon=/path/to/icons/R.png --title=R -x'
+   let R_term_cmd = 'xterm -title R -e'
+   let R_term_cmd = 'tilix -a session-add-right -e'
+   let R_term_cmd = 'xfce4-terminal --icon=/path/to/icons/R.png --title=R -x'
 <
 Please, look at the manual of your terminal emulator to know how to call it.
 The last argument must be the one which precedes the command to be executed.
@@ -1225,7 +1247,7 @@ If R cannot find either `make` or `gcc` while trying to compile nvimcom, you
 should add their directories to the beginning of the `PATH` environment
 variable in your |vimrc|:
 >
-   let $PATH = "C:\\rtools40\\mingw64\\bin;C:\\rtools40\\usr\\bin;" . $PATH
+   let $PATH = "c:\\rtools40\\usr\\bin;c:\\rtools40\\mingw64\\bin;" . $PATH
 <
 By default, Nvim-R will save the positions of R Console and Vim windows
 when you quit R with the <LocalLeader>rq command, and it will restore the
@@ -1342,7 +1364,8 @@ control the behavior of the Object Browser:
 >
    let R_objbr_opendf = 1    " Show data.frames elements
    let R_objbr_openlist = 0  " Show lists elements
-   let R_objbr_allnames = 0  " Show hidden objects
+   let R_objbr_allnames = 0  " Show .GlobalEnv hidden objects
+   let R_objbr_labelerr = 1  " Warn if label is not a valid text
 <
 Objects whose names start with a "." are hidden by default. If you want them
 displayed in the Object Browser, set the value of `R_objbr_allnames` to `1`.
@@ -1354,6 +1377,10 @@ only if it is explicitly opened. The options `R_objbr_opendf` and
 respectively, `data.frames` and `lists`. The options are ignored for
 `data.frames` and `lists` of libraries which are always started closed.
 
+If an object R's workspace has the attribute `"label"`, it is displayed in
+Vim's Object Browser. If the `"label"` attribute is not of class
+`"character"`, and if  `R_objbr_labelerr` is `1`, an error message is printed
+in the Object Browser.
 
 
 ------------------------------------------------------------------------------
@@ -1390,13 +1417,13 @@ document.
 
 The valid values of `R_nvimpager` are:
 
+   "tab"       : Show the help document in a new tab. If there is already a
+                 tab with an R help document tab, use it.
+                 This is the default if R_in_buffer = 0.
    "vertical"  : Split the window vertically if the editor width is large
                  enough; otherwise, split the window horizontally and attempt
                  to set the window height to at least 20 lines.
-                 This is the default.
-   "tab"       : Show the help document in a new tab. If there is already a
-                 tab with an R help document tab, use it.
-                 This is the default if `R_external_term` = 1.
+                 This is the default if R_in_buffer = 1.
    "horizontal": Split the window horizontally.
    "tabnew"    : Show the help document in a new tab.
    "no"        : Do not show R documentation in Vim.
@@ -1426,21 +1453,14 @@ Vim will run the first R executable in the path. You can set an alternative
 path to R in your |vimrc| as in the examples:
 >
    let R_path = '/path/to/my/preferred/R/version/bin'
-   let R_path = "C:\\Program Files\\R\\R-4.0.1\\bin\\x64"
+   let R_path = "C:\\Program Files\\R\\R-3.3.1\\bin\\i386"
 <
 On Windows, Vim will try to find the R install path in the Windows Registry.
 
 You can set the path to a different R version for specific R scripts in your
 |vimrc|. Example:
 >
-   autocmd BufReadPre ~/old* let R_path='~/app/R-4.0.0/bin'
-<
-The `R_path` variable can also be prefixed to the `PATH` environment variable.
-So, it can include more than one directory separated by a `;` on Windows or a
-`:` on other systems. This is specially important to include the path to
-RTools `bin` directories on Windows. Example:
->
-   let R_path = 'C:\rtools40\mingw64\bin;C:\rtools40\usr\bin;C:\Program Files\R\R-4.0.1\bin\x64'
+   autocmd BufReadPre ~/old* let R_path='~/app/R-2.8.1/bin'
 <
 By default the value of `R_app` is `"R"` on Unix systems (such as Linux and
 Mac OS X). On Windows, it is `Rterm.exe` if R is going to run in a Neovim
@@ -1532,7 +1552,7 @@ you prefer these functions more quickly highlighted, change the value of
    let R_hi_fun_globenv = 2 " Highlight immediately
 <
 If the value of `R_hi_fun_globenv` is 0, it is automatically increased to 1 if
-you trigger omni completion.
+you either trigger omni completion or open the Object Browser.
 
 Functions from environments in the search path are highlighted as functions
 from packages, but in Neovim (not in Vim) you can set a different highlight
@@ -1673,13 +1693,13 @@ window.
 If you are on Mac OS X and want to use the R.app graphical application, put in
 your |vimrc|:
 >
-   let R_external_term = 1
+   let R_in_buffer = 0
    let R_applescript = 1
 <
 If you want to run RStudio instead of R set in your |vimrc| the value of
 `RStudio_cmd` to the complete path of the RStudio_cmd binary. Example:
 >
-   let R_external_term = 1
+   let R_in_buffer = 0
    let RStudio_cmd = 'C:\Program Files\RStudio\bin\rstudio'
 <
 Note: You must manually run a successful comand in RStudio Console before
@@ -1710,7 +1730,6 @@ the plugin after <LocalLeader>rg if you put the following line in your
 							   *R_paragraph_begin*
 							   *R_parenblock*
 							   *R_bracketed_paste*
-							   *R_clear_console*
 6.17. Control how paragraphs and lines are sent~
 
 By default, when you press <LocalLeader>pp Nvim-R sends all contiguous lines to
@@ -1733,13 +1752,6 @@ useful when you are using a version of R which is compiled against readline
 7.0+ or when rice console is used. To enable it, put in your |vimrc|:
 >
    let R_bracketed_paste = 1
-<
-Some versions of R's console interpret <C-L> as a command to clear the console
-while others have no command to clear the console. You should set the value of
-`R_clear_console`  as `0` if you see `^L` printed in the R's console after
-<LocalLeader>rm:
->
-   let R_clear_console = 0
 <
 
 ------------------------------------------------------------------------------
@@ -1822,7 +1834,7 @@ You do not need to set `R_cite_pattern` if you have already set the value of
 When rendering an Rmd file, the code can be evaluated (and saved) in a
 specified environment.  The default value is `.GlobalEnv` which makes the
 objects stored in the Rmd file available on the R console.  If you do not want
-the objects stored in the Rmd file to be available in the global environment,
+the  objects stored in the Rmd file to be available in the global environment,
 you can set
 >
     let R_rmd_environment = 'new.env()'
@@ -1871,8 +1883,6 @@ the audible bell only for R by putting in your `~/.inputrc`:
        set bell-style audible
    $endif
 <
-Note: You can't control the bell on Windows; it is hardcoded to run in Rterm
-and to not run in Rgui.
 
 ------------------------------------------------------------------------------
 							   *R_pdfviewer*
@@ -1968,9 +1978,15 @@ See also: |Nvim-R-localleader|.
 
 
 ------------------------------------------------------------------------------
+								  *R_allnames*
 								  *R_rmhidden*
 6.26. Show/remove hidden objects~
 
+Hidden objects are not included in the list of objects for omni completion. If
+you prefer to include them, put in your |vimrc|:
+>
+   let g:R_allnames = 1
+<
 Hidden objects are removed from R workspace when you do <LocalLeader>rm. If
 you prefer to remove only visible objects, put in your |vimrc|:
 >
@@ -2074,11 +2090,11 @@ from vim-pandoc or LaTeX-Box
 
 If you want a different function for completion of non R code, you should not
 set the value 'omnifunc' in your |vimrc| because you would lose the completion
-of R objects. It is better to use an |autocmd| to set the value of the buffer
+of R objects. It is better to use an |autocmd| to set the value of buffer the
 variable `b:rplugin_non_r_omnifunc`. Examples:
 >
    autocmd FileType rnoweb let b:rplugin_non_r_omnifunc = "g:LatexBox_Complete"
-   autocmd FileType rmd let b:rplugin_non_r_omnifunc = "pandoc#completion#Complete"
+   autocmd FileType rmd let b:rplugin_non_r_omnifunc = "g:omnifunc=pandoc#completion#Complete"
 <
 Note: On Windows, Nvim-R's bibliographic completion works only with ascii letters.
 
@@ -2153,7 +2169,7 @@ script `~/bin/after_R_start` similar to the following:
 <
 Then, make the script executable, and put in your |vimrc|:
 >
-   let R_external_term = 1
+   let R_in_buffer = 0
    let R_after_start = ['!after_R_start']
 <
 Similarly, on Mac OS X, the script below (developed by songcai) will bring the
@@ -2186,15 +2202,10 @@ is open, set the value of `R_after_ob_open` as a list of commands. Example:
 6.33 Support for debugging functions~
 
 Put the line below in your |vimrc| if do not want that the cursor jumps to the
-line being debugged (when `browser()` is run). Highlighting of the line being
+line being debugged when by `browser()`. Highlighting of the line being
 debugged will also be disabled.
 >
    let R_debug = 0
-<
-Nvim-R puts the cursor in the R Console when the debugging starts. If you do
-not want this, put in your |vimrc|:
->
-   let R_dbg_jump = 0
 <
 
 ------------------------------------------------------------------------------
@@ -2237,37 +2248,30 @@ want to know what they are, while editing an R file, do in Normal mode:
 <
 
 ------------------------------------------------------------------------------
-								 *R_auto_omni*
-							      *R_set_omnifunc*
-6.36 Omni completion~
-
-Nvim-R sets the 'omnifunc' option to its built-in omni completion function
-(`CompleteR`), but if you prefer to use another function or system (such as
-a language server) for omni completion, set in your |vimrc| the value of
-`R_set_omnifunc` as a list including only the file types that must have
-`CompleteR` as the function for omni completion. Example with the default
-value:
->
-   let R_set_omnifunc = ["r",  "rmd", "rnoweb", "rhelp", "rrst"]
-<
-Similarly, you can define what files will get Nvim-R's auto omni completion:
->
-   let R_auto_omni = ["r",  "rmd", "rnoweb", "rhelp", "rrst"]
-<
-You should use empty lists if you do not want to use Nvim-R's omni completion
-in any file type:
->
-   let R_set_omnifunc = []
-   let R_auto_omni = []
-<
-Automatic omni completion does not include results from previously defined
-non-R function, such as `htmlcomplete#CompleteTags` when editing Rmd files.
-You should trigger these functions manually with CTRL-X CTRL-O.
+								 *R_omni_size*
+							     *R_omni_tmp_file*
+6.36 Number of results in omni completion~
 
 Nvim-R receives the list of objects for omni completion from the nclientserver
-job running in the background. If the list is too big to be transmitted
-through nclientserver's stdout in a single chunk of data, the completion is
-aborted.
+job running in the background. If the list is not too big, it is transmitted
+through nclientserver's stdout; otherwise, it is transmitted through a
+temporary file. The default size limit is 7600 bytes in Neovim running on Mac
+OS X and 65000 bytes on other systems. Higher values may cause errors during
+completion (malformed |Dictionary| due to unmatched single quotes, missing
+colons, etc.). If you see such bugs during omni completion you should choose a
+value lower than the default, but if you believe that your system support a
+higher you can increase it by setting the value of `R_omni_size` in your
+|vimrc|, as in the example:
+>
+   let R_omni_size = 36000
+<
+If saving the list in a temporary file is too slow for you --- for instance,
+if you are using a plugin to run omni completion automatically --- you can put
+the following line in your |vimrc|:
+>
+   R_omni_tmp_file = 0
+<
+Then no temporary file will be used, but big lists will be truncated.
 
 
 ------------------------------------------------------------------------------
@@ -2309,7 +2313,7 @@ in your |vimrc|. Valid values are `"\t"`, `";"` and `","`. Example:
    let R_csv_delim = ','
 <
 There is also the option of configuring Nvim-R to run an R command to
-display the data. Examples:
+display the data. Example:
 >
    let R_df_viewer = "relimp::showData(%s, font = 'Courier 14')"
 <
@@ -2321,10 +2325,10 @@ name of the object under the cursor.
 							      *Nvim-R-SyncTeX*
 6.39 SyncTeX support~
 
-SyncTeX is a communication system used by some PDF viewers and by some text
-editors which allow users to jump from a specific line in the text editor to
-the corresponding line in the PDF viewer and vice-versa. Nvim-R has support
-for SyncTeX in five applications:
+SyncTeX is a set of communication systems used by some PDF viewers and by some
+text editors which allow users to jump from a specific line in the text editor
+to the corresponding line in the PDF viewer and vice-versa. The Nvim-R
+has support for the SyncTeX systems of five applications:
 
    Linux:   Zathura, Evince and Okular
    OS X:    Skim
@@ -2337,7 +2341,7 @@ To completely disable SyncTeX support, put in your |vimrc|:
 >
    let R_synctex = 0
 <
-You do not have to do anything special in your Rnoweb document, if you are
+You do not have to do anything special in your Rnoweb document if you are
 using the knitr package, and are editing single file Rnoweb documents.
 Otherwise, keep reading...
 
@@ -2567,7 +2571,12 @@ could write custom key bindings in your |vimrc|, as in the examples below:
    nmap <silent> <LocalLeader>rk :call RAction("levels")<CR>
    nmap <silent> <LocalLeader>t :call RAction("tail")<CR>
    nmap <silent> <LocalLeader>H :call RAction("head")<CR>
+   nmap <silent> <LocalLeader>h :call RAction("head", "@,48-57,_,.")<CR>
 <
+The second, and optional, argument that can be passed to RAction is the value
+of 'iskeyword' that will be used to get the word under cursor (see the last
+example above).
+
 If you want an action over an selection, then the second argument must be the
 string `"v"`:
 >
@@ -2612,8 +2621,16 @@ http://www.r-project.org/Licenses/
 								 *Nvim-R-tips*
 9. FAQ and tips~
 
-9.1. How to quit R automatically?~
+9.1. How to start and quit R automatically?~
 
+If you want that R is started automatically when you start editing an R
+script, you should create in |vimrc| auto commands for each R file type that
+you usually edit. However, you should try to start R only if it is not already
+started. Examples for R and RMarkdown:
+>
+   autocmd FileType r if string(g:SendCmdToR) == "function('SendCmdToR_fake')" | call StartR("R") | endif
+   autocmd FileType rmd if string(g:SendCmdToR) == "function('SendCmdToR_fake')" | call StartR("R") | endif
+<
 And if you want to quit automatically when quiting Vim, put in your |vimrc|
 (replace `"nosave"` with `"save"` if you want to save R's workspace):
 >
@@ -2921,7 +2938,7 @@ document from the beginning.
 								 *rout_colors*
 9.17. Syntax highlight of .Rout files~
 
-You can set both foreground and background colors of R output in your |vimrc|.
+You can set the both foreground background colors of R output in your |vimrc|.
 The example below is for either a gui version of Vim or a terminal
 interface of Neovim with 'termguicolors' (see |true-color|):
 >
@@ -3129,7 +3146,7 @@ goal (tested on April, 2017).
             let R_compldir = '/home/locallogin/.remoteR/NvimR_cache'
             let R_tmpdir = '/home/locallogin/.remoteR/NvimR_cache/tmp'
             let R_remote_tmpdir = '/home/remotelogin/.cache/NvimR_cache/tmp'
-            let R_nvimcom_home = '/home/locallogin/.remoteR/library/nvimcom'
+            let R_nvimcom_home = '/home/locallogin/.remoteR/R_library/nvimcom'
         endif
 <
       - Mount the remote directories:
@@ -3141,38 +3158,37 @@ goal (tested on April, 2017).
 
 ------------------------------------------------------------------------------
 						     *Nvim-R-df-view-mappings*
-
+                                                      
 9.21 Create custom mappings for viewing data.frames or matrices~
 
 Using the method described in |Nvim-R-key-bindings|, you can customize how
 data.frames or matrices are viewed by passing a string of optional arguments
 to `RAction`, starting with a comma. The accepted arguments are:
 
-   - `howto` which should be a string like `"vsplit"` or `"above 10split"`,
+   - `location` which should be a string like `"vsplit"` or `"above 10split"`,
      and determines where the data is opened (see |opening-window|).
 
    - `nrows` which is the number of rows of the data to open.
 
 Examples:
 >
-   nmap <silent> <LocalLeader>vl :call RAction("viewobj", ", howto='aboveleft vsp'")<CR>
-   nmap <silent> <LocalLeader>vt :call RAction("viewobj", ", howto='topleft 11sp', nrows=10")<CR>
+   nmap <silent> <LocalLeader>vl :call RAction("viewdf", ", location='aboveleft vsp'")<CR>
+   nmap <silent> <LocalLeader>vt :call RAction("viewdf", ", location='topleft 11sp', nrows=10")<CR>
 <
 
 ==============================================================================
 								 *Nvim-R-news*
 10. News~
 
-0.9.16 (2021-04-29)
+0.9.15.1 (2021-04-22)
 
  * Minor bug fixes.
- * New options: R_set_omnifunc, R_auto_omni.
- * Option R_path might be a list of directories.
+ * New options: R_omni_size and R_omni_tmp_file.
 
 0.9.15 (2021-04-14)
 
  * Delete options R_ls_env_tol, R_objbr_labelerr, R_show_arg_help.
- * New options: R_clear_console, R_debug, R_auto_start, R_dbg_jump.
+ * New options: R_clear_console, R_debug, R_auto_start.
  * Replace options R_in_buffer, R_term and R_term_cmd with a single option:
    R_external_term.
  * Make R_rmdchunk more flexible.

@@ -21,8 +21,7 @@ from hamcrest import ( assert_that,
                        empty,
                        equal_to,
                        has_entries,
-                       has_entry,
-                       matches_regexp )
+                       has_entry )
 from unittest.mock import patch
 from pprint import pformat
 import os
@@ -30,11 +29,16 @@ import pytest
 import requests
 
 from ycmd import handlers
-from ycmd.tests.rust import PathToTestFile, SharedYcmd
+from ycmd.completers.language_server.language_server_completer import (
+    ResponseFailedException
+)
+from ycmd.tests.rust import ( IsolatedYcmd,
+                              PathToTestFile,
+                              SharedYcmd,
+                              StartRustCompleterServerInDirectory )
 from ycmd.tests.test_utils import ( BuildRequest,
                                     ChunkMatcher,
                                     ErrorMatcher,
-                                    ExpectedFailure,
                                     LocationMatcher,
                                     WithRetry )
 from ycmd.utils import ReadFile
@@ -78,11 +82,19 @@ def RunTest( app, test, contents = None ):
     expect_errors = True
   )
 
-  print( f'completer response: { pformat( response.json ) }' )
+  print( 'completer response: {}'.format( pformat( response.json ) ) )
 
   assert_that( response.status_code,
                equal_to( test[ 'expect' ][ 'response' ] ) )
   assert_that( response.json, test[ 'expect' ][ 'data' ] )
+
+  if test.get( 'run_resolve_fixit_test', False ):
+    fixit = response.json[ 'fixits' ][ 0 ]
+    response = app.post_json(
+      '/resolve_fixit',
+      CombineRequest( test[ 'request' ], { 'fixit': fixit } ) ).json
+    assert_that( response, has_entries( {
+      'fixits': contains_exactly( fixit ) } ) )
 
 
 @SharedYcmd
@@ -90,18 +102,16 @@ def Subcommands_DefinedSubcommands_test( app ):
   subcommands_data = BuildRequest( completer_target = 'rust' )
 
   assert_that( app.post_json( '/defined_subcommands', subcommands_data ).json,
-               contains_inanyorder( 'FixIt',
+               contains_inanyorder( 'ExecuteCommand',
+                                    'FixIt',
                                     'Format',
                                     'GetDoc',
                                     'GetType',
                                     'GoTo',
                                     'GoToDeclaration',
                                     'GoToDefinition',
-                                    'GoToDocumentOutline',
                                     'GoToImplementation',
                                     'GoToReferences',
-                                    'GoToSymbol',
-                                    'GoToType',
                                     'RefactorRename',
                                     'RestartServer' ) )
 
@@ -142,10 +152,12 @@ def Subcommands_ServerNotInitialized_test( app ):
   Test( app, 'RefactorRename', [ 'test' ] )
 
 
-@WithRetry
 @SharedYcmd
 def Subcommands_Format_WholeFile_test( app ):
-  filepath = PathToTestFile( 'common', 'src', 'main.rs' )
+  project_dir = PathToTestFile( 'common' )
+  StartRustCompleterServerInDirectory( app, project_dir )
+
+  filepath = os.path.join( project_dir, 'src', 'main.rs' )
 
   RunTest( app, {
     'description': 'Formatting is applied on the whole file',
@@ -162,21 +174,15 @@ def Subcommands_Format_WholeFile_test( app ):
       'data': has_entries( {
         'fixits': contains_exactly( has_entries( {
           'chunks': contains_exactly(
-            ChunkMatcher( "",
-                          LocationMatcher( filepath, 17,  4 ),
-                          LocationMatcher( filepath, 17, 16 ) ),
-            ChunkMatcher( "",
-                          LocationMatcher( filepath, 18,  1 ),
-                          LocationMatcher( filepath, 19,  1 ) ),
-            ChunkMatcher( "",
-                          LocationMatcher( filepath, 19,  8 ),
-                          LocationMatcher( filepath, 20,  8 ) ),
-            ChunkMatcher( "",
-                          LocationMatcher( filepath, 20, 10 ),
-                          LocationMatcher( filepath, 20, 11 ) ),
-            ChunkMatcher( "",
-                          LocationMatcher( filepath, 20, 13 ),
-                          LocationMatcher( filepath, 21,  1 ) ),
+            ChunkMatcher( '  create_universe();\n'
+                          '  let builder = Builder {};\n'
+                          '  builder.build_\n',
+                          LocationMatcher( filepath, 12, 1 ),
+                          LocationMatcher( filepath, 15, 1 ) ),
+            ChunkMatcher( 'fn format_test() {\n'
+                          '  let a: i32 = 5;\n',
+                          LocationMatcher( filepath, 17, 1 ),
+                          LocationMatcher( filepath, 22, 1 ) ),
           )
         } ) )
       } )
@@ -184,11 +190,12 @@ def Subcommands_Format_WholeFile_test( app ):
   } )
 
 
-@ExpectedFailure( 'rangeFormat is not yet implemented',
-                  matches_regexp( '\nExpected: <200>\n     but: was <500>\n' ) )
 @SharedYcmd
 def Subcommands_Format_Range_test( app ):
-  filepath = PathToTestFile( 'common', 'src', 'main.rs' )
+  project_dir = PathToTestFile( 'common' )
+  StartRustCompleterServerInDirectory( app, project_dir )
+
+  filepath = os.path.join( project_dir, 'src', 'main.rs' )
 
   RunTest( app, {
     'description': 'Formatting is applied on some part of the file',
@@ -233,19 +240,18 @@ def Subcommands_GetDoc_NoDocumentation_test( app ):
                    'raises an error',
     'request': {
       'command': 'GetDoc',
-      'line_num': 3,
+      'line_num': 4,
       'column_num': 11,
       'filepath': PathToTestFile( 'common', 'src', 'test.rs' ),
     },
     'expect': {
       'response': requests.codes.internal_server_error,
       'data': ErrorMatcher( RuntimeError,
-                            'No documentation available.' )
+                            'No documentation available for current context.' )
     }
   } )
 
 
-@WithRetry
 @SharedYcmd
 def Subcommands_GetDoc_Function_test( app ):
   RunTest( app, {
@@ -259,9 +265,6 @@ def Subcommands_GetDoc_Function_test( app ):
     'expect': {
       'response': requests.codes.ok,
       'data': has_entry( 'detailed_info',
-                         'common::test\n'
-                         'pub fn create_universe()\n'
-                         '---\n'
                          'Be careful when using that function' ),
     }
   } )
@@ -273,7 +276,7 @@ def Subcommands_GetType_UnknownType_test( app ):
     'description': 'GetType on a unknown type raises an error',
     'request': {
       'command': 'GetType',
-      'line_num': 3,
+      'line_num': 2,
       'column_num': 4,
       'filepath': PathToTestFile( 'common', 'src', 'test.rs' ),
     },
@@ -317,7 +320,7 @@ def RunGoToTest( app, command, test ):
   if isinstance( response, list ):
     expect = {
       'response': requests.codes.ok,
-      'data': contains_inanyorder( *[
+      'data': contains_exactly( *[
         LocationMatcher(
           os.path.join( folder, location[ 0 ] ),
           location[ 1 ],
@@ -348,21 +351,6 @@ def RunGoToTest( app, command, test ):
 
 
 @pytest.mark.parametrize( 'test', [
-    # Variable
-    { 'req': ( 'main.rs', 14,  5 ), 'res': ( 'test.rs', 4, 12 ) },
-    # Type
-    { 'req': ( 'main.rs', 13, 19 ), 'res': ( 'test.rs', 4, 12 ) },
-    # Function
-    { 'req': ( 'main.rs', 12, 14 ), 'res': 'Cannot jump to location' },
-    # Keyword
-    { 'req': ( 'main.rs',  3,  2 ), 'res': 'Cannot jump to location' },
-  ] )
-@SharedYcmd
-def Subcommands_GoToType_Basic_test( app, test ):
-  RunGoToTest( app, 'GoToType', test )
-
-
-@pytest.mark.parametrize( 'test', [
     # Structure
     { 'req': ( 'main.rs',  8, 24 ), 'res': ( 'main.rs', 5, 8 ) },
     # Function
@@ -387,6 +375,9 @@ def Subcommands_GoTo_test( app, command, test ):
     # Trait
     { 'req': ( 'main.rs',  7,  7 ), 'res': [ ( 'main.rs', 8, 21 ),
                                              ( 'main.rs', 9, 21 ) ] },
+    # Implementation
+    { 'req': ( 'main.rs',  9, 15 ), 'res': [ ( 'main.rs', 8, 21 ),
+                                             ( 'main.rs', 9, 21 ) ] },
   ] )
 @WithRetry
 @SharedYcmd
@@ -400,8 +391,8 @@ def Subcommands_GoToImplementation_Failure_test( app ):
   RunGoToTest( app,
                'GoToImplementation',
                { 'req': ( 'main.rs', 11,  2 ),
-                 'res': 'Cannot jump to location',
-                 'exc': RuntimeError } )
+                 'res': 'Request failed: -32603: An unknown error occurred',
+                 'exc': ResponseFailedException } )
 
 
 @pytest.mark.parametrize( 'test', [
@@ -476,15 +467,18 @@ def Subcommands_RefactorRename_Invalid_test( app ):
   } )
 
 
-@SharedYcmd
+@IsolatedYcmd
 def Subcommands_FixIt_EmptyResponse_test( app ):
-  filepath = PathToTestFile( 'common', 'src', 'main.rs' )
+  project_dir = PathToTestFile( 'formatting' )
+  StartRustCompleterServerInDirectory( app, project_dir )
+
+  filepath = os.path.join( project_dir, 'src', 'main.rs' )
 
   RunTest( app, {
     'description': 'FixIt on a line with no codeAction returns empty response',
     'request': {
       'command': 'FixIt',
-      'line_num': 22,
+      'line_num': 1,
       'column_num': 1,
       'filepath': filepath
     },
@@ -495,16 +489,22 @@ def Subcommands_FixIt_EmptyResponse_test( app ):
   } )
 
 
-@SharedYcmd
-def Subcommands_FixIt_Basic_test( app ):
-  filepath = PathToTestFile( 'common', 'src', 'main.rs' )
+@IsolatedYcmd
+def Subcommands_FixIt_ApplySuggestion_test( app ):
+  # Similarly to textDocument/formatting, if a file has errors
+  # RLS won't respond with `rls.applySuggestions` command.
+
+  project_dir = PathToTestFile( 'formatting' )
+  StartRustCompleterServerInDirectory( app, project_dir )
+
+  filepath = os.path.join( project_dir, 'src', 'main.rs' )
 
   RunTest( app, {
     'description': 'Simple FixIt test',
     'request': {
       'command': 'FixIt',
-      'line_num': 17,
-      'column_num': 2,
+      'line_num': 8,
+      'column_num': 13,
       'filepath': filepath
     },
     'expect': {
@@ -512,16 +512,40 @@ def Subcommands_FixIt_Basic_test( app ):
       'data': has_entries( {
         'fixits': contains_exactly( has_entries( {
           'chunks': contains_exactly(
-            ChunkMatcher( 'pub(crate) ',
-                          LocationMatcher( filepath, 17, 1 ),
-                          LocationMatcher( filepath, 17, 1 ) )
+            ChunkMatcher( '_x',
+                          LocationMatcher( filepath, 8, 13 ),
+                          LocationMatcher( filepath, 8, 14 ) )
           )
         } ) )
       } )
     },
+    'run_resolve_fixit_test': True
   } )
 
 
-def Dummy_test():
-  # Workaround for https://github.com/pytest-dev/pytest-rerunfailures/issues/51
-  assert True
+@IsolatedYcmd
+def Subcommands_FixIt_DeglobImport_test( app ):
+  project_dir = PathToTestFile( 'common' )
+  StartRustCompleterServerInDirectory( app, project_dir )
+  filepath = os.path.join( project_dir, 'src', 'main.rs' )
+  RunTest( app, {
+    'description': 'Simple FixIt test',
+    'request': {
+      'command': 'FixIt',
+      'line_num': 3,
+      'column_num': 1,
+      'filepath': filepath
+    },
+    'expect': {
+      'response': requests.codes.ok,
+      'data': has_entries( {
+        'fixits': contains_exactly( has_entries( {
+          'chunks': contains_exactly(
+            ChunkMatcher( '{create_universe, Builder}',
+                          LocationMatcher( filepath, 3, 11 ),
+                          LocationMatcher( filepath, 3, 12 ) )
+          )
+        } ) )
+      } )
+    }
+  } )

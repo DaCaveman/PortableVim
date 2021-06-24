@@ -20,7 +20,6 @@ from ycmd.responses import BuildDiagnosticData
 from ycmd.tests.bindings import PathToTestFile
 from ycmd.tests.test_utils import ( ClangOnly, TemporaryTestDir,
                                     TemporaryClangProject )
-from ycmd.utils import ImportCore
 
 from hamcrest import ( assert_that,
                        contains_exactly,
@@ -29,7 +28,7 @@ from hamcrest import ( assert_that,
                        equal_to,
                        has_entries,
                        has_properties )
-ycm_core = ImportCore()
+import ycm_core
 import os
 
 
@@ -60,9 +59,7 @@ def CppBindings_IdentifierCompleter_test():
   identifiers.append( 'foo' )
   identifiers.append( 'bar' )
   identifiers.append( 'baz' )
-  identifier_completer.ClearForFileAndAddIdentifiersToDatabase( identifiers,
-                                                                'foo',
-                                                                'file' )
+  identifier_completer.AddIdentifiersToDatabase( identifiers, 'foo', 'file' )
   del identifiers
   query_fo_10 = identifier_completer.CandidatesForQueryAndType(
                                        'fo', 'foo', 10 )
@@ -365,7 +362,6 @@ def CppBindings_FixIt_test():
           } ),
         } )
       } ) ),
-      'kind': None,
     } ) ) )
 
 
@@ -488,8 +484,3 @@ def CppBindings_CompilationDatabase_test():
                                                   '-I/absolute/path',
                                                   '-Wall' )
                    } ) )
-
-
-def Dummy_test():
-  # Workaround for https://github.com/pytest-dev/pytest-rerunfailures/issues/51
-  assert True

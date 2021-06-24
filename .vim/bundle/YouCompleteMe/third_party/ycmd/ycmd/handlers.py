@@ -23,19 +23,17 @@ import time
 import traceback
 from bottle import request
 
-
+import ycm_core
 from ycmd import extra_conf_store, hmac_plugin, server_state, user_options_store
 from ycmd.responses import ( BuildExceptionResponse,
                              BuildCompletionResponse,
-                             BuildResolveCompletionResponse,
                              BuildSignatureHelpResponse,
                              BuildSignatureHelpAvailableResponse,
                              SignatureHelpAvailalability,
                              UnknownExtraConf )
 from ycmd.request_wrap import RequestWrap
 from ycmd.completers.completer_utils import FilterAndSortCandidatesWrap
-from ycmd.utils import LOGGER, StartThread, ImportCore
-ycm_core = ImportCore()
+from ycmd.utils import LOGGER, StartThread
 
 
 # num bytes for the request body buffer; request.json only works if the request
@@ -50,6 +48,7 @@ wsgi_server = None
 
 @app.post( '/event_notification' )
 def EventNotification():
+  LOGGER.info( 'Received event notification' )
   request_data = RequestWrap( request.json )
   event_name = request_data[ 'event_name' ]
   LOGGER.debug( 'Event name: %s', event_name )
@@ -70,6 +69,7 @@ def EventNotification():
 
 @app.get( '/signature_help_available' )
 def GetSignatureHelpAvailable():
+  LOGGER.info( 'Received signature help available request' )
   if request.query.subserver:
     filetype = request.query.subserver
     try:
@@ -85,6 +85,7 @@ def GetSignatureHelpAvailable():
 
 @app.post( '/run_completer_command' )
 def RunCompleterCommand():
+  LOGGER.info( 'Received command request' )
   request_data = RequestWrap( request.json )
   completer = _GetCompleterForRequestData( request_data )
 
@@ -95,6 +96,7 @@ def RunCompleterCommand():
 
 @app.post( '/resolve_fixit' )
 def ResolveFixit():
+  LOGGER.info( 'Received resolve_fixit request' )
   request_data = RequestWrap( request.json )
   completer = _GetCompleterForRequestData( request_data )
 
@@ -103,6 +105,7 @@ def ResolveFixit():
 
 @app.post( '/completions' )
 def GetCompletions():
+  LOGGER.info( 'Received completion request' )
   request_data = RequestWrap( request.json )
   do_filetype_completion = _server_state.ShouldUseFiletypeCompleter(
     request_data )
@@ -138,23 +141,9 @@ def GetCompletions():
                                errors = errors ) )
 
 
-@app.post( '/resolve_completion' )
-def ResolveCompletionItem():
-  request_data = RequestWrap( request.json )
-  completer = _GetCompleterForRequestData( request_data )
-
-  errors = None
-  completion = None
-  try:
-    completion = completer.ResolveCompletionItem( request_data )
-  except Exception as e:
-    errors = [ BuildExceptionResponse( e, traceback.format_exc() ) ]
-
-  return _JsonResponse( BuildResolveCompletionResponse( completion, errors ) )
-
-
 @app.post( '/signature_help' )
 def GetSignatureHelp():
+  LOGGER.info( 'Received signature help request' )
   request_data = RequestWrap( request.json )
 
   if not _server_state.FiletypeCompletionUsable( request_data[ 'filetypes' ],
@@ -180,6 +169,7 @@ def GetSignatureHelp():
 
 @app.post( '/filter_and_sort_candidates' )
 def FilterAndSortCandidates():
+  LOGGER.info( 'Received filter & sort request' )
   # Not using RequestWrap because no need and the requests coming in aren't like
   # the usual requests we handle.
   request_data = request.json
@@ -193,6 +183,7 @@ def FilterAndSortCandidates():
 
 @app.get( '/healthy' )
 def GetHealthy():
+  LOGGER.info( 'Received health request' )
   if request.query.subserver:
     filetype = request.query.subserver
     completer = _server_state.GetFiletypeCompleter( [ filetype ] )
@@ -202,6 +193,7 @@ def GetHealthy():
 
 @app.get( '/ready' )
 def GetReady():
+  LOGGER.info( 'Received ready request' )
   if request.query.subserver:
     filetype = request.query.subserver
     completer = _server_state.GetFiletypeCompleter( [ filetype ] )
@@ -211,12 +203,14 @@ def GetReady():
 
 @app.post( '/semantic_completion_available' )
 def FiletypeCompletionAvailable():
+  LOGGER.info( 'Received filetype completion available request' )
   return _JsonResponse( _server_state.FiletypeCompletionAvailable(
       RequestWrap( request.json )[ 'filetypes' ] ) )
 
 
 @app.post( '/defined_subcommands' )
 def DefinedSubcommands():
+  LOGGER.info( 'Received defined subcommands request' )
   completer = _GetCompleterForRequestData( RequestWrap( request.json ) )
 
   return _JsonResponse( completer.DefinedSubcommands() )
@@ -224,6 +218,7 @@ def DefinedSubcommands():
 
 @app.post( '/detailed_diagnostic' )
 def GetDetailedDiagnostic():
+  LOGGER.info( 'Received detailed diagnostic request' )
   request_data = RequestWrap( request.json )
   completer = _GetCompleterForRequestData( request_data )
 
@@ -232,6 +227,7 @@ def GetDetailedDiagnostic():
 
 @app.post( '/load_extra_conf_file' )
 def LoadExtraConfFile():
+  LOGGER.info( 'Received extra conf load request' )
   request_data = RequestWrap( request.json, validate = False )
   extra_conf_store.Load( request_data[ 'filepath' ], force = True )
 
@@ -240,6 +236,7 @@ def LoadExtraConfFile():
 
 @app.post( '/ignore_extra_conf_file' )
 def IgnoreExtraConfFile():
+  LOGGER.info( 'Received extra conf ignore request' )
   request_data = RequestWrap( request.json, validate = False )
   extra_conf_store.Disable( request_data[ 'filepath' ] )
 
@@ -248,6 +245,7 @@ def IgnoreExtraConfFile():
 
 @app.post( '/debug_info' )
 def DebugInfo():
+  LOGGER.info( 'Received debug info request' )
   request_data = RequestWrap( request.json )
 
   has_clang_support = ycm_core.HasClangSupport()
@@ -288,7 +286,9 @@ def DebugInfo():
 
 @app.post( '/shutdown' )
 def Shutdown():
+  LOGGER.info( 'Received shutdown request' )
   ServerShutdown()
+
   return _JsonResponse( True )
 
 
@@ -351,7 +351,7 @@ def _GetCompleterForRequestData( request_data ):
 def ServerShutdown():
   def Terminator():
     if wsgi_server:
-      wsgi_server.shutdown()
+      wsgi_server.Shutdown()
 
   # Use a separate thread to let the server send the response before shutting
   # down.

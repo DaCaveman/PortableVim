@@ -74,8 +74,3 @@ def FilterAndSortCandidates_Unicode_test():
 def DefinedSubcommands_RemoveStopServerSubcommand_test( subcommands_map ):
   completer = DummyCompleter( DefaultOptions() )
   assert_that( completer.DefinedSubcommands(), contains_exactly( 'Foo' ) )
-
-
-def Dummy_test():
-  # Workaround for https://github.com/pytest-dev/pytest-rerunfailures/issues/51
-  assert True

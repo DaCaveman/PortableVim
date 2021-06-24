@@ -42,21 +42,15 @@ from ycmd import extra_conf_store, handlers, user_options_store
 from ycmd.completers.completer import Completer
 from ycmd.responses import BuildCompletionData
 from ycmd.utils import ( GetCurrentDirectory,
-                         ImportCore,
                          OnMac,
                          OnWindows,
                          ToUnicode,
                          WaitUntilProcessIsTerminated )
-ycm_core = ImportCore()
+import ycm_core
 
 from unittest import skipIf
 
 TESTS_DIR = os.path.abspath( os.path.dirname( __file__ ) )
-TEST_OPTIONS = {
-  # The 'client' represented by the tests supports on-demand resolve, but the
-  # server default config doesn't for backward compatibility
-  'max_num_candidates_to_detail': 10
-}
 
 WindowsOnly = skipIf( not OnWindows(), 'Windows only' )
 ClangOnly = skipIf( not ycm_core.HasClangSupport(),
@@ -136,22 +130,12 @@ def MessageMatcher( msg ):
   return has_entry( 'message', contains_string( msg ) )
 
 
-def LocationMatcher( filepath,
-                     line_num,
-                     column_num,
-                     description=None,
-                     extra_data=None ):
-  entry = {
+def LocationMatcher( filepath, line_num, column_num ):
+  return has_entries( {
     'line_num': line_num,
     'column_num': column_num,
     'filepath': filepath
-  }
-  if description is not None:
-    entry[ 'description' ] = description
-  if extra_data is not None:
-    entry[ 'extra_data' ] = has_entries( **extra_data )
-
-  return has_entries( entry )
+  } )
 
 
 def RangeMatcher( filepath, start, end ):
@@ -192,25 +176,21 @@ def CompleterProjectDirectoryMatcher( project_directory ):
   )
 
 
-def SignatureMatcher( label, parameters, docs = None ):
-  entries = {
+def SignatureMatcher( label, parameters ):
+  return has_entries( {
     'label': equal_to( label ),
     'parameters': contains_exactly( *parameters )
-  }
-  if docs is not None:
-    entries.update( { 'documentation': docs } )
-  return has_entries( entries )
+  } )
 
 
 def SignatureAvailableMatcher( available ):
   return has_entries( { 'available': equal_to( available ) } )
 
 
-def ParameterMatcher( begin, end, docs = None ):
-  entries = { 'label': contains_exactly( begin, end ) }
-  if docs is not None:
-    entries.update( { 'documentation': docs } )
-  return has_entries( entries )
+def ParameterMatcher( begin, end ):
+  return has_entries( {
+    'label': contains_exactly( begin, end )
+  } )
 
 
 @contextlib.contextmanager
@@ -252,7 +232,6 @@ def TemporarySymlink( source, link ):
 def SetUpApp( custom_options = {} ):
   bottle.debug( True )
   options = user_options_store.DefaultOptions()
-  options.update( TEST_OPTIONS )
   options.update( custom_options )
   handlers.UpdateUserOptions( options )
   extra_conf_store.Reset()
@@ -299,8 +278,8 @@ def WaitUntilCompleterServerReady( app, filetype, timeout = 30 ):
   expiration = time.time() + timeout
   while True:
     if time.time() > expiration:
-      raise RuntimeError( f'Waited for the { filetype } subserver to be ready '
-                          f'for { timeout } seconds, aborting.' )
+      raise RuntimeError( 'Waited for the {0} subserver to be ready for '
+                          '{1} seconds, aborting.'.format( filetype, timeout ) )
 
     if app.get( '/ready', { 'subserver': filetype } ).json:
       return
@@ -310,8 +289,8 @@ def WaitUntilCompleterServerReady( app, filetype, timeout = 30 ):
 
 def MockProcessTerminationTimingOut( handle, timeout = 5 ):
   WaitUntilProcessIsTerminated( handle, timeout )
-  raise RuntimeError( f'Waited process to terminate for { timeout } seconds, '
-                      'aborting.' )
+  raise RuntimeError( 'Waited process to terminate for {0} seconds, '
+                      'aborting.'.format( timeout ) )
 
 
 def ClearCompletionsCache():
@@ -384,7 +363,8 @@ def ExpectedFailure( reason, *exception_matchers ):
         # Failed for the right reason
         pytest.skip( reason )
       else:
-        raise AssertionError( f'Test was expected to fail: { reason }' )
+        raise AssertionError( 'Test was expected to fail: {0}'.format(
+          reason ) )
     return Wrapper
 
   return decorator
@@ -403,29 +383,26 @@ def TemporaryTestDir():
     shutil.rmtree( tmp_dir )
 
 
-def WithRetry( *args, **kwargs ):
-  """Decorator to be applied to tests that retries the test over and over"""
+def WithRetry( test ):
+  """Decorator to be applied to tests that retries the test over and over
+  until it passes or |timeout| seconds have passed."""
 
-  if len( args ) == 1 and callable( args[ 0 ] ):
-    # We are the decorator
-    f = args[ 0 ]
+  if 'YCM_TEST_NO_RETRY' in os.environ:
+    return test
 
-    def ReturnDecorator( wrapper ):
-      return wrapper( f )
-  else:
-    # We need to return the decorator
-    def ReturnDecorator( wrapper ):
-      return wrapper
-
-  if os.environ.get( 'YCM_TEST_NO_RETRY' ) == 'XFAIL':
-    return ReturnDecorator( pytest.mark.xfail( strict = False ) )
-  elif os.environ.get( 'YCM_TEST_NO_RETRY' ):
-    # This is a "null" decorator
-    return ReturnDecorator( lambda f: f )
-  else:
-    opts = { 'reruns': 20, 'reruns_delay': 0.5 }
-    opts.update( kwargs )
-    return ReturnDecorator( pytest.mark.flaky( **opts ) )
+  @functools.wraps( test )
+  def wrapper( *args, **kwargs ):
+    expiry = time.time() + 30
+    while True:
+      try:
+        test( *args, **kwargs )
+        return
+      except Exception as test_exception:
+        if time.time() > expiry:
+          raise
+        print( 'Test failed, retrying: {0}'.format( str( test_exception ) ) )
+        time.sleep( 0.25 )
+  return wrapper
 
 
 @contextlib.contextmanager
@@ -453,7 +430,7 @@ def TemporaryClangProject( tmp_dir, compile_commands ):
   path = os.path.join( tmp_dir, 'compile_commands.json' )
 
   with open( path, 'w' ) as f:
-    f.write( ToUnicode( json.dumps( compile_commands, indent = 2 ) ) )
+    f.write( ToUnicode( json.dumps( compile_commands, indent=2 ) ) )
 
   try:
     yield
@@ -488,8 +465,9 @@ def PollForMessages( app, request_data, timeout = 60 ):
   expiration = time.time() + timeout
   while True:
     if time.time() > expiration:
-      raise PollForMessagesTimeoutException( 'Waited for diagnostics to be '
-        f'ready for { timeout } seconds, aborting.' )
+      raise PollForMessagesTimeoutException(
+        'Waited for diagnostics to be ready for {0} seconds, aborting.'.format(
+          timeout ) )
 
     default_args = {
       'line_num'  : 1,
@@ -500,7 +478,7 @@ def PollForMessages( app, request_data, timeout = 60 ):
 
     response = app.post_json( '/receive_messages', BuildRequest( **args ) ).json
 
-    print( f'poll response: { pformat( response ) }' )
+    print( 'poll response: {0}'.format( pformat( response ) ) )
 
     if isinstance( response, bool ):
       if not response:
@@ -509,7 +487,7 @@ def PollForMessages( app, request_data, timeout = 60 ):
       for message in response:
         yield message
     else:
-      raise AssertionError(
-        f'Message poll response was wrong type: { type( response ).__name__ }' )
+      raise AssertionError( 'Message poll response was wrong type: {0}'.format(
+        type( response ).__name__ ) )
 
     time.sleep( 0.25 )

@@ -15,10 +15,11 @@
 # You should have received a copy of the GNU General Public License
 # along with ycmd.  If not, see <http://www.gnu.org/licenses/>.
 
+import os
 import pytest
 
-from ycmd.tests.test_utils import ( ClearCompletionsCache,
-                                    IgnoreExtraConfOutsideTestsFolder,
+from ycmd.tests.test_utils import ( BuildRequest,
+                                    ClearCompletionsCache,
                                     IsolatedApp,
                                     SetUpApp,
                                     StopCompleterServer,
@@ -26,12 +27,23 @@ from ycmd.tests.test_utils import ( ClearCompletionsCache,
 shared_app = None
 
 
-@pytest.fixture( scope='module', autouse=True )
-def set_up_shared_app():
+def setup_module():
   global shared_app
   shared_app = SetUpApp()
   WaitUntilCompleterServerReady( shared_app, 'typescript' )
-  yield
+
+
+def StartGoCompleterServerInDirectory( app, directory ):
+  app.post_json( '/event_notification',
+                 BuildRequest(
+                   filepath = os.path.join( directory, 'goto.go' ),
+                   event_name = 'FileReadyToParse',
+                   filetype = 'go' ) )
+  WaitUntilCompleterServerReady( app, 'go' )
+
+
+def teardown_module():
+  global shared_app
   StopCompleterServer( shared_app, 'typescript' )
 
 
@@ -41,13 +53,14 @@ def app( request ):
   assert which == 'isolated' or which == 'shared'
   if which == 'isolated':
     with IsolatedApp( request.param[ 1 ] ) as app:
-      yield app
-      StopCompleterServer( app, 'typescript' )
+      try:
+        yield app
+      finally:
+        StopCompleterServer( app, 'go' )
   else:
     global shared_app
     ClearCompletionsCache()
-    with IgnoreExtraConfOutsideTestsFolder():
-      yield shared_app
+    yield shared_app
 
 
 """Defines a decorator to be attached to tests of this package. This decorator

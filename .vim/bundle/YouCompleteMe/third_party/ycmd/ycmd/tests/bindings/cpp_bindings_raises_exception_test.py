@@ -15,10 +15,9 @@
 # You should have received a copy of the GNU General Public License
 # along with ycmd.  If not, see <http://www.gnu.org/licenses/>.
 
-from ycmd.utils import ImportCore
 from ycmd.tests.test_utils import ClangOnly
 from hamcrest import assert_that, calling, raises
-ycm_core = ImportCore()
+import ycm_core
 
 READONLY_MESSAGE = 'can\'t set attribute'
 
@@ -121,8 +120,3 @@ def CppBindings_CompilationInfo_NoInit_test():
   assert_that( calling( ycm_core.CompilationInfoForFile ),
       raises( TypeError, 'ycm_core.CompilationInfoForFile:'
                          ' No constructor defined!' ) )
-
-
-def Dummy_test():
-  # Workaround for https://github.com/pytest-dev/pytest-rerunfailures/issues/51
-  assert True
