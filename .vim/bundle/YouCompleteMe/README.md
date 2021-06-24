@@ -302,10 +302,9 @@ The following additional language support options are available:
 - Java support: install [JDK8 (version 8 required)][jdk-install] and add
   `--java-completer` when calling `install.py`.
 
-To simply compile with everything enabled, there's a `--all` flag. You need to
-specify it manually by adding `--clangd-completer`. So, to install with all
-language features, ensure `xbuild`, `go`, `node` and `npm` tools
-are installed and in your `PATH`, then simply run:
+To simply compile with everything enabled, there's a `--all` flag. So, to
+install with all language features, ensure `xbuild`, `go`, `node` and `npm`
+tools are installed and in your `PATH`, then simply run:
 
 ```
 cd ~/.vim/bundle/YouCompleteMe
@@ -410,10 +409,9 @@ The following additional language support options are available:
 - Java support: install [JDK8 (version 8 required)][jdk-install] and add
   `--java-completer` when calling `install.py`.
 
-To simply compile with everything enabled, there's a `--all` flag. You need to
-specify it manually by adding `--clangd-completer`. So, to install with all
-language features, ensure `xbuild`, `go`, `node`, `npm` and tools
-are installed and in your `PATH`, then simply run:
+To simply compile with everything enabled, there's a `--all` flag. So, to
+install with all language features, ensure `xbuild`, `go`, `node` and `npm`
+tools are installed and in your `PATH`, then simply run:
 
 ```
 cd ~/.vim/bundle/YouCompleteMe
@@ -527,10 +525,9 @@ The following additional language support options are available:
 - Java support: install [JDK8 (version 8 required)][jdk-install] and add
   `--java-completer` when calling `install.py`.
 
-To simply compile with everything enabled, there's a `--all` flag. You need to
-specify it manually by adding `--clangd-completer`. So, to install with all
-language features, ensure `msbuild`, `go`, `node` and `npm` tools
-are installed and in your `PATH`, then simply run:
+To simply compile with everything enabled, there's a `--all` flag. So, to
+install with all language features, ensure `msbuild`, `go`, `node` and `npm`
+tools are installed and in your `PATH`, then simply run:
 
 ```
 cd %USERPROFILE%/vimfiles/bundle/YouCompleteMe
@@ -634,10 +631,9 @@ The following additional language support options are available:
 - Java support: install [JDK8 (version 8 required)][jdk-install] and add
   `--java-completer` when calling `./install.py`.
 
-To simply compile with everything enabled, there's a `--all` flag. You need to
-specify it manually by adding `--clangd-completer`. So, to install with all
-language features, ensure `xbuild`, `go`, `node`, `npm` and tools
-are installed and in your `PATH`, then simply run:
+To simply compile with everything enabled, there's a `--all` flag. So, to
+install with all language features, ensure `xbuild`, `go`, `node` and `npm`
+tools are installed and in your `PATH`, then simply run:
 
 ```
 cd ~/.vim/bundle/YouCompleteMe
