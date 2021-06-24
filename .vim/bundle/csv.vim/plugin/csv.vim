@@ -1,4 +1,5 @@
 " Plugin folklore START "{{{1
+"
 if get(g:, 'loaded_csv', 0)
     finish
 endif
