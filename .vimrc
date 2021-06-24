@@ -34,6 +34,7 @@ Plugin 'VundleVim/Vundle.vim'
 " different version somewhere else.
 " Plugin 'ascenator/L9', {'name': 'newL9'}
 "
+"
 Plugin 'ycm-core/YouCompleteMe'
 Plugin 'tmhedberg/SimpylFold'
 Plugin 'vim-scripts/indentpython.vim'
@@ -46,7 +47,7 @@ Plugin 'frazrepo/vim-rainbow'
 Plugin 'itchyny/lightline.vim'
 Plugin 'KnoP-01/krl-for-vim'
 Plugin 'KnoP-01/rapid-for-vim'
-Plugin 'jalvesaq/Nvim-R'
+"Plugin 'jalvesaq/Nvim-R'
 Plugin 'chrisbra/csv.vim'
 Plugin 'othree/html5.vim'
 Plugin 'Raimondi/delimitMate'
