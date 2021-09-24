@@ -48,7 +48,7 @@ Plugin 'itchyny/lightline.vim'
 Plugin 'KnoP-01/krl-for-vim'
 Plugin 'KnoP-01/rapid-for-vim'
 "Plugin 'jalvesaq/Nvim-R'
-Plugin 'chrisbra/csv.vim'
+"Plugin 'chrisbra/csv.vim'
 Plugin 'othree/html5.vim'
 Plugin 'Raimondi/delimitMate'
 Plugin 'rickhowe/diffchar.vim'
@@ -259,11 +259,11 @@ nnoremap 								<localleader>d	<C-X>
 nnoremap								Q 				@q
 nnoremap								W 				@w
 nnoremap								E 				@e
-nnoremap 								<leader>h		:call BlacklistFiletype()<CR>
-nnoremap 								<localleader>t	:call CopyOut()<CR>
-nnoremap 								<leader>/		:call GrepBuffers("<C-R><C-W>")<CR>
-nnoremap 								<localleader>e	wbve"oyy:%s/\<o\>/o/g
-nnoremap 								<localleader>E	wbve"oyy:tabdo %s/\<o\>/o/g
+nnoremap								<leader>h		:call BlacklistFiletype()<CR>
+nnoremap								<localleader>t	:call CopyOut()<CR>
+nnoremap								<leader>/		:call GrepBuffers("<C-R><C-W>")<CR>
+nnoremap								<localleader>e	wbve"oyy:%s/\<o\>/o/g
+nnoremap								<localleader>E	wbve"oyy:tabdo %s/\<o\>/o/g
 "au FileType qf nnoremap <buffer> 		<CR> 			<CR>:tabdo :ccl<CR>
 autocmd FileType qf nnoremap <buffer> <Enter> <C-W><Enter><C-W>T
 autocmd FileType nerdtree nnoremap <buffer> <localleader>/ :vimgrep //gj **/*.*<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
