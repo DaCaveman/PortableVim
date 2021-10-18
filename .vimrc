@@ -399,10 +399,11 @@ aug END
 "Text Formatting/Layout
 "
 set completeopt=menu,preview   " use a pop up menu for completions
-set noexpandtab                " :set expandtab + :retab
-set shiftwidth=4               " auto-indent amount when using cindent, >>, << and stuff like that
+"set noexpandtab                " :set expandtab + :retab
+set expandtab                " :set expandtab + :retab
+set shiftwidth=3               " auto-indent amount when using cindent, >>, << and stuff like that
 set softtabstop=0              " when hitting tab or backspace, how many spaces should a tab be (see expandtab)
-set tabstop=4                  " real tabs should be 8, and they will show with set list on
+set tabstop=3                  " real tabs should be 8, and they will show with set list on
 set nowrap                     " do not wrap line
 set foldmethod=syntax
 "____________________________________________________________________________________________________________________
