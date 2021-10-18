@@ -399,10 +399,11 @@ aug END
 "Text Formatting/Layout
 "
 set completeopt=menu,preview   " use a pop up menu for completions
-set noexpandtab                " :set expandtab + :retab
-set shiftwidth=4               " auto-indent amount when using cindent, >>, << and stuff like that
+set expandtab                " :set expandtab + :retab
+"set noexpandtab                " :set expandtab + :retab
+set shiftwidth=3               " auto-indent amount when using cindent, >>, << and stuff like that
 set softtabstop=0              " when hitting tab or backspace, how many spaces should a tab be (see expandtab)
-set tabstop=4                  " real tabs should be 8, and they will show with set list on
+set tabstop=3                  " real tabs should be 8, and they will show with set list on
 set nowrap                     " do not wrap line
 set foldmethod=syntax
 "____________________________________________________________________________________________________________________
@@ -536,7 +537,7 @@ autocmd BufRead,BufNewFile *.var set filetype=pdl2" Highlight pdl2 syntax
 "____________________________________________________________________________________________________________________
 " CSharp/XAML
 "
-autocmd BufRead,BufNewFile *.cs set filetype=cSharp" Highlight cSharp syntax
+"autocmd BufRead,BufNewFile *.cs set filetype=cSharp" Highlight cSharp syntax
 autocmd BufRead,BufNewFile *.xaml set filetype=xaml" Highlight xaml syntax
 "____________________________________________________________________________________________________________________
 "Python

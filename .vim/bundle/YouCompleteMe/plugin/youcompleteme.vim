@@ -76,7 +76,10 @@ let g:loaded_youcompleteme = 1
 " List of YCM options.
 "
 let g:ycm_filetype_whitelist =
-      \ get( g:, 'ycm_filetype_whitelist', { "*": 1 } )
+      \ get( g:, 'ycm_filetype_whitelist', { 
+      \   "*": 1,
+      \   "cSharp": 1
+      \} )
 
 let g:ycm_filetype_blacklist =
       \ get( g:, 'ycm_filetype_blacklist', {
@@ -90,7 +93,7 @@ let g:ycm_filetype_blacklist =
       \   'pandoc': 1,
       \   'infolog': 1,
       \   'leaderf': 1,
-      \   'mail': 1,
+      \   'mail': 1
       \ } )
 
 " Blacklist empty buffers unless explicity whitelisted; workaround for
@@ -195,6 +198,9 @@ let g:ycm_disable_for_files_larger_than_kb =
 let g:ycm_auto_hover =
       \ get( g:, 'ycm_auto_hover', 'CursorHold' )
 
+let g:ycm_update_diagnostics_in_insert_mode =
+      \ get( g:, 'ycm_update_diagnostics_in_insert_mode', 1 )
+
 "
 " List of ycmd options.
 "
@@ -282,6 +288,9 @@ let g:ycm_java_jdtls_workspace_root_path =
 " This option is deprecated.
 let g:ycm_python_binary_path =
       \ get( g:, 'ycm_python_binary_path', '' )
+
+let g:ycm_refilter_workspace_symbols =
+      \ get( g:, 'ycm_refilter_workspace_symbols', 1 )
 
 if has( 'vim_starting' ) " Loading at startup.
   " We defer loading until after VimEnter to allow the gui to fork (see

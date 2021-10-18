@@ -24,6 +24,9 @@ set cpo&vim
 " neovim, which doesn't implement them.
 let s:is_neovim = has( 'nvim' )
 
+" Only useful in neovim, for handling text properties... I mean extmarks.
+let g:ycm_neovim_ns_id = s:is_neovim ? nvim_create_namespace( 'ycm_id' ) : -1
+
 " This needs to be called outside of a function
 let s:script_folder_path = escape( expand( '<sfile>:p:h' ), '\' )
 let s:force_semantic = 0
@@ -200,15 +203,19 @@ function! youcompleteme#Enable()
   let s:default_completion = py3eval( 'vimsupport.NO_COMPLETIONS' )
   let s:completion = s:default_completion
 
-  if exists( '*prop_type_add' ) && exists( '*prop_type_delete' )
+  if s:PropertyTypeNotDefined( 'YCM-signature-help-current-argument' )
     hi default YCMInverse term=reverse cterm=reverse gui=reverse
-    call prop_type_delete( 'YCM-signature-help-current-argument' )
     call prop_type_add( 'YCM-signature-help-current-argument', {
           \   'highlight': 'YCMInverse',
           \   'combine':   1,
           \   'priority':  50,
           \ } )
   endif
+
+  nnoremap <silent> <Plug>(YCMFindSymbolInWorkspace)
+        \ :call youcompleteme#finder#FindSymbol( 'workspace' )<CR>
+  nnoremap <silent> <Plug>(YCMFindSymbolInDocument)
+        \ :call youcompleteme#finder#FindSymbol( 'document' )<CR>
 endfunction
 
 
@@ -250,19 +257,8 @@ root_folder = p.normpath( p.join( vim.eval( 's:script_folder_path' ), '..' ) )
 third_party_folder = p.join( root_folder, 'third_party' )
 
 # Add dependencies to Python path.
-dependencies = [ p.join( root_folder, 'python' ),
-                 p.join( third_party_folder, 'requests-futures' ),
-                 p.join( third_party_folder, 'ycmd' ),
-                 p.join( third_party_folder, 'requests_deps', 'idna' ),
-                 p.join( third_party_folder, 'requests_deps', 'chardet' ),
-                 p.join( third_party_folder,
-                         'requests_deps',
-                         'urllib3',
-                         'src' ),
-                 p.join( third_party_folder, 'requests_deps', 'certifi' ),
-                 p.join( third_party_folder, 'requests_deps', 'requests' ) ]
-
-sys.path[ 0:0 ] = dependencies
+sys.path[ 0:0 ] = [ p.join( root_folder, 'python' ),
+                    p.join( third_party_folder, 'ycmd' ) ]
 
 # We enclose this code in a try/except block to avoid backtraces in Vim.
 try:
@@ -370,32 +366,40 @@ function! s:SetUpSigns()
 
   if !hlexists( 'YcmErrorSign' )
     if hlexists( 'SyntasticErrorSign')
-      highlight link YcmErrorSign SyntasticErrorSign
+      highlight default link YcmErrorSign SyntasticErrorSign
     else
-      highlight link YcmErrorSign error
+      highlight default link YcmErrorSign error
     endif
   endif
 
   if !hlexists( 'YcmWarningSign' )
     if hlexists( 'SyntasticWarningSign')
-      highlight link YcmWarningSign SyntasticWarningSign
+      highlight default link YcmWarningSign SyntasticWarningSign
     else
-      highlight link YcmWarningSign todo
+      highlight default link YcmWarningSign todo
     endif
   endif
 
   if !hlexists( 'YcmErrorLine' )
-    highlight link YcmErrorLine SyntasticErrorLine
+    highlight default link YcmErrorLine SyntasticErrorLine
   endif
 
   if !hlexists( 'YcmWarningLine' )
-    highlight link YcmWarningLine SyntasticWarningLine
+    highlight default link YcmWarningLine SyntasticWarningLine
   endif
 
-  exe 'sign define YcmError text=' . g:ycm_error_symbol .
-        \ ' texthl=YcmErrorSign linehl=YcmErrorLine'
-  exe 'sign define YcmWarning text=' . g:ycm_warning_symbol .
-        \ ' texthl=YcmWarningSign linehl=YcmWarningLine'
+  call sign_define( [
+    \ { 'name': 'YcmError',
+    \   'text': g:ycm_error_symbol,
+    \   'texthl': 'YcmErrorSign',
+    \   'linehl': 'YcmErrorLine',
+    \   'group':  'ycm_signs' },
+    \ { 'name': 'YcmWarning',
+    \   'text': g:ycm_warning_symbol,
+    \   'texthl': 'YcmWarningSign',
+    \   'linehl': 'YcmWarningLine',
+    \   'group':  'ycm_signs' }
+    \ ] )
 
 endfunction
 
@@ -406,18 +410,26 @@ function! s:SetUpSyntaxHighlighting()
 
   if !hlexists( 'YcmErrorSection' )
     if hlexists( 'SyntasticError' )
-      highlight link YcmErrorSection SyntasticError
+      highlight default link YcmErrorSection SyntasticError
     else
-      highlight link YcmErrorSection SpellBad
+      highlight default link YcmErrorSection SpellBad
     endif
+  endif
+  if s:PropertyTypeNotDefined( 'YcmErrorProperty' )
+    call prop_type_add( 'YcmErrorProperty', {
+          \ 'highlight': 'YcmErrorSection' } )
   endif
 
   if !hlexists( 'YcmWarningSection' )
     if hlexists( 'SyntasticWarning' )
-      highlight link YcmWarningSection SyntasticWarning
+      highlight default link YcmWarningSection SyntasticWarning
     else
-      highlight link YcmWarningSection SpellCap
+      highlight default link YcmWarningSection SpellCap
     endif
+  endif
+  if s:PropertyTypeNotDefined( 'YcmWarningProperty' )
+    call prop_type_add( 'YcmWarningProperty', {
+          \ 'highlight': 'YcmWarningSection' } )
   endif
 endfunction
 
@@ -470,6 +482,11 @@ function! s:HasAnyKey( dict, keys )
     endif
   endfor
   return 0
+endfunction
+
+function! s:PropertyTypeNotDefined( type )
+  return exists( '*prop_type_add' ) &&
+    \ index( prop_type_list(), a:type ) == -1
 endfunction
 
 function! s:AllowedToCompleteInBuffer( buffer )
@@ -1219,7 +1236,7 @@ function! youcompleteme#LogsComplete( arglead, cmdline, cursorpos )
 endfunction
 
 
-function! youcompleteme#GetCommandResponse( ... )
+function! youcompleteme#GetCommandResponse( ... ) abort
   if !s:AllowedToCompleteInCurrentBuffer()
     return ''
   endif
@@ -1232,7 +1249,7 @@ function! youcompleteme#GetCommandResponse( ... )
 endfunction
 
 
-function! youcompleteme#GetCommandResponseAsync( callback, ... )
+function! youcompleteme#GetCommandResponseAsync( callback, ... ) abort
   if !s:AllowedToCompleteInCurrentBuffer()
     eval a:callback( '' )
     return
@@ -1252,10 +1269,35 @@ function! youcompleteme#GetCommandResponseAsync( callback, ... )
 
   let s:pollers.command.id = timer_start(
         \ s:pollers.command.wait_milliseconds,
-        \ function( 's:PollCommand', [ a:callback ] ) )
+        \ function( 's:PollCommand', [ 'StringResponse', a:callback ] ) )
 endfunction
 
-function! s:PollCommand( callback, id )
+
+function! youcompleteme#GetRawCommandResponseAsync( callback, ... ) abort
+  if !s:AllowedToCompleteInCurrentBuffer()
+    eval a:callback( { 'error': 'ycm not allowed in buffer' } )
+    return
+  endif
+
+  if !get( b:, 'ycm_completing' )
+    eval a:callback( { 'error': 'ycm disabled in buffer' } )
+    return
+  endif
+
+  if s:pollers.command.id != -1
+    eval a:callback( { 'error': 'request in progress' } )
+    return
+  endif
+
+  py3 ycm_state.SendCommandRequestAsync( vim.eval( "a:000" ) )
+
+  let s:pollers.command.id = timer_start(
+        \ s:pollers.command.wait_milliseconds,
+        \ function( 's:PollCommand', [ 'Response', a:callback ] ) )
+endfunction
+
+
+function! s:PollCommand( response_func, callback, id ) abort
   if py3eval( 'ycm_state.GetCommandRequest() is None' )
     " Possible in case of race conditions and things like RestartServer
     " But particualrly in the tests
@@ -1265,13 +1307,14 @@ function! s:PollCommand( callback, id )
   if !py3eval( 'ycm_state.GetCommandRequest().Done()' )
     let s:pollers.command.id = timer_start(
           \ s:pollers.command.wait_milliseconds,
-          \ function( 's:PollCommand', [ a:callback ] ) )
+          \ function( 's:PollCommand', [ a:response_func, a:callback ] ) )
     return
   endif
 
   call s:StopPoller( s:pollers.command )
 
-  let result = py3eval( 'ycm_state.GetCommandRequest().StringResponse()' )
+  let result = py3eval( 'ycm_state.GetCommandRequest().'
+                      \ .a:response_func . '()' )
 
   eval a:callback( result )
 endfunction

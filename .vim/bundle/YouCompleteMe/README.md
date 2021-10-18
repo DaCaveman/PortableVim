@@ -11,7 +11,7 @@ NOTE: Minimum Requirements Have Changed
 Our policy is to support the Vim version that's in the latest LTS of Ubuntu.
 That's currently Ubuntu 20.04 which contains `vim-nox` at `v8.1.2269`.
 
-For neovim users, 0.4.4 is required.
+For neovim users, 0.5.0 is required.
 
 NOTE: Minimum compiler versions have been increased
 ----------------------------------------
@@ -68,9 +68,10 @@ Contents
     - [Client-Server Architecture](#client-server-architecture)
     - [Completion String Ranking](#completion-string-ranking)
     - [General Semantic Completion](#general-semantic-completion)
+    - [Signature Help](#signature-help)
     - [C-family Semantic Completion](#c-family-semantic-completion)
     - [Java Semantic Completion](#java-semantic-completion)
-	- [C# Semantic Completion](#c-semantic-completion)
+    - [C# Semantic Completion](#c-semantic-completion)
     - [Python Semantic Completion](#python-semantic-completion)
     - [Rust Semantic Completion](#rust-semantic-completion)
     - [Go Semantic Completion](#go-semantic-completion)
@@ -80,6 +81,7 @@ Contents
     - [Writing New Semantic Completers](#writing-new-semantic-completers)
     - [Diagnostic Display](#diagnostic-display)
         - [Diagnostic Highlighting Groups](#diagnostic-highlighting-groups)
+    - [Symbol Search](#symbol-search)
 - [Commands](#commands)
     - [YcmCompleter subcommands](#ycmcompleter-subcommands)
         - [GoTo Commands](#goto-commands)
@@ -93,6 +95,7 @@ Contents
 - [Contributor Code of Conduct](#contributor-code-of-conduct)
 - [Contact](#contact)
 - [License](#license)
+- [Sponsorship](#sponsorship)
 
 
 Intro
@@ -175,7 +178,7 @@ number of languages, including:
 - displaying signature help (argument hints) when entering the arguments to a
   function call (Vim only)
 - [finding declarations, definitions, usages](#goto-commands), etc.
-  of identifiers,
+  of identifiers, and an [interactive symbol finder](#symbol-search)
 - [displaying type information](#the-gettype-subcommand) for classes,
   variables, functions etc.,
 - displaying documentation for methods, members, etc. in the [preview
@@ -233,11 +236,31 @@ officially supported.
 #### Quick start, installing all completers
 
 - Install YCM plugin via [Vundle][]
-- Install cmake, macvim and python; Note that the *system* vim is not supported.
+- Install cmake, macvim and python; Note that the pre-installed *macOS system* vim is not supported.
 
 ```
-brew install cmake macvim python mono go nodejs
+brew install cmake python mono go nodejs
 ```
+
+- For java support you must install a JDK, one way to do this is with homebrew:
+
+```
+$ brew install java
+$ sudo ln -sfn /usr/local/opt/openjdk/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk.jdk
+```
+
+- Pre-installed macOS *system* Vim does not support Python 3. So you need to install either a Vim that supports Python 3 OR [MacVim][] with [Homebrew][brew]:
+
+  - Option 1: Installing a Vim that supports Python 3
+  
+  ```
+  brew install vim
+  ```
+  - Option 2: Installing [MacVim][]
+  
+  ```
+  brew install macvim
+  ```
 
 - Compile YCM
 
@@ -255,11 +278,15 @@ YouCompleteMe, however they may not work for everyone. If the following
 instructions don't work for you, check out the [full installation
 guide](#full-installation-guide).
 
-[MacVim][] is required. YCM won't work with the pre-installed Vim from Apple as
-its Python support is broken. If you don't already use [MacVim][], install it
+A Vim that supports Python 3 or [MacVim][] is required. YCM won't work with the pre-installed Vim from Apple as
+its Python 3 support is broken. If you don't already use a Vim that supports Python 3 or [MacVim][], install it
 with [Homebrew][brew]. Install CMake as well:
 
-    brew install cmake macvim
+    brew install vim cmake     
+    
+   OR
+
+    brew install macvim cmake
 
 Install YouCompleteMe with [Vundle][].
 
@@ -302,10 +329,9 @@ The following additional language support options are available:
 - Java support: install [JDK8 (version 8 required)][jdk-install] and add
   `--java-completer` when calling `install.py`.
 
-To simply compile with everything enabled, there's a `--all` flag. You need to
-specify it manually by adding `--clangd-completer`. So, to install with all
-language features, ensure `xbuild`, `go`, `node` and `npm` tools
-are installed and in your `PATH`, then simply run:
+To simply compile with everything enabled, there's a `--all` flag. So, to
+install with all language features, ensure `xbuild`, `go`, `node` and `npm`
+tools are installed and in your `PATH`, then simply run:
 
 ```
 cd ~/.vim/bundle/YouCompleteMe
@@ -323,16 +349,23 @@ that are conservatively turned off by default that you may want to turn on.
 
 ### Linux 64-bit
 
+The following assume you're using Ubuntu 20.04.
+
 #### Quick start, installing all completers
 
 - Install YCM plugin via [Vundle][]
 - Install cmake, vim and python
 
 ```
-apt install build-essential cmake vim python3-dev
+apt install build-essential cmake vim-nox python3-dev
 ```
 
-- Install mono-complete, go, node and npm
+- Install mono-complete, go, node, java and npm
+
+```
+apt install mono-complete golang nodejs default-jdk npm
+```
+
 - Compile YCM
 
 ```
@@ -410,10 +443,9 @@ The following additional language support options are available:
 - Java support: install [JDK8 (version 8 required)][jdk-install] and add
   `--java-completer` when calling `install.py`.
 
-To simply compile with everything enabled, there's a `--all` flag. You need to
-specify it manually by adding `--clangd-completer`. So, to install with all
-language features, ensure `xbuild`, `go`, `node`, `npm` and tools
-are installed and in your `PATH`, then simply run:
+To simply compile with everything enabled, there's a `--all` flag. So, to
+install with all language features, ensure `xbuild`, `go`, `node` and `npm`
+tools are installed and in your `PATH`, then simply run:
 
 ```
 cd ~/.vim/bundle/YouCompleteMe
@@ -527,10 +559,9 @@ The following additional language support options are available:
 - Java support: install [JDK8 (version 8 required)][jdk-install] and add
   `--java-completer` when calling `install.py`.
 
-To simply compile with everything enabled, there's a `--all` flag. You need to
-specify it manually by adding `--clangd-completer`. So, to install with all
-language features, ensure `msbuild`, `go`, `node` and `npm` tools
-are installed and in your `PATH`, then simply run:
+To simply compile with everything enabled, there's a `--all` flag. So, to
+install with all language features, ensure `msbuild`, `go`, `node` and `npm`
+tools are installed and in your `PATH`, then simply run:
 
 ```
 cd %USERPROFILE%/vimfiles/bundle/YouCompleteMe
@@ -634,10 +665,9 @@ The following additional language support options are available:
 - Java support: install [JDK8 (version 8 required)][jdk-install] and add
   `--java-completer` when calling `./install.py`.
 
-To simply compile with everything enabled, there's a `--all` flag. You need to
-specify it manually by adding `--clangd-completer`. So, to install with all
-language features, ensure `xbuild`, `go`, `node`, `npm` and tools
-are installed and in your `PATH`, then simply run:
+To simply compile with everything enabled, there's a `--all` flag. So, to
+install with all language features, ensure `xbuild`, `go`, `node` and `npm`
+tools are installed and in your `PATH`, then simply run:
 
 ```
 cd ~/.vim/bundle/YouCompleteMe
@@ -674,8 +704,8 @@ Quick Feature Summary
 * Signature help
 * Real-time diagnostic display
 * Go to include/declaration/definition (`GoTo`, etc.)
-* Find Symbol (`GoToSymbol`)
-* Document outline (`GoToDocumentOutline`)
+* Find Symbol (`GoToSymbol`), with interactive search
+* Document outline (`GoToDocumentOutline`), with interactive search
 * View documentation comments for identifiers (`GetDoc`)
 * Type information for identifiers (`GetType`)
 * Automatically fix certain errors (`FixIt`)
@@ -690,7 +720,7 @@ Quick Feature Summary
 * Real-time diagnostic display
 * Go to declaration/definition (`GoTo`, etc.)
 * Go to implementation (`GoToImplementation`)
-* Find Symbol (`GoToSymbol`)
+* Find Symbol (`GoToSymbol`), with interactive search
 * View documentation comments for identifiers (`GetDoc`)
 * Type information for identifiers (`GetType`)
 * Automatically fix certain errors (`FixIt`)
@@ -703,7 +733,7 @@ Quick Feature Summary
 * Semantic auto-completion
 * Signature help
 * Go to definition (`GoTo`)
-* Find Symbol (`GoToSymbol`)
+* Find Symbol (`GoToSymbol`), with interactive search
 * Reference finding (`GoToReferences`)
 * View documentation comments for identifiers (`GetDoc`)
 * Type information for identifiers (`GetType`)
@@ -717,7 +747,7 @@ Quick Feature Summary
 * Go to declaration/definition (`GoTo`, etc.)
 * Go to type definition (`GoToType`)
 * Go to implementation (`GoToImplementation`)
-* Document outline (`GoToDocumentOutline`)
+* Document outline (`GoToDocumentOutline`), with interactive search
 * Automatically fix certain errors (`FixIt`)
 * View documentation comments for identifiers (`GetDoc`)
 * Type information for identifiers (`GetType`)
@@ -733,7 +763,7 @@ Quick Feature Summary
   identical)
 * Go to type definition (`GoToType`)
 * Go to implementation (`GoToImplementation`)
-* Find Symbol (`GoToSymbol`)
+* Find Symbol (`GoToSymbol`), with interactive search
 * Reference finding (`GoToReferences`)
 * View documentation comments for identifiers (`GetDoc`)
 * Type information for identifiers (`GetType`)
@@ -750,7 +780,7 @@ Quick Feature Summary
 * Go to declaration/definition (`GoTo`, etc.)
 * Go to implementation (`GoToImplementation`)
 * Reference finding (`GoToReferences`)
-* Document outline (`GoToDocumentOutline`)
+* Document outline (`GoToDocumentOutline`), with interactive search
 * View documentation comments for identifiers (`GetDoc`)
 * Automatically fix certain errors (`FixIt`)
 * Type information for identifiers (`GetType`)
@@ -767,9 +797,9 @@ Quick Feature Summary
   identical)
 * Go to type definition (`GoToType`)
 * Go to implementation (`GoToImplementation`)
-* Find Symbol (`GoToSymbol`)
+* Find Symbol (`GoToSymbol`), with interactive search
 * Reference finding (`GoToReferences`)
-* Document outline (`GoToDocumentOutline`)
+* Document outline (`GoToDocumentOutline`), with interactive search
 * View documentation comments for identifiers (`GetDoc`)
 * Type information for identifiers (`GetType`)
 * Automatically fix certain errors including code generation (`FixIt`)
@@ -882,9 +912,8 @@ string.
 
 ### Signature Help
 
-Signature help is an **experimental** feature for which we value your feedback.
 Valid signatures are displayed in a second popup menu and the current signature
-is highlighed along with the current arguemnt.
+is highlighted along with the current argument.
 
 Signature help is triggered in insert mode automatically when
 `g:ycm_auto_trigger` is enabled and is not supported when it is not enabled.
@@ -1154,6 +1183,10 @@ Gradle projects require a [build.gradle][gradle-project]. Again, there is a
 The format of [build.gradle][gradle-project] files is way beyond the scope of
 this document, but we do recommend using the various tools that can generate
 them for you, if you're not familiar with them already.
+
+Some users have experienced issues with their jdt.ls  when using the Groovy
+language for their build.gradle. As such, try using
+[Kotlin](https://github.com/ycm-core/lsp-examples#kotlin) instead.
 
 #### Troubleshooting
 
@@ -1612,6 +1645,61 @@ Here's how you'd change the style for a group:
 highlight YcmErrorLine guibg=#3f0000
 ```
 
+### Symbol Search
+
+***This feature requires Vim and does not work in Neovim***
+
+YCM provides a way to search for and jump to a symbol in the current project or
+document when using supported languages.
+
+You can search for symbols in the current workspace when the `GoToSymbol`
+request is supported and the current document when `GoToDocumentOutline` is
+supported.
+
+Here's a quick demo: 
+
+[![asciicast](https://asciinema.org/a/4JmYLAaz5hOHbZDD0hbsQpY8C.svg)](https://asciinema.org/a/4JmYLAaz5hOHbZDD0hbsQpY8C)
+
+As you can see, you can type and YCM filters down the list as you type. The
+current set of matches are displayed in a popup window in the centre of the
+screen and you can select an entry with the keyboard, to jump to that position.
+Any matches are then added to the quickfix list.
+
+To enable:
+
+* `nmap <something> <Plug>(YCMFindSymbolInWorkspace)`
+* `nmap <something> <Plug>(YCMFindSymbolInDocument)`
+
+e.g.
+
+* `nmap <leader>yfw <Plug>(YCMFindSymbolInWorkspace)`
+* `nmap <leader>yfd <Plug>(YCMFindSymbolInDocument)`
+
+When searching, YCM opens a prompt buffer at the top of the screen for the
+input, and puts you in insert mode. This means that you can hit `<Esc>` to go
+into normal mode and use any other input commands that are supported in prompt
+buffers. As you type characters, the serch is updated.
+
+While the popup is open, the following keys are intercepted:
+
+* `<C-j>`, `<Down>`, `<C-n>`, `<Tab>` - select the next item
+* `<C-k>`, `<Up>`, `<C-p>`, `<S-Tab>` - select the previous item
+* `<PageUp>`, `<kPageUp>` - jump up one screenful of items 
+* `<PageDown>`, `<kPageDown>` - jump down one screenful of items
+* `<Home>`, `<kHome>` - jump to first item
+* `<End>`, `<kEnd>` - jump to last item
+* `<CR>` - jump to the selected item
+* `<C-c>` cancel/dismiss the popup
+
+The search is also cancelled if you leave the prompt buffer window at any time,
+so you can use window commands `<C-w>...` for example.
+
+#### Closing the popup
+
+***NOTE***: Pressing `<Esc>` does not close the popup - you must use `Ctrl-c`
+for that, or use a window command (e.g. `<Ctrl-w>j`) or the mouse to leave the
+prompt buffer window.
+
 Commands
 --------
 
@@ -1768,7 +1856,8 @@ Supported in filetypes: `c, cpp, objc, objcpp, cuda`
 #### The `GoToSymbol <symbol query>` subcommand
 
 Finds the definition of all symbols matching a specified string. Note that this
-does not use any sort of smart/fuzzy matching.
+does not use any sort of smart/fuzzy matching. However, an [interactive symbol
+search](#symbol-search) is also available.
 
 Supported in filetypes: `c, cpp, objc, objcpp, cuda, cs, java, javascript, python, typescript`
 
@@ -1805,7 +1894,8 @@ Supported in filetypes: `go, java, javascript, typescript`
 
 #### The `GoToDocumentOutline` subcommand
 
-Provides a list of symbols in current scope, in the quickfix list.
+Provides a list of symbols in current document, in the quickfix list. See also
+[interactive symbol search](#symbol-search).
 
 Supported in filetypes: `c, cpp, objc, objcpp, cuda, go, java, rust`
 
@@ -2902,15 +2992,23 @@ let g:ycm_csharp_insert_namespace_expr = ''
 
 When this option is set to `1`, YCM will add the `preview` string to Vim's
 `completeopt` option (see `:h completeopt`). If your `completeopt` option
-already has `preview` set, there will be no effect. You can see the current
-state of your `completeopt` setting with `:set completeopt?` (yes, the question
-mark is important).
+already has `preview` set, there will be no effect. Alternatively, when set to
+`popup` and your version of Vim supports popup windows (see `:help popup`), the
+`popup` string will be used instead. You can see the current state of your
+`completeopt` setting with `:set completeopt?` (yes, the question mark is
+important).
 
 When `preview` is present in `completeopt`, YCM will use the `preview` window at
 the top of the file to store detailed information about the current completion
 candidate (but only if the candidate came from the semantic engine). For
 instance, it would show the full function prototype and all the function
 overloads in the window if the current completion is a function name.
+
+When `popup` is present in `completeopt`, YCM will instead use a `popup`
+window to the side of the completion popup for storing detailed information
+about the current completion candidate. In addition, YCM may truncate the
+detailed completion information in order to give the popup sufficient room
+to display that detailed information.
 
 Default: `0`
 
@@ -3360,6 +3458,17 @@ tells YCM where is the TSServer executable located.
 Similar to [the `gopls` path](#the-gycm-gopls-binaty-path), this option
 tells YCM where is the Omnisharp-Roslyn executable located.
 
+### The `g:ycm_update_diagnostics_in_insert_mode` option
+
+With async diagnostics, LSP servers might send new diagnostics mid-typing.
+If seeing these new diagnostics while typing is not desired, this option can
+be set to 0.
+
+Default: `1`
+
+```viml
+let g:ycm_update_diagnostics_in_insert_mode = 1
+```
 
 FAQ
 ---
@@ -3398,6 +3507,20 @@ License
 
 This software is licensed under the [GPL v3 license][gpl].
 © 2015-2018 YouCompleteMe contributors
+
+Sponsorship
+-----------
+
+If you like YCM so much that you're wiling to part with your hard-earned cash, please consider donating to one of the following charities, which are meaningful to the current maintainers (in no particular order):
+
+* [Greyhound Rescue Wales](https://greyhoundrescuewales.co.uk)
+* [Be Humane](https://www.budihuman.rs/en)
+* [Cancer Research UK](https://www.cancerresearchuk.org)
+* [ICCF Holland](https://iccf.nl)
+* Any charity of your choosing.
+
+Please note: The YCM maintainers do not specifically endorse nor necessarily have any relationship with the above charities. Disclosure: It is noted that one key maintainer is family with Trustees of Greyhound Rescue Wales.
+
 
 [ycmd]: https://github.com/ycm-core/ycmd
 [Clang]: https://clang.llvm.org/
