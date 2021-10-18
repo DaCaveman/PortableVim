@@ -48,7 +48,7 @@ Plugin 'itchyny/lightline.vim'
 Plugin 'KnoP-01/krl-for-vim'
 Plugin 'KnoP-01/rapid-for-vim'
 "Plugin 'jalvesaq/Nvim-R'
-Plugin 'chrisbra/csv.vim'
+"Plugin 'chrisbra/csv.vim'
 Plugin 'othree/html5.vim'
 Plugin 'Raimondi/delimitMate'
 Plugin 'rickhowe/diffchar.vim'
@@ -259,11 +259,11 @@ nnoremap 								<localleader>d	<C-X>
 nnoremap								Q 				@q
 nnoremap								W 				@w
 nnoremap								E 				@e
-nnoremap 								<leader>h		:call BlacklistFiletype()<CR>
-nnoremap 								<localleader>t	:call CopyOut()<CR>
-nnoremap 								<leader>/		:call GrepBuffers("<C-R><C-W>")<CR>
-nnoremap 								<localleader>e	wbve"oyy:%s/\<o\>/o/g
-nnoremap 								<localleader>E	wbve"oyy:tabdo %s/\<o\>/o/g
+nnoremap								<leader>h		:call BlacklistFiletype()<CR>
+nnoremap								<localleader>t	:call CopyOut()<CR>
+nnoremap								<leader>/		:call GrepBuffers("<C-R><C-W>")<CR>
+nnoremap								<localleader>e	wbve"oyy:%s/\<o\>/o/g
+nnoremap								<localleader>E	wbve"oyy:tabdo %s/\<o\>/o/g
 "au FileType qf nnoremap <buffer> 		<CR> 			<CR>:tabdo :ccl<CR>
 autocmd FileType qf nnoremap <buffer> <Enter> <C-W><Enter><C-W>T
 autocmd FileType nerdtree nnoremap <buffer> <localleader>/ :vimgrep //gj **/*.*<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
@@ -399,8 +399,8 @@ aug END
 "Text Formatting/Layout
 "
 set completeopt=menu,preview   " use a pop up menu for completions
-"set noexpandtab                " :set expandtab + :retab
 set expandtab                " :set expandtab + :retab
+"set noexpandtab                " :set expandtab + :retab
 set shiftwidth=3               " auto-indent amount when using cindent, >>, << and stuff like that
 set softtabstop=0              " when hitting tab or backspace, how many spaces should a tab be (see expandtab)
 set tabstop=3                  " real tabs should be 8, and they will show with set list on
@@ -537,7 +537,7 @@ autocmd BufRead,BufNewFile *.var set filetype=pdl2" Highlight pdl2 syntax
 "____________________________________________________________________________________________________________________
 " CSharp/XAML
 "
-autocmd BufRead,BufNewFile *.cs set filetype=cSharp" Highlight cSharp syntax
+"autocmd BufRead,BufNewFile *.cs set filetype=cSharp" Highlight cSharp syntax
 autocmd BufRead,BufNewFile *.xaml set filetype=xaml" Highlight xaml syntax
 "____________________________________________________________________________________________________________________
 "Python
