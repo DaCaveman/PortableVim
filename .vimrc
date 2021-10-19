@@ -79,7 +79,10 @@ filetype plugin indent on   " after syntax on
 "
 "source $VIMRUNTIME/vimrc_example.vim
 "packadd! matchit
-silent call mkdir ($HOME.'/.vim_backup', 'p')
+"silent call mkdir ($HOME.'/.vim_backup', 'p')
+if !isdirectory($HOME.'/.vim_backup')
+    silent call mkdir($HOME.'/.vim_backup', "", 0700)
+endif
 set encoding=utf-8
 set termencoding=utf-8
 scriptencoding utf-8
@@ -99,7 +102,8 @@ set autowriteall        " write buffers automatical if required
 set backup              " make backup files
 "set backupdir=D:\tmp   " where to put backup files
 set backupdir=~\.vim_backup   " where to put backup files
-set noundofile
+set undodir=~\.vim_backup
+set undofile            " Persistent Undo
 set clipboard+=unnamed  " share windows clipboard
 "set hidden             " set buffer hidden
 set noerrorbells        " don't make noise
@@ -412,7 +416,7 @@ set foldmethod=syntax
 set incsearch   " incremental search
 set hlsearch    " use :nohlsearch for clearance
 set ignorecase  " ignoriere Gross- und Kleinschreibung
-"set smartcase   " intelligent Gross- und Kleinschreibung
+set smartcase" intelligent Gross- und Kleinschreibung
 "____________________________________________________________________________________________________________________
 "gruvbox
 "
