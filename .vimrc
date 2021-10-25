@@ -39,7 +39,7 @@ Plugin 'ycm-core/YouCompleteMe'
 Plugin 'tmhedberg/SimpylFold'
 Plugin 'vim-scripts/indentpython.vim'
 Plugin 'preservim/nerdtree'
-"Plugin 'vim-syntastic/syntastic'
+Plugin 'vim-syntastic/syntastic'
 Plugin 'preservim/nerdcommenter'
 Plugin 'morhetz/gruvbox'
 Plugin 'altercation/vim-colors-solarized'
@@ -430,7 +430,10 @@ let g:ycm_autoclose_preview_window_after_completion=1
 set completeopt+=popup
 let g:ycm_python_interpreter_path = ''
 let g:ycm_python_sys_path = []
-let g:ycm_extra_conf_vim_data = ['g:ycm_python_interpreter_path','g:ycm_python_sys_path']
+let g:ycm_extra_conf_vim_data = [
+  \  'g:ycm_python_interpreter_path',
+  \  'g:ycm_python_sys_path'
+  \]
 let g:ycm_global_ycm_extra_conf = '~/global_extra_conf.py'
 
 function BlacklistFiletype()
