@@ -260,9 +260,10 @@ nnoremap 								K				gkzz
 nnoremap 								<S-U>			<C-R>
 nnoremap 								<localleader>i	<C-A>
 nnoremap 								<localleader>d	<C-X>
-nnoremap								Q 				@q
-nnoremap								W 				@w
-nnoremap								E 				@e
+nnoremap								<localleader>q 				@q
+nnoremap								<localleader>w 				@w
+nnoremap								<localleader>v 				@v
+nnoremap								<localleader>a 				@a
 nnoremap								<leader>h		:call BlacklistFiletype()<CR>
 nnoremap								<localleader>t	:call CopyOut()<CR>
 nnoremap								<leader>/		:call GrepBuffers("<C-R><C-W>")<CR>
