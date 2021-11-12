@@ -226,6 +226,7 @@ vnoremap 								yy				y
 vnoremap 								do				:diffge<CR>
 vnoremap 								dp				:diffpu<CR>
 vnoremap 								<localleader>/	:<C-U>execute "vimgrep /" . expand("<cword>") . "/gj **/*.*"<CR>
+vnoremap                         <Space>     zf
 "____________________________________________________________________________________________________________________
 " normal mode mapping
 "
@@ -236,6 +237,7 @@ nnoremap								<C-F1>			:if &go=~#'m'<Bar>set go-=mcerb<Bar>else<Bar>set go+=mc
 "nnoremap								<C-j>			<c-w>j
 "nnoremap								<C-k>			<c-w>k
 "nnoremap								<C-l>			<c-w><c-w>l
+nnoremap <silent>             <Space>     @=(foldlevel('.')?'za':"\<Space>")<CR>
 nnoremap								<F6>			:YcmForceCompileAndDiagnostics<CR>
 nnoremap								<F5>			:TlistToggle <CR>                                  " taglist
 nnoremap								<M-F5>			:TlistUpdate<CR>                                 " taglist
