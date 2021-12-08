@@ -1,0 +1,292 @@
+2021-12-08 21:03:58,552+0100 INFO  pdflatex - this process (15716) started by 'sh' with command line: C:\_Vim\.vim\MiKTeX\texmfs\install\miktex\bin\pdflatex.exe -file-line-error -synctex=1 -interaction=nonstopmode -recorder tk_Dispense.tex
+2021-12-08 21:03:58,555+0100 INFO  pdflatex - this is MiKTeX-PDFTEX 4.10.0 (1.40.24) (MiKTeX 21.12 32-bit Portable)
+2021-12-08 21:03:58,559+0100 INFO  pdflatex - allowing known shell commands
+2021-12-08 21:03:58,613+0100 INFO  pdflatex - going to create file: pdflatex.fmt
+2021-12-08 21:03:58,613+0100 INFO  pdflatex.core - start process: initexmf --dump-by-name=pdflatex --engine=pdftex
+2021-12-08 21:04:13,202+0100 INFO  pdflatex - this process (15716) finishes with exit code 1
+2021-12-08 21:05:13,094+0100 INFO  pdflatex - this process (12332) started by 'sh' with command line: C:\_Vim\.vim\MiKTeX\texmfs\install\miktex\bin\pdflatex.exe -file-line-error -synctex=1 -interaction=nonstopmode -recorder sicar-programming-guide.tex
+2021-12-08 21:05:13,097+0100 INFO  pdflatex - this is MiKTeX-PDFTEX 4.10.0 (1.40.24) (MiKTeX 21.12 32-bit Portable)
+2021-12-08 21:05:13,101+0100 INFO  pdflatex - allowing known shell commands
+2021-12-08 21:05:20,542+0100 INFO  pdflatex - installing package xstring triggered by tex/latex/xstring\xstring.sty
+2021-12-08 21:05:20,549+0100 INFO  pdflatex.packagemanager - going to download https://api2.miktex.org/hello
+2021-12-08 21:05:20,756+0100 INFO  pdflatex.packagemanager - going to download https://api2.miktex.org/repositories?&releaseState=Stable&orderBy=ranking&take=1&onlySecure=true
+2021-12-08 21:05:20,795+0100 INFO  pdflatex - mpm: starting package maintenance...
+2021-12-08 21:05:20,796+0100 INFO  pdflatex - mpm: installation directory: C:\_Vim\.vim\MiKTeX\texmfs\install
+2021-12-08 21:05:20,796+0100 INFO  pdflatex - mpm: package repository: https://ftp.rrze.uni-erlangen.de/ctan/systems/win32/miktex/tm/packages/
+2021-12-08 21:05:21,219+0100 INFO  pdflatex - mpm: package repository digest: b5e6ecd758b9b83e358b12ed0b62fe05
+2021-12-08 21:05:21,219+0100 INFO  pdflatex - mpm: going to download 11494 bytes
+2021-12-08 21:05:21,219+0100 INFO  pdflatex - mpm: going to install 3 file(s) (1 package(s))
+2021-12-08 21:05:22,133+0100 INFO  pdflatex.packagemanager - installing package xstring
+2021-12-08 21:05:22,135+0100 INFO  pdflatex - mpm: downloading https://ftp.rrze.uni-erlangen.de/ctan/systems/win32/miktex/tm/packages/xstring.tar.lzma...
+2021-12-08 21:05:22,144+0100 INFO  pdflatex.packagemanager - going to download https://ftp.rrze.uni-erlangen.de/ctan/systems/win32/miktex/tm/packages/xstring.tar.lzma
+2021-12-08 21:05:22,329+0100 INFO  pdflatex - mpm: 0.01 MB, 0.51 Mbit/s
+2021-12-08 21:05:22,345+0100 INFO  pdflatex - mpm: extracting files from xstring.tar.lzma...
+2021-12-08 21:05:23,198+0100 INFO  pdflatex.core - start process: initexmf --mkmaps
+2021-12-08 21:05:28,782+0100 INFO  pdflatex - installing package babel-german triggered by tex/latex/babel-german\german.ldf
+2021-12-08 21:05:28,786+0100 INFO  pdflatex.packagemanager - going to download https://api2.miktex.org/repositories/2ad34d370855feef1368d4ca04073cc0
+2021-12-08 21:05:28,952+0100 INFO  pdflatex - mpm: starting package maintenance...
+2021-12-08 21:05:28,952+0100 INFO  pdflatex - mpm: installation directory: C:\_Vim\.vim\MiKTeX\texmfs\install
+2021-12-08 21:05:28,952+0100 INFO  pdflatex - mpm: package repository: https://ftp.rrze.uni-erlangen.de/ctan/systems/win32/miktex/tm/packages/
+2021-12-08 21:05:29,517+0100 INFO  pdflatex - mpm: package repository digest: b5e6ecd758b9b83e358b12ed0b62fe05
+2021-12-08 21:05:29,517+0100 INFO  pdflatex - mpm: going to download 519666 bytes
+2021-12-08 21:05:29,518+0100 INFO  pdflatex - mpm: going to install 13 file(s) (1 package(s))
+2021-12-08 21:05:30,585+0100 INFO  pdflatex.packagemanager - installing package babel-german
+2021-12-08 21:05:30,586+0100 INFO  pdflatex - mpm: downloading https://ftp.rrze.uni-erlangen.de/ctan/systems/win32/miktex/tm/packages/babel-german.tar.lzma...
+2021-12-08 21:05:30,586+0100 INFO  pdflatex.packagemanager - going to download https://ftp.rrze.uni-erlangen.de/ctan/systems/win32/miktex/tm/packages/babel-german.tar.lzma
+2021-12-08 21:05:31,189+0100 INFO  pdflatex - mpm: 0.52 MB, 6.93 Mbit/s
+2021-12-08 21:05:31,221+0100 INFO  pdflatex - mpm: extracting files from babel-german.tar.lzma...
+2021-12-08 21:05:32,076+0100 INFO  pdflatex.core - start process: initexmf --mkmaps
+2021-12-08 21:05:36,929+0100 INFO  pdflatex - installing package koma-script triggered by tex/latex/koma-script\scrhack.sty
+2021-12-08 21:05:36,929+0100 INFO  pdflatex - mpm: starting package maintenance...
+2021-12-08 21:05:36,929+0100 INFO  pdflatex - mpm: installation directory: C:\_Vim\.vim\MiKTeX\texmfs\install
+2021-12-08 21:05:36,929+0100 INFO  pdflatex - mpm: package repository: https://ftp.rrze.uni-erlangen.de/ctan/systems/win32/miktex/tm/packages/
+2021-12-08 21:05:37,310+0100 INFO  pdflatex - mpm: package repository digest: b5e6ecd758b9b83e358b12ed0b62fe05
+2021-12-08 21:05:37,310+0100 INFO  pdflatex - mpm: going to download 136769 bytes
+2021-12-08 21:05:37,310+0100 INFO  pdflatex - mpm: going to install 58 file(s) (1 package(s))
+2021-12-08 21:05:38,445+0100 INFO  pdflatex.packagemanager - installing package koma-script
+2021-12-08 21:05:38,446+0100 INFO  pdflatex - mpm: downloading https://ftp.rrze.uni-erlangen.de/ctan/systems/win32/miktex/tm/packages/koma-script.tar.lzma...
+2021-12-08 21:05:38,446+0100 INFO  pdflatex.packagemanager - going to download https://ftp.rrze.uni-erlangen.de/ctan/systems/win32/miktex/tm/packages/koma-script.tar.lzma
+2021-12-08 21:05:38,702+0100 INFO  pdflatex - mpm: 0.14 MB, 4.29 Mbit/s
+2021-12-08 21:05:38,720+0100 INFO  pdflatex - mpm: extracting files from koma-script.tar.lzma...
+2021-12-08 21:05:39,771+0100 INFO  pdflatex.core - start process: initexmf --mkmaps
+2021-12-08 21:05:43,896+0100 INFO  pdflatex - installing package xpatch triggered by tex/latex/xpatch\xpatch.sty
+2021-12-08 21:05:43,896+0100 INFO  pdflatex - mpm: starting package maintenance...
+2021-12-08 21:05:43,896+0100 INFO  pdflatex - mpm: installation directory: C:\_Vim\.vim\MiKTeX\texmfs\install
+2021-12-08 21:05:43,896+0100 INFO  pdflatex - mpm: package repository: https://ftp.rrze.uni-erlangen.de/ctan/systems/win32/miktex/tm/packages/
+2021-12-08 21:05:44,283+0100 INFO  pdflatex - mpm: package repository digest: b5e6ecd758b9b83e358b12ed0b62fe05
+2021-12-08 21:05:44,283+0100 INFO  pdflatex - mpm: going to download 481261 bytes
+2021-12-08 21:05:44,283+0100 INFO  pdflatex - mpm: going to install 5 file(s) (1 package(s))
+2021-12-08 21:05:45,226+0100 INFO  pdflatex.packagemanager - installing package xpatch
+2021-12-08 21:05:45,227+0100 INFO  pdflatex - mpm: downloading https://ftp.rrze.uni-erlangen.de/ctan/systems/win32/miktex/tm/packages/xpatch.tar.lzma...
+2021-12-08 21:05:45,227+0100 INFO  pdflatex.packagemanager - going to download https://ftp.rrze.uni-erlangen.de/ctan/systems/win32/miktex/tm/packages/xpatch.tar.lzma
+2021-12-08 21:05:45,756+0100 INFO  pdflatex - mpm: 0.48 MB, 7.31 Mbit/s
+2021-12-08 21:05:45,787+0100 INFO  pdflatex - mpm: extracting files from xpatch.tar.lzma...
+2021-12-08 21:05:46,679+0100 INFO  pdflatex.core - start process: initexmf --mkmaps
+2021-12-08 21:05:52,523+0100 INFO  pdflatex - installing package geometry triggered by tex/latex/geometry\geometry.sty
+2021-12-08 21:05:52,523+0100 INFO  pdflatex - mpm: starting package maintenance...
+2021-12-08 21:05:52,523+0100 INFO  pdflatex - mpm: installation directory: C:\_Vim\.vim\MiKTeX\texmfs\install
+2021-12-08 21:05:52,524+0100 INFO  pdflatex - mpm: package repository: https://ftp.rrze.uni-erlangen.de/ctan/systems/win32/miktex/tm/packages/
+2021-12-08 21:05:53,018+0100 INFO  pdflatex - mpm: package repository digest: b5e6ecd758b9b83e358b12ed0b62fe05
+2021-12-08 21:05:53,019+0100 INFO  pdflatex - mpm: going to download 921500 bytes
+2021-12-08 21:05:53,019+0100 INFO  pdflatex - mpm: going to install 8 file(s) (1 package(s))
+2021-12-08 21:05:53,979+0100 INFO  pdflatex.packagemanager - installing package geometry
+2021-12-08 21:05:53,980+0100 INFO  pdflatex - mpm: downloading https://ftp.rrze.uni-erlangen.de/ctan/systems/win32/miktex/tm/packages/geometry.tar.lzma...
+2021-12-08 21:05:53,980+0100 INFO  pdflatex.packagemanager - going to download https://ftp.rrze.uni-erlangen.de/ctan/systems/win32/miktex/tm/packages/geometry.tar.lzma
+2021-12-08 21:05:54,769+0100 INFO  pdflatex - mpm: 0.92 MB, 9.36 Mbit/s
+2021-12-08 21:05:54,800+0100 INFO  pdflatex - mpm: extracting files from geometry.tar.lzma...
+2021-12-08 21:05:55,734+0100 INFO  pdflatex.core - start process: initexmf --mkmaps
+2021-12-08 21:06:00,333+0100 INFO  pdflatex - installing package setspace triggered by tex/latex/setspace\setspace.sty
+2021-12-08 21:06:00,333+0100 INFO  pdflatex - mpm: starting package maintenance...
+2021-12-08 21:06:00,333+0100 INFO  pdflatex - mpm: installation directory: C:\_Vim\.vim\MiKTeX\texmfs\install
+2021-12-08 21:06:00,334+0100 INFO  pdflatex - mpm: package repository: https://ftp.rrze.uni-erlangen.de/ctan/systems/win32/miktex/tm/packages/
+2021-12-08 21:06:00,865+0100 INFO  pdflatex - mpm: package repository digest: b5e6ecd758b9b83e358b12ed0b62fe05
+2021-12-08 21:06:00,865+0100 INFO  pdflatex - mpm: going to download 8626 bytes
+2021-12-08 21:06:00,865+0100 INFO  pdflatex - mpm: going to install 4 file(s) (1 package(s))
+2021-12-08 21:06:01,808+0100 INFO  pdflatex.packagemanager - installing package setspace
+2021-12-08 21:06:01,809+0100 INFO  pdflatex - mpm: downloading https://ftp.rrze.uni-erlangen.de/ctan/systems/win32/miktex/tm/packages/setspace.tar.lzma...
+2021-12-08 21:06:01,809+0100 INFO  pdflatex.packagemanager - going to download https://ftp.rrze.uni-erlangen.de/ctan/systems/win32/miktex/tm/packages/setspace.tar.lzma
+2021-12-08 21:06:01,938+0100 INFO  pdflatex - mpm: 0.01 MB, 0.54 Mbit/s
+2021-12-08 21:06:01,962+0100 INFO  pdflatex - mpm: extracting files from setspace.tar.lzma...
+2021-12-08 21:06:02,852+0100 INFO  pdflatex.core - start process: initexmf --mkmaps
+2021-12-08 21:06:07,872+0100 INFO  pdflatex - installing package float triggered by tex/latex/float\float.sty
+2021-12-08 21:06:07,873+0100 INFO  pdflatex - mpm: starting package maintenance...
+2021-12-08 21:06:07,873+0100 INFO  pdflatex - mpm: installation directory: C:\_Vim\.vim\MiKTeX\texmfs\install
+2021-12-08 21:06:07,873+0100 INFO  pdflatex - mpm: package repository: https://ftp.rrze.uni-erlangen.de/ctan/systems/win32/miktex/tm/packages/
+2021-12-08 21:06:08,264+0100 INFO  pdflatex - mpm: package repository digest: b5e6ecd758b9b83e358b12ed0b62fe05
+2021-12-08 21:06:08,264+0100 INFO  pdflatex - mpm: going to download 127884 bytes
+2021-12-08 21:06:08,264+0100 INFO  pdflatex - mpm: going to install 5 file(s) (1 package(s))
+2021-12-08 21:06:09,200+0100 INFO  pdflatex.packagemanager - installing package float
+2021-12-08 21:06:09,202+0100 INFO  pdflatex - mpm: downloading https://ftp.rrze.uni-erlangen.de/ctan/systems/win32/miktex/tm/packages/float.tar.lzma...
+2021-12-08 21:06:09,202+0100 INFO  pdflatex.packagemanager - going to download https://ftp.rrze.uni-erlangen.de/ctan/systems/win32/miktex/tm/packages/float.tar.lzma
+2021-12-08 21:06:09,443+0100 INFO  pdflatex - mpm: 0.13 MB, 4.28 Mbit/s
+2021-12-08 21:06:09,463+0100 INFO  pdflatex - mpm: extracting files from float.tar.lzma...
+2021-12-08 21:06:10,328+0100 INFO  pdflatex.core - start process: initexmf --mkmaps
+2021-12-08 21:06:14,307+0100 INFO  pdflatex - installing package caption triggered by tex/latex/caption\caption.sty
+2021-12-08 21:06:14,307+0100 INFO  pdflatex - mpm: starting package maintenance...
+2021-12-08 21:06:14,307+0100 INFO  pdflatex - mpm: installation directory: C:\_Vim\.vim\MiKTeX\texmfs\install
+2021-12-08 21:06:14,307+0100 INFO  pdflatex - mpm: package repository: https://ftp.rrze.uni-erlangen.de/ctan/systems/win32/miktex/tm/packages/
+2021-12-08 21:06:14,780+0100 INFO  pdflatex - mpm: package repository digest: b5e6ecd758b9b83e358b12ed0b62fe05
+2021-12-08 21:06:14,780+0100 INFO  pdflatex - mpm: going to download 1802539 bytes
+2021-12-08 21:06:14,780+0100 INFO  pdflatex - mpm: going to install 26 file(s) (1 package(s))
+2021-12-08 21:06:15,721+0100 INFO  pdflatex.packagemanager - installing package caption
+2021-12-08 21:06:15,722+0100 INFO  pdflatex - mpm: downloading https://ftp.rrze.uni-erlangen.de/ctan/systems/win32/miktex/tm/packages/caption.tar.lzma...
+2021-12-08 21:06:15,722+0100 INFO  pdflatex.packagemanager - going to download https://ftp.rrze.uni-erlangen.de/ctan/systems/win32/miktex/tm/packages/caption.tar.lzma
+2021-12-08 21:06:18,441+0100 INFO  pdflatex - mpm: 1.80 MB, 5.31 Mbit/s
+2021-12-08 21:06:18,480+0100 INFO  pdflatex - mpm: extracting files from caption.tar.lzma...
+2021-12-08 21:06:19,602+0100 INFO  pdflatex.core - start process: initexmf --mkmaps
+2021-12-08 21:06:24,391+0100 INFO  pdflatex - installing package wrapfig triggered by tex/latex/wrapfig\wrapfig.sty
+2021-12-08 21:06:24,391+0100 INFO  pdflatex - mpm: starting package maintenance...
+2021-12-08 21:06:24,391+0100 INFO  pdflatex - mpm: installation directory: C:\_Vim\.vim\MiKTeX\texmfs\install
+2021-12-08 21:06:24,391+0100 INFO  pdflatex - mpm: package repository: https://ftp.rrze.uni-erlangen.de/ctan/systems/win32/miktex/tm/packages/
+2021-12-08 21:06:24,803+0100 INFO  pdflatex - mpm: package repository digest: b5e6ecd758b9b83e358b12ed0b62fe05
+2021-12-08 21:06:24,803+0100 INFO  pdflatex - mpm: going to download 349367 bytes
+2021-12-08 21:06:24,803+0100 INFO  pdflatex - mpm: going to install 5 file(s) (1 package(s))
+2021-12-08 21:06:25,864+0100 INFO  pdflatex.packagemanager - installing package wrapfig
+2021-12-08 21:06:25,866+0100 INFO  pdflatex - mpm: downloading https://ftp.rrze.uni-erlangen.de/ctan/systems/win32/miktex/tm/packages/wrapfig.tar.lzma...
+2021-12-08 21:06:25,866+0100 INFO  pdflatex.packagemanager - going to download https://ftp.rrze.uni-erlangen.de/ctan/systems/win32/miktex/tm/packages/wrapfig.tar.lzma
+2021-12-08 21:06:26,293+0100 INFO  pdflatex - mpm: 0.35 MB, 6.58 Mbit/s
+2021-12-08 21:06:26,351+0100 INFO  pdflatex - mpm: extracting files from wrapfig.tar.lzma...
+2021-12-08 21:06:27,246+0100 INFO  pdflatex.core - start process: initexmf --mkmaps
+2021-12-08 21:06:35,849+0100 INFO  pdflatex - installing package tikzscale triggered by tex/latex/tikzscale\tikzscale.sty
+2021-12-08 21:06:35,849+0100 INFO  pdflatex - mpm: starting package maintenance...
+2021-12-08 21:06:35,849+0100 INFO  pdflatex - mpm: installation directory: C:\_Vim\.vim\MiKTeX\texmfs\install
+2021-12-08 21:06:35,849+0100 INFO  pdflatex - mpm: package repository: https://ftp.rrze.uni-erlangen.de/ctan/systems/win32/miktex/tm/packages/
+2021-12-08 21:06:36,242+0100 INFO  pdflatex - mpm: package repository digest: b5e6ecd758b9b83e358b12ed0b62fe05
+2021-12-08 21:06:36,242+0100 INFO  pdflatex - mpm: going to download 586082 bytes
+2021-12-08 21:06:36,242+0100 INFO  pdflatex - mpm: going to install 24 file(s) (1 package(s))
+2021-12-08 21:06:37,264+0100 INFO  pdflatex.packagemanager - installing package tikzscale
+2021-12-08 21:06:37,266+0100 INFO  pdflatex - mpm: downloading https://ftp.rrze.uni-erlangen.de/ctan/systems/win32/miktex/tm/packages/tikzscale.tar.lzma...
+2021-12-08 21:06:37,266+0100 INFO  pdflatex.packagemanager - going to download https://ftp.rrze.uni-erlangen.de/ctan/systems/win32/miktex/tm/packages/tikzscale.tar.lzma
+2021-12-08 21:06:37,952+0100 INFO  pdflatex - mpm: 0.59 MB, 6.84 Mbit/s
+2021-12-08 21:06:37,984+0100 INFO  pdflatex - mpm: extracting files from tikzscale.tar.lzma...
+2021-12-08 21:06:39,241+0100 INFO  pdflatex.core - start process: initexmf --mkmaps
+2021-12-08 21:06:44,627+0100 INFO  pdflatex - installing package letltxmacro triggered by tex/latex/letltxmacro\letltxmacro.sty
+2021-12-08 21:06:44,627+0100 INFO  pdflatex - mpm: starting package maintenance...
+2021-12-08 21:06:44,627+0100 INFO  pdflatex - mpm: installation directory: C:\_Vim\.vim\MiKTeX\texmfs\install
+2021-12-08 21:06:44,627+0100 INFO  pdflatex - mpm: package repository: https://ftp.rrze.uni-erlangen.de/ctan/systems/win32/miktex/tm/packages/
+2021-12-08 21:06:45,039+0100 INFO  pdflatex - mpm: package repository digest: b5e6ecd758b9b83e358b12ed0b62fe05
+2021-12-08 21:06:45,040+0100 INFO  pdflatex - mpm: going to download 298537 bytes
+2021-12-08 21:06:45,040+0100 INFO  pdflatex - mpm: going to install 6 file(s) (1 package(s))
+2021-12-08 21:06:46,110+0100 INFO  pdflatex.packagemanager - installing package letltxmacro
+2021-12-08 21:06:46,112+0100 INFO  pdflatex - mpm: downloading https://ftp.rrze.uni-erlangen.de/ctan/systems/win32/miktex/tm/packages/letltxmacro.tar.lzma...
+2021-12-08 21:06:46,112+0100 INFO  pdflatex.packagemanager - going to download https://ftp.rrze.uni-erlangen.de/ctan/systems/win32/miktex/tm/packages/letltxmacro.tar.lzma
+2021-12-08 21:06:46,486+0100 INFO  pdflatex - mpm: 0.30 MB, 6.44 Mbit/s
+2021-12-08 21:06:46,518+0100 INFO  pdflatex - mpm: extracting files from letltxmacro.tar.lzma...
+2021-12-08 21:06:47,395+0100 INFO  pdflatex.core - start process: initexmf --mkmaps
+2021-12-08 21:06:52,530+0100 INFO  pdflatex - installing package acronym triggered by tex/latex/acronym\acronym.sty
+2021-12-08 21:06:52,530+0100 INFO  pdflatex - mpm: starting package maintenance...
+2021-12-08 21:06:52,531+0100 INFO  pdflatex - mpm: installation directory: C:\_Vim\.vim\MiKTeX\texmfs\install
+2021-12-08 21:06:52,531+0100 INFO  pdflatex - mpm: package repository: https://ftp.rrze.uni-erlangen.de/ctan/systems/win32/miktex/tm/packages/
+2021-12-08 21:06:52,915+0100 INFO  pdflatex - mpm: package repository digest: b5e6ecd758b9b83e358b12ed0b62fe05
+2021-12-08 21:06:52,916+0100 INFO  pdflatex - mpm: going to download 301327 bytes
+2021-12-08 21:06:52,916+0100 INFO  pdflatex - mpm: going to install 6 file(s) (1 package(s))
+2021-12-08 21:06:53,879+0100 INFO  pdflatex.packagemanager - installing package acronym
+2021-12-08 21:06:53,880+0100 INFO  pdflatex - mpm: downloading https://ftp.rrze.uni-erlangen.de/ctan/systems/win32/miktex/tm/packages/acronym.tar.lzma...
+2021-12-08 21:06:53,880+0100 INFO  pdflatex.packagemanager - going to download https://ftp.rrze.uni-erlangen.de/ctan/systems/win32/miktex/tm/packages/acronym.tar.lzma
+2021-12-08 21:06:54,362+0100 INFO  pdflatex - mpm: 0.30 MB, 5.02 Mbit/s
+2021-12-08 21:06:54,389+0100 INFO  pdflatex - mpm: extracting files from acronym.tar.lzma...
+2021-12-08 21:06:55,299+0100 INFO  pdflatex.core - start process: initexmf --mkmaps
+2021-12-08 21:06:59,651+0100 INFO  pdflatex - installing package bigfoot triggered by tex/latex/bigfoot\suffix.sty
+2021-12-08 21:06:59,651+0100 INFO  pdflatex - mpm: starting package maintenance...
+2021-12-08 21:06:59,651+0100 INFO  pdflatex - mpm: installation directory: C:\_Vim\.vim\MiKTeX\texmfs\install
+2021-12-08 21:06:59,651+0100 INFO  pdflatex - mpm: package repository: https://ftp.rrze.uni-erlangen.de/ctan/systems/win32/miktex/tm/packages/
+2021-12-08 21:07:00,149+0100 INFO  pdflatex - mpm: package repository digest: b5e6ecd758b9b83e358b12ed0b62fe05
+2021-12-08 21:07:00,149+0100 INFO  pdflatex - mpm: going to download 787676 bytes
+2021-12-08 21:07:00,149+0100 INFO  pdflatex - mpm: going to install 10 file(s) (1 package(s))
+2021-12-08 21:07:01,388+0100 INFO  pdflatex.packagemanager - installing package bigfoot
+2021-12-08 21:07:01,389+0100 INFO  pdflatex - mpm: downloading https://ftp.rrze.uni-erlangen.de/ctan/systems/win32/miktex/tm/packages/bigfoot.tar.lzma...
+2021-12-08 21:07:01,389+0100 INFO  pdflatex.packagemanager - going to download https://ftp.rrze.uni-erlangen.de/ctan/systems/win32/miktex/tm/packages/bigfoot.tar.lzma
+2021-12-08 21:07:02,286+0100 INFO  pdflatex - mpm: 0.79 MB, 7.03 Mbit/s
+2021-12-08 21:07:02,310+0100 INFO  pdflatex - mpm: extracting files from bigfoot.tar.lzma...
+2021-12-08 21:07:03,395+0100 INFO  pdflatex.core - start process: initexmf --mkmaps
+2021-12-08 21:07:08,544+0100 INFO  pdflatex - installing package booktabs triggered by tex/latex/booktabs\booktabs.sty
+2021-12-08 21:07:08,545+0100 INFO  pdflatex - mpm: starting package maintenance...
+2021-12-08 21:07:08,545+0100 INFO  pdflatex - mpm: installation directory: C:\_Vim\.vim\MiKTeX\texmfs\install
+2021-12-08 21:07:08,545+0100 INFO  pdflatex - mpm: package repository: https://ftp.rrze.uni-erlangen.de/ctan/systems/win32/miktex/tm/packages/
+2021-12-08 21:07:08,976+0100 INFO  pdflatex - mpm: package repository digest: b5e6ecd758b9b83e358b12ed0b62fe05
+2021-12-08 21:07:08,976+0100 INFO  pdflatex - mpm: going to download 313410 bytes
+2021-12-08 21:07:08,976+0100 INFO  pdflatex - mpm: going to install 5 file(s) (1 package(s))
+2021-12-08 21:07:09,965+0100 INFO  pdflatex.packagemanager - installing package booktabs
+2021-12-08 21:07:09,966+0100 INFO  pdflatex - mpm: downloading https://ftp.rrze.uni-erlangen.de/ctan/systems/win32/miktex/tm/packages/booktabs.tar.lzma...
+2021-12-08 21:07:09,966+0100 INFO  pdflatex.packagemanager - going to download https://ftp.rrze.uni-erlangen.de/ctan/systems/win32/miktex/tm/packages/booktabs.tar.lzma
+2021-12-08 21:07:10,353+0100 INFO  pdflatex - mpm: 0.31 MB, 6.51 Mbit/s
+2021-12-08 21:07:10,373+0100 INFO  pdflatex - mpm: extracting files from booktabs.tar.lzma...
+2021-12-08 21:07:11,248+0100 INFO  pdflatex.core - start process: initexmf --mkmaps
+2021-12-08 21:07:16,444+0100 INFO  pdflatex - installing package psnfss triggered by tex/latex/psnfss\helvet.sty
+2021-12-08 21:07:16,444+0100 INFO  pdflatex - mpm: starting package maintenance...
+2021-12-08 21:07:16,444+0100 INFO  pdflatex - mpm: installation directory: C:\_Vim\.vim\MiKTeX\texmfs\install
+2021-12-08 21:07:16,444+0100 INFO  pdflatex - mpm: package repository: https://ftp.rrze.uni-erlangen.de/ctan/systems/win32/miktex/tm/packages/
+2021-12-08 21:07:16,871+0100 INFO  pdflatex - mpm: package repository digest: b5e6ecd758b9b83e358b12ed0b62fe05
+2021-12-08 21:07:16,872+0100 INFO  pdflatex - mpm: going to download 279649 bytes
+2021-12-08 21:07:16,872+0100 INFO  pdflatex - mpm: going to install 121 file(s) (1 package(s))
+2021-12-08 21:07:17,872+0100 INFO  pdflatex.packagemanager - installing package psnfss
+2021-12-08 21:07:17,873+0100 INFO  pdflatex - mpm: downloading https://ftp.rrze.uni-erlangen.de/ctan/systems/win32/miktex/tm/packages/psnfss.tar.lzma...
+2021-12-08 21:07:17,873+0100 INFO  pdflatex.packagemanager - going to download https://ftp.rrze.uni-erlangen.de/ctan/systems/win32/miktex/tm/packages/psnfss.tar.lzma
+2021-12-08 21:07:18,254+0100 INFO  pdflatex - mpm: 0.28 MB, 5.90 Mbit/s
+2021-12-08 21:07:18,281+0100 INFO  pdflatex - mpm: extracting files from psnfss.tar.lzma...
+2021-12-08 21:07:19,450+0100 INFO  pdflatex.core - start process: initexmf --mkmaps
+2021-12-08 21:07:25,356+0100 INFO  pdflatex - installing package infwarerr triggered by tex/generic/infwarerr\infwarerr.sty
+2021-12-08 21:07:25,356+0100 INFO  pdflatex - mpm: starting package maintenance...
+2021-12-08 21:07:25,357+0100 INFO  pdflatex - mpm: installation directory: C:\_Vim\.vim\MiKTeX\texmfs\install
+2021-12-08 21:07:25,357+0100 INFO  pdflatex - mpm: package repository: https://ftp.rrze.uni-erlangen.de/ctan/systems/win32/miktex/tm/packages/
+2021-12-08 21:07:25,815+0100 INFO  pdflatex - mpm: package repository digest: b5e6ecd758b9b83e358b12ed0b62fe05
+2021-12-08 21:07:25,815+0100 INFO  pdflatex - mpm: going to download 293465 bytes
+2021-12-08 21:07:25,815+0100 INFO  pdflatex - mpm: going to install 5 file(s) (1 package(s))
+2021-12-08 21:07:26,822+0100 INFO  pdflatex.packagemanager - installing package infwarerr
+2021-12-08 21:07:26,824+0100 INFO  pdflatex - mpm: downloading https://ftp.rrze.uni-erlangen.de/ctan/systems/win32/miktex/tm/packages/infwarerr.tar.lzma...
+2021-12-08 21:07:26,824+0100 INFO  pdflatex.packagemanager - going to download https://ftp.rrze.uni-erlangen.de/ctan/systems/win32/miktex/tm/packages/infwarerr.tar.lzma
+2021-12-08 21:07:27,190+0100 INFO  pdflatex - mpm: 0.29 MB, 6.45 Mbit/s
+2021-12-08 21:07:27,237+0100 INFO  pdflatex - mpm: extracting files from infwarerr.tar.lzma...
+2021-12-08 21:07:28,265+0100 INFO  pdflatex.core - start process: initexmf --mkmaps
+2021-12-08 21:07:37,308+0100 INFO  pdflatex - installing package grfext triggered by tex/latex/grfext\grfext.sty
+2021-12-08 21:07:37,308+0100 INFO  pdflatex - mpm: starting package maintenance...
+2021-12-08 21:07:37,309+0100 INFO  pdflatex - mpm: installation directory: C:\_Vim\.vim\MiKTeX\texmfs\install
+2021-12-08 21:07:37,309+0100 INFO  pdflatex - mpm: package repository: https://ftp.rrze.uni-erlangen.de/ctan/systems/win32/miktex/tm/packages/
+2021-12-08 21:07:37,725+0100 INFO  pdflatex - mpm: package repository digest: b5e6ecd758b9b83e358b12ed0b62fe05
+2021-12-08 21:07:37,726+0100 INFO  pdflatex - mpm: going to download 317057 bytes
+2021-12-08 21:07:37,726+0100 INFO  pdflatex - mpm: going to install 5 file(s) (1 package(s))
+2021-12-08 21:07:38,681+0100 INFO  pdflatex.packagemanager - installing package grfext
+2021-12-08 21:07:38,682+0100 INFO  pdflatex - mpm: downloading https://ftp.rrze.uni-erlangen.de/ctan/systems/win32/miktex/tm/packages/grfext.tar.lzma...
+2021-12-08 21:07:38,682+0100 INFO  pdflatex.packagemanager - going to download https://ftp.rrze.uni-erlangen.de/ctan/systems/win32/miktex/tm/packages/grfext.tar.lzma
+2021-12-08 21:07:39,077+0100 INFO  pdflatex - mpm: 0.32 MB, 6.44 Mbit/s
+2021-12-08 21:07:39,102+0100 INFO  pdflatex - mpm: extracting files from grfext.tar.lzma...
+2021-12-08 21:07:40,124+0100 INFO  pdflatex.core - start process: initexmf --mkmaps
+2021-12-08 21:07:44,130+0100 INFO  pdflatex - installing package kvdefinekeys triggered by tex/generic/kvdefinekeys\kvdefinekeys.sty
+2021-12-08 21:07:44,131+0100 INFO  pdflatex - mpm: starting package maintenance...
+2021-12-08 21:07:44,131+0100 INFO  pdflatex - mpm: installation directory: C:\_Vim\.vim\MiKTeX\texmfs\install
+2021-12-08 21:07:44,131+0100 INFO  pdflatex - mpm: package repository: https://ftp.rrze.uni-erlangen.de/ctan/systems/win32/miktex/tm/packages/
+2021-12-08 21:07:44,550+0100 INFO  pdflatex - mpm: package repository digest: b5e6ecd758b9b83e358b12ed0b62fe05
+2021-12-08 21:07:44,550+0100 INFO  pdflatex - mpm: going to download 304244 bytes
+2021-12-08 21:07:44,550+0100 INFO  pdflatex - mpm: going to install 5 file(s) (1 package(s))
+2021-12-08 21:07:45,504+0100 INFO  pdflatex.packagemanager - installing package kvdefinekeys
+2021-12-08 21:07:45,505+0100 INFO  pdflatex - mpm: downloading https://ftp.rrze.uni-erlangen.de/ctan/systems/win32/miktex/tm/packages/kvdefinekeys.tar.lzma...
+2021-12-08 21:07:45,505+0100 INFO  pdflatex.packagemanager - going to download https://ftp.rrze.uni-erlangen.de/ctan/systems/win32/miktex/tm/packages/kvdefinekeys.tar.lzma
+2021-12-08 21:07:45,919+0100 INFO  pdflatex - mpm: 0.30 MB, 5.89 Mbit/s
+2021-12-08 21:07:45,949+0100 INFO  pdflatex - mpm: extracting files from kvdefinekeys.tar.lzma...
+2021-12-08 21:07:46,845+0100 INFO  pdflatex.core - start process: initexmf --mkmaps
+2021-12-08 21:07:56,288+0100 INFO  pdflatex - installing package kvoptions triggered by tex/latex/kvoptions\kvoptions.sty
+2021-12-08 21:07:56,288+0100 INFO  pdflatex - mpm: starting package maintenance...
+2021-12-08 21:07:56,288+0100 INFO  pdflatex - mpm: installation directory: C:\_Vim\.vim\MiKTeX\texmfs\install
+2021-12-08 21:07:56,288+0100 INFO  pdflatex - mpm: package repository: https://ftp.rrze.uni-erlangen.de/ctan/systems/win32/miktex/tm/packages/
+2021-12-08 21:07:56,793+0100 INFO  pdflatex - mpm: package repository digest: b5e6ecd758b9b83e358b12ed0b62fe05
+2021-12-08 21:07:56,793+0100 INFO  pdflatex - mpm: going to download 500847 bytes
+2021-12-08 21:07:56,793+0100 INFO  pdflatex - mpm: going to install 7 file(s) (1 package(s))
+2021-12-08 21:07:57,702+0100 INFO  pdflatex.packagemanager - installing package kvoptions
+2021-12-08 21:07:57,703+0100 INFO  pdflatex - mpm: downloading https://ftp.rrze.uni-erlangen.de/ctan/systems/win32/miktex/tm/packages/kvoptions.tar.lzma...
+2021-12-08 21:07:57,703+0100 INFO  pdflatex.packagemanager - going to download https://ftp.rrze.uni-erlangen.de/ctan/systems/win32/miktex/tm/packages/kvoptions.tar.lzma
+2021-12-08 21:07:58,267+0100 INFO  pdflatex - mpm: 0.50 MB, 7.13 Mbit/s
+2021-12-08 21:07:58,296+0100 INFO  pdflatex - mpm: extracting files from kvoptions.tar.lzma...
+2021-12-08 21:07:59,302+0100 INFO  pdflatex.core - start process: initexmf --mkmaps
+2021-12-08 21:08:02,126+0100 INFO  pdflatex - installing package ltxcmds triggered by tex/generic/ltxcmds\ltxcmds.sty
+2021-12-08 21:08:02,126+0100 INFO  pdflatex - mpm: starting package maintenance...
+2021-12-08 21:08:02,126+0100 INFO  pdflatex - mpm: installation directory: C:\_Vim\.vim\MiKTeX\texmfs\install
+2021-12-08 21:08:02,126+0100 INFO  pdflatex - mpm: package repository: https://ftp.rrze.uni-erlangen.de/ctan/systems/win32/miktex/tm/packages/
+2021-12-08 21:08:02,571+0100 INFO  pdflatex - mpm: package repository digest: b5e6ecd758b9b83e358b12ed0b62fe05
+2021-12-08 21:08:02,572+0100 INFO  pdflatex - mpm: going to download 409074 bytes
+2021-12-08 21:08:02,572+0100 INFO  pdflatex - mpm: going to install 5 file(s) (1 package(s))
+2021-12-08 21:08:03,566+0100 INFO  pdflatex.packagemanager - installing package ltxcmds
+2021-12-08 21:08:03,567+0100 INFO  pdflatex - mpm: downloading https://ftp.rrze.uni-erlangen.de/ctan/systems/win32/miktex/tm/packages/ltxcmds.tar.lzma...
+2021-12-08 21:08:03,568+0100 INFO  pdflatex.packagemanager - going to download https://ftp.rrze.uni-erlangen.de/ctan/systems/win32/miktex/tm/packages/ltxcmds.tar.lzma
+2021-12-08 21:08:04,115+0100 INFO  pdflatex - mpm: 0.41 MB, 5.99 Mbit/s
+2021-12-08 21:08:04,143+0100 INFO  pdflatex - mpm: extracting files from ltxcmds.tar.lzma...
+2021-12-08 21:08:05,020+0100 INFO  pdflatex.core - start process: initexmf --mkmaps
+2021-12-08 21:08:07,629+0100 INFO  pdflatex - installing package kvsetkeys triggered by tex/generic/kvsetkeys\kvsetkeys.sty
+2021-12-08 21:08:07,630+0100 INFO  pdflatex - mpm: starting package maintenance...
+2021-12-08 21:08:07,630+0100 INFO  pdflatex - mpm: installation directory: C:\_Vim\.vim\MiKTeX\texmfs\install
+2021-12-08 21:08:07,630+0100 INFO  pdflatex - mpm: package repository: https://ftp.rrze.uni-erlangen.de/ctan/systems/win32/miktex/tm/packages/
+2021-12-08 21:08:08,024+0100 INFO  pdflatex - mpm: package repository digest: b5e6ecd758b9b83e358b12ed0b62fe05
+2021-12-08 21:08:08,024+0100 INFO  pdflatex - mpm: going to download 386446 bytes
+2021-12-08 21:08:08,024+0100 INFO  pdflatex - mpm: going to install 6 file(s) (1 package(s))
+2021-12-08 21:08:08,798+0100 INFO  pdflatex.packagemanager - installing package kvsetkeys
+2021-12-08 21:08:08,799+0100 INFO  pdflatex - mpm: downloading https://ftp.rrze.uni-erlangen.de/ctan/systems/win32/miktex/tm/packages/kvsetkeys.tar.lzma...
+2021-12-08 21:08:08,800+0100 INFO  pdflatex.packagemanager - going to download https://ftp.rrze.uni-erlangen.de/ctan/systems/win32/miktex/tm/packages/kvsetkeys.tar.lzma
+2021-12-08 21:08:09,171+0100 INFO  pdflatex - mpm: 0.39 MB, 8.36 Mbit/s
+2021-12-08 21:08:09,198+0100 INFO  pdflatex - mpm: extracting files from kvsetkeys.tar.lzma...
+2021-12-08 21:08:10,036+0100 INFO  pdflatex.core - start process: initexmf --mkmaps
+2021-12-08 21:08:13,772+0100 INFO  pdflatex.core - start process: miktex-makepk --enable-installer --verbose ectt1095 600 600 magstep(0.0)
+2021-12-08 21:08:19,344+0100 INFO  pdflatex.core - start process: miktex-makepk --enable-installer --verbose ecrm1200 600 600 magstep(0.0)
+2021-12-08 21:08:22,016+0100 INFO  pdflatex - this process (12332) finishes with exit code 0
+2021-12-08 21:08:23,713+0100 INFO  pdflatex - this process (2936) started by 'sh' with command line: C:\_Vim\.vim\MiKTeX\texmfs\install\miktex\bin\pdflatex.exe -file-line-error -synctex=1 -interaction=nonstopmode -recorder sicar-programming-guide.tex
+2021-12-08 21:08:23,716+0100 INFO  pdflatex - this is MiKTeX-PDFTEX 4.10.0 (1.40.24) (MiKTeX 21.12 32-bit Portable)
+2021-12-08 21:08:23,720+0100 INFO  pdflatex - allowing known shell commands
+2021-12-08 21:08:26,419+0100 INFO  pdflatex - this process (2936) finishes with exit code 0

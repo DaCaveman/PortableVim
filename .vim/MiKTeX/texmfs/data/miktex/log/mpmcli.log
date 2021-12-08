@@ -1,0 +1,14 @@
+2021-12-08 20:42:58,841+0100 INFO  mpmcli - this is mpmcli 4.2 (MiKTeX 21.12 32-bit Portable)
+2021-12-08 20:42:58,841+0100 INFO  mpmcli - this process (552) started by 'miktex-portable' with command line: mpm --register-components --verbose
+2021-12-08 20:42:58,841+0100 INFO  mpmcli - Operating on the private (per-user) MiKTeX setup
+2021-12-08 20:42:58,843+0100 INFO  mpmcli - configuring fontconfig\config\fonts.conf
+2021-12-08 20:42:58,920+0100 WARN  mpmcli.core - still open: C:\_Vim\.vim\MiKTeX\texmfs\install\fontconfig\config\fonts.conf.in
+2021-12-08 20:42:58,920+0100 WARN  mpmcli.core - still open: C:\_Vim\.vim\MiKTeX\texmfs/config\fontconfig\config\fonts.conf
+2021-12-08 20:42:58,921+0100 INFO  mpmcli - this process (552) finishes with exit code 0
+2021-12-08 20:46:07,861+0100 INFO  mpmcli - this is mpmcli 4.2 (MiKTeX 21.12 32-bit Portable)
+2021-12-08 20:46:07,862+0100 INFO  mpmcli - this process (1664) started by 'miktex-console' with command line: mpm --register-components --verbose
+2021-12-08 20:46:07,862+0100 INFO  mpmcli - Operating on the private (per-user) MiKTeX setup
+2021-12-08 20:46:07,863+0100 INFO  mpmcli - configuring fontconfig\config\fonts.conf
+2021-12-08 20:46:07,871+0100 WARN  mpmcli.core - still open: C:\_Vim\.vim\MiKTeX\texmfs\install\fontconfig/config\fonts.conf.in
+2021-12-08 20:46:07,871+0100 WARN  mpmcli.core - still open: C:\_Vim\.vim\MiKTeX\texmfs/config\fontconfig\config\fonts.conf
+2021-12-08 20:46:07,972+0100 INFO  mpmcli - this process (1664) finishes with exit code 0

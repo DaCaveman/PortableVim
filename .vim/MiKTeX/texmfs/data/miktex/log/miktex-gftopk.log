@@ -1,0 +1,10 @@
+2021-12-08 21:08:18,908+0100 INFO  miktex-gftopk - this process (20952) started by 'miktex-makepk' with command line: miktex-gftopk.exe --miktex-enable-installer --miktex-disable-maintenance --miktex-disable-diagnose ectt1095.600gf ectt1095.pk
+2021-12-08 21:08:18,909+0100 INFO  miktex-gftopk - this is MiKTeX-GFTOPK  (MiKTeX 21.12 32-bit Portable)
+2021-12-08 21:08:18,922+0100 INFO  miktex-gftopk - this process (20952) finishes with exit code 0
+2021-12-08 21:08:18,924+0100 WARN  miktex-gftopk.core - still open: ectt1095.600gf
+2021-12-08 21:08:18,924+0100 WARN  miktex-gftopk.core - still open: ectt1095.pk
+2021-12-08 21:08:21,745+0100 INFO  miktex-gftopk - this process (5484) started by 'miktex-makepk' with command line: miktex-gftopk.exe --miktex-enable-installer --miktex-disable-maintenance --miktex-disable-diagnose ecrm1200.600gf ecrm1200.pk
+2021-12-08 21:08:21,745+0100 INFO  miktex-gftopk - this is MiKTeX-GFTOPK  (MiKTeX 21.12 32-bit Portable)
+2021-12-08 21:08:21,755+0100 INFO  miktex-gftopk - this process (5484) finishes with exit code 0
+2021-12-08 21:08:21,757+0100 WARN  miktex-gftopk.core - still open: ecrm1200.600gf
+2021-12-08 21:08:21,757+0100 WARN  miktex-gftopk.core - still open: ecrm1200.pk

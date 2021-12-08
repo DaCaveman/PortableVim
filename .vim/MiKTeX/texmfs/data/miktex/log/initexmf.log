@@ -1,0 +1,276 @@
+2021-12-08 20:42:58,238+0100 INFO  initexmf - this is MiKTeX Configuration Utility 4.7 (MiKTeX 21.12 32-bit Portable)
+2021-12-08 20:42:58,239+0100 INFO  initexmf - this process (7252) started by 'miktex-portable' with command line: initexmf --rmfndb --log-file=C:\_Vim\.vim\MiKTeX\texmfs/install\miktex/config\uninst.log --disable-installer --verbose
+2021-12-08 20:42:58,239+0100 INFO  initexmf - Operating on the private (per-user) MiKTeX setup
+2021-12-08 20:42:58,244+0100 INFO  initexmf - this process (7252) finishes with exit code 0
+2021-12-08 20:42:59,210+0100 INFO  initexmf - this is MiKTeX Configuration Utility 4.7 (MiKTeX 21.12 32-bit Portable)
+2021-12-08 20:42:59,211+0100 INFO  initexmf - this process (20652) started by 'miktex-portable' with command line: initexmf --update-fndb --log-file=C:\_Vim\.vim\MiKTeX\texmfs/install\miktex/config\uninst.log --disable-installer --verbose
+2021-12-08 20:42:59,214+0100 INFO  initexmf - Operating on the private (per-user) MiKTeX setup
+2021-12-08 20:42:59,217+0100 INFO  initexmf - Creating fndb for common root directory (C:\_Vim\.vim\MiKTeX\texmfs/config)...
+2021-12-08 20:42:59,266+0100 INFO  initexmf - Creating fndb for common root directory (C:\_Vim\.vim\MiKTeX\texmfs/data)...
+2021-12-08 20:42:59,296+0100 INFO  initexmf - Creating fndb for common root directory (C:\_Vim\.vim\MiKTeX\texmfs\install)...
+2021-12-08 20:43:02,596+0100 INFO  initexmf - Creating fndb for MPM...
+2021-12-08 20:43:05,509+0100 INFO  initexmf - this process (20652) finishes with exit code 0
+2021-12-08 20:43:05,970+0100 INFO  initexmf - this is MiKTeX Configuration Utility 4.7 (MiKTeX 21.12 32-bit Portable)
+2021-12-08 20:43:05,971+0100 INFO  initexmf - this process (13688) started by 'miktex-portable' with command line: initexmf --force --mklinks --log-file=C:\_Vim\.vim\MiKTeX\texmfs/install\miktex/config\uninst.log --disable-installer --verbose
+2021-12-08 20:43:05,971+0100 INFO  initexmf - Operating on the private (per-user) MiKTeX setup
+2021-12-08 20:43:05,974+0100 INFO  initexmf - Collecting linked executables in target directory C:\_Vim\.vim\MiKTeX\texmfs\install\miktex/bin...
+2021-12-08 20:43:06,023+0100 WARN  initexmf - The lualatex executable could not be found.
+2021-12-08 20:43:09,320+0100 INFO  initexmf - this process (13688) finishes with exit code 0
+2021-12-08 20:43:09,892+0100 INFO  initexmf - this is MiKTeX Configuration Utility 4.7 (MiKTeX 21.12 32-bit Portable)
+2021-12-08 20:43:09,894+0100 INFO  initexmf - this process (20428) started by 'miktex-portable' with command line: initexmf --mkmaps --mklangs --log-file=C:\_Vim\.vim\MiKTeX\texmfs/install\miktex/config\uninst.log --disable-installer --verbose
+2021-12-08 20:43:09,894+0100 INFO  initexmf - Operating on the private (per-user) MiKTeX setup
+2021-12-08 20:43:09,895+0100 INFO  initexmf - Creating language.dat, language.dat.lua and language.def...
+2021-12-08 20:43:10,023+0100 INFO  initexmf - running: mkfntmap --verbose --disable-installer --miktex-disable-maintenance --miktex-disable-diagnose
+2021-12-08 20:43:10,023+0100 INFO  initexmf.core - start process: mkfntmap --verbose --disable-installer --miktex-disable-maintenance --miktex-disable-diagnose
+2021-12-08 20:43:19,795+0100 INFO  initexmf - this process (20428) finishes with exit code 0
+2021-12-08 20:43:20,308+0100 INFO  initexmf - this is MiKTeX Configuration Utility 4.7 (MiKTeX 21.12 32-bit Portable)
+2021-12-08 20:43:20,309+0100 INFO  initexmf - this process (16412) started by 'miktex-portable' with command line: initexmf --default-paper-size=A4 --log-file=C:\_Vim\.vim\MiKTeX\texmfs/install\miktex/config\uninst.log --disable-installer --verbose
+2021-12-08 20:43:20,309+0100 INFO  initexmf - Operating on the private (per-user) MiKTeX setup
+2021-12-08 20:43:20,414+0100 INFO  initexmf - this process (16412) finishes with exit code 0
+2021-12-08 20:43:20,932+0100 INFO  initexmf - this is MiKTeX Configuration Utility 4.7 (MiKTeX 21.12 32-bit Portable)
+2021-12-08 20:43:20,933+0100 INFO  initexmf - this process (11128) started by 'miktex-portable' with command line: initexmf --set-config-value=[MPM]AutoInstall=2 --log-file=C:\_Vim\.vim\MiKTeX\texmfs/install\miktex/config\uninst.log --disable-installer --verbose
+2021-12-08 20:43:20,933+0100 INFO  initexmf - Operating on the private (per-user) MiKTeX setup
+2021-12-08 20:43:20,935+0100 INFO  initexmf - Setting config value: [MPM]AutoInstall=2
+2021-12-08 20:43:21,030+0100 INFO  initexmf - this process (11128) finishes with exit code 0
+2021-12-08 20:43:21,494+0100 INFO  initexmf - this is MiKTeX Configuration Utility 4.7 (MiKTeX 21.12 32-bit Portable)
+2021-12-08 20:43:21,494+0100 INFO  initexmf - this process (3436) started by 'miktex-portable' with command line: initexmf --update-fndb --log-file=C:\_Vim\.vim\MiKTeX\texmfs/install\miktex/config\uninst.log --disable-installer --verbose
+2021-12-08 20:43:21,494+0100 INFO  initexmf - Operating on the private (per-user) MiKTeX setup
+2021-12-08 20:43:21,565+0100 INFO  initexmf - Creating fndb for common root directory (C:\_Vim\.vim\MiKTeX\texmfs/config)...
+2021-12-08 20:43:21,604+0100 INFO  initexmf - Creating fndb for common root directory (C:\_Vim\.vim\MiKTeX\texmfs/data)...
+2021-12-08 20:43:21,635+0100 INFO  initexmf - Creating fndb for common root directory (C:\_Vim\.vim\MiKTeX\texmfs\install)...
+2021-12-08 20:43:24,478+0100 INFO  initexmf - Creating fndb for MPM...
+2021-12-08 20:43:27,370+0100 INFO  initexmf - this process (3436) finishes with exit code 0
+2021-12-08 20:43:27,916+0100 INFO  initexmf - this is MiKTeX Configuration Utility 4.7 (MiKTeX 21.12 32-bit Portable)
+2021-12-08 20:43:27,917+0100 INFO  initexmf - this process (3324) started by 'miktex-portable' with command line: initexmf --report --log-file=C:\_Vim\.vim\MiKTeX\texmfs/install\miktex/config\uninst.log --disable-installer --verbose
+2021-12-08 20:43:27,917+0100 INFO  initexmf - Operating on the private (per-user) MiKTeX setup
+2021-12-08 20:43:27,968+0100 ERROR initexmf.core - Something is wrong with the PATH:
+2021-12-08 20:43:27,968+0100 ERROR initexmf.core - C:\Program Files (x86)\VMware\VMware Player\bin\;C:\Program Files\AdoptOpenJDK\jdk-11.0.7.10-hotspot\bin;C:\Rtools40;C:\rtools40\usr\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\PuTTY\;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files\dotnet\;C:\Program Files\CMake\bin;C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\15.0\Bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Docker\Docker\resources\bin;C:\ProgramData\DockerDesktop\version-bin;c:\users\d-kel\appdata\local\programs\python\python38\lib\site-packages;C:\wkhtmltopdf\bin;c:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;c:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Git\cmd;C:\Program Files\nodejs\;C:\Program Files (x86)\dotnet\;d:\Python\edgedriver\;C:\Program Files\TortoiseGit\bin;C:\Windows\Microsoft.NET\Framework64\v4.0.30319;C:\Users\d-kel\AppData\Local\Programs\Python\Python38\Scripts\;C:\Users\d-kel\AppData\Local\Programs\Python\Python38\;C:\Users\d-kel\AppData\Local\Microsoft\WindowsApps;C:\Program Files (x86)\Common Files\Hilscher GmbH\TLRDecode;C:\Program Files\MongoDB\Server\4.4\bin;C:\Users\d-kel\AppData\Roaming\npm;C:\Users\d-kel\.dotnet\tools
+2021-12-08 20:43:28,010+0100 ERROR initexmf.core - Something is wrong with the PATH:
+2021-12-08 20:43:28,010+0100 ERROR initexmf.core - C:\Program Files (x86)\VMware\VMware Player\bin\;C:\Program Files\AdoptOpenJDK\jdk-11.0.7.10-hotspot\bin;C:\Rtools40;C:\rtools40\usr\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\PuTTY\;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files\dotnet\;C:\Program Files\CMake\bin;C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\15.0\Bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Docker\Docker\resources\bin;C:\ProgramData\DockerDesktop\version-bin;c:\users\d-kel\appdata\local\programs\python\python38\lib\site-packages;C:\wkhtmltopdf\bin;c:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;c:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Git\cmd;C:\Program Files\nodejs\;C:\Program Files (x86)\dotnet\;d:\Python\edgedriver\;C:\Program Files\TortoiseGit\bin;C:\Windows\Microsoft.NET\Framework64\v4.0.30319;C:\Users\d-kel\AppData\Local\Programs\Python\Python38\Scripts\;C:\Users\d-kel\AppData\Local\Programs\Python\Python38\;C:\Users\d-kel\AppData\Local\Microsoft\WindowsApps;C:\Program Files (x86)\Common Files\Hilscher GmbH\TLRDecode;C:\Program Files\MongoDB\Server\4.4\bin;C:\Users\d-kel\AppData\Roaming\npm;C:\Users\d-kel\.dotnet\tools
+2021-12-08 20:43:28,116+0100 INFO  initexmf - this process (3324) finishes with exit code 0
+2021-12-08 20:44:56,927+0100 INFO  initexmf - this is MiKTeX Configuration Utility 4.7 (MiKTeX 21.12 32-bit Portable)
+2021-12-08 20:44:56,928+0100 INFO  initexmf - this process (21132) started by 'miktex-console' with command line: initexmf --mkmaps
+2021-12-08 20:44:56,928+0100 INFO  initexmf - Operating on the private (per-user) MiKTeX setup
+2021-12-08 20:44:56,930+0100 INFO  initexmf - running: mkfntmap --miktex-disable-maintenance --miktex-disable-diagnose
+2021-12-08 20:44:56,930+0100 INFO  initexmf.core - start process: mkfntmap --miktex-disable-maintenance --miktex-disable-diagnose
+2021-12-08 20:44:58,506+0100 INFO  initexmf - this process (21132) finishes with exit code 0
+2021-12-08 20:46:05,321+0100 INFO  initexmf - this is MiKTeX Configuration Utility 4.7 (MiKTeX 21.12 32-bit Portable)
+2021-12-08 20:46:05,321+0100 INFO  initexmf - this process (16464) started by 'miktex-console' with command line: initexmf --mkmaps
+2021-12-08 20:46:05,321+0100 INFO  initexmf - Operating on the private (per-user) MiKTeX setup
+2021-12-08 20:46:05,323+0100 INFO  initexmf - running: mkfntmap --miktex-disable-maintenance --miktex-disable-diagnose
+2021-12-08 20:46:05,323+0100 INFO  initexmf.core - start process: mkfntmap --miktex-disable-maintenance --miktex-disable-diagnose
+2021-12-08 20:46:07,168+0100 INFO  initexmf - this process (16464) finishes with exit code 0
+2021-12-08 20:46:08,517+0100 INFO  initexmf - this is MiKTeX Configuration Utility 4.7 (MiKTeX 21.12 32-bit Portable)
+2021-12-08 20:46:08,518+0100 INFO  initexmf - this process (4844) started by 'miktex-console' with command line: initexmf --update-fndb --disable-installer --verbose
+2021-12-08 20:46:08,518+0100 INFO  initexmf - Operating on the private (per-user) MiKTeX setup
+2021-12-08 20:46:08,593+0100 INFO  initexmf - Creating fndb for common root directory (C:\_Vim\.vim\MiKTeX\texmfs/config)...
+2021-12-08 20:46:08,628+0100 INFO  initexmf - Creating fndb for common root directory (C:\_Vim\.vim\MiKTeX\texmfs/data)...
+2021-12-08 20:46:08,662+0100 INFO  initexmf - Creating fndb for common root directory (C:\_Vim\.vim\MiKTeX\texmfs\install)...
+2021-12-08 20:46:09,269+0100 ERROR initexmf.core - Zugriff verweigert
+
+2021-12-08 20:46:09,269+0100 ERROR initexmf.core - Function: DeleteFileW
+2021-12-08 20:46:09,269+0100 ERROR initexmf.core - Result: 5
+2021-12-08 20:46:09,269+0100 ERROR initexmf.core - Data: path="C:\_Vim\.vim\MiKTeX\texmfs\install\miktex\bin\msvcp140.dll.(old)"
+2021-12-08 20:46:09,270+0100 ERROR initexmf.core - Source: Libraries\MiKTeX\Core\File\win\winFile.cpp:320
+2021-12-08 20:46:09,271+0100 ERROR initexmf.core - Zugriff verweigert
+
+2021-12-08 20:46:09,271+0100 ERROR initexmf.core - Function: DeleteFileW
+2021-12-08 20:46:09,271+0100 ERROR initexmf.core - Result: 5
+2021-12-08 20:46:09,271+0100 ERROR initexmf.core - Data: path="C:\_Vim\.vim\MiKTeX\texmfs\install\miktex\bin\msvcp140_1.dll.(old)"
+2021-12-08 20:46:09,271+0100 ERROR initexmf.core - Source: Libraries\MiKTeX\Core\File\win\winFile.cpp:320
+2021-12-08 20:46:09,273+0100 ERROR initexmf.core - Zugriff verweigert
+
+2021-12-08 20:46:09,273+0100 ERROR initexmf.core - Function: DeleteFileW
+2021-12-08 20:46:09,273+0100 ERROR initexmf.core - Result: 5
+2021-12-08 20:46:09,273+0100 ERROR initexmf.core - Data: path="C:\_Vim\.vim\MiKTeX\texmfs\install\miktex\bin\msvcp140_codecvt_ids.dll.(old)"
+2021-12-08 20:46:09,273+0100 ERROR initexmf.core - Source: Libraries\MiKTeX\Core\File\win\winFile.cpp:320
+2021-12-08 20:46:09,274+0100 ERROR initexmf.core - Zugriff verweigert
+
+2021-12-08 20:46:09,274+0100 ERROR initexmf.core - Function: DeleteFileW
+2021-12-08 20:46:09,274+0100 ERROR initexmf.core - Result: 5
+2021-12-08 20:46:09,274+0100 ERROR initexmf.core - Data: path="C:\_Vim\.vim\MiKTeX\texmfs\install\miktex\bin\vcruntime140.dll.(old)"
+2021-12-08 20:46:09,275+0100 ERROR initexmf.core - Source: Libraries\MiKTeX\Core\File\win\winFile.cpp:320
+2021-12-08 20:46:11,822+0100 INFO  initexmf - Creating fndb for MPM...
+2021-12-08 20:46:14,621+0100 INFO  initexmf - this process (4844) finishes with exit code 0
+2021-12-08 20:46:15,091+0100 INFO  initexmf - this is MiKTeX Configuration Utility 4.7 (MiKTeX 21.12 32-bit Portable)
+2021-12-08 20:46:15,091+0100 INFO  initexmf - this process (16984) started by 'miktex-console' with command line: initexmf --force --mklinks --disable-installer --verbose
+2021-12-08 20:46:15,091+0100 INFO  initexmf - Operating on the private (per-user) MiKTeX setup
+2021-12-08 20:46:15,094+0100 INFO  initexmf - Collecting linked executables in target directory C:\_Vim\.vim\MiKTeX\texmfs\install\miktex/bin...
+2021-12-08 20:46:17,928+0100 ERROR initexmf.core - Zugriff verweigert
+
+2021-12-08 20:46:17,928+0100 ERROR initexmf.core - Function: DeleteFileW
+2021-12-08 20:46:17,928+0100 ERROR initexmf.core - Result: 5
+2021-12-08 20:46:17,928+0100 ERROR initexmf.core - Data: path="C:\_Vim\.vim\MiKTeX\texmfs\install\miktex\bin\miktex-taskbar-icon.exe"
+2021-12-08 20:46:17,928+0100 ERROR initexmf.core - Source: Libraries\MiKTeX\Core\File\win\winFile.cpp:320
+2021-12-08 20:46:17,946+0100 ERROR initexmf.core - Zugriff verweigert
+
+2021-12-08 20:46:17,947+0100 ERROR initexmf.core - Function: DeleteFileW
+2021-12-08 20:46:17,947+0100 ERROR initexmf.core - Result: 5
+2021-12-08 20:46:17,947+0100 ERROR initexmf.core - Data: path="C:\_Vim\.vim\MiKTeX\texmfs\install\miktex\bin\miktex-update.exe"
+2021-12-08 20:46:17,947+0100 ERROR initexmf.core - Source: Libraries\MiKTeX\Core\File\win\winFile.cpp:320
+2021-12-08 20:46:22,399+0100 INFO  initexmf.core - starting finish script
+2021-12-08 20:46:22,401+0100 INFO  initexmf.core - start process: C:\WINDOWS\system32\cmd.exe /c C:\Users\d-kel\AppData\Local\Temp\mik40731\initexmf-finish.cmd
+2021-12-08 20:46:22,500+0100 INFO  initexmf - this process (16984) finishes with exit code 0
+2021-12-08 20:46:32,259+0100 INFO  initexmf - this is MiKTeX Configuration Utility 4.7 (MiKTeX 21.12 32-bit Portable)
+2021-12-08 20:46:32,260+0100 INFO  initexmf - this process (1956) started by 'miktex-console' with command line: initexmf --mkmaps --mklangs --disable-installer --verbose
+2021-12-08 20:46:32,260+0100 INFO  initexmf - Operating on the private (per-user) MiKTeX setup
+2021-12-08 20:46:32,260+0100 INFO  initexmf - Creating language.dat, language.dat.lua and language.def...
+2021-12-08 20:46:32,322+0100 INFO  initexmf - running: mkfntmap --verbose --disable-installer --miktex-disable-maintenance --miktex-disable-diagnose
+2021-12-08 20:46:32,322+0100 INFO  initexmf.core - start process: mkfntmap --verbose --disable-installer --miktex-disable-maintenance --miktex-disable-diagnose
+2021-12-08 20:46:33,939+0100 INFO  initexmf - this process (1956) finishes with exit code 0
+2021-12-08 20:47:43,075+0100 INFO  initexmf - this is MiKTeX Configuration Utility 4.7 (MiKTeX 21.12 32-bit Portable)
+2021-12-08 20:47:43,075+0100 INFO  initexmf - this process (9736) started by 'miktex-console' with command line: initexmf --mkmaps
+2021-12-08 20:47:43,076+0100 INFO  initexmf - Operating on the private (per-user) MiKTeX setup
+2021-12-08 20:47:43,078+0100 INFO  initexmf - running: mkfntmap --miktex-disable-maintenance --miktex-disable-diagnose
+2021-12-08 20:47:43,078+0100 INFO  initexmf.core - start process: mkfntmap --miktex-disable-maintenance --miktex-disable-diagnose
+2021-12-08 20:47:44,603+0100 INFO  initexmf - this process (9736) finishes with exit code 0
+2021-12-08 20:48:27,437+0100 INFO  initexmf - this is MiKTeX Configuration Utility 4.7 (MiKTeX 21.12 32-bit Portable)
+2021-12-08 20:48:27,438+0100 INFO  initexmf - this process (14264) started by 'miktex-console' with command line: initexmf --mkmaps
+2021-12-08 20:48:27,438+0100 INFO  initexmf - Operating on the private (per-user) MiKTeX setup
+2021-12-08 20:48:27,440+0100 INFO  initexmf - running: mkfntmap --miktex-disable-maintenance --miktex-disable-diagnose
+2021-12-08 20:48:27,440+0100 INFO  initexmf.core - start process: mkfntmap --miktex-disable-maintenance --miktex-disable-diagnose
+2021-12-08 20:48:29,121+0100 INFO  initexmf - this process (14264) finishes with exit code 0
+2021-12-08 20:54:03,628+0100 INFO  initexmf - this is MiKTeX Configuration Utility 4.7 (MiKTeX 21.12 32-bit Portable)
+2021-12-08 20:54:03,629+0100 INFO  initexmf - this process (8440) started by 'chktex' with command line: initexmf --mkmaps
+2021-12-08 20:54:03,629+0100 INFO  initexmf - Operating on the private (per-user) MiKTeX setup
+2021-12-08 20:54:03,633+0100 INFO  initexmf - running: mkfntmap --miktex-disable-maintenance --miktex-disable-diagnose
+2021-12-08 20:54:03,633+0100 INFO  initexmf.core - start process: mkfntmap --miktex-disable-maintenance --miktex-disable-diagnose
+2021-12-08 20:54:05,252+0100 INFO  initexmf - this process (8440) finishes with exit code 0
+2021-12-08 21:03:59,266+0100 INFO  initexmf - this is MiKTeX Configuration Utility 4.7 (MiKTeX 21.12 32-bit Portable)
+2021-12-08 21:03:59,266+0100 INFO  initexmf - this process (4548) started by 'pdflatex' with command line: initexmf --dump-by-name=pdflatex --engine=pdftex
+2021-12-08 21:03:59,266+0100 INFO  initexmf - Operating on the private (per-user) MiKTeX setup
+2021-12-08 21:03:59,271+0100 INFO  initexmf - running: miktex-makefmt.exe --engine=pdftex --dest-name=pdflatex --no-dump pdflatex.ini --engine-option=-tcx=cp227.tcx --miktex-disable-maintenance --miktex-disable-diagnose
+2021-12-08 21:03:59,271+0100 INFO  initexmf.core - start process: miktex-makefmt.exe --engine=pdftex --dest-name=pdflatex --no-dump pdflatex.ini --engine-option=-tcx=cp227.tcx --miktex-disable-maintenance --miktex-disable-diagnose
+2021-12-08 21:04:06,488+0100 INFO  initexmf - this process (4548) finishes with exit code 0
+2021-12-08 21:05:23,998+0100 INFO  initexmf - this is MiKTeX Configuration Utility 4.7 (MiKTeX 21.12 32-bit Portable)
+2021-12-08 21:05:23,998+0100 INFO  initexmf - this process (12936) started by 'pdflatex' with command line: initexmf --mkmaps
+2021-12-08 21:05:23,998+0100 INFO  initexmf - Operating on the private (per-user) MiKTeX setup
+2021-12-08 21:05:24,000+0100 INFO  initexmf - running: mkfntmap --miktex-disable-maintenance --miktex-disable-diagnose
+2021-12-08 21:05:24,001+0100 INFO  initexmf.core - start process: mkfntmap --miktex-disable-maintenance --miktex-disable-diagnose
+2021-12-08 21:05:25,704+0100 INFO  initexmf - this process (12936) finishes with exit code 0
+2021-12-08 21:05:32,803+0100 INFO  initexmf - this is MiKTeX Configuration Utility 4.7 (MiKTeX 21.12 32-bit Portable)
+2021-12-08 21:05:32,803+0100 INFO  initexmf - this process (1636) started by 'pdflatex' with command line: initexmf --mkmaps
+2021-12-08 21:05:32,804+0100 INFO  initexmf - Operating on the private (per-user) MiKTeX setup
+2021-12-08 21:05:32,806+0100 INFO  initexmf - running: mkfntmap --miktex-disable-maintenance --miktex-disable-diagnose
+2021-12-08 21:05:32,806+0100 INFO  initexmf.core - start process: mkfntmap --miktex-disable-maintenance --miktex-disable-diagnose
+2021-12-08 21:05:34,637+0100 INFO  initexmf - this process (1636) finishes with exit code 0
+2021-12-08 21:05:40,311+0100 INFO  initexmf - this is MiKTeX Configuration Utility 4.7 (MiKTeX 21.12 32-bit Portable)
+2021-12-08 21:05:40,311+0100 INFO  initexmf - this process (3696) started by 'pdflatex' with command line: initexmf --mkmaps
+2021-12-08 21:05:40,311+0100 INFO  initexmf - Operating on the private (per-user) MiKTeX setup
+2021-12-08 21:05:40,314+0100 INFO  initexmf - running: mkfntmap --miktex-disable-maintenance --miktex-disable-diagnose
+2021-12-08 21:05:40,314+0100 INFO  initexmf.core - start process: mkfntmap --miktex-disable-maintenance --miktex-disable-diagnose
+2021-12-08 21:05:41,908+0100 INFO  initexmf - this process (3696) finishes with exit code 0
+2021-12-08 21:05:47,441+0100 INFO  initexmf - this is MiKTeX Configuration Utility 4.7 (MiKTeX 21.12 32-bit Portable)
+2021-12-08 21:05:47,442+0100 INFO  initexmf - this process (15544) started by 'pdflatex' with command line: initexmf --mkmaps
+2021-12-08 21:05:47,442+0100 INFO  initexmf - Operating on the private (per-user) MiKTeX setup
+2021-12-08 21:05:47,444+0100 INFO  initexmf - running: mkfntmap --miktex-disable-maintenance --miktex-disable-diagnose
+2021-12-08 21:05:47,444+0100 INFO  initexmf.core - start process: mkfntmap --miktex-disable-maintenance --miktex-disable-diagnose
+2021-12-08 21:05:49,460+0100 INFO  initexmf - this process (15544) finishes with exit code 0
+2021-12-08 21:05:56,281+0100 INFO  initexmf - this is MiKTeX Configuration Utility 4.7 (MiKTeX 21.12 32-bit Portable)
+2021-12-08 21:05:56,282+0100 INFO  initexmf - this process (13112) started by 'pdflatex' with command line: initexmf --mkmaps
+2021-12-08 21:05:56,282+0100 INFO  initexmf - Operating on the private (per-user) MiKTeX setup
+2021-12-08 21:05:56,285+0100 INFO  initexmf - running: mkfntmap --miktex-disable-maintenance --miktex-disable-diagnose
+2021-12-08 21:05:56,285+0100 INFO  initexmf.core - start process: mkfntmap --miktex-disable-maintenance --miktex-disable-diagnose
+2021-12-08 21:05:58,183+0100 INFO  initexmf - this process (13112) finishes with exit code 0
+2021-12-08 21:06:03,678+0100 INFO  initexmf - this is MiKTeX Configuration Utility 4.7 (MiKTeX 21.12 32-bit Portable)
+2021-12-08 21:06:03,678+0100 INFO  initexmf - this process (18612) started by 'pdflatex' with command line: initexmf --mkmaps
+2021-12-08 21:06:03,678+0100 INFO  initexmf - Operating on the private (per-user) MiKTeX setup
+2021-12-08 21:06:03,683+0100 INFO  initexmf - running: mkfntmap --miktex-disable-maintenance --miktex-disable-diagnose
+2021-12-08 21:06:03,683+0100 INFO  initexmf.core - start process: mkfntmap --miktex-disable-maintenance --miktex-disable-diagnose
+2021-12-08 21:06:05,444+0100 INFO  initexmf - this process (18612) finishes with exit code 0
+2021-12-08 21:06:10,916+0100 INFO  initexmf - this is MiKTeX Configuration Utility 4.7 (MiKTeX 21.12 32-bit Portable)
+2021-12-08 21:06:10,916+0100 INFO  initexmf - this process (3480) started by 'pdflatex' with command line: initexmf --mkmaps
+2021-12-08 21:06:10,916+0100 INFO  initexmf - Operating on the private (per-user) MiKTeX setup
+2021-12-08 21:06:10,919+0100 INFO  initexmf - running: mkfntmap --miktex-disable-maintenance --miktex-disable-diagnose
+2021-12-08 21:06:10,919+0100 INFO  initexmf.core - start process: mkfntmap --miktex-disable-maintenance --miktex-disable-diagnose
+2021-12-08 21:06:12,556+0100 INFO  initexmf - this process (3480) finishes with exit code 0
+2021-12-08 21:06:20,217+0100 INFO  initexmf - this is MiKTeX Configuration Utility 4.7 (MiKTeX 21.12 32-bit Portable)
+2021-12-08 21:06:20,217+0100 INFO  initexmf - this process (3272) started by 'pdflatex' with command line: initexmf --mkmaps
+2021-12-08 21:06:20,217+0100 INFO  initexmf - Operating on the private (per-user) MiKTeX setup
+2021-12-08 21:06:20,219+0100 INFO  initexmf - running: mkfntmap --miktex-disable-maintenance --miktex-disable-diagnose
+2021-12-08 21:06:20,220+0100 INFO  initexmf.core - start process: mkfntmap --miktex-disable-maintenance --miktex-disable-diagnose
+2021-12-08 21:06:21,836+0100 INFO  initexmf - this process (3272) finishes with exit code 0
+2021-12-08 21:06:27,820+0100 INFO  initexmf - this is MiKTeX Configuration Utility 4.7 (MiKTeX 21.12 32-bit Portable)
+2021-12-08 21:06:27,820+0100 INFO  initexmf - this process (1632) started by 'pdflatex' with command line: initexmf --mkmaps
+2021-12-08 21:06:27,820+0100 INFO  initexmf - Operating on the private (per-user) MiKTeX setup
+2021-12-08 21:06:27,823+0100 INFO  initexmf - running: mkfntmap --miktex-disable-maintenance --miktex-disable-diagnose
+2021-12-08 21:06:27,824+0100 INFO  initexmf.core - start process: mkfntmap --miktex-disable-maintenance --miktex-disable-diagnose
+2021-12-08 21:06:29,537+0100 INFO  initexmf - this process (1632) finishes with exit code 0
+2021-12-08 21:06:39,781+0100 INFO  initexmf - this is MiKTeX Configuration Utility 4.7 (MiKTeX 21.12 32-bit Portable)
+2021-12-08 21:06:39,781+0100 INFO  initexmf - this process (9348) started by 'pdflatex' with command line: initexmf --mkmaps
+2021-12-08 21:06:39,781+0100 INFO  initexmf - Operating on the private (per-user) MiKTeX setup
+2021-12-08 21:06:39,783+0100 INFO  initexmf - running: mkfntmap --miktex-disable-maintenance --miktex-disable-diagnose
+2021-12-08 21:06:39,784+0100 INFO  initexmf.core - start process: mkfntmap --miktex-disable-maintenance --miktex-disable-diagnose
+2021-12-08 21:06:41,739+0100 INFO  initexmf - this process (9348) finishes with exit code 0
+2021-12-08 21:06:47,913+0100 INFO  initexmf - this is MiKTeX Configuration Utility 4.7 (MiKTeX 21.12 32-bit Portable)
+2021-12-08 21:06:47,913+0100 INFO  initexmf - this process (9528) started by 'pdflatex' with command line: initexmf --mkmaps
+2021-12-08 21:06:47,913+0100 INFO  initexmf - Operating on the private (per-user) MiKTeX setup
+2021-12-08 21:06:47,916+0100 INFO  initexmf - running: mkfntmap --miktex-disable-maintenance --miktex-disable-diagnose
+2021-12-08 21:06:47,916+0100 INFO  initexmf.core - start process: mkfntmap --miktex-disable-maintenance --miktex-disable-diagnose
+2021-12-08 21:06:49,625+0100 INFO  initexmf - this process (9528) finishes with exit code 0
+2021-12-08 21:06:55,815+0100 INFO  initexmf - this is MiKTeX Configuration Utility 4.7 (MiKTeX 21.12 32-bit Portable)
+2021-12-08 21:06:55,815+0100 INFO  initexmf - this process (10012) started by 'pdflatex' with command line: initexmf --mkmaps
+2021-12-08 21:06:55,815+0100 INFO  initexmf - Operating on the private (per-user) MiKTeX setup
+2021-12-08 21:06:55,817+0100 INFO  initexmf - running: mkfntmap --miktex-disable-maintenance --miktex-disable-diagnose
+2021-12-08 21:06:55,818+0100 INFO  initexmf.core - start process: mkfntmap --miktex-disable-maintenance --miktex-disable-diagnose
+2021-12-08 21:06:57,621+0100 INFO  initexmf - this process (10012) finishes with exit code 0
+2021-12-08 21:07:03,983+0100 INFO  initexmf - this is MiKTeX Configuration Utility 4.7 (MiKTeX 21.12 32-bit Portable)
+2021-12-08 21:07:03,983+0100 INFO  initexmf - this process (18760) started by 'pdflatex' with command line: initexmf --mkmaps
+2021-12-08 21:07:03,983+0100 INFO  initexmf - Operating on the private (per-user) MiKTeX setup
+2021-12-08 21:07:03,985+0100 INFO  initexmf - running: mkfntmap --miktex-disable-maintenance --miktex-disable-diagnose
+2021-12-08 21:07:03,986+0100 INFO  initexmf.core - start process: mkfntmap --miktex-disable-maintenance --miktex-disable-diagnose
+2021-12-08 21:07:05,629+0100 INFO  initexmf - this process (18760) finishes with exit code 0
+2021-12-08 21:07:11,772+0100 INFO  initexmf - this is MiKTeX Configuration Utility 4.7 (MiKTeX 21.12 32-bit Portable)
+2021-12-08 21:07:11,773+0100 INFO  initexmf - this process (12936) started by 'pdflatex' with command line: initexmf --mkmaps
+2021-12-08 21:07:11,773+0100 INFO  initexmf - Operating on the private (per-user) MiKTeX setup
+2021-12-08 21:07:11,776+0100 INFO  initexmf - running: mkfntmap --miktex-disable-maintenance --miktex-disable-diagnose
+2021-12-08 21:07:11,777+0100 INFO  initexmf.core - start process: mkfntmap --miktex-disable-maintenance --miktex-disable-diagnose
+2021-12-08 21:07:13,370+0100 INFO  initexmf - this process (12936) finishes with exit code 0
+2021-12-08 21:07:20,266+0100 INFO  initexmf - this is MiKTeX Configuration Utility 4.7 (MiKTeX 21.12 32-bit Portable)
+2021-12-08 21:07:20,267+0100 INFO  initexmf - this process (1636) started by 'pdflatex' with command line: initexmf --mkmaps
+2021-12-08 21:07:20,267+0100 INFO  initexmf - Operating on the private (per-user) MiKTeX setup
+2021-12-08 21:07:20,269+0100 INFO  initexmf - running: mkfntmap --miktex-disable-maintenance --miktex-disable-diagnose
+2021-12-08 21:07:20,269+0100 INFO  initexmf.core - start process: mkfntmap --miktex-disable-maintenance --miktex-disable-diagnose
+2021-12-08 21:07:21,879+0100 INFO  initexmf - this process (1636) finishes with exit code 0
+2021-12-08 21:07:29,013+0100 INFO  initexmf - this is MiKTeX Configuration Utility 4.7 (MiKTeX 21.12 32-bit Portable)
+2021-12-08 21:07:29,013+0100 INFO  initexmf - this process (21388) started by 'pdflatex' with command line: initexmf --mkmaps
+2021-12-08 21:07:29,013+0100 INFO  initexmf - Operating on the private (per-user) MiKTeX setup
+2021-12-08 21:07:29,015+0100 INFO  initexmf - running: mkfntmap --miktex-disable-maintenance --miktex-disable-diagnose
+2021-12-08 21:07:29,016+0100 INFO  initexmf.core - start process: mkfntmap --miktex-disable-maintenance --miktex-disable-diagnose
+2021-12-08 21:07:30,721+0100 INFO  initexmf - this process (21388) finishes with exit code 0
+2021-12-08 21:07:40,639+0100 INFO  initexmf - this is MiKTeX Configuration Utility 4.7 (MiKTeX 21.12 32-bit Portable)
+2021-12-08 21:07:40,640+0100 INFO  initexmf - this process (5220) started by 'pdflatex' with command line: initexmf --mkmaps
+2021-12-08 21:07:40,640+0100 INFO  initexmf - Operating on the private (per-user) MiKTeX setup
+2021-12-08 21:07:40,644+0100 INFO  initexmf - running: mkfntmap --miktex-disable-maintenance --miktex-disable-diagnose
+2021-12-08 21:07:40,644+0100 INFO  initexmf.core - start process: mkfntmap --miktex-disable-maintenance --miktex-disable-diagnose
+2021-12-08 21:07:42,419+0100 INFO  initexmf - this process (5220) finishes with exit code 0
+2021-12-08 21:07:47,393+0100 INFO  initexmf - this is MiKTeX Configuration Utility 4.7 (MiKTeX 21.12 32-bit Portable)
+2021-12-08 21:07:47,394+0100 INFO  initexmf - this process (8776) started by 'pdflatex' with command line: initexmf --mkmaps
+2021-12-08 21:07:47,394+0100 INFO  initexmf - Operating on the private (per-user) MiKTeX setup
+2021-12-08 21:07:47,398+0100 INFO  initexmf - running: mkfntmap --miktex-disable-maintenance --miktex-disable-diagnose
+2021-12-08 21:07:47,398+0100 INFO  initexmf.core - start process: mkfntmap --miktex-disable-maintenance --miktex-disable-diagnose
+2021-12-08 21:07:49,146+0100 INFO  initexmf - this process (8776) finishes with exit code 0
+2021-12-08 21:07:59,813+0100 INFO  initexmf - this is MiKTeX Configuration Utility 4.7 (MiKTeX 21.12 32-bit Portable)
+2021-12-08 21:07:59,813+0100 INFO  initexmf - this process (2184) started by 'pdflatex' with command line: initexmf --mkmaps
+2021-12-08 21:07:59,813+0100 INFO  initexmf - Operating on the private (per-user) MiKTeX setup
+2021-12-08 21:07:59,815+0100 INFO  initexmf - running: mkfntmap --enable-installer --miktex-disable-maintenance --miktex-disable-diagnose
+2021-12-08 21:07:59,816+0100 INFO  initexmf.core - start process: mkfntmap --enable-installer --miktex-disable-maintenance --miktex-disable-diagnose
+2021-12-08 21:08:01,831+0100 INFO  initexmf - this process (2184) finishes with exit code 0
+2021-12-08 21:08:05,695+0100 INFO  initexmf - this is MiKTeX Configuration Utility 4.7 (MiKTeX 21.12 32-bit Portable)
+2021-12-08 21:08:05,695+0100 INFO  initexmf - this process (16472) started by 'pdflatex' with command line: initexmf --mkmaps
+2021-12-08 21:08:05,695+0100 INFO  initexmf - Operating on the private (per-user) MiKTeX setup
+2021-12-08 21:08:05,697+0100 INFO  initexmf - running: mkfntmap --enable-installer --miktex-disable-maintenance --miktex-disable-diagnose
+2021-12-08 21:08:05,698+0100 INFO  initexmf.core - start process: mkfntmap --enable-installer --miktex-disable-maintenance --miktex-disable-diagnose
+2021-12-08 21:08:07,295+0100 INFO  initexmf - this process (16472) finishes with exit code 0
+2021-12-08 21:08:10,543+0100 INFO  initexmf - this is MiKTeX Configuration Utility 4.7 (MiKTeX 21.12 32-bit Portable)
+2021-12-08 21:08:10,543+0100 INFO  initexmf - this process (1476) started by 'pdflatex' with command line: initexmf --mkmaps
+2021-12-08 21:08:10,543+0100 INFO  initexmf - Operating on the private (per-user) MiKTeX setup
+2021-12-08 21:08:10,546+0100 INFO  initexmf - running: mkfntmap --enable-installer --miktex-disable-maintenance --miktex-disable-diagnose
+2021-12-08 21:08:10,546+0100 INFO  initexmf.core - start process: mkfntmap --enable-installer --miktex-disable-maintenance --miktex-disable-diagnose
+2021-12-08 21:08:12,435+0100 INFO  initexmf - this process (1476) finishes with exit code 0
+2021-12-08 21:08:15,733+0100 INFO  initexmf - this is MiKTeX Configuration Utility 4.7 (MiKTeX 21.12 32-bit Portable)
+2021-12-08 21:08:15,733+0100 INFO  initexmf - this process (15716) started by 'miktex-mf' with command line: initexmf --enable-installer --dump-by-name=mf
+2021-12-08 21:08:15,733+0100 INFO  initexmf - Operating on the private (per-user) MiKTeX setup
+2021-12-08 21:08:15,738+0100 INFO  initexmf - running: miktex-makebase.exe --dest-name=mf --no-dump mf.ini --engine-option=-tcx=cp227.tcx --enable-installer --miktex-disable-maintenance --miktex-disable-diagnose
+2021-12-08 21:08:15,738+0100 INFO  initexmf.core - start process: miktex-makebase.exe --dest-name=mf --no-dump mf.ini --engine-option=-tcx=cp227.tcx --enable-installer --miktex-disable-maintenance --miktex-disable-diagnose
+2021-12-08 21:08:17,180+0100 INFO  initexmf - this process (15716) finishes with exit code 0

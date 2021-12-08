@@ -1,0 +1,93 @@
+2021-12-08 20:44:51,969+0100 INFO  main - starting: MiKTeX Console 4.5 (MiKTeX 21.12 32-bit Portable)
+2021-12-08 20:44:52,007+0100 ERROR miktex-console.core - Something is wrong with the PATH:
+2021-12-08 20:44:52,007+0100 ERROR miktex-console.core - C:\Program Files (x86)\VMware\VMware Player\bin\;C:\Program Files\AdoptOpenJDK\jdk-11.0.7.10-hotspot\bin;C:\Rtools40;C:\rtools40\usr\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\PuTTY\;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files\dotnet\;C:\Program Files\CMake\bin;C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\15.0\Bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Docker\Docker\resources\bin;C:\ProgramData\DockerDesktop\version-bin;c:\users\d-kel\appdata\local\programs\python\python38\lib\site-packages;C:\wkhtmltopdf\bin;c:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;c:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Git\cmd;C:\Program Files\nodejs\;C:\Program Files (x86)\dotnet\;d:\Python\edgedriver\;C:\Program Files\TortoiseGit\bin;C:\Windows\Microsoft.NET\Framework64\v4.0.30319;C:\Users\d-kel\AppData\Local\Programs\Python\Python38\Scripts\;C:\Users\d-kel\AppData\Local\Programs\Python\Python38\;C:\Users\d-kel\AppData\Local\Microsoft\WindowsApps;C:\Program Files (x86)\Common Files\Hilscher GmbH\TLRDecode;C:\Program Files\MongoDB\Server\4.4\bin;C:\Users\d-kel\AppData\Roaming\npm;C:\Users\d-kel\.dotnet\tools
+2021-12-08 20:44:56,346+0100 INFO  miktex-console.core - start process: initexmf --mkmaps
+2021-12-08 20:45:15,700+0100 INFO  mainwindow - checking for updates...
+2021-12-08 20:45:15,714+0100 INFO  miktex-console.packagemanager - searching for updateable packages
+2021-12-08 20:45:15,729+0100 INFO  miktex-console.packagemanager - going to download https://api2.miktex.org/hello
+2021-12-08 20:45:16,022+0100 INFO  miktex-console.packagemanager - going to download https://api2.miktex.org/repositories?&releaseState=Stable&orderBy=ranking&take=1&onlySecure=true
+2021-12-08 20:45:16,065+0100 INFO  mainwindow - downloading https://mirror.informatik.hs-fulda.de/tex-archive/systems/win32/miktex/tm/packages/miktex-zzdb3-2.9.tar.lzma...
+2021-12-08 20:45:16,348+0100 INFO  miktex-console.packagemanager - going to download https://mirror.informatik.hs-fulda.de/tex-archive/systems/win32/miktex/tm/packages/miktex-zzdb3-2.9.tar.lzma
+2021-12-08 20:45:18,389+0100 INFO  mainwindow - 1.29 MB, 5.07 Mbit/s
+2021-12-08 20:45:20,935+0100 INFO  mainwindow - updating package manifests (C:\_Vim\.vim\MiKTeX\texmfs\install\miktex/config\package-manifests.ini)...
+2021-12-08 20:45:22,611+0100 INFO  mainwindow - installed 4962 package manifests
+2021-12-08 20:45:22,611+0100 INFO  mainwindow - visiting repository https://mirror.informatik.hs-fulda.de/tex-archive/systems/win32/miktex/tm/packages/...
+2021-12-08 20:45:22,611+0100 INFO  mainwindow - repository type: remote package repository
+2021-12-08 20:45:22,614+0100 INFO  mainwindow - loading package repository manifest...
+2021-12-08 20:45:22,615+0100 INFO  mainwindow - downloading https://mirror.informatik.hs-fulda.de/tex-archive/systems/win32/miktex/tm/packages/miktex-zzdb1-2.9.tar.lzma...
+2021-12-08 20:45:22,615+0100 INFO  miktex-console.packagemanager - going to download https://mirror.informatik.hs-fulda.de/tex-archive/systems/win32/miktex/tm/packages/miktex-zzdb1-2.9.tar.lzma
+2021-12-08 20:45:23,663+0100 INFO  mainwindow - 0.26 MB, 1.95 Mbit/s
+2021-12-08 20:45:28,472+0100 INFO  mainwindow - package repository digest: b5e6ecd758b9b83e358b12ed0b62fe05
+2021-12-08 20:45:29,284+0100 WARN  miktex-console.packagemanager - package miktex-vc140-bin verification failed: some files have been modified
+2021-12-08 20:45:29,285+0100 WARN  miktex-console.packagemanager - expected digest: ed69772c6fddf05073b6afc504007918
+2021-12-08 20:45:29,285+0100 WARN  miktex-console.packagemanager - computed digest: 2db00b6725562d54f66fffc4fedff2a1
+2021-12-08 20:45:29,285+0100 WARN  miktex-console.packagemanager - miktex-vc140-bin: package is broken
+2021-12-08 20:45:33,249+0100 WARN  miktex-console.packagemanager - package miktex-ucrt-bin verification failed: some files have been modified
+2021-12-08 20:45:33,249+0100 WARN  miktex-console.packagemanager - expected digest: 6cdc5065fb7e43b28712ab8369c18626
+2021-12-08 20:45:33,250+0100 WARN  miktex-console.packagemanager - computed digest: c3c9648e531d6b792dc35696476c1a6a
+2021-12-08 20:45:33,250+0100 WARN  miktex-console.packagemanager - miktex-ucrt-bin: package is broken
+2021-12-08 20:45:38,104+0100 INFO  mainwindow - found 2 updates
+2021-12-08 20:45:38,142+0100 ERROR miktex-console.core - Something is wrong with the PATH:
+2021-12-08 20:45:38,143+0100 ERROR miktex-console.core - C:\Program Files (x86)\VMware\VMware Player\bin\;C:\Program Files\AdoptOpenJDK\jdk-11.0.7.10-hotspot\bin;C:\Rtools40;C:\rtools40\usr\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\PuTTY\;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files\dotnet\;C:\Program Files\CMake\bin;C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\15.0\Bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Docker\Docker\resources\bin;C:\ProgramData\DockerDesktop\version-bin;c:\users\d-kel\appdata\local\programs\python\python38\lib\site-packages;C:\wkhtmltopdf\bin;c:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;c:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Git\cmd;C:\Program Files\nodejs\;C:\Program Files (x86)\dotnet\;d:\Python\edgedriver\;C:\Program Files\TortoiseGit\bin;C:\Windows\Microsoft.NET\Framework64\v4.0.30319;C:\Users\d-kel\AppData\Local\Programs\Python\Python38\Scripts\;C:\Users\d-kel\AppData\Local\Programs\Python\Python38\;C:\Users\d-kel\AppData\Local\Microsoft\WindowsApps;C:\Program Files (x86)\Common Files\Hilscher GmbH\TLRDecode;C:\Program Files\MongoDB\Server\4.4\bin;C:\Users\d-kel\AppData\Roaming\npm;C:\Users\d-kel\.dotnet\tools
+2021-12-08 20:45:58,084+0100 INFO  mainwindow - installing updates...
+2021-12-08 20:45:58,088+0100 INFO  miktex-console.packagemanager - going to download https://api2.miktex.org/repositories?&releaseState=Stable&orderBy=ranking&take=1&onlySecure=true
+2021-12-08 20:45:58,486+0100 INFO  mainwindow - starting package maintenance...
+2021-12-08 20:45:58,487+0100 INFO  mainwindow - installation directory: C:\_Vim\.vim\MiKTeX\texmfs\install
+2021-12-08 20:45:58,487+0100 INFO  mainwindow - package repository: https://ftp.agdsn.de/pub/mirrors/latex/dante/systems/win32/miktex/tm/packages/
+2021-12-08 20:45:58,883+0100 INFO  mainwindow - package repository digest: b5e6ecd758b9b83e358b12ed0b62fe05
+2021-12-08 20:45:58,884+0100 INFO  mainwindow - going to download 3253645 bytes
+2021-12-08 20:45:58,884+0100 INFO  mainwindow - going to install 68 file(s) (2 package(s))
+2021-12-08 20:45:59,649+0100 INFO  miktex-console.packagemanager - installing package miktex-ucrt-bin
+2021-12-08 20:45:59,651+0100 INFO  mainwindow - downloading https://ftp.agdsn.de/pub/mirrors/latex/dante/systems/win32/miktex/tm/packages/miktex-ucrt-bin.tar.lzma...
+2021-12-08 20:45:59,651+0100 INFO  miktex-console.packagemanager - going to download https://ftp.agdsn.de/pub/mirrors/latex/dante/systems/win32/miktex/tm/packages/miktex-ucrt-bin.tar.lzma
+2021-12-08 20:46:00,430+0100 INFO  mainwindow - 0.47 MB, 4.80 Mbit/s
+2021-12-08 20:46:00,661+0100 INFO  mainwindow - extracting files from miktex-ucrt-bin.tar.lzma...
+2021-12-08 20:46:01,117+0100 INFO  miktex-console.packagemanager - installing package miktex-vc140-bin
+2021-12-08 20:46:01,118+0100 INFO  mainwindow - downloading https://ftp.agdsn.de/pub/mirrors/latex/dante/systems/win32/miktex/tm/packages/miktex-vc140-bin.tar.lzma...
+2021-12-08 20:46:01,118+0100 INFO  miktex-console.packagemanager - going to download https://ftp.agdsn.de/pub/mirrors/latex/dante/systems/win32/miktex/tm/packages/miktex-vc140-bin.tar.lzma
+2021-12-08 20:46:03,469+0100 INFO  mainwindow - 2.79 MB, 9.49 Mbit/s
+2021-12-08 20:46:03,593+0100 ERROR miktex-console.core - Zugriff verweigert
+
+2021-12-08 20:46:03,594+0100 ERROR miktex-console.core - Function: DeleteFileW
+2021-12-08 20:46:03,594+0100 ERROR miktex-console.core - Result: 5
+2021-12-08 20:46:03,594+0100 ERROR miktex-console.core - Data: path="C:\_Vim\.vim\MiKTeX\texmfs\install\miktex\bin\msvcp140.dll"
+2021-12-08 20:46:03,594+0100 ERROR miktex-console.core - Source: Libraries\MiKTeX\Core\File\win\winFile.cpp:320
+2021-12-08 20:46:03,609+0100 ERROR miktex-console.core - Zugriff verweigert
+
+2021-12-08 20:46:03,609+0100 ERROR miktex-console.core - Function: DeleteFileW
+2021-12-08 20:46:03,609+0100 ERROR miktex-console.core - Result: 5
+2021-12-08 20:46:03,610+0100 ERROR miktex-console.core - Data: path="C:\_Vim\.vim\MiKTeX\texmfs\install\miktex\bin\msvcp140_1.dll"
+2021-12-08 20:46:03,610+0100 ERROR miktex-console.core - Source: Libraries\MiKTeX\Core\File\win\winFile.cpp:320
+2021-12-08 20:46:03,622+0100 ERROR miktex-console.core - Zugriff verweigert
+
+2021-12-08 20:46:03,623+0100 ERROR miktex-console.core - Function: DeleteFileW
+2021-12-08 20:46:03,623+0100 ERROR miktex-console.core - Result: 5
+2021-12-08 20:46:03,623+0100 ERROR miktex-console.core - Data: path="C:\_Vim\.vim\MiKTeX\texmfs\install\miktex\bin\msvcp140_codecvt_ids.dll"
+2021-12-08 20:46:03,623+0100 ERROR miktex-console.core - Source: Libraries\MiKTeX\Core\File\win\winFile.cpp:320
+2021-12-08 20:46:03,632+0100 ERROR miktex-console.core - Zugriff verweigert
+
+2021-12-08 20:46:03,632+0100 ERROR miktex-console.core - Function: DeleteFileW
+2021-12-08 20:46:03,632+0100 ERROR miktex-console.core - Result: 5
+2021-12-08 20:46:03,632+0100 ERROR miktex-console.core - Data: path="C:\_Vim\.vim\MiKTeX\texmfs\install\miktex\bin\vcruntime140.dll"
+2021-12-08 20:46:03,633+0100 ERROR miktex-console.core - Source: Libraries\MiKTeX\Core\File\win\winFile.cpp:320
+2021-12-08 20:46:03,659+0100 INFO  mainwindow - extracting files from miktex-vc140-bin.tar.lzma...
+2021-12-08 20:46:04,805+0100 INFO  miktex-console.core - start process: initexmf --mkmaps
+2021-12-08 20:46:07,225+0100 INFO  miktex-console.core - start process: mpm --register-components --verbose
+2021-12-08 20:46:07,983+0100 INFO  miktex-console.core - start process: initexmf --update-fndb --disable-installer --verbose
+2021-12-08 20:46:14,630+0100 INFO  miktex-console.core - start process: initexmf --force --mklinks --disable-installer --verbose
+2021-12-08 20:46:31,725+0100 INFO  miktex-console.core - start process: initexmf --mkmaps --mklangs --disable-installer --verbose
+2021-12-08 20:46:34,003+0100 ERROR miktex-console.core - Something is wrong with the PATH:
+2021-12-08 20:46:34,003+0100 ERROR miktex-console.core - C:\Program Files (x86)\VMware\VMware Player\bin\;C:\Program Files\AdoptOpenJDK\jdk-11.0.7.10-hotspot\bin;C:\Rtools40;C:\rtools40\usr\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\PuTTY\;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files\dotnet\;C:\Program Files\CMake\bin;C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\15.0\Bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Docker\Docker\resources\bin;C:\ProgramData\DockerDesktop\version-bin;c:\users\d-kel\appdata\local\programs\python\python38\lib\site-packages;C:\wkhtmltopdf\bin;c:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;c:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Git\cmd;C:\Program Files\nodejs\;C:\Program Files (x86)\dotnet\;d:\Python\edgedriver\;C:\Program Files\TortoiseGit\bin;C:\Windows\Microsoft.NET\Framework64\v4.0.30319;C:\Users\d-kel\AppData\Local\Programs\Python\Python38\Scripts\;C:\Users\d-kel\AppData\Local\Programs\Python\Python38\;C:\Users\d-kel\AppData\Local\Microsoft\WindowsApps;C:\Program Files (x86)\Common Files\Hilscher GmbH\TLRDecode;C:\Program Files\MongoDB\Server\4.4\bin;C:\Users\d-kel\AppData\Roaming\npm;C:\Users\d-kel\.dotnet\tools
+2021-12-08 20:46:34,519+0100 INFO  mainwindow - MiKTeX Console needs to be closed
+2021-12-08 20:46:56,708+0100 INFO  miktex-console.core - starting finish script
+2021-12-08 20:46:56,709+0100 INFO  miktex-console.core - start process: C:\WINDOWS\system32\cmd.exe /c C:\Users\d-kel\AppData\Local\Temp\mik75800\miktex-console-finish.cmd
+2021-12-08 20:46:56,735+0100 INFO  main - finishing with exit code 0
+2021-12-08 20:47:39,022+0100 INFO  main - starting: MiKTeX Console 4.5 (MiKTeX 21.12 32-bit Portable)
+2021-12-08 20:47:39,042+0100 ERROR miktex-console.core - Something is wrong with the PATH:
+2021-12-08 20:47:39,042+0100 ERROR miktex-console.core - C:\Program Files (x86)\VMware\VMware Player\bin\;C:\Program Files\AdoptOpenJDK\jdk-11.0.7.10-hotspot\bin;C:\Rtools40;C:\rtools40\usr\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\PuTTY\;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files\dotnet\;C:\Program Files\CMake\bin;C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\15.0\Bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Docker\Docker\resources\bin;C:\ProgramData\DockerDesktop\version-bin;c:\users\d-kel\appdata\local\programs\python\python38\lib\site-packages;C:\wkhtmltopdf\bin;c:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;c:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Git\cmd;C:\Program Files\nodejs\;C:\Program Files (x86)\dotnet\;d:\Python\edgedriver\;C:\Program Files\TortoiseGit\bin;C:\Windows\Microsoft.NET\Framework64\v4.0.30319;C:\Users\d-kel\AppData\Local\Programs\Python\Python38\Scripts\;C:\Users\d-kel\AppData\Local\Programs\Python\Python38\;C:\Users\d-kel\AppData\Local\Microsoft\WindowsApps;C:\Program Files (x86)\Common Files\Hilscher GmbH\TLRDecode;C:\Program Files\MongoDB\Server\4.4\bin;C:\Users\d-kel\AppData\Roaming\npm;C:\Users\d-kel\.dotnet\tools
+2021-12-08 20:47:42,359+0100 INFO  miktex-console.core - start process: initexmf --mkmaps
+2021-12-08 20:48:22,746+0100 INFO  miktex-console.packagemanager - going to download https://api2.miktex.org/repositories?&releaseState=Stable&orderBy=ranking&take=1&onlySecure=true
+2021-12-08 20:48:24,290+0100 INFO  miktex-console.packagemanager - installing package latexmk
+2021-12-08 20:48:24,292+0100 INFO  miktex-console.packagemanager - going to download https://ftp.gwdg.de/pub/ctan/systems/win32/miktex/tm/packages/latexmk.tar.lzma
+2021-12-08 20:48:26,933+0100 INFO  miktex-console.core - start process: initexmf --mkmaps
+2021-12-08 20:54:54,949+0100 INFO  main - finishing with exit code 0

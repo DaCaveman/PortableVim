@@ -567,7 +567,8 @@ au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
 au BufWritePre *.py,*.pyw,*.c,*.h %s/\s\+$//e
 let g:pytGoDefinitionKeyMap=1 " gd shows the declaration of curr. word
 let $PATH .= ';' . $HOME . '\.vim\PortablePython382x64\App\Python;' .
-				  \$HOME . '\.vim\PortablePython382x64\App\Scripts;'
+				  \$HOME . '\.vim\PortablePython382x64\App\Scripts;' . 
+				  \$HOME . '\.vim\MiKTeX\texmfs\install\miktex\bin\;' . 
 				  \'C:\rtools40\usr\bin;C:\rtools40\mingw64\bin;'
 let $PYTHONPATH .= $HOME . '\.vim\PortablePython382x64\App\Python;' .
 				  \$HOME . '\.vim\PortablePython382x64\App\Python\Lib;' .
@@ -576,6 +577,11 @@ let $PYTHONPATH .= $HOME . '\.vim\PortablePython382x64\App\Python;' .
 				  \$HOME . '\.vim\PortablePython382x64\App\Python\libs;' .
 				  \$HOME . '\.vim\PortablePython382x64\App\Python\Scripts;' .
 				  \$HOME . '\.vim\PortablePython382x64\App\Python\Tools;'
+"____________________________________________________________________________________________________________________
+"VimTex
+"
+let g:vimtex_view_method = 'zathura'
+"let g:vimtex_compiler_method = 'latexrun'
 "____________________________________________________________________________________________________________________
 " .CSV file
 "
