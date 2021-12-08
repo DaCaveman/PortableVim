@@ -53,6 +53,7 @@ Plugin 'othree/html5.vim'
 Plugin 'Raimondi/delimitMate'
 Plugin 'rickhowe/diffchar.vim'
 Plugin 'romainl/vim-qf'
+Plugin 'lervag/vimtex'
 "
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
