@@ -12,3 +12,24 @@
 2021-12-08 21:03:48,484+0100 INFO  lacheck - this process (3212) finishes with exit code 0
 2021-12-08 21:05:06,101+0100 INFO  lacheck - this process (2720) started by 'cmd' with command line: lacheck sicar-programming-guide.tex
 2021-12-08 21:05:06,108+0100 INFO  lacheck - this process (2720) finishes with exit code 0
+2021-12-08 21:47:12,819+0100 INFO  lacheck - this process (4468) started by 'cmd' with command line: lacheck sicar-programming-guide.tex
+2021-12-08 21:47:12,851+0100 WARN  lacheck - Sicherheitsrisiko: wird mit erweiterten Privilegien ausgeführt
+2021-12-08 21:47:12,867+0100 INFO  lacheck - this process (4468) finishes with exit code 0
+2021-12-08 21:47:40,679+0100 INFO  lacheck - this process (11288) started by 'cmd' with command line: lacheck sicar-programming-guide.tex
+2021-12-08 21:47:40,715+0100 WARN  lacheck - Sicherheitsrisiko: wird mit erweiterten Privilegien ausgeführt
+2021-12-08 21:47:40,725+0100 INFO  lacheck - this process (11288) finishes with exit code 0
+2021-12-08 21:47:48,416+0100 INFO  lacheck - this process (17220) started by 'cmd' with command line: lacheck sicar-programming-guide.tex
+2021-12-08 21:47:48,444+0100 WARN  lacheck - Sicherheitsrisiko: wird mit erweiterten Privilegien ausgeführt
+2021-12-08 21:47:48,459+0100 INFO  lacheck - this process (17220) finishes with exit code 0
+2021-12-08 21:51:41,349+0100 INFO  lacheck - this process (19184) started by 'cmd' with command line: lacheck sicar-programming-guide.tex
+2021-12-08 21:51:41,380+0100 WARN  lacheck - Sicherheitsrisiko: wird mit erweiterten Privilegien ausgeführt
+2021-12-08 21:51:41,398+0100 INFO  lacheck - this process (19184) finishes with exit code 0
+2021-12-08 21:54:02,007+0100 INFO  lacheck - this process (11688) started by 'cmd' with command line: lacheck sicar-programming-guide.tex
+2021-12-08 21:54:02,034+0100 WARN  lacheck - Sicherheitsrisiko: wird mit erweiterten Privilegien ausgeführt
+2021-12-08 21:54:02,048+0100 INFO  lacheck - this process (11688) finishes with exit code 0
+2021-12-08 21:56:39,160+0100 INFO  lacheck - this process (12076) started by 'cmd' with command line: lacheck sicar-programming-guide.tex
+2021-12-08 21:56:39,194+0100 WARN  lacheck - Sicherheitsrisiko: wird mit erweiterten Privilegien ausgeführt
+2021-12-08 21:56:39,211+0100 INFO  lacheck - this process (12076) finishes with exit code 0
+2021-12-08 22:15:59,408+0100 INFO  lacheck - this process (11688) started by 'cmd' with command line: lacheck sicar-programming-guide.tex
+2021-12-08 22:15:59,431+0100 WARN  lacheck - Sicherheitsrisiko: wird mit erweiterten Privilegien ausgeführt
+2021-12-08 22:15:59,442+0100 INFO  lacheck - this process (11688) finishes with exit code 0

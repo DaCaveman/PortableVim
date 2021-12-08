@@ -565,10 +565,12 @@ au BufNewFile,BufRead *.py set autoindent
 au BufNewFile,BufRead *.py set fileformat=unix
 au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
 au BufWritePre *.py,*.pyw,*.c,*.h %s/\s\+$//e
+
 let g:pytGoDefinitionKeyMap=1 " gd shows the declaration of curr. word
 let $PATH .= ';' . $HOME . '\.vim\PortablePython382x64\App\Python;' .
 				  \$HOME . '\.vim\PortablePython382x64\App\Scripts;' . 
 				  \$HOME . '\.vim\MiKTeX\texmfs\install\miktex\bin\;' . 
+				  \$HOME . '\.vim\Perl\perl\bin\;' . 
 				  \'C:\rtools40\usr\bin;C:\rtools40\mingw64\bin;'
 let $PYTHONPATH .= $HOME . '\.vim\PortablePython382x64\App\Python;' .
 				  \$HOME . '\.vim\PortablePython382x64\App\Python\Lib;' .

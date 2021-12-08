@@ -54,3 +54,9 @@
 2021-12-08 21:08:07,169+0100 INFO  miktex-fc-cache - this process (2092) finishes with exit code 0
 2021-12-08 21:08:12,128+0100 INFO  miktex-fc-cache - this process (16508) started by 'mkfntmap' with command line: miktex-fc-cache --miktex-disable-maintenance --miktex-disable-diagnose
 2021-12-08 21:08:12,338+0100 INFO  miktex-fc-cache - this process (16508) finishes with exit code 0
+2021-12-08 21:53:58,863+0100 INFO  miktex-fc-cache - this process (4896) started by 'mkfntmap' with command line: miktex-fc-cache --miktex-disable-maintenance --miktex-disable-diagnose
+2021-12-08 21:53:58,897+0100 WARN  miktex-fc-cache - Sicherheitsrisiko: wird mit erweiterten Privilegien ausgeführt
+2021-12-08 21:54:08,103+0100 FATAL miktex-fc-cache.core - The file name database is damaged.
+2021-12-08 21:54:08,103+0100 FATAL miktex-fc-cache.core - Data: path="C:\_Vim\.vim\MiKTeX\texmfs/data\miktex/data/le\texmf.fndb-5.log"
+2021-12-08 21:54:08,103+0100 FATAL miktex-fc-cache.core - Source: Libraries\MiKTeX\Core\Fndb\FileNameDatabase.cpp:477
+2021-12-08 21:54:12,365+0100 INFO  miktex-fc-cache - this process (4896) finishes with exit code 0

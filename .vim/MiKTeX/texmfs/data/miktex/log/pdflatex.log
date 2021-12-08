@@ -290,3 +290,8 @@
 2021-12-08 21:08:23,716+0100 INFO  pdflatex - this is MiKTeX-PDFTEX 4.10.0 (1.40.24) (MiKTeX 21.12 32-bit Portable)
 2021-12-08 21:08:23,720+0100 INFO  pdflatex - allowing known shell commands
 2021-12-08 21:08:26,419+0100 INFO  pdflatex - this process (2936) finishes with exit code 0
+2021-12-08 22:16:14,159+0100 INFO  pdflatex - this process (2548) started by 'perl' with command line: pdflatex -file-line-error -synctex=1 -interaction=nonstopmode -recorder sicar-programming-guide.tex
+2021-12-08 22:16:14,187+0100 WARN  pdflatex - Sicherheitsrisiko: wird mit erweiterten Privilegien ausgeführt
+2021-12-08 22:16:14,187+0100 INFO  pdflatex - this is MiKTeX-PDFTEX 4.10.0 (1.40.24) (MiKTeX 21.12 32-bit Portable)
+2021-12-08 22:16:14,226+0100 INFO  pdflatex - allowing known shell commands
+2021-12-08 22:16:19,670+0100 INFO  pdflatex - this process (2548) finishes with exit code 0

@@ -2,3 +2,42 @@
 2021-12-08 21:03:57,327+0100 INFO  latexmk.core - start process: perl C:\_Vim\.vim\MiKTeX\texmfs\install\scripts/latexmk\latexmk.pl -verbose -file-line-error -synctex=1 -interaction=nonstopmode -pdf -pvc -e "$compiling_cmd = ($compiling_cmd ? $compiling_cmd . ' & ' : '') . 'echo vimtex_compiler_callback_compiling'" -e "$success_cmd = ($success_cmd ? $success_cmd . ' & ' : '') . 'echo vimtex_compiler_callback_success'" -e "$failure_cmd = ($failure_cmd ? $failure_cmd . ' & ' : '') . 'echo vimtex_compiler_callback_failure'" tk_Dispense.tex
 2021-12-08 21:05:12,094+0100 INFO  latexmk - this process (15696) started by 'cmd' with command line: latexmk -verbose -file-line-error -synctex=1 -interaction=nonstopmode -pdf -pvc -e "$compiling_cmd = ($compiling_cmd ? $compiling_cmd . ' & ' : '') . 'echo vimtex_compiler_callback_compiling'" -e "$success_cmd = ($success_cmd ? $success_cmd . ' & ' : '') . 'echo vimtex_compiler_callback_success'" -e "$failure_cmd = ($failure_cmd ? $failure_cmd . ' & ' : '') . 'echo vimtex_compiler_callback_failure'" sicar-programming-guide.tex
 2021-12-08 21:05:12,106+0100 INFO  latexmk.core - start process: perl C:\_Vim\.vim\MiKTeX\texmfs\install\scripts/latexmk\latexmk.pl -verbose -file-line-error -synctex=1 -interaction=nonstopmode -pdf -pvc -e "$compiling_cmd = ($compiling_cmd ? $compiling_cmd . ' & ' : '') . 'echo vimtex_compiler_callback_compiling'" -e "$success_cmd = ($success_cmd ? $success_cmd . ' & ' : '') . 'echo vimtex_compiler_callback_success'" -e "$failure_cmd = ($failure_cmd ? $failure_cmd . ' & ' : '') . 'echo vimtex_compiler_callback_failure'" sicar-programming-guide.tex
+2021-12-08 21:47:52,724+0100 INFO  latexmk - this process (7368) started by 'cmd' with command line: latexmk -verbose -file-line-error -synctex=1 -interaction=nonstopmode -pdf -pvc -e "$compiling_cmd = ($compiling_cmd ? $compiling_cmd . ' & ' : '') . 'echo vimtex_compiler_callback_compiling'" -e "$success_cmd = ($success_cmd ? $success_cmd . ' & ' : '') . 'echo vimtex_compiler_callback_success'" -e "$failure_cmd = ($failure_cmd ? $failure_cmd . ' & ' : '') . 'echo vimtex_compiler_callback_failure'" sicar-programming-guide.tex
+2021-12-08 21:47:52,751+0100 WARN  latexmk - Sicherheitsrisiko: wird mit erweiterten Privilegien ausgeführt
+2021-12-08 21:47:52,782+0100 FATAL latexmk.core - The script engine could not be found.
+2021-12-08 21:47:52,782+0100 FATAL latexmk.core - Data: scriptEngine="perl", scriptName="latexmk"
+2021-12-08 21:47:52,782+0100 FATAL latexmk.core - Source: Libraries\MiKTeX\Core\Session\runperl.cpp:80
+2021-12-08 21:47:52,782+0100 FATAL latexmk - The script engine could not be found.
+2021-12-08 21:47:52,782+0100 FATAL latexmk - Info: scriptEngine="perl", scriptName="latexmk"
+2021-12-08 21:47:52,782+0100 FATAL latexmk - Source: Libraries\MiKTeX\Core\Session\runperl.cpp
+2021-12-08 21:47:52,782+0100 FATAL latexmk - Line: 80
+2021-12-08 21:51:48,003+0100 INFO  latexmk - this process (8472) started by 'cmd' with command line: latexmk -verbose -file-line-error -synctex=1 -interaction=nonstopmode -pdf -pvc -e "$compiling_cmd = ($compiling_cmd ? $compiling_cmd . ' & ' : '') . 'echo vimtex_compiler_callback_compiling'" -e "$success_cmd = ($success_cmd ? $success_cmd . ' & ' : '') . 'echo vimtex_compiler_callback_success'" -e "$failure_cmd = ($failure_cmd ? $failure_cmd . ' & ' : '') . 'echo vimtex_compiler_callback_failure'" sicar-programming-guide.tex
+2021-12-08 21:51:48,029+0100 WARN  latexmk - Sicherheitsrisiko: wird mit erweiterten Privilegien ausgeführt
+2021-12-08 21:51:48,059+0100 FATAL latexmk.core - The script engine could not be found.
+2021-12-08 21:51:48,059+0100 FATAL latexmk.core - Data: scriptEngine="perl", scriptName="latexmk"
+2021-12-08 21:51:48,059+0100 FATAL latexmk.core - Source: Libraries\MiKTeX\Core\Session\runperl.cpp:80
+2021-12-08 21:51:48,059+0100 FATAL latexmk - The script engine could not be found.
+2021-12-08 21:51:48,059+0100 FATAL latexmk - Info: scriptEngine="perl", scriptName="latexmk"
+2021-12-08 21:51:48,060+0100 FATAL latexmk - Source: Libraries\MiKTeX\Core\Session\runperl.cpp
+2021-12-08 21:51:48,060+0100 FATAL latexmk - Line: 80
+2021-12-08 21:54:06,026+0100 INFO  latexmk - this process (856) started by 'cmd' with command line: latexmk -verbose -file-line-error -synctex=1 -interaction=nonstopmode -pdf -pvc -e "$compiling_cmd = ($compiling_cmd ? $compiling_cmd . ' & ' : '') . 'echo vimtex_compiler_callback_compiling'" -e "$success_cmd = ($success_cmd ? $success_cmd . ' & ' : '') . 'echo vimtex_compiler_callback_success'" -e "$failure_cmd = ($failure_cmd ? $failure_cmd . ' & ' : '') . 'echo vimtex_compiler_callback_failure'" sicar-programming-guide.tex
+2021-12-08 21:54:06,052+0100 WARN  latexmk - Sicherheitsrisiko: wird mit erweiterten Privilegien ausgeführt
+2021-12-08 21:54:06,092+0100 FATAL latexmk.core - The script engine could not be found.
+2021-12-08 21:54:06,092+0100 FATAL latexmk.core - Data: scriptEngine="perl", scriptName="latexmk"
+2021-12-08 21:54:06,099+0100 FATAL latexmk.core - Source: Libraries\MiKTeX\Core\Session\runperl.cpp:80
+2021-12-08 21:54:06,099+0100 FATAL latexmk - The script engine could not be found.
+2021-12-08 21:54:06,099+0100 FATAL latexmk - Info: scriptEngine="perl", scriptName="latexmk"
+2021-12-08 21:54:06,099+0100 FATAL latexmk - Source: Libraries\MiKTeX\Core\Session\runperl.cpp
+2021-12-08 21:54:06,099+0100 FATAL latexmk - Line: 80
+2021-12-08 21:57:07,813+0100 INFO  latexmk - this process (11868) started by 'cmd' with command line: latexmk -verbose -file-line-error -synctex=1 -interaction=nonstopmode -pdf -pvc -e "$compiling_cmd = ($compiling_cmd ? $compiling_cmd . ' & ' : '') . 'echo vimtex_compiler_callback_compiling'" -e "$success_cmd = ($success_cmd ? $success_cmd . ' & ' : '') . 'echo vimtex_compiler_callback_success'" -e "$failure_cmd = ($failure_cmd ? $failure_cmd . ' & ' : '') . 'echo vimtex_compiler_callback_failure'" sicar-programming-guide.tex
+2021-12-08 21:57:07,831+0100 WARN  latexmk - Sicherheitsrisiko: wird mit erweiterten Privilegien ausgeführt
+2021-12-08 21:57:07,859+0100 FATAL latexmk.core - The script engine could not be found.
+2021-12-08 21:57:07,859+0100 FATAL latexmk.core - Data: scriptEngine="perl", scriptName="latexmk"
+2021-12-08 21:57:07,859+0100 FATAL latexmk.core - Source: Libraries\MiKTeX\Core\Session\runperl.cpp:80
+2021-12-08 21:57:07,859+0100 FATAL latexmk - The script engine could not be found.
+2021-12-08 21:57:07,859+0100 FATAL latexmk - Info: scriptEngine="perl", scriptName="latexmk"
+2021-12-08 21:57:07,859+0100 FATAL latexmk - Source: Libraries\MiKTeX\Core\Session\runperl.cpp
+2021-12-08 21:57:07,859+0100 FATAL latexmk - Line: 80
+2021-12-08 22:16:07,631+0100 INFO  latexmk - this process (5580) started by 'cmd' with command line: latexmk -verbose -file-line-error -synctex=1 -interaction=nonstopmode -pdf -pvc -e "$compiling_cmd = ($compiling_cmd ? $compiling_cmd . ' & ' : '') . 'echo vimtex_compiler_callback_compiling'" -e "$success_cmd = ($success_cmd ? $success_cmd . ' & ' : '') . 'echo vimtex_compiler_callback_success'" -e "$failure_cmd = ($failure_cmd ? $failure_cmd . ' & ' : '') . 'echo vimtex_compiler_callback_failure'" sicar-programming-guide.tex
+2021-12-08 22:16:07,656+0100 WARN  latexmk - Sicherheitsrisiko: wird mit erweiterten Privilegien ausgeführt
+2021-12-08 22:16:07,737+0100 INFO  latexmk.core - start process: perl C:\_Vim\.vim\MiKTeX\texmfs\install\scripts/latexmk\latexmk.pl -verbose -file-line-error -synctex=1 -interaction=nonstopmode -pdf -pvc -e "$compiling_cmd = ($compiling_cmd ? $compiling_cmd . ' & ' : '') . 'echo vimtex_compiler_callback_compiling'" -e "$success_cmd = ($success_cmd ? $success_cmd . ' & ' : '') . 'echo vimtex_compiler_callback_success'" -e "$failure_cmd = ($failure_cmd ? $failure_cmd . ' & ' : '') . 'echo vimtex_compiler_callback_failure'" sicar-programming-guide.tex

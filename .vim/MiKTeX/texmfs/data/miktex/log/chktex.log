@@ -27,3 +27,24 @@
 2021-12-08 21:03:49,103+0100 INFO  chktex - this process (18188) finishes with exit code 2
 2021-12-08 21:05:06,682+0100 INFO  chktex - this process (5124) started by 'cmd' with command line: chktex -q -v1 sicar-programming-guide.tex
 2021-12-08 21:05:06,696+0100 INFO  chktex - this process (5124) finishes with exit code 2
+2021-12-08 21:47:14,006+0100 INFO  chktex - this process (17520) started by 'cmd' with command line: chktex -q -v1 sicar-programming-guide.tex
+2021-12-08 21:47:14,045+0100 WARN  chktex - Sicherheitsrisiko: wird mit erweiterten Privilegien ausgeführt
+2021-12-08 21:47:14,089+0100 INFO  chktex - this process (17520) finishes with exit code 2
+2021-12-08 21:47:41,620+0100 INFO  chktex - this process (2692) started by 'cmd' with command line: chktex -q -v1 sicar-programming-guide.tex
+2021-12-08 21:47:41,659+0100 WARN  chktex - Sicherheitsrisiko: wird mit erweiterten Privilegien ausgeführt
+2021-12-08 21:47:41,687+0100 INFO  chktex - this process (2692) finishes with exit code 2
+2021-12-08 21:47:49,419+0100 INFO  chktex - this process (5688) started by 'cmd' with command line: chktex -q -v1 sicar-programming-guide.tex
+2021-12-08 21:47:49,443+0100 WARN  chktex - Sicherheitsrisiko: wird mit erweiterten Privilegien ausgeführt
+2021-12-08 21:47:49,472+0100 INFO  chktex - this process (5688) finishes with exit code 2
+2021-12-08 21:51:42,556+0100 INFO  chktex - this process (18836) started by 'cmd' with command line: chktex -q -v1 sicar-programming-guide.tex
+2021-12-08 21:51:42,587+0100 WARN  chktex - Sicherheitsrisiko: wird mit erweiterten Privilegien ausgeführt
+2021-12-08 21:51:42,636+0100 INFO  chktex - this process (18836) finishes with exit code 2
+2021-12-08 21:54:03,132+0100 INFO  chktex - this process (12396) started by 'cmd' with command line: chktex -q -v1 sicar-programming-guide.tex
+2021-12-08 21:54:03,158+0100 WARN  chktex - Sicherheitsrisiko: wird mit erweiterten Privilegien ausgeführt
+2021-12-08 21:54:03,188+0100 INFO  chktex - this process (12396) finishes with exit code 2
+2021-12-08 21:56:40,606+0100 INFO  chktex - this process (12276) started by 'cmd' with command line: chktex -q -v1 sicar-programming-guide.tex
+2021-12-08 21:56:40,641+0100 WARN  chktex - Sicherheitsrisiko: wird mit erweiterten Privilegien ausgeführt
+2021-12-08 21:56:40,692+0100 INFO  chktex - this process (12276) finishes with exit code 2
+2021-12-08 22:16:00,459+0100 INFO  chktex - this process (12060) started by 'cmd' with command line: chktex -q -v1 sicar-programming-guide.tex
+2021-12-08 22:16:00,483+0100 WARN  chktex - Sicherheitsrisiko: wird mit erweiterten Privilegien ausgeführt
+2021-12-08 22:16:00,515+0100 INFO  chktex - this process (12060) finishes with exit code 2

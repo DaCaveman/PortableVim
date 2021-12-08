@@ -91,3 +91,7 @@
 2021-12-08 20:48:24,292+0100 INFO  miktex-console.packagemanager - going to download https://ftp.gwdg.de/pub/ctan/systems/win32/miktex/tm/packages/latexmk.tar.lzma
 2021-12-08 20:48:26,933+0100 INFO  miktex-console.core - start process: initexmf --mkmaps
 2021-12-08 20:54:54,949+0100 INFO  main - finishing with exit code 0
+2021-12-08 21:53:48,604+0100 INFO  main - starting: MiKTeX Console 4.5 (MiKTeX 21.12 32-bit Portable)
+2021-12-08 21:53:48,617+0100 ERROR miktex-console.core - Something is wrong with the PATH:
+2021-12-08 21:53:48,617+0100 ERROR miktex-console.core - C:\Windows\System32;C:\Windows;C:\Windows\System32\wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\PuTTY\;C:\Program Files\Git\cmd;C:\Program Files\TortoiseGit\bin;
+2021-12-08 21:53:54,447+0100 INFO  miktex-console.core - start process: initexmf --mkmaps

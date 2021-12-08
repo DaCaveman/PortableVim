@@ -274,3 +274,9 @@
 2021-12-08 21:08:15,738+0100 INFO  initexmf - running: miktex-makebase.exe --dest-name=mf --no-dump mf.ini --engine-option=-tcx=cp227.tcx --enable-installer --miktex-disable-maintenance --miktex-disable-diagnose
 2021-12-08 21:08:15,738+0100 INFO  initexmf.core - start process: miktex-makebase.exe --dest-name=mf --no-dump mf.ini --engine-option=-tcx=cp227.tcx --enable-installer --miktex-disable-maintenance --miktex-disable-diagnose
 2021-12-08 21:08:17,180+0100 INFO  initexmf - this process (15716) finishes with exit code 0
+2021-12-08 21:53:55,425+0100 INFO  initexmf - this is MiKTeX Configuration Utility 4.7 (MiKTeX 21.12 32-bit Portable)
+2021-12-08 21:53:55,428+0100 INFO  initexmf - this process (7992) started by 'miktex-console' with command line: initexmf --mkmaps
+2021-12-08 21:53:55,428+0100 INFO  initexmf - Operating on the private (per-user) MiKTeX setup
+2021-12-08 21:53:55,432+0100 INFO  initexmf - running: mkfntmap --enable-installer --miktex-disable-maintenance --miktex-disable-diagnose
+2021-12-08 21:53:55,433+0100 INFO  initexmf.core - start process: mkfntmap --enable-installer --miktex-disable-maintenance --miktex-disable-diagnose
+2021-12-08 21:54:12,506+0100 INFO  initexmf - this process (7992) finishes with exit code 0
