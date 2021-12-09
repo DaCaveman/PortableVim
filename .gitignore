@@ -8,3 +8,4 @@ _.git
 *.whl
 **/__pycache__/
 *.pyc
+/.vim/MiKTeX/texmfs/data/miktex/log

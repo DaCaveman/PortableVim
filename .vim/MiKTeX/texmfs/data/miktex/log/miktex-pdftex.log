@@ -1,4 +1,0 @@
-2021-12-08 21:04:00,750+0100 INFO  miktex-pdftex - this process (12164) started by 'miktex-makefmt' with command line: miktex-pdftex.exe --miktex-disable-maintenance --miktex-disable-diagnose --initialize --interaction=nonstopmode --halt-on-error --alias=pdflatex --job-name=pdflatex -tcx=cp227.tcx --enable-etex pdflatex.ini
-2021-12-08 21:04:00,751+0100 INFO  miktex-pdftex - this is MiKTeX-PDFTEX 4.10.0 (1.40.24) (MiKTeX 21.12 32-bit Portable)
-2021-12-08 21:04:00,755+0100 INFO  miktex-pdftex - allowing known shell commands
-2021-12-08 21:04:06,331+0100 INFO  miktex-pdftex - this process (12164) finishes with exit code 0

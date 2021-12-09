@@ -580,7 +580,7 @@ let $PYTHONPATH .= $HOME . '\.vim\PortablePython382x64\App\Python;' .
 "____________________________________________________________________________________________________________________
 "VimTex
 "
-let g:vimtex_view_method = 'zathura'
+"let g:vimtex_view_method = 'zathura'
 "let g:vimtex_compiler_method = 'latexrun'
 "____________________________________________________________________________________________________________________
 " .CSV file
