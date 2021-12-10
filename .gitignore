@@ -9,3 +9,4 @@ _.git
 **/__pycache__/
 *.pyc
 /.vim/MiKTeX/texmfs/data/miktex/log
+/.cache
