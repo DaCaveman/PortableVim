@@ -571,6 +571,7 @@ let $PATH .= ';' . $HOME . '\.vim\PortablePython382x64\App\Python;' .
 				  \$HOME . '\.vim\PortablePython382x64\App\Scripts;' . 
 				  \$HOME . '\.vim\MiKTeX\texmfs\install\miktex\bin\;' . 
 				  \$HOME . '\.vim\Perl\perl\bin\;' . 
+				  \$HOME . '\.vim\SumatraPDF\;' . 
 				  \'C:\rtools40\usr\bin;C:\rtools40\mingw64\bin;'
 let $PYTHONPATH .= $HOME . '\.vim\PortablePython382x64\App\Python;' .
 				  \$HOME . '\.vim\PortablePython382x64\App\Python\Lib;' .
@@ -582,8 +583,11 @@ let $PYTHONPATH .= $HOME . '\.vim\PortablePython382x64\App\Python;' .
 "____________________________________________________________________________________________________________________
 "VimTex
 "
-"let g:vimtex_view_method = 'zathura'
-"let g:vimtex_compiler_method = 'latexrun'
+" tex file are always in latex
+let g:tex_flavor='latex'
+let g:vimtex_view_general_viewer = 'SumatraPDF' 
+let g:vimtex_view_general_options='-reuse-instance -forward-search @tex @line @pdf'
+let g:vimtex_view_general_options_latexmk='-reuse-instance'
 "____________________________________________________________________________________________________________________
 " .CSV file
 "
