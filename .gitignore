@@ -11,3 +11,4 @@ _.git
 /.vim/MiKTeX/texmfs/data/miktex/log
 /.cache
 /.vim/SumatraPDF/sumatrapdfcache
+/.vim/SumatraPDF/SumatraPDF-settings.txt
