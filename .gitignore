@@ -8,6 +8,7 @@ _.git
 *.whl
 **/__pycache__/
 *.pyc
+*.log
 /.vim/MiKTeX/texmfs/data/miktex/log
 /.cache
 /.vim/SumatraPDF/sumatrapdfcache
