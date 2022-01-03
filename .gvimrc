@@ -4,7 +4,7 @@
 	if has("gui_running")
 		" Basics {
 			
-			winpos 1921 0
+			winpos -1207 -193
 			"colorscheme summerfruit256" Helles Theme color
 			"colorscheme nikolaev" Dunkles Theme color
 			"colorscheme solarized" Dunkles Theme color
