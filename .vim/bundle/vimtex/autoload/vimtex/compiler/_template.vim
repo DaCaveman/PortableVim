@@ -170,8 +170,8 @@ function! s:compiler.stop() abort dict " {{{1
   if !self.is_running() | return | endif
 
   silent! call timer_stop(self.check_timer)
-  call self.kill()
   let self.status = 0
+  call self.kill()
 
   if exists('#User#VimtexEventCompileStopped')
     doautocmd <nomodeline> User VimtexEventCompileStopped
@@ -291,6 +291,9 @@ endfunction
 
 " }}}1
 function! s:callback(ch, msg) abort " {{{1
+  if !exists('b:vimtex.compiler') | return | endif
+  if b:vimtex.compiler.status == 0 | return | endif
+
   try
     call vimtex#compiler#callback(2 + vimtex#qf#inquire(s:cb_target))
   catch /E565:/
@@ -391,7 +394,7 @@ function! s:callback_nvim_output(id, data, event) abort dict " {{{1
 
   call s:check_callback(
         \ get(filter(copy(a:data),
-        \   {_, x -> x =~# '^vimtex_compiler_callback'}), -1, ''))
+        \   {_, x -> x =~# 'vimtex_compiler_callback'}), -1, ''))
 
   try
     for l:Hook in get(get(get(b:, 'vimtex', {}), 'compiler', {}), 'hooks', [])
@@ -403,7 +406,8 @@ endfunction
 
 " }}}1
 function! s:callback_nvim_exit(id, data, event) abort dict " {{{1
-  if !exists('b:vimtex.tex') | return | endif
+  if !exists('b:vimtex.compiler') | return | endif
+  if b:vimtex.compiler.status == 0 | return | endif
 
   let l:target = self.tex !=# b:vimtex.tex ? self.tex : ''
   call vimtex#compiler#callback(2 + vimtex#qf#inquire(l:target))
@@ -445,11 +449,11 @@ endfunction
 " }}}1
 
 function! s:check_callback(line) abort " {{{1
-  if a:line ==# 'vimtex_compiler_callback_compiling'
+  if a:line =~# 'vimtex_compiler_callback_compiling'
     call vimtex#compiler#callback(1)
-  elseif a:line ==# 'vimtex_compiler_callback_success'
+  elseif a:line =~# 'vimtex_compiler_callback_success'
     call vimtex#compiler#callback(2)
-  elseif a:line ==# 'vimtex_compiler_callback_failure'
+  elseif a:line =~# 'vimtex_compiler_callback_failure'
     call vimtex#compiler#callback(3)
   endif
 endfunction

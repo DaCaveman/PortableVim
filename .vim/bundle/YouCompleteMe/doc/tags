@@ -14,8 +14,10 @@ GetParent	youcompleteme.txt	/*GetParent*
 GetType	youcompleteme.txt	/*GetType*
 GetTypeImprecise	youcompleteme.txt	/*GetTypeImprecise*
 GoTo	youcompleteme.txt	/*GoTo*
+GoToCallers	youcompleteme.txt	/*GoToCallers*
 GoToDeclaration	youcompleteme.txt	/*GoToDeclaration*
 GoToDefinition	youcompleteme.txt	/*GoToDefinition*
+GoToDocumentOutline	youcompleteme.txt	/*GoToDocumentOutline*
 GoToImplementation	youcompleteme.txt	/*GoToImplementation*
 GoToImplementationElseDeclaration	youcompleteme.txt	/*GoToImplementationElseDeclaration*
 GoToImprecise	youcompleteme.txt	/*GoToImprecise*
@@ -89,6 +91,7 @@ g:ycm_semantic_triggers	youcompleteme.txt	/*g:ycm_semantic_triggers*
 g:ycm_server_python_interpreter	youcompleteme.txt	/*g:ycm_server_python_interpreter*
 g:ycm_show_diagnostics_ui	youcompleteme.txt	/*g:ycm_show_diagnostics_ui*
 g:ycm_tsserver_binary_path	youcompleteme.txt	/*g:ycm_tsserver_binary_path*
+g:ycm_update_diagnostics_in_insert_mode	youcompleteme.txt	/*g:ycm_update_diagnostics_in_insert_mode*
 g:ycm_use_clangd	youcompleteme.txt	/*g:ycm_use_clangd*
 g:ycm_use_ultisnips_completer	youcompleteme.txt	/*g:ycm_use_ultisnips_completer*
 g:ycm_warning_symbol	youcompleteme.txt	/*g:ycm_warning_symbol*
@@ -98,13 +101,15 @@ youcompleteme#GetCommandResponseAsync()	youcompleteme.txt	/*youcompleteme#GetCom
 youcompleteme#GetErrorCount	youcompleteme.txt	/*youcompleteme#GetErrorCount*
 youcompleteme#GetWarningCount	youcompleteme.txt	/*youcompleteme#GetWarningCount*
 youcompleteme-autocommands	youcompleteme.txt	/*youcompleteme-autocommands*
-youcompleteme-automaticly-discovered-solution-files	youcompleteme.txt	/*youcompleteme-automaticly-discovered-solution-files*
+youcompleteme-automatically-discovered-solution-files	youcompleteme.txt	/*youcompleteme-automatically-discovered-solution-files*
 youcompleteme-c	youcompleteme.txt	/*youcompleteme-c*
 youcompleteme-c-family-languages	youcompleteme.txt	/*youcompleteme-c-family-languages*
 youcompleteme-c-family-semantic-completion	youcompleteme.txt	/*youcompleteme-c-family-semantic-completion*
 youcompleteme-c-semantic-completion	youcompleteme.txt	/*youcompleteme-c-semantic-completion*
 youcompleteme-client-server-architecture	youcompleteme.txt	/*youcompleteme-client-server-architecture*
+youcompleteme-closing-popup	youcompleteme.txt	/*youcompleteme-closing-popup*
 youcompleteme-commands	youcompleteme.txt	/*youcompleteme-commands*
+youcompleteme-compile-flags	youcompleteme.txt	/*youcompleteme-compile-flags*
 youcompleteme-completion-string-ranking	youcompleteme.txt	/*youcompleteme-completion-string-ranking*
 youcompleteme-configuring-through-vim-options	youcompleteme.txt	/*youcompleteme-configuring-through-vim-options*
 youcompleteme-contact	youcompleteme.txt	/*youcompleteme-contact*
@@ -129,6 +134,7 @@ youcompleteme-go-semantic-completion	youcompleteme.txt	/*youcompleteme-go-semant
 youcompleteme-goto-commands	youcompleteme.txt	/*youcompleteme-goto-commands*
 youcompleteme-gradle-projects	youcompleteme.txt	/*youcompleteme-gradle-projects*
 youcompleteme-help-advice-support	youcompleteme.txt	/*youcompleteme-help-advice-support*
+youcompleteme-individual-completer-requirements	youcompleteme.txt	/*youcompleteme-individual-completer-requirements*
 youcompleteme-installation	youcompleteme.txt	/*youcompleteme-installation*
 youcompleteme-intro	youcompleteme.txt	/*youcompleteme-intro*
 youcompleteme-introduction	youcompleteme.txt	/*youcompleteme-introduction*
@@ -146,9 +152,7 @@ youcompleteme-manually-specified-solution-files	youcompleteme.txt	/*youcompletem
 youcompleteme-maven-projects	youcompleteme.txt	/*youcompleteme-maven-projects*
 youcompleteme-miscellaneous-commands	youcompleteme.txt	/*youcompleteme-miscellaneous-commands*
 youcompleteme-multi-file-refactor	youcompleteme.txt	/*youcompleteme-multi-file-refactor*
-youcompleteme-note-minimum-compiler-versions-have-been-increased	youcompleteme.txt	/*youcompleteme-note-minimum-compiler-versions-have-been-increased*
-youcompleteme-note-minimum-requirements-have-changed	youcompleteme.txt	/*youcompleteme-note-minimum-requirements-have-changed*
-youcompleteme-option-1-use-compilation-database-45	youcompleteme.txt	/*youcompleteme-option-1-use-compilation-database-45*
+youcompleteme-option-1-use-compilation-database-46	youcompleteme.txt	/*youcompleteme-option-1-use-compilation-database-46*
 youcompleteme-option-2-provide-flags-manually	youcompleteme.txt	/*youcompleteme-option-2-provide-flags-manually*
 youcompleteme-options	youcompleteme.txt	/*youcompleteme-options*
 youcompleteme-plugging-an-arbitrary-lsp-server	youcompleteme.txt	/*youcompleteme-plugging-an-arbitrary-lsp-server*
@@ -164,6 +168,10 @@ youcompleteme-rust-semantic-completion	youcompleteme.txt	/*youcompleteme-rust-se
 youcompleteme-semantic-completion-for-other-languages	youcompleteme.txt	/*youcompleteme-semantic-completion-for-other-languages*
 youcompleteme-semantic-information-commands	youcompleteme.txt	/*youcompleteme-semantic-information-commands*
 youcompleteme-signature-help	youcompleteme.txt	/*youcompleteme-signature-help*
+youcompleteme-sponsorship	youcompleteme.txt	/*youcompleteme-sponsorship*
+youcompleteme-supported-compilers	youcompleteme.txt	/*youcompleteme-supported-compilers*
+youcompleteme-supported-vim-versions	youcompleteme.txt	/*youcompleteme-supported-vim-versions*
+youcompleteme-symbol-search	youcompleteme.txt	/*youcompleteme-symbol-search*
 youcompleteme-troubleshooting	youcompleteme.txt	/*youcompleteme-troubleshooting*
 youcompleteme-user-guide	youcompleteme.txt	/*youcompleteme-user-guide*
 youcompleteme-using-omnifunc-for-semantic-completion	youcompleteme.txt	/*youcompleteme-using-omnifunc-for-semantic-completion*
