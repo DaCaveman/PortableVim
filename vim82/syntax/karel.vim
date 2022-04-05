@@ -81,8 +81,9 @@ syn match  rapidFloat	"\%(\%(\w\|[]})\"']\s*\)\@<!-\)\=\<\%(0\|[1-9]\d*\%(_\d\+\
 
 "FOLDs festlegen
 
-"syn region rapidFold start=/pos/ end=\/};/ transparent fold
-syn region rapidFold start=/SYSSIG_/ end=/#/ transparent fold
+syn region rapidFold start="{" end="};" transparent fold
+"syn region rapidFold start="/pos" end="};" transparent fold
+"syn region rapidFold start=/SYSSIG_/ end=/#/ transparent fold
 
 
 
