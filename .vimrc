@@ -39,6 +39,7 @@ Plugin 'ycm-core/YouCompleteMe'
 Plugin 'tmhedberg/SimpylFold'
 Plugin 'vim-scripts/indentpython.vim'
 Plugin 'preservim/nerdtree'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'vim-syntastic/syntastic'
 Plugin 'preservim/nerdcommenter'
 Plugin 'morhetz/gruvbox'
@@ -47,6 +48,8 @@ Plugin 'frazrepo/vim-rainbow'
 Plugin 'itchyny/lightline.vim'
 Plugin 'KnoP-01/krl-for-vim'
 Plugin 'KnoP-01/rapid-for-vim'
+Plugin 'KnoP-01/vim-tp'
+
 "Plugin 'jalvesaq/Nvim-R'
 "Plugin 'chrisbra/csv.vim'
 Plugin 'othree/html5.vim'
@@ -69,6 +72,7 @@ call vundle#end()            " required
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
 "____________________________________________________________________________________________________________________
+call pathogen#infect()
 "Start-Up
 "
 syntax off                  " undo what plug#begin() did to syntax
@@ -539,8 +543,9 @@ au BufNewFile,BufRead *.src set fileencoding=utf-8
 "____________________________________________________________________________________________________________________
 " FANUC karel
 "
-autocmd BufRead,BufNewFile *.PE set filetype=karel" Highlight karel syntax
-autocmd BufRead,BufNewFile *.LS set filetype=karel" Highlight karel syntax
+let g:tpAutoCorrLineEnd = 1
+"autocmd BufRead,BufNewFile *.PE set filetype=karel" Highlight karel syntax
+"autocmd BufRead,BufNewFile *.LS set filetype=karel" Highlight karel syntax
 "____________________________________________________________________________________________________________________
 " COMAU pdl2
 "
