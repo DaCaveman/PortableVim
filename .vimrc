@@ -39,7 +39,7 @@ Plugin 'ycm-core/YouCompleteMe'
 Plugin 'tmhedberg/SimpylFold'
 Plugin 'vim-scripts/indentpython.vim'
 Plugin 'preservim/nerdtree'
-Plugin 'Xuyuanp/nerdtree-git-plugin'
+"Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'vim-syntastic/syntastic'
 Plugin 'preservim/nerdcommenter'
 Plugin 'morhetz/gruvbox'
@@ -49,6 +49,9 @@ Plugin 'itchyny/lightline.vim'
 Plugin 'KnoP-01/krl-for-vim'
 Plugin 'KnoP-01/rapid-for-vim'
 Plugin 'KnoP-01/vim-tp'
+"Plugin 'lambdalisue/fern.vim'
+"Plugin 'lambdalisue/fern-git-status.vim'
+"Plugin 'qaiviq/vim-filer'
 
 "Plugin 'jalvesaq/Nvim-R'
 "Plugin 'chrisbra/csv.vim'
@@ -119,7 +122,7 @@ set directory=.,~\.vim_backup
 "____________________________________________________________________________________________________________________
 "Diff
 "
-set diffopt+=internal,algorithm:patience
+"set diffopt+=internal,algorithm:patience
 "____________________________________________________________________________________________________________________
 " gVim appearance
 "
@@ -505,9 +508,9 @@ let g:SimpylFold_fold_docstring = 1
 "____________________________________________________________________________________________________________________
 " NERDTree
 "
-let NERDTreeMapOpenInTab='\r'
-let NERDTreeMapOpenInTab='<ENTER>'
-let NERDTreeChDirMode=2
+"let NERDTreeMapOpenInTab='\r'
+"let NERDTreeMapOpenInTab='<ENTER>'
+"let NERDTreeChDirMode=2
 "____________________________________________________________________________________________________________________
 " ABB rapid
 "
@@ -623,3 +626,29 @@ function! GrepBuffers (expression)
 endfunction
 
 command! -nargs=+ GrepBufs call GrepBuffers(<q-args>)
+"
+"---------------------------------------------------------------------------------------------------------------------
+"some test
+function! IgnoreDiff(pattern)
+    let opt = ""
+    if &diffopt =~ "icase"
+      let opt = opt . "-i "
+    endif
+    if &diffopt =~ "iwhite"
+      let opt = opt . "-b "
+    endif
+    let cmd = "!diff -a --binary " . opt .
+      \ " <(perl -pe 's/" . a:pattern .  "/\".\" x length($0)/gei' " .
+      \ v:fname_in .
+      \ ") <(perl -pe 's/" . a:pattern .  "/\".\" x length($0)/gei' " .
+      \ v:fname_new .
+      \ ") > " . v:fname_out
+    echo cmd
+    silent execute cmd
+    redraw!
+    return cmd
+endfunction
+command! IgnoreHexDiff set diffexpr=IgnoreDiff('0x[0-9a-fA-F]+') | diffupdate
+command! IgnoreDecimalDiff set diffexpr=IgnoreDiff('\\.\\d+') | diffupdate
+command! IgnoreLineNr set diffexpr=IgnoreDiff('\\^\\.\\d+') | diffupdate
+command! NormalDiff set diffexpr= | diffupdate
