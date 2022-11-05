@@ -174,6 +174,10 @@ set viminfo=%,<800,'10,/50,:100,h,f0,n~/.vim/.viminfo
 "Toggle Menubar usw.
 autocmd BufEnter * silent! lcd %:p:h
 autocmd BufEnter bufdo tab split
+"augroup open-tabs
+    "au!
+    "au VimEnter * ++nested if !&diff | tab all | tabfirst | endif
+"augroup end
 "
 " Uncomment the following to have Vim jump to the last position when
 " reopening a file
