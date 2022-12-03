@@ -1,14 +1,8 @@
 " ABB Rapid Command file type plugin for Vim
 " Language: ABB Rapid Command
-<<<<<<< HEAD
-" Maintainer: Patrick Meiser-Knosowski <knosowski@graeff.de>
-" Version: 2.2.1
-" Last Change: 08. Apr 2020
-=======
 " Maintainer: Patrick Meiser-Knosowski <knosowski@graeffrobotics.de>
 " Version: 2.2.7
 " Last Change: 22. Mar 2022
->>>>>>> e57b1e0a24656be48458f77fa4d06681c424b3d5
 " Credits: Peter Oddings (KnopUniqueListItems/xolox#misc#list#unique)
 "          Thanks for beta testing to Thomas Baginski
 "
@@ -260,11 +254,7 @@ if !exists("*s:KnopVerboseEcho()")
   endfunction
 
   let g:knopPositionQf=1
-<<<<<<< HEAD
-  function s:KnopOpenQf(useSyntax)
-=======
   function s:KnopOpenQf(useSyntax,...) abort
->>>>>>> e57b1e0a24656be48458f77fa4d06681c424b3d5
     if getqflist()==[] | return -1 | endif
     if !exists("a:1")
       call setqflist([], ' ', {'items' : getqflist(), 'quickfixtextfunc' : 'KnopFormatQFPaths', 'nr': "$"})
@@ -341,45 +331,7 @@ if !exists("*s:KnopVerboseEcho()")
 
   " Rapid Helper {{{
 
-<<<<<<< HEAD
-  function <SID>RapidCleanBufferList()
-    if exists("g:knopTmpFile")
-      let l:knopTmpFile = substitute(g:knopTmpFile,'.*[\\/]\(VI\w\+\.tmp\)','\1','')
-    endif
-    if exists("g:rapidTmpFile")
-      let l:rapidTmpFile = substitute(g:rapidTmpFile,'.*[\\/]\(VI\w\+\.tmp\)','\1','')
-    endif
-    let l:b = {}
-    for l:b in getbufinfo({'buflisted':1})
-      " unlist temp file buffer
-      if exists("g:knopTmpFile")
-            \&& l:b["name"] =~ l:knopTmpFile . '$'
-            \&& !l:b["hidden"]
-        call setbufvar(l:b["bufnr"],"&buflisted",0)
-      endif
-      if exists("g:rapidTmpFile")
-            \&& l:b["name"] =~ l:rapidTmpFile . '$'
-            \&& !l:b["hidden"]
-        call setbufvar(l:b["bufnr"],"&buflisted",0)
-      endif
-      " delete those strange empty unnamed buffers
-      if        l:b["name"]==""       " not named
-            \&& l:b["windows"]==[]    " not shown in any window
-            \&& !l:b["hidden"]        " not hidden
-            \&& !l:b["changed"]       " not modified
-        execute "silent bwipeout! " . l:b["bufnr"]
-      endif
-    endfor
-    augroup RapidCleanBufferList
-      " work around where buffer list is not cleaned if knopVerbose is enabled
-      autocmd!
-    augroup END
-  endfunction " <SID>RapidCleanBufferList()
-
-  function s:RapidCurrentWordIs()
-=======
   function s:RapidCurrentWordIs() abort
->>>>>>> e57b1e0a24656be48458f77fa4d06681c424b3d5
     " returns the string "<type><name>" depending on the word under the cursor
     "
     let l:numLine = line(".")
@@ -695,16 +647,7 @@ if !exists("*s:KnopVerboseEcho()")
     return -1
   endfunction " s:RapidSearchUserDefined()
 
-<<<<<<< HEAD
-  function <SID>RapidGoDefinition()
-    augroup RapidCleanBufferList
-      " work around where buffer list is not cleaned if knopVerbose is enabled
-      autocmd!
-      autocmd CursorMoved * call <SID>RapidCleanBufferList()
-    augroup END
-=======
   function <SID>RapidGoDefinition() abort
->>>>>>> e57b1e0a24656be48458f77fa4d06681c424b3d5
     "
     let l:declPrefix = '\c\v^\s*(local\s+|task\s+|global\s+)?(var|pers|const|alias)\s+\w+\s+'
     "
@@ -1026,62 +969,17 @@ if !exists("*s:KnopVerboseEcho()")
 
   " List Def/Usage {{{
 
-<<<<<<< HEAD
-  function <SID>RapidListDefinition()
-    augroup RapidCleanBufferList
-      " work around where buffer list is not cleaned if knopVerbose is enabled
-      autocmd!
-      autocmd CursorMoved * call <SID>RapidCleanBufferList()
-    augroup END
-    " list defs in qf
-    if s:KnopSearchPathForPatternNTimes('\v\c^\s*(global\s+|task\s+|local\s+)?(proc|func|trap|record|module)>','%','','rapid')==0
-      if getqflist()==[] | return | endif
-      " put cursor back after manipulating qf
-      if getbufvar('%', "&buftype")!="quickfix"
-        let l:getback=1
-        noautocmd copen
-      endif
-      if getbufvar('%', "&buftype")!="quickfix" | return | endif
-      setlocal modifiable
-      silent %substitute/\v\c^.*\|\s*((global\s+|task\s+|local\s+)?(proc|func|trap|record|module)>)/\1/
-      0
-      if !exists("g:rapidTmpFile")
-        let g:rapidTmpFile=tempname()
-        augroup rapidDelTmpFile
-          au!
-          au VimLeavePre * call delete(g:rapidTmpFile)
-          au VimLeavePre * call delete(g:rapidTmpFile . "~")
-        augroup END
-      endif
-      execute 'silent save! ' . g:rapidTmpFile
-      setlocal nomodifiable
-      setlocal nobuflisted " to be able to remove from buffer list after writing the temp file
-      if exists("l:getback")
-        unlet l:getback
-        wincmd p
-      endif
-=======
   function <SID>RapidListDefinition() abort
     " list defs in qf
     if s:KnopSearchPathForPatternNTimes('\v\c^\s*(task\s+|local\s+)?(proc|func|trap|record|module)>','%','','rapid')==0
       call setqflist([], ' ', {'items' : getqflist(), 'quickfixtextfunc' : 'KnopEraseQFPaths', 'nr': "$"})
       call s:KnopOpenQf('rapid',"don't format'")
->>>>>>> e57b1e0a24656be48458f77fa4d06681c424b3d5
     else
       call s:KnopVerboseEcho("Nothing found.",1)
     endif
   endfunction " <SID>RapidListDefinition()
 
-<<<<<<< HEAD
-  function <SID>RapidListUsage()
-    augroup RapidCleanBufferList
-      " work around where buffer list is not cleaned if knopVerbose is enabled
-      autocmd!
-      autocmd CursorMoved * call <SID>RapidCleanBufferList()
-    augroup END
-=======
   function <SID>RapidListUsage() abort
->>>>>>> e57b1e0a24656be48458f77fa4d06681c424b3d5
     "
     if search('\w','cW',line("."))
       let l:currentWord = s:RapidCurrentWordIs()
@@ -1384,69 +1282,6 @@ endif
 " Move Around and Function Text Object key mappings {{{
 
 if get(g:,'rapidMoveAroundKeyMap',1)
-<<<<<<< HEAD
-  " Move around functions
-  nnoremap <silent><buffer> [[ :<C-U>let b:knopCount=v:count1<Bar>                     call <SID>KnopNTimesSearch(b:knopCount, '\c\v^\s*(global\s+\|local\s+\|task\s+)?(proc\|func\|trap\|record\|module)>', 'bs')        <Bar>unlet b:knopCount<CR>:normal! zt<CR>
-  onoremap <silent><buffer> [[ :<C-U>let b:knopCount=v:count1<Bar>                     call <SID>KnopNTimesSearch(b:knopCount, '\c\v^\s*(global\s+\|local\s+\|task\s+)?(proc\|func\|trap\|record\|module)>.*\n\zs', 'bsW')<Bar>unlet b:knopCount<CR>
-  xnoremap <silent><buffer> [[ :<C-U>let b:knopCount=v:count1<Bar>exe "normal! gv"                                                                                                                                        <Bar>call <SID>KnopNTimesSearch(b:knopCount, '\c\v^\s*(global\s+\|local\s+\|task\s+)?(proc\|func\|trap\|record\|module)>', 'bsW')     <Bar>unlet b:knopCount<CR>
-  nnoremap <silent><buffer> ]] :<C-U>let b:knopCount=v:count1<Bar>                     call <SID>KnopNTimesSearch(b:knopCount, '\c\v^\s*(global\s+\|local\s+\|task\s+)?(proc\|func\|trap\|record\|module)>', 's')         <Bar>unlet b:knopCount<CR>:normal! zt<CR>
-  onoremap <silent><buffer> ]] :<C-U>let b:knopCount=v:count1<Bar>                     call <SID>KnopNTimesSearch(b:knopCount, '\c\v^\s*(global\s+\|local\s+\|task\s+)?(proc\|func\|trap\|record\|module)>', 'sW')        <Bar>unlet b:knopCount<CR>
-  xnoremap <silent><buffer> ]] :<C-U>let b:knopCount=v:count1<Bar>exe "normal! gv"                                                                                                                                        <Bar>call <SID>KnopNTimesSearch(b:knopCount, '\c\v^\s*(global\s+\|local\s+\|task\s+)?(proc\|func\|trap\|record\|module)>.*\n', 'seWz')<Bar>unlet b:knopCount<CR>
-  nnoremap <silent><buffer> [] :<C-U>let b:knopCount=v:count1<Bar>                     call <SID>KnopNTimesSearch(b:knopCount, '\c\v^\s*end(proc\|func\|trap\|record\|module)>', 'bs')                                    <Bar>unlet b:knopCount<CR>:normal! zb<CR>
-  onoremap <silent><buffer> [] :<C-U>let b:knopCount=v:count1<Bar>                     call <SID>KnopNTimesSearch(b:knopCount, '\c\v^\s*end(proc\|func\|trap\|record\|module)>\n^(.\|\n)', 'bseW')                        <Bar>unlet b:knopCount<CR>
-  xnoremap <silent><buffer> [] :<C-U>let b:knopCount=v:count1<Bar>exe "normal! gv"                                                                                                                                        <Bar>call <SID>KnopNTimesSearch(b:knopCount, '\c\v^\s*end(proc\|func\|trap\|record\|module)>', 'bsW')                                 <Bar>unlet b:knopCount<CR>
-  nnoremap <silent><buffer> ][ :<C-U>let b:knopCount=v:count1<Bar>                     call <SID>KnopNTimesSearch(b:knopCount, '\c\v^\s*end(proc\|func\|trap\|record\|module)>', 's')                                     <Bar>unlet b:knopCount<CR>:normal! zb<CR>
-  onoremap <silent><buffer> ][ :<C-U>let b:knopCount=v:count1<Bar>                     call <SID>KnopNTimesSearch(b:knopCount, '\c\v\ze^\s*end(proc\|func\|trap\|record\|module)>', 'sW')                                 <Bar>unlet b:knopCount<CR>
-  xnoremap <silent><buffer> ][ :<C-U>let b:knopCount=v:count1<Bar>exe "normal! gv"                                                                                                                                        <Bar>call <SID>KnopNTimesSearch(b:knopCount, '\c\v^\s*end(proc\|func\|trap\|record\|module)>(\n)?', 'seWz')                           <Bar>unlet b:knopCount<CR>
-  " Move around comments
-  nnoremap <silent><buffer> [; :<C-U>let b:knopCount=v:count1<Bar>                     call <SID>KnopNTimesSearch(b:knopCount, '\v(^\s*!.*\n)@<!(^\s*!)', 'bs')<Bar>unlet b:knopCount<cr>
-  onoremap <silent><buffer> [; :<C-U>let b:knopCount=v:count1<Bar>                     call <SID>KnopNTimesSearch(b:knopCount, '\v(^\s*!.*\n)@<!(^\s*!)', 'bsW')<Bar>unlet b:knopCount<cr>
-  xnoremap <silent><buffer> [; :<C-U>let b:knopCount=v:count1<Bar>exe "normal! gv"<Bar>call <SID>KnopNTimesSearch(b:knopCount, '\v(^\s*!.*\n)@<!(^\s*!)', 'bsW')<Bar>unlet b:knopCount<cr>
-  nnoremap <silent><buffer> ]; :<C-U>let b:knopCount=v:count1<Bar>                     call <SID>KnopNTimesSearch(b:knopCount, '\v^\s*!.*\n\s*([^!\t ]\|$)', 's')<Bar>unlet b:knopCount<cr>
-  onoremap <silent><buffer> ]; :<C-U>let b:knopCount=v:count1<Bar>                     call <SID>KnopNTimesSearch(b:knopCount, '\v^\s*!.*\n(\s*[^!\t ]\|$)', 'seW')<Bar>normal! ==<Bar>unlet b:knopCount<cr>
-  xnoremap <silent><buffer> ]; :<C-U>let b:knopCount=v:count1<Bar>exe "normal! gv"<Bar>call <SID>KnopNTimesSearch(b:knopCount, '\v^\s*!.*\n\ze\s*([^!\t ]\|$)', 'seW')<Bar>unlet b:knopCount<cr>
-  " inner and around function text objects
-  if get(g:,'rapidFunctionTextObject',0)
-        \|| mapcheck("aF","x")=="" && !hasmapto('<plug>RapidTxtObjAroundFuncInclCo','x')
-    xmap <silent><buffer> aF <plug>RapidTxtObjAroundFuncInclCo
-  endif
-  if get(g:,'rapidFunctionTextObject',0)
-        \|| mapcheck("af","x")=="" && !hasmapto('<plug>RapidTxtObjAroundFuncExclCo','x')
-    xmap <silent><buffer> af <plug>RapidTxtObjAroundFuncExclCo
-  endif
-  if get(g:,'rapidFunctionTextObject',0)
-        \|| mapcheck("if","x")=="" && !hasmapto('<plug>RapidTxtObjInnerFunc','x')
-    xmap <silent><buffer> if <plug>RapidTxtObjInnerFunc
-  endif
-  if get(g:,'rapidFunctionTextObject',0)
-        \|| mapcheck("aF","o")=="" && !hasmapto('<plug>RapidTxtObjAroundFuncInclCo','o')
-    omap <silent><buffer> aF <plug>RapidTxtObjAroundFuncInclCo
-  endif
-  if get(g:,'rapidFunctionTextObject',0)
-        \|| mapcheck("af","o")=="" && !hasmapto('<plug>RapidTxtObjAroundFuncExclCo','o')
-    omap <silent><buffer> af <plug>RapidTxtObjAroundFuncExclCo
-  endif
-  if get(g:,'rapidFunctionTextObject',0)
-        \|| mapcheck("if","o")=="" && !hasmapto('<plug>RapidTxtObjInnerFunc','o')
-    omap <silent><buffer> if <plug>RapidTxtObjInnerFunc
-  endif
-  " inner and around comment text objects
-  if get(g:,'rapidCommentTextObject',0)
-        \|| mapcheck("ac","x")=="" && !hasmapto('<plug>RapidTxtObjAroundComment','x')
-    xmap <silent><buffer> ac <plug>RapidTxtObjAroundComment
-  endif
-  if get(g:,'rapidCommentTextObject',0)
-        \|| mapcheck("ic","x")=="" && !hasmapto('<plug>RapidTxtObjInnerComment','x')
-    xmap <silent><buffer> ic <plug>RapidTxtObjInnerComment
-  endif
-  if get(g:,'rapidCommentTextObject',0)
-        \|| mapcheck("ac","o")=="" && !hasmapto('<plug>RapidTxtObjAroundComment','o')
-    omap <silent><buffer> ac <plug>RapidTxtObjAroundComment
-  endif
-  if get(g:,'rapidCommentTextObject',0)
-        \|| mapcheck("ic","o")=="" && !hasmapto('<plug>RapidTxtObjInnerComment','o')
-    omap <silent><buffer> ic <plug>RapidTxtObjInnerComment
-=======
   if bufname("%") =~ '\c\.cfg$'
     nnoremap <silent><buffer> ]] :<C-U>                     call search('^#'              ,   'sw')<cr>
     onoremap <silent><buffer> ]] :<C-U>exe "normal! v" <Bar>call search('\(\ze\n#\\|\%$\)',   'eW')<cr>
@@ -1523,7 +1358,6 @@ if get(g:,'rapidMoveAroundKeyMap',1)
           \|| mapcheck("ic","o")=="" && !hasmapto('<plug>RapidTxtObjInnerComment','o')
       omap <silent><buffer> ic <plug>RapidTxtObjInnerComment
     endif
->>>>>>> e57b1e0a24656be48458f77fa4d06681c424b3d5
   endif
 endif
 
@@ -1640,15 +1474,6 @@ endif
 " <PLUG> mappings {{{
 
 " Go Definition
-<<<<<<< HEAD
-nnoremap <silent><buffer> <plug>RapidGoDef :call <SID>RapidGoDefinition()<CR>:call <SID>RapidCleanBufferList()<CR>
-
-" list all PROCs of current file
-nnoremap <silent><buffer> <plug>RapidListDef :call <SID>RapidListDefinition()<CR>:call <SID>RapidCleanBufferList()<CR>
-
-" list usage
-nnoremap <silent><buffer> <plug>RapidListUse :call <SID>RapidListUsage()<CR>:call <SID>RapidCleanBufferList()<CR>
-=======
 nnoremap <silent><buffer> <plug>RapidGoDef :call <SID>RapidGoDefinition()<CR>
 
 " list all PROCs of current file
@@ -1656,7 +1481,6 @@ nnoremap <silent><buffer> <plug>RapidListDef :call <SID>RapidListDefinition()<CR
 
 " list usage
 nnoremap <silent><buffer> <plug>RapidListUse :call <SID>RapidListUsage()<CR>
->>>>>>> e57b1e0a24656be48458f77fa4d06681c424b3d5
 
 " auto form
 nnoremap <silent><buffer> <plug>RapidAutoForm                 :call <SID>RapidAutoForm("   ")<cr>

@@ -93,14 +93,9 @@ A: Disable stuff in your `vimrc`, see [rapid-options][6] for details: >
 
 Q: Which keys get mapped to what? Will that override my own mappings?  
 A: rapid-for-vim will not override existing mappings unless the corresponding
-<<<<<<< HEAD
-   option is explicitly set. To use different key bindings use the
-   `<PLUG>`mapping. Otherwise rapid-for-vim create the followin mappings: >
-=======
    option is explicitly set. To use different key bindings see :help 
    [rapid-key-mappings][13] for \<Plug\> mappings.  
    Otherwise rapid-for-vim create the following mappings: >
->>>>>>> e57b1e0a24656be48458f77fa4d06681c424b3d5
 
     <F2> Show all structure values
     <F3> Show structure values at cursorline

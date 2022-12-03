@@ -1,14 +1,8 @@
 " ABB Rapid Command syntax file for Vim
 " Language: ABB Rapid Command
-<<<<<<< HEAD
-" Maintainer: Patrick Meiser-Knosowski <knosowski@graeff.de>
-" Version: 2.2.0
-" Last Change: 06. Apr 2020
-=======
 " Maintainer: Patrick Meiser-Knosowski <knosowski@graeffrobotics.de>
 " Version: 2.2.7
 " Last Change: 27. Oct 2022
->>>>>>> e57b1e0a24656be48458f77fa4d06681c424b3d5
 " Credits: Thanks for beta testing to Thomas Baginski
 "
 " Suggestions of improvement are very welcome. Please email me!
@@ -71,8 +65,6 @@ syn case ignore
 syn spell notoplevel
 " }}} init
 
-<<<<<<< HEAD
-=======
 " common highlighting {{{
 
 " Error {{{
@@ -120,33 +112,12 @@ highlight default link rapidEscapedBackSlash SpecialChar
 " }}} common highlighting
 
 if bufname("%") =~ '\c\.cfg$'
->>>>>>> e57b1e0a24656be48458f77fa4d06681c424b3d5
 " {{{ highlighting for *.cfg
 if bufname("%") =~ '\c\.cfg$'
 
-<<<<<<< HEAD
-  " Constant values
-  " Boolean
-  syn keyword rapidBoolean True False Edge High Low
-  highlight default link rapidBoolean Boolean
-  " Float (num)
-  syn match rapidFloat /\v%(\W|_)@1<=[+-]?\d+\.?\d*%(\s*[eE][+-]?\d+)?/
-  highlight default link rapidFloat Float
-  " character code in string
-  syn match rapidCharCode /[^\\]\zs\\\d\{1,3}/ contained
-  highlight default link rapidCharCode SpecialChar
-  " String. Note: Don't rename group rapidString. Indent depend on this
-  syn region rapidString start=/"/ end=/"/ contains=rapidCharCode
-  highlight default link rapidString String
-  " ---
-
-  " special chars
-  syn match rapidOperator /:\|[+-]\|\*\|\/\|\\/
-=======
   " special chars {{{
   " syn match rapidOperator /:\|[+-]\|\*\|\/\|\\/
   syn match rapidOperator /[-+*/:\\]/
->>>>>>> e57b1e0a24656be48458f77fa4d06681c424b3d5
   syn match rapidOperator /^#/
   highlight default link rapidOperator Operator
   " ---
@@ -205,15 +176,6 @@ else
   " TODO testing. Problem: does not highlight any type if it's part of an argument list
   " syn match rapidAnyType /\v^\s*(global\s+|task\s+|local\s+)?(alias|pers|var|const|func)\s+\w+>/ contains=rapidStorageClass,rapidType,rapidTypeDef
   " highlight default link rapidAnyType Type
-<<<<<<< HEAD
-  syn keyword rapidType aiotrigg bool btnres busstate buttondata byte
-  syn keyword rapidType cameradev cameratarget cfgdomain clock confdata corrdescr datapos dionum dir dnum
-  syn keyword rapidType egmframetype egmident egm_minmax egmstate egmstopmode errdomain errnum errstr errtype event_type exec_level extjoint handler_type
-  syn keyword rapidType icondata identno intnum iodev iounit_state jointtarget
-  syn keyword rapidType listitem loaddata loadidnum loadsession mecunit motsetdata
-  syn keyword rapidType num
-  syn keyword rapidType opcalc opnum orient paridnum paridvalidnum pathrecid pos pose progdisp o_jointtarget o_robtarget
-=======
   syn keyword rapidType accdata aiotrigg bool btnres busstate buttondata byte
   syn keyword rapidType cfgdomain clock cnvcmd confdata confsupdata corrdescr datapos deflectiondata dionum dir dnum
   syn keyword rapidType egmframetype egmident egm_minmax egmstate egmstopmode errdomain errnum ErrorInfo errstr errtype event_type exec_level extjoint handler_type
@@ -221,7 +183,6 @@ else
   syn keyword rapidType listitem loaddata loadidnum loadsession mecunit motionprocessmode motsetdata
   " syn keyword rapidType num
   syn keyword rapidType opcalc opnum orient paridnum paridvalidnum pathrecid pnpdata pos pose proc_times progdisp o_jointtarget o_robtarget
->>>>>>> e57b1e0a24656be48458f77fa4d06681c424b3d5
   syn keyword rapidType rawbytes restartdata rmqheader rmqmessage rmqslot robjoint robtarget
   syn keyword rapidType sensor sensorstate shapedata signalorigin signalai signalao signaldi signaldo signalgi signalgo socketdev socketstatus speeddata stoppointdata string stringdig switch symnum syncident 
   syn keyword rapidType taskid tasks testsignal tooldata tpnum trapdata triggdata triggios triggiosdnum triggmode triggstrgo tunetype
@@ -239,13 +200,9 @@ else
   " dispense data types
   syn keyword rapidType beaddata equipdata
   " Spot data types
-<<<<<<< HEAD
-  syn keyword rapidType gundata spotdata forcedata simdata smeqdata
-=======
   syn keyword rapidType gundata gunnum spotdata forcedata simdata smeqdata smeqtype
   " Tool change data types
   syn keyword rapidType standno ToolInfo toolno
->>>>>>> e57b1e0a24656be48458f77fa4d06681c424b3d5
   " Continuous Application Platform data types
   syn keyword rapidType capdata caplatrackdata capspeeddata captrackdata capweavedata flypointdata processtimes restartblkdata supervtimeouts weavestartdata 
   " Bulls Eye data types
@@ -321,15 +278,9 @@ else
   syn match rapidLabel /\c\v^\s*\a\w*\:\ze%([^=]|$)/ contains=rapidConditional,rapidOperator
   highlight default link rapidLabel Label
   " Keyword
-<<<<<<< HEAD
-  syn keyword rapidKeyword AccSet ActEventBuffer ActUnit Add AliasIO AliasIOReset BitClear BitSet BookErrNo BrakeCheck
-  syn keyword rapidKeyword CallByVar CancelLoad CheckProgRef CirPathMode Clear ClearIOBuff ClearPath ClearRawBytes ClkReset ClkStart ClkStop Close CloseDir ConfJ ConfL CONNECT CopyFile CopyRawBytes CorrClear CorrCon CorrDiscon CorrWrite
-  syn keyword rapidKeyword CSSAct CSSForceOffsetAct CSSForceOffsetDeact CSSOffsetTuneCSSOffsetTune
-=======
   syn keyword rapidKeyword AccSet ActEventBuffer ActUnit Add AliasCamera AliasIO AliasIOReset BitClear BitSet BookErrNo BrakeCheck
   syn keyword rapidKeyword CallByVar CancelLoad CheckProgRef CirPathMode Clear ClearIOBuff ClearPath ClearRawBytes ClkReset ClkStart ClkStop Close CloseDir ConfJ ConfL CONNECT CopyFile CopyRawBytes CornerPathWarning CorrClear CorrCon CorrDiscon CorrWrite
   syn keyword rapidKeyword CSSAct CSSDeact CSSForceOffsetAct CSSForceOffsetDeact CSSOffsetTune CyclicBrakeCheck
->>>>>>> e57b1e0a24656be48458f77fa4d06681c424b3d5
   syn keyword rapidKeyword DeactEventBuffer DeactUnit Decr DitherAct DitherDeact DropSensor 
   syn keyword rapidKeyword EGMActJoint EGMActMove EGMActPose EGMGetId EGMReset EGMSetupAI EGMSetupAO EGMSetupGI EGMSetupLTAPP EGMSetupUC EOffsOff EOffsOn EOffsSet EraseModule ErrLog ErrWrite
   syn keyword rapidKeyword FricIdInit FricIdEvaluate FricIdSetFricLevels 
@@ -350,11 +301,7 @@ else
   " arc Weldguide and MultiPass instructions
   syn keyword rapidKeyword MPSavePath MPLoadPath MPReadInPath MPOffsEaxOnPath
   " Paint instructions
-<<<<<<< HEAD
-  syn keyword rapidKeyword SetBrush SetBrushFac
-=======
   syn keyword rapidKeyword IpsSetParam PntProdUserLog SetBrush SetBrushFac
->>>>>>> e57b1e0a24656be48458f77fa4d06681c424b3d5
   " Spot instructions
   syn keyword rapidKeyword SetForce Calibrate ReCalcTCP IndGunMove IndGunMoveReset OpenHighLift CloseHighLift SwSetIntSpotData SwSetIntForceData SwSetIntGunData SwSetIntSimData SwGetCalibData SwGetFixTipData 
   " dispense instructions
@@ -376,10 +323,6 @@ else
   highlight default link rapidException Exception
 " }}} Statements, keywords et al
 
-<<<<<<< HEAD
-" special keyword for move command {{{
-  " arc instructions
-=======
   " Special keyword for move command {{{
   " uncategorized yet
   syn keyword rapidMovement MovePnP
@@ -391,7 +334,6 @@ else
   syn keyword rapidMovement SearchC SearchExtJ SearchL
   syn keyword rapidMovement TriggC TriggJ TriggL TriggJIOs TriggLIOs
   " Arc instructions
->>>>>>> e57b1e0a24656be48458f77fa4d06681c424b3d5
   syn keyword rapidMovement ArcC ArcC1 ArcC2 ArcCEnd ArcC1End ArcC2End ArcCStart ArcC1Start ArcC2Start 
   syn keyword rapidMovement ArcL ArcL1 ArcL2 ArcLEnd ArcL1End ArcL2End ArcLStart ArcL1Start ArcL2Start ArcMoveExtJ 
   " arc Weldguide and MultiPass instructions
@@ -457,16 +399,6 @@ else
   endif
 " }}} special keyword for move command 
 
-<<<<<<< HEAD
-" Structure value {{{
-  syn match rapidNames /[a-zA-Z_][.a-zA-Z0-9_]*/
-  " highlight default link rapidNames None
-  " rapid structrure values. added to be able to conceal them
-  syn region rapidConcealableString start=/"/ end=/"/ contained contains=rapidCharCode conceal 
-  highlight default link rapidConcealableString String
-  syn region rapidStructVal matchgroup=rapidDelimiter start=/\[/ end=/\]/ contains=ALLBUT,rapidString keepend extend conceal cchar=* 
-" }}} Structure value
-=======
   " Any name {{{
   syn match rapidNames /\v[[:upper:][:lower:]](\k|\.)*/
   " }}} Any name
@@ -495,7 +427,6 @@ else
   syn match rapidDelimiter /[\\(){},;|]/
   highlight default link rapidDelimiter Delimiter
   " }}} Delimiter
->>>>>>> e57b1e0a24656be48458f77fa4d06681c424b3d5
 
 " BuildInFunction {{{
   " dispense functions
@@ -532,13 +463,10 @@ else
   syn keyword rapidBuildInFunction contained PMgrAtSafe PMgrAtService PMgrAtState PMgrAtStation PMgrNextStation PMgrTaskNumber PMgrTaskName
   " Spot functions
   syn keyword rapidBuildInFunction contained SwGetCurrTargetName SwGetCurrSpotName 
-<<<<<<< HEAD
-=======
   " Homepos-Running functions
   syn keyword rapidBuildInFunction contained HR_RobotInHome HR_GetTypeDIndex HR_GetTypeIndex
   " Paint functions
   syn keyword rapidBuildInFunction contained IndexLookup IpsCommand IpsGetParam PaintCommand PntQueueExtraGet PntQueueExtraSet PntQueuePeek 
->>>>>>> e57b1e0a24656be48458f77fa4d06681c424b3d5
   if g:rapidGroupName
     highlight default link rapidBuildInFunction BuildInFunction
   else
@@ -736,16 +664,10 @@ else
     syn match rapidError5 /\c\v%(^\s*if>[^!\\]+[^!<>])@<=%(\=|:)\=\ze[^!]*then/
     syn match rapidError6 /\c\v%(^\s*while>[^!\\]+[^!<>])@<=%(\=|:)\=\ze[^!]*do/
     "
-<<<<<<< HEAD
-    " WaitUntil a=>b ok
-    "            ||
-    syn match rapidError7 /\c\v%(^\s*%(Return|WaitUntil|if|while)>[^!]+[^!<>])@<=\=[><]/
-=======
     " WaitUntil a==b
     syn match rapidErrorShouldBeEqual    /\c\v%(^\s*%(Return|WaitUntil|while)>[^!\\]+[^!<>])@<=%(\=|:)\=/
     syn match rapidErrorShouldBeEqual    /\c\v%(^\s*%(if|elseif)>[^!\\]+[^!<>])@<=%(\=|:)\=\ze[^!\\]+<then>/
     highlight default link rapidErrorShouldBeEqual Error
->>>>>>> e57b1e0a24656be48458f77fa4d06681c424b3d5
     "
     " WaitUntil a><b ok
     "           ||
@@ -778,8 +700,6 @@ else
     highlight default link rapidError10 Error
     highlight default link rapidError11 Error
   endif
-<<<<<<< HEAD
-=======
   " }}} Error
 
 " }}}
@@ -795,7 +715,6 @@ if get(g:,'rapidShowError',1)
   "
 endif
 
->>>>>>> e57b1e0a24656be48458f77fa4d06681c424b3d5
 " }}} Error
 
 " Finish {{{

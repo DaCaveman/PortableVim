@@ -187,12 +187,9 @@ let s:delimiterMap = {
     \ 'jgraph': { 'left': '(*', 'right': '*)' },
     \ 'jinja': { 'left': '{#', 'right': '#}', 'leftAlt': '<!--', 'rightAlt': '-->' },
     \ 'jproperties': { 'left': '#' },
-<<<<<<< HEAD:plugin/NERD_commenter.vim
-=======
     \ 'json5': { 'left': '//', 'leftAlt': '/*', 'rightAlt': '*/' },
     \ 'jsonc': { 'left': '//', 'leftAlt': '/*', 'rightAlt': '*/' },
     \ 'jsonnet': { 'left': '//', 'leftAlt': '/*', 'rightAlt': '*/' },
->>>>>>> 98cc4a2d64ca67cccbf5b5cf47c682ebadaaff58:autoload/nerdcommenter.vim
     \ 'jsp': { 'left': '<%--', 'right': '--%>' },
     \ 'julia': { 'left': '# ', 'leftAlt': '#=', 'rightAlt': '=#' },
     \ 'just' : { 'left': '#' },
@@ -2079,13 +2076,8 @@ endfunction
 
 " Function: s:Esc(str)
 " Escapes all the tricky chars in the given string
-<<<<<<< HEAD:plugin/NERD_commenter.vim
-function s:Esc(str)
-    let charsToEsc = '*/\."&$+'
-=======
 function! s:Esc(str) abort
     let charsToEsc = '*/\."&$+[]'
->>>>>>> 98cc4a2d64ca67cccbf5b5cf47c682ebadaaff58:autoload/nerdcommenter.vim
     return escape(a:str, charsToEsc)
 endfunction
 

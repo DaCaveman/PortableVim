@@ -1,14 +1,8 @@
 " ABB Rapid Command indent file for Vim
 " Language: ABB Rapid Command
-<<<<<<< HEAD
-" Maintainer: Patrick Meiser-Knosowski <knosowski@graeff.de>
-" Version: 2.0.1
-" Last Change: 11. Feb 2020
-=======
 " Maintainer: Patrick Meiser-Knosowski <knosowski@graeffrobotics.de>
 " Version: 2.2.2
 " Last Change: 29. Apr 2021
->>>>>>> e57b1e0a24656be48458f77fa4d06681c424b3d5
 " Credits: Based on indent/vim.vim
 "
 " Suggestions of improvement are very welcome. Please email me!
