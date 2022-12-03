@@ -190,6 +190,7 @@ function! s:compiler.create_build_dir() abort dict " {{{1
     call filter(map(
           \ l:dirs, "fnamemodify(v:val, ':h')"),
           \ {_, x -> x !=# '.'})
+    call filter(l:dirs, {_, x -> stridx(x, '../') != 0})
   else
     let l:dirs = glob(self.state.root . '/**/*.tex', v:false, v:true)
     call map(l:dirs, "fnamemodify(v:val, ':h')")
@@ -253,6 +254,7 @@ function! s:compiler_jobs.exec(cmd) abort dict " {{{1
     let l:options.err_cb = function('s:callback_continuous_output')
   else
     let s:cb_target = self.state.tex !=# b:vimtex.tex ? self.state.tex : ''
+    let s:cb_output = self.output
     let l:options.exit_cb = function('s:callback')
   endif
 
@@ -306,6 +308,17 @@ function! s:callback(ch, msg) abort " {{{1
     "
     " See https://github.com/lervag/vimtex/issues/2225
   endtry
+
+  if !exists('b:vimtex.compiler.hooks') | return | endif
+  try
+    let l:lines = readfile(s:cb_output)
+    for l:Hook in b:vimtex.compiler.hooks
+      for l:line in l:lines
+        call l:Hook(l:line)
+      endfor
+    endfor
+  catch /E716/
+  endtry
 endfunction
 
 " }}}1
@@ -317,8 +330,9 @@ function! s:callback_continuous_output(channel, msg) abort " {{{1
 
   call s:check_callback(a:msg)
 
+  if !exists('b:vimtex.compiler.hooks') | return | endif
   try
-    for l:Hook in get(get(get(b:, 'vimtex', {}), 'compiler', {}), 'hooks', [])
+    for l:Hook in b:vimtex.compiler.hooks
       call l:Hook(a:msg)
     endfor
   catch /E716/
@@ -343,10 +357,9 @@ function! s:compiler_nvim.exec(cmd) abort dict " {{{1
     let l:shell.on_exit = function('s:callback_nvim_exit')
   endif
 
-  let s:saveshell = [&shell, &shellcmdflag]
-  set shell& shellcmdflag&
+  call vimtex#jobs#neovim#shell_default()
   let self.job = jobstart(a:cmd, l:shell)
-  let [&shell, &shellcmdflag] = s:saveshell
+  call vimtex#jobs#neovim#shell_restore()
 endfunction
 
 " }}}1
@@ -394,10 +407,11 @@ function! s:callback_nvim_output(id, data, event) abort dict " {{{1
 
   call s:check_callback(
         \ get(filter(copy(a:data),
-        \   {_, x -> x =~# 'vimtex_compiler_callback'}), -1, ''))
+        \   {_, x -> x =~# '^vimtex_compiler_callback'}), -1, ''))
 
+  if !exists('b:vimtex.compiler.hooks') | return | endif
   try
-    for l:Hook in get(get(get(b:, 'vimtex', {}), 'compiler', {}), 'hooks', [])
+    for l:Hook in b:vimtex.compiler.hooks
       call l:Hook(join(a:data, "\n"))
     endfor
   catch /E716/
@@ -449,13 +463,16 @@ endfunction
 " }}}1
 
 function! s:check_callback(line) abort " {{{1
-  if a:line =~# 'vimtex_compiler_callback_compiling'
-    call vimtex#compiler#callback(1)
-  elseif a:line =~# 'vimtex_compiler_callback_success'
-    call vimtex#compiler#callback(2)
-  elseif a:line =~# 'vimtex_compiler_callback_failure'
-    call vimtex#compiler#callback(3)
-  endif
+  let l:status = get(s:callbacks, substitute(a:line, '\r', '', ''))
+  if l:status <= 0 | return | endif
+
+  call vimtex#compiler#callback(l:status)
 endfunction
+
+let s:callbacks = {
+      \ 'vimtex_compiler_callback_compiling': 1,
+      \ 'vimtex_compiler_callback_success': 2,
+      \ 'vimtex_compiler_callback_failure': 3,
+      \}
 
 " }}}1

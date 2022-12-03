@@ -24,6 +24,32 @@ endfunction
 
 " }}}1
 
+function! vimtex#jobs#vim#shell_default() abort " {{{1
+  let s:saveshell = [
+        \ &shell,
+        \ &shellcmdflag,
+        \ &shellquote,
+        \ &shellxquote,
+        \ &shellredir,
+        \ &shellslash
+        \]
+  let &shell = 'cmd.exe'
+  let &shellcmdflag = '/s /c'
+  set shellquote& shellxquote& shellredir& shellslash&
+endfunction
+
+" }}}1
+function! vimtex#jobs#vim#shell_restore() abort " {{{1
+  let [   &shell,
+        \ &shellcmdflag,
+        \ &shellquote,
+        \ &shellxquote,
+        \ &shellredir,
+        \ &shellslash] = s:saveshell
+endfunction
+
+" }}}1
+
 let s:os = has('win32') ? 'win' : 'unix'
 
 
@@ -42,6 +68,9 @@ function! s:job.start() abort dict " {{{1
     let l:options.in_io = 'null'
     let l:options.out_io = 'null'
     let l:options.err_io = 'null'
+  endif
+  if self.detached
+    let l:options.stoponexit = ''
   endif
   if !empty(self.cwd)
     let l:options.cwd = self.cwd
@@ -119,9 +148,7 @@ function! s:vim_unix_run(cmd) abort " {{{1
         \]
   let &shell = s:shell
   set shellcmdflag& shellquote& shellredir&
-
   silent! call system(a:cmd)
-
   let [   &shell,
         \ &shellcmdflag,
         \ &shellquote,
@@ -157,46 +184,16 @@ let s:shell = executable('sh')
 " }}}1
 
 function! s:vim_win_run(cmd) abort " {{{1
-  let s:saveshell = [
-        \ &shell,
-        \ &shellcmdflag,
-        \ &shellquote,
-        \ &shellxquote,
-        \ &shellredir,
-        \ &shellslash
-        \]
-  set shell& shellcmdflag& shellquote& shellxquote& shellredir& shellslash&
-
+  call vimtex#jobs#vim#shell_default()
   silent! call system('cmd /s /c "' . a:cmd . '"')
-
-  let [   &shell,
-        \ &shellcmdflag,
-        \ &shellquote,
-        \ &shellxquote,
-        \ &shellredir,
-        \ &shellslash] = s:saveshell
+  call vimtex#jobs#vim#shell_restore()
 endfunction
 
 " }}}1
 function! s:vim_win_capture(cmd) abort " {{{1
-  let s:saveshell = [
-        \ &shell,
-        \ &shellcmdflag,
-        \ &shellquote,
-        \ &shellxquote,
-        \ &shellredir,
-        \ &shellslash
-        \]
-  set shell& shellcmdflag& shellquote& shellxquote& shellredir& shellslash&
-
+  call vimtex#jobs#vim#shell_default()
   silent! let l:output = systemlist('cmd /s /c "' . a:cmd . '"')
-
-  let [   &shell,
-        \ &shellcmdflag,
-        \ &shellquote,
-        \ &shellxquote,
-        \ &shellredir,
-        \ &shellslash] = s:saveshell
+  call vimtex#jobs#vim#shell_restore()
 
   return l:output
 endfunction

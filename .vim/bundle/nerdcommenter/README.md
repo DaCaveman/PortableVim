@@ -68,10 +68,12 @@ git clone https://github.com/preservim/nerdcommenter.git
 (For Neovim, change `~/.vim/` to `~/.config/nvim/`.)
 
 ```sh
-curl -fLo ~/.vim/plugin/NERD_Commenter.vim --create-dirs \
-  https://raw.githubusercontent.com/preservim/nerdcommenter/master/plugin/NERD_commenter.vim
-curl -fLo ~/.vim/doc/NERD_Commenter.txt --create-dirs \
-  https://raw.githubusercontent.com/preservim/nerdcommenter/master/doc/NERD_commenter.txt
+curl -fLo ~/.vim/plugin/nerdcommenter.vim --create-dirs \
+  https://raw.githubusercontent.com/preservim/nerdcommenter/master/plugin/nerdcommenter.vim
+curl -fLo ~/.vim/doc/nerdcommenter.txt --create-dirs \
+  https://raw.githubusercontent.com/preservim/nerdcommenter/master/doc/nerdcommenter.txt
+curl -fLo ~/.vim/autoload/nerdcommenter.vim --create-dirs \
+  https://raw.githubusercontent.com/preservim/nerdcommenter/master/autoload/nerdcommenter.vim
 ```
 </details>
 
@@ -82,10 +84,10 @@ curl -fLo ~/.vim/doc/NERD_Commenter.txt --create-dirs \
 ```powershell
 md ~\vimfiles\plugin
 md ~\vimfiles\doc
-$pluguri = 'https://raw.githubusercontent.com/preservim/nerdcommenter/master/plugin/NERD_commenter.vim'
-$docsuri = 'https://raw.githubusercontent.com/preservim/nerdcommenter/master/doc/NERD_commenter.txt'
-(New-Object Net.WebClient).DownloadFile($pluguri, $ExecutionContext.SessionState.Path.GetUnresolvedProviderPathFromPSPath("~\vimfiles\plugin\NERD_commenter.vim"))
-(New-Object Net.WebClient).DownloadFile($docsuri, $ExecutionContext.SessionState.Path.GetUnresolvedProviderPathFromPSPath("~\vimfiles\doc\NERD_commenter.txt"))
+$pluguri = 'https://raw.githubusercontent.com/preservim/nerdcommenter/master/plugin/nerdcommenter.vim'
+$docsuri = 'https://raw.githubusercontent.com/preservim/nerdcommenter/master/doc/nerdcommenter.txt'
+(New-Object Net.WebClient).DownloadFile($pluguri, $ExecutionContext.SessionState.Path.GetUnresolvedProviderPathFromPSPath("~\vimfiles\plugin\nerdcommenter.vim"))
+(New-Object Net.WebClient).DownloadFile($docsuri, $ExecutionContext.SessionState.Path.GetUnresolvedProviderPathFromPSPath("~\vimfiles\doc\nerdcommenter.txt"))
 ```
 </details>
 
@@ -192,6 +194,17 @@ Most of the following mappings are for normal/visual mode only. The **|NERDComme
 
     Uncomments the selected line(s).
 
+<<<<<<< HEAD
+=======
+## Motions
+
+While the plugin does not directly support motions, you can leverage its support for selections to do something very similar. For example, to add motions to toggle comments on the paragraph text object you could use:
+```vim
+nnoremap <silent> <leader>c} V}:call nerdcommenter#Comment('x', 'toggle')<CR>
+nnoremap <silent> <leader>c{ V{:call nerdcommenter#Comment('x', 'toggle')<CR>
+```
+
+>>>>>>> 98cc4a2d64ca67cccbf5b5cf47c682ebadaaff58
 ## Contributions
 
 This plugin was originally written in 2007 by [Martin Grenfell (@scrooloose)](https://github.com/scrooloose/). Lots of features and many of the supported filetypes have come from [community contributors](https://github.com/preservim/nerdcommenter/graphs/contributors). Since 2016 it has been maintained primarily by [Caleb Maclennan (@alerque)](https://github.com/alerque). Additional file type support, bug fixes, and new feature contributons are all welcome, please send them as Pull Requests on Github. If you can't contribute yourself please also feel free to open issues to report problems or request features.

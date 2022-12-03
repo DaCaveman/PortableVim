@@ -12,16 +12,60 @@ endfunction
 function! vimtex#util#count(line, pattern) abort " {{{1
   if empty(a:pattern) | return 0 | endif
 
-  let l:sum = 0
-  let l:indx = match(a:line, a:pattern)
-  while l:indx >= 0
-    let l:sum += 1
-    let l:match = matchstr(a:line, a:pattern, l:indx)
-    let l:indx += len(l:match)
-    let l:indx = match(a:line, a:pattern, l:indx)
+  let l:count = 1
+  while match(a:line, a:pattern, 0, l:count) >= 0
+    let l:count += 1
   endwhile
 
-  return l:sum
+  return l:count - 1
+endfunction
+
+" }}}1
+function! vimtex#util#count_open(line, re_open, re_close) abort " {{{1
+  " Counts the number of unclosed opening patterns in the given line.
+  let l:i = match(a:line, a:re_open)
+  if l:i < 0 | return 0 | endif
+
+  let l:sum = 0
+  let l:imin_last = l:i
+  while l:i >= 0
+    let l:sum += 1
+    let l:i += len(matchstr(a:line, a:re_open, l:i))
+    let l:i = match(a:line, a:re_open, l:i)
+  endwhile
+
+  let l:i = match(a:line, a:re_close, l:imin_last)
+  while l:i >= 0
+    let l:sum -= 1
+    let l:i += len(matchstr(a:line, a:re_close, l:i))
+    let l:i = match(a:line, a:re_close, l:i)
+  endwhile
+
+  return max([l:sum, 0])
+endfunction
+
+" }}}1
+function! vimtex#util#count_close(line, re_open, re_close) abort " {{{1
+  " Counts the number of unopened closing patterns in the given line.
+  let l:i = match(a:line, a:re_close)
+  if l:i < 0 | return 0 | endif
+
+  let l:sum = 0
+  while l:i >= 0
+    let l:sum += 1
+    let l:imax_first = l:i
+    let l:i += len(matchstr(a:line, a:re_close, l:i))
+    let l:i = match(a:line, a:re_close, l:i)
+  endwhile
+
+  let l:i = match(a:line, a:re_open)
+  while l:i >= 0 && l:i < l:imax_first
+    let l:sum -= 1
+    let l:i += len(matchstr(a:line, a:re_open, l:i))
+    let l:i = match(a:line, a:re_open, l:i)
+  endwhile
+
+  return max([l:sum, 0])
 endfunction
 
 " }}}1
@@ -265,6 +309,15 @@ function! vimtex#util#uniq_unsorted(list) abort " {{{1
   endfor
 
   return l:result
+endfunction
+
+" }}}1
+function! vimtex#util#undostore() abort " {{{1
+  " This is a hack to make undo restore the correct position
+  if mode() !=# 'i'
+    normal! ix
+    normal! x
+  endif
 endfunction
 
 " }}}1

@@ -137,9 +137,10 @@ function! vimtex#compiler#compile_selected(type) abort range " {{{1
 
   " Create and initialize temporary compiler
   let l:compiler = s:init_compiler({
-        \ 'state' : l:file,
-        \ 'continuous' : 0,
-        \ 'callback' : 0,
+        \ 'state': l:file,
+        \ 'build_dir': '',
+        \ 'continuous': 0,
+        \ 'callback': 0,
         \})
   if empty(l:compiler) | return | endif
 
@@ -149,7 +150,7 @@ function! vimtex#compiler#compile_selected(type) abort range " {{{1
   call l:compiler.wait()
 
   " Check if successful
-  if vimtex#qf#inquire(l:file.base)
+  if vimtex#qf#inquire(l:file.tex)
     call vimtex#log#set_silent_restore()
     call vimtex#log#warning('Compiling selected lines ... failed!')
     botright cwindow
@@ -187,6 +188,14 @@ endfunction
 
 " }}}1
 function! vimtex#compiler#start() abort " {{{1
+  if !b:vimtex.is_compileable()
+    call vimtex#log#error(
+          \ 'Compilation error due to failed mainfile detection!',
+          \ 'Please ensure that VimTeX can locate the proper main .tex file.',
+          \ 'Read ":help vimtex-multi-file" for more info.'
+          \)
+    return
+  endif
   if b:vimtex.compiler.is_running()
     call vimtex#log#warning(
           \ 'Compiler is already running for `' . b:vimtex.base . "'")

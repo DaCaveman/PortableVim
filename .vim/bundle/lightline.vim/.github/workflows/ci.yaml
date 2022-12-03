@@ -13,7 +13,7 @@ jobs:
     strategy:
       matrix:
         vim:
-        - v8.2.1000
+        - v9.0.0000
         - v8.2.0000
         - v8.1.0000
         - v8.0.0000
@@ -21,12 +21,19 @@ jobs:
         - v7.3
     steps:
     - name: Checkout code
+<<<<<<< HEAD
       uses: actions/checkout@main
     - name: Checkout vim-themis
       uses: actions/checkout@main
+=======
+      uses: actions/checkout@v3
+    - name: Checkout vim-themis
+      uses: actions/checkout@v3
+>>>>>>> b1e91b41f5028d65fa3d31a425ff21591d5d957f
       with:
         repository: thinca/vim-themis
         path: vim-themis
+        ref: v1.6.0
     - name: Setup Vim
       uses: rhysd/action-setup-vim@v1
       id: vim

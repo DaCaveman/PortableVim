@@ -4,6 +4,14 @@
 " Email:      karl.yngve@gmail.com
 "
 
+function! vimtex#paths#asset(name) abort " {{{1
+  return vimtex#paths#join(s:root, 'assets/' . a:name)
+endfunction
+
+let s:root = resolve(expand('<sfile>:p:h:h:h'))
+
+" }}}1
+
 function! vimtex#paths#pushd(path) abort " {{{1
   if empty(a:path) || getcwd() ==# fnamemodify(a:path, ':p')
     let s:qpath += ['']
@@ -98,4 +106,4 @@ let s:cd = haslocaldir()
       \ : exists(':tcd') && haslocaldir(-1) ? 'tcd' : 'cd'
 let s:qpath = get(s:, 'qpath', [])
 
-let s:re_abs = has('win32') ? '^[A-Z]:[\\/]' : '^/'
+let s:re_abs = has('win32') ? '^\a:[\\/]' : '^/'

@@ -1,8 +1,14 @@
 " ABB Rapid Command syntax file for Vim
 " Language: ABB Rapid Command
+<<<<<<< HEAD
 " Maintainer: Patrick Meiser-Knosowski <knosowski@graeff.de>
 " Version: 2.2.0
 " Last Change: 06. Apr 2020
+=======
+" Maintainer: Patrick Meiser-Knosowski <knosowski@graeffrobotics.de>
+" Version: 2.2.7
+" Last Change: 27. Oct 2022
+>>>>>>> e57b1e0a24656be48458f77fa4d06681c424b3d5
 " Credits: Thanks for beta testing to Thomas Baginski
 "
 " Suggestions of improvement are very welcome. Please email me!
@@ -61,11 +67,64 @@ endif
 
 " Rapid does ignore case
 syn case ignore
+" spell checking
+syn spell notoplevel
 " }}} init
 
+<<<<<<< HEAD
+=======
+" common highlighting {{{
+
+" Error {{{
+if get(g:,'rapidShowError',1)
+  "
+  " This error must be defined befor rapidCharCode and rapidEscapedBackSlash
+  " a string containing a single \ which is not a char code
+  syn match rapidErrorSingleBackslash /\\/ contained
+  highlight default link rapidErrorSingleBackslash Error
+  "
+endif
+" }}} Error
+
+" Constant values {{{
+" Boolean
+syn keyword rapidBoolean TRUE FALSE Edge High Low
+highlight default link rapidBoolean Boolean
+" Float (num)
+" syn match rapidFloat /\v%(\W|_)@1<=[+-]?\d+\.?\d*%(\s*[eE][+-]?\d+)?/
+syn match rapidFloat /\v\c%(<\d+\.|\.?<\d)\d*%(E[+-]?\d+)?>/ contains=rapidOperator
+highlight default link rapidFloat Float
+" integer in decimal, hexadecimal, octal and binary
+syn match rapidDec /\<[0-9]\+\>/
+highlight default link rapidDec Number
+syn match rapidHex /\<0x[0-9a-fA-F]\+\>/
+highlight default link rapidHex Number
+syn match rapidOct /\<0o[0-7]\+\>/
+highlight default link rapidOct Number
+syn match rapidBin /\<0b[01]\+\>/
+highlight default link rapidBin Number
+" String. Note: Don't rename group rapidString. Indent depend on this
+syn region rapidString matchgroup=rapidString start=/"/ skip=/""/ end=/"/ oneline contains=rapidStringDoubleQuote,rapidEscapedBackSlash,rapidCharCode,rapidErrorSingleBackslash,rapidErrorStringTooLong,@Spell
+highlight default link rapidString String
+" two adjacent "" in string for one double quote
+syn match rapidStringDoubleQuote /""/ contained
+highlight default link rapidStringDoubleQuote SpecialChar
+" character code in string
+syn match rapidCharCode /\\\x\x/ contained
+highlight default link rapidCharCode SpecialChar
+" escaped \ in string
+syn match rapidEscapedBackSlash /\\\\/ contained
+highlight default link rapidEscapedBackSlash SpecialChar
+" }}} Constant values
+
+" }}} common highlighting
+
+if bufname("%") =~ '\c\.cfg$'
+>>>>>>> e57b1e0a24656be48458f77fa4d06681c424b3d5
 " {{{ highlighting for *.cfg
 if bufname("%") =~ '\c\.cfg$'
 
+<<<<<<< HEAD
   " Constant values
   " Boolean
   syn keyword rapidBoolean True False Edge High Low
@@ -83,13 +142,18 @@ if bufname("%") =~ '\c\.cfg$'
 
   " special chars
   syn match rapidOperator /:\|[+-]\|\*\|\/\|\\/
+=======
+  " special chars {{{
+  " syn match rapidOperator /:\|[+-]\|\*\|\/\|\\/
+  syn match rapidOperator /[-+*/:\\]/
+>>>>>>> e57b1e0a24656be48458f77fa4d06681c424b3d5
   syn match rapidOperator /^#/
   highlight default link rapidOperator Operator
   " ---
 
   " sections
   syn match rapidException /^\w\+/
-  syn match rapidException /CFG\ze_/
+  syn match rapidException /CFG_\d\+/
   highlight default link rapidException Exception
   " ---
 
@@ -114,7 +178,7 @@ else
   syn match rapidDebugComment contained /\<DEBUG\>/
   highlight default link rapidDebugComment Debug
   " Line comment
-  syn match rapidComment /!.*$/ contains=rapidTodoComment,rapidDebugComment
+  syn match rapidComment /!.*$/ contains=rapidTodoComment,rapidDebugComment,@Spell
   highlight default link rapidComment Comment
 " }}} Comment 
 
@@ -141,6 +205,7 @@ else
   " TODO testing. Problem: does not highlight any type if it's part of an argument list
   " syn match rapidAnyType /\v^\s*(global\s+|task\s+|local\s+)?(alias|pers|var|const|func)\s+\w+>/ contains=rapidStorageClass,rapidType,rapidTypeDef
   " highlight default link rapidAnyType Type
+<<<<<<< HEAD
   syn keyword rapidType aiotrigg bool btnres busstate buttondata byte
   syn keyword rapidType cameradev cameratarget cfgdomain clock confdata corrdescr datapos dionum dir dnum
   syn keyword rapidType egmframetype egmident egm_minmax egmstate egmstopmode errdomain errnum errstr errtype event_type exec_level extjoint handler_type
@@ -148,6 +213,15 @@ else
   syn keyword rapidType listitem loaddata loadidnum loadsession mecunit motsetdata
   syn keyword rapidType num
   syn keyword rapidType opcalc opnum orient paridnum paridvalidnum pathrecid pos pose progdisp o_jointtarget o_robtarget
+=======
+  syn keyword rapidType accdata aiotrigg bool btnres busstate buttondata byte
+  syn keyword rapidType cfgdomain clock cnvcmd confdata confsupdata corrdescr datapos deflectiondata dionum dir dnum
+  syn keyword rapidType egmframetype egmident egm_minmax egmstate egmstopmode errdomain errnum ErrorInfo errstr errtype event_type exec_level extjoint handler_type
+  syn keyword rapidType icondata identno inposdata intnum inttypes iodev iounit_state jointtarget
+  syn keyword rapidType listitem loaddata loadidnum loadsession mecunit motionprocessmode motsetdata
+  " syn keyword rapidType num
+  syn keyword rapidType opcalc opnum orient paridnum paridvalidnum pathrecid pnpdata pos pose proc_times progdisp o_jointtarget o_robtarget
+>>>>>>> e57b1e0a24656be48458f77fa4d06681c424b3d5
   syn keyword rapidType rawbytes restartdata rmqheader rmqmessage rmqslot robjoint robtarget
   syn keyword rapidType sensor sensorstate shapedata signalorigin signalai signalao signaldi signaldo signalgi signalgo socketdev socketstatus speeddata stoppointdata string stringdig switch symnum syncident 
   syn keyword rapidType taskid tasks testsignal tooldata tpnum trapdata triggdata triggios triggiosdnum triggmode triggstrgo tunetype
@@ -165,7 +239,13 @@ else
   " dispense data types
   syn keyword rapidType beaddata equipdata
   " Spot data types
+<<<<<<< HEAD
   syn keyword rapidType gundata spotdata forcedata simdata smeqdata
+=======
+  syn keyword rapidType gundata gunnum spotdata forcedata simdata smeqdata smeqtype
+  " Tool change data types
+  syn keyword rapidType standno ToolInfo toolno
+>>>>>>> e57b1e0a24656be48458f77fa4d06681c424b3d5
   " Continuous Application Platform data types
   syn keyword rapidType capdata caplatrackdata capspeeddata captrackdata capweavedata flypointdata processtimes restartblkdata supervtimeouts weavestartdata 
   " Bulls Eye data types
@@ -174,6 +254,27 @@ else
   syn keyword rapidType fcboxvol fccondstatus fccylindervol fcdamping fcforcevector fcframe fclindir fcprocessdata fcplane fcrotdir fcspeedvector fcspherevol fcspdchgtunetype fcxyznum
   " Discrete application platform data types
   syn keyword rapidType dadescapp dadescprc daintdata
+  " VW Konzernstandard VWKS_1.07.02
+  syn keyword rapidType merker 
+  syn keyword rapidType frgnum frgwert robnum 
+  syn keyword rapidType fmnum applid calibdatavorr stepdata 
+  syn keyword rapidType tsmethode tsdaten teilspeicherdaten
+  syn keyword rapidType greiferdaten greiferposition bauteildaten bauteilkontrolle g_datenident g_sensor g_signal g_teilident g_ventil 
+  syn keyword rapidType strgnum typnum 
+  syn keyword rapidType hubnum kopfnum 
+  syn keyword rapidType applservicetype 
+  syn keyword rapidType applfraesdaten kwdionum 
+  syn keyword rapidType butechnum
+  syn keyword rapidType toolnum dbnum 
+  " das folgende sind datentypen aber das kann man doch nicht machen...
+  " syn keyword rapidType position wert
+  syn keyword rapidType camdata camlimitdata cammode camprotocoldata camstatus camsequence campositionstatus
+  syn keyword rapidType saposnum sabereichnum autofocusnum focusposnum lascaledata laleistungnum larobnum laprognum uebwnum dgbanum dgjobnum gasspuelnum davalve gasuebwnum 
+  syn keyword rapidType lsfigurnum lsstarttype 
+  syn keyword rapidType lwprognum lwdiodnum lsstarttype 
+  syn keyword rapidType lztype diskrethubnum lztipnum 
+  syn keyword rapidType gblmethod
+  syn keyword rapidType buatypenum buatechnum buadirnum 
   highlight default link rapidType Type
   " Storage class
   syn keyword rapidStorageClass LOCAL TASK GLOBAL VAR PERS CONST ALIAS NOVIEW NOSTEPIN VIEWONLY READONLY SYSMODULE INOUT
@@ -220,9 +321,15 @@ else
   syn match rapidLabel /\c\v^\s*\a\w*\:\ze%([^=]|$)/ contains=rapidConditional,rapidOperator
   highlight default link rapidLabel Label
   " Keyword
+<<<<<<< HEAD
   syn keyword rapidKeyword AccSet ActEventBuffer ActUnit Add AliasIO AliasIOReset BitClear BitSet BookErrNo BrakeCheck
   syn keyword rapidKeyword CallByVar CancelLoad CheckProgRef CirPathMode Clear ClearIOBuff ClearPath ClearRawBytes ClkReset ClkStart ClkStop Close CloseDir ConfJ ConfL CONNECT CopyFile CopyRawBytes CorrClear CorrCon CorrDiscon CorrWrite
   syn keyword rapidKeyword CSSAct CSSForceOffsetAct CSSForceOffsetDeact CSSOffsetTuneCSSOffsetTune
+=======
+  syn keyword rapidKeyword AccSet ActEventBuffer ActUnit Add AliasCamera AliasIO AliasIOReset BitClear BitSet BookErrNo BrakeCheck
+  syn keyword rapidKeyword CallByVar CancelLoad CheckProgRef CirPathMode Clear ClearIOBuff ClearPath ClearRawBytes ClkReset ClkStart ClkStop Close CloseDir ConfJ ConfL CONNECT CopyFile CopyRawBytes CornerPathWarning CorrClear CorrCon CorrDiscon CorrWrite
+  syn keyword rapidKeyword CSSAct CSSDeact CSSForceOffsetAct CSSForceOffsetDeact CSSOffsetTune CyclicBrakeCheck
+>>>>>>> e57b1e0a24656be48458f77fa4d06681c424b3d5
   syn keyword rapidKeyword DeactEventBuffer DeactUnit Decr DitherAct DitherDeact DropSensor 
   syn keyword rapidKeyword EGMActJoint EGMActMove EGMActPose EGMGetId EGMReset EGMSetupAI EGMSetupAO EGMSetupGI EGMSetupLTAPP EGMSetupUC EOffsOff EOffsOn EOffsSet EraseModule ErrLog ErrWrite
   syn keyword rapidKeyword FricIdInit FricIdEvaluate FricIdSetFricLevels 
@@ -237,12 +344,17 @@ else
   syn keyword rapidKeyword ArcRefresh RecoveryMenu RecoveryMenuWR RecoveryPosSet RecoveryPosReset SetWRProcName 
   " conveyor tracking instructions
   syn keyword rapidKeyword UseACCProfile WaitWObj DropWObj RecordProfile WaitAndRecProf StoreProfile LoadProfile ActivateProfile DeactProfile CnvGenInstr CnvSync CnvGenInstr IndCnvInit IndCnvEnable IndCnvDisable IndCnvReset IndCnvAddObject 
+  syn keyword rapidKeyword UseReachableTargets GetMaxUsageTime ResetMaxUsageTime CnvPredictReach
   " Integrated Vision instructions
   syn keyword rapidKeyword CamFlush CamGetParameter CamGetResult CamLoadJob CamReqImage CamSetExposure CamSetParameter CamSetProgramMode CamSetRunMode CamStartLoadJob CamWaitLoadJob 
   " arc Weldguide and MultiPass instructions
   syn keyword rapidKeyword MPSavePath MPLoadPath MPReadInPath MPOffsEaxOnPath
   " Paint instructions
+<<<<<<< HEAD
   syn keyword rapidKeyword SetBrush SetBrushFac
+=======
+  syn keyword rapidKeyword IpsSetParam PntProdUserLog SetBrush SetBrushFac
+>>>>>>> e57b1e0a24656be48458f77fa4d06681c424b3d5
   " Spot instructions
   syn keyword rapidKeyword SetForce Calibrate ReCalcTCP IndGunMove IndGunMoveReset OpenHighLift CloseHighLift SwSetIntSpotData SwSetIntForceData SwSetIntGunData SwSetIntSimData SwGetCalibData SwGetFixTipData 
   " dispense instructions
@@ -264,8 +376,22 @@ else
   highlight default link rapidException Exception
 " }}} Statements, keywords et al
 
+<<<<<<< HEAD
 " special keyword for move command {{{
   " arc instructions
+=======
+  " Special keyword for move command {{{
+  " uncategorized yet
+  syn keyword rapidMovement MovePnP
+  syn keyword rapidMovement EGMMoveC EGMMoveL EGMRunJoint EGMRunPose EGMStop
+  syn keyword rapidMovement IndAMove IndCMove IndDMove IndRMove 
+  " common instructions
+  syn keyword rapidMovement MoveAbsJ MoveC MoveExtJ MoveJ MoveL 
+  syn keyword rapidMovement MoveCAO MoveCDO MoveCGO MoveCSync MoveJAO MoveJDO MoveJGO MoveJSync MoveLAO MoveLDO MoveLGO MoveLSync 
+  syn keyword rapidMovement SearchC SearchExtJ SearchL
+  syn keyword rapidMovement TriggC TriggJ TriggL TriggJIOs TriggLIOs
+  " Arc instructions
+>>>>>>> e57b1e0a24656be48458f77fa4d06681c424b3d5
   syn keyword rapidMovement ArcC ArcC1 ArcC2 ArcCEnd ArcC1End ArcC2End ArcCStart ArcC1Start ArcC2Start 
   syn keyword rapidMovement ArcL ArcL1 ArcL2 ArcLEnd ArcL1End ArcL2End ArcLStart ArcL1Start ArcL2Start ArcMoveExtJ 
   " arc Weldguide and MultiPass instructions
@@ -290,6 +416,40 @@ else
   syn keyword rapidMovement TriggC TriggJ TriggL TriggJIOs TriggLIOs
   " Discrete application platform instructions
   syn keyword rapidMovement DaProcML DaProcMJ
+  " VW Konzernstandard VWKS_1.07.02
+  syn keyword rapidMovement MoveABS  MoveABS_FB  MoveABS_FRG  MoveABS_ROB
+  syn keyword rapidMovement MoveCIRC MoveCIRC_FB MoveCIRC_FRG MoveCIRC_ROB
+  syn keyword rapidMovement MoveLIN  MoveLIN_FB  MoveLIN_FRG  MoveLIN_ROB 
+  syn keyword rapidMovement MovePTP  MovePTP_FB  MovePTP_FRG  MovePTP_ROB 
+  syn keyword rapidMovement SearchCIRC SearchCIRC_M 
+  syn keyword rapidMovement SearchLIN  SearchLIN_M 
+  syn keyword rapidMovement MoveABS_AO  MoveABS_DO  MoveABS_GO
+  syn keyword rapidMovement MoveCIRC_AO MoveCIRC_DO MoveCIRC_GO
+  syn keyword rapidMovement MoveLIN_AO  MoveLIN_DO  MoveLIN_GO
+  syn keyword rapidMovement KW_LoesenLIN
+  syn keyword rapidMovement SPZ_FraesenLIN SPZ_FraesenPTP SPZ_MessenLIN SPZ_MessenPTP SPZ_LIN SPZ_PTP 
+  syn keyword rapidMovement BZ_LIN BZ_PTP
+  syn keyword rapidMovement KL_LIN KL_CIRC
+  syn keyword rapidMovement BP_LIN BP_PTP
+  syn keyword rapidMovement BU_CIRC BU_LIN
+  syn keyword rapidMovement CZ_LIN CZ_LIN_V CZ_PTP CZ_PTP_V
+  syn keyword rapidMovement FD_LIN FD_PTP
+  syn keyword rapidMovement KG_LIN KG_PTP
+  syn keyword rapidMovement DA_LIN 
+  syn keyword rapidMovement LK_CIRC LK_LIN 
+  syn keyword rapidMovement LL_CIRC LL_LIN
+  syn keyword rapidMovement LS_CIRC LS_LIN LS_LIN_F LS_PTP_F
+  syn keyword rapidMovement LW_CIRC LW_LIN
+  syn keyword rapidMovement LZ_LIN LZ_PTP LZ_ReinigenLIN LZ_ReinigenPTP
+  syn keyword rapidMovement MS_CIRC MS_LIN MS_ReinigenLIN MS_SearchLIN MS_PTP_CS MS_LIN_CS GBL_LIN GBL_PTP GBL_RefPointLIN
+  syn keyword rapidMovement NK_LIN
+  syn keyword rapidMovement NZ_LIN NZ_LIN_V NZ_PTP NZ_PTP_V 
+  syn keyword rapidMovement PR_LIN PR_PTP
+  syn keyword rapidMovement RF_CIRC RF_LIN
+  syn keyword rapidMovement STP_FraesenLIN STP_FraesenPTP STP_LIN STP_PTP 
+  syn keyword rapidMovement SM_LIN SM_PTP
+  syn keyword rapidMovement BUA_CIRC BUA_LIN BUA_MessenLIN BUA_MessenPTP
+  syn keyword rapidMovement KE_LIN 
   if g:rapidGroupName
     highlight default link rapidMovement Movement
   else
@@ -297,6 +457,7 @@ else
   endif
 " }}} special keyword for move command 
 
+<<<<<<< HEAD
 " Structure value {{{
   syn match rapidNames /[a-zA-Z_][.a-zA-Z0-9_]*/
   " highlight default link rapidNames None
@@ -305,6 +466,36 @@ else
   highlight default link rapidConcealableString String
   syn region rapidStructVal matchgroup=rapidDelimiter start=/\[/ end=/\]/ contains=ALLBUT,rapidString keepend extend conceal cchar=* 
 " }}} Structure value
+=======
+  " Any name {{{
+  syn match rapidNames /\v[[:upper:][:lower:]](\k|\.)*/
+  " }}} Any name
+
+  " Attempt to avoid false highlight of num in case of parameter name:
+  "   TPWrite "goPosNo="\num:=GOutput(goPosNo);
+  " Must follow after rapidNames in this file
+  syn match rapidType /\c\v<num>\s*\ze[^ :]/
+
+  " Structure value {{{
+  " rapid structrure values. added to be able to conceal them
+  syn region rapidConcealableString matchgroup=rapidConcealableString start=/"/ skip=/""/ end=/"/ oneline keepend extend contained contains=rapidStringDoubleQuote,rapidEscapedBackSlash,rapidCharCode,rapidErrorSingleBackslash,rapidErrorStringTooLong,@Spell conceal 
+  highlight default link rapidConcealableString String
+  syn region rapidStructVal matchgroup=rapidStructDelimiter start=/\[/ end=/\]/ contains=rapidStructVal,rapidBoolean,rapidDec,rapidHex,rapidOct,rapidBin,rapidFloat,rapidConcealableString,rapidDelimiter,rapidConstant,rapidErrNo,rapidIntNo,rapidOperator keepend extend conceal cchar=* 
+  highlight default link rapidStructDelimiter Delimiter
+  " sync for regions from start of function
+  syn sync match rapidSyncStrucVal grouphere rapidStructVal /\s\c^\s*<(module|proc|func|trap|record)>/
+  " check edge cases like this one:
+  "  LOCAL CONST listitem lstAuswService{18}:=[["","Service Position"],["","Bremsentest"],["","Referenzfahrt"],["","Manuelles Abfahren"],["","Justagestellung"],["","Transportposition"],
+  "      ["","Spitze-Spitze Greifer 1, [RT]"],["","Spitze-Spitze Greifer 2, [FT]"],["","Spitze-Spitze Pruefspitze"],["","Werkobjekt Ablage"],["","Werkobjekt Modul 1"],
+  "      ["","Werkobjekt Modul 2"],["","TCP von Greifer 1 vermessen, [RT]"],["","TCP von Greifer 2 vermessen, [FT]"],["","TCP von Basisdorn vermessen"],
+  "      ["","Greifer abdocken"],["","Greifer andocken"],["","Kollision Check (Ohne Greifer)"]];
+  " }}} Structure value
+
+  " Delimiter {{{
+  syn match rapidDelimiter /[\\(){},;|]/
+  highlight default link rapidDelimiter Delimiter
+  " }}} Delimiter
+>>>>>>> e57b1e0a24656be48458f77fa4d06681c424b3d5
 
 " BuildInFunction {{{
   " dispense functions
@@ -341,6 +532,13 @@ else
   syn keyword rapidBuildInFunction contained PMgrAtSafe PMgrAtService PMgrAtState PMgrAtStation PMgrNextStation PMgrTaskNumber PMgrTaskName
   " Spot functions
   syn keyword rapidBuildInFunction contained SwGetCurrTargetName SwGetCurrSpotName 
+<<<<<<< HEAD
+=======
+  " Homepos-Running functions
+  syn keyword rapidBuildInFunction contained HR_RobotInHome HR_GetTypeDIndex HR_GetTypeIndex
+  " Paint functions
+  syn keyword rapidBuildInFunction contained IndexLookup IpsCommand IpsGetParam PaintCommand PntQueueExtraGet PntQueueExtraSet PntQueuePeek 
+>>>>>>> e57b1e0a24656be48458f77fa4d06681c424b3d5
   if g:rapidGroupName
     highlight default link rapidBuildInFunction BuildInFunction
   else
@@ -400,7 +598,7 @@ else
   syn keyword rapidConstant ERR_ROBLIMIT ERR_SC_WRITE
   syn keyword rapidConstant ERR_SGUN_ESTOP ERR_SGUN_MOTOFF ERR_SGUN_NEGVAL ERR_SGUN_NOTACT ERR_SGUN_NOTINIT ERR_SGUN_NOTOPEN ERR_SGUN_NOTSYNC
   syn keyword rapidConstant ERR_SIG_NAME ERR_SIGSUPSEARCH ERR_SIG_NOT_VALID
-  syn keyword rapidConstant ERR_SOCK_ADDR_INUSE ERR_SOCK_CLOSED ERR_SOCK_TIMEOUT
+  syn keyword rapidConstant ERR_SOCK_ADDR_INVALID ERR_SOCK_ADDR_INUSE ERR_SOCK_CLOSED ERR_SOCK_IS_BOUND ERR_SOCK_IS_CONN ERR_SOCK_NET_UNREACH ERR_SOCK_NOT_BOUND ERR_SOCK_NOT_CONN ERR_SOCK_TIMEOUT ERR_SOCK_UNSPEC
   syn keyword rapidConstant ERR_SPEEDLIM_VALUE ERR_SPEED_REFRESH_LIM
   syn keyword rapidConstant ERR_STARTMOVE ERR_STORE_PROF ERR_STRTOOLNG ERR_SYMBOL_TYPE ERR_SYM_ACCESS ERR_SYNCMOVEOFF ERR_SYNCMOVEON ERR_SYNTAX
   syn keyword rapidConstant ERR_TASKNAME
@@ -511,6 +709,10 @@ else
   syn keyword rapidConstant END_OF_LIST WAIT_MAX
   syn keyword rapidErrNo ERRNO
   syn keyword rapidIntNo INTNO
+  " VW Konzernstandard VWKS_1.07.02
+  syn keyword rapidIntNo KG_UNDEFINIERT KG_LETZTEPOS KG_GREIFPOS KG_ZWISCHENPOS KG_TOOLINFO KG_GREIFPOSKORR
+  syn keyword rapidIntNo BA1 BA2
+  syn keyword rapidIntNo SetupXY SetupZ KorrekturXY KorrekturZ
   if g:rapidGroupName
     highlight default link rapidConstant Sysvars
     highlight default link rapidErrNo Sysvars
@@ -534,9 +736,16 @@ else
     syn match rapidError5 /\c\v%(^\s*if>[^!\\]+[^!<>])@<=%(\=|:)\=\ze[^!]*then/
     syn match rapidError6 /\c\v%(^\s*while>[^!\\]+[^!<>])@<=%(\=|:)\=\ze[^!]*do/
     "
+<<<<<<< HEAD
     " WaitUntil a=>b ok
     "            ||
     syn match rapidError7 /\c\v%(^\s*%(Return|WaitUntil|if|while)>[^!]+[^!<>])@<=\=[><]/
+=======
+    " WaitUntil a==b
+    syn match rapidErrorShouldBeEqual    /\c\v%(^\s*%(Return|WaitUntil|while)>[^!\\]+[^!<>])@<=%(\=|:)\=/
+    syn match rapidErrorShouldBeEqual    /\c\v%(^\s*%(if|elseif)>[^!\\]+[^!<>])@<=%(\=|:)\=\ze[^!\\]+<then>/
+    highlight default link rapidErrorShouldBeEqual Error
+>>>>>>> e57b1e0a24656be48458f77fa4d06681c424b3d5
     "
     " WaitUntil a><b ok
     "           ||
@@ -569,6 +778,24 @@ else
     highlight default link rapidError10 Error
     highlight default link rapidError11 Error
   endif
+<<<<<<< HEAD
+=======
+  " }}} Error
+
+" }}}
+endif
+
+" common Error {{{
+if get(g:,'rapidShowError',1)
+  "
+  " This error must be defined after rapidString
+  " string too long
+  " syn match rapidErrorStringTooLong /\v%("%(""|\\\\|\\\x\x|[^"\\]){80})@240<=%([^"]|"{2})+/ contained contains=rapidStringDoubleQuote,rapidEscapedBackSlash,rapidCharCode,rapidErrorSingleBackslash
+  highlight default link rapidErrorStringTooLong Error
+  "
+endif
+
+>>>>>>> e57b1e0a24656be48458f77fa4d06681c424b3d5
 " }}} Error
 
 " Finish {{{

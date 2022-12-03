@@ -93,8 +93,14 @@ A: Disable stuff in your `vimrc`, see [rapid-options][6] for details: >
 
 Q: Which keys get mapped to what? Will that override my own mappings?  
 A: rapid-for-vim will not override existing mappings unless the corresponding
+<<<<<<< HEAD
    option is explicitly set. To use different key bindings use the
    `<PLUG>`mapping. Otherwise rapid-for-vim create the followin mappings: >
+=======
+   option is explicitly set. To use different key bindings see :help 
+   [rapid-key-mappings][13] for \<Plug\> mappings.  
+   Otherwise rapid-for-vim create the following mappings: >
+>>>>>>> e57b1e0a24656be48458f77fa4d06681c424b3d5
 
     <F2> Show all structure values
     <F3> Show structure values at cursorline
@@ -165,8 +171,8 @@ A: `:let g:knopVerbose=1` any time.
 If you like this plugin please rate it on [vim.org][4]. If you don't but you
 think it could be useful if this or that would be different, don't hesitate to
 email me or even better open an [issue][5]. With a little luck and good
-timing you may find me on irc://irc.freenode.net/#vim as KnoP in case you have
-any questions.  
+timing you may find me on ircs://irc.libera.chat:6697/#vim as KnoP in case you
+have any questions.  
 
 [1]: https://github.com/KnoP-01/rapid-for-vim/releases/latest
 [2]: https://github.com/KnoP-01/rapid-for-vim#FAQ

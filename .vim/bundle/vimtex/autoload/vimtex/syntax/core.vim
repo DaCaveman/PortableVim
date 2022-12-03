@@ -308,14 +308,17 @@ function! vimtex#syntax#core#init() abort " {{{1
         \ 'contains': '@texClusterTabular'
         \})
 
-  syntax match texTabularCol   "[lcr]" contained
-  syntax match texTabularCol   "p"     contained nextgroup=texTabularLength
-  syntax match texTabularAtSep "@"     contained nextgroup=texTabularLength
+  syntax match texTabularAtSep     "@"     contained nextgroup=texTabularLength
+  syntax match texTabularCol       "[lcr]" contained
+  syntax match texTabularCol       "\*"    contained nextgroup=texTabularMulti
+  syntax match texTabularCol       "p"     contained nextgroup=texTabularLength
+  syntax match texTabularVertline  "||\?"  contained
   syntax cluster texClusterTabular contains=texTabular.*
 
   call vimtex#syntax#core#new_arg('texTabularLength', {
         \ 'contains': 'texLength,texCmd'
         \})
+  call vimtex#syntax#core#new_arg('texTabularMulti', {'next': 'texTabularArg'})
 
   " {{{2 Commands: \begin{minipage}[position][height][inner-pos]{width}
 
@@ -433,12 +436,28 @@ function! vimtex#syntax#core#init() abort " {{{1
   syntax case match
 
   " Highlight \iffalse ... \fi blocks as comments
-  syntax region texComment matchgroup=texCmd
-        \ start="^\s*\\iffalse\>" end="\\fi\>"
+  syntax region texComment matchgroup=texCmdConditional
+        \ start="^\s*\\iffalse\>" end="\\\%(fi\|else\)\>"
         \ contains=texCommentConditionals
+
   syntax region texCommentConditionals matchgroup=texComment
         \ start="\\if\w\+" end="\\fi\>"
         \ contained transparent
+
+  " Highlight \iftrue ... \else ... \fi blocks as comments
+  syntax region texConditionalTrueZone matchgroup=texCmdConditional
+        \ start="^\s*\\iftrue\>"  end="\v\\fi>|%(\\else>)@="
+        \ contains=TOP nextgroup=texCommentFalse
+        \ transparent
+
+  syntax region texConditionalNested matchgroup=texCmdConditional
+        \ start="\\if\w\+" end="\\fi\>"
+        \ contained contains=TOP
+        \ containedin=texConditionalTrueZone,texConditionalNested
+
+  syntax region texCommentFalse matchgroup=texCmdConditional
+        \ start="\\else\>"  end="\\fi\>"
+        \ contained contains=texCommentConditionals
 
   " }}}2
   " {{{2 Zone: Verbatim
@@ -466,7 +485,8 @@ function! vimtex#syntax#core#init() abort " {{{1
         \ 'opts': 'contained containedin=@texClusterE3',
         \})
 
-  syntax match texE3Cmd contained containedin=@texClusterE3 "\\\w\+"
+  syntax match texE3Cmd "\\\w\+"
+        \ contained containedin=@texClusterE3
         \ nextgroup=texE3Opt,texE3Arg skipwhite skipnl
   call vimtex#syntax#core#new_opt('texE3Opt', {'next': 'texE3Arg'})
   call vimtex#syntax#core#new_arg('texE3Arg', {
@@ -477,11 +497,16 @@ function! vimtex#syntax#core#init() abort " {{{1
   syntax match texE3CmdNestedZoneEnd '\\\ExplSyntaxOff'
         \ contained containedin=texE3Arg,texE3Group
 
-  syntax match texE3Var  contained containedin=@texClusterE3 "\\\a*\%(_\+[a-zA-Z]\+\)\+\>"
-  syntax match texE3Func contained containedin=@texClusterE3 "\\\a*\%(_\+[a-zA-Z]\+\)*:[a-zA-Z]*" contains=texE3Type
-  syntax match texE3Parm contained containedin=@texClusterE3 "#\+\d"
+  syntax match texE3Variable "\\[gl]_\%(\h\|@@_\@=\)*_\a\+"
+        \ contained containedin=@texClusterE3
+  syntax match texE3Constant "\\c_\%(\h\|@@_\@=\)*_\a\+"
+        \ contained containedin=@texClusterE3
+  syntax match texE3Function "\\\%(\h\|@@_\)\+:\a*"
+        \ contained containedin=@texClusterE3
+        \ contains=texE3Type
 
-  syntax match texE3Type contained ":[a-zA-Z]*"
+  syntax match texE3Type ":[a-zA-Z]*" contained
+  syntax match texE3Parm "#\+\d" contained containedin=@texClusterE3
 
   syntax cluster texClusterE3 contains=texE3Zone,texE3Arg,texE3Group,texE3Opt
 
@@ -496,6 +521,16 @@ function! vimtex#syntax#core#init() abort " {{{1
   call vimtex#syntax#core#new_arg('texMathEnvArgName',
         \ {'contains': 'texComment,@NoSpell'})
 
+  " Environments inside math zones
+  " * This is used to restrict the whitespace between environment name and
+  "   the option group (see https://github.com/lervag/vimtex/issues/2043).
+  syntax match texCmdEnvM "\v\\%(begin|end)>" contained nextgroup=texEnvMArgName
+  call vimtex#syntax#core#new_arg('texEnvMArgName', {
+        \ 'contains': 'texComment,@NoSpell',
+        \ 'next': 'texEnvOpt',
+        \ 'skipwhite': v:false
+        \})
+
   " Math regions: environments
   call vimtex#syntax#core#new_region_math('displaymath')
   call vimtex#syntax#core#new_region_math('eqnarray')
@@ -503,19 +538,29 @@ function! vimtex#syntax#core#init() abort " {{{1
   call vimtex#syntax#core#new_region_math('math')
 
   " Math regions: Inline Math Zones
-  if g:vimtex_syntax_conceal.math_bounds
-    syntax region texMathZone   matchgroup=texMathDelimZone concealends contains=@texClusterMath keepend start="\\("  end="\\)"
-    syntax region texMathZone   matchgroup=texMathDelimZone concealends contains=@texClusterMath keepend start="\\\[" end="\\]"
-    syntax region texMathZoneX  matchgroup=texMathDelimZone concealends contains=@texClusterMath         start="\$"   skip="\\\\\|\\\$"  end="\$"
-          \ nextgroup=texMathTextAfter
-    syntax region texMathZoneXX matchgroup=texMathDelimZone concealends contains=@texClusterMath keepend start="\$\$" end="\$\$"
-  else
-    syntax region texMathZone   matchgroup=texMathDelimZone contains=@texClusterMath keepend start="\\("  end="\\)"
-    syntax region texMathZone   matchgroup=texMathDelimZone contains=@texClusterMath keepend start="\\\[" end="\\]"
-    syntax region texMathZoneX  matchgroup=texMathDelimZone contains=@texClusterMath         start="\$"   skip="\\\\\|\\\$"  end="\$"
-          \ nextgroup=texMathTextAfter
-    syntax region texMathZoneXX matchgroup=texMathDelimZone contains=@texClusterMath keepend start="\$\$" end="\$\$"
-  endif
+  let l:conceal = g:vimtex_syntax_conceal.math_bounds ? 'concealends' : ''
+  execute 'syntax region texMathZoneLI matchgroup=texMathDelimZoneLI'
+          \ 'start="\%(\\\@<!\)\@<=\\("'
+          \ 'end="\%(\\\@<!\)\@<=\\)"'
+          \ 'contains=@texClusterMath'
+          \ l:conceal
+  execute 'syntax region texMathZoneLD matchgroup=texMathDelimZoneLD'
+          \ 'start="\\\["'
+          \ 'end="\\]"'
+          \ 'contains=@texClusterMath'
+          \ l:conceal
+  execute 'syntax region texMathZoneTI matchgroup=texMathDelimZoneTI'
+          \ 'start="\$"'
+          \ 'skip="\\\\\|\\\$"'
+          \ 'end="\$"'
+          \ 'contains=@texClusterMath'
+          \ 'nextgroup=texMathTextAfter'
+          \ l:conceal
+  execute 'syntax region texMathZoneTD matchgroup=texMathDelimZoneTD'
+          \ 'start="\$\$"'
+          \ 'end="\$\$"'
+          \ 'contains=@texClusterMath keepend'
+          \ l:conceal
 
   " This is to disable spell check for text just after "$" (e.g. "$n$th")
   syntax match texMathTextAfter "\w\+" contained contains=@NoSpell
@@ -557,16 +602,6 @@ function! vimtex#syntax#core#init() abort " {{{1
 
   " Bold and italic commands
   call s:match_bold_italic_math()
-
-  " Environments inside math zones
-  " * This is used to restrict the whitespace between environment name and
-  "   the option group (see https://github.com/lervag/vimtex/issues/2043).
-  syntax match texCmdEnvM "\v\\%(begin|end)>" contained nextgroup=texEnvMArgName
-  call vimtex#syntax#core#new_arg('texEnvMArgName', {
-        \ 'contains': 'texComment,@NoSpell',
-        \ 'next': 'texEnvOpt',
-        \ 'skipwhite': v:false
-        \})
 
   " Support for array environment
   syntax match texMathCmdEnv contained contains=texCmdMathEnv "\\begin{array}"
@@ -612,9 +647,14 @@ function! vimtex#syntax#core#init() abort " {{{1
       call s:match_conceal_greek()
     endif
 
-    " Conceal replace accented characters and ligatures
+    " Conceal replace accented characters
     if g:vimtex_syntax_conceal.accents
       call s:match_conceal_accents()
+    endif
+
+    " Conceal replace ligatures
+    if g:vimtex_syntax_conceal.ligatures
+      call s:match_conceal_ligatures()
     endif
 
     " Conceal cite commands
@@ -663,13 +703,16 @@ function! vimtex#syntax#core#init_highlights() abort " {{{1
   highlight def link texArg              Include
   highlight def link texCmd              Statement
   highlight def link texCmdSpaceCodeChar Special
-  highlight def link texCmdTodo          Todo
+  highlight def link texCmdTodo          VimtexTodo
+  highlight def link texCmdWarning       VimtexWarning
+  highlight def link texCmdError         VimtexError
+  highlight def link texCmdFatal         VimtexFatal
   highlight def link texCmdType          Type
   highlight def link texComment          Comment
   highlight def link texCommentTodo      Todo
   highlight def link texDelim            Delimiter
   highlight def link texEnvArgName       PreCondit
-  highlight def link texError            Error
+  highlight def link texError            VimtexError
   highlight def link texLength           Number
   highlight def link texMathDelim        Type
   highlight def link texMathEnvArgName   Delimiter
@@ -740,6 +783,7 @@ function! vimtex#syntax#core#init_highlights() abort " {{{1
   highlight def link texCmdTitle           texCmd
   highlight def link texCmdVerb            texCmd
   highlight def link texCommentAcronym     texComment
+  highlight def link texCommentFalse       texComment
   highlight def link texCommentURL         texComment
   highlight def link texConditionalArg     texArg
   highlight def link texConditionalINCChar texSymbol
@@ -747,11 +791,12 @@ function! vimtex#syntax#core#init_highlights() abort " {{{1
   highlight def link texDefParm            texParm
   highlight def link texE3Cmd              texCmd
   highlight def link texE3Delim            texDelim
-  highlight def link texE3Func             texCmdType
+  highlight def link texE3Function         texCmdType
   highlight def link texE3Opt              texOpt
   highlight def link texE3Parm             texParm
   highlight def link texE3Type             texParm
-  highlight def link texE3Var              texCmd
+  highlight def link texE3Variable         texCmd
+  highlight def link texE3Constant         texE3Variable
   highlight def link texEnvOpt             texOpt
   highlight def link texEnvMArgName        texEnvArgName
   highlight def link texFileArg            texArg
@@ -774,14 +819,20 @@ function! vimtex#syntax#core#init_highlights() abort " {{{1
   highlight def link texMathCmdText        texCmd
   highlight def link texMathDelimMod       texMathDelim
   highlight def link texMathDelimZone      texDelim
+  highlight def link texMathDelimZoneLI    texMathDelimZone
+  highlight def link texMathDelimZoneLD    texMathDelimZone
+  highlight def link texMathDelimZoneTI    texMathDelimZone
+  highlight def link texMathDelimZoneTD    texMathDelimZone
   highlight def link texMathError          texError
   highlight def link texMathErrorDelim     texError
   highlight def link texMathGroup          texMathZone
+  highlight def link texMathZoneLI         texMathZone
+  highlight def link texMathZoneLD         texMathZone
+  highlight def link texMathZoneTI         texMathZone
+  highlight def link texMathZoneTD         texMathZone
   highlight def link texMathZoneEnsured    texMathZone
   highlight def link texMathZoneEnv        texMathZone
   highlight def link texMathZoneEnvStarred texMathZone
-  highlight def link texMathZoneX          texMathZone
-  highlight def link texMathZoneXX         texMathZone
   highlight def link texMathStyleConcArg   texMathZone
   highlight def link texMathSub            texMathZone
   highlight def link texMathSuper          texMathZone
@@ -812,6 +863,7 @@ function! vimtex#syntax#core#init_highlights() abort " {{{1
   highlight def link texTabularChar        texSymbol
   highlight def link texTabularCol         texOpt
   highlight def link texTabularOpt         texEnvOpt
+  highlight def link texTabularVertline    texMathDelim
   highlight def link texTheoremEnvOpt      texEnvOpt
   highlight def link texVerbZone           texZone
   highlight def link texVerbZoneInline     texVerbZone
@@ -1158,7 +1210,7 @@ endfunction
 let s:re_sub =
       \ '[-+=()0-9aehijklmnoprstuvx]\|\\\%('
       \ . join([
-      \     'beta', 'delta', 'phi', 'gamma', 'chi'
+      \     'beta', 'rho', 'phi', 'gamma', 'chi'
       \ ], '\|') . '\)\>'
 let s:re_super = '[-+=()<>:;0-9a-pr-zABDEG-PRTUVW]'
 
@@ -1352,6 +1404,8 @@ let s:cmd_symbols = [
       \ ['in', '∈'],
       \ ['infty', '∞'],
       \ ['int', '∫'],
+      \ ['iint', '∬'],
+      \ ['iiint', '∭'],
       \ ['jmath', '𝚥'],
       \ ['land', '∧'],
       \ ['lnot', '¬'],
@@ -1453,6 +1507,7 @@ let s:cmd_symbols = [
       \ ['implies', '⇒'],
       \ ['choose', 'C'],
       \ ['sqrt', '√'],
+      \ ['colon', ':'],
       \ ['coloneqq', '≔'],
       \]
 
@@ -1717,27 +1772,27 @@ function! s:match_math_delims() abort " {{{1
   syntax match texMathDelimMod contained "\\\(left\|right\)\>"
   syntax match texMathDelimMod contained "\\[bB]igg\?[lr]\?\>"
   syntax match texMathDelim contained "[<>()[\]|/.]\|\\[{}|]"
-  syntax match texMathDelim contained "\\backslash"
-  syntax match texMathDelim contained "\\downarrow"
-  syntax match texMathDelim contained "\\Downarrow"
-  syntax match texMathDelim contained "\\[lr]vert"
-  syntax match texMathDelim contained "\\[lr]Vert"
-  syntax match texMathDelim contained "\\langle"
-  syntax match texMathDelim contained "\\lbrace"
-  syntax match texMathDelim contained "\\lceil"
-  syntax match texMathDelim contained "\\lfloor"
-  syntax match texMathDelim contained "\\lgroup"
-  syntax match texMathDelim contained "\\lmoustache"
-  syntax match texMathDelim contained "\\rangle"
-  syntax match texMathDelim contained "\\rbrace"
-  syntax match texMathDelim contained "\\rceil"
-  syntax match texMathDelim contained "\\rfloor"
-  syntax match texMathDelim contained "\\rgroup"
-  syntax match texMathDelim contained "\\rmoustache"
-  syntax match texMathDelim contained "\\uparrow"
-  syntax match texMathDelim contained "\\Uparrow"
-  syntax match texMathDelim contained "\\updownarrow"
-  syntax match texMathDelim contained "\\Updownarrow"
+  syntax match texMathDelim contained "\\backslash\>"
+  syntax match texMathDelim contained "\\downarrow\>"
+  syntax match texMathDelim contained "\\Downarrow\>"
+  syntax match texMathDelim contained "\\[lr]vert\>"
+  syntax match texMathDelim contained "\\[lr]Vert\>"
+  syntax match texMathDelim contained "\\langle\>"
+  syntax match texMathDelim contained "\\lbrace\>"
+  syntax match texMathDelim contained "\\lceil\>"
+  syntax match texMathDelim contained "\\lfloor\>"
+  syntax match texMathDelim contained "\\lgroup\>"
+  syntax match texMathDelim contained "\\lmoustache\>"
+  syntax match texMathDelim contained "\\rangle\>"
+  syntax match texMathDelim contained "\\rbrace\>"
+  syntax match texMathDelim contained "\\rceil\>"
+  syntax match texMathDelim contained "\\rfloor\>"
+  syntax match texMathDelim contained "\\rgroup\>"
+  syntax match texMathDelim contained "\\rmoustache\>"
+  syntax match texMathDelim contained "\\uparrow\>"
+  syntax match texMathDelim contained "\\Uparrow\>"
+  syntax match texMathDelim contained "\\updownarrow\>"
+  syntax match texMathDelim contained "\\Updownarrow\>"
 
   if !g:vimtex_syntax_conceal.math_delimiters || &encoding !=# 'utf-8'
     return
@@ -1747,8 +1802,8 @@ function! s:match_math_delims() abort " {{{1
   syntax match texMathDelim contained conceal cchar=| "\\right|"
   syntax match texMathDelim contained conceal cchar=‖ "\\left\\|"
   syntax match texMathDelim contained conceal cchar=‖ "\\right\\|"
-  syntax match texMathDelim contained conceal cchar=| "\\[lr]vert"
-  syntax match texMathDelim contained conceal cchar=‖ "\\[lr]Vert"
+  syntax match texMathDelim contained conceal cchar=| "\\[lr]vert\>"
+  syntax match texMathDelim contained conceal cchar=‖ "\\[lr]Vert\>"
   syntax match texMathDelim contained conceal cchar=( "\\left("
   syntax match texMathDelim contained conceal cchar=) "\\right)"
   syntax match texMathDelim contained conceal cchar=[ "\\left\["
@@ -1759,39 +1814,39 @@ function! s:match_math_delims() abort " {{{1
   syntax match texMathDelim contained conceal cchar=⟩ '\\rangle\>'
   syntax match texMathDelim contained conceal cchar=⌊ "\\lfloor\>"
   syntax match texMathDelim contained conceal cchar=⌋ "\\rfloor\>"
-  syntax match texMathDelim contained conceal cchar=< "\\\%([bB]igg\?l\|left\)<"
-  syntax match texMathDelim contained conceal cchar=> "\\\%([bB]igg\?r\|right\)>"
-  syntax match texMathDelim contained conceal cchar=( "\\\%([bB]igg\?l\|left\)("
-  syntax match texMathDelim contained conceal cchar=) "\\\%([bB]igg\?r\|right\))"
-  syntax match texMathDelim contained conceal cchar=[ "\\\%([bB]igg\?l\|left\)\["
-  syntax match texMathDelim contained conceal cchar=] "\\\%([bB]igg\?r\|right\)]"
-  syntax match texMathDelim contained conceal cchar={ "\\\%([bB]igg\?l\|left\)\\{"
-  syntax match texMathDelim contained conceal cchar=} "\\\%([bB]igg\?r\|right\)\\}"
-  syntax match texMathDelim contained conceal cchar=[ "\\\%([bB]igg\?l\|left\)\\lbrace"
-  syntax match texMathDelim contained conceal cchar=⌈ "\\\%([bB]igg\?l\|left\)\\lceil"
-  syntax match texMathDelim contained conceal cchar=⌊ "\\\%([bB]igg\?l\|left\)\\lfloor"
-  syntax match texMathDelim contained conceal cchar=⌊ "\\\%([bB]igg\?l\|left\)\\lgroup"
-  syntax match texMathDelim contained conceal cchar=⎛ "\\\%([bB]igg\?l\|left\)\\lmoustache"
-  syntax match texMathDelim contained conceal cchar=] "\\\%([bB]igg\?r\|right\)\\rbrace"
-  syntax match texMathDelim contained conceal cchar=⌉ "\\\%([bB]igg\?r\|right\)\\rceil"
-  syntax match texMathDelim contained conceal cchar=⌋ "\\\%([bB]igg\?r\|right\)\\rfloor"
-  syntax match texMathDelim contained conceal cchar=⌋ "\\\%([bB]igg\?r\|right\)\\rgroup"
-  syntax match texMathDelim contained conceal cchar=⎞ "\\\%([bB]igg\?r\|right\)\\rmoustache"
+  syntax match texMathDelim contained conceal cchar=< "\\\%([bB]igg\?l\?\|left\)<"
+  syntax match texMathDelim contained conceal cchar=> "\\\%([bB]igg\?r\?\|right\)>"
+  syntax match texMathDelim contained conceal cchar=( "\\\%([bB]igg\?l\?\|left\)("
+  syntax match texMathDelim contained conceal cchar=) "\\\%([bB]igg\?r\?\|right\))"
+  syntax match texMathDelim contained conceal cchar=[ "\\\%([bB]igg\?l\?\|left\)\["
+  syntax match texMathDelim contained conceal cchar=] "\\\%([bB]igg\?r\?\|right\)]"
+  syntax match texMathDelim contained conceal cchar={ "\\\%([bB]igg\?l\?\|left\)\\{"
+  syntax match texMathDelim contained conceal cchar=} "\\\%([bB]igg\?r\?\|right\)\\}"
+  syntax match texMathDelim contained conceal cchar=[ "\\\%([bB]igg\?l\?\|left\)\\lbrace\>"
+  syntax match texMathDelim contained conceal cchar=⌈ "\\\%([bB]igg\?l\?\|left\)\\lceil\>"
+  syntax match texMathDelim contained conceal cchar=⌊ "\\\%([bB]igg\?l\?\|left\)\\lfloor\>"
+  syntax match texMathDelim contained conceal cchar=⌊ "\\\%([bB]igg\?l\?\|left\)\\lgroup\>"
+  syntax match texMathDelim contained conceal cchar=⎛ "\\\%([bB]igg\?l\?\|left\)\\lmoustache\>"
+  syntax match texMathDelim contained conceal cchar=] "\\\%([bB]igg\?r\?\|right\)\\rbrace\>"
+  syntax match texMathDelim contained conceal cchar=⌉ "\\\%([bB]igg\?r\?\|right\)\\rceil\>"
+  syntax match texMathDelim contained conceal cchar=⌋ "\\\%([bB]igg\?r\?\|right\)\\rfloor\>"
+  syntax match texMathDelim contained conceal cchar=⌋ "\\\%([bB]igg\?r\?\|right\)\\rgroup\>"
+  syntax match texMathDelim contained conceal cchar=⎞ "\\\%([bB]igg\?r\?\|right\)\\rmoustache\>"
   syntax match texMathDelim contained conceal cchar=| "\\\%([bB]igg\?[lr]\?\|left\|right\)|"
   syntax match texMathDelim contained conceal cchar=‖ "\\\%([bB]igg\?[lr]\?\|left\|right\)\\|"
-  syntax match texMathDelim contained conceal cchar=↓ "\\\%([bB]igg\?[lr]\?\|left\|right\)\\downarrow"
-  syntax match texMathDelim contained conceal cchar=⇓ "\\\%([bB]igg\?[lr]\?\|left\|right\)\\Downarrow"
-  syntax match texMathDelim contained conceal cchar=↑ "\\\%([bB]igg\?[lr]\?\|left\|right\)\\uparrow"
-  syntax match texMathDelim contained conceal cchar=↑ "\\\%([bB]igg\?[lr]\?\|left\|right\)\\Uparrow"
-  syntax match texMathDelim contained conceal cchar=↕ "\\\%([bB]igg\?[lr]\?\|left\|right\)\\updownarrow"
-  syntax match texMathDelim contained conceal cchar=⇕ "\\\%([bB]igg\?[lr]\?\|left\|right\)\\Updownarrow"
+  syntax match texMathDelim contained conceal cchar=↓ "\\\%([bB]igg\?[lr]\?\|left\|right\)\\downarrow\>"
+  syntax match texMathDelim contained conceal cchar=⇓ "\\\%([bB]igg\?[lr]\?\|left\|right\)\\Downarrow\>"
+  syntax match texMathDelim contained conceal cchar=↑ "\\\%([bB]igg\?[lr]\?\|left\|right\)\\uparrow\>"
+  syntax match texMathDelim contained conceal cchar=↑ "\\\%([bB]igg\?[lr]\?\|left\|right\)\\Uparrow\>"
+  syntax match texMathDelim contained conceal cchar=↕ "\\\%([bB]igg\?[lr]\?\|left\|right\)\\updownarrow\>"
+  syntax match texMathDelim contained conceal cchar=⇕ "\\\%([bB]igg\?[lr]\?\|left\|right\)\\Updownarrow\>"
 
   if &ambiwidth ==# 'double'
-    syntax match texMathDelim contained conceal cchar=〈 "\\\%([bB]igg\?l\|left\)\\langle"
-    syntax match texMathDelim contained conceal cchar=〉 "\\\%([bB]igg\?r\|right\)\\rangle"
+    syntax match texMathDelim contained conceal cchar=〈 "\\\%([bB]igg\?l\?\|left\)\\langle\>"
+    syntax match texMathDelim contained conceal cchar=〉 "\\\%([bB]igg\?r\?\|right\)\\rangle\>"
   else
-    syntax match texMathDelim contained conceal cchar=⟨ "\\\%([bB]igg\?l\|left\)\\langle"
-    syntax match texMathDelim contained conceal cchar=⟩ "\\\%([bB]igg\?r\|right\)\\rangle"
+    syntax match texMathDelim contained conceal cchar=⟨ "\\\%([bB]igg\?l\?\|left\)\\langle\>"
+    syntax match texMathDelim contained conceal cchar=⟩ "\\\%([bB]igg\?r\?\|right\)\\rangle\>"
   endif
 endfunction
 
@@ -1801,29 +1856,15 @@ function! s:match_conceal_accents() abort " {{{1
   for [l:chr; l:targets] in s:map_accents
     for i in range(13)
       let l:target = l:targets[i]
-      let l:accent = s:key_accents[i]
       if empty(l:target) | continue | endif
 
-      let l:re = l:accent . '\%(\s*{' . l:chr . '}\|'
-            \ . (l:accent =~# '\a' ? '\s\+' : '\s*') . l:chr . '\)'
-      execute 'syntax match texCmdAccent /' . l:re . '/ conceal cchar=' . l:target
+      let l:accent = s:key_accents[i]
+      let l:re_ws = l:accent =~# '^\\\\\a$' ? '\s\+' : '\s*'
+      let l:re = l:accent . '\%(\s*{' . l:chr . '}\|' . l:re_ws . l:chr . '\)'
+      execute 'syntax match texCmdAccent /' . l:re . '/'
+            \ 'conceal cchar=' . l:target
     endfor
   endfor
-
-  syntax match texCmdAccent   "\\aa\>" conceal cchar=å
-  syntax match texCmdAccent   "\\AA\>" conceal cchar=Å
-  syntax match texCmdAccent   "\\o\>"  conceal cchar=ø
-  syntax match texCmdAccent   "\\O\>"  conceal cchar=Ø
-  syntax match texCmdLigature "\\AE\>" conceal cchar=Æ
-  syntax match texCmdLigature "\\ae\>" conceal cchar=æ
-  syntax match texCmdLigature "\\oe\>" conceal cchar=œ
-  syntax match texCmdLigature "\\OE\>" conceal cchar=Œ
-  syntax match texCmdLigature "\\ss\>" conceal cchar=ß
-  syntax match texLigature    "--"     conceal cchar=–
-  syntax match texLigature    "---"    conceal cchar=—
-  syntax match texLigature    "``"     conceal cchar=“
-  syntax match texLigature    "''"     conceal cchar=”
-  syntax match texLigature    ",,"     conceal cchar=„
 endfunction
 
 let s:key_accents = [
@@ -1831,7 +1872,7 @@ let s:key_accents = [
       \ '\\''',
       \ '\\^',
       \ '\\"',
-      \ '\\\~',
+      \ '\\\%(\~\|tilde\)',
       \ '\\\.',
       \ '\\=',
       \ '\\c',
@@ -1884,10 +1925,37 @@ let s:map_accents = [
       \]
 
 " }}}1
+function! s:match_conceal_ligatures() abort " {{{1
+  syntax match texCmdLigature "\\lq\>" conceal cchar=‘
+  syntax match texCmdLigature "\\rq\>" conceal cchar=′
+  syntax match texCmdLigature "\\i\>"  conceal cchar=ı
+  syntax match texCmdLigature "\\j\>"  conceal cchar=ȷ
+  syntax match texCmdLigature "\\AE\>" conceal cchar=Æ
+  syntax match texCmdLigature "\\ae\>" conceal cchar=æ
+  syntax match texCmdLigature "\\oe\>" conceal cchar=œ
+  syntax match texCmdLigature "\\OE\>" conceal cchar=Œ
+  syntax match texCmdLigature "\\o\>"  conceal cchar=ø
+  syntax match texCmdLigature "\\O\>"  conceal cchar=Ø
+  syntax match texCmdLigature "\\aa\>" conceal cchar=å
+  syntax match texCmdLigature "\\AA\>" conceal cchar=Å
+  syntax match texCmdLigature "\\ss\>" conceal cchar=ß
+  syntax match texLigature    "--"     conceal cchar=–
+  syntax match texLigature    "---"    conceal cchar=—
+  syntax match texLigature    "`"      conceal cchar=‘
+  syntax match texLigature    "'"      conceal cchar=’
+  syntax match texLigature    "``"     conceal cchar=“
+  syntax match texLigature    "''"     conceal cchar=”
+  syntax match texLigature    ",,"     conceal cchar=„
+  syntax match texLigature    "!`"     conceal cchar=¡
+  syntax match texLigature    "?`"     conceal cchar=¿
+endfunction
+
+" }}}1
 function! s:match_conceal_fancy() abort " {{{1
   syntax match texCmd         '\\colon\>' conceal cchar=:
-  syntax match texCmd         '\\dots'    conceal cchar=…
-  syntax match texCmd         '\\ldots'   conceal cchar=…
+  syntax match texCmd         '\\dots\>'  conceal cchar=…
+  syntax match texCmd         '\\slash\>' conceal cchar=/
+  syntax match texCmd         '\\ldots\>' conceal cchar=…
   syntax match texCmdItem     '\\item\>'  conceal cchar=○
   syntax match texTabularChar '\\\\'      conceal cchar=⏎
 endfunction

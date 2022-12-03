@@ -339,7 +339,8 @@ class YouCompleteMeTest( TestCase ):
 
 
   @YouCompleteMeInstance( { 'g:ycm_extra_conf_vim_data': [ 'tempname()' ] } )
-  def test_YouCompleteMe_DebugInfo_ServerRunning( self, ycm ):
+  @patch( 'ycm.vimsupport.VimSupportsPopupWindows', return_value=True )
+  def test_YouCompleteMe_DebugInfo_ServerRunning( self, ycm, *args ):
     dir_of_script = os.path.dirname( os.path.abspath( __file__ ) )
     buf_name = os.path.join( dir_of_script, 'testdata', 'test.cpp' )
     extra_conf = os.path.join( dir_of_script, 'testdata', '.ycm_extra_conf.py' )
@@ -367,7 +368,8 @@ class YouCompleteMeTest( TestCase ):
 
 
   @YouCompleteMeInstance()
-  def test_YouCompleteMe_DebugInfo_ServerNotRunning( self, ycm ):
+  @patch( 'ycm.vimsupport.VimSupportsPopupWindows', return_value=True )
+  def test_YouCompleteMe_DebugInfo_ServerNotRunning( self, ycm, *args ):
     StopServer( ycm )
 
     current_buffer = VimBuffer( 'current_buffer' )
@@ -531,7 +533,7 @@ class YouCompleteMeTest( TestCase ):
     with MockVimBuffers( [ current_buffer ], [ current_buffer ] ):
       with patch( 'ycm.client.base_request._JsonFromFuture',
                   return_value = { 'message': 'some_detailed_diagnostic' } ):
-        ycm.ShowDetailedDiagnostic(),
+        ycm.ShowDetailedDiagnostic( False ),
 
     post_vim_message.assert_has_exact_calls( [
       call( 'some_detailed_diagnostic', warning = False )
@@ -547,7 +549,7 @@ class YouCompleteMeTest( TestCase ):
     with MockVimBuffers( [ current_buffer ], [ current_buffer ] ):
       with patch( 'ycm.client.base_request._JsonFromFuture',
                   side_effect = RuntimeError( 'Some exception' ) ):
-        ycm.ShowDetailedDiagnostic(),
+        ycm.ShowDetailedDiagnostic( False ),
 
     post_vim_message.assert_has_exact_calls( [
       call( 'Some exception', truncate = False )

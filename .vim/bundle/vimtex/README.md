@@ -17,13 +17,17 @@ filetype and syntax plugin for LaTeX files.
 - [Installation](#installation)
 - [Configuration](#configuration)
 - [Quick Start](#quick-start)
+  - [Tutorial](#tutorial)
+  - [Documentation](#documentation)
 - [Screenshots](#screenshots)
+  - [GIFs](#gifs)
 - [Features](#features)
 - [Other relevant plugins](#other-relevant-plugins)
   - [Linting and syntax checking](#linting-and-syntax-checking)
   - [Snippets and templates](#snippets-and-templates)
   - [Tag navigation](#tag-navigation)
 - [Alternatives](#alternatives)
+- [VimTeX on the Web](#vimtex-on-the-web)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -41,17 +45,28 @@ Users are encouraged to read the requirements section in the
 
 ## Installation
 
-If you use [vim-plug](https://github.com/junegunn/vim-plug), then add the
-following line to your `vimrc` file:
+If you use [vim-plug](https://github.com/junegunn/vim-plug) or [packer.nvim](https://github.com/wbthomason/packer.nvim), then add one of the
+following lines to your `vimrc` file, correspondingly:
 
 ```vim
+" vim-plug
 Plug 'lervag/vimtex'
+
+" packer.nvim
+use 'lervag/vimtex'
 ```
 
 Or use some other plugin manager:
 * [vundle](https://github.com/gmarik/vundle)
 * [neobundle](https://github.com/Shougo/neobundle.vim)
 * [pathogen](https://github.com/tpope/vim-pathogen)
+
+**Note**: Many plugin managers provide mechanisms to lazy load plugins. Please
+    don't use this for VimTeX! VimTeX is already lazy loaded by virtue of being
+    a filetype plugin and by using the autoload mechanisms. There is therefore
+    nothing to gain by forcing VimTeX to lazily load through the plugin
+    manager. In fact, doing it will _break_ the inverse-search mechanism, which
+    relies on a _global_ command (`:VimtexInverseSearch`).
 
 If you use the new package feature in Vim, please note the following:
 * Make sure to read and understand the package feature: `:help package`!
@@ -111,43 +126,60 @@ let maplocalleader = ","
 
 ## Quick Start
 
-The following is a video guide for how to use VimTeX (credits:
+The following video shows how to use VimTeX's main features (credits:
 [@DustyTopology](https://github.com/DustyTopology) from
 [#1946](https://github.com/lervag/vimtex/issues/1946#issuecomment-846345095)).
-It displays some of the main features. The example LaTeX file used in the video
-is available under
+The example LaTeX file used in the video is available under
 [`test/example-quick-start/main.tex`](test/example-quick-start/main.tex) and it
 may be instructive to copy the file and play with it to learn some of these
 basic functions.
 
 https://user-images.githubusercontent.com/66584581/119213849-1b7d4080-ba77-11eb-8a31-7ff7b9a4a020.mp4
 
-Users are of course _strongly_
-encouraged to read the documentation, at least the introduction, to learn about
-the different features and possibilities provided by VimTeX (see [`:h
-vimtex`](doc/vimtex.txt)).
-Advanced users and potential developers may also be interested in reading the
-supplementary documents:
+### Tutorial
+
+Both new and experienced users are also encouraged to read the third-party
+article [Getting started with the VimTeX
+plugin](https://www.ejmastnak.com/tutorials/vim-latex/vimtex.html). The
+article covers VimTeX's core features and contains plenty of examples and
+high-resolution animations intended to help new users ease into working with
+the plugin.
+
+### Documentation
+
+Users are of course _strongly_ encouraged to read the documentation, at least
+the introduction, to learn about the different features and possibilities
+provided by VimTeX (see [`:h vimtex`](doc/vimtex.txt)). Advanced users and
+potential developers may also be interested in reading the supplementary
+documents:
 
 * [CONTRIBUTING.md](CONTRIBUTING.md)
 * [DOCUMENTATION.md](DOCUMENTATION.md)
 
 ## Screenshots
 
-Here is an example of the syntax highlighting provided by VimTeX. The example
-is made by @DustyTopology with the
+Here is an example of the syntax highlighting provided by VimTeX. The conceal
+feature is active on the right-hand side split. The example is made by
+@DustyTopology with the
 [vim-colors-xcode](https://github.com/arzg/vim-colors-xcode) colorscheme with
 some minor adjustments [described
 here](https://github.com/lervag/vimtex/issues/1946#issuecomment-843674951).
 
 ![Syntax example](https://github.com/lervag/vimtex-media/blob/main/img/syntax.png)
 
+### GIFs
+
+See the file [VISUALS.md](VISUALS.md) for screencast-style GIFs demonstrating
+VimTeX's core motions, text-editing commands, and text objects.
+
 ## Features
 
 Below is a list of features offered by VimTeX. The features are accessible as
 both commands and mappings. The mappings generally start with `<localleader>l`,
-but if desired one can disable default mappings to define custom mappings. All
-features are enabled by default, but each feature may be disabled if desired.
+but if desired one can disable default mappings to define custom mappings. 
+Nearly all features are enabled by default, but each feature may be disabled if
+desired. The two exceptions are code folding and formating, which are disabled
+by default and must be manually enabled.
 
 - Document compilation with
   [latexmk](http://users.phys.psu.edu/~collins/software/latexmk-jcc/),
@@ -174,7 +206,7 @@ features are enabled by default, but each feature may be disabled if desired.
   - glossary entries
   - package and documentclass names based on available `.sty` and `.cls` files
 - Document navigation through
-  - table of content
+  - table of contents
   - table of labels
   - proper settings for `'include'`, `'includexpr'`, `'suffixesadd'` and
     `'define'`, which among other things
@@ -182,29 +214,31 @@ features are enabled by default, but each feature may be disabled if desired.
     - give enhanced `gf` command
 - Easy access to (online) documentation of packages
 - Word count (through `texcount`)
-- Motions
+- Motions ([link to GIF demonstrations](VISUALS.md#motion-commands))
   - Move between section boundaries with `[[`, `[]`, `][`, and `]]`
   - Move between environment boundaries with `[m`, `[M`, `]m`, and `]M`
   - Move between math environment boundaries with `[n`, `[N`, `]n`, and `]N`
   - Move between frame environment boundaries with `[r`, `[R`, `]r`, and `]R`
   - Move between comment boundaries with `[*` and `]*`
   - Move between matching delimiters with `%`
-- Text objects
+- Text objects ([link to GIF demonstrations](VISUALS.md#text-objects))
   - `ic ac` Commands
   - `id ad` Delimiters
   - `ie ae` LaTeX environments
-  - `i$ a$` Inline math structures
+  - `i$ a$` Math environments
   - `iP aP` Sections
   - `im am` Items
-- Other mappings
+- Other mappings ([link to GIF demonstrations](VISUALS.md#deleting-surrounding-latex-content))
   - Delete the surrounding command, environment or delimiter with
     `dsc`/`dse`/`ds$`/`dsd`
   - Change the surrounding command, environment or delimiter with
     `csc`/`cse`/`cs$`/`csd`
   - Toggle starred command or environment with `tsc`/`tse`
+  - Toggle inline and displaymath with `ts$`
   - Toggle between e.g. `()` and `\left(\right)` with `tsd`
   - Toggle (inline) fractions with `tsf`
   - Close the current environment/delimiter in insert mode with `]]`
+  - Add `\left ... \right)` modifiers to surrounding delimiters with `<F8>`
   - Insert new command with `<F7>`
   - Convenient insert mode mappings for faster typing of e.g. maths
   - Context menu on citations (e.g. `\cite{...}`) mapped to `<cr>`
@@ -226,7 +260,7 @@ See the documentation for a thorough introduction to VimTeX (e.g. `:h vimtex`).
 Even though VimTeX provides a lot of nice features for working with LaTeX
 documents, there are several features that are better served by other,
 dedicated plugins. For a more detailed listing of these, please see [`:help
-vimtex-non-features`](doc/vimtex.txt#L156).
+vimtex-and-friends`](doc/vimtex.txt#L508).
 
 ### Linting and syntax checking
 
@@ -295,3 +329,16 @@ plugins for Vim, see:
 * [What are the differences between LaTeX plugins](http://vi.stackexchange.com/questions/2047/what-are-the-differences-between-latex-plugins)
 * [List of LaTeX editors (not only Vim)](https://tex.stackexchange.com/questions/339/latex-editors-ides)
 
+## VimTeX on the Web
+
+VimTeX users may be interested in reading
+[@ejmastnak](https://github.com/ejmastnak)'s series on [Efficient LaTeX Using
+(Neo)Vim](https://www.ejmastnak.com/tutorials/vim-latex/intro.html), which
+covers all the fundamentals of setting up a VimTeX-based LaTeX workflow,
+including usage of the VimTeX plugin, compilation, setting up forward and
+inverse search with a PDF reader, and Vimscript tools for user-specific
+customization.
+
+If you know of (or create) other up-to-date, high-quality guides to VimTeX's
+features on third-party websites, feel free to submit a pull request updating
+this section.
