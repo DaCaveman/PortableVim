@@ -1115,3 +1115,5 @@ autocmd ColorScheme * if g:colors_name != "solarized" | silent! aunmenu Solarize
 "
 " vim:foldmethod=marker:foldlevel=0
 "}}}
+
+highlight BadWhitespace     guibg=#dc322f     guifg=#dc322f
