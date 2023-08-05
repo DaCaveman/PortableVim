@@ -62,13 +62,13 @@ Like line-based `:diffget`/`:diffput` and `do`/`dp` vim commands, you can use
 unit, where the cursor is on, between 2 buffers and undo its difference. Those
 keymaps are configurable in your vimrc and so on.
 
-#### Find diff lines incrementally
-When the diff mode begins, this plugin locally finds the `hl-DiffChange` lines
-in the limited range of the current visible and its upper/lower lines of a
-window. And each time a cursor is moved on to other ranges upon scrolling or
-searching, the new `hl-DiffChange` lines will be incrementally found in that
-range. Which means, independently of the file size, the number of lines to be
-found and then the time consumed are always constant.
+#### Check diff lines locally
+When the diff mode begins, this plugin locally checks the `hl-DiffChange`
+lines in the limited range of the current visible and its upper/lower lines of
+a window. And each time a cursor is moved on to another range upon scrolling
+or searching, those diff lines will be checked in that range. Which means,
+independently of the file size, the number of lines to be checked and then the
+time consumed are always constant.
 
 #### Tab page individual
 This plugin works on each tab page individually. You can use a tab page
@@ -87,10 +87,12 @@ to read.
 To find the exact differences, this plugin uses "An O(NP) Sequence Comparison
 Algorithm" developed by S.Wu, et al., which always finds an optimum sequence.
 But it takes time to check a long and dissimilar line. To improve the
-performance, the algorithm is also implemented in Vim9 script.
+performance, the algorithm is also implemented in Vim9 script. In addition,
+if available in nvim, this plugin uses a builtin Lua `vim.diff()` function and
+makes it much faster.
 
 #### See also
-For a flexible and partial diff comparison, see
+For a range and area selectable partial comparison, see
 [spotdiff.vim](https://github.com/rickhowe/spotdiff.vim) plugin.
 
 ### Options

@@ -30,6 +30,7 @@ let g:ycm_neovim_ns_id = s:is_neovim ? nvim_create_namespace( 'ycm_id' ) : -1
 " This needs to be called outside of a function
 let s:script_folder_path = escape( expand( '<sfile>:p:h' ), '\' )
 let s:force_semantic = 0
+let s:force_manual = 0
 let s:completion_stopped = 0
 " These two variables are initialized in youcompleteme#Enable.
 let s:default_completion = {}
@@ -224,9 +225,9 @@ function! youcompleteme#Enable()
           \ } )
   endif
 
-  nnoremap <silent> <Plug>(YCMFindSymbolInWorkspace)
+  nnoremap <silent> <plug>(YCMFindSymbolInWorkspace)
         \ :call youcompleteme#finder#FindSymbol( 'workspace' )<CR>
-  nnoremap <silent> <Plug>(YCMFindSymbolInDocument)
+  nnoremap <silent> <plug>(YCMFindSymbolInDocument)
         \ :call youcompleteme#finder#FindSymbol( 'document' )<CR>
 endfunction
 
@@ -639,6 +640,9 @@ endfunction
 
 
 function! s:EnableCompletingInCurrentBuffer()
+  if !g:ycm_auto_trigger
+    call s:SetCompleteFunc()
+  endif
   let b:ycm_completing = 1
 endfunction
 
@@ -818,24 +822,29 @@ function! s:OnFileReadyToParse( ... )
           \ s:pollers.file_parse_response.wait_milliseconds,
           \ function( 's:PollFileParseResponse' ) )
 
-    call s:UpdateSemanticHighlighting( bufnr() )
+    call s:UpdateSemanticHighlighting( bufnr(), 1, 0 )
     call s:UpdateInlayHints( bufnr(), 1, 0 )
 
   endif
 endfunction
 
-function! s:UpdateSemanticHighlighting( bufnr ) abort
+function! s:UpdateSemanticHighlighting( bufnr, force, redraw_anyway ) abort
   call s:StopPoller( s:pollers.semantic_highlighting )
   if !s:is_neovim &&
         \ get( b:, 'ycm_enable_semantic_highlighting',
         \   get( g:, 'ycm_enable_semantic_highlighting', 0 ) )
 
-    py3 ycm_state.Buffer(
-          \ int( vim.eval( "a:bufnr" ) ) ).SendSemanticTokensRequest()
-    let s:pollers.semantic_highlighting.id = timer_start(
-          \ s:pollers.semantic_highlighting.wait_milliseconds,
-          \ function( 's:PollSemanticHighlighting', [ a:bufnr ] ) )
-
+    if py3eval(
+        \ 'ycm_state.Buffer( int( vim.eval( "a:bufnr" ) ) ).'
+        \ . 'semantic_highlighting.Request( '
+        \ . '  force=int( vim.eval( "a:force" ) ) )' )
+      let s:pollers.semantic_highlighting.id = timer_start(
+            \ s:pollers.semantic_highlighting.wait_milliseconds,
+            \ function( 's:PollSemanticHighlighting', [ a:bufnr ] ) )
+    elseif a:redraw_anyway
+      py3 ycm_state.Buffer(
+            \ int( vim.eval( "a:bufnr" ) ) ).semantic_highlighting.Refresh()
+    endif
   endif
 endfunction
 
@@ -846,7 +855,7 @@ function s:ShouldUseInlayHintsNow( bufnr )
         \   get( g:, 'ycm_enable_inlay_hints', 0 ) )
 endfunction
 
-function! s:UpdateInlayHints( bufnr, force, redraw_anyway )
+function! s:UpdateInlayHints( bufnr, force, redraw_anyway ) abort
   call s:StopPoller( s:pollers.inlay_hints )
 
   if s:ShouldUseInlayHintsNow( a:bufnr )
@@ -879,36 +888,29 @@ function! s:PollFileParseResponse( ... )
 endfunction
 
 
-function! s:PollSemanticHighlighting( bufnr, ... )
-  if !py3eval(
-      \ 'ycm_state.Buffer( int( vim.eval( "a:bufnr" ) ) )'
-      \ . '.SemanticTokensRequestReady()' )
-    let s:pollers.semantic_highlighting.id = timer_start(
-          \ s:pollers.semantic_highlighting.wait_milliseconds,
-          \ function( 's:PollSemanticHighlighting', [ a:bufnr ] ) )
-  elseif !py3eval(
-      \ 'ycm_state.Buffer( int( vim.eval( "a:bufnr" ) ) )'
-      \ . '.UpdateSemanticTokens()' )
-    let s:pollers.semantic_highlighting.id = timer_start(
-          \ s:pollers.semantic_highlighting.wait_milliseconds,
-          \ function( 's:PollSemanticHighlighting', [ a:bufnr ] ) )
-  endif
+function! s:PollSemanticHighlighting( bufnr, ... ) abort
+  return s:PollScrollable( a:bufnr, 'semantic_highlighting' )
 endfunction
 
 
-function! s:PollInlayHints( bufnr, ... )
+function! s:PollInlayHints( bufnr, ... ) abort
+  return s:PollScrollable( a:bufnr, 'inlay_hints' )
+endfunction
+
+
+function! s:PollScrollable( bufnr, scrollable, ... ) abort
   if !py3eval(
       \ 'ycm_state.Buffer( int( vim.eval( "a:bufnr" ) ) )'
-      \ . '.inlay_hints.Ready()' )
-    let s:pollers.inlay_hints.id = timer_start(
-          \ s:pollers.inlay_hints.wait_milliseconds,
-          \ function( 's:PollInlayHints', [ a:bufnr ] ) )
+      \ . '.' . a:scrollable . '.Ready()' )
+    let s:pollers[a:scrollable].id = timer_start(
+          \ s:pollers[a:scrollable].wait_milliseconds,
+          \ function( 's:PollScrollable', [ a:bufnr, a:scrollable ] ) )
   elseif ! py3eval(
       \ 'ycm_state.Buffer( int( vim.eval( "a:bufnr" ) ) )'
-      \ . '.inlay_hints.Update()' )
-    let s:pollers.inlay_hints.id = timer_start(
-          \ s:pollers.inlay_hints.wait_milliseconds,
-          \ function( 's:PollInlayHints', [ a:bufnr ] ) )
+      \ . '.' . a:scrollable . '.Update()' )
+    let s:pollers[ a:scrollable ].id = timer_start(
+          \ s:pollers[ a:scrollable ].wait_milliseconds,
+          \ function( 's:PollScrollable', [ a:bufnr, a:scrollable ] ) )
   endif
 endfunction
 
@@ -969,7 +971,7 @@ function! s:OnWinScrolled()
     return
   endif
   let bufnr = winbufnr( expand( '<afile>' ) )
-  call s:UpdateSemanticHighlighting( bufnr )
+  call s:UpdateSemanticHighlighting( bufnr, 0, 0 )
   call s:UpdateInlayHints( bufnr, 0, 0 )
 endfunction
 
@@ -1010,10 +1012,11 @@ function! s:OnTextChangedInsertMode( popup_is_visible )
   " CurrentIdentifierFinished check.
   if s:force_semantic && !py3eval( 'base.LastEnteredCharIsIdentifierChar()' )
     let s:force_semantic = 0
+    let s:force_manual = 0
   endif
 
   if get( b:, 'ycm_completing' ) &&
-        \ ( g:ycm_auto_trigger || s:force_semantic ) &&
+        \ ( g:ycm_auto_trigger || s:force_semantic || s:force_manual ) &&
         \ !s:InsideCommentOrStringAndShouldStop() &&
         \ !s:OnBlankLine()
     call s:RequestCompletion()
@@ -1030,6 +1033,7 @@ endfunction
 
 function! s:OnInsertEnter() abort
   let s:current_cursor_position = getpos( '.' )
+  py3 ycm_state.OnInsertEnter()
   if s:ShouldUseInlayHintsNow( bufnr() ) &&
         \ get(g:, 'ycm_clear_inlay_hints_in_insert_mode' )
     py3 ycm_state.CurrentBuffer().inlay_hints.Clear()
@@ -1045,6 +1049,7 @@ function! s:OnInsertLeave()
 
   call s:StopPoller( s:pollers.completion )
   let s:force_semantic = 0
+  let s:force_manual = 0
   let s:completion = s:default_completion
 
   call s:OnFileReadyToParse()
@@ -1085,6 +1090,7 @@ function! s:IdentifierFinishedOperations()
   endif
   py3 ycm_state.OnCurrentIdentifierFinished()
   let s:force_semantic = 0
+  let s:force_manual = 0
   let s:completion = s:default_completion
 endfunction
 
@@ -1149,8 +1155,37 @@ function! s:RequestCompletion()
   endif
 endfunction
 
+function! s:ManuallyRequestCompletion() abort
+  " Since this function is called in a mapping through the expression register
+  " <C-R>=, its return value is inserted (see :h c_CTRL-R_=). We don't want to
+  " insert anything so we return an empty string.
 
-function! s:RequestSemanticCompletion()
+  if !s:AllowedToCompleteInCurrentBuffer()
+    return ''
+  endif
+
+  if get( b:, 'ycm_completing' )
+    let s:force_manual = 0
+    call s:RequestCompletion()
+    call s:RequestSignatureHelp()
+  endif
+
+  return ''
+endfunction
+
+function! s:SetCompleteFunc()
+   let &completefunc = 'youcompleteme#CompleteFunc'
+endfunction
+
+function! youcompleteme#CompleteFunc( findstart, base ) abort
+  call s:ManuallyRequestCompletion()
+  " Cancel, but silently stay in completion mode.
+  return -2
+endfunction
+
+inoremap <silent> <plug>(YCMComplete) <C-r>=<SID>ManuallyRequestCompletion()<CR>
+
+function! s:RequestSemanticCompletion() abort
   if !s:AllowedToCompleteInCurrentBuffer()
     return ''
   endif
@@ -1613,18 +1648,22 @@ if exists( '*popup_atcursor' )
       let wrap = 1
     endif
 
-    let s:cursorhold_popup = popup_atcursor(
-          \   lines,
-          \   {
-          \     'col': col,
-          \     'wrap': wrap,
-          \     'padding': [ 0, 1, 0, 1 ],
-          \     'moved': 'word',
-          \     'maxwidth': &columns,
-          \     'close': 'click',
-          \     'fixed': 0,
-          \   }
-          \ )
+    let popup_params = {
+          \ 'col': col,
+          \ 'wrap': wrap,
+          \ 'padding': [ 0, 1, 0, 1 ],
+          \ 'moved': 'word',
+          \ 'maxwidth': &columns,
+          \ 'close': 'click',
+          \ 'fixed': 0,
+          \ }
+
+    if has_key( b:ycm_hover, 'popup_params' )
+      let popup_params = extend( copy( popup_params ),
+                               \ b:ycm_hover.popup_params )
+    endif
+
+    let s:cursorhold_popup = popup_atcursor( lines, popup_params )
     call setbufvar( winbufnr( s:cursorhold_popup ),
                             \ '&syntax',
                             \ b:ycm_hover.syntax )
@@ -1682,7 +1721,7 @@ function! s:ToggleInlayHints()
   endif
 endfunction
 
-silent! nnoremap <silent> <Plug>(YCMToggleInlayHints)
+silent! nnoremap <silent> <plug>(YCMToggleInlayHints)
       \ <cmd>call <SID>ToggleInlayHints()<CR>
 
 " This is basic vim plugin boilerplate

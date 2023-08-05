@@ -3,7 +3,6 @@
 " Maintainer:   Ethan Schoonover
 " License:      OSI approved MIT license
 
-"let g:loaded_togglebg = 1
 if exists("g:loaded_togglebg")
     finish
 endif
@@ -52,5 +51,5 @@ function! togglebg#map(mapActivation)
 endfunction
 
 if !exists("no_plugin_maps") && !hasmapto('<Plug>ToggleBackground')
-    call togglebg#map("<C-F2>")
+    call togglebg#map("<F5>")
 endif

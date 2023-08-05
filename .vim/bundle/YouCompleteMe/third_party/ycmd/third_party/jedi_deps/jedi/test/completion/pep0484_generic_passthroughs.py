@@ -19,16 +19,16 @@ TTypeAny = TypeVar('TTypeAny', bound=Type[Any])
 TCallable = TypeVar('TCallable', bound=Callable[..., Any])
 
 untyped_list_str = ['abc', 'def']
-typed_list_str = ['abc', 'def']  # type: List[str]
+typed_list_str: List[str] = ['abc', 'def']
 
 untyped_tuple_str = ('abc',)
-typed_tuple_str = ('abc',)  # type: Tuple[str]
+typed_tuple_str: Tuple[str] = ('abc',)
 
 untyped_tuple_str_int = ('abc', 4)
-typed_tuple_str_int = ('abc', 4)  # type: Tuple[str, int]
+typed_tuple_str_int: Tuple[str, int] = ('abc', 4)
 
-variadic_tuple_str = ('abc',)  # type: Tuple[str, ...]
-variadic_tuple_str_int = ('abc', 4)  # type: Tuple[Union[str, int], ...]
+variadic_tuple_str: Tuple[str, ...] = ('abc',)
+variadic_tuple_str_int: Tuple[Union[str, int], ...] = ('abc', 4)
 
 
 def untyped_passthrough(x):
@@ -57,6 +57,16 @@ def typed_bound_generic_passthrough(x: TList) -> TList:
     x
 
     return x
+
+# Forward references are more likely with custom types, however this aims to
+# test just the handling of the quoted type rather than any other part of the
+# machinery.
+def typed_quoted_return_generic_passthrough(x: T) -> 'List[T]':
+    return [x]
+
+def typed_quoted_input_generic_passthrough(x: 'Tuple[T]') -> T:
+    x
+    return x[0]
 
 
 for a in untyped_passthrough(untyped_list_str):
@@ -144,6 +154,23 @@ for p in typed_bound_generic_passthrough(untyped_list_str):
 for q in typed_bound_generic_passthrough(typed_list_str):
     #? str()
     q
+
+
+for r in typed_quoted_return_generic_passthrough("something"):
+    #? str()
+    r
+
+for s in typed_quoted_return_generic_passthrough(42):
+    #? int()
+    s
+
+
+#? str()
+typed_quoted_input_generic_passthrough(("something",))
+
+#? int()
+typed_quoted_input_generic_passthrough((42,))
+
 
 
 class CustomList(List):

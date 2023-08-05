@@ -1,3 +1,5 @@
+from typing import Generator
+
 import pytest
 from pytest import fixture
 
@@ -63,6 +65,11 @@ def lala(my_fixture):
 #! 15 ['def my_fixture']
 def lala(my_fixture):
     pass
+
+# overriding types of a fixture should be possible
+def test_x(my_yield_fixture: str):
+    #? str()
+    my_yield_fixture
 
 # -----------------
 # completion
@@ -132,9 +139,6 @@ def test_p(monkeypatch):
 #? ['capsysbinary']
 def test_p(capsysbin
 
-#? ['tmpdir', 'tmpdir_factory']
-def test_p(tmpdi
-
 
 def close_parens():
     pass
@@ -164,3 +168,40 @@ def test_inheritance_fixture(inheritance_fixture, caplog):
 @pytest.fixture
 def caplog(caplog):
     yield caplog
+
+# -----------------
+# Generator with annotation
+# -----------------
+
+@pytest.fixture
+def with_annot() -> Generator[float, None, None]:
+    pass
+
+def test_with_annot(inheritance_fixture, with_annot):
+    #? float()
+    with_annot
+
+# -----------------
+# pytest external plugins
+# -----------------
+
+#? ['admin_user', 'admin_client']
+def test_z(admin
+
+#! 15 ['def admin_client']
+def test_p(admin_client):
+    #? ['login', 'logout']
+    admin_client.log
+
+@pytest.fixture
+@some_decorator
+#? ['admin_user']
+def bla(admin_u
+    return
+
+@pytest.fixture
+@some_decorator
+#! 12 ['def admin_user']
+def bla(admin_user):
+    pass
+

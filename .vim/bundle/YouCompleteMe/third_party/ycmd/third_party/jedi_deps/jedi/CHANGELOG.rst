@@ -6,6 +6,23 @@ Changelog
 Unreleased
 ++++++++++
 
+0.18.2 (2022-11-21)
++++++++++++++++++++
+
+- Added dataclass-equivalent for attrs.define
+- Find fixtures from Pytest entrypoints; Examples of pytest plugins installed
+  like this are pytest-django, pytest-sugar and Faker.
+- Fixed Project.search, when a venv was involved, which is why for example
+  `:Pyimport django.db` did not work in some cases in jedi-vim.
+- And many smaller bugfixes
+
+0.18.1 (2021-11-17)
++++++++++++++++++++
+
+- Implict namespaces are now a separate types in ``Name().type``
+- Python 3.10 support
+- Mostly bugfixes
+
 0.18.0 (2020-12-25)
 +++++++++++++++++++
 

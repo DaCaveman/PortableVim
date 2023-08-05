@@ -1,156 +1,124 @@
-" Kuka Robot Language indent file for Vim
+" Vim indent file
 " Language: Kuka Robot Language
-" Maintainer: Patrick Meiser-Knosowski <knosowski@graeff.de>
-" Version: 2.0.0
-" Last Change: 07. Apr 2019
+" Maintainer: Patrick Meiser-Knosowski <knosowski@graeffrobotics.de>
+" Version: 2.3.0
+" Last Change: 15. Apr 2022
 " Credits: Based on indent/vim.vim
-"
-" Suggestions of improvement are very welcome. Please email me!
-"
-" Known bugs: See ../doc/krl.txt
-"
-
-if exists("g:krlNoSpaceIndent")
-  if !exists("g:krlSpaceIndent")
-    let g:krlSpaceIndent = !g:krlNoSpaceIndent
-  endif
-  unlet g:krlNoSpaceIndent
-endif
 
 " Only load this indent file when no other was loaded.
-if exists("b:did_indent") || get(g:,'krlNoIndent',0)
+if exists("b:did_indent")
   finish
 endif
 let b:did_indent = 1
 
 setlocal nolisp
+setlocal nocindent
 setlocal nosmartindent
 setlocal autoindent
 setlocal indentexpr=GetKrlIndent()
-setlocal indentkeys=!^F,o,O,0=~end,0=~else,0=~case,0=~default,0=~until,0=~continue
-let b:undo_indent="setlocal lisp< si< ai< inde< indk<"
+setlocal indentkeys=!^F,o,O,=~end,0=~else,0=~case,0=~default,0=~until,0=~continue,=~part
+let b:undo_indent = "setlocal lisp< cindent< smartindent< autoindent< indentexpr< indentkeys<"
 
 if get(g:,'krlSpaceIndent',1)
-  " use spaces for indention, 2 is enough, more or even tabs are looking awful
-  " on the teach pendant
+  " Use spaces, not tabs, for indention, 2 is enough. 
+  " More or even tabs would waste valuable space on the teach pendant.
   setlocal softtabstop=2
   setlocal shiftwidth=2
   setlocal expandtab
   setlocal shiftround
-  let b:undo_indent = b:undo_indent." sts< sw< et< sr<"
+  let b:undo_indent = b:undo_indent." softtabstop< shiftwidth< expandtab< shiftround<"
 endif
 
 " Only define the function once.
 if exists("*GetKrlIndent")
   finish
 endif
-
-let s:keepcpo= &cpo
+let s:keepcpo = &cpo
 set cpo&vim
 
-function GetKrlIndent()
-  let ignorecase_save = &ignorecase
-  try
-    let &ignorecase = 0
-    return s:GetKrlIndentIntern()
-  finally
-    let &ignorecase = ignorecase_save
-  endtry
-endfunction
+function GetKrlIndent() abort
 
-function s:GetKrlIndentIntern()
-  let l:currentLine = getline(v:lnum)
-  if  l:currentLine =~ '\c\v^;(\s*(end)?fold>)@!' && !get(g:,'krlCommentIndent',0)
-    " if first char is ; line comment, do not change indent
-    " this may be usefull if code is commented out at the first column
+  let currentLine = getline(v:lnum)
+  if  currentLine =~? '\v^;(\s*(end)?fold>)@!' && !get(g:, 'krlCommentIndent', 0)
+    " If current line has a ; in column 1 and is no fold, keep zero indent.
+    " This may be usefull if code is commented out at the first column.
     return 0
   endif
+
   " Find a non-blank line above the current line.
-  let l:preNoneBlankLineNum = s:KrlPreNoneBlank(v:lnum - 1)
-  if  l:preNoneBlankLineNum == 0
+  let preNoneBlankLineNum = s:KrlPreNoneBlank(v:lnum - 1)
+  if  preNoneBlankLineNum == 0
     " At the start of the file use zero indent.
     return 0
   endif
-  let l:preNoneBlankLine = getline(l:preNoneBlankLineNum)
-  let l:ind = indent(l:preNoneBlankLineNum)
 
-  " Add a 'shiftwidth' 
-  let l:i = match(l:preNoneBlankLine, '\c\v^\s*
-        \(
-          \(global\s+)?def
-          \(\s+\w
-          \|fct\s+\w
-          \|dat\s+\w
-          \)
-        \|if\W+
-        \|spline>
-        \|else\s*(;.*)?$
-        \|case\W+
-        \|default\s*(;.*)?$
-        \|for\W+
-        \|while\W+
-        \|repeat\s*(;.*)?$
-        \|loop\s*(;.*)?$
-        \)'
-      \)
-  if l:i >= 0
-    let l:ind += &sw
+  let preNoneBlankLine = getline(preNoneBlankLineNum)
+  let ind = indent(preNoneBlankLineNum)
+
+  " Define add 'shiftwidth' pattern
+  let addShiftwidthPattern =           '\v^\s*('
+  if get(g:, 'krlIndentBetweenDef', 1)
+    let addShiftwidthPattern .=                '(global\s+)?def(fct|dat)?\s+\$?\w'
+    let addShiftwidthPattern .=                '|'
+  endif
+  let   addShiftwidthPattern .=                'if>|while>|for>|loop>'
+  let   addShiftwidthPattern .=                '|else>'
+  let   addShiftwidthPattern .=                '|case>|default>'
+  let   addShiftwidthPattern .=                '|repeat>'
+  let   addShiftwidthPattern .=                '|skip>|(ptp_)?spline>'
+  let   addShiftwidthPattern .=                '|time_block\s+(start|part)>'
+  let   addShiftwidthPattern .=                '|const_vel\s+start>'
+  let   addShiftwidthPattern .=              ')'
+
+  " Define Subtract 'shiftwidth' pattern
+  let subtractShiftwidthPattern =      '\v^\s*('
+  if get(g:, 'krlIndentBetweenDef', 1)
+    let subtractShiftwidthPattern .=           'end(fct|dat)?>'
+    let subtractShiftwidthPattern .=           '|'
+  endif
+  let   subtractShiftwidthPattern .=           'end(if|while|for|loop)>'
+  let   subtractShiftwidthPattern .=           '|else>'
+  let   subtractShiftwidthPattern .=           '|case>|default>|endswitch>'
+  let   subtractShiftwidthPattern .=           '|until>'
+  let   subtractShiftwidthPattern .=           '|end(skip|spline)>'
+  let   subtractShiftwidthPattern .=           '|time_block\s+(part|end)>'
+  let   subtractShiftwidthPattern .=           '|const_vel\s+end>'
+  let   subtractShiftwidthPattern .=         ')'
+
+  " Add shiftwidth
+  if preNoneBlankLine =~? addShiftwidthPattern
+    let ind += &sw
   endif
 
-  " Subtract a 'shiftwidth'
-  if l:currentLine =~ '\c\v^\s*
-        \(end(|fct|dat|if|spline|switch|for|while|loop)\s*(;.*)?$
-        \|else\s*(;.*)?$
-        \|case>
-        \|default\s*(;.*)?$
-        \|until>
-        \)'
-    let l:ind = l:ind - &sw
+  " Subtract shiftwidth
+  if currentLine =~? subtractShiftwidthPattern
+    let ind = ind - &sw
   endif
 
-  " first case after a switch
-  if l:currentLine =~ '\c\v^\s*case>' && l:preNoneBlankLine =~ '\c\v^\s*switch>'
-    let l:ind = l:ind + &sw
+  " First case after a switch gets the indent of the switch.
+  if currentLine =~? '\v^\s*case>'  
+        \&& preNoneBlankLine =~? '\v^\s*switch>'
+    let ind = ind + &sw
   endif
 
-  " keep continue-instructions the same indention like the following
-  " instruction if its end*, else, case, default or until
-  if getline(v:lnum) =~ '\c\v^\s*continue>' && getline(v:lnum + 1) =~ '\c\v^\s*
-        \(end(|fct|dat|if|switch|for|while|loop)\s*(;.*)?$
-        \|else\s*(;.*)?$
-        \|case>
-        \|default\s*(;.*)?$
-        \|until>
-        \)'
-    let l:ind = l:ind - &sw
+  " align continue with the following instruction
+  if currentLine =~? '\v^\s*continue>'  
+        \&& getline(v:lnum + 1) =~? subtractShiftwidthPattern
+    let ind = ind - &sw
   endif
 
-  return l:ind
+  return ind
 endfunction
 
-function s:KrlPreNoneBlank(lnum)
-  " this function handles &foo-headers, comments and continue-instructions like blank lines
-  let nPreNoneBlank = prevnonblank(a:lnum)
-  " At the start of the file use zero indent.
-  if nPreNoneBlank == 0
-    return 0
-  endif
+" This function works almost like prevnonblank() but handles &-headers,
+" comments and continue instructions like blank lines
+function s:KrlPreNoneBlank(lnum) abort
 
-  let l:i=1
-  while l:i>=1 && nPreNoneBlank>=0
-    if getline(nPreNoneBlank) =~ '\v\c^\s*
-          \(\&\w\+.*$
-          \|(;.*)?$
-          \|continue\s*(;.*)?$
-          \)'
-      let nPreNoneBlank = prevnonblank(nPreNoneBlank - 1)
-      " At the start of the file use zero indent.
-      if nPreNoneBlank == 0
-        return 0
-      endif
-    else
-      let l:i=0
-    endif
+  let nPreNoneBlank = prevnonblank(a:lnum)
+
+  while nPreNoneBlank > 0 && getline(nPreNoneBlank) =~? '\v^\s*(\&\w\+|;|continue>)'
+    " Previouse none blank line irrelevant. Look further aback.
+    let nPreNoneBlank = prevnonblank(nPreNoneBlank - 1)
   endwhile
 
   return nPreNoneBlank

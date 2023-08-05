@@ -1,22 +1,38 @@
 " Kuka Robot Language file type detection for Vim
 " Language: Kuka Robot Language
-" Maintainer: Patrick Meiser-Knosowski <knosowski@graeff.de>
-" Version: 2.0.1
-" Last Change: 18. Feb 2019
+" Maintainer: Patrick Meiser-Knosowski <knosowski@graeffrobotics.de>
+" Version: 3.0.0
+" Last Change: 17. Apr 2022
 " Credits:
 "
-" Suggestions of improvement are very welcome. Please email me!
-"
 
-let s:keepcpo= &cpo
+let s:keepcpo = &cpo
 set cpo&vim
 
-augroup krlftdetect
-  au!  BufNewFile *.src,*.Src,*.SRC,*.sub,*.Sub,*.SUB,*.dat,*.Dat,*.DAT setf krl
-  au!  BufRead *.src,*.Src,*.SRC,*.sub,*.Sub,*.SUB,*.dat,*.Dat,*.DAT setf krl
-  "au!  BufRead *.src,*.Src,*.SRC,*.sub,*.Sub,*.SUB if getline(nextnonblank(1)) =~ '\v\c^\s*(\&\w+|(global\s+)?def(fct)?\s+[$]?\w+)' | setf krl | endif
-  "au!  BufRead *.dat,*.Dat,*.DAT if getline(nextnonblank(1)) =~ '\v\c^\s*(\&\w+|defdat\s+[$]?\w+)' | setf krl | endif
-augroup END
+" patterns used with \v\c
+let s:krlHeader        = '\&\w+'
+let s:krlDefDefinition = '(global\s+)?def(fct)?\s+'
+let s:krlDatDefinition = 'defdat\s+[$]?\w+'
+
+" no augroup! see :h ftdetect
+au!  BufNewFile *.src\c,*.sub\c,*.dat\c
+      \  setf krl
+au!  BufRead *.src\c
+      \  if getline(nextnonblank(1)) =~ '\v\c^\s*(' . s:krlHeader . '|' . s:krlDefDefinition . ')' 
+      \|   setf krl 
+      \| elseif exists("g:filetype_src")
+      \|   exe "setf " . g:filetype_src
+      \| endif
+au!  BufRead *.sub\c
+      \  if getline(nextnonblank(1)) =~ '\v\c^\s*(' . s:krlHeader . '|' . s:krlDefDefinition . ')' 
+      \|   setf krl 
+      \| endif
+au!  BufRead *.dat\c
+      \  if getline(nextnonblank(1)) =~ '\v\c^\s*(' . s:krlHeader . '|' . s:krlDatDefinition . ')' 
+      \|   setf krl 
+      \| elseif exists("g:filetype_dat")
+      \|   exe "setf " . g:filetype_dat
+      \| endif
 
 let &cpo = s:keepcpo
 unlet s:keepcpo

@@ -34,6 +34,7 @@ import subprocess
 DIR_OF_THIS_SCRIPT = p.abspath( p.dirname( __file__ ) )
 DIR_OF_THIRD_PARTY = p.join( DIR_OF_THIS_SCRIPT, 'third_party' )
 
+
 def GetStandardLibraryIndexInSysPath( sys_path ):
   for index, path in enumerate( sys_path ):
     if p.isfile( p.join( path, 'os.py' ) ):

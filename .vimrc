@@ -76,7 +76,7 @@ call vundle#end()            " required
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
 "____________________________________________________________________________________________________________________
-call pathogen#infect()
+"call pathogen#infect()
 "Start-Up
 "
 syntax off                  " undo what plug#begin() did to syntax
@@ -163,7 +163,8 @@ set laststatus=2 " always show the status line
 set tabpagemax=1000
 set showtabline=1
 set showmatch
-set viminfo=%,<800,'10,/50,:100,h,f0,n~/.vim/.viminfo
+"set viminfo=%,<800,'10,/50,:100,h,f0,n~/.vim/.viminfo
+set viminfo=<800,'10,/50,:100,h,f0,n~/.vim/.viminfo
 "           | |    |   |   |    | |  + viminfo file path
 "           | |    |   |   |    | + file marks 0-9,A-Z 0=NOT stored
 "           | |    |   |   |    + disable 'hlsearch' loading viminfo
@@ -444,7 +445,7 @@ let g:gruvbox_bold=1
 "
 let g:ycm_autoclose_preview_window_after_completion=1
 set completeopt+=popup
-let g:ycm_python_interpreter_path = ''
+let g:ycm_python_interpreter_path = ''    "$HOME . '\.vim\PortablePython382x64\App\Python'
 let g:ycm_python_sys_path = []
 let g:ycm_extra_conf_vim_data = [
   \  'g:ycm_python_interpreter_path',
@@ -580,19 +581,26 @@ au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
 au BufWritePre *.py,*.pyw,*.c,*.h %s/\s\+$//e
 
 let g:pytGoDefinitionKeyMap=1 " gd shows the declaration of curr. word
-let $PATH .= ';' . $HOME . '\.vim\PortablePython382x64\App\Python;' .
-				  \$HOME . '\.vim\PortablePython382x64\App\Scripts;' . 
-				  \$HOME . '\.vim\MiKTeX\texmfs\install\miktex\bin\;' . 
-				  \$HOME . '\.vim\Perl\perl\bin\;' . 
-				  \$HOME . '\.vim\SumatraPDF\;' . 
-				  \'C:\rtools40\usr\bin;C:\rtools40\mingw64\bin;'
-let $PYTHONPATH .= $HOME . '\.vim\PortablePython382x64\App\Python;' .
-				  \$HOME . '\.vim\PortablePython382x64\App\Python\Lib;' .
-				  \$HOME . '\.vim\PortablePython382x64\App\Python\DLLs;' .
-				  \$HOME . '\.vim\PortablePython382x64\App\Python\include;' .
-				  \$HOME . '\.vim\PortablePython382x64\App\Python\libs;' .
-				  \$HOME . '\.vim\PortablePython382x64\App\Python\Scripts;' .
-				  \$HOME . '\.vim\PortablePython382x64\App\Python\Tools;'
+"let $PATH .= ';' . $HOME . '\.vim\Python311\;' .
+              "\$HOME . '\.vim\MiKTeX\texmfs\install\miktex\bin\;' . 
+              "\$HOME . '\.vim\Perl\perl\bin\;' . 
+              "\$HOME . '\.vim\SumatraPDF\;' . 
+              "\'C:\rtools40\usr\bin;C:\rtools40\mingw64\bin;'
+let tempPath = $PATH
+let $PATH = $HOME . '\.vim\Python311;' .
+              \$HOME . '\.vim\Python311\Scripts;' . 
+              \$HOME . '\.vim\MiKTeX\texmfs\install\miktex\bin\;' . 
+              \$HOME . '\.vim\Perl\perl\bin\;' . 
+              \$HOME . '\.vim\SumatraPDF\;' . 
+              \'C:\rtools40\usr\bin;C:\rtools40\mingw64\bin;' .
+              \tempPath
+let $PYTHONPATH .= $HOME . '\.vim\Python311;'
+              "\$HOME . '\.vim\Python311\Lib\;' .
+              "\$HOME . '\.vim\Python311\DLLs;' .
+              "\$HOME . '\.vim\Python311\include;' .
+              "\$HOME . '\.vim\Python311\libs;' .
+              "\$HOME . '\.vim\Python311\Scripts;' .
+              "\$HOME . '\.vim\Python311\Tools;'
 "____________________________________________________________________________________________________________________
 "VimTex
 "

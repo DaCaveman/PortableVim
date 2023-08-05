@@ -21,13 +21,13 @@ let s:compiler = vimtex#compiler#_template#new({
 function! s:compiler.__check_requirements() abort dict " {{{1
   if !executable('tectonic')
     call vimtex#log#warning('tectonic is not executable!')
-    throw 'VimTeX: Requirements not met'
+    let self.enabled = v:false
   endif
 
   for l:opt in self.options
     if l:opt =~# '^-\%(o\|-outdir\)'
       call vimtex#log#warning("Don't use --outdir or -o in compiler options,"
-            \ . ' use build_dir instead, see :help g:vimtex_compiler_tectonic'
+            \ . ' use out_dir instead, see :help g:vimtex_compiler_tectonic'
             \ . ' for more details')
       break
     endif
@@ -36,12 +36,12 @@ endfunction
 
 " }}}1
 function! s:compiler.__build_cmd() abort dict " {{{1
-  let l:outdir = !empty(self.build_dir)
-        \ ? self.build_dir
+  let l:outdir = !empty(self.out_dir)
+        \ ? self.out_dir
         \ : fnamemodify(self.state.tex, ':p:h')
 
   return 'tectonic ' . join(self.options)
-        \ . ' --outdir=' . fnameescape(l:outdir)
+        \ . ' --outdir="' . l:outdir . '"'
         \ . ' ' . vimtex#util#shellescape(self.state.base)
 endfunction
 

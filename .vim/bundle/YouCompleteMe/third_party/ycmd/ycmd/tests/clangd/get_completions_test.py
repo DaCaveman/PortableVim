@@ -36,7 +36,8 @@ from ycmd.tests.test_utils import ( BuildRequest,
                                     CompletionEntryMatcher,
                                     WaitUntilCompleterServerReady,
                                     WindowsOnly,
-                                    WithRetry )
+                                    WithRetry,
+                                    NotMac )
 from ycmd.utils import ReadFile
 
 
@@ -155,7 +156,7 @@ class GetCompletionsTest( TestCase ):
 
 
   @WithRetry()
-  @SharedYcmd
+  @IsolatedYcmd()
   def test_GetCompletions_ForcedWithNoTrigger( self, app ):
     RunTest( app, {
       'description': 'semantic completion with force query=DO_SO',
@@ -371,7 +372,7 @@ int main()
 
 
   @WithRetry()
-  @SharedYcmd
+  @IsolatedYcmd( { 'clangd_uses_ycmd_caching': 1 } )
   def test_GetCompletions_ForceSemantic_YcmdCache( self, app ):
     RunTest( app, {
       'description': 'completions are returned when using ycmd filtering',
@@ -396,8 +397,9 @@ int main()
       'expect': {
         'response': requests.codes.ok,
         'data': has_entries( {
-          'completions': contains_exactly( CompletionEntryMatcher( 'foobar' ),
-                                   CompletionEntryMatcher( 'floozar' ) ),
+          'completions': contains_exactly(
+            CompletionEntryMatcher( 'foobar' ),
+            CompletionEntryMatcher( 'floozar' ) ),
           'errors': empty()
         } )
       },
@@ -613,7 +615,7 @@ int main()
         'response': requests.codes.ok,
         'data': has_entries( {
           'completion_start_column': 11,
-          'completions': contains_exactly(
+          'completions': has_items(
             CompletionEntryMatcher( 'a.hpp"' ),
             CompletionEntryMatcher( 'b.hpp"' ),
             CompletionEntryMatcher( 'c.hpp"' ),
@@ -773,6 +775,7 @@ int main()
     } )
 
 
+  @NotMac( "CUDA tests fail in CI" )
   @WithRetry()
   @IsolatedYcmd()
   def test_GetCompletions_cuda( self, app ):
@@ -799,6 +802,7 @@ int main()
     } )
 
 
+  @NotMac( "CUDA tests fail in CI on mac" )
   @IsolatedYcmd( { 'clangd_args': [ '-header-insertion-decorators=1' ] } )
   def test_GetCompletions_WithHeaderInsertionDecorators( self, app ):
     RunTest( app, {

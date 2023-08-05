@@ -48,7 +48,7 @@ elseif !has( 'timers' )
 elseif !has( 'python3_compiled' )
   echohl WarningMsg |
         \ echomsg "YouCompleteMe unavailable: requires Vim compiled with " .
-        \ "Python (3.6.0+) support." |
+        \ "Python (3.8.0+) support." |
         \ echohl None
   call s:restore_cpo()
   finish
@@ -76,10 +76,7 @@ let g:loaded_youcompleteme = 1
 " List of YCM options.
 "
 let g:ycm_filetype_whitelist =
-      \ get( g:, 'ycm_filetype_whitelist', { 
-      \   "*": 1,
-      \   "cSharp": 1
-      \} )
+      \ get( g:, 'ycm_filetype_whitelist', { "*": 1 } )
 
 let g:ycm_filetype_blacklist =
       \ get( g:, 'ycm_filetype_blacklist', {

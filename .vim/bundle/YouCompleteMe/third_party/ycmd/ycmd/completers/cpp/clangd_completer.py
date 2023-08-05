@@ -34,6 +34,10 @@ from ycmd.utils import ( CLANG_RESOURCE_DIR,
                          PathsToAllParentFolders,
                          re )
 
+# NOTES: We currently bundle 14.0.0, but as this is very new, we still allow the
+# use of earlier version to avoid breaking users who have set
+# g:ycm_clangd_binary_path. In general, we should only update this if we make
+# changes to this CLangdCompleter that would not be backward compatible.
 MIN_SUPPORTED_VERSION = ( 13, 0, 0 )
 INCLUDE_REGEX = re.compile(
   '(\\s*#\\s*(?:include|import)\\s*)(?:"[^"]*|<[^>]*)' )
@@ -297,12 +301,36 @@ class ClangdCompleter( language_server_completer.LanguageServerCompleter ):
       'GetDocImprecise': (
         lambda self, request_data, args: self.GetDoc( request_data )
       ),
+      'GoToAlternateFile': (
+        lambda self, request_data, args: self.GoToAlternateFile( request_data )
+      ),
       # To handle the commands below we need extensions to LSP. One way to
       # provide those could be to use workspace/executeCommand requset.
       # 'GetParent': (
       #   lambda self, request_data, args: self.GetType( request_data )
       # )
     }
+
+
+  def GoToAlternateFile( self, request_data ):
+    request_id = self.GetConnection().NextRequestId()
+    uri = lsp.FilePathToUri( request_data[ 'filepath' ] )
+    request  = lsp.BuildRequest( request_id,
+                                 "textDocument/switchSourceHeader",
+                                 { "uri": uri } )
+    response = self.GetConnection().GetResponse(
+            request_id,
+            request,
+            language_server_completer.REQUEST_TIMEOUT_COMMAND )
+    filepath = lsp.UriToFilePath( response[ 'result' ] )
+    # We don't have a specific location in the file we need to go to so
+    # we just arbitrarily choose line 1, column 1. The client can choose
+    # to ignore them.
+    return responses.BuildGoToResponse( filepath,
+                                        1,
+                                        1,
+                                        description = filepath,
+                                        file_only = True )
 
 
   def ShouldCompleteIncludeStatement( self, request_data ):

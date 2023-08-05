@@ -39,8 +39,8 @@ IS_MSYS = 'MSYS' == os.environ.get( 'MSYSTEM' )
 IS_64BIT = sys.maxsize > 2**32
 PY_MAJOR, PY_MINOR = sys.version_info[ 0 : 2 ]
 PY_VERSION = sys.version_info[ 0 : 3 ]
-if PY_VERSION < ( 3, 6, 0 ):
-  sys.exit( 'ycmd requires Python >= 3.6.0; '
+if PY_VERSION < ( 3, 8, 0 ):
+  sys.exit( 'ycmd requires Python >= 3.8.0; '
             'your version of Python is ' + sys.version +
             '\nHint: Try running python3 ' + ' '.join( sys.argv ) )
 
@@ -89,13 +89,13 @@ DYNAMIC_PYTHON_LIBRARY_REGEX = """
   )$
 """
 
-JDTLS_MILESTONE = '1.6.0'
-JDTLS_BUILD_STAMP = '202110200520'
+JDTLS_MILESTONE = '1.14.0'
+JDTLS_BUILD_STAMP = '202207211651'
 JDTLS_SHA256 = (
-  '09650af5c9dc39f0b40981bcdaa2170cbbc5bb003ac90cdb07fbb57381ac47b2'
+  '4978ee235049ecba9c65b180b69ef982eedd2f79dc4fd1781610f17939ecd159'
 )
 
-RUST_TOOLCHAIN = 'nightly-2021-10-26'
+RUST_TOOLCHAIN = 'nightly-2022-08-17'
 RUST_ANALYZER_DIR = p.join( DIR_OF_THIRD_PARTY, 'rust-analyzer' )
 
 BUILD_ERROR_MESSAGE = (
@@ -107,12 +107,70 @@ BUILD_ERROR_MESSAGE = (
   'issue tracker, including the entire output of this script (with --verbose) '
   'and the invocation line used to run it.' )
 
-CLANGD_VERSION = '13.0.0'
+CLANGD_VERSION = '16.0.1'
 CLANGD_BINARIES_ERROR_MESSAGE = (
   'No prebuilt Clang {version} binaries for {platform}. '
   'You\'ll have to compile Clangd {version} from source '
   'or use your system Clangd. '
   'See the YCM docs for details on how to use a custom Clangd.' )
+
+
+def FindLatestMSVC( quiet ):
+  ACCEPTABLE_VERSIONS = [ 17, 16, 15 ]
+
+  VSWHERE_EXE = os.path.join( os.environ[ 'ProgramFiles(x86)' ],
+                             'Microsoft Visual Studio',
+                             'Installer', 'vswhere.exe' )
+
+  if os.path.exists( VSWHERE_EXE ):
+    if not quiet:
+      print( "Calling vswhere -latest -installationVersion" )
+    latest_full_v = subprocess.check_output(
+      [ VSWHERE_EXE, '-latest', '-property', 'installationVersion' ]
+    ).strip().decode()
+    if '.' in latest_full_v:
+      try:
+        latest_v = int( latest_full_v.split( '.' )[ 0 ] )
+      except ValueError:
+        raise ValueError( f"{latest_full_v} is not a version number." )
+
+      if not quiet:
+        print( f'vswhere -latest returned version {latest_full_v}' )
+
+      if latest_v not in ACCEPTABLE_VERSIONS:
+        if latest_v > 17:
+          if not quiet:
+            print( f'MSVC Version {latest_full_v} is newer than expected.' )
+        else:
+          raise ValueError(
+            f'vswhere returned {latest_full_v} which is unexpected.'
+            'Pass --msvc <version> argument.' )
+      return latest_v
+    else:
+      if not quiet:
+        print( f'vswhere returned nothing usable, {latest_full_v}' )
+
+  # Fall back to registry parsing, which works at least until MSVC 2019 (16)
+  # but is likely failing on MSVC 2022 (17)
+  if not quiet:
+    print( "vswhere method failed, falling back to searching the registry" )
+
+  import winreg
+  handle = winreg.ConnectRegistry( None, winreg.HKEY_LOCAL_MACHINE )
+  msvc = None
+  for i in ACCEPTABLE_VERSIONS:
+    if not quiet:
+      print( 'Trying to find '
+             rf'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\VisualStudio\{i}.0' )
+    try:
+      winreg.OpenKey( handle, rf'SOFTWARE\Microsoft\VisualStudio\{i}.0' )
+      if not quiet:
+        print( f"Found MSVC version {i}" )
+      msvc = i
+      break
+    except FileNotFoundError:
+      pass
+  return msvc
 
 
 def RemoveDirectory( directory ):
@@ -157,10 +215,6 @@ def OnMac():
 
 def OnWindows():
   return platform.system() == 'Windows'
-
-
-def OnFreeBSD():
-  return platform.system() == 'FreeBSD'
 
 
 def OnAArch64():
@@ -254,6 +308,7 @@ def _CheckCallQuiet( args, status_message, **kwargs ):
 def _CheckCall( args, **kwargs ):
   exit_message = kwargs.pop( 'exit_message', None )
   stdout = kwargs.get( 'stdout', None )
+  on_failure = kwargs.pop( 'on_failure', None )
 
   try:
     subprocess.check_call( args, **kwargs )
@@ -263,10 +318,12 @@ def _CheckCall( args, **kwargs ):
       print( stdout.read().decode( 'utf-8' ) )
       print( "FAILED" )
 
-    if exit_message:
+    if on_failure:
+      on_failure( exit_message, error.returncode )
+    elif exit_message:
       raise InstallationFailed( exit_message )
-
-    raise InstallationFailed( exit_code = error.returncode )
+    else:
+      raise InstallationFailed( exit_code = error.returncode )
 
 
 def GetGlobalPythonPrefix():
@@ -289,6 +346,7 @@ def GetPossiblePythonLibraryDirectories():
   return [
     sysconfig.get_config_var( 'LIBPL' ),
     p.join( prefix, 'lib64' ),
+    p.join( prefix, 'lib/64' ),
     p.join( prefix, 'lib' )
   ]
 
@@ -405,9 +463,11 @@ def ParseArguments():
   parser.add_argument( '--system-libclang', action = 'store_true',
                        help = 'Use system libclang instead of downloading one '
                        'from llvm.org. NOT RECOMMENDED OR SUPPORTED!' )
-  parser.add_argument( '--msvc', type = int, choices = [ 15, 16, 17 ],
-                       default = 16, help = 'Choose the Microsoft Visual '
-                       'Studio version (default: %(default)s).' )
+  if OnWindows():
+    parser.add_argument( '--msvc', type = int, choices = [ 15, 16, 17 ],
+                          default=None,
+                          help= 'Choose the Microsoft Visual Studio version '
+                                '(default: %(default)s).' )
   parser.add_argument( '--ninja', action = 'store_true',
                        help = 'Use Ninja build system.' )
   parser.add_argument( '--all',
@@ -486,6 +546,11 @@ def ParseArguments():
     # We always want a debug build when running with coverage enabled
     args.enable_debug = True
 
+  if OnWindows() and args.msvc is None:
+    args.msvc = FindLatestMSVC( args.quiet )
+    if args.msvc is None:
+      raise FileNotFoundError( "Could not find a valid MSVC version." )
+
   if args.core_tests:
     os.environ[ 'YCM_TESTRUN' ] = '1'
   elif os.environ.get( 'YCM_TESTRUN' ):
@@ -544,6 +609,8 @@ def GetCmakeArgs( parsed_args ):
   if parsed_args.enable_debug:
     cmake_args.append( '-DCMAKE_BUILD_TYPE=Debug' )
     cmake_args.append( '-DUSE_DEV_FLAGS=ON' )
+  else:
+    cmake_args.append( '-DCMAKE_BUILD_TYPE=Release' )
 
   # coverage is not supported for c++ on MSVC
   if not OnWindows() and parsed_args.enable_coverage:
@@ -863,10 +930,17 @@ def EnableGoCompleter( args ):
   new_env[ 'GOPATH' ] = p.join( DIR_OF_THIS_SCRIPT, 'third_party', 'go' )
   new_env.pop( 'GOROOT', None )
   new_env[ 'GOBIN' ] = p.join( new_env[ 'GOPATH' ], 'bin' )
-  CheckCall( [ go, 'get', 'golang.org/x/tools/gopls@v0.7.1' ],
+
+  gopls = 'golang.org/x/tools/gopls@v0.9.4'
+  CheckCall( [ go, 'install', gopls ],
              env = new_env,
              quiet = args.quiet,
-             status_message = 'Building gopls for go completion' )
+             status_message = 'Building gopls for go completion',
+             on_failure = lambda msg, code: CheckCall(
+               [ go, 'get', gopls ],
+               env = new_env,
+               quiet = args.quiet,
+               status_message = 'Trying legacy get get' ) )
 
 
 def WriteToolchainVersion( version ):
@@ -993,13 +1067,14 @@ def EnableJavaCompleter( switches ):
     sys.stdout.write( 'Installing jdt.ls for Java support...' )
     sys.stdout.flush()
 
-  CheckJavaVersion( 11 )
+  CheckJavaVersion( 17 )
 
   TARGET = p.join( DIR_OF_THIRD_PARTY, 'eclipse.jdt.ls', 'target', )
   REPOSITORY = p.join( TARGET, 'repository' )
   CACHE = p.join( TARGET, 'cache' )
 
-  JDTLS_SERVER_URL_FORMAT = ( 'http://download.eclipse.org/jdtls/snapshots/'
+  JDTLS_SERVER_URL_FORMAT = ( 'https://download.eclipse.org/jdtls/milestones/'
+                              '{jdtls_milestone}/'
                               '{jdtls_package_name}' )
   JDTLS_PACKAGE_NAME_FORMAT = ( 'jdt-language-server-{jdtls_milestone}-'
                                 '{jdtls_build_stamp}.tar.gz' )
@@ -1052,36 +1127,30 @@ def GetClangdTarget():
   if OnWindows():
     return [
       ( 'clangd-{version}-win64',
-        'ca4c9b7c0350a936e921b3e3dc6bdd51a6e905d65eac26b23ede7774158d2305' ),
+        'a0a7b16f6f92d545c84baff5e4bdb56897e955689ffc7407c915cc9d3c69a945' ),
       ( 'clangd-{version}-win32',
-        'a2eab3a4b23b700a16b9ef3e6b5b122438fcf016ade88dd8e10d1f81bde9386e' ) ]
+        '870de4d2a45380eba7c6b6640e2cb870219dd2025ed3bcb58101fd1d17f51d75' ) ]
   if OnMac():
     if OnArm():
       return [
         ( 'clangd-{version}-arm64-apple-darwin',
-          '68be75dbe52893cba5d75486e598e51032f7f67b24c748655aace932152d4421' ) ]
+          'c5b0a314c00e4ce839ce1f4ee1ed46116f839949b7874affa759e10589340948' ) ]
     return [
       ( 'clangd-{version}-x86_64-apple-darwin',
-        'eacbe2d7df6e57e6053f60be798e9f64d3e57556a0b2c58cf0c5599fdf9e793d' ) ]
-  if OnFreeBSD():
-    return [
-      ( 'clangd-{version}-amd64-unknown-freebsd13',
-        'bc6a11bd22251f4996290384baa59854b88537ce9105da2c64d0c70992cc548b' ),
-      ( 'clangd-{version}-i386-unknown-freebsd13',
-        '5ea931ca15b02c667fc3ad4d08266447b8212a83b43c80e644e3989645d63e2b' ) ]
+        '826c85889a1c288418e2c05b91e40158cde06f2e79f1e951d4983de2652a6d2c' ) ]
   if OnAArch64():
     return [
       ( 'clangd-{version}-aarch64-linux-gnu',
-        'f0e9cea316217a40298d48ef81198ac1b41e6686fc7f7631a6ce54dd75a6989e' ) ]
+        '79f4a0a20342479c0e29573cf58810e0daabbf00178cf042edf6e1acb20a8602' ) ]
   if OnArm():
     return [
       None, # First list index is for 64bit archives. ARMv7 is 32bit only.
       ( 'clangd-{version}-armv7a-linux-gnueabihf',
-        'bb52085decd18621f5c15b884dde6a327e3193b69bfc4b3a49c5f4459242e522' ) ]
+        'e521f21021885aaeb94e631949db6c0a65cc9c5c9c708afe4a42a058eb91ebca' ) ]
   if OnX86_64():
     return [
       ( 'clangd-{version}-x86_64-unknown-linux-gnu',
-        '10a64c468d1dd2a384e0e5fd4eb2582fd9f1dfa706b6d2d2bb88fb0fbfc2718d' ) ]
+        '51e69f6f5394ed6990cd7d938c53135ef2b5f8d2da1026eb291ffb3c81968847' ) ]
   raise InstallationFailed(
     CLANGD_BINARIES_ERROR_MESSAGE.format( version = CLANGD_VERSION,
                                           platform = 'this system' ) )
@@ -1216,11 +1285,12 @@ def PrintReRunMessage():
 def Main(): # noqa: C901
   args = ParseArguments()
 
-  if 'SUDO_COMMAND' in os.environ:
+  if not OnWindows() and os.geteuid() == 0:
     if args.force_sudo:
-      print( 'Forcing build with sudo. If it breaks, keep the pieces.' )
+      print( 'Forcing build with root privileges. '
+             'If it breaks, keep the pieces.' )
     else:
-      sys.exit( 'This script should not be run with sudo.' )
+      sys.exit( 'This script should not be run with root privileges.' )
 
   try:
     if not args.skip_build:

@@ -246,8 +246,8 @@ if (has("gui_running") && g:solarized_degrade == 0)
     let s:base02      = "#073642"
     let s:base01      = "#586e75"
     let s:base00      = "#657b83"
-    let s:base1       = "#839496"
-    let s:base0       = "#93a1a1"
+    let s:base0       = "#839496"
+    let s:base1       = "#93a1a1"
     let s:base2       = "#eee8d5"
     let s:base3       = "#fdf6e3"
     let s:yellow      = "#b58900"
@@ -1115,5 +1115,3 @@ autocmd ColorScheme * if g:colors_name != "solarized" | silent! aunmenu Solarize
 "
 " vim:foldmethod=marker:foldlevel=0
 "}}}
-
-highlight BadWhitespace     guibg=#dc322f     guifg=#dc322f

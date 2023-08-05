@@ -37,14 +37,14 @@ class Buffer:
     self._diag_interface = DiagnosticInterface( bufnr, user_options )
     self._open_loclist_on_ycm_diags = user_options[
                                         'open_loclist_on_ycm_diags' ]
-    self._semantic_highlighting = SemanticHighlighting( bufnr, user_options )
-    self.inlay_hints = InlayHints( bufnr, user_options )
+    self.semantic_highlighting = SemanticHighlighting( bufnr )
+    self.inlay_hints = InlayHints( bufnr )
     self.UpdateFromFileTypes( filetypes )
 
 
   def FileParseRequestReady( self, block = False ):
-    return bool( self._parse_request and
-                 ( block or self._parse_request.Done() ) )
+    return ( bool( self._parse_request ) and
+             ( block or self._parse_request.Done() ) )
 
 
   def SendParseRequest( self, extra_data ):
@@ -62,6 +62,10 @@ class Buffer:
     # reparse on buffer visit and changed tick remains the same.
     self._handled_tick -= 1
     self._parse_tick = self._ChangedTick()
+
+
+  def ParseRequestPending( self ):
+    return bool( self._parse_request ) and not self._parse_request.Done()
 
 
   def NeedsReparse( self ):
@@ -127,6 +131,10 @@ class Buffer:
     return self._diag_interface.RefreshDiagnosticsUI()
 
 
+  def ClearDiagnosticsUI( self ):
+    return self._diag_interface.ClearDiagnosticsUI()
+
+
   def DiagnosticsForLine( self, line_number ):
     return self._diag_interface.DiagnosticsForLine( line_number )
 
@@ -135,18 +143,6 @@ class Buffer:
     self._filetypes = filetypes
     # We will set this to true if we ever receive any diagnostics asyncronously.
     self._async_diags = False
-
-
-  def SendSemanticTokensRequest( self ):
-    self._semantic_highlighting.SendRequest()
-
-
-  def SemanticTokensRequestReady( self ):
-    return self._semantic_highlighting.IsResponseReady()
-
-
-  def UpdateSemanticTokens( self ):
-    return self._semantic_highlighting.Update()
 
 
   def _ChangedTick( self ):

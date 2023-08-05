@@ -30,21 +30,21 @@ endfunction
 
 " }}}1
 function! s:viewer.out() dict abort " {{{1
+  let l:out = b:vimtex.compiler.get_file('pdf')
+
   " Copy pdf and synctex files if we use temporary files
   if g:vimtex_view_use_temp_files
-    let l:out = b:vimtex.root . '/' . b:vimtex.name . '_vimtex.pdf'
-
-    if getftime(b:vimtex.out()) > getftime(l:out)
-      call writefile(readfile(b:vimtex.out(), 'b'), l:out, 'b')
+    let l:temp = b:vimtex.root . '/' . b:vimtex.name . '_vimtex.pdf'
+    if getftime(l:out) > getftime(l:temp)
+      call writefile(readfile(l:out, 'b'), l:temp, 'b')
     endif
+    let l:out = l:temp
 
-    let l:old = b:vimtex.get_aux_file('synctex.gz')
+    let l:old = b:vimtex.compiler.get_file('synctex.gz')
     let l:new = fnamemodify(l:out, ':r') . '.synctex.gz'
     if getftime(l:old) > getftime(l:new)
       call rename(l:old, l:new)
     endif
-  else
-    let l:out = b:vimtex.out(1)
   endif
 
   return filereadable(l:out) ? l:out : ''
@@ -83,6 +83,10 @@ function! s:viewer.compiler_callback(outfile) dict abort " {{{1
 
   call self._start(a:outfile)
   let self.started_through_callback = 1
+
+  if exists('#User#VimtexEventView')
+    doautocmd <nomodeline> User VimtexEventView
+  endif
 endfunction
 
 " }}}1
@@ -257,8 +261,8 @@ function! s:viewer.xdo_focus_vim() dict abort " {{{1
     let l:xwinids = filter(reverse(l:output), '!empty(v:val)')
 
     if !empty(l:xwinids)
+      call vimtex#jobs#run('xdotool mousemove --window '. l:xwinids[0] . ' --polar 0 0')
       call vimtex#jobs#run('xdotool windowactivate ' . l:xwinids[0] . ' &')
-      call feedkeys("\<c-l>", 'tn')
       return l:xwinids[0]
       break
     endif

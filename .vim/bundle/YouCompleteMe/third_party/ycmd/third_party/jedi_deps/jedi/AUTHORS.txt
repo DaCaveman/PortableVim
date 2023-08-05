@@ -1,4 +1,4 @@
-﻿Main Authors
+Main Authors
 ------------
 
 - David Halter (@davidhalter) <davidhalter88@gmail.com>
@@ -61,6 +61,8 @@ Code Contributors
 - Vladislav Serebrennikov (@endilll)
 - Andrii Kolomoiets (@muffinmad)
 - Leo Ryu (@Leo-Ryu)
+- Joseph Birkner (@josephbirkner)
+- Márcio Mazza (@marciomazza)
 
 And a few more "anonymous" contributors.
 

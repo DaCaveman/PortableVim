@@ -42,7 +42,7 @@ from ycmd.tests.test_utils import ( BuildRequest,
 
 TYPESHED_PATH = os.path.normpath(
   PathToTestFile( '..', '..', '..', '..', 'third_party', 'jedi_deps', 'jedi',
-    'jedi', 'third_party', 'typeshed', 'stdlib', '2and3', 'builtins.pyi' ) )
+    'jedi', 'third_party', 'typeshed', 'stdlib', '3', 'builtins.pyi' ) )
 
 
 class JediDef:
@@ -154,7 +154,7 @@ class SubcommandsTest( TestCase ):
           { 'request': ( 'basic.py', 1,  4 ),
             'response': ( 'basic.py', 1, 1 ) },
           { 'request': ( 'basic.py', 1, 12 ),
-            'response': ( TYPESHED_PATH, 947, 7 ) },
+            'response': ( TYPESHED_PATH, 742, 7 ) },
           { 'request': ( 'basic.py', 2,  2 ),
             'response': ( 'basic.py', 1, 1 ) },
           # Class
@@ -381,7 +381,7 @@ class SubcommandsTest( TestCase ):
   def test_Subcommands_GoToType( self, app ):
     for test in [
       { 'request':  ( 'basic.py', 2, 1 ),
-        'response': ( TYPESHED_PATH, 947, 7 ) },
+        'response': ( TYPESHED_PATH, 742, 7 ) },
       { 'request':  ( 'basic.py', 8, 1 ),
         'response': ( 'basic.py', 4, 7 ) },
       { 'request':  ( 'basic.py', 3, 1 ),
@@ -777,6 +777,249 @@ class SubcommandsTest( TestCase ):
               'old_file': one,
               'new_file': PathToTestFile( 'rename', 'pfivr.py' )
             } )
+          )
+        } )
+      )
+    } ) )
+
+
+  @SharedYcmd
+  def test_Subcommands_RefactorInline( self, app ):
+    one = PathToTestFile( 'rename', 'one.py' )
+    contents = ReadFile( one )
+
+    command_data = BuildRequest( filepath = one,
+                                 filetype = 'python',
+                                 line_num = 8,
+                                 column_num = 10,
+                                 contents = contents,
+                                 command_arguments = [ 'RefactorInline' ] )
+
+    response = app.post_json( '/run_completer_command',
+                              command_data ).json
+
+    assert_that( response, has_entries( {
+      'fixits': contains_exactly(
+        has_entries( {
+          'text': '',
+          'chunks': contains_exactly(
+            ChunkMatcher( '',
+                          LocationMatcher( one, 8, 10 ),
+                          LocationMatcher( one, 9, 10 ) ),
+            ChunkMatcher( '',
+                          LocationMatcher( one, 9, 61 ),
+                          LocationMatcher( one, 9, 66 ) ),
+            ChunkMatcher( ' + MODULE',
+                          LocationMatcher( one, 9, 74 ),
+                          LocationMatcher( one, 9, 74 ) ),
+            ChunkMatcher( 'SCOPE',
+                          LocationMatcher( one, 9, 75 ),
+                          LocationMatcher( one, 9, 75 ) )
+          )
+        } )
+      )
+    } ) )
+
+
+  @SharedYcmd
+  def test_Subcommands_RefactorExtractVariable_NoNewName( self, app ):
+    filepath = PathToTestFile( 'basic.py' )
+    contents = ReadFile( filepath )
+    command_data = BuildRequest( filepath = filepath,
+                                 filetype = 'python',
+                                 line_num = 3,
+                                 column_num = 10,
+                                 contents = contents,
+                                 command_arguments = [
+                                     'RefactorExtractVariable'
+                                 ] )
+
+    response = app.post_json( '/run_completer_command',
+                              command_data,
+                              expect_errors = True )
+
+    assert_that( response.status_code,
+                 equal_to( requests.codes.internal_server_error ) )
+    assert_that( response.json,
+                 ErrorMatcher( RuntimeError, 'Must specify a new name' ) )
+
+
+  @SharedYcmd
+  def test_Subcommands_RefactorExtractVariable_Same( self, app ):
+    filepath = PathToTestFile( 'basic.py' )
+    contents = ReadFile( filepath )
+
+    command_data = BuildRequest( filepath = filepath,
+                                 filetype = 'python',
+                                 line_num = 3,
+                                 column_num = 14,
+                                 contents = contents,
+                                 command_arguments = [
+                                     'RefactorExtractVariable',
+                                     'c'
+                                 ] )
+
+    response = app.post_json( '/run_completer_command',
+                              command_data ).json
+
+    assert_that( response, has_entries( {
+      'fixits': contains_exactly(
+        has_entries( {
+          'text': '',
+          'chunks': contains_exactly(
+            ChunkMatcher( 'c = 1\n    ',
+                          LocationMatcher( filepath, 3, 5 ),
+                          LocationMatcher( filepath, 3, 5 ) ),
+            ChunkMatcher( 'c',
+                          LocationMatcher( filepath, 3, 14 ),
+                          LocationMatcher( filepath, 3, 15 ) )
+          )
+        } )
+      )
+    } ) )
+
+
+  @SharedYcmd
+  def test_Subcommands_RefactorExtractVariable_Until( self, app ):
+    filepath = PathToTestFile( 'signature_help.py' )
+    contents = ReadFile( filepath )
+
+    command_data = BuildRequest( filepath = filepath,
+                                 filetype = 'python',
+                                 line_num = 14,
+                                 column_num = 24,
+                                 range = {
+                                     'end': {
+                                         'line_num': 14,
+                                         'column_num': 36
+                                     }
+                                 },
+                                 contents = contents,
+                                 command_arguments = [
+                                     'RefactorExtractVariable',
+                                     'c'
+                                 ] )
+
+    response = app.post_json( '/run_completer_command',
+                              command_data ).json
+
+    assert_that( response, has_entries( {
+      'fixits': contains_exactly(
+        has_entries( {
+          'text': '',
+          'chunks': contains_exactly(
+            ChunkMatcher( "c = 'test'.center\n    ",
+                          LocationMatcher( filepath, 14, 5 ),
+                          LocationMatcher( filepath, 14, 5 ) ),
+            ChunkMatcher( '',
+                          LocationMatcher( filepath, 14, 24 ),
+                          LocationMatcher( filepath, 14, 31 ) ),
+            ChunkMatcher( '',
+                          LocationMatcher( filepath, 14, 32 ),
+                          LocationMatcher( filepath, 14, 37 ) ),
+          )
+        } )
+      )
+    } ) )
+  @SharedYcmd
+  def test_Subcommands_RefactorExtractFunction_NoNewName( self, app ):
+    filepath = PathToTestFile( 'basic.py' )
+    contents = ReadFile( filepath )
+    command_data = BuildRequest( filepath = filepath,
+                                 filetype = 'python',
+                                 line_num = 3,
+                                 column_num = 10,
+                                 contents = contents,
+                                 command_arguments = [
+                                     'RefactorExtractFunction',
+                                 ] )
+
+    response = app.post_json( '/run_completer_command',
+                              command_data,
+                              expect_errors = True )
+
+    assert_that( response.status_code,
+                 equal_to( requests.codes.internal_server_error ) )
+    assert_that( response.json,
+                 ErrorMatcher( RuntimeError, 'Must specify a new name' ) )
+
+
+  @SharedYcmd
+  def test_Subcommands_RefactorExtractFunction_Same( self, app ):
+    filepath = PathToTestFile( 'basic.py' )
+    contents = ReadFile( filepath )
+
+    command_data = BuildRequest( filepath = filepath,
+                                 filetype = 'python',
+                                 line_num = 3,
+                                 column_num = 14,
+                                 contents = contents,
+                                 command_arguments = [
+                                     'RefactorExtractFunction',
+                                     'c'
+                                 ] )
+
+    response = app.post_json( '/run_completer_command',
+                              command_data ).json
+
+    assert_that( response, has_entries( {
+      'fixits': contains_exactly(
+        has_entries( {
+          'text': '',
+          'chunks': contains_exactly(
+            ChunkMatcher( '\n  def c(self):\n      return 1\n',
+                          LocationMatcher( filepath, 1, 19 ),
+                          LocationMatcher( filepath, 1, 19 ) ),
+            ChunkMatcher( 'self.c()',
+                          LocationMatcher( filepath, 3, 14 ),
+                          LocationMatcher( filepath, 3, 15 ) )
+          )
+        } )
+      )
+    } ) )
+
+
+  @SharedYcmd
+  def test_Subcommands_RefactorExtractFunction_Until( self, app ):
+    filepath = PathToTestFile( 'signature_help.py' )
+    contents = ReadFile( filepath )
+
+    command_data = BuildRequest( filepath = filepath,
+                                 filetype = 'python',
+                                 line_num = 14,
+                                 column_num = 24,
+                                 range = {
+                                     'end': {
+                                         'line_num': 14,
+                                         'column_num': 36
+                                     }
+                                 },
+                                 contents = contents,
+                                 command_arguments = [
+                                     'RefactorExtractFunction',
+                                     'c'
+                                 ] )
+
+    response = app.post_json( '/run_completer_command',
+                              command_data ).json
+
+    assert_that( response, has_entries( {
+      'fixits': contains_exactly(
+        has_entries( {
+          'text': '',
+          'chunks': contains_exactly(
+            ChunkMatcher( "\n  def c(self):\n      return 'test'.center\n",
+                          LocationMatcher( filepath, 9, 13 ),
+                          LocationMatcher( filepath, 9, 13 ) ),
+            ChunkMatcher( 's',
+                          LocationMatcher( filepath, 14, 24 ),
+                          LocationMatcher( filepath, 14, 26 ) ),
+            ChunkMatcher( 'lf',
+                          LocationMatcher( filepath, 14, 27 ),
+                          LocationMatcher( filepath, 14, 30 ) ),
+            ChunkMatcher( '()',
+                          LocationMatcher( filepath, 14, 32 ),
+                          LocationMatcher( filepath, 14, 37 ) ),
           )
         } )
       )

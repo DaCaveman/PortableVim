@@ -69,8 +69,9 @@ def _BuildLocations( start_line, start_column, end_line, end_column ):
 
 
 class VimsupportTest( TestCase ):
+  @patch( 'ycm.vimsupport.WinIDForWindow', side_effect = range( 1001, 1010 ) )
   @patch( 'vim.eval', new_callable = ExtendedMock )
-  def test_SetLocationListsForBuffer_Current( self, vim_eval ):
+  def test_SetLocationListsForBuffer_Current( self, vim_eval, *args ):
     diagnostics = [ {
       'bufnr': 3,
       'filename': 'some_filename',
@@ -84,10 +85,10 @@ class VimsupportTest( TestCase ):
       vimsupport.SetLocationListsForBuffer( 3, diagnostics )
 
     vim_eval.assert_has_exact_calls( [
-      call( 'setloclist( 1, [], " ", { "title": "ycm_loc", '
+      call( 'setloclist( 1001, [], " ", { "title": "ycm_loc", '
             '"items": [{"bufnr": 3, "filename": "some_filename", "lnum": 5, '
             '"col": 22, "type": "E", "valid": 1}] } )' ),
-      call( 'getloclist( 1, { "nr": "$", "id": 0 } ).id' ),
+      call( 'getloclist( 1001, { "nr": "$", "id": 0 } ).id' ),
     ] )
 
 
@@ -127,8 +128,9 @@ class VimsupportTest( TestCase ):
     vim_eval.assert_not_called()
 
 
+  @patch( 'ycm.vimsupport.WinIDForWindow', side_effect = range( 1001, 1010 ) )
   @patch( 'vim.eval', new_callable = ExtendedMock, side_effect = [ -1, 1 ] )
-  def test_SetLocationListsForBuffer_MultipleWindows( self, vim_eval ):
+  def test_SetLocationListsForBuffer_MultipleWindows( self, vim_eval, *args ):
     diagnostics = [ {
       'bufnr': 3,
       'filename': 'some_filename',
@@ -144,14 +146,15 @@ class VimsupportTest( TestCase ):
       vimsupport.SetLocationListsForBuffer( 1, diagnostics )
 
     vim_eval.assert_has_exact_calls( [
-      call( 'setloclist( 2, [], " ", { "title": "ycm_loc", "items": '
+      call( 'setloclist( 1001, [], " ", { "title": "ycm_loc", "items": '
            f'{ json.dumps( diagnostics ) } }} )' ),
-      call( 'getloclist( 2, { "nr": "$", "id": 0 } ).id' ),
+      call( 'getloclist( 1001, { "nr": "$", "id": 0 } ).id' ),
     ] )
 
 
+  @patch( 'ycm.vimsupport.WinIDForWindow', side_effect = range( 1001, 1010 ) )
   @patch( 'vim.eval', new_callable = ExtendedMock )
-  def test_SetLocationList( self, vim_eval ):
+  def test_SetLocationList( self, vim_eval, *args ):
     diagnostics = [ {
       'bufnr': 3,
       'filename': 'some_filename',
@@ -165,15 +168,16 @@ class VimsupportTest( TestCase ):
       vimsupport.SetLocationList( diagnostics )
 
     vim_eval.assert_has_exact_calls( [
-      call( 'setloclist( 0, [], " ", { "title": "ycm_loc", "items": [{"bufnr": '
-            '3, "filename": "some_filename", "lnum": '
+      call( 'setloclist( 1001, [], " ", { "title": "ycm_loc", "items": '
+            '[{"bufnr": 3, "filename": "some_filename", "lnum": '
             '5, "col": 22, "type": "E", "valid": 1}] } )' ),
-      call( 'getloclist( 0, { "nr": "$", "id": 0 } ).id' ),
+      call( 'getloclist( 1001, { "nr": "$", "id": 0 } ).id' ),
     ] )
 
 
+  @patch( 'ycm.vimsupport.WinIDForWindow', side_effect = range( 1001, 1010 ) )
   @patch( 'vim.eval', new_callable = ExtendedMock )
-  def test_SetLocationList_NotCurrent( self, vim_eval ):
+  def test_SetLocationList_NotCurrent( self, vim_eval, *args ):
     diagnostics = [ {
       'bufnr': 3,
       'filename': 'some_filename',
@@ -192,10 +196,10 @@ class VimsupportTest( TestCase ):
     # This version does not check the current
     # buffer and just sets the current win
     vim_eval.assert_has_exact_calls( [
-      call( 'setloclist( 0, [], " ", { "title": "ycm_loc", "items": [{"bufnr": '
-            '3, "filename": "some_filename", "lnum": 5, "col": 22, '
+      call( 'setloclist( 1001, [], " ", { "title": "ycm_loc", "items": '
+            '[{"bufnr": 3, "filename": "some_filename", "lnum": 5, "col": 22, '
             '"type": "E", "valid": 1}] } )' ),
-      call( 'getloclist( 0, { "nr": "$", "id": 0 } ).id' ),
+      call( 'getloclist( 1001, { "nr": "$", "id": 0 } ).id' ),
     ] )
 
 
@@ -1371,7 +1375,7 @@ class VimsupportTest( TestCase ):
   def test_WriteToPreviewWindow( self, vim_current, vim_command ):
     vim_current.window.options.__getitem__ = MagicMock( return_value = True )
 
-    vimsupport.WriteToPreviewWindow( "test" )
+    vimsupport.WriteToPreviewWindow( "test", '' )
 
     vim_command.assert_has_exact_calls( [
       call( 'silent! pclose!' ),
@@ -1394,11 +1398,39 @@ class VimsupportTest( TestCase ):
       call( 'readonly', True ),
     ], any_order = True )
 
+  @patch( 'vim.command', new_callable=ExtendedMock )
+  @patch( 'vim.current', new_callable=ExtendedMock )
+  def test_WriteToPreviewWindow_Mods( self, vim_current, vim_command ):
+    vim_current.window.options.__getitem__ = MagicMock( return_value = True )
+
+    vimsupport.WriteToPreviewWindow( "test", 'tab leftabove' )
+
+    vim_command.assert_has_exact_calls( [
+      call( 'silent! pclose!' ),
+      call( 'silent! tab leftabove pedit! _TEMP_FILE_' ),
+      call( 'silent! wincmd P' ),
+      call( 'silent! wincmd p' ) ] )
+
+    vim_current.buffer.__setitem__.assert_called_with(
+        slice( None, None, None ), [ 'test' ] )
+
+    vim_current.buffer.options.__setitem__.assert_has_exact_calls( [
+      call( 'modifiable', True ),
+      call( 'readonly', False ),
+      call( 'buftype', 'nofile' ),
+      call( 'bufhidden', 'wipe' ),
+      call( 'buflisted', False ),
+      call( 'swapfile', False ),
+      call( 'modifiable', False ),
+      call( 'modified', False ),
+      call( 'readonly', True ),
+    ], any_order = True )
+
 
   @patch( 'vim.current' )
   def test_WriteToPreviewWindow_MultiLine( self, vim_current ):
     vim_current.window.options.__getitem__ = MagicMock( return_value = True )
-    vimsupport.WriteToPreviewWindow( "test\ntest2" )
+    vimsupport.WriteToPreviewWindow( "test\ntest2", '' )
 
     vim_current.buffer.__setitem__.assert_called_with(
         slice( None, None, None ), [ 'test', 'test2' ] )
@@ -1409,7 +1441,7 @@ class VimsupportTest( TestCase ):
   def test_WriteToPreviewWindow_JumpFail( self, vim_current, vim_command ):
     vim_current.window.options.__getitem__ = MagicMock( return_value = False )
 
-    vimsupport.WriteToPreviewWindow( "test" )
+    vimsupport.WriteToPreviewWindow( "test", '' )
 
     vim_command.assert_has_exact_calls( [
       call( 'silent! pclose!' ),
@@ -1430,7 +1462,7 @@ class VimsupportTest( TestCase ):
 
     vim_current.window.options.__getitem__ = MagicMock( return_value = False )
 
-    vimsupport.WriteToPreviewWindow( "test\ntest2" )
+    vimsupport.WriteToPreviewWindow( "test\ntest2", '' )
 
     vim_command.assert_has_exact_calls( [
       call( 'silent! pclose!' ),
@@ -1729,6 +1761,124 @@ class VimsupportTest( TestCase ):
 
 
   @patch( 'vim.command', new_callable = ExtendedMock )
+  def test_JumpToLocation_SameFile_NoLineCol( self, vim_command ):
+    current_buffer = VimBuffer( 'uni¢𐍈d€' )
+    with MockVimBuffers( [ current_buffer ], [ current_buffer ] ) as vim:
+      vim.current.window.cursor = ( 99, 99 )
+
+      target_name = os.path.realpath( 'uni¢𐍈d€' )
+      vimsupport.JumpToLocation( target_name,
+                                 None,
+                                 None,
+                                 'belowright',
+                                 'same-buffer' )
+
+      assert_that( vim.current.window.cursor, equal_to( ( 99, 99 ) ) )
+      vim_command.assert_has_exact_calls( [
+        call( 'normal! m\'' ),
+      ] )
+
+
+  @patch( 'vim.command', new_callable = ExtendedMock )
+  def test_JumpToLocation_SameFile_NoLine( self, vim_command ):
+    current_buffer = VimBuffer( 'uni¢𐍈d€' )
+    with MockVimBuffers( [ current_buffer ], [ current_buffer ] ) as vim:
+      vim.current.window.cursor = ( 99, 99 )
+
+      target_name = os.path.realpath( 'uni¢𐍈d€' )
+      vimsupport.JumpToLocation( target_name,
+                                 None,
+                                 1,
+                                 'belowright',
+                                 'same-buffer' )
+
+      assert_that( vim.current.window.cursor, equal_to( ( 99, 99 ) ) )
+      vim_command.assert_has_exact_calls( [
+        call( 'normal! m\'' ),
+      ] )
+
+
+  @patch( 'vim.command', new_callable = ExtendedMock )
+  def test_JumpToLocation_SameFile_NoCol( self, vim_command ):
+    current_buffer = VimBuffer( 'uni¢𐍈d€' )
+    with MockVimBuffers( [ current_buffer ], [ current_buffer ] ) as vim:
+      vim.current.window.cursor = ( 99, 99 )
+
+      target_name = os.path.realpath( 'uni¢𐍈d€' )
+      vimsupport.JumpToLocation( target_name,
+                                 1,
+                                 None,
+                                 'belowright',
+                                 'same-buffer' )
+
+      assert_that( vim.current.window.cursor, equal_to( ( 99, 99 ) ) )
+      vim_command.assert_has_exact_calls( [
+        call( 'normal! m\'' ),
+      ] )
+
+
+  @patch( 'vim.command', new_callable = ExtendedMock )
+  def test_JumpToLocation_DifferentFile_NoLineCol( self, vim_command ):
+    current_buffer = VimBuffer( 'uni¢𐍈d€' )
+    with MockVimBuffers( [ current_buffer ], [ current_buffer ] ) as vim:
+      vim.current.window.cursor = ( 99, 99 )
+
+      target_name = os.path.realpath( 'different_uni¢𐍈d€' )
+      vimsupport.JumpToLocation( target_name,
+                                 None,
+                                 None,
+                                 'belowright',
+                                 'same-buffer' )
+
+      assert_that( vim.current.window.cursor, equal_to( ( 99, 99 ) ) )
+      vim_command.assert_has_exact_calls( [
+        call( 'normal! m\'' ),
+        call( f'keepjumps belowright edit { target_name }' ),
+      ] )
+
+
+  @patch( 'vim.command', new_callable = ExtendedMock )
+  def test_JumpToLocation_DifferentFile_NoLine( self, vim_command ):
+    current_buffer = VimBuffer( 'uni¢𐍈d€' )
+    with MockVimBuffers( [ current_buffer ], [ current_buffer ] ) as vim:
+      vim.current.window.cursor = ( 99, 99 )
+
+      target_name = os.path.realpath( 'different_uni¢𐍈d€' )
+      vimsupport.JumpToLocation( target_name,
+                                 None,
+                                 1,
+                                 'belowright',
+                                 'same-buffer' )
+
+      assert_that( vim.current.window.cursor, equal_to( ( 99, 99 ) ) )
+      vim_command.assert_has_exact_calls( [
+        call( 'normal! m\'' ),
+        call( f'keepjumps belowright edit { target_name }' ),
+      ] )
+
+
+  @patch( 'vim.command', new_callable = ExtendedMock )
+  def test_JumpToLocation_DifferentFile_NoCol( self, vim_command ):
+    current_buffer = VimBuffer( 'uni¢𐍈d€' )
+    with MockVimBuffers( [ current_buffer ], [ current_buffer ] ) as vim:
+      vim.current.window.cursor = ( 99, 99 )
+
+      target_name = os.path.realpath( 'different_uni¢𐍈d€' )
+      vimsupport.JumpToLocation( target_name,
+                                 1,
+                                 None,
+                                 'belowright',
+                                 'same-buffer' )
+
+      assert_that( vim.current.window.cursor, equal_to( ( 99, 99 ) ) )
+      vim_command.assert_has_exact_calls( [
+        call( 'normal! m\'' ),
+        call( f'keepjumps belowright edit { target_name }' ),
+      ] )
+
+
+
+  @patch( 'vim.command', new_callable = ExtendedMock )
   def test_JumpToLocation_DifferentFile_SameBuffer_Modified_CannotHide(
       self, vim_command ):
 
@@ -1934,9 +2084,9 @@ class VimsupportTest( TestCase ):
     current_window = MagicMock( buffer = current_buffer )
     different_window = MagicMock( buffer = different_buffer )
     current_tab = MagicMock( windows = [ current_window, different_window ] )
-    with patch( 'vim.tabpages', [ current_tab ] ):
-      with MockVimBuffers( [ current_buffer, different_buffer ],
-                           [ current_buffer ] ) as vim:
+    with MockVimBuffers( [ current_buffer, different_buffer ],
+                         [ current_buffer ] ) as vim:
+      with patch( 'vim.tabpages', [ current_tab ] ):
         vimsupport.JumpToLocation( os.path.realpath( 'different_uni¢𐍈d€' ),
                                    2,
                                    5,
@@ -1984,9 +2134,9 @@ class VimsupportTest( TestCase ):
     current_window = MagicMock( buffer = current_buffer )
     different_window = MagicMock( buffer = different_buffer )
     current_tab = MagicMock( windows = [ current_window, different_window ] )
-    with patch( 'vim.tabpages', [ current_tab ] ):
-      with MockVimBuffers( [ current_buffer, different_buffer ],
-                           [ current_buffer ] ) as vim:
+    with MockVimBuffers( [ current_buffer, different_buffer ],
+                         [ current_buffer ] ) as vim:
+      with patch( 'vim.tabpages', [ current_tab ] ):
         vimsupport.JumpToLocation( os.path.realpath( 'different_uni¢𐍈d€' ),
                                    2,
                                    5,

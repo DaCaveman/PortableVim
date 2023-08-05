@@ -356,8 +356,7 @@ function! s:ExtraMappings() "{{{
   " Jump over next delimiters
   inoremap <expr><buffer> <Plug>delimitMateJumpMany <SID>TriggerAbb()."\<C-R>=delimitMate#JumpMany()\<CR>"
   if !hasmapto('<Plug>delimitMateJumpMany', 'i') && maparg("<C-G>g", 'i') == ''
-    imap <silent> <buffer> <C-Tab> <Plug>delimitMateJumpMany
-    nmap <silent> <buffer> <C-Tab> <Plug>delimitMateJumpMany
+    imap <silent> <buffer> <C-G>g <Plug>delimitMateJumpMany
   endif
 endfunction "}}}
 
@@ -384,6 +383,7 @@ augroup delimitMate
   au!
   " Run on file type change.
   au FileType * call <SID>setup()
+  au FileType python let b:delimitMate_nesting_quotes = ['"', "'"]
 
   " Run on new buffers.
   au BufNewFile,BufRead,BufEnter,CmdwinEnter *
