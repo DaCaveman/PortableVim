@@ -286,6 +286,7 @@ nnoremap								<leader>/		:call GrepBuffers("<C-R><C-W>")<CR>
 nnoremap								<localleader>e	wbve"oyy:%s/\<o\>/o/g
 nnoremap								<localleader>E	wbve"oyy:tabdo %s/\<o\>/o/g
 "au FileType qf nnoremap <buffer> 		<CR> 			<CR>:tabdo :ccl<CR>
+au BufNewFile,BufRead *.c nnoremap 	<M-F11> 		:w!<CR>:!gcc % -o %< && %<<CR><CR>
 autocmd FileType qf nnoremap <buffer> <Enter> <C-W><Enter><C-W>T
 autocmd FileType nerdtree nnoremap <buffer> <localleader>/ :vimgrep //gj **/*.*<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
 au BufNewFile,BufRead *.html nnoremap 	<M-F11> 		:silent !start powershell -NoExit browser-sync start --server --files .<CR>
@@ -443,6 +444,7 @@ let g:gruvbox_bold=1
 "____________________________________________________________________________________________________________________
 " YouCompleteMe
 "
+let g:jedi#use_tabs_not_buffers = 1
 let g:ycm_autoclose_preview_window_after_completion=1
 set completeopt+=popup
 let g:ycm_python_interpreter_path = ''    "$HOME . '\.vim\PortablePython382x64\App\Python'
@@ -467,6 +469,9 @@ function BlacklistFiletype()
 		echo "YouCompleteMe deactivated for " . &filetype . "!"
 	endif
 endfunction
+
+au BufNewFile,BufRead *.py nnoremap 	gd :tab split \|YcmCompleter GoTo<CR>
+au BufNewFile,BufRead *.cs nnoremap 	gd :tab split \|YcmCompleter GoTo<CR>
 
 "____________________________________________________________________________________________________________________
 "solarized
@@ -580,7 +585,7 @@ au BufNewFile,BufRead *.py set fileformat=unix
 au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
 au BufWritePre *.py,*.pyw,*.c,*.h %s/\s\+$//e
 
-let g:pytGoDefinitionKeyMap=1 " gd shows the declaration of curr. word
+"let g:pytGoDefinitionKeyMap=1 " gd shows the declaration of curr. word
 "let $PATH .= ';' . $HOME . '\.vim\Python311\;' .
               "\$HOME . '\.vim\MiKTeX\texmfs\install\miktex\bin\;' . 
               "\$HOME . '\.vim\Perl\perl\bin\;' . 
