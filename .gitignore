@@ -16,4 +16,3 @@ _.git
 /.vim/MiKTeX/texmfs/config/miktex/config/miktex.ini
 /.vim/MiKTeX/texmfs/config/miktex/config/issues.json
 /_Vim_RunningBefore90.rar
-/.vim/*.gitignore
