@@ -36,6 +36,7 @@ Plugin 'VundleVim/Vundle.vim'
 "
 "
 Plugin 'ycm-core/YouCompleteMe'
+Plugin 'dense-analysis/ale'
 Plugin 'tmhedberg/SimpylFold'
 Plugin 'vim-scripts/indentpython.vim'
 Plugin 'preservim/nerdtree'
