@@ -88,8 +88,6 @@ filetype plugin indent on   " after syntax on
 "general
 "
 "source $VIMRUNTIME/vimrc_example.vim
-"packadd! matchit
-"silent call mkdir ($HOME.'/.vim_backup', 'p')
 if !isdirectory($HOME.'/.vim_backup')
     silent call mkdir($HOME.'/.vim_backup', "", 0700)
 endif
@@ -104,13 +102,11 @@ let $LANG = 'en_US'
 call togglebg#map("")
 "set nocompatible     " explicitly get out of vi-compatible mode
 set background=dark" we plan to use a dark background
-"set background=light" we plan to use a dark background
 set noautochdir           " always switch to the current file directory
 set lazyredraw            " do not redraw while running macros
 set autoindent          " autoindent
 set autowriteall        " write buffers automatical if required
 set backup              " make backup files
-"set backupdir=D:\tmp   " where to put backup files
 set backupdir=~\.vim_backup   " where to put backup files
 set undodir=~\.vim_backup
 set undofile            " Persistent Undo
@@ -119,7 +115,6 @@ set clipboard+=unnamed  " share windows clipboard
 set noerrorbells        " don't make noise
 set mouse=a             " use mouse everywhere
 "set shortmess+=I        " don't show splashscreen
-"set directory=.,d:\tmp
 set directory=.,~\.vim_backup
 "____________________________________________________________________________________________________________________
 "Diff
@@ -177,11 +172,6 @@ set viminfo=<800,'10,/50,:100,h,f0,n~/.vim/.viminfo
 "Toggle Menubar usw.
 autocmd BufEnter * silent! lcd %:p:h
 autocmd BufEnter bufdo tab split
-"augroup open-tabs
-    "au!
-    "au VimEnter * ++nested if !&diff | tab all | tabfirst | endif
-"augroup end
-"
 " Uncomment the following to have Vim jump to the last position when
 " reopening a file
 if has("autocmd")
@@ -193,16 +183,13 @@ endif
 let mapleader = ","	
 let maplocalleader = "ö"
 noremap									<F9>	 		<Esc>:bufdo tab split<CR>:tablast<CR>:tabclose<CR>
-"noremap									<F2>	 		<ESC>:if &guifont=~#'Fira_Code:h8'<Bar>set guifont=Fira_Code:h10.5<Bar>set lines=55<Bar>wincmd =<Bar>else<Bar>set guifont=Fira_Code:h8<Bar>set lines=55<Bar>wincmd =<Bar>endif<CR>
 noremap									<F2>	 		<ESC>:call WindowSize()<CR>
 noremap									<M-F2>	 		<ESC>:call WindowDiffSize()<CR>
 noremap									<F3>			<ESC>:if &lines=~#'55'<Bar>set lines=75<Bar>else<Bar>set lines=55<Bar>endif<CR>
 nmap									<localleader>h 	<plug>(YCMHover)
-"noremap <expr>							<C-h> &diff ?	'<ESC><c-w><c-w>' : '<ESC><c-w>h'
 noremap <expr>							<C-h> &diff ?	'<ESC><c-w>h' : '<ESC><c-w>h'
 noremap <expr>							<C-j> &diff ?	'<ESC>]c' : '<ESC><c-w>j'
 noremap <expr>							<C-k> &diff ?	'<ESC>[c' : '<ESC><c-w>k'
-"noremap <expr>							<C-l> &diff ?	'<ESC><c-w><c-w>' : '<ESC><c-w>l'
 noremap <expr>							<C-l> &diff ?	'<ESC><c-w>l' : '<ESC><c-w>l'
 noremap									<localleader>g 	:diffge<CR>
 noremap									<localleader>p 	:diffpu<CR>
@@ -219,19 +206,10 @@ tnoremap								<Esc>			<C-\><C-n>
 "____________________________________________________________________________________________________________________
 " Insert mode mapping
 "
-"inoremap								<C-h>			<Esc><c-w>h
-"inoremap								<C-j>			<Esc><c-w>j
-"inoremap								<C-k>			<Esc><c-w>k
-"inoremap								<C-l>			<Esc><c-w>l
-"digraph
 inoremap								<C-d>			<C-k>
 "____________________________________________________________________________________________________________________
 " Visual mode mapping
 "
-"vnoremap								<C-h>			<Esc><c-w>h
-"vnoremap								<C-j>			<Esc><c-w>j
-"vnoremap								<C-k>			<Esc><c-w>k
-"vnoremap								<C-l>			<Esc><c-w>l
 vnoremap								<				<gv
 vnoremap								>				>gv
 vnoremap 								yp				"0p
@@ -247,10 +225,6 @@ vnoremap                         <Space>     zf
 nnoremap								<TAB>			:tabn<CR>
 nnoremap								<S-TAB>			:tabp<CR>
 nnoremap								<C-F1>			:if &go=~#'m'<Bar>set go-=mcerb<Bar>else<Bar>set go+=mcerb<Bar>endif<CR>
-"nnoremap								<C-h>			<c-w>h
-"nnoremap								<C-j>			<c-w>j
-"nnoremap								<C-k>			<c-w>k
-"nnoremap								<C-l>			<c-w><c-w>l
 nnoremap <silent>             <Space>     @=(foldlevel('.')?'za':"\<Space>")<CR>
 nnoremap								<F6>			:YcmForceCompileAndDiagnostics<CR>
 nnoremap								<F5>			:TlistToggle <CR>                                  " taglist
@@ -294,9 +268,9 @@ cnoremap								<C-l>			<Right>
 set completeopt=menu,preview   " use a pop up menu for completions
 set expandtab                " :set expandtab + :retab
 "set noexpandtab                " :set expandtab + :retab
-set shiftwidth=3               " auto-indent amount when using cindent, >>, << and stuff like that
-set softtabstop=0              " when hitting tab or backspace, how many spaces should a tab be (see expandtab)
-set tabstop=3                  " real tabs should be 8, and they will show with set list on
+set shiftwidth=4               " auto-indent amount when using cindent, >>, << and stuff like that
+set softtabstop=4              " when hitting tab or backspace, how many spaces should a tab be (see expandtab)
+set tabstop=4                  " real tabs should be 8, and they will show with set list on
 set nowrap                     " do not wrap line
 set foldmethod=syntax
 "____________________________________________________________________________________________________________________
@@ -342,11 +316,6 @@ au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
 au BufWritePre *.py,*.pyw,*.c,*.h %s/\s\+$//e
 
 "let g:pytGoDefinitionKeyMap=1 " gd shows the declaration of curr. word
-"let $PATH .= ';' . $HOME . '\.vim\Python311\;' .
-              "\$HOME . '\.vim\MiKTeX\texmfs\install\miktex\bin\;' . 
-              "\$HOME . '\.vim\Perl\perl\bin\;' . 
-              "\$HOME . '\.vim\SumatraPDF\;' . 
-              "\'C:\rtools40\usr\bin;C:\rtools40\mingw64\bin;'
 let tempPath = $PATH
 let $PATH = $HOME . '\.vim\Python311;' .
               \$HOME . '\.vim\Python311\Scripts;' . 
@@ -356,12 +325,6 @@ let $PATH = $HOME . '\.vim\Python311;' .
               \'C:\rtools40\usr\bin;C:\rtools40\mingw64\bin;' .
               \tempPath
 let $PYTHONPATH .= $HOME . '\.vim\Python311;'
-              "\$HOME . '\.vim\Python311\Lib\;' .
-              "\$HOME . '\.vim\Python311\DLLs;' .
-              "\$HOME . '\.vim\Python311\include;' .
-              "\$HOME . '\.vim\Python311\libs;' .
-              "\$HOME . '\.vim\Python311\Scripts;' .
-              "\$HOME . '\.vim\Python311\Tools;'
 "____________________________________________________________________________________________________________________
 "VimTex
 "
@@ -626,7 +589,7 @@ function WindowSize()
 	else
 		set guifont=Fira_Code:h8
 		set columns=136                   " columns
-		set lines=55
+		set lines=96
 		wincmd =
 	endif
 endfunction
@@ -688,5 +651,5 @@ function! IgnoreDiff(pattern)
 endfunction
 command! IgnoreHexDiff set diffexpr=IgnoreDiff('0x[0-9a-fA-F]+') | diffupdate
 command! IgnoreDecimalDiff set diffexpr=IgnoreDiff('\\.\\d+') | diffupdate
-command! IgnoreLineNr set diffexpr=IgnoreDiff('\\^\\.\\d+') | diffupdate
 command! NormalDiff set diffexpr= | diffupdate
+command! IgnoreLineNr set diffexpr=IgnoreDiff('\\^\\.\\d+:') | diffupdate
