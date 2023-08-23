@@ -281,6 +281,19 @@ set hlsearch    " use :nohlsearch for clearance
 set ignorecase  " ignoriere Gross- und Kleinschreibung
 set smartcase   "intelligent Gross- und Kleinschreibung
 "____________________________________________________________________________________________________________________
+"Portable Path
+"
+let tempPath = $PATH
+let $PATH = $HOME . '\.vim\Python311;' .
+              \$HOME . '\.vim\Python311\Scripts;' . 
+              \$HOME . '\.vim\Git242\cmd;' . 
+              \$HOME . '\.vim\MiKTeX\texmfs\install\miktex\bin\;' . 
+              \$HOME . '\.vim\Perl\perl\bin\;' . 
+              \$HOME . '\.vim\SumatraPDF\;' . 
+              \'C:\rtools40\usr\bin;C:\rtools40\mingw64\bin;' .
+              \tempPath
+let $PYTHONPATH .= $HOME . '\.vim\Python311;'
+"____________________________________________________________________________________________________________________
 "LANGUAGES
 "
 "____________________________________________________________________________________________________________________
@@ -316,15 +329,6 @@ au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
 au BufWritePre *.py,*.pyw,*.c,*.h %s/\s\+$//e
 
 "let g:pytGoDefinitionKeyMap=1 " gd shows the declaration of curr. word
-let tempPath = $PATH
-let $PATH = $HOME . '\.vim\Python311;' .
-              \$HOME . '\.vim\Python311\Scripts;' . 
-              \$HOME . '\.vim\MiKTeX\texmfs\install\miktex\bin\;' . 
-              \$HOME . '\.vim\Perl\perl\bin\;' . 
-              \$HOME . '\.vim\SumatraPDF\;' . 
-              \'C:\rtools40\usr\bin;C:\rtools40\mingw64\bin;' .
-              \tempPath
-let $PYTHONPATH .= $HOME . '\.vim\Python311;'
 "____________________________________________________________________________________________________________________
 "VimTex
 "
