@@ -186,7 +186,6 @@ noremap									<F9>	 		<Esc>:bufdo tab split<CR>:tablast<CR>:tabclose<CR>
 noremap									<F2>	 		<ESC>:call WindowSize()<CR>
 noremap									<M-F2>	 		<ESC>:call WindowDiffSize()<CR>
 noremap									<F3>			<ESC>:if &lines=~#'55'<Bar>set lines=75<Bar>else<Bar>set lines=55<Bar>endif<CR>
-nmap									<localleader>h 	<plug>(YCMHover)
 noremap <expr>							<C-h> &diff ?	'<ESC><c-w>h' : '<ESC><c-w>h'
 noremap <expr>							<C-j> &diff ?	'<ESC>]c' : '<ESC><c-w>j'
 noremap <expr>							<C-k> &diff ?	'<ESC>[c' : '<ESC><c-w>k'
@@ -420,6 +419,9 @@ let g:gruvbox_bold=1
 "____________________________________________________________________________________________________________________
 " YouCompleteMe
 "
+noremap									<localleader>h 	<plug>(YCMHover)
+noremap									<localleader>c 	:YcmCompleter GetDoc<CR>
+let g:ycm_enable_semantic_highlighting=1
 let g:jedi#use_tabs_not_buffers = 1
 let g:ycm_autoclose_preview_window_after_completion=1
 set completeopt+=popup
