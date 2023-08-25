@@ -36,6 +36,7 @@ Plugin 'VundleVim/Vundle.vim'
 "
 "
 Plugin 'ycm-core/YouCompleteMe'
+Plugin 'jlcrochet/vim-cs'
 Plugin 'dense-analysis/ale'
 Plugin 'tmhedberg/SimpylFold'
 Plugin 'vim-scripts/indentpython.vim'
@@ -264,12 +265,11 @@ cnoremap								<C-l>			<Right>
 "____________________________________________________________________________________________________________________
 "Text Formatting/Layout
 "
-set completeopt=menu,preview   " use a pop up menu for completions
 set expandtab                " :set expandtab + :retab
 "set noexpandtab                " :set expandtab + :retab
-set shiftwidth=4               " auto-indent amount when using cindent, >>, << and stuff like that
-set softtabstop=4              " when hitting tab or backspace, how many spaces should a tab be (see expandtab)
-set tabstop=4                  " real tabs should be 8, and they will show with set list on
+set shiftwidth=3               " auto-indent amount when using cindent, >>, << and stuff like that
+set softtabstop=3              " when hitting tab or backspace, how many spaces should a tab be (see expandtab)
+set tabstop=3                  " real tabs should be 8, and they will show with set list on
 set nowrap                     " do not wrap line
 set foldmethod=syntax
 "____________________________________________________________________________________________________________________
@@ -410,6 +410,7 @@ aug END
 "DelimitMate
 "
 inoremap								<C-Tab>			<Plug>delimitMateS-Tab
+inoremap								<C-e>			<Plug>delimitMateJumpMany
 "____________________________________________________________________________________________________________________
 "gruvbox
 "
@@ -421,10 +422,12 @@ let g:gruvbox_bold=1
 "
 noremap									<localleader>h 	<plug>(YCMHover)
 noremap									<localleader>c 	:YcmCompleter GetDoc<CR>
+let g:ycm_show_detailed_diag_in_popup = 1
 let g:ycm_enable_semantic_highlighting=1
 let g:jedi#use_tabs_not_buffers = 1
 let g:ycm_autoclose_preview_window_after_completion=1
-set completeopt+=popup
+"set completeopt=menu,preview   " use a pop up menu for completions
+"set completeopt=menu,preview,popup   " use a pop up menu for completions
 let g:ycm_python_interpreter_path = ''    "$HOME . '\.vim\PortablePython382x64\App\Python'
 let g:ycm_python_sys_path = []
 let g:ycm_extra_conf_vim_data = [
