@@ -12,7 +12,7 @@
          set columns=136                   " columns
 			"set guifont=Courier_New:h8       " font
 			"set guifont=ProggySmallTT:h12           " font
-			set guifont=consolas:h8           " font
+         "set guifont=consolas:h8            "font
 			"set guifont=Hack:h8           " font
 			set guifont=Fira_Code:h8:cANSI:qDRAFT
 			set renderoptions=type:directx

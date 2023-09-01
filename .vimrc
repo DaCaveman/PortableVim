@@ -186,6 +186,7 @@ let maplocalleader = "ö"
 noremap									<F9>	 		<Esc>:bufdo tab split<CR>:tablast<CR>:tabclose<CR>
 noremap									<F2>	 		<ESC>:call WindowSize()<CR>
 noremap									<M-F2>	 		<ESC>:call WindowDiffSize()<CR>
+noremap									<C-F2>	 		<Plug>ToggleBackground
 noremap									<F3>			<ESC>:if &lines=~#'55'<Bar>set lines=75<Bar>else<Bar>set lines=55<Bar>endif<CR>
 noremap <expr>							<C-h> &diff ?	'<ESC><c-w>h' : '<ESC><c-w>h'
 noremap <expr>							<C-j> &diff ?	'<ESC>]c' : '<ESC><c-w>j'
@@ -285,6 +286,7 @@ set smartcase   "intelligent Gross- und Kleinschreibung
 let tempPath = $PATH
 let $PATH = $HOME . '\.vim\Python311;' .
               \$HOME . '\.vim\Python311\Scripts;' . 
+              \$HOME . '\.vim\mingw64\bin;' . 
               \$HOME . '\.vim\Git242\cmd;' . 
               \$HOME . '\.vim\MiKTeX\texmfs\install\miktex\bin\;' . 
               \$HOME . '\.vim\Perl\perl\bin\;' . 
