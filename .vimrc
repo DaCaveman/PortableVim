@@ -40,8 +40,11 @@ Plugin 'jlcrochet/vim-cs'
 Plugin 'dense-analysis/ale'
 Plugin 'tmhedberg/SimpylFold'
 Plugin 'vim-scripts/indentpython.vim'
-Plugin 'preservim/nerdtree'
-"Plugin 'Xuyuanp/nerdtree-git-plugin'
+"Plugin 'xuyuanp/git-nerdtree'
+Plugin 'preservim/nerdtree' |
+Plugin 'Xuyuanp/nerdtree-git-plugin'
+"Plugin 'ryanoasis/vim-devicons'
+"Plugin 'tpope/vim-fugitive'
 Plugin 'vim-syntastic/syntastic'
 Plugin 'preservim/nerdcommenter'
 Plugin 'morhetz/gruvbox'
@@ -58,7 +61,7 @@ Plugin 'KnoP-01/vim-karel'
 
 "Plugin 'jalvesaq/Nvim-R'
 "Plugin 'chrisbra/csv.vim'
-Plugin 'othree/html5.vim'
+"Plugin 'othree/html5.vim'
 Plugin 'Raimondi/delimitMate'
 Plugin 'rickhowe/diffchar.vim'
 Plugin 'romainl/vim-qf'
@@ -287,7 +290,7 @@ let tempPath = $PATH
 let $PATH = $HOME . '\.vim\Python311;' .
               \$HOME . '\.vim\Python311\Scripts;' . 
               \$HOME . '\.vim\mingw64\bin;' . 
-              \$HOME . '\.vim\Git242\cmd;' . 
+              \$HOME . '\.vim\Git242\bin;' . 
               \$HOME . '\.vim\MiKTeX\texmfs\install\miktex\bin\;' . 
               \$HOME . '\.vim\Perl\perl\bin\;' . 
               \$HOME . '\.vim\SumatraPDF\;' . 
@@ -400,6 +403,24 @@ autocmd BufRead,BufNewFile *.xaml set filetype=xaml" Highlight xaml syntax
 "____________________________________________________________________________________________________________________
 "PLUGINS
 "
+"____________________________________________________________________________________________________________________
+"NERDTree Git Plugin
+"
+let g:NERDTreeGitStatusShowClean = 0
+let g:NERDTreeGitStatusEnable = 1
+let g:NERDTreeGitStatusUseNerdFonts = 0
+let g:NERDTreeGitStatusIndicatorMapCustom = {
+                \ 'Modified'  :'✹',
+                \ 'Staged'    :'✚',
+                \ 'Untracked' :'✭',
+                \ 'Renamed'   :'➜',
+                \ 'Unmerged'  :'═',
+                \ 'Deleted'   :'✖',
+                \ 'Dirty'     :'✗',
+                \ 'Ignored'   :'☒',
+                \ 'Clean'     :'✔︎',
+                \ 'Unknown'   :'?',
+                \ }
 "____________________________________________________________________________________________________________________
 "Quckfix window
 "
