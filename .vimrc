@@ -613,13 +613,13 @@ endfunction
 "WindowSizeChange
 "
 function WindowSize()
-	if &guifont=~#'Fira_Code:h8'
-		set guifont=Fira_Code:h10.5
+	if &guifont=~#'FiraCode_Nerd_Font_Mono:h8:cANSI:qDRAFT'
+		set guifont=FiraCode_Nerd_Font_Mono:h10:cANSI:qDRAFT
 		set columns=136                   " columns
 		set lines=55
 		wincmd =
 	else
-		set guifont=Fira_Code:h8
+		set guifont=FiraCode_Nerd_Font_Mono:h8:cANSI:qDRAFT
 		set columns=136                   " columns
 		set lines=96
 		wincmd =
