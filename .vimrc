@@ -17,12 +17,12 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
-" The following are examples of different formats supported.
-" Keep Plugin commands between vundle#begin/end.
-" plugin on GitHub repo
+ "The following are examples of different formats supported.
+ "Keep Plugin commands between vundle#begin/end.
+ "plugin on GitHub repo
 "Plugin 'tpope/vim-fugitive'
-" plugin from http://vim-scripts.org/vim/scripts.html
-" Plugin 'L9'
+ "plugin from http://vim-scripts.org/vim/scripts.html
+ "Plugin 'L9'
 " Git plugin not hosted on GitHub
 "Plugin 'git://git.wincent.com/command-t.git'
 " git repos on your local machine (i.e. when working on your own plugin)
@@ -197,6 +197,8 @@ noremap <expr>							<C-k> &diff ?	'<ESC>[c' : '<ESC><c-w>k'
 noremap <expr>							<C-l> &diff ?	'<ESC><c-w>l' : '<ESC><c-w>l'
 noremap									<localleader>g 	:diffge<CR>
 noremap									<localleader>p 	:diffpu<CR>
+noremap									<leader>q 	      :call CloseOnLast()<CR>
+noremap									gcc       	      <plug>NERDCommenterToggle
 "___________________________________________________________________________________________________________________
 " Terminal mode mapping
 "
@@ -223,6 +225,7 @@ vnoremap 								do				:diffge<CR>
 vnoremap 								dp				:diffpu<CR>
 vnoremap 								<localleader>/	:<C-U>execute "vimgrep /" . expand("<cword>") . "/gj **/*.*"<CR>
 vnoremap                         <Space>     zf
+vnoremap									gcc       	      <plug>NERDCommenterToggle
 "____________________________________________________________________________________________________________________
 " normal mode mapping
 "
@@ -659,6 +662,23 @@ function! GrepBuffers (expression)
 endfunction
 
 command! -nargs=+ GrepBufs call GrepBuffers(<q-args>)
+function! OpenBufferNumber()
+    let count = 0
+    for i in range(0, bufnr("$"))
+        if buflisted(i)
+            let count += 1
+        endif
+    endfor
+    return count
+endfunction
+
+function! CloseOnLast()
+    if OpenBufferNumber() <= 1
+        q
+    else
+        bd
+    endif
+endfunction
 "
 "---------------------------------------------------------------------------------------------------------------------
 "some test
