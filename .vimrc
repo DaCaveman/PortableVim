@@ -290,16 +290,15 @@ set smartcase   "intelligent Gross- und Kleinschreibung
 "Portable Path
 "
 let tempPath = $PATH
-let $PATH = $HOME . '\.vim\Python311;' .
-              \$HOME . '\.vim\Python311\Scripts;' . 
-              \$HOME . '\.vim\mingw64\bin;' . 
-              \$HOME . '\.vim\Git242\bin;' . 
-              \$HOME . '\.vim\MiKTeX\texmfs\install\miktex\bin\;' . 
-              \$HOME . '\.vim\Perl\perl\bin\;' . 
-              \$HOME . '\.vim\SumatraPDF\;' . 
-              \'C:\rtools40\usr\bin;C:\rtools40\mingw64\bin;' .
+let $PATH = $HOME . '\..\nVimPortable\Python311;' .
+              \$HOME . '\..\nVimPortable\Python311\Scripts;' . 
+              \$HOME . '\..\nVimPortable\mingw64\bin;' . 
+              \$HOME . '\..\nVimPortable\Git242\bin;' . 
+              \$HOME . '\..\nVimPortable\MiKTeX\texmfs\install\miktex\bin\;' . 
+              \$HOME . '\..\nVimPortable\Perl\perl\bin\;' . 
+              \$HOME . '\..\nVimPortable\SumatraPDF\;' . 
               \tempPath
-let $PYTHONPATH .= $HOME . '\.vim\Python311;'
+let $PYTHONPATH .= $HOME . '\..\nVimPortable\Python311;'
 "____________________________________________________________________________________________________________________
 "LANGUAGES
 "
@@ -391,8 +390,8 @@ au BufNewFile,BufRead *.src set fileencoding=utf-8
 "
 let g:tpAutoCorrLineEnd = 1
 au BufNewFile,BufRead *.kl nnoremap 	<M-F11> 		:! ktrans %<CR><CR>
-"autocmd BufRead,BufNewFile *.PE set filetype=karel" Highlight karel syntax
-"autocmd BufRead,BufNewFile *.LS set filetype=karel" Highlight karel syntax
+autocmd BufRead,BufNewFile *.PE set filetype=karel" Highlight karel syntax
+autocmd BufRead,BufNewFile *.LS set filetype=karel" Highlight karel syntax
 "____________________________________________________________________________________________________________________
 " COMAU pdl2
 "
