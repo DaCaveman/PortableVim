@@ -498,7 +498,7 @@ set noshowmode
 "____________________________________________________________________________________________________________________
 " taglist
 "
-let Tlist_Ctags_Cmd = $HOME . '/ctags58/ctags.exe'
+let Tlist_Ctags_Cmd = $HOME . '/../nVimPortable/home/ctags/ctags.exe'
 set tags=tags;/
 let Tlist_Auto_Open=0 " let the tag list open automagically
 let Tlist_Exit_OnlyWindow = 1 " if you are the last, kill
